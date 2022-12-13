@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane prefHeight="290.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.PetItemController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.PetItemController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="290.0" prefWidth="200.0" spacing="10.0">
+      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="200.0" spacing="10.0">
          <children>
-            <ImageView fx:id="petImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
-            <Label fx:id="petName" VBox.vgrow="ALWAYS">
+            <ImageView fx:id="petImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+               <image>
+                  <Image url="@image/gatto1.png" />
+               </image></ImageView>
+            <Label fx:id="petName" text="Name" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

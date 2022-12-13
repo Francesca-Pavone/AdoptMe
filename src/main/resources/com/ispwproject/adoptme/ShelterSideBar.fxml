@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="250.0" style="-fx-background-color: #34665A;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.francescapavone.demo1.UserHomepageController">
+<AnchorPane style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.UserHomepageController">
    <children>
       <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
          <children>
@@ -44,9 +44,9 @@
       </HBox>
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
          <children>
-            <HBox fx:id="homepageBox" alignment="CENTER_LEFT" layoutX="50.0" layoutY="150.0" prefHeight="70.0" prefWidth="300.0" style="-fx-background-color: #295147;">
+            <HBox fx:id="homepageBox" alignment="CENTER_LEFT" layoutX="50.0" layoutY="150.0" prefHeight="70.0" prefWidth="300.0" styleClass="open-screen" stylesheets="@style.css">
                <children>
-                  <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" style="-fx-background-color: #c89c32; -fx-background-radius: 50 50 50 50;">
+                  <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>
@@ -62,7 +62,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <Button fx:id="btnHomePage" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="212.0" style="-fx-background-color: trasparent;" text="HOME PAGE" textFill="WHITE">
+                  <Button fx:id="btnHomePage" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="212.0" styleClass="transparent" stylesheets="@style.css" text="HOME PAGE" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="20.0" />
                      </font>
@@ -83,7 +83,7 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Pane fx:id="profileSelect" prefHeight="70.0" prefWidth="8.0" style="-fx-background-color: #c89c32; -fx-background-radius: 50 50 50 50;" visible="false">
+                  <Pane fx:id="profileSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -99,7 +99,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <Button fx:id="btnToProfile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToProfilePage" prefHeight="70.0" prefWidth="212.0" style="-fx-background-color: trasparent;" text="PROFILE" textFill="WHITE">
+                  <Button fx:id="btnToProfile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToProfilePage" prefHeight="70.0" prefWidth="212.0" styleClass="transparent" stylesheets="@style.css" text="PROFILE" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="20.0" />
                      </font>
@@ -111,7 +111,7 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <Pane fx:id="favoritesSelect" prefHeight="70.0" prefWidth="8.0" style="-fx-background-color: #c89c32; -fx-background-radius: 50 50 50 50;" visible="false">
+                  <Pane fx:id="favoritesSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -127,7 +127,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <Button fx:id="btnToFavorites" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToFavoritesPage" prefHeight="70.0" prefWidth="212.0" style="-fx-background-color: trasparent;" text="APPOINTMENTES" textFill="WHITE">
+                  <Button fx:id="btnToFavorites" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToFavoritesPage" prefHeight="70.0" prefWidth="212.0" styleClass="transparent" stylesheets="@style.css" text="APPOINTMENTES" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="20.0" />
                      </font>
@@ -139,7 +139,7 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" style="-fx-background-color: #c89c32; -fx-background-radius: 50 50 50 50;" visible="false">
+                  <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -155,7 +155,7 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <Button fx:id="btnToSettings" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToSettingsPage" prefHeight="70.0" prefWidth="212.0" style="-fx-background-color: trasparent;" text="SETTINGS" textFill="WHITE">
+                  <Button fx:id="btnToSettings" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToSettingsPage" prefHeight="70.0" prefWidth="212.0" styleClass="transparent" stylesheets="@style.css" text="SETTINGS" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="20.0" />
                      </font>

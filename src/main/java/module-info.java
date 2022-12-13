@@ -8,4 +8,6 @@ module com.ispwproject.adoptme {
 
     opens com.ispwproject.adoptme to javafx.fxml;
     exports com.ispwproject.adoptme;
+    exports com.ispwproject.adoptme.controller;
+    opens com.ispwproject.adoptme.controller to javafx.fxml;
 }

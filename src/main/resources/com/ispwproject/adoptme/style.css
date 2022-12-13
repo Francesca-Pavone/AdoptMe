@@ -1,37 +1,26 @@
-body {
-    background: #e0e5ec;
-}
-h1 {
-    position: relative;
-    text-align: center;
-    color: #353535;
-    font-size: 50px;
-    font-family: "Cormorant Garamond", serif;
-}
 
-p {
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    text-align: center;
-    font-size: 18px;
-    color: #676767;
-}
-.frame {
-    width: 90%;
-    margin: 40px auto;
-    text-align: center;
-}
-button {
-    margin: 20px;
-    outline: none;
-}
-.add-btn {
-    -fx-pref-width: 243;
-    -fx-pref-height: 73;
+.button1 {
     -fx-background-color: #34665A;
     -fx-background-radius: 20 20 20 20;
 }
 
-.add-btn:hover {
+.button1:hover {
     -fx-background-color: #417E70;
+}
+
+.button1:pressed {
+    -fx-background-color: #C89C32;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.open-screen{
+    -fx-background-color: #295147;
+}
+
+.open-screen-bar{
+    -fx-background-color: #c89c32;
+    -fx-background-radius: 50 50 50 50;
 }

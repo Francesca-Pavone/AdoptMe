@@ -1,11 +1,10 @@
-package com.ispwproject.adoptme.Controller;
+package com.ispwproject.adoptme.controller;
 
+import com.ispwproject.adoptme.utils.ChangeSideBar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class UserHomepageController {
     @FXML
@@ -30,10 +29,10 @@ public class UserHomepageController {
     public Pane settingsSelect;
 
     public void goToHomePage(ActionEvent actionEvent) {
-        homepageBox.setBackground(new Background(new BackgroundFill(Color.rgb(41,81,71), CornerRadii.EMPTY, Insets.EMPTY)));
-        profileBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        favoritesBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        settingsBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
+        ChangeSideBar.changeSideBar(homepageBox, 41,81,71);
+        ChangeSideBar.changeSideBar(profileBox, 52,102,90);
+        ChangeSideBar.changeSideBar(favoritesBox, 52,102,90);
+        ChangeSideBar.changeSideBar(settingsBox, 52,102,90);
 
         homepageSelect.setVisible(true);
         profileSelect.setVisible(false);
@@ -43,10 +42,10 @@ public class UserHomepageController {
     }
 
     public void goToProfilePage(ActionEvent actionEvent) {
-        homepageBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        profileBox.setBackground(new Background(new BackgroundFill(Color.rgb(41,81,71), CornerRadii.EMPTY, Insets.EMPTY)));
-        favoritesBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        settingsBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
+        ChangeSideBar.changeSideBar(profileBox, 41,81,71);
+        ChangeSideBar.changeSideBar(homepageBox, 52,102,90);
+        ChangeSideBar.changeSideBar(favoritesBox, 52,102,90);
+        ChangeSideBar.changeSideBar(settingsBox, 52,102,90);
 
         homepageSelect.setVisible(false);
         profileSelect.setVisible(true);
@@ -55,10 +54,10 @@ public class UserHomepageController {
     }
 
     public void goToFavoritesPage(ActionEvent actionEvent) {
-        homepageBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        profileBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        favoritesBox.setBackground(new Background(new BackgroundFill(Color.rgb(41,81,71), CornerRadii.EMPTY, Insets.EMPTY)));
-        settingsBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
+        ChangeSideBar.changeSideBar(favoritesBox, 41,81,71);
+        ChangeSideBar.changeSideBar(homepageBox, 52,102,90);
+        ChangeSideBar.changeSideBar(profileBox, 52,102,90);
+        ChangeSideBar.changeSideBar(settingsBox, 52,102,90);
 
         homepageSelect.setVisible(false);
         profileSelect.setVisible(false);
@@ -67,10 +66,10 @@ public class UserHomepageController {
     }
 
     public void goToSettingsPage(ActionEvent actionEvent) {
-        homepageBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        profileBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        favoritesBox.setBackground(new Background(new BackgroundFill(Color.rgb(52,102,90), CornerRadii.EMPTY, Insets.EMPTY)));
-        settingsBox.setBackground(new Background(new BackgroundFill(Color.rgb(41,81,71), CornerRadii.EMPTY, Insets.EMPTY)));
+        ChangeSideBar.changeSideBar(settingsBox, 41,81,71);
+        ChangeSideBar.changeSideBar(homepageBox, 52,102,90);
+        ChangeSideBar.changeSideBar(profileBox, 52,102,90);
+        ChangeSideBar.changeSideBar(favoritesBox, 52,102,90);
 
         homepageSelect.setVisible(false);
         profileSelect.setVisible(false);
