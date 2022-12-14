@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme;
 
-import com.ispwproject.adoptme.controller.ShelterAddPetController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +12,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ShelterAddPet.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-//        stage.setTitle("AdoptMe");
+        stage.setTitle("AdoptMe");
         stage.setScene(scene);
         stage.show();
     }

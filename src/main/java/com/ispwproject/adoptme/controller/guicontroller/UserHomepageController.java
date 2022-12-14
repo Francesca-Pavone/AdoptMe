@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller;
+package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.utils.ChangeSideBar;
 import javafx.event.ActionEvent;
