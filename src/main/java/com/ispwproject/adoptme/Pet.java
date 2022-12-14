@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.model;
+package com.ispwproject.adoptme;
 
 public class Pet {
     private String imgSrc;

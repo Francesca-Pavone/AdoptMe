@@ -49,7 +49,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                      <content>
-                        <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="532.0" prefWidth="750.0" vgap="33.0">
+                        <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" />
                            </rowConstraints>

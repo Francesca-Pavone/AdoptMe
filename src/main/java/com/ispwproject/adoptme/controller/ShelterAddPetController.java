@@ -1,29 +1,21 @@
 package com.ispwproject.adoptme.controller;
 
 import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.Pet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
-public class ShelterAddPetController implements Initializable {
+public class ShelterAddPetController {
 
     @FXML
     private GridPane grid;
-
-/*
-    @FXML
-    private ScrollPane scroll;
- */
 
     private final List<Pet> petList = new ArrayList<>();
 
@@ -31,19 +23,64 @@ public class ShelterAddPetController implements Initializable {
         List<Pet> petList = new ArrayList<>();
         Pet pet;
 
-        for (int i=0; i<4; i++){
-            pet = new Pet();
-            pet.setName("Name"+i);
-            pet.setImgSrc("/image/gatto1.png");
-            pet.setAge("Adult");
-            pet.setGender("Female");
-            petList.add(pet);
+        pet = new Pet();
+        pet.setName("Name1");
+        pet.setImgSrc("image/gatto1.png");
+        pet.setAge("Adult");
+        pet.setGender("Female");
+        petList.add(pet);
+
+        pet = new Pet();
+        pet.setName("Name2");
+        pet.setImgSrc("image/cane1.png");
+        pet.setAge("Puppy");
+        pet.setGender("Male");
+        petList.add(pet);
+
+        pet = new Pet();
+        pet.setName("Name3");
+        pet.setImgSrc("image/cane2.png");
+        pet.setAge("Young");
+        pet.setGender("Female");
+        petList.add(pet);
+
+        pet = new Pet();
+        pet.setName("Name4");
+        pet.setImgSrc("image/gatto2.png");
+        pet.setAge("Adult");
+        pet.setGender("Male");
+        petList.add(pet);
+
+        pet = new Pet();
+        pet.setName("Name5");
+        pet.setImgSrc("image/gatto3.png");
+        pet.setAge("Puppy");
+        pet.setGender("Female");
+        petList.add(pet);
+
+        pet = new Pet();
+        pet.setName("Name6");
+        pet.setImgSrc("image/cane3.png");
+        pet.setAge("Adult");
+        pet.setGender("Male");
+        petList.add(pet);
+
+        pet = new Pet();
+        pet.setName("Name7");
+        pet.setImgSrc("image/cane4.png");
+        pet.setAge("Young");
+        pet.setGender("Female");
+        petList.add(pet);
+
+        for (Pet value : petList) {
+            System.out.println(value.getName() + "," + value.getAge() + "," + value.getGender() + "," + value.getImgSrc());
         }
+
         return petList;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initialize() {
         petList.addAll(getPetList());
 
         int column = 0;
@@ -55,15 +92,19 @@ public class ShelterAddPetController implements Initializable {
                 fxmlLoader.setLocation(HelloApplication.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-//                PetItemController petItemController = fxmlLoader.getController();
-//                petItemController.setData(petList.get(i));
+
+                PetItemController petItemController = fxmlLoader.getController();
+                petItemController.setData(petList.get(i));
 
                 if (column == 3) {
                     column = 0;
                     row++;
                 }
 
-                grid.add(pane, column++, row);
+                if (grid == null)
+                    System.out.println("NULL grid");
+                else
+                    grid.add(pane, column++, row);
             }
         } catch (IOException e) {
             e.printStackTrace();
