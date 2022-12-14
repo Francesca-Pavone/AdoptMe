@@ -1,0 +1,33 @@
+
+.button1 {
+    -fx-background-color: #34665A;
+    -fx-background-radius: 20 20 20 20;
+}
+
+.button1:hover {
+    -fx-background-color: #417E70;
+}
+
+.button1:pressed {
+    -fx-background-color: #C89C32;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.open-screen{
+    -fx-background-color: #295147;
+}
+
+.open-screen-bar{
+    -fx-background-color: #c89c32;
+    -fx-background-radius: 50 50 50 50;
+}
+
+.text-field {
+	-fx-border-color: #000000;
+	-fx-border-width: 0.4;
+	-fx-border-radius: 20;
+	-fx-effect:  dropshadow(one-pass-box, grey, 6, 0.5, 0, 0);
+}
