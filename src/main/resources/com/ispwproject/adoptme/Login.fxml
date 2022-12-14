@@ -43,7 +43,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@image/style.css">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -56,7 +56,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@image/style.css">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -66,7 +66,7 @@
                               <Insets />
                            </VBox.margin>
                            <children>
-                              <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Forgot password" underline="true" AnchorPane.rightAnchor="0.0">
+                              <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@image/style.css" text="Forgot password" underline="true" AnchorPane.rightAnchor="0.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -110,7 +110,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Continue without login" underline="true" AnchorPane.leftAnchor="94.4" AnchorPane.rightAnchor="94.39999999999998">
+                              <Button alignment="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@image/style.css" text="Continue without login" underline="true" AnchorPane.leftAnchor="94.4" AnchorPane.rightAnchor="94.39999999999998">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -124,7 +124,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Text>
-                              <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Sign up" underline="true">
+                              <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@image/style.css" text="Sign up" underline="true">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
