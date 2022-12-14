@@ -4,7 +4,6 @@ import com.ispwproject.adoptme.HelloApplication;
 import com.ispwproject.adoptme.Pet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -20,63 +19,64 @@ public class ShelterAddPetController {
     private final List<Pet> petList = new ArrayList<>();
 
     private List<Pet> getPetList() {
-        List<Pet> petList = new ArrayList<>();
+        List<Pet> pets = new ArrayList<>();
         Pet pet;
+        String female = "Female";
+        String male = "Male";
+        String adult = "Adult";
+        String puppy = "Puppy";
+        String young = "Young";
 
         pet = new Pet();
         pet.setName("Name1");
         pet.setImgSrc("image/gatto1.png");
-        pet.setAge("Adult");
-        pet.setGender("Female");
-        petList.add(pet);
+        pet.setAge(adult);
+        pet.setGender(female);
+        pets.add(pet);
 
         pet = new Pet();
         pet.setName("Name2");
         pet.setImgSrc("image/cane1.png");
-        pet.setAge("Puppy");
-        pet.setGender("Male");
-        petList.add(pet);
+        pet.setAge(puppy);
+        pet.setGender(male);
+        pets.add(pet);
 
         pet = new Pet();
         pet.setName("Name3");
         pet.setImgSrc("image/cane2.png");
-        pet.setAge("Young");
-        pet.setGender("Female");
-        petList.add(pet);
+        pet.setAge(young);
+        pet.setGender(female);
+        pets.add(pet);
 
         pet = new Pet();
         pet.setName("Name4");
         pet.setImgSrc("image/gatto2.png");
-        pet.setAge("Adult");
-        pet.setGender("Male");
-        petList.add(pet);
+        pet.setAge(adult);
+        pet.setGender(male);
+        pets.add(pet);
 
         pet = new Pet();
         pet.setName("Name5");
         pet.setImgSrc("image/gatto3.png");
-        pet.setAge("Puppy");
-        pet.setGender("Female");
-        petList.add(pet);
+        pet.setAge(puppy);
+        pet.setGender(female);
+        pets.add(pet);
 
         pet = new Pet();
         pet.setName("Name6");
         pet.setImgSrc("image/cane3.png");
-        pet.setAge("Adult");
-        pet.setGender("Male");
-        petList.add(pet);
+        pet.setAge(adult);
+        pet.setGender(male);
+        pets.add(pet);
 
         pet = new Pet();
         pet.setName("Name7");
         pet.setImgSrc("image/cane4.png");
-        pet.setAge("Young");
-        pet.setGender("Female");
-        petList.add(pet);
+        pet.setAge(young);
+        pet.setGender(female);
+        pets.add(pet);
 
-        for (Pet value : petList) {
-            System.out.println(value.getName() + "," + value.getAge() + "," + value.getGender() + "," + value.getImgSrc());
-        }
-
-        return petList;
+        return pets;
     }
 
 
@@ -101,10 +101,8 @@ public class ShelterAddPetController {
                     row++;
                 }
 
-                if (grid == null)
-                    System.out.println("NULL grid");
-                else
-                    grid.add(pane, column++, row);
+
+                grid.add(pane, column++, row);
             }
         } catch (IOException e) {
             e.printStackTrace();

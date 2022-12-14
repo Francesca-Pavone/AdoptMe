@@ -8,25 +8,25 @@ import javafx.scene.layout.*;
 
 public class UserHomepageController {
     @FXML
-    public Button btnHomePage;
+    private Button btnHomePage;
     @FXML
-    public Button btnToProfile;
+    private Button btnToProfile;
     @FXML
-    public Button btnToFavorites;
+    private Button btnToFavorites;
     @FXML
-    public Button btnToSettings;
+    private Button btnToSettings;
     @FXML
-    public HBox homepageBox;
+    private HBox homepageBox;
     @FXML
-    public HBox profileBox;
+    private HBox profileBox;
     @FXML
-    public HBox favoritesBox;
+    private HBox favoritesBox;
     @FXML
-    public HBox settingsBox;
-    public Pane homepageSelect;
-    public Pane profileSelect;
-    public Pane favoritesSelect;
-    public Pane settingsSelect;
+    private HBox settingsBox;
+    private Pane homepageSelect;
+    private Pane profileSelect;
+    private Pane favoritesSelect;
+    private Pane settingsSelect;
 
     public void goToHomePage(ActionEvent actionEvent) {
         ChangeSideBar.changeSideBar(homepageBox, 41,81,71);
