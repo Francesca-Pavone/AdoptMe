@@ -23,9 +23,13 @@ public class UserHomepageController {
     private HBox favoritesBox;
     @FXML
     private HBox settingsBox;
+    @FXML
     private Pane homepageSelect;
+    @FXML
     private Pane profileSelect;
+    @FXML
     private Pane favoritesSelect;
+    @FXML
     private Pane settingsSelect;
 
     public void goToHomePage(ActionEvent actionEvent) {
