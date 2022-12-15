@@ -27,7 +27,6 @@
 
 .text-field {
 	-fx-border-color: #000000;
-	-fx-border-width: 0.4;
+	-fx-border-width: 0.8;
 	-fx-border-radius: 20;
-	-fx-effect:  dropshadow(one-pass-box, grey, 6, 0.5, 0, 0);
 }
