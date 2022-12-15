@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,8 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" layoutX="75.0" layoutY="62.0" AnchorPane.bottomAnchor="35.80000000000007" AnchorPane.leftAnchor="41.6" AnchorPane.rightAnchor="41.600000000000136" AnchorPane.topAnchor="35.8">
          <children>
@@ -23,19 +23,29 @@
                   <Image url="@image/man_dog_login.png" />
                </image>
             </ImageView>
-            <Pane prefHeight="638.0" prefWidth="429.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 40;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="429.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 40;">
                <children>
-                  <VBox layoutX="40.0" layoutY="40.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="638.0" prefWidth="429.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log In">
+                        <Label styleClass="bold" stylesheets="@style.css" text="Log In">
                            <font>
-                              <Font name="System Bold" size="32.0" />
+                              <Font size="32.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="semi-bold-16" stylesheets="@style.css" text="Email">
+                           <font>
+                              <Font size="16.0" />
                            </font>
                            <VBox.margin>
-                              <Insets />
+                              <Insets top="35.0" />
                            </VBox.margin>
-                        </Text>
-                        <Label text="Email">
+                        </Label>
+                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label styleClass="semi-bold-16" stylesheets="@style.css" text="Password">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -43,37 +53,28 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <Label text="Password">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0">
                            <VBox.margin>
                               <Insets top="5.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <AnchorPane>
-                           <VBox.margin>
-                              <Insets />
                            </VBox.margin>
                            <children>
-                              <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Forgot password" underline="true" AnchorPane.rightAnchor="0.0">
+                              <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" stylesheets="@style.css" text="Forgot password" underline="true" AnchorPane.rightAnchor="0.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="transparent" />
+                                    <String fx:value="semi-bold-14" />
+                                 </styleClass>
                               </Button>
                            </children>
                         </AnchorPane>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #000000; -fx-background-radius: 20;" text="Login" textFill="WHITE">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #000000; -fx-background-radius: 20;" styleClass="semi-bold-16" stylesheets="@style.css" text="Login" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>
@@ -81,7 +82,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-radius: 20; -fx-border-width: 2;">
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-radius: 20; -fx-border-width: 2;">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
@@ -89,14 +90,14 @@
                               <Font size="16.0" />
                            </font>
                            <graphic>
-                              <HBox alignment="CENTER" spacing="10.0">
+                              <HBox alignment="CENTER" spacing="10.0" stylesheets="@style.css">
                                  <children>
                                     <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@image/logo_google.png" />
                                        </image>
                                     </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login with Google">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="semi-bold-16" text="Login with Google">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -107,27 +108,35 @@
                         </Button>
                         <AnchorPane>
                            <VBox.margin>
-                              <Insets top="10.0" />
+                              <Insets top="15.0" />
                            </VBox.margin>
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Continue without login" underline="true" AnchorPane.leftAnchor="94.4" AnchorPane.rightAnchor="94.39999999999998">
+                              <Button alignment="CENTER" mnemonicParsing="false" stylesheets="@style.css" text="Continue without login" underline="true" AnchorPane.leftAnchor="99.75">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="transparent" />
+                                    <String fx:value="semi-bold-14" />
+                                 </styleClass>
                               </Button>
                            </children>
                         </AnchorPane>
-                        <HBox alignment="CENTER_LEFT">
+                        <HBox alignment="CENTER_LEFT" stylesheets="@style.css">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="regular-14" text="Don't have an account?">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Text>
-                              <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Sign up" underline="true">
+                              <Button mnemonicParsing="false" stylesheets="@style.css" text="Sign up" underline="true">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <styleClass>
+                                    <String fx:value="transparent" />
+                                    <String fx:value="semi-bold-14" />
+                                 </styleClass>
                               </Button>
                            </children>
                            <VBox.margin>
@@ -135,6 +144,9 @@
                            </VBox.margin>
                         </HBox>
                      </children>
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding>
                   </VBox>
                </children>
             </Pane>
