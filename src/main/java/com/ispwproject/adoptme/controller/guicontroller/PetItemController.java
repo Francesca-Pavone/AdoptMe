@@ -1,14 +1,13 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.Pet;
+import com.ispwproject.adoptme.model.Pet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class PetItemController {
 

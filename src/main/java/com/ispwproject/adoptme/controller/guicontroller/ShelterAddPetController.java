@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.Pet;
+import com.ispwproject.adoptme.model.Pet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.GridPane;
