@@ -13,7 +13,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" layoutX="75.0" layoutY="62.0" AnchorPane.bottomAnchor="35.80000000000007" AnchorPane.leftAnchor="41.6" AnchorPane.rightAnchor="41.600000000000136" AnchorPane.topAnchor="35.8">
          <children>
@@ -22,9 +23,9 @@
                   <Image url="@image/login_image.png" />
                </image>
             </ImageView>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="429.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 40;">
+            <Pane prefHeight="638.0" prefWidth="429.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 40;">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="638.0" prefWidth="429.0">
+                  <VBox layoutX="40.0" layoutY="40.0">
                      <children>
                         <Label text="Log In">
                            <font>
@@ -36,10 +37,10 @@
                               <Font name="Arial" size="16.0" />
                            </font>
                            <VBox.margin>
-                              <Insets top="35.0" />
+                              <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -55,7 +56,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
+                        <TextField prefHeight="40.0" prefWidth="350.0" styleClass="transparent" stylesheets="@style.css">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -63,9 +64,9 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0">
+                        <AnchorPane>
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets />
                            </VBox.margin>
                            <children>
                               <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Forgot password" underline="true" AnchorPane.rightAnchor="0.0">
@@ -83,7 +84,7 @@
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Button>
-                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-radius: 20; -fx-border-width: 2;">
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-radius: 20; -fx-border-width: 2;">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
@@ -109,7 +110,7 @@
                         </Button>
                         <AnchorPane>
                            <VBox.margin>
-                              <Insets top="15.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                            <children>
                               <Button alignment="CENTER" mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css" text="Continue without login" underline="true" AnchorPane.leftAnchor="99.75">
@@ -119,7 +120,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <HBox alignment="CENTER_LEFT" stylesheets="@style.css">
+                        <HBox alignment="CENTER_LEFT">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account?">
                                  <font>
@@ -137,9 +138,6 @@
                            </VBox.margin>
                         </HBox>
                      </children>
-                     <padding>
-                        <Insets left="40.0" right="40.0" />
-                     </padding>
                   </VBox>
                </children>
             </Pane>
