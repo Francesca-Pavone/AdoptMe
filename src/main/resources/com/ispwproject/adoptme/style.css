@@ -36,7 +36,18 @@
 }
 
 .text-field {
-	-fx-border-color: #000000;
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-border-color: #000000;
 	-fx-border-width: 0.8;
 	-fx-border-radius: 20;
+}
+
+.pet-box{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);
+}
+
+.pet-box:hover{
+    -fx-background-color: #DADADA;
 }
