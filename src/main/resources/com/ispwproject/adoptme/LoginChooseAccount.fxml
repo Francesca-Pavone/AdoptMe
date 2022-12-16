@@ -165,7 +165,7 @@
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../OneDrive/Desktop/AdoptMe-master/AdoptMe-master/src/main/resources/com/ispwproject/adoptme/image/close.png" />
+                              <Image url="@image/close.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -189,7 +189,7 @@
                                  <children>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../../OneDrive/Desktop/AdoptMe-master/AdoptMe-master/src/main/resources/com/ispwproject/adoptme/image/user2.png" />
+                                          <Image url="@image/user2.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets left="32.0" top="25.0" />
@@ -224,7 +224,7 @@
                                  <children>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../../../../OneDrive/Desktop/AdoptMe-master/AdoptMe-master/src/main/resources/com/ispwproject/adoptme/image/pet-house.png" />
+                                          <Image url="@image/pet-house.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets left="32.0" top="18.0" />
