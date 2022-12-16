@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserSideBarController">
+<AnchorPane style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserSideBarController">
    <children>
       <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
          <children>

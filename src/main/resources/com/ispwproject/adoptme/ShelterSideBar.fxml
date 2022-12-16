@@ -11,167 +11,159 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSideBarController">
-   <children>
-      <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
-         <children>
-            <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@image/paws.png" />
-               </image>
-            </ImageView>
-            <VBox>
-               <children>
-                  <Label text="Adopt" textFill="#c89c32">
-                     <font>
-                        <Font name="Times New Roman Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="10.0" opacity="0.6" text="Don't Shop" textFill="#c89c32">
-                     <font>
-                        <Font name="Times New Roman Bold" size="30.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="30.0" top="30.0" />
-         </padding>
-      </HBox>
-      <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
-         <children>
-            <Button fx:id="btnHomePage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="300.0" styleClass="open-screen" stylesheets="@style.css">
-               <graphic>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                     <children>
-                        <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/home.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label text="HOME PAGE" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </graphic>
-            </Button>
-            <Button fx:id="btnAppointments" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-               <graphic>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                     <children>
-                        <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/schedule.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="APPOINTMENTES" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </graphic>
-            </Button>
-            <Button fx:id="btnWishList" layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToWishlist" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-               <graphic>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                     <children>
-                        <Pane fx:id="wishlistSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/wishlist.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label text="WISH LIST" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </graphic>
-            </Button>
-            <Button fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-               <graphic>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                     <children>
-                        <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@image/gear.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="SETTINGS" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-               </graphic>
-            </Button>
-         </children>
-      </VBox>
-      <ImageView fitHeight="201.0" fitWidth="213.0" layoutX="65.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0">
-         <image>
-            <Image url="@image/dog_cat.png" />
-         </image>
+<AnchorPane style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSideBarController">
+   <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;"
+         AnchorPane.topAnchor="0.0">
+      <padding>
+         <Insets bottom="30.0" top="30.0"/>
+      </padding>
+      <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@image/paws.png"/>
       </ImageView>
-   </children>
+      <VBox>
+         <padding>
+            <Insets left="10.0"/>
+         </padding>
+         <Label text="Adopt" textFill="#c89c32">
+            <font>
+               <Font name="Times New Roman Bold" size="36.0"/>
+            </font>
+         </Label>
+         <Label layoutX="10.0" layoutY="10.0" opacity="0.6" text="Don't Shop" textFill="#c89c32">
+            <font>
+               <Font name="Times New Roman Bold" size="30.0"/>
+            </font>
+         </Label>
+      </VBox>
+   </HBox>
+   <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
+      <Button fx:id="btnHomePage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0"
+              prefWidth="300.0" styleClass="open-screen" stylesheets="@style.css">
+         <graphic>
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                  minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+               <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar"
+                     stylesheets="@style.css">
+                  <HBox.margin>
+                     <Insets right="35.0"/>
+                  </HBox.margin>
+                  <padding>
+                     <Insets bottom="10.0" top="10.0"/>
+                  </padding>
+               </Pane>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <HBox.margin>
+                     <Insets/>
+                  </HBox.margin>
+                  <Image url="@image/home.png"/>
+               </ImageView>
+               <Label text="HOME PAGE" textFill="WHITE">
+                  <font>
+                     <Font name="Arial" size="20.0"/>
+                  </font>
+               </Label>
+            </HBox>
+         </graphic>
+      </Button>
+      <Button fx:id="btnAppointments" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments"
+              prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
+         <graphic>
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                  minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+               <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar"
+                     stylesheets="@style.css" visible="false">
+                  <HBox.margin>
+                     <Insets right="35.0"/>
+                  </HBox.margin>
+                  <padding>
+                     <Insets bottom="10.0" top="10.0"/>
+                  </padding>
+               </Pane>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@image/schedule.png"/>
+               </ImageView>
+               <Label text="APPOINTMENTES" textFill="WHITE">
+                  <font>
+                     <Font name="Arial" size="20.0"/>
+                  </font>
+               </Label>
+            </HBox>
+         </graphic>
+      </Button>
+      <Button fx:id="btnWishList" layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToWishlist"
+              prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
+         <graphic>
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                  minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+               <Pane fx:id="wishlistSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar"
+                     stylesheets="@style.css" visible="false">
+                  <HBox.margin>
+                     <Insets right="35.0"/>
+                  </HBox.margin>
+                  <padding>
+                     <Insets bottom="10.0" top="10.0"/>
+                  </padding>
+               </Pane>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <HBox.margin>
+                     <Insets/>
+                  </HBox.margin>
+                  <Image url="@image/wishlist.png"/>
+               </ImageView>
+               <Label text="WISH LIST" textFill="WHITE">
+                  <font>
+                     <Font name="Arial" size="20.0"/>
+                  </font>
+               </Label>
+            </HBox>
+         </graphic>
+      </Button>
+      <Button fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings"
+              prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
+         <graphic>
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                  minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+               <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar"
+                     stylesheets="@style.css" visible="false">
+                  <HBox.margin>
+                     <Insets right="35.0"/>
+                  </HBox.margin>
+                  <padding>
+                     <Insets bottom="10.0" top="10.0"/>
+                  </padding>
+               </Pane>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@image/gear.png"/>
+               </ImageView>
+               <Label text="SETTINGS" textFill="WHITE">
+                  <font>
+                     <Font name="Arial" size="20.0"/>
+                  </font>
+               </Label>
+            </HBox>
+         </graphic>
+      </Button>
+   </VBox>
+   <ImageView fitHeight="201.0" fitWidth="213.0" layoutX="65.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.bottomAnchor="0.0">
+      <Image url="@image/dog_cat.png"/>
+   </ImageView>
 </AnchorPane>
