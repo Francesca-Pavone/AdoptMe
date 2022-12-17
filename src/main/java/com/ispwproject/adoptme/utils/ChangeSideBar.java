@@ -1,9 +1,7 @@
 package com.ispwproject.adoptme.utils;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class ChangeSideBar {
     private ChangeSideBar() {
@@ -16,9 +14,9 @@ public class ChangeSideBar {
         pane.setVisible(true);
         //btn.setBackground(new Background(new BackgroundFill(Color.rgb(i1,i2,i3), CornerRadii.EMPTY, Insets.EMPTY)));
     }
-    public static void others(Button btn, Pane pane) {
+    public static void other(Button btn, Pane pane) {
         btn.getStyleClass().clear();
-        btn.getStyleClass().add("transparent");
+        btn.getStyleClass().add("other-screen");
         pane.setVisible(false);
 
     }

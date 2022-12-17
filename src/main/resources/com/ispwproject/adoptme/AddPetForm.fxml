@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
+   <children>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" styleClass="transparent" stylesheets="@style.css">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/close.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" right="-25.0" />
+         </VBox.margin>
+      </HBox>
+      <Label maxWidth="1.7976931348623157E308" text="Register a new pet">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+         <graphic>
+            <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/load-photo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <HBox alignment="CENTER" spacing="100.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox spacing="7.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <children>
+                  <Label text="Name *">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" stylesheets="@style.css">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="10.0" layoutY="10.0" text="Year of Birth *">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="boxYear" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" stylesheets="@style.css" visibleRowCount="4">
+                     <padding>
+                        <Insets left="10.0" right="5.0" />
+                     </padding>
+                  </ComboBox>
+                  <Label layoutX="10.0" layoutY="124.0" text="Gender *">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Male">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Female">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefWidth="280.0" spacing="7.0">
+               <children>
+                  <Label text="Size *">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="transparent" stylesheets="@style.css">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="40.0" left="40.0" right="40.0" top="15.0" />
+   </padding>
+</VBox>

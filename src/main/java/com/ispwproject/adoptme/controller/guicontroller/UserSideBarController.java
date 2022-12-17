@@ -27,29 +27,29 @@ public class UserSideBarController {
 
     public void goToHomePage(ActionEvent actionEvent) {
         ChangeSideBar.clicked(btnHomePage, homepageSelect);
-        ChangeSideBar.others(btnFavorites, favoritesSelect);
-        ChangeSideBar.others(btnAppointments, appointmentsSelect);
-        ChangeSideBar.others(btnSettings, settingsSelect);
+        ChangeSideBar.other(btnFavorites, favoritesSelect);
+        ChangeSideBar.other(btnAppointments, appointmentsSelect);
+        ChangeSideBar.other(btnSettings, settingsSelect);
     }
 
     public void goToFavorites(ActionEvent actionEvent) {
-        ChangeSideBar.others(btnHomePage, homepageSelect);
+        ChangeSideBar.other(btnHomePage, homepageSelect);
         ChangeSideBar.clicked(btnFavorites, favoritesSelect);
-        ChangeSideBar.others(btnAppointments, appointmentsSelect);
-        ChangeSideBar.others(btnSettings, settingsSelect);
+        ChangeSideBar.other(btnAppointments, appointmentsSelect);
+        ChangeSideBar.other(btnSettings, settingsSelect);
     }
 
     public void goToAppointments(ActionEvent actionEvent) {
-        ChangeSideBar.others(btnHomePage, homepageSelect);
-        ChangeSideBar.others(btnFavorites, favoritesSelect);
+        ChangeSideBar.other(btnHomePage, homepageSelect);
+        ChangeSideBar.other(btnFavorites, favoritesSelect);
         ChangeSideBar.clicked(btnAppointments, appointmentsSelect);
-        ChangeSideBar.others(btnSettings, settingsSelect);
+        ChangeSideBar.other(btnSettings, settingsSelect);
     }
 
     public void goToSettings(ActionEvent actionEvent) {
-        ChangeSideBar.others(btnHomePage, homepageSelect);
-        ChangeSideBar.others(btnFavorites, favoritesSelect);
-        ChangeSideBar.others(btnAppointments, appointmentsSelect);
+        ChangeSideBar.other(btnHomePage, homepageSelect);
+        ChangeSideBar.other(btnFavorites, favoritesSelect);
+        ChangeSideBar.other(btnAppointments, appointmentsSelect);
         ChangeSideBar.clicked(btnSettings, settingsSelect);
     }
 

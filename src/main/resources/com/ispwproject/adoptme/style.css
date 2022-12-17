@@ -18,6 +18,16 @@
 
 .open-screen{
     -fx-background-color: #295147;
+    -fx-background-radius: 10 0 0 10;
+}
+
+.other-screen{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.other-screen:hover{
+    -fx-background-color: #417E70;
+    -fx-background-radius: 10 0 0 10;
 }
 
 .open-screen-bar{
@@ -26,10 +36,20 @@
 }
 
 .text-field {
-	-fx-border-color: #000000;
-	-fx-border-width: 0.4;
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-border-color: #000000;
+	-fx-border-width: 0.8;
 	-fx-border-radius: 20;
-	-fx-effect:  dropshadow(one-pass-box, grey, 6, 0.5, 0, 0);
+}
+
+.pet-box{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);
+}
+
+.pet-box:hover{
+    -fx-background-color: #DADADA;
 }
 
 .radio-button {

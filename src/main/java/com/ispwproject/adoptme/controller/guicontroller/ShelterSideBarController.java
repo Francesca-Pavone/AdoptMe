@@ -26,29 +26,29 @@ public class ShelterSideBarController {
 
     public void goToHomePage(ActionEvent actionEvent) {
         ChangeSideBar.clicked(btnHomePage, homepageSelect);
-        ChangeSideBar.others(btnAppointments, appointmentsSelect);
-        ChangeSideBar.others(btnWishList, wishlistSelect);
-        ChangeSideBar.others(btnSettings, settingsSelect);
+        ChangeSideBar.other(btnAppointments, appointmentsSelect);
+        ChangeSideBar.other(btnWishList, wishlistSelect);
+        ChangeSideBar.other(btnSettings, settingsSelect);
     }
 
     public void goToAppointments(ActionEvent actionEvent) {
-        ChangeSideBar.others(btnHomePage, homepageSelect);
+        ChangeSideBar.other(btnHomePage, homepageSelect);
         ChangeSideBar.clicked(btnAppointments, appointmentsSelect);
-        ChangeSideBar.others(btnWishList, wishlistSelect);
-        ChangeSideBar.others(btnSettings, settingsSelect);
+        ChangeSideBar.other(btnWishList, wishlistSelect);
+        ChangeSideBar.other(btnSettings, settingsSelect);
     }
 
     public void goToWishlist(ActionEvent actionEvent) {
-        ChangeSideBar.others(btnHomePage, homepageSelect);
-        ChangeSideBar.others(btnAppointments, appointmentsSelect);
+        ChangeSideBar.other(btnHomePage, homepageSelect);
+        ChangeSideBar.other(btnAppointments, appointmentsSelect);
         ChangeSideBar.clicked(btnWishList, wishlistSelect);
-        ChangeSideBar.others(btnSettings, settingsSelect);
+        ChangeSideBar.other(btnSettings, settingsSelect);
     }
 
     public void goToSettings(ActionEvent actionEvent) {
-        ChangeSideBar.others(btnHomePage, homepageSelect);
-        ChangeSideBar.others(btnAppointments, appointmentsSelect);
-        ChangeSideBar.others(btnWishList, wishlistSelect);
+        ChangeSideBar.other(btnHomePage, homepageSelect);
+        ChangeSideBar.other(btnAppointments, appointmentsSelect);
+        ChangeSideBar.other(btnWishList, wishlistSelect);
         ChangeSideBar.clicked(btnSettings, settingsSelect);
     }
 
