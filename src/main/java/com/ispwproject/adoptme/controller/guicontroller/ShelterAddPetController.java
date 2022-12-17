@@ -5,12 +5,14 @@ import com.ispwproject.adoptme.model.Pet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ public class ShelterAddPetController {
     private final List<Pet> petList = new ArrayList<>();
 
     public void addPet(ActionEvent event) throws IOException {
-        final Stage dialog = new Stage();
+        Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
