@@ -33,7 +33,7 @@
                         </Label>
                         <Label fx:id="petGender" layoutX="10.0" layoutY="10.0">
                            <font>
-                              <Font name="Arial" size="15.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Label>
                      </children>
@@ -50,7 +50,7 @@
                         </Label>
                         <Label fx:id="petAge" layoutX="10.0" layoutY="10.0">
                            <font>
-                              <Font name="Arial" size="15.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Label>
                      </children>
