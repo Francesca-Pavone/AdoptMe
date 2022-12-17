@@ -32,7 +32,7 @@ public class ShelterAddPetController {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm1.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
         dialog.show();
