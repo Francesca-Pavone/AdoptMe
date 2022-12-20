@@ -3,20 +3,22 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" styleClass="transparent" stylesheets="@style.css">
+            <Button mnemonicParsing="false" onAction="#close" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -109,21 +111,80 @@
             </VBox>
             <VBox prefWidth="280.0" spacing="7.0">
                <children>
-                  <Label text="Size *">
+                  <Label text="Type *">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="transparent" stylesheets="@style.css">
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="Dog">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cat">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </RadioButton>
+                     </children>
+                  </HBox>
+                  <Label text="Day and month of birth">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial Bold" size="16.0" />
                      </font>
-                  </TextField>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" showWeekNumbers="true" styleClass="transparent" stylesheets="@style.css" />
+                  <Label text="Coat lenght *">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="boxYear1" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" stylesheets="@style.css" visibleRowCount="4">
+                     <padding>
+                        <Insets left="10.0" right="5.0" />
+                     </padding>
+                  </ComboBox>
                </children>
             </VBox>
          </children>
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER">
+         <children>
+            <Pane prefHeight="33.0" prefWidth="41.0" />
+            <ImageView fitHeight="13.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/1of3_page.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnTo2" mnemonicParsing="false" onAction="#goToPage2" styleClass="transparent" stylesheets="@style.css">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/next_arrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="-20.0" top="40.0" />
          </VBox.margin>
       </HBox>
    </children>
