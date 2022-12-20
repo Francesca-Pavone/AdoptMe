@@ -7,10 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,6 +30,18 @@ public class AddPetFormController implements Initializable {
     private Button btnBack1;
     @FXML
     private Button btnTo3;
+    @FXML
+    private RadioButton typeDog;
+    @FXML
+    private HBox boxEducProg;
+    @FXML
+    private Label txtEducProg;
+    @FXML
+    private RadioButton rdBtnCat;
+    @FXML
+    private RadioButton rdBtnDog;
+
+    private int petType; // 0->DOG, 1->CAT
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[] items = {"2022", "2021", "2020", "2019", "2018", "2017"};
@@ -68,5 +78,15 @@ public class AddPetFormController implements Initializable {
     }
 
     public void goToPage3(ActionEvent event) {
+    }
+
+    public void selectDogType(ActionEvent event) {
+        petType = 0;
+        rdBtnCat.setSelected(false);
+    }
+
+    public void selectCatType(ActionEvent event) {
+        petType = 1;
+        rdBtnDog.setSelected(false);
     }
 }

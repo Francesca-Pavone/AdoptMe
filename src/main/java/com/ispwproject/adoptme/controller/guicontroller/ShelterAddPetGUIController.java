@@ -2,10 +2,10 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
 import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -15,10 +15,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterAddPetController {
+public class ShelterAddPetGUIController {
 
     @FXML
     private Button btnAddPet;
@@ -26,7 +27,9 @@ public class ShelterAddPetController {
     @FXML
     private GridPane grid;
 
-    private final List<Pet> petList = new ArrayList<>();
+    private List<Pet> petList = new ArrayList<>();
+
+    private PetDAO petDAO = new PetDAO();
 
     public void addPet(ActionEvent event) throws IOException {
         Stage dialog = new Stage();
@@ -39,64 +42,25 @@ public class ShelterAddPetController {
     }
 
     private List<Pet> getPetList() {
-        List<Pet> pets = new ArrayList<>();
-        Pet pet;
-        String female = "Female";
-        String male = "Male";
-        String adult = "Adult";
-        String puppy = "Puppy";
-        String young = "Young";
 
-        pet = new Pet();
-        pet.setName("Name1");
-        pet.setImgSrc("image/gatto1.png");
-        pet.setAge(adult);
-        pet.setGender(female);
-        pets.add(pet);
+        try {
+            String searchKey = "Pensieri Bestiali";
+            System.out.println("Looking for " + searchKey + "'s pets: ");
+            petList = this.petDAO.retreiveByShelterName(searchKey);
 
-        pet = new Pet();
-        pet.setName("Name2");
-        pet.setImgSrc("image/cane1.png");
-        pet.setAge(puppy);
-        pet.setGender(male);
-        pets.add(pet);
 
-        pet = new Pet();
-        pet.setName("Name3");
-        pet.setImgSrc("image/cane2.png");
-        pet.setAge(young);
-        pet.setGender(female);
-        pets.add(pet);
+        } catch (SQLException se) {
+            // Errore durante l'apertura della connessione
+            se.printStackTrace();
+        } catch (ClassNotFoundException driverEx) {
+            // Errore nel loading del driver
+            driverEx.printStackTrace();
+        } catch (Exception e) {
+            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
+            e.printStackTrace();
+        }
 
-        pet = new Pet();
-        pet.setName("Name4");
-        pet.setImgSrc("image/gatto2.png");
-        pet.setAge(adult);
-        pet.setGender(male);
-        pets.add(pet);
-
-        pet = new Pet();
-        pet.setName("Name5");
-        pet.setImgSrc("image/gatto3.png");
-        pet.setAge(puppy);
-        pet.setGender(female);
-        pets.add(pet);
-
-        pet = new Pet();
-        pet.setName("Name6");
-        pet.setImgSrc("image/cane3.png");
-        pet.setAge(adult);
-        pet.setGender(male);
-        pets.add(pet);
-
-        pet = new Pet();
-        pet.setName("Name7");
-        pet.setImgSrc("image/cane4.png");
-        pet.setAge(young);
-        pet.setGender(female);
-        pets.add(pet);
-
-        return pets;
+        return petList;
     }
 
 
@@ -107,14 +71,14 @@ public class ShelterAddPetController {
         int row = 1;
 
         try {
-            for (int i=0; i<petList.size(); i++) {
+            for (Pet pet : petList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(HelloApplication.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
 
                 PetItemController petItemController = fxmlLoader.getController();
-                petItemController.setData(petList.get(i));
+                petItemController.setData(pet);
 
                 if (column == 3) {
                     column = 0;
