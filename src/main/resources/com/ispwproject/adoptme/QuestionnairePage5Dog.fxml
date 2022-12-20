@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
    <children>
       <VBox layoutX="310.0" layoutY="-3.0" prefHeight="713.0" prefWidth="790.0">
          <children>
@@ -107,7 +108,7 @@
             </RadioButton>
             <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+                  <Button fx:id="btnPreviousQuestion5" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
@@ -127,8 +128,12 @@
                      <HBox.margin>
                         <Insets left="-5.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="button3" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+                  <Button fx:id="btnNextQuestion5" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
@@ -148,6 +153,10 @@
                      <HBox.margin>
                         <Insets left="400.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="button3" />
+                     </styleClass>
                   </Button>
                </children>
                <VBox.margin>
