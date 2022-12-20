@@ -1,10 +1,37 @@
 package com.ispwproject.adoptme.model;
 
 public class Pet {
-    private String imgSrc;
+
+    private int petId;
     private String name;
-    private String gender;
+    private String imgSrc;
     private String age;
+    private String gender;
+    private String shelter;
+
+    public Pet(String name, String imgSrc, String age,String gender) {
+        setName(name);
+        setImgSrc(imgSrc);
+        setAge(age);
+        setGender(gender);
+    }
+
+    public Pet(int petId, String imgSrc, String name, String gender, String age, String shelter) {
+        setPetId(petId);
+        setImgSrc(imgSrc);
+        setName(name);
+        setGender(gender);
+        setAge(age);
+        setShelter(shelter);
+    }
+
+    public int getPetId() {
+        return petId;
+    }
+
+    public void setPetId(int petId) {
+        this.petId = petId;
+    }
 
     public String getImgSrc() {
         return imgSrc;
@@ -36,5 +63,13 @@ public class Pet {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getShelter() {
+        return shelter;
+    }
+
+    public void setShelter(String shelter) {
+        this.shelter = shelter;
     }
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -121,12 +121,12 @@
                         <Insets left="30.0" />
                      </padding>
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Dog">
+                        <RadioButton fx:id="rdBtnDog" mnemonicParsing="false" onAction="#selectDogType" text="Dog">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cat">
+                        <RadioButton fx:id="rdBtnCat" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectCatType" text="Cat">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
