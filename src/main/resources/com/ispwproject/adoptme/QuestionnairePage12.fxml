@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
    <children>
       <VBox layoutX="309.0" layoutY="2.0" prefHeight="713.0" prefWidth="790.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,12 +41,12 @@
             </Label>
             <HBox alignment="CENTER" spacing="95.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #34665A; -fx-background-radius: 20; -fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" stylesheets="@style.css" text="Yes" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Yes" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="40.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #34665A; -fx-background-radius: 20; -fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" text="No" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="No" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="40.0" />
                      </font>
@@ -58,7 +58,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+                  <Button fx:id="btnPreviousQuestion12" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
@@ -78,8 +78,12 @@
                      <HBox.margin>
                         <Insets left="-5.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="button3" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+                  <Button fx:id="btnNextQuestion12" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
@@ -99,6 +103,10 @@
                      <HBox.margin>
                         <Insets left="400.0" />
                      </HBox.margin>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="button3" />
+                     </styleClass>
                   </Button>
                </children>
                <VBox.margin>
