@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetDAO {
-    private static String USER = "root";
-    private static String PASS = "Francy.1601";
-    private static String DB_URL = "jdbc:mysql://localhost:3306/AdoptMe-DB";
+    private static String USER = "user1";
+    private static String PASS = "user1";
+    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
