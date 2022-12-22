@@ -79,8 +79,11 @@ public class AddPetFormController2 implements Initializable {
         stage.setScene(scene);
     }
 
-    public void goToPage3(ActionEvent event) {
-
+    public void goToPage3(ActionEvent event) throws IOException {
+        Stage stage = (Stage) btnBack1.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm3.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
     }
 
 }

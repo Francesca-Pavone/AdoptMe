@@ -10,11 +10,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController1">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController1">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -167,11 +166,13 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Pane prefHeight="33.0" prefWidth="41.0" />
             <ImageView fitHeight="13.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/1of3_page.png" />
                </image>
+               <HBox.margin>
+                  <Insets left="41.0" />
+               </HBox.margin>
             </ImageView>
             <Button fx:id="btnTo2" mnemonicParsing="false" onAction="#goToPage2" styleClass="transparent" stylesheets="@style.css">
                <graphic>
