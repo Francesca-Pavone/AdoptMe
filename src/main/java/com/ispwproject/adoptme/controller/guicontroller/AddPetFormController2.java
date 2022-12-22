@@ -8,16 +8,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddPetFormController implements Initializable {
-    @FXML
-    private ComboBox<String> boxYear;
+import static com.ispwproject.adoptme.controller.guicontroller.AddPetFormController1.getPetType;
+
+public class AddPetFormController2 implements Initializable {
+
     @FXML
     private RadioButton noDisability;
     @FXML
@@ -25,28 +34,26 @@ public class AddPetFormController implements Initializable {
     @FXML
     private RadioButton yesDisability;
     @FXML
-    private Button btnTo2;
-    @FXML
     private Button btnBack1;
     @FXML
     private Button btnTo3;
     @FXML
-    private RadioButton typeDog;
-    @FXML
     private HBox boxEducProg;
     @FXML
     private Label txtEducProg;
-    @FXML
-    private RadioButton rdBtnCat;
-    @FXML
-    private RadioButton rdBtnDog;
 
-    private int petType; // 0->DOG, 1->CAT
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] items = {"2022", "2021", "2020", "2019", "2018", "2017"};
-        if (boxYear != null)
-            boxYear.getItems().addAll(items);
+
+        if (boxEducProg != null && txtEducProg != null) {
+            if (getPetType() == 1) {
+                System.out.println("Pet Type: " + getPetType());
+                boxEducProg.setVisible(false);
+                txtEducProg.setVisible(false);
+            }
+        }
     }
 
     public void close(ActionEvent event) {
@@ -63,12 +70,7 @@ public class AddPetFormController implements Initializable {
         txtDisabilityType.setVisible(false);
     }
 
-    public void goToPage2(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnTo2.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm2.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
+
 
     public void goBackToPage1(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnBack1.getScene().getWindow();
@@ -78,15 +80,7 @@ public class AddPetFormController implements Initializable {
     }
 
     public void goToPage3(ActionEvent event) {
+
     }
 
-    public void selectDogType(ActionEvent event) {
-        petType = 0;
-        rdBtnCat.setSelected(false);
-    }
-
-    public void selectCatType(ActionEvent event) {
-        petType = 1;
-        rdBtnDog.setSelected(false);
-    }
 }

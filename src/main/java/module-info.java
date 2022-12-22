@@ -7,6 +7,7 @@ module com.ispwproject.adoptme {
     requires org.kordamp.bootstrapfx.core;
     requires com.opencsv;
     requires java.sql;
+    requires java.desktop;
 
     opens com.ispwproject.adoptme to javafx.fxml;
     exports com.ispwproject.adoptme;
