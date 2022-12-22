@@ -13,8 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
    <children>
-      <fx:include source="UserSideBar.fxml" />
-      <VBox layoutX="310.0" layoutY="-3.0" prefHeight="713.0" prefWidth="790.0">
+      <VBox layoutX="320.0" layoutY="7.0" prefHeight="713.0" prefWidth="790.0">
          <children>
             <Label text="Fill in the questionnaire" textFill="#34665a">
                <font>
@@ -24,7 +23,7 @@
                   <Insets left="40.0" top="100.0" />
                </VBox.margin>
             </Label>
-            <Label text="What age do you prefer?">
+            <Label text="Do you live in an apartment with a terrace?">
                <font>
                   <Font name="Arial Bold" size="35.0" />
                </font>
@@ -32,16 +31,16 @@
                   <Insets left="40.0" top="25.0" />
                </VBox.margin>
             </Label>
-            <HBox alignment="CENTER" spacing="45.0">
+            <HBox alignment="CENTER" spacing="95.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="325.0" style="-fx-background-radius: 20; -fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Puppy (0-12 months)" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Yes" textFill="WHITE">
                      <font>
-                        <Font name="Arial Bold" size="20.0" />
+                        <Font name="Arial Bold" size="40.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="325.0" style="-fx-background-radius: 20; -fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Young (13 months - 3 years)" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="250.0" prefWidth="250.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="No" textFill="WHITE">
                      <font>
-                        <Font name="Arial Bold" size="20.0" />
+                        <Font name="Arial Bold" size="40.0" />
                      </font>
                   </Button>
                </children>
@@ -49,34 +48,9 @@
                   <Insets top="60.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" spacing="45.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="325.0" style="-fx-background-radius: 20; -fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Adult (4 years - 10 years)" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="79.0" prefWidth="325.0" style="-fx-background-radius: 20; -fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Senior (more than 11 years)" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="20.0" />
-                     </font>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </HBox>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="267.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" text="Not important" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="262.0" top="40.0" />
-               </VBox.margin>
-            </Button>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="btnPreviousQuestion3" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
+                  <Button fx:id="btnPreviousQuestion8" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
@@ -101,7 +75,7 @@
                         <String fx:value="button3" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="btnNextQuestion3" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
+                  <Button fx:id="btnNextQuestion8" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
                      <graphic>
                         <VBox alignment="CENTER">
                            <children>
@@ -128,10 +102,11 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets top="90.0" />
                </VBox.margin>
             </HBox>
          </children>
       </VBox>
+      <fx:include source="UserSideBar.fxml" />
    </children>
 </AnchorPane>

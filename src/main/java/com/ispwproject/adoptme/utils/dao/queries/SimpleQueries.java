@@ -27,7 +27,7 @@ import java.sql.Statement;
 public class SimpleQueries {
     public static ResultSet selectPetByShelterName(Statement stmt, String shelterName) throws SQLException {
         String sql = "SELECT * FROM Pets WHERE shelter in (SELECT shelterId FROM Shelters WHERE name = '" + shelterName + "');";
-        System.out.println(sql);
+        //System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 /*

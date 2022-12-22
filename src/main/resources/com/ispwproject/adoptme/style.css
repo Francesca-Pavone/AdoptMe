@@ -12,6 +12,24 @@
     -fx-background-color: #C89C32;
 }
 
+.button2 {
+    -fx-background-color: #CFCFCF;
+    -fx-background-radius: 40 40 40 40;
+}
+
+.button2:hover {
+    -fx-background-color: #9C9C9C;
+}
+
+.button2:pressed {
+    -fx-background-color: #7797B3;
+}
+
+.button3:pressed {
+	-fx-scale-x: 1.2;
+	-fx-scale-y: 1.2;
+}
+
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
@@ -50,4 +68,21 @@
 
 .pet-box:hover{
     -fx-background-color: #DADADA;
+}
+
+.radio-button {
+	-fx-background-color: #34665A;
+	-fx-background-radius: 20;
+	-fx-border-color: #34665A;
+	-fx-border-radius: 20;
+	-fx-border-width: 0.3;
+}
+
+.radio-button:selected .dot{
+	-fx-background-color: #34665A;
+}
+
+.photo-loaded {
+    -fx-background-color: green;
+    -fx-background-radius: 100;
 }

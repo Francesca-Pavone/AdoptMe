@@ -45,7 +45,7 @@ public class ShelterAddPetGUIController {
 
         try {
             String searchKey = "Pensieri Bestiali";
-            System.out.println("Looking for " + searchKey + "'s pets: ");
+            //System.out.println("Looking for " + searchKey + "'s pets: ");
             petList = this.petDAO.retreiveByShelterName(searchKey);
 
 
