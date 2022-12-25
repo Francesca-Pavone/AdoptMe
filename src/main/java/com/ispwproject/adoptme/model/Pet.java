@@ -7,7 +7,7 @@ public class Pet {
     private String imgSrc;
     private String age;
     private String gender;
-    private String shelter;
+    private int shelter;
 
     public Pet(String name, String imgSrc, String age,String gender) {
         setName(name);
@@ -16,7 +16,7 @@ public class Pet {
         setGender(gender);
     }
 
-    public Pet(int petId, String imgSrc, String name, String gender, String age, String shelter) {
+    public Pet(int petId, String imgSrc, String name, String gender, String age, int shelter) {
         setPetId(petId);
         setImgSrc(imgSrc);
         setName(name);
@@ -65,11 +65,11 @@ public class Pet {
         this.age = age;
     }
 
-    public String getShelter() {
+    public int getShelter() {
         return shelter;
     }
 
-    public void setShelter(String shelter) {
+    public void setShelter(int shelter) {
         this.shelter = shelter;
     }
 }

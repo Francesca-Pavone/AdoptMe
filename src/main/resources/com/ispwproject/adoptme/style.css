@@ -81,3 +81,8 @@
 .radio-button:selected .dot{
 	-fx-background-color: #34665A;
 }
+
+.photo-loaded {
+    -fx-background-color: green;
+    -fx-background-radius: 100;
+}
