@@ -5,13 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController2">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -58,8 +59,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="vaccinated" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$vaccinated">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -83,8 +87,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="dewormed" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$dewormed">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -108,8 +115,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="disability" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="noDisability" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#hideDisabilityType" text="No">
+                        <RadioButton fx:id="noDisability" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#hideDisabilityType" text="No" toggleGroup="$disability">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -142,8 +152,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="microchipped" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$microchipped">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -167,8 +180,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sterilized" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$sterilized">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -192,8 +208,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="dogEducation" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$dogEducation">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -212,7 +231,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="btnBack1" mnemonicParsing="false" onAction="#goBackToPage1" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btnBack1" mnemonicParsing="false" onAction="#goToPage1" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>

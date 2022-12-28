@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
 import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterAddPetGUIController {
+public class ShelterAddPetGUI extends ShelterSideBar {
 
     @FXML
     private Button btnAddPet;

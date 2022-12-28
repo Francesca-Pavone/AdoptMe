@@ -7,13 +7,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController1">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -66,7 +67,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" stylesheets="@style.css">
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -79,7 +80,7 @@
                         <Insets top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="boxYear" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" stylesheets="@style.css" visibleRowCount="4">
+                  <ComboBox fx:id="boxYear" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
                      <padding>
                         <Insets left="10.0" right="5.0" />
                      </padding>
@@ -98,8 +99,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="gender" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Female">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Female" toggleGroup="$gender">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -127,8 +131,11 @@
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="type" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="rdBtnCat" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectCatType" text="Cat">
+                        <RadioButton fx:id="rdBtnCat" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectCatType" text="Cat" toggleGroup="$type">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -143,7 +150,7 @@
                         <Insets top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" showWeekNumbers="true" styleClass="transparent" stylesheets="@style.css" />
+                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" showWeekNumbers="true" styleClass="transparent" />
                   <Label text="Coat lenght *">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
@@ -152,7 +159,7 @@
                         <Insets top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="boxYear1" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" stylesheets="@style.css" visibleRowCount="4">
+                  <ComboBox fx:id="boxYear1" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
                      <padding>
                         <Insets left="10.0" right="5.0" />
                      </padding>

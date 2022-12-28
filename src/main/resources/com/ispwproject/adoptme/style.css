@@ -70,7 +70,13 @@
     -fx-background-color: #DADADA;
 }
 
-.radio-button {
+.request-box{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);
+}
+
+/*.radio-button {
 	-fx-background-color: #34665A;
 	-fx-background-radius: 20;
 	-fx-border-color: #34665A;
@@ -81,8 +87,55 @@
 .radio-button:selected .dot{
 	-fx-background-color: #34665A;
 }
+ */
+
+.radio-button .radio {
+    -fx-border-width: 2px;
+    -fx-border-color: #34665A;
+    -fx-background-color: white;
+    -fx-background-image: null;
+    -fx-border-radius: 15px;
+    -fx-padding: 5px;
+}
+
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #34665A;
+    -fx-border-radius: 5;
+    -fx-border-width: 2px;
+}
+
+.check-box .mark {
+    -fx-shape: "M1.73,12.91 8.1,19.28 22.79,4.59 22.79,1.59 8.1,16.28 1.73,9.91";
+}
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+.check-box:selected .box {
+    -fx-background-color: #34665A;
+    -fx-background-radius: 5;
+}
+
+.button-modify {
+    -fx-background-color: #c89c32;
+    -fx-background-radius: 50;
+}
+
+.button-modify:hover {
+    -fx-background-color: #D3AD76;
+}
+
+.button-refuse {
+    -fx-background-color: #670D01;
+    -fx-background-radius: 50;
+}
+
+.button-refuse:hover {
+    -fx-background-color: #7A443D;
+}
 
 .photo-loaded {
     -fx-background-color: green;
     -fx-background-radius: 100;
 }
+

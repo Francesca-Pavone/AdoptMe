@@ -7,16 +7,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -25,25 +26,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddPetFormController1 implements Initializable {
-    @FXML
-    private Button btnLoadImage;
+public class AddPetFormController implements Initializable {
     @FXML
     private ImageView petImg;
     @FXML
     private ComboBox<String> boxYear;
     @FXML
-    private Button btnTo2;
-    @FXML
     private RadioButton rdBtnCat;
     @FXML
     private RadioButton rdBtnDog;
+    @FXML
+    private TextField txtDisabilityType;
+    @FXML
+    private HBox boxEducProg;
+    @FXML
+    private Label txtEducProg;
+
 
     private static int petType; // 0->DOG, 1->CAT
     private static Image newPetImage;
 
-    public AddPetFormController1() {
-    }
 
     public static int getPetType() {
         return petType;
@@ -60,22 +62,25 @@ public class AddPetFormController1 implements Initializable {
             boxYear.getItems().addAll(items);
 
         if (rdBtnCat != null && rdBtnDog != null){
-            if (getPetType() == 1){
-                rdBtnDog.setSelected(false);
+            if (getPetType() == 1)
                 rdBtnCat.setSelected(true);
-            }
-            else {
+            else
                 rdBtnDog.setSelected(true);
-                rdBtnCat.setSelected(false);
-
-            }
         }
 
-        if (newPetImage != null){
+        if (newPetImage != null && petImg != null){
             petImg.setImage(newPetImage);
 
             //btnLoadImage.getStyleClass().clear();
             //btnLoadImage.getStyleClass().add("photo-loaded");
+        }
+
+        if (boxEducProg != null && txtEducProg != null) {
+            if (getPetType() == 1) {
+                System.out.println("Pet Type: " + getPetType());
+                boxEducProg.setVisible(false);
+                txtEducProg.setVisible(false);
+            }
         }
     }
 
@@ -83,22 +88,31 @@ public class AddPetFormController1 implements Initializable {
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
+    public void goToPage1(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm1.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+    }
     public void goToPage2(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnTo2.getScene().getWindow();
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm2.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-        initialize(null, null);
+    }
+    public void goToPage3(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm3.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
     }
 
     public void selectDogType(ActionEvent event) {
         setPetType(0);
-        rdBtnCat.setSelected(false);
     }
 
     public void selectCatType(ActionEvent event) {
         setPetType(1);
-        rdBtnDog.setSelected(false);
     }
 
     public void loadImage(ActionEvent event) throws IOException {
@@ -110,6 +124,7 @@ public class AddPetFormController1 implements Initializable {
 
         BufferedImage bfImage = null;
         bfImage = ImageIO.read(image);
+
         WritableImage wr = null;
         if (bfImage != null) {
             wr = new WritableImage(bfImage.getWidth(), bfImage.getHeight());
@@ -122,7 +137,6 @@ public class AddPetFormController1 implements Initializable {
         }
 
         newPetImage = new ImageView(wr).getImage();
-
         petImg.setImage(newPetImage);
 /*
         btnLoadImage.getStyleClass().clear();
@@ -130,4 +144,13 @@ public class AddPetFormController1 implements Initializable {
 
  */
     }
+
+    public void showDisabilityType(ActionEvent event) {
+        txtDisabilityType.setVisible(true);
+    }
+
+    public void hideDisabilityType(ActionEvent event) {
+        txtDisabilityType.setVisible(false);
+    }
+
 }

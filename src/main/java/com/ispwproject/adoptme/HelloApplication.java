@@ -9,9 +9,10 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     private static Stage stage;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ShelterAddPet.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ShelterHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         HelloApplication.stage = stage;
         stage.setTitle("AdoptMe");
@@ -22,7 +23,8 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    static public Stage getStage() {
+    public static Stage getStage() {
         return stage;
     }
+
 }
