@@ -70,15 +70,23 @@
     -fx-background-color: #DADADA;
 }
 
-.radio-button {
+.radio-button1 {
+	-fx-border-color: #34665A;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+	-fx-text-fill: #34665A;
+}
+
+.radio-button1:selected {
 	-fx-background-color: #34665A;
 	-fx-background-radius: 20;
 	-fx-border-color: #34665A;
 	-fx-border-radius: 20;
 	-fx-border-width: 0.3;
+	-fx-text-fill: #ffffff;
 }
 
-.radio-button:selected .dot{
+.radio-button1:selected .dot{
 	-fx-background-color: #34665A;
 }
 

@@ -11,16 +11,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="790.0" style="-fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
    <children>
-      <VBox layoutX="320.0" layoutY="7.0" prefHeight="713.0" prefWidth="790.0">
+      <VBox layoutX="320.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="573.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/close.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="730.0" top="15.0" />
+               </VBox.margin>
+            </Button>
             <Label text="Fill in the questionnaire" textFill="#34665a">
                <font>
                   <Font name="Arial Bold" size="32.0" />
                </font>
                <VBox.margin>
-                  <Insets left="40.0" top="100.0" />
+                  <Insets left="40.0" top="20.0" />
                </VBox.margin>
             </Label>
             <Label prefWidth="750.0" text="How long will the pet be alone at home">
@@ -28,7 +40,7 @@
                   <Font name="Arial Bold" size="35.0" />
                </font>
                <VBox.margin>
-                  <Insets left="40.0" top="25.0" />
+                  <Insets left="40.0" top="15.0" />
                </VBox.margin>
             </Label>
             <Label prefWidth="750.0" text=" during the day?">
@@ -39,7 +51,7 @@
                   <Insets left="40.0" />
                </VBox.margin>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="418.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="1 - 3 hours" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="418.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="1 - 3 hours" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="30.0" />
                </font>
@@ -47,20 +59,20 @@
                   <Insets left="170.0" top="30.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="418.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="4 - 6 hours" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="418.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="4 - 6 hours" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="30.0" />
                </font>
                <VBox.margin>
-                  <Insets left="170.0" top="25.0" />
+                  <Insets left="170.0" top="15.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="418.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="More than 6 hours" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="418.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="More than 6 hours" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="30.0" />
                </font>
                <VBox.margin>
-                  <Insets left="170.0" top="25.0" />
+                  <Insets left="170.0" top="15.0" />
                </VBox.margin>
             </Button>
             <HBox alignment="CENTER">
@@ -117,11 +129,10 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="45.0" />
+                  <Insets top="15.0" />
                </VBox.margin>
             </HBox>
          </children>
       </VBox>
-      <fx:include source="UserSideBar.fxml" />
    </children>
 </AnchorPane>
