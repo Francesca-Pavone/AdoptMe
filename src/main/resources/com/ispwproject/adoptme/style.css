@@ -12,6 +12,10 @@
     -fx-background-color: #C89C32;
 }
 
+.button1:selected {
+    -fx-background-color: #C89C32;
+}
+
 .button2 {
     -fx-background-color: #CFCFCF;
     -fx-background-radius: 40 40 40 40;
@@ -22,6 +26,10 @@
 }
 
 .button2:pressed {
+    -fx-background-color: #7797B3;
+}
+
+.button2:selected {
     -fx-background-color: #7797B3;
 }
 
