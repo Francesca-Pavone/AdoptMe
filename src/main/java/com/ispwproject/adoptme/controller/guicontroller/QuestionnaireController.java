@@ -23,8 +23,6 @@ public class QuestionnaireController {
     @FXML
     private Button btnCity;
     @FXML
-    private Button btnStartQuestionnaire;
-    @FXML
     private Button btnNextQuestion1;
     @FXML
     private Button btnNextQuestion2;
@@ -112,11 +110,7 @@ public class QuestionnaireController {
    public void goToNextQuestion(ActionEvent event) throws IOException {
         Stage stage = HelloApplication.getStage();
         FXMLLoader fxmlLoader = null;
-        if (event.getSource() == btnStartQuestionnaire){
-           System.out.println(catOrDog);
-           fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage1.fxml"));
-        }
-        else if (event.getSource() == btnNextQuestion1 && catOrDog == 1){
+        if (event.getSource() == btnNextQuestion1 && catOrDog == 1){
             System.out.println(catOrDog);
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
         }
