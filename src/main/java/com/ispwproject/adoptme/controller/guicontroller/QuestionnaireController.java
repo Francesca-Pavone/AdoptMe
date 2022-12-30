@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +13,19 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionnaireController {
+
     private static int petType;
     private static int petGender;
     private static int petAge;
@@ -531,17 +539,14 @@ public class QuestionnaireController {
    public void goToNextQuestion(ActionEvent event) throws IOException {
        Stage stage = null;
         FXMLLoader fxmlLoader = null;
-        if (event.getSource() == btnNextQuestion1){
+        if (event.getSource() == btnNextQuestion1 && petType == 1){
             stage = (Stage) btnNextQuestion1.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
-            if (petType == 1 ) {
-                //femalePet.setImage(new Image("female_cat.png"));
-                //malePet.setImage(new Image("male_cat.png"));
-            } else {
-                //femalePet.setImage(new Image("female_dog.png"));
-                //malePet.setImage(new Image("male_dog.png"));
-            }
         }
+       else if (event.getSource() == btnNextQuestion1 && petType == 0){
+           stage = (Stage) btnNextQuestion1.getScene().getWindow();
+           fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Dog.fxml"));
+       }
         else if (event.getSource() == btnNextQuestion2){
             stage = (Stage) btnNextQuestion2.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage3.fxml"));
@@ -554,13 +559,14 @@ public class QuestionnaireController {
             stage = (Stage) btnNextQuestion3.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage4.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion3 /*&& petType == 1*/) {
+        else if (event.getSource() == btnPreviousQuestion3 && petType == 1) {
             stage = (Stage) btnPreviousQuestion3.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
         }
-        /*else if (event.getSource() == btnPreviousQuestion3 && petType == 0) {
+        else if (event.getSource() == btnPreviousQuestion3 && petType == 0) {
+            stage = (Stage) btnPreviousQuestion3.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Dog.fxml"));
-        }*/
+        }
         else if (event.getSource() == btnNextQuestion4 && petType == 1) {
             stage = (Stage) btnNextQuestion4.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Cat.fxml"));
@@ -589,9 +595,9 @@ public class QuestionnaireController {
             stage = (Stage) btnPreviousQuestion6.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Cat.fxml"));
         }
-        /*else if (event.getSource() == btnPreviousQuestion6 && petType == 0) {
+        else if (event.getSource() == btnPreviousQuestion6 && petType == 0) {
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Dog.fxml"));
-        }*/
+        }
         else if (event.getSource() == btnNextQuestion7) {
             stage = (Stage) btnNextQuestion7.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage8.fxml"));

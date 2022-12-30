@@ -28,7 +28,7 @@ public class UserHomepageController {
 
     public void goToFavorites(ActionEvent event) throws IOException {
         Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserSettingsPage.fxml"));
+        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserFavoritesPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
