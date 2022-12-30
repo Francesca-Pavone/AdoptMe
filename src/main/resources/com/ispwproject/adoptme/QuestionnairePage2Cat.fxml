@@ -17,7 +17,7 @@
    <children>
       <VBox layoutX="310.0" layoutY="-3.0" prefHeight="573.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#exitQuestionnaire" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btnExitQuestionnaire" mnemonicParsing="false" onAction="#exitQuestionnaire" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +47,7 @@
             </Label>
             <HBox alignment="CENTER" spacing="40.0">
                <children>
-                  <ToggleButton fx:id="btnFemale" mnemonicParsing="false" onAction="#selectFemale" prefHeight="250.0" prefWidth="250.0" styleClass="button1" stylesheets="@style.css">
+                  <ToggleButton fx:id="btnFemale" mnemonicParsing="false" onAction="#selectFemale" prefHeight="250.0" prefWidth="250.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css">
                      <graphic>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -74,7 +74,7 @@
                         <ToggleGroup fx:id="petGenderGroup" />
                      </toggleGroup>
                   </ToggleButton>
-                  <ToggleButton fx:id="btnMale" mnemonicParsing="false" onAction="#selectMale" styleClass="button1" stylesheets="@style.css" toggleGroup="$petGenderGroup">
+                  <ToggleButton fx:id="btnMale" mnemonicParsing="false" onAction="#selectMale" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" toggleGroup="$petGenderGroup">
                      <graphic>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -98,7 +98,7 @@
                         </VBox>
                      </graphic>
                   </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" styleClass="button2" stylesheets="@style.css" toggleGroup="$petGenderGroup">
+                  <ToggleButton mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" toggleGroup="$petGenderGroup">
                      <graphic>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>

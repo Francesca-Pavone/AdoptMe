@@ -12,16 +12,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="790.0" style="-fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController">
    <children>
-      <VBox layoutX="310.0" layoutY="-3.0" prefHeight="713.0" prefWidth="790.0">
+      <VBox layoutX="310.0" layoutY="-3.0" prefHeight="713.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Button mnemonicParsing="false" styleClass="transparent" stylesheets="@style.css">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/close.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="730.0" top="15.0" />
+               </VBox.margin>
+            </Button>
             <Label text="Fill in the questionnaire" textFill="#34665a">
                <font>
                   <Font name="Arial Bold" size="32.0" />
                </font>
                <VBox.margin>
-                  <Insets left="40.0" top="100.0" />
+                  <Insets left="40.0" top="20.0" />
                </VBox.margin>
             </Label>
             <Label text="Do you already have a pet?">
@@ -29,7 +41,7 @@
                   <Font name="Arial" size="25.0" />
                </font>
                <VBox.margin>
-                  <Insets left="65.0" top="25.0" />
+                  <Insets left="65.0" top="10.0" />
                </VBox.margin>
             </Label>
             <Label text="If yes, select which of these:">
@@ -37,10 +49,10 @@
                   <Font name="Arial Bold" size="35.0" />
                </font>
                <VBox.margin>
-                  <Insets left="40.0" top="2.0" />
+                  <Insets left="40.0" />
                </VBox.margin>
             </Label>
-            <RadioButton mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" style="-fx-border-color: #34665A; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@style.css" text="Male dog sterilized" textFill="WHITE">
+            <RadioButton fx:id="radioButtonPet1" mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" styleClass="radio-button1" stylesheets="@style.css" text="Male dog sterilized" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -48,10 +60,10 @@
                   <Insets left="15.0" />
                </padding>
                <VBox.margin>
-                  <Insets left="150.0" top="45.0" />
+                  <Insets left="150.0" top="20.0" />
                </VBox.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" style="-fx-border-color: #34665A; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@style.css" text="Male dog non-sterilized" textFill="WHITE">
+            <RadioButton fx:id="radioButtonPet2" mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" styleClass="radio-button1" stylesheets="@style.css" text="Male dog non-sterilized" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -59,10 +71,10 @@
                   <Insets left="15.0" />
                </padding>
                <VBox.margin>
-                  <Insets left="150.0" top="10.0" />
+                  <Insets left="150.0" top="5.0" />
                </VBox.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" style="-fx-border-color: #34665A; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@style.css" text="Female dog sterilized" textFill="WHITE">
+            <RadioButton fx:id="radioButtonPet3" mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" styleClass="radio-button1" stylesheets="@style.css" text="Female dog sterilized" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -70,10 +82,10 @@
                   <Insets left="15.0" />
                </padding>
                <VBox.margin>
-                  <Insets left="150.0" top="10.0" />
+                  <Insets left="150.0" top="5.0" />
                </VBox.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" style="-fx-border-color: #34665A; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@style.css" text="Female dog non-sterilized" textFill="WHITE">
+            <RadioButton fx:id="radioButtonPet4" mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" styleClass="radio-button1" stylesheets="@style.css" text="Female dog non-sterilized" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -81,10 +93,10 @@
                   <Insets left="15.0" />
                </padding>
                <VBox.margin>
-                  <Insets left="150.0" top="10.0" />
+                  <Insets left="150.0" top="5.0" />
                </VBox.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" style="-fx-border-color: #34665A; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@style.css" text="Male cat" textFill="WHITE">
+            <RadioButton fx:id="radioButtonPet5" mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" styleClass="radio-button1" stylesheets="@style.css" text="Male cat" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -92,10 +104,10 @@
                   <Insets left="15.0" />
                </padding>
                <VBox.margin>
-                  <Insets left="150.0" top="10.0" />
+                  <Insets left="150.0" top="5.0" />
                </VBox.margin>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" style="-fx-border-color: #34665A; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@style.css" text="Female cat" textFill="WHITE">
+            <RadioButton fx:id="radioButtonPet6" mnemonicParsing="false" prefHeight="40.0" prefWidth="468.0" styleClass="radio-button1" stylesheets="@style.css" text="Female cat" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -103,7 +115,7 @@
                   <Insets left="15.0" />
                </padding>
                <VBox.margin>
-                  <Insets left="150.0" top="10.0" />
+                  <Insets left="150.0" top="5.0" />
                </VBox.margin>
             </RadioButton>
             <HBox alignment="CENTER">
@@ -160,11 +172,10 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets top="45.0" />
+                  <Insets top="5.0" />
                </VBox.margin>
             </HBox>
          </children>
       </VBox>
-      <fx:include source="UserSideBar.fxml" />
    </children>
 </AnchorPane>
