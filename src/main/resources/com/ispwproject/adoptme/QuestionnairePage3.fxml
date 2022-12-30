@@ -17,7 +17,7 @@
    <children>
       <VBox layoutX="310.0" layoutY="-3.0" prefHeight="573.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#exitQuestionnaire" prefHeight="25.0" prefWidth="25.0" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btnExitQuestionnaire" mnemonicParsing="false" onAction="#exitQuestionnaire" prefHeight="25.0" prefWidth="25.0" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +47,7 @@
             </Label>
             <HBox alignment="CENTER" spacing="45.0">
                <children>
-                  <ToggleButton fx:id="btnPuppy" mnemonicParsing="false" onAction="#selectPuppy" prefHeight="79.0" prefWidth="325.0" styleClass="button1" stylesheets="@style.css" text="Puppy (0-12 months)" textFill="WHITE">
+                  <ToggleButton fx:id="btnPuppy" mnemonicParsing="false" onAction="#selectPuppy" prefHeight="79.0" prefWidth="325.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Puppy (0-12 months)" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
@@ -55,7 +55,7 @@
                         <ToggleGroup fx:id="petAgeGroup" />
                      </toggleGroup>
                   </ToggleButton>
-                  <ToggleButton fx:id="btnYoung" mnemonicParsing="false" onAction="#selectYoung" prefHeight="79.0" prefWidth="325.0" styleClass="button1" stylesheets="@style.css" text="Young (13 months - 3 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
+                  <ToggleButton fx:id="btnYoung" mnemonicParsing="false" onAction="#selectYoung" prefHeight="79.0" prefWidth="325.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Young (13 months - 3 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
@@ -67,12 +67,12 @@
             </HBox>
             <HBox alignment="CENTER" spacing="45.0">
                <children>
-                  <ToggleButton fx:id="btnAdult" mnemonicParsing="false" onAction="#selectAdult" prefHeight="79.0" prefWidth="325.0" styleClass="button1" stylesheets="@style.css" text="Adult (4 years - 10 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
+                  <ToggleButton fx:id="btnAdult" mnemonicParsing="false" onAction="#selectAdult" prefHeight="79.0" prefWidth="325.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Adult (4 years - 10 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </ToggleButton>
-                  <ToggleButton fx:id="btnSenior" mnemonicParsing="false" onAction="#selectSenior" prefHeight="79.0" prefWidth="325.0" styleClass="button1" stylesheets="@style.css" text="Senior (more than 11 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
+                  <ToggleButton fx:id="btnSenior" mnemonicParsing="false" onAction="#selectSenior" prefHeight="79.0" prefWidth="325.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Senior (more than 11 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
