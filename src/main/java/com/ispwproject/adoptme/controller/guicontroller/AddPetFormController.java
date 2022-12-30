@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddPetFormController implements Initializable {
+public class AddPetFormController {
     @FXML
     private ImageView petImg;
     @FXML
@@ -55,8 +55,7 @@ public class AddPetFormController implements Initializable {
         petType = type;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         String[] items = {"2022", "2021", "2020", "2019", "2018", "2017"};
         if (boxYear != null)
             boxYear.getItems().addAll(items);
@@ -77,7 +76,6 @@ public class AddPetFormController implements Initializable {
 
         if (boxEducProg != null && txtEducProg != null) {
             if (getPetType() == 1) {
-                System.out.println("Pet Type: " + getPetType());
                 boxEducProg.setVisible(false);
                 txtEducProg.setVisible(false);
             }

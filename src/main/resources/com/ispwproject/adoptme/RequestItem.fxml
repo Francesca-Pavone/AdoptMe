@@ -26,9 +26,8 @@
                         <Image url="@image/join.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="127.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="90.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-
                      </image>
                   </ImageView>
                </children>
