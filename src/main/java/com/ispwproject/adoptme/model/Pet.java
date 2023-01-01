@@ -9,7 +9,7 @@ public class Pet {
     private String gender;
     private int shelter;
 
-    public Pet(String name, String imgSrc, String age,String gender) {
+    public Pet(String name, String imgSrc, String age, String gender) {
         setName(name);
         setImgSrc(imgSrc);
         setAge(age);

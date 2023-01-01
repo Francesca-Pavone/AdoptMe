@@ -1,24 +1,17 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.Pet;
-import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-public class PetDAO {
+public class AppointmentRequestDAO {
+    /*
     private static String USER = "user1";
     private static String PASS = "user1";
     private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
-
-    public List<Pet> retreivePetByShelterName(String shelterName) throws Exception {
+    public List<AppointmentRequestModel> retreiveReqByShelterName(String shelterName) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
-        List<Pet> petList = new ArrayList<Pet>();
+        List<AppointmentRequestModel> appointmentRequestModelList = new ArrayList<AppointmentRequestModel>();
 
         try {
             // STEP 2: loading dinamico del driver mysql
@@ -35,24 +28,24 @@ public class PetDAO {
             ResultSet resultSet = SimpleQueries.selectPetByShelterName(stmt, shelterName);
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
-            if (!resultSet.first()){
-                Exception e = new Exception("No pets found for the shelter: "+shelterName);
+            if (!resultSet.first()) {
+                Exception e = new Exception("No pets found for the shelter: " + shelterName);
                 throw e;
             }
 
             // Riposiziono il cursore sul primo record del result set
             resultSet.first();
-            do{
+            do {
                 // Leggo le colonne "by name"
                 String petName = resultSet.getString("name");
                 String petImage = resultSet.getString("imgSrc");
                 String petAge = resultSet.getString("age");
                 String petGender = resultSet.getString("gender");
 
-                Pet pet = new Pet(petName, petImage, petAge, petGender);
-                petList.add(pet);
+                AppointmentRequestModel appointmentRequestModel = new AppointmentRequestModel();
+                appointmentRequestModelList.add(petModel);
 
-            }while(resultSet.next());
+            } while (resultSet.next());
 
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
@@ -73,6 +66,11 @@ public class PetDAO {
             }
         }
 
-        return petList;
+        return appointmentRequestModelList;
+
     }
+
+     */
+
 }
+
