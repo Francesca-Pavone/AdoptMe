@@ -1,31 +1,23 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.controller.guicontroller.LoginController;
-import com.ispwproject.adoptme.model.AppointmentRequestModel;
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.User;
+import com.ispwproject.adoptme.utils.bean.AccountInfo;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-public class AppointmentRequestDAO {
-
+public class UserDAO {
     private static String USER = "user1";
     private static String PASS = "user1";
     private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
-    public List<AppointmentRequestModel> retreiveReqByShelterId(int shelterId) throws Exception {
+
+    public static User retreiveUserById(int userId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
-        List<AppointmentRequestModel> appointmentRequestList = new ArrayList<AppointmentRequestModel>();
+        User user;
 
         try {
             // STEP 2: loading dinamico del driver mysql
@@ -39,34 +31,28 @@ public class AppointmentRequestDAO {
                     ResultSet.CONCUR_READ_ONLY);
 
             // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
-            ResultSet resultSet = SimpleQueries.selectReqByShelterId(stmt, shelterId);
+            ResultSet resultSet = SimpleQueries.selectUserById(stmt, userId);
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
-            if (!resultSet.first()) {
-                Exception e = new Exception("No requests found for the shelter with id: " + shelterId);
+            if (!resultSet.first()){
+                Exception e = new Exception("No pets found for the shelter with id: "+ userId);
                 throw e;
             }
 
             // Riposiziono il cursore sul primo record del result set
             resultSet.first();
-            do {
+            do{
                 // Leggo le colonne "by name"
-                int petId = resultSet.getInt("petId");
-                PetModel pet = PetDAO.retreivePetById(petId, shelterId);
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String email = resultSet.getString("email");
+                String profileImg = resultSet.getString("profileImg");
 
-                int userId = resultSet.getInt("userId");
-                User user = UserDAO.retreiveUserById(userId);
+                AccountInfo accountInfo = new AccountInfo(email, 0);
 
-                Date date = resultSet.getDate("date");
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                dateFormat.format(date);
+                user = new User(profileImg, accountInfo, name, surname);
 
-                LocalTime time = resultSet.getObject("time", LocalTime.class);
-
-                AppointmentRequestModel appointmentRequestModel = new AppointmentRequestModel(pet, user, date, time);
-                appointmentRequestList.add(appointmentRequestModel);
-
-            } while (resultSet.next());
+            }while(resultSet.next());
 
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
@@ -87,8 +73,6 @@ public class AppointmentRequestDAO {
             }
         }
 
-        return appointmentRequestList;
-
+        return user;
     }
 }
-

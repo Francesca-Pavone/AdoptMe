@@ -1,14 +1,18 @@
 package com.ispwproject.adoptme.utils.bean;
 
 public class AccountInfo {
-    private String username;
     private String password;
     private String email;
-    private int accountType;
+    private int accountType; // 0 -> USER  |  1 -> SHELTER
 
     public AccountInfo(String email,String password, int accountType) {
         this.email = email;
         this.password = password;
+        this.accountType = accountType;
+    }
+
+    public AccountInfo(String email, int accountType) {
+        this.email = email;
         this.accountType = accountType;
     }
 

@@ -5,23 +5,23 @@ import java.util.Date;
 
 public class AppointmentRequestModel {
 
-    private Pet pet;
+    private PetModel pet;
     private User user;
     private Date date;
     private LocalTime time;
 
-    public AppointmentRequestModel(Pet pet, User user, Date date, LocalTime time) {
+    public AppointmentRequestModel(PetModel pet, User user, Date date, LocalTime time) {
         this.pet = pet;
         this.user = user;
         this.date = date;
         this.time = time;
     }
 
-    public Pet getPet() {
+    public PetModel getPet() {
         return pet;
     }
 
-    public void setPet(Pet pet) {
+    public void setPet(PetModel pet) {
         this.pet = pet;
     }
 

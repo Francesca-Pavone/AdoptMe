@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
@@ -20,15 +20,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterAddPetGUI extends ShelterSideBar {
+public class ShelterHomepage extends ShelterSideBar {
 
     @FXML
     private Button btnAddPet;
-
     @FXML
     private GridPane grid;
 
-    private List<Pet> petList = new ArrayList<>();
+    private List<PetModel> petList = new ArrayList<>();
 
     private PetDAO petDAO = new PetDAO();
 
@@ -36,18 +35,17 @@ public class ShelterAddPetGUI extends ShelterSideBar {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm1.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPetForm1.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
         dialog.show();
     }
 
-    private List<Pet> getPetList() {
+    private List<PetModel> getPetList() {
 
         try {
-            String searchKey = "Pensieri Bestiali";
-            //System.out.println("Looking for " + searchKey + "'s pets: ");
-            petList = this.petDAO.retreiveByShelterName(searchKey);
+            int searchKey = 1;
+            petList = this.petDAO.retreivePetByShelterId(searchKey);
 
 
         } catch (SQLException se) {
@@ -72,9 +70,9 @@ public class ShelterAddPetGUI extends ShelterSideBar {
         int row = 1;
 
         try {
-            for (Pet pet : petList) {
+            for (PetModel pet : petList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(HelloApplication.class.getResource("PetItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
 

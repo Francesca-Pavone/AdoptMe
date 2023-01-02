@@ -1,10 +1,9 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -110,132 +109,132 @@ public class QuestionnaireController {
     }
 
    public void goToNextQuestion(ActionEvent event) throws IOException {
-        Stage stage = HelloApplication.getStage();
+        Stage stage = Main.getStage();
         FXMLLoader fxmlLoader = null;
         if (event.getSource() == btnStartQuestionnaire){
            System.out.println(catOrDog);
-           fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage1.fxml"));
+           fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage1.fxml"));
         }
         else if (event.getSource() == btnNextQuestion1 && catOrDog == 1){
             System.out.println(catOrDog);
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage2Cat.fxml"));
         }
         else if (event.getSource() == btnNextQuestion1 && catOrDog == 2){
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Dog.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage2Dog.fxml"));
         }
         else if (event.getSource() == btnNextQuestion2){
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage3.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage3.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage1.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage1.fxml"));
         }
         else if (event.getSource() == btnNextQuestion3) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage4.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage4.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion3 && catOrDog == 1) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage2Cat.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion3 && catOrDog == 2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Dog.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage2Dog.fxml"));
         }
         else if (event.getSource() == btnNextQuestion4 && catOrDog == 1) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Cat.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage5Cat.fxml"));
         }
         else if (event.getSource() == btnNextQuestion4 && catOrDog == 2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Dog.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage5Dog.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion4) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage3.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage3.fxml"));
         }
         else if (event.getSource() == btnNextQuestion5) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage6.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage6.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion5) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage4.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage4.fxml"));
         }
         else if (event.getSource() == btnNextQuestion6) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage7.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage7.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion6 && catOrDog == 1) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Cat.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage5Cat.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion6 && catOrDog == 2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Dog.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage5Dog.fxml"));
         }
         else if (event.getSource() == btnNextQuestion7) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage8.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage8.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion7) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage6.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage6.fxml"));
         }
         else if (event.getSource() == btnNextQuestion8) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage9.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage9.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion8) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage7.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage7.fxml"));
         }
         else if (event.getSource() == btnNextQuestion9) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage10.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage10.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion9) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage8.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage8.fxml"));
         }
         else if (event.getSource() == btnNextQuestion10) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage11.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage11.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion10) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage10.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage10.fxml"));
         }
         else if (event.getSource() == btnNextQuestion11) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage12.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage12.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion11) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage10.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage10.fxml"));
         }
         else if (event.getSource() == btnNextQuestion12 && catOrDog == 2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage13Dog.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage13Dog.fxml"));
         }
         else if (event.getSource() == btnNextQuestion12 && catOrDog == 1) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage14.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage14.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion12) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage11.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage11.fxml"));
         }
         else if (event.getSource() == btnNextQuestion13) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage14.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage14.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion13) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage12.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage12.fxml"));
         }
         else if (event.getSource() == btnNextQuestion14) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage15.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage15.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion14 && catOrDog == 1) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage12.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage12.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion14 && catOrDog == 2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage13Dog.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage13Dog.fxml"));
         }
         else if (event.getSource() == btnNextQuestion15) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage16.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage16.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion15) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage14.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage14.fxml"));
         }
         else if (event.getSource() == btnNextQuestion16 && rangeOrCity == 1) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage17Range.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage17Range.fxml"));
         }
         else if (event.getSource() == btnNextQuestion16 && rangeOrCity == 2) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage17City.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage17City.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion16) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage15.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage15.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion17) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage16.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnairePage16.fxml"));
         }
         else if (event.getSource() == btnEndQuestionnaire) {
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnaireResultPage.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
         }
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
