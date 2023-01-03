@@ -15,4 +15,6 @@ module com.ispwproject.adoptme {
     opens com.ispwproject.adoptme.controller.guicontroller to javafx.fxml;
     exports com.ispwproject.adoptme.model;
     opens com.ispwproject.adoptme.model to javafx.fxml;
+    exports com.ispwproject.adoptme.utils;
+    opens com.ispwproject.adoptme.utils to javafx.fxml;
 }

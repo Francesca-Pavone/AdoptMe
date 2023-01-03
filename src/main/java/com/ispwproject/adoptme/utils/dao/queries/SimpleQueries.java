@@ -25,9 +25,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SimpleQueries {
-    public static ResultSet selectPetByShelterName(Statement stmt, String shelterName) throws SQLException {
-        String sql = "SELECT * FROM Pets WHERE shelter in (SELECT shelterId FROM Shelters WHERE name = '" + shelterName + "');";
+    public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterId + "';";
         //System.out.println(sql);
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectReqByShelterId(Statement stmt, int id) throws SQLException {
+        String sql = "SELECT * FROM Requests WHERE shelterId = '" + id + "';";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectPetById(Statement stmt, int petId, int shelterId) throws SQLException {
+        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterId + "' AND petId = '" + petId + "';";
+        //System.out.println(sql);
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectUserById(Statement stmt, int userId) throws SQLException {
+        String sql = "SELECT * FROM Users WHERE userId = '" + userId + "';";
         return stmt.executeQuery(sql);
     }
 /*
