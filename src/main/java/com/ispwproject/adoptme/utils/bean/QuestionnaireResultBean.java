@@ -46,10 +46,12 @@ public class QuestionnaireResultBean {
 
     public QuestionnaireResultBean() {}
 
-    public QuestionnaireResultBean(int type, int gender, int haveAPet, int haveAGarden, int gardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, int specificArea, String city) {
+    public void QuestionnaireResult(int type, int gender, PetAge age, int haveAPet, PetAlreadyHave petAlreadyHave, int haveAGarden, int gardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, int specificArea, String city) {
         this.type = type;
         this.gender = gender;
+        this.age = new PetAge[0];
         this.haveAPet = haveAPet;
+        this.petAlreadyHave = new PetAlreadyHave[0];
         this.haveAGarden = haveAGarden;
         this.gardenSleepOutside = gardenSleepOutside;
         this.haveATerrace = haveATerrace;
@@ -62,25 +64,6 @@ public class QuestionnaireResultBean {
         this.specificArea = specificArea;
         this.city = city;
     }
-
-    /*public void QuestionnaireResult(int type, int gender, String age, int haveAPet, PetAlreadyHave petAlreadyHave, int haveAGarden, int gardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, int specificArea, String city) {
-        this.type = type;
-        this.gender = gender;
-        this.age = null;
-        this.haveAPet = haveAPet;
-        this.petAlreadyHave = null;
-        this.haveAGarden = haveAGarden;
-        this.gardenSleepOutside = gardenSleepOutside;
-        this.haveATerrace = haveATerrace;
-        this.terraceSleepOutside = terraceSleepOutside;
-        this.hoursAlone = hoursAlone;
-        this.firstPet = firstPet;
-        this.sterilizePet = sterilizePet;
-        this.programEducation = programEducation;
-        this.disabledPet = disabledPet;
-        this.specificArea = specificArea;
-        this.city = city;
-    }*/
 
     public int getType() {
         return type;
@@ -103,13 +86,18 @@ public class QuestionnaireResultBean {
     }
 
     public void setAge(PetAge age) {
-        int i;
-        int n = this.age.length;
+        int i, n;
+        if (this.age == null) {
+            n = 0;
+        } else {
+            n = this.age.length;
+        }
         PetAge[] newArr = new PetAge[n + 1];
         for(i = 0; i < n; i++) {
             newArr[i] = this.age[i];
         }
         newArr[n] = age;
+        this.age = newArr;
     }
 
     public int getHaveAPet() {
@@ -125,13 +113,18 @@ public class QuestionnaireResultBean {
     }
 
     public void setPetAlreadyHave(PetAlreadyHave petAlreadyHave) {
-        int i;
-        int n = this.petAlreadyHave.length;
+        int i, n;
+        if (this.petAlreadyHave == null) {
+            n = 0;
+        } else {
+            n = this.petAlreadyHave.length;
+        }
         PetAlreadyHave[] newArr = new PetAlreadyHave[n + 1];
         for(i = 0; i < n; i++) {
             newArr[i] = this.petAlreadyHave[i];
         }
         newArr[n] = petAlreadyHave;
+        this.petAlreadyHave = newArr;
     }
 
     public int getHaveAGarden() {

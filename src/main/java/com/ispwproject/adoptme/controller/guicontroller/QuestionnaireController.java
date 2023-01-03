@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -22,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-import com.ispwproject.adoptme.controller.guicontroller.UserHomepageController;
 
 public class QuestionnaireController {
 
     @FXML
     private GridPane grid;
+
     private List<PetModel> petList = new ArrayList<>();
     private PetDAO petDAO = new PetDAO();
 
@@ -36,14 +35,6 @@ public class QuestionnaireController {
 
     private static Scene sceneExitQuestionnaire;
 
-    @FXML
-    private ToggleButton btnCat;
-    @FXML
-    private ToggleButton btnDog;
-    @FXML
-    private ToggleButton btnFemale;
-    @FXML
-    private ToggleButton btnMale;
     @FXML
     private ToggleButton btnPuppy;
     @FXML
@@ -54,76 +45,6 @@ public class QuestionnaireController {
     private ToggleButton btnSenior;
     @FXML
     private ToggleButton btnAgeNotImportant;
-    @FXML
-    private ToggleButton btnHaveAPet;
-    @FXML
-    private ToggleButton btnDontHaveAPet;
-    @FXML
-    private RadioButton radioButtonCat1;
-    @FXML
-    private RadioButton radioButtonCat2;
-    @FXML
-    private RadioButton radioButtonCat3;
-    @FXML
-    private RadioButton radioButtonCat4;
-    @FXML
-    private RadioButton radioButtonCat5;
-    @FXML
-    private RadioButton radioButtonCat6;
-    @FXML
-    private RadioButton radioButtonDog1;
-    @FXML
-    private RadioButton radioButtonDog2;
-    @FXML
-    private RadioButton radioButtonDog3;
-    @FXML
-    private RadioButton radioButtonDog4;
-    @FXML
-    private RadioButton radioButtonDog5;
-    @FXML
-    private RadioButton radioButtonDog6;
-    @FXML
-    private ToggleButton btnGarden;
-    @FXML
-    private ToggleButton btnNoGarden;
-    @FXML
-    private ToggleButton btnGardenSleepOutside;
-    @FXML
-    private ToggleButton btnGardenDontSleepOutside;
-    @FXML
-    private ToggleButton btnTerrace;
-    @FXML
-    private ToggleButton btnNoTerrace;
-    @FXML
-    private ToggleButton btnTerraceSleepOutside;
-    @FXML
-    private ToggleButton btnTerraceDontSleepOutside;
-    @FXML
-    private ToggleButton btnHoursAloneOne;
-    @FXML
-    private ToggleButton btnHoursAloneTwo;
-    @FXML
-    private ToggleButton btnHoursAloneThree;
-    @FXML
-    private ToggleButton btnNoFirstPet;
-    @FXML
-    private ToggleButton btnFirstPet;
-    @FXML
-    private ToggleButton btnSterilizePet;
-    @FXML
-    private ToggleButton btnNoSterilizePet;
-    @FXML
-    private ToggleButton btnProgramEducation;
-    @FXML
-    private ToggleButton btnNoProgramEducation;
-    @FXML
-    private ToggleButton btnDisabledPet;
-    @FXML
-    private ToggleButton btnNoDisabledPet;
-    @FXML
-    private ToggleButton btnSpecificArea;
-    @FXML
-    private ToggleButton btnNoSpecificArea;
 
     @FXML
     private Button btnNextQuestion1;
@@ -241,46 +162,20 @@ public class QuestionnaireController {
         }
     }
 
-    public static int getType() {
-        return petType;
-    }
-
-    public static void setPetType(int petType) {
-        QuestionnaireController.petType = petType;
-    }
-
-    public static int getHaveAPet() {
-        return haveAPet;
-    }
-
-    public static void setHaveAPet(int haveAPet) {
-        QuestionnaireController.haveAPet = haveAPet;
-    }
-
     public void selectDogType() {
         questionnaireResultBean.setType(0);
-        setPetType(0);
-        btnDog.setSelected(true);
-        btnCat.setSelected(false);
     }
 
     public void selectCatType() {
         questionnaireResultBean.setType(1);
-        setPetType(1);
-        btnDog.setSelected(false);
-        btnCat.setSelected(true);
     }
 
     public void selectFemale() {
         questionnaireResultBean.setGender(1);
-        btnFemale.setSelected(true);
-        btnMale.setSelected(false);
     }
 
     public void selectMale() {
         questionnaireResultBean.setGender(0);
-        btnFemale.setSelected(false);
-        btnMale.setSelected(true);
     }
 
     public void selectPuppy() {
@@ -312,198 +207,135 @@ public class QuestionnaireController {
 
     public void selectHaveAPet() {
         questionnaireResultBean.setHaveAPet(1);
-        setHaveAPet(1);
-        btnHaveAPet.setSelected(true);
-        btnDontHaveAPet.setSelected(false);
     }
 
     public void selectDontHaveAPet() {
-        setHaveAPet(0);
         questionnaireResultBean.setHaveAPet(0);
-        btnHaveAPet.setSelected(false);
-        btnDontHaveAPet.setSelected(true);
     }
 
     public void selectRadioButton1Cat() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatSterilized);
-        radioButtonCat1.setSelected(true);
     }
     public void selectRadioButton2Cat() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatNonSterilized);
-        radioButtonCat2.setSelected(true);
     }
     public void selectRadioButton3Cat() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatSterilized);
-        radioButtonCat3.setSelected(true);
     }
     public void selectRadioButton4Cat() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatNonSterilized);
-        radioButtonCat4.setSelected(true);
     }
     public void selectRadioButton5Cat() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDog);
-        radioButtonCat5.setSelected(true);
     }
     public void selectRadioButton6Cat() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDog);
-        radioButtonCat6.setSelected(true);
     }
     public void selectRadioButton1Dog() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogSterilized);
-        radioButtonDog1.setSelected(true);
     }
     public void selectRadioButton2Dog() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogNonSterilized);
-        radioButtonDog2.setSelected(true);
     }
     public void selectRadioButton3Dog() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogSterilized);
-        radioButtonDog3.setSelected(true);
     }
     public void selectRadioButton4Dog() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogNonSterilized);
-        radioButtonDog4.setSelected(true);
     }
     public void selectRadioButton5Dog() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCat);
-        radioButtonDog5.setSelected(true);
     }
     public void selectRadioButton6Dog() {
         questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCat);
-        radioButtonDog6.setSelected(true);
     }
 
     public void selectGarden() {
         questionnaireResultBean.setHaveAGarden(1);
-        btnGarden.setSelected(true);
-        btnNoGarden.setSelected(false);
     }
 
     public void selectNoGarden() {
         questionnaireResultBean.setHaveAGarden(0);
-        btnGarden.setSelected(false);
-        btnNoGarden.setSelected(true);
     }
 
     public void selectGardenSleepOutside() {
         questionnaireResultBean.setGardenSleepOutside(1);
-        btnGardenSleepOutside.setSelected(true);
-        btnGardenDontSleepOutside.setSelected(false);
     }
 
     public void selectGardenDontSleepOutside() {
         questionnaireResultBean.setGardenSleepOutside(0);
-        btnGardenSleepOutside.setSelected(false);
-        btnGardenDontSleepOutside.setSelected(true);
     }
 
     public void selectTerrace() {
         questionnaireResultBean.setHaveATerrace(1);
-        btnTerrace.setSelected(true);
-        btnNoTerrace.setSelected(false);
     }
 
     public void selectNoTerrace() {
         questionnaireResultBean.setHaveATerrace(0);
-        btnTerrace.setSelected(false);
-        btnNoTerrace.setSelected(true);
     }
 
     public void selectTerraceSleepOutside() {
         questionnaireResultBean.setTerraceSleepOutside(1);
-        btnTerraceSleepOutside.setSelected(true);
-        btnTerraceDontSleepOutside.setSelected(false);
     }
 
     public void selectTerraceDontSleepOutside() {
         questionnaireResultBean.setTerraceSleepOutside(0);
-        btnTerraceSleepOutside.setSelected(false);
-        btnTerraceDontSleepOutside.setSelected(true);
     }
 
     public void selectHoursAloneOne() {
         questionnaireResultBean.setHoursAlone(0);
-        btnHoursAloneOne.setSelected(true);
-        btnHoursAloneTwo.setSelected(false);
-        btnHoursAloneThree.setSelected(false);
     }
 
     public void selectHoursAloneTwo() {
         questionnaireResultBean.setHoursAlone(1);
-        btnHoursAloneOne.setSelected(false);
-        btnHoursAloneTwo.setSelected(true);
-        btnHoursAloneThree.setSelected(false);
     }
 
     public void selectHoursAloneThree() {
         questionnaireResultBean.setHoursAlone(2);
-        btnHoursAloneOne.setSelected(false);
-        btnHoursAloneTwo.setSelected(false);
-        btnHoursAloneThree.setSelected(true);
     }
 
     public void selectNoFirstPet() {
         questionnaireResultBean.setFirstPet(0);
-        btnNoFirstPet.setSelected(true);
-        btnFirstPet.setSelected(false);
     }
 
     public void selectFirstPet() {
         questionnaireResultBean.setFirstPet(1);
-        btnNoFirstPet.setSelected(false);
-        btnFirstPet.setSelected(true);
     }
 
     public void selectSterilizePet() {
         questionnaireResultBean.setSterilizePet(1);
-        btnSterilizePet.setSelected(true);
-        btnNoSterilizePet.setSelected(false);
     }
 
     public void selectNoSterilizePet() {
         questionnaireResultBean.setSterilizePet(0);
-        btnSterilizePet.setSelected(false);
-        btnNoSterilizePet.setSelected(true);
     }
 
     public void selectProgramEducation() {
         questionnaireResultBean.setProgramEducation(1);
-        btnProgramEducation.setSelected(true);
-        btnNoProgramEducation.setSelected(false);
     }
 
     public void selectNoProgramEducation() {
         questionnaireResultBean.setProgramEducation(0);
-        btnProgramEducation.setSelected(false);
-        btnNoProgramEducation.setSelected(true);
     }
 
     public void selectDisabledPet() {
         questionnaireResultBean.setDisabledPet(1);
-        btnDisabledPet.setSelected(true);
-        btnNoDisabledPet.setSelected(false);
     }
 
     public void selectNoDisabledPet() {
         questionnaireResultBean.setDisabledPet(0);
-        btnDisabledPet.setSelected(false);
-        btnNoDisabledPet.setSelected(true);
     }
 
     public void selectSpecificArea() {
         questionnaireResultBean.setSpecificArea(1);
         btnNextQuestion15.setVisible(true);
         btnEndQuestionnaire.setVisible(false);
-        btnSpecificArea.setSelected(true);
-        btnNoSpecificArea.setSelected(false);
     }
 
     public void selectNoSpecificArea() {
         questionnaireResultBean.setSpecificArea(0);
         btnNextQuestion15.setVisible(false);
         btnEndQuestionnaire.setVisible(true);
-        btnSpecificArea.setSelected(false);
-        btnNoSpecificArea.setSelected(true);
     }
 
     public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
