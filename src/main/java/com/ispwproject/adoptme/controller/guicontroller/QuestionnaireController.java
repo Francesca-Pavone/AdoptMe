@@ -11,36 +11,29 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
+import com.ispwproject.adoptme.controller.guicontroller.UserHomepageController;
+
 public class QuestionnaireController {
 
+    @FXML
+    private GridPane grid;
+    private List<Pet> petList = new ArrayList<>();
+    private PetDAO petDAO = new PetDAO();
+
     private static int petType;
-    private static int petGender;
-    private static int petAge;
     private static int haveAPet;
-    private static int rangeOrCity;
-    private static int haveAGarden;
-    private static int gardenSleepOutside;
-    private static int haveATerrace;
-    private static int terraceSleepOutside;
-    private static int hoursAlone;
-    private static int firstPet;
-    private static int sterilizePet;
-    private static int programEducation;
-    private static int disabledPet;
-    private static int specificArea;
+
     private static Scene sceneExitQuestionnaire;
 
     @FXML
@@ -60,21 +53,35 @@ public class QuestionnaireController {
     @FXML
     private ToggleButton btnSenior;
     @FXML
+    private ToggleButton btnAgeNotImportant;
+    @FXML
     private ToggleButton btnHaveAPet;
     @FXML
     private ToggleButton btnDontHaveAPet;
     @FXML
-    private RadioButton radioButtonPet1;
+    private RadioButton radioButtonCat1;
     @FXML
-    private RadioButton radioButtonPet2;
+    private RadioButton radioButtonCat2;
     @FXML
-    private RadioButton radioButtonPet3;
+    private RadioButton radioButtonCat3;
     @FXML
-    private RadioButton radioButtonPet4;
+    private RadioButton radioButtonCat4;
     @FXML
-    private RadioButton radioButtonPet5;
+    private RadioButton radioButtonCat5;
     @FXML
-    private RadioButton radioButtonPet6;
+    private RadioButton radioButtonCat6;
+    @FXML
+    private RadioButton radioButtonDog1;
+    @FXML
+    private RadioButton radioButtonDog2;
+    @FXML
+    private RadioButton radioButtonDog3;
+    @FXML
+    private RadioButton radioButtonDog4;
+    @FXML
+    private RadioButton radioButtonDog5;
+    @FXML
+    private RadioButton radioButtonDog6;
     @FXML
     private ToggleButton btnGarden;
     @FXML
@@ -117,10 +124,6 @@ public class QuestionnaireController {
     private ToggleButton btnSpecificArea;
     @FXML
     private ToggleButton btnNoSpecificArea;
-    @FXML
-    private ToggleButton btnRange;
-    @FXML
-    private ToggleButton btnCity;
 
     @FXML
     private Button btnNextQuestion1;
@@ -181,336 +184,326 @@ public class QuestionnaireController {
     @FXML
     private Button btnPreviousQuestion15;
     @FXML
-    private Button btnNextQuestion16;
-    @FXML
     private Button btnPreviousQuestion16;
-    @FXML
-    private Button btnPreviousQuestion17;
     @FXML
     private Button btnEndQuestionnaire;
 
-    public static int getPetType() {
+    private static final QuestionnaireResultBean questionnaireResultBean = new QuestionnaireResultBean();
+
+    private List<Pet> getPetList() {
+        try {
+            String searchKey = "Pensieri Bestiali";
+            //System.out.println("Looking for " + searchKey + "'s pets: ");
+            petList = this.petDAO.retreiveByShelterName(searchKey);
+
+        } catch (SQLException se) {
+            // Errore durante l'apertura della connessione
+            se.printStackTrace();
+        } catch (ClassNotFoundException driverEx) {
+            // Errore nel loading del driver
+            driverEx.printStackTrace();
+        } catch (Exception e) {
+            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
+            e.printStackTrace();
+        }
+        return petList;
+    }
+
+
+    public void initialize() {
+        if (this.grid != null) {
+            petList.addAll(getPetList());
+
+            int column = 0;
+            int row = 1;
+
+            try {
+                for (Pet pet : petList) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(HelloApplication.class.getResource("UserPetItem.fxml"));
+                    Pane pane = fxmlLoader.load();
+
+
+                    PetItemController petItemController = fxmlLoader.getController();
+                    petItemController.setData(pet);
+
+                    if (column == 3) {
+                        column = 0;
+                        row++;
+                    }
+
+
+                    grid.add(pane, column++, row);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static int getType() {
         return petType;
     }
 
-    public static void setPetType(int type) {
-        petType = type;
-    }
-
-    public void selectDogType(ActionEvent event) {
-        setPetType(0);
-        btnDog.setSelected(true);
-        btnCat.setSelected(false);
-    }
-
-    public void selectCatType(ActionEvent event) {
-        setPetType(1);
-        btnDog.setSelected(false);
-        btnCat.setSelected(true);
-    }
-
-    public static int getPetGender() {
-        return petGender;
-    }
-
-    public static void setPetGender(int gender) {
-        petGender = gender;
-    }
-
-    public void selectFemale(ActionEvent event) {
-        setPetGender(0);
-        btnFemale.setSelected(true);
-        btnMale.setSelected(false);
-    }
-
-    public void selectMale(ActionEvent event) {
-        setPetGender(1);
-        btnFemale.setSelected(false);
-        btnMale.setSelected(true);
-    }
-
-    public static int getPetAge() {return petAge;};
-
-    public static void setPetAge(int age) {petAge = age;}
-
-    public void selectPuppy(ActionEvent event) {
-        setPetAge(0);
-        btnPuppy.setSelected(true);
-        btnYoung.setSelected(false);
-        btnAdult.setSelected(false);
-        btnSenior.setSelected(false);
-    }
-
-    public void selectYoung(ActionEvent event) {
-        setPetAge(0);
-        btnPuppy.setSelected(false);
-        btnYoung.setSelected(true);
-        btnAdult.setSelected(false);
-        btnSenior.setSelected(false);
-    }
-    public void selectAdult(ActionEvent event) {
-        setPetAge(0);
-        btnPuppy.setSelected(false);
-        btnYoung.setSelected(false);
-        btnAdult.setSelected(true);
-        btnSenior.setSelected(false);
-    }
-    public void selectSenior(ActionEvent event) {
-        setPetAge(0);
-        btnPuppy.setSelected(false);
-        btnYoung.setSelected(false);
-        btnAdult.setSelected(false);
-        btnSenior.setSelected(true);
+    public static void setPetType(int petType) {
+        QuestionnaireController.petType = petType;
     }
 
     public static int getHaveAPet() {
         return haveAPet;
     }
 
-    public static void setHaveAPet(int type) {
-        haveAPet = type;
+    public static void setHaveAPet(int haveAPet) {
+        QuestionnaireController.haveAPet = haveAPet;
     }
 
-    public void selectHaveAPet(ActionEvent event) {
-        setHaveAPet(0);
+    public void selectDogType() {
+        questionnaireResultBean.setType(0);
+        setPetType(0);
+        btnDog.setSelected(true);
+        btnCat.setSelected(false);
+    }
+
+    public void selectCatType() {
+        questionnaireResultBean.setType(1);
+        setPetType(1);
+        btnDog.setSelected(false);
+        btnCat.setSelected(true);
+    }
+
+    public void selectFemale() {
+        questionnaireResultBean.setGender(1);
+        btnFemale.setSelected(true);
+        btnMale.setSelected(false);
+    }
+
+    public void selectMale() {
+        questionnaireResultBean.setGender(0);
+        btnFemale.setSelected(false);
+        btnMale.setSelected(true);
+    }
+
+    public void selectPuppy() {
+        btnAgeNotImportant.setSelected(false);
+        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.puppy);
+    }
+
+    public void selectYoung() {
+        btnAgeNotImportant.setSelected(false);
+        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.young);
+    }
+
+    public void selectAdult() {
+        btnAgeNotImportant.setSelected(false);
+        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.adult);
+    }
+
+    public void selectSenior() {
+        btnAgeNotImportant.setSelected(false);
+        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.senior);
+    }
+
+    public void selectAgeNotImportant() {
+        btnPuppy.setSelected(false);
+        btnYoung.setSelected(false);
+        btnAdult.setSelected(false);
+        btnSenior.setSelected(false);
+    }
+
+    public void selectHaveAPet() {
+        questionnaireResultBean.setHaveAPet(1);
+        setHaveAPet(1);
         btnHaveAPet.setSelected(true);
         btnDontHaveAPet.setSelected(false);
     }
 
-    public void selectDontHaveAPet(ActionEvent event) {
-        setHaveAPet(1);
+    public void selectDontHaveAPet() {
+        setHaveAPet(0);
+        questionnaireResultBean.setHaveAPet(0);
         btnHaveAPet.setSelected(false);
         btnDontHaveAPet.setSelected(true);
     }
 
-    //manca parte sui radio button (scelta non esclusiva)
-
-    public static int getHaveAGarden() {
-        return haveAGarden;
+    public void selectRadioButton1Cat() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatSterilized);
+        radioButtonCat1.setSelected(true);
+    }
+    public void selectRadioButton2Cat() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatNonSterilized);
+        radioButtonCat2.setSelected(true);
+    }
+    public void selectRadioButton3Cat() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatSterilized);
+        radioButtonCat3.setSelected(true);
+    }
+    public void selectRadioButton4Cat() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatNonSterilized);
+        radioButtonCat4.setSelected(true);
+    }
+    public void selectRadioButton5Cat() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDog);
+        radioButtonCat5.setSelected(true);
+    }
+    public void selectRadioButton6Cat() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDog);
+        radioButtonCat6.setSelected(true);
+    }
+    public void selectRadioButton1Dog() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogSterilized);
+        radioButtonDog1.setSelected(true);
+    }
+    public void selectRadioButton2Dog() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogNonSterilized);
+        radioButtonDog2.setSelected(true);
+    }
+    public void selectRadioButton3Dog() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogSterilized);
+        radioButtonDog3.setSelected(true);
+    }
+    public void selectRadioButton4Dog() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogNonSterilized);
+        radioButtonDog4.setSelected(true);
+    }
+    public void selectRadioButton5Dog() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCat);
+        radioButtonDog5.setSelected(true);
+    }
+    public void selectRadioButton6Dog() {
+        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCat);
+        radioButtonDog6.setSelected(true);
     }
 
-    public static void setHaveAGarden(int type) {
-        haveAGarden = type;
-    }
-
-    public void selectGarden(ActionEvent event) {
-        setHaveAGarden(0);
+    public void selectGarden() {
+        questionnaireResultBean.setHaveAGarden(1);
         btnGarden.setSelected(true);
         btnNoGarden.setSelected(false);
     }
 
-    public void selectNoGarden(ActionEvent event) {
-        setHaveAGarden(1);
+    public void selectNoGarden() {
+        questionnaireResultBean.setHaveAGarden(0);
         btnGarden.setSelected(false);
         btnNoGarden.setSelected(true);
     }
 
-    public static int getGardenSleepOutside() {
-        return gardenSleepOutside;
-    }
-
-    public static void setGardenSleepOutside(int type) {
-        gardenSleepOutside = type;
-    }
-
-    public void selectGardenSleepOutside(ActionEvent event) {
-        setGardenSleepOutside(0);
+    public void selectGardenSleepOutside() {
+        questionnaireResultBean.setGardenSleepOutside(1);
         btnGardenSleepOutside.setSelected(true);
         btnGardenDontSleepOutside.setSelected(false);
     }
 
-    public void selectGardenDontSleepOutside(ActionEvent event) {
-        setGardenSleepOutside(1);
+    public void selectGardenDontSleepOutside() {
+        questionnaireResultBean.setGardenSleepOutside(0);
         btnGardenSleepOutside.setSelected(false);
         btnGardenDontSleepOutside.setSelected(true);
     }
 
-    public static int getHaveATerrace() {
-        return haveATerrace;
-    }
-
-    public static void setHaveATerrace(int type) {
-        haveATerrace = type;
-    }
-
-    public void selectTerrace(ActionEvent event) {
-        setHaveATerrace(0);
+    public void selectTerrace() {
+        questionnaireResultBean.setHaveATerrace(1);
         btnTerrace.setSelected(true);
         btnNoTerrace.setSelected(false);
     }
 
-    public void selectNoTerrace(ActionEvent event) {
-        setHaveATerrace(1);
+    public void selectNoTerrace() {
+        questionnaireResultBean.setHaveATerrace(0);
         btnTerrace.setSelected(false);
         btnNoTerrace.setSelected(true);
     }
 
-    public static int getTerraceSleepOutside() {
-        return terraceSleepOutside;
-    }
-
-    public static void setTerraceSleepOutside(int type) {
-        terraceSleepOutside = type;
-    }
-
-    public void selectTerraceSleepOutside(ActionEvent event) {
-        setTerraceSleepOutside(0);
+    public void selectTerraceSleepOutside() {
+        questionnaireResultBean.setTerraceSleepOutside(1);
         btnTerraceSleepOutside.setSelected(true);
         btnTerraceDontSleepOutside.setSelected(false);
     }
 
-    public void selectTerraceDontSleepOutside(ActionEvent event) {
-        setTerraceSleepOutside(1);
+    public void selectTerraceDontSleepOutside() {
+        questionnaireResultBean.setTerraceSleepOutside(0);
         btnTerraceSleepOutside.setSelected(false);
         btnTerraceDontSleepOutside.setSelected(true);
     }
 
-    public static int getHoursAlone() {
-        return hoursAlone;
-    }
-
-    public static void setHoursAlone(int type) {
-        hoursAlone = type;
-    }
-
-    public void selectHoursAloneOne(ActionEvent event) {
-        setHoursAlone(0);
+    public void selectHoursAloneOne() {
+        questionnaireResultBean.setHoursAlone(0);
         btnHoursAloneOne.setSelected(true);
         btnHoursAloneTwo.setSelected(false);
         btnHoursAloneThree.setSelected(false);
     }
 
-    public void selectHoursAloneTwo(ActionEvent event) {
-        setHoursAlone(1);
+    public void selectHoursAloneTwo() {
+        questionnaireResultBean.setHoursAlone(1);
         btnHoursAloneOne.setSelected(false);
         btnHoursAloneTwo.setSelected(true);
         btnHoursAloneThree.setSelected(false);
     }
 
-    public void selectHoursAloneThree(ActionEvent event) {
-        setHoursAlone(2);
+    public void selectHoursAloneThree() {
+        questionnaireResultBean.setHoursAlone(2);
         btnHoursAloneOne.setSelected(false);
         btnHoursAloneTwo.setSelected(false);
         btnHoursAloneThree.setSelected(true);
     }
 
-    public static int getFirstPet() {
-        return firstPet;
-    }
-
-    public static void setFirstPet(int type) {
-        firstPet = type;
-    }
-
-    public void selectNoFirstPet(ActionEvent event) {
-        setFirstPet(0);
+    public void selectNoFirstPet() {
+        questionnaireResultBean.setFirstPet(0);
         btnNoFirstPet.setSelected(true);
         btnFirstPet.setSelected(false);
     }
 
-    public void selectFirstPet(ActionEvent event) {
-        setFirstPet(1);
+    public void selectFirstPet() {
+        questionnaireResultBean.setFirstPet(1);
         btnNoFirstPet.setSelected(false);
         btnFirstPet.setSelected(true);
     }
 
-    public static int getSterilizePet() {
-        return sterilizePet;
-    }
-
-    public static void setSterilizePet(int type) {
-        sterilizePet = type;
-    }
-
-    public void selectSterilizePet(ActionEvent event) {
-        setSterilizePet(0);
+    public void selectSterilizePet() {
+        questionnaireResultBean.setSterilizePet(1);
         btnSterilizePet.setSelected(true);
         btnNoSterilizePet.setSelected(false);
     }
 
-    public void selectNoSterilizePet(ActionEvent event) {
-        setSterilizePet(1);
+    public void selectNoSterilizePet() {
+        questionnaireResultBean.setSterilizePet(0);
         btnSterilizePet.setSelected(false);
         btnNoSterilizePet.setSelected(true);
     }
 
-    public static int getProgramEducation() {
-        return programEducation;
-    }
-
-    public static void setProgramEducation(int type) {
-        programEducation = type;
-    }
-
-    public void selectProgramEducation(ActionEvent event) {
-        setProgramEducation(0);
+    public void selectProgramEducation() {
+        questionnaireResultBean.setProgramEducation(1);
         btnProgramEducation.setSelected(true);
         btnNoProgramEducation.setSelected(false);
     }
 
-    public void selectNoProgramEducation(ActionEvent event) {
-        setProgramEducation(1);
+    public void selectNoProgramEducation() {
+        questionnaireResultBean.setProgramEducation(0);
         btnProgramEducation.setSelected(false);
         btnNoProgramEducation.setSelected(true);
     }
 
-    public static int getDisabledPet() {
-        return disabledPet;
-    }
-
-    public static void setDisabledPet(int type) {
-        disabledPet = type;
-    }
-
-    public void selectDisabledPet(ActionEvent event) {
-        setDisabledPet(0);
+    public void selectDisabledPet() {
+        questionnaireResultBean.setDisabledPet(1);
         btnDisabledPet.setSelected(true);
         btnNoDisabledPet.setSelected(false);
     }
 
-    public void selectNoDisabledPet(ActionEvent event) {
-        setDisabledPet(1);
+    public void selectNoDisabledPet() {
+        questionnaireResultBean.setDisabledPet(0);
         btnDisabledPet.setSelected(false);
         btnNoDisabledPet.setSelected(true);
     }
-    public static int getSpecificArea() {
-        return specificArea;
-    }
 
-    public static void setSpecificArea(int type) {
-        specificArea = type;
-    }
-
-    public void selectSpecificArea(ActionEvent event) {
-        setSpecificArea(0);
+    public void selectSpecificArea() {
+        questionnaireResultBean.setSpecificArea(1);
+        btnNextQuestion15.setVisible(true);
+        btnEndQuestionnaire.setVisible(false);
         btnSpecificArea.setSelected(true);
         btnNoSpecificArea.setSelected(false);
     }
 
-    public void selectNoSpecificArea(ActionEvent event) {
-        setSpecificArea(1);
+    public void selectNoSpecificArea() {
+        questionnaireResultBean.setSpecificArea(0);
+        btnNextQuestion15.setVisible(false);
+        btnEndQuestionnaire.setVisible(true);
         btnSpecificArea.setSelected(false);
         btnNoSpecificArea.setSelected(true);
-    }
-
-    public static int getRangeOrCity() {
-        return rangeOrCity;
-    }
-
-    public static void setRangeOrCity(int type) {
-        rangeOrCity = type;
-    }
-
-    public void selectCity(ActionEvent event) {
-        setRangeOrCity(0);
-        btnRange.setSelected(false);
-        btnCity.setSelected(true);
-    }
-
-    public void selectRange(ActionEvent event) {
-        setRangeOrCity(1);
-        btnRange.setSelected(true);
-        btnCity.setSelected(false);
     }
 
     public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
@@ -527,7 +520,7 @@ public class QuestionnaireController {
             dialog.show();
     }
 
-    public void closeQuestionnaire(ActionEvent event) throws IOException {
+    public void closeQuestionnaire(ActionEvent event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
         getSceneExitQuestionnaire().getWindow().hide();
     }
@@ -539,11 +532,11 @@ public class QuestionnaireController {
    public void goToNextQuestion(ActionEvent event) throws IOException {
        Stage stage = null;
         FXMLLoader fxmlLoader = null;
-        if (event.getSource() == btnNextQuestion1 && petType == 1){
+        if (event.getSource() == btnNextQuestion1 && questionnaireResultBean.getType() == 1){
             stage = (Stage) btnNextQuestion1.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
         }
-       else if (event.getSource() == btnNextQuestion1 && petType == 0){
+       else if (event.getSource() == btnNextQuestion1 && questionnaireResultBean.getType() == 0){
            stage = (Stage) btnNextQuestion1.getScene().getWindow();
            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Dog.fxml"));
        }
@@ -559,19 +552,23 @@ public class QuestionnaireController {
             stage = (Stage) btnNextQuestion3.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage4.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion3 && petType == 1) {
+        else if (event.getSource() == btnPreviousQuestion3 && questionnaireResultBean.getType() == 1) {
             stage = (Stage) btnPreviousQuestion3.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Cat.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion3 && petType == 0) {
+        else if (event.getSource() == btnPreviousQuestion3 && questionnaireResultBean.getType() == 0) {
             stage = (Stage) btnPreviousQuestion3.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage2Dog.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion4 && petType == 1) {
+        else if (event.getSource() == btnNextQuestion4 && questionnaireResultBean.getHaveAPet() == 0) {
+            stage = (Stage) btnNextQuestion4.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage6.fxml"));
+        }
+        else if (event.getSource() == btnNextQuestion4 && questionnaireResultBean.getType() == 1 && questionnaireResultBean.getHaveAPet() == 1) {
             stage = (Stage) btnNextQuestion4.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Cat.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion4 && petType == 0) {
+        else if (event.getSource() == btnNextQuestion4 && questionnaireResultBean.getType() == 0 && questionnaireResultBean.getHaveAPet() == 1) {
             stage = (Stage) btnNextQuestion4.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Dog.fxml"));
         }
@@ -579,23 +576,36 @@ public class QuestionnaireController {
             stage = (Stage) btnPreviousQuestion4.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage3.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion5) {
+        else if (event.getSource() == btnNextQuestion5 ) {
             stage = (Stage) btnNextQuestion5.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage6.fxml"));
+        }
+        else if (event.getSource() == btnNextQuestion5) {
+            stage = (Stage) btnNextQuestion5.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage7.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion5) {
             stage = (Stage) btnPreviousQuestion5.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage4.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion6) {
+        else if (event.getSource() == btnNextQuestion6 && questionnaireResultBean.getHaveAGarden() == 1) {
             stage = (Stage) btnNextQuestion6.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage7.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion6 && petType == 1) {
+        else if (event.getSource() == btnNextQuestion6 && questionnaireResultBean.getHaveAGarden() == 0) {
+            stage = (Stage) btnNextQuestion6.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage8.fxml"));
+        }
+        else if (event.getSource() == btnPreviousQuestion6 && questionnaireResultBean.getHaveAPet() == 0) {
+            stage = (Stage) btnPreviousQuestion6.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage4.fxml"));
+        }
+        else if (event.getSource() == btnPreviousQuestion6 && questionnaireResultBean.getType() == 1 && questionnaireResultBean.getHaveAPet() == 1) {
             stage = (Stage) btnPreviousQuestion6.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Cat.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion6 && petType == 0) {
+        else if (event.getSource() == btnPreviousQuestion6 && questionnaireResultBean.getType() == 0 && questionnaireResultBean.getHaveAPet() == 1) {
+            stage = (Stage) btnPreviousQuestion6.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage5Dog.fxml"));
         }
         else if (event.getSource() == btnNextQuestion7) {
@@ -606,13 +616,21 @@ public class QuestionnaireController {
             stage = (Stage) btnPreviousQuestion7.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage6.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion8) {
+        else if (event.getSource() == btnNextQuestion8 && questionnaireResultBean.getHaveATerrace() == 1) {
             stage = (Stage) btnNextQuestion8.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage9.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion8) {
+        else if (event.getSource() == btnNextQuestion8 && questionnaireResultBean.getHaveATerrace() == 0) {
+            stage = (Stage) btnNextQuestion8.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage10.fxml"));
+        }
+        else if (event.getSource() == btnPreviousQuestion8 && questionnaireResultBean.getHaveAGarden() == 1) {
             stage = (Stage) btnPreviousQuestion8.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage7.fxml"));
+        }
+        else if (event.getSource() == btnPreviousQuestion8 && questionnaireResultBean.getHaveAGarden() == 0) {
+            stage = (Stage) btnPreviousQuestion8.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage6.fxml"));
         }
         else if (event.getSource() == btnNextQuestion9) {
             stage = (Stage) btnNextQuestion9.getScene().getWindow();
@@ -626,9 +644,13 @@ public class QuestionnaireController {
             stage = (Stage) btnNextQuestion10.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage11.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion10) {
+        else if (event.getSource() == btnPreviousQuestion10 && questionnaireResultBean.getHaveATerrace() == 1) {
             stage = (Stage) btnPreviousQuestion10.getScene().getWindow();
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage10.fxml"));
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage9.fxml"));
+        }
+        else if (event.getSource() == btnPreviousQuestion10 && questionnaireResultBean.getHaveATerrace() == 0) {
+            stage = (Stage) btnPreviousQuestion10.getScene().getWindow();
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage8.fxml"));
         }
         else if (event.getSource() == btnNextQuestion11) {
             stage = (Stage) btnNextQuestion11.getScene().getWindow();
@@ -638,11 +660,11 @@ public class QuestionnaireController {
             stage = (Stage) btnPreviousQuestion11.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage10.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion12 && petType == 0) {
+        else if (event.getSource() == btnNextQuestion12 && questionnaireResultBean.getType() == 0) {
             stage = (Stage) btnNextQuestion12.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage13Dog.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion12 && petType == 1) {
+        else if (event.getSource() == btnNextQuestion12 && questionnaireResultBean.getType() == 1) {
             stage = (Stage) btnNextQuestion12.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage14.fxml"));
         }
@@ -662,46 +684,32 @@ public class QuestionnaireController {
             stage = (Stage) btnNextQuestion14.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage15.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion14 && petType == 1) {
+        else if (event.getSource() == btnPreviousQuestion14 && questionnaireResultBean.getType() == 1) {
             stage = (Stage) btnPreviousQuestion14.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage12.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion14 && petType == 0) {
+        else if (event.getSource() == btnPreviousQuestion14 && questionnaireResultBean.getType() == 0) {
             stage = (Stage) btnPreviousQuestion14.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage13Dog.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion15 && specificArea == 0) {
+        else if (event.getSource() == btnNextQuestion15) {
             stage = (Stage) btnNextQuestion15.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage16.fxml"));
-        }
-        else if (event.getSource() == btnNextQuestion15 && specificArea == 1) {
-            stage = (Stage) btnNextQuestion15.getScene().getWindow();
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnaireResultPage.fxml"));
         }
         else if (event.getSource() == btnPreviousQuestion15) {
             stage = (Stage) btnPreviousQuestion15.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage14.fxml"));
         }
-        else if (event.getSource() == btnNextQuestion16 && rangeOrCity == 1) {
-            stage = (Stage) btnNextQuestion16.getScene().getWindow();
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage17Range.fxml"));
-        }
-        else if (event.getSource() == btnNextQuestion16 && rangeOrCity == 0) {
-            stage = (Stage) btnNextQuestion16.getScene().getWindow();
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage17City.fxml"));
-        }
         else if (event.getSource() == btnPreviousQuestion16) {
             stage = (Stage) btnPreviousQuestion16.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage15.fxml"));
         }
-        else if (event.getSource() == btnPreviousQuestion17) {
-            stage = (Stage) btnPreviousQuestion17.getScene().getWindow();
-            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnairePage16.fxml"));
-        }
         else if (event.getSource() == btnEndQuestionnaire) {
+            initialize();
             stage = (Stage) btnEndQuestionnaire.getScene().getWindow();
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QuestionnaireResultPage.fxml"));
         }
+       assert fxmlLoader != null;
        Scene scene = new Scene(fxmlLoader.load());
        stage.setScene(scene);
     }
