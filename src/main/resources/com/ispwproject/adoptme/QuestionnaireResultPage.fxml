@@ -44,7 +44,7 @@
                   <Insets left="35.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefHeight="396.0" prefWidth="780.0" styleClass="transparent" stylesheets="@style.css" vbarPolicy="NEVER">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefHeight="404.0" prefWidth="780.0" styleClass="transparent" stylesheets="@style.css" vbarPolicy="NEVER">
                <content>
                   <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="308.0" prefWidth="778.0" vgap="33.0">
                      <rowConstraints>
