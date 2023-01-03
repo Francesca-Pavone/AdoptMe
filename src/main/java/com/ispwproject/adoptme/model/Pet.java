@@ -2,11 +2,25 @@ package com.ispwproject.adoptme.model;
 
 public class Pet {
 
+    public enum CoatLenght{
+        shortLenght,
+        mediumLenght,
+        longLenght
+    }
+
     private int petId;
     private String name;
     private String imgSrc;
     private String age;
     private String gender;
+    private CoatLenght coatLenght;
+    private int vaccinated; // 0 -> no | 1 -> yes
+    private int dewormed; // 0 -> no | 1 -> yes
+    private int disability; // 0 -> no | 1 -> yes
+    private int microchipped; // 0 -> no | 1 -> yes
+    private int sterilized; // 0 -> no | 1 -> yes
+    private int programEducation; // 0 -> no | 1 -> yes
+
     private int shelter;
 
     public Pet(String name, String imgSrc, String age,String gender) {
@@ -63,6 +77,46 @@ public class Pet {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public CoatLenght getCoatLenght() { return coatLenght; }
+
+    public void setCoatLenght(CoatLenght coatLenght) { this.coatLenght = coatLenght; }
+
+    public int getVaccinated() { return vaccinated; }
+
+    public void setVaccinated(int vaccinated) { this.vaccinated = vaccinated; }
+
+    public int getDewormed() { return dewormed; }
+
+    public void setDewormed(int dewormed) { this.dewormed = dewormed; }
+
+    public int getDisability() { return disability; }
+
+    public void setDisability(int disability) { this.disability = disability; }
+
+    public int getMicrochipped() {
+        return microchipped;
+    }
+
+    public void setMicrochipped(int microchipped) {
+        this.microchipped = microchipped;
+    }
+
+    public int getSterilized() {
+        return sterilized;
+    }
+
+    public void setSterilized(int sterilized) {
+        this.sterilized = sterilized;
+    }
+
+    public int getProgramEducation() {
+        return programEducation;
+    }
+
+    public void setProgramEducation(int programEducation) {
+        this.programEducation = programEducation;
     }
 
     public int getShelter() {

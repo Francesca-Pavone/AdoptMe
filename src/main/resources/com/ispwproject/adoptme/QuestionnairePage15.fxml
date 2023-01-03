@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -137,31 +138,53 @@
                         <String fx:value="button3" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="btnNextQuestion15" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
-                     <graphic>
-                        <VBox alignment="CENTER">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/next_arrow.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="Next question">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                     </graphic>
+                  <Pane>
                      <HBox.margin>
                         <Insets left="400.0" />
                      </HBox.margin>
-                     <styleClass>
-                        <String fx:value="transparent" />
-                        <String fx:value="button3" />
-                     </styleClass>
-                  </Button>
+                     <children>
+                        <Button fx:id="btnNextQuestion15" mnemonicParsing="false" onAction="#goToNextQuestion" stylesheets="@style.css">
+                           <graphic>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/next_arrow.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="Next question">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="button3" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnEndQuestionnaire" mnemonicParsing="false" onAction="#goToNextQuestion" prefHeight="70.0" prefWidth="176.0" styleClass="button1" stylesheets="@style.css" visible="false">
+                           <graphic>
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <Label text="End" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="questionnaire" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </Pane>
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

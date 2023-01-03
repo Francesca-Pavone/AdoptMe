@@ -192,9 +192,9 @@
                   <String fx:value="button3" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" styleClass="transparent" stylesheets="@style.css">
+            <Button mnemonicParsing="false" onAction="#loadImage" prefHeight="120.0" prefWidth="120.0" styleClass="transparent" stylesheets="@style.css">
                <graphic>
-                  <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userImg" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/user_photo.png" />
                      </image>
