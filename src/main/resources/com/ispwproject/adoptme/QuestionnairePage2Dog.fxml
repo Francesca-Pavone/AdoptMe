@@ -92,7 +92,7 @@
                         </VBox>
                      </graphic>
                   </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="130.0" prefWidth="130.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" toggleGroup="$PetGenderGroup">
+                  <ToggleButton fx:id="btnGenderNotImportant" mnemonicParsing="false" onAction="#selectGenderNotImportant" prefHeight="130.0" prefWidth="130.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" toggleGroup="$PetGenderGroup">
                      <graphic>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>

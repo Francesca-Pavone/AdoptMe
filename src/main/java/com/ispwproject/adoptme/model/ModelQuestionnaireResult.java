@@ -27,6 +27,21 @@ public class ModelQuestionnaireResult {
         }
    }
 
+    private Tuple[] rangeAge;
+    private int haveAPet; // 0 -> no | 1 -> yes
+    private QuestionnaireResultBean.PetAlreadyHave[] petAlreadyHave;
+    private int haveAGarden; // 0 -> no | 1 -> yes
+    private int gardenSleepOutside; // 0 -> no | 1 -> yes
+    private int haveATerrace; // 0 -> no | 1 -> yes
+    private int terraceSleepOutside; // 0 -> no | 1 -> yes
+    private int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
+    private int firstPet; // 0 -> no | 1 -> yes
+    private int sterilizePet; // 0 -> no | 1 -> yes
+    private int programEducation; // 0 -> no | 1 -> yes
+    private int disabledPet; // 0 -> no | 1 -> yes
+    private int specificArea; // 0 -> no | 1 -> yes
+    private String city;
+
     public int getType() {
         return type;
     }
@@ -166,20 +181,7 @@ public class ModelQuestionnaireResult {
         this.rangeAge = newArr;
     }
 
-    private Tuple[] rangeAge;
-    private int haveAPet; // 0 -> no | 1 -> yes
-    private QuestionnaireResultBean.PetAlreadyHave[] petAlreadyHave;
-    private int haveAGarden; // 0 -> no | 1 -> yes
-    private int gardenSleepOutside; // 0 -> no | 1 -> yes
-    private int haveATerrace; // 0 -> no | 1 -> yes
-    private int terraceSleepOutside; // 0 -> no | 1 -> yes
-    private int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
-    private int firstPet; // 0 -> no | 1 -> yes
-    private int sterilizePet; // 0 -> no | 1 -> yes
-    private int programEducation; // 0 -> no | 1 -> yes
-    private int disabledPet; // 0 -> no | 1 -> yes
-    private int specificArea; // 0 -> no | 1 -> yes
-    private String city;
+
 
 
 
