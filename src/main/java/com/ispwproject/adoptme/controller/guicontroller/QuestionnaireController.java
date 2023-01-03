@@ -1,11 +1,12 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -27,7 +28,7 @@ public class QuestionnaireController {
 
     @FXML
     private GridPane grid;
-    private List<Pet> petList = new ArrayList<>();
+    private List<PetModel> petList = new ArrayList<>();
     private PetDAO petDAO = new PetDAO();
 
     private static int petType;
@@ -189,11 +190,11 @@ public class QuestionnaireController {
 
     private static final QuestionnaireResultBean questionnaireResultBean = new QuestionnaireResultBean();
 
-    private List<Pet> getPetList() {
+    private List<PetModel> getPetList() {
         try {
-            String searchKey = "Pensieri Bestiali";
+            int searchKey = 1;
             //System.out.println("Looking for " + searchKey + "'s pets: ");
-            petList = this.petDAO.retreiveByShelterName(searchKey);
+            petList = this.petDAO.retreivePetByShelterId(searchKey);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
@@ -217,7 +218,7 @@ public class QuestionnaireController {
             int row = 1;
 
             try {
-                for (Pet pet : petList) {
+                for (PetModel pet : petList) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(HelloApplication.class.getResource("UserPetItem.fxml"));
                     Pane pane = fxmlLoader.load();
