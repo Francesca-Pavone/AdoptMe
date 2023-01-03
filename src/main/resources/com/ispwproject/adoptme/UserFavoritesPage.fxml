@@ -14,32 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserFavoritesPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserFavoritesPageController">
    <children>
-      <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="Your list of favorite pets:" textFill="#34665a">
-               <font>
-                  <Font name="Arial Bold" size="30.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="40.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="550.0" prefWidth="750.0" styleClass="transparent" stylesheets="@style.css" vbarPolicy="NEVER">
-               <content>
-                  <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                     </rowConstraints>
-                  </GridPane>
-               </content>
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </ScrollPane>
-         </children>
-      </VBox>
       <AnchorPane style="-fx-background-color: #34665A;">
          <children>
             <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
@@ -204,5 +180,29 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Your list of favorite pets:" textFill="#34665a">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="40.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="550.0" prefWidth="750.0" styleClass="transparent" stylesheets="@style.css" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+               <content>
+                  <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
