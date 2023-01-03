@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,14 +20,14 @@ public class UserFavoritesPageController {
     @FXML
     private GridPane grid;
 
-    private List<Pet> petList = new ArrayList<>();
+    private List<PetModel> petList = new ArrayList<>();
     private PetDAO petDAO = new PetDAO();
-    private List<Pet> getPetList() {
+    private List<PetModel> getPetList() {
 
         try {
-            String searchKey = "Pensieri Bestiali";
+            int searchKey = 1;
             //System.out.println("Looking for " + searchKey + "'s pets: ");
-            petList = this.petDAO.retreiveByShelterName(searchKey);
+            petList = this.petDAO.retreivePetByShelterId(searchKey);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
@@ -49,7 +49,7 @@ public class UserFavoritesPageController {
         int row = 1;
 
         try {
-            for (Pet pet : petList) {
+            for (PetModel pet : petList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(HelloApplication.class.getResource("UserPetItem.fxml"));
                 Pane pane = fxmlLoader.load();
