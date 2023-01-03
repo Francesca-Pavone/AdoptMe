@@ -2,14 +2,12 @@ package com.ispwproject.adoptme.model;
 
 import com.ispwproject.adoptme.utils.bean.AccountInfo;
 
-import java.io.File;
-
 public abstract class ShelterUserModel {
     private int id ;
-    private File profileImg;
+    private String profileImg; // todo: riportare in formato file
     private AccountInfo accountInfo;
 
-    public ShelterUserModel(File profileImg, AccountInfo accountInfo) {
+    public ShelterUserModel(String profileImg, AccountInfo accountInfo) {
         setProfileImg(profileImg);
         setAccountInfo(accountInfo);
     }
@@ -22,11 +20,11 @@ public abstract class ShelterUserModel {
         this.id = id;
     }
 
-    public File getProfileImg() {
+    public String getProfileImg() {
         return profileImg;
     }
 
-    public void setProfileImg(File profileImg) {
+    public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
     }
 

@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.model;
 
-public class Pet {
+public class PetModel {
 
     public enum CoatLenght{
         shortLenght,
@@ -21,16 +21,16 @@ public class Pet {
     private int sterilized; // 0 -> no | 1 -> yes
     private int programEducation; // 0 -> no | 1 -> yes
 
-    private int shelter;
+    private Shelter shelter;
 
-    public Pet(String name, String imgSrc, String age,String gender) {
+    public PetModel(String name, String imgSrc, String age, String gender) {
         setName(name);
         setImgSrc(imgSrc);
         setAge(age);
         setGender(gender);
     }
 
-    public Pet(int petId, String imgSrc, String name, String gender, String age, int shelter) {
+    public PetModel(int petId, String imgSrc, String name, String gender, String age, Shelter shelter) {
         setPetId(petId);
         setImgSrc(imgSrc);
         setName(name);
@@ -119,11 +119,12 @@ public class Pet {
         this.programEducation = programEducation;
     }
 
-    public int getShelter() {
+
+    public Shelter getShelter() {
         return shelter;
     }
 
-    public void setShelter(int shelter) {
+    public void setShelter(Shelter shelter) {
         this.shelter = shelter;
     }
 }

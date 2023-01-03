@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.HelloApplication;
-import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.model.PetModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -23,7 +23,7 @@ public class PetItemController {
     @FXML
     private Label petName;
 
-    public void setData(Pet pet) throws IOException {
+    public void setData(PetModel pet) throws IOException {
         petGender.setText(pet.getGender());
         petName.setText(pet.getName());
         petAge.setText(pet.getAge());

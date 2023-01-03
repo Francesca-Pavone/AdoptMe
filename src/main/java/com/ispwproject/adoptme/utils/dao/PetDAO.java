@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.Pet;
+import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.sql.*;
@@ -14,11 +14,11 @@ public class PetDAO {
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
-    public List<Pet> retreiveByShelterName(String shelterName) throws Exception {
+    public List<PetModel> retreivePetByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
-        List<Pet> petList = new ArrayList<Pet>();
+        List<PetModel> petList = new ArrayList<PetModel>();
 
         try {
             // STEP 2: loading dinamico del driver mysql
@@ -32,11 +32,11 @@ public class PetDAO {
                     ResultSet.CONCUR_READ_ONLY);
 
             // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
-            ResultSet resultSet = SimpleQueries.selectPetByShelterName(stmt, shelterName);
+            ResultSet resultSet = SimpleQueries.selectPetByShelterId(stmt, shelterId);
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                Exception e = new Exception("No pets found for the shelter: "+shelterName);
+                Exception e = new Exception("No pets found for the shelter with id: "+shelterId);
                 throw e;
             }
 
@@ -49,7 +49,7 @@ public class PetDAO {
                 String petAge = resultSet.getString("age");
                 String petGender = resultSet.getString("gender");
 
-                Pet pet = new Pet(petName, petImage, petAge, petGender);
+                PetModel pet = new PetModel(petName, petImage, petAge, petGender);
                 petList.add(pet);
 
             }while(resultSet.next());
@@ -63,6 +63,7 @@ public class PetDAO {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
+                se2.printStackTrace();
             }
             try {
                 if (conn != null)
@@ -73,5 +74,66 @@ public class PetDAO {
         }
 
         return petList;
+    }
+
+    public static PetModel retreivePetById(int petId, int shelterId) throws Exception {
+        // STEP 1: dichiarazioni
+        Statement stmt = null;
+        Connection conn = null;
+        PetModel pet;
+
+        try {
+            // STEP 2: loading dinamico del driver mysql
+            Class.forName(DRIVER_CLASS_NAME);
+
+            // STEP 3: apertura connessione
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // STEP 4: creazione ed esecuzione della query
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
+            ResultSet resultSet = SimpleQueries.selectPetById(stmt, petId, shelterId);
+
+            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
+            if (!resultSet.first()){
+                Exception e = new Exception("No pets found for the shelter with id: "+shelterId);
+                throw e;
+            }
+
+            // Riposiziono il cursore sul primo record del result set
+            resultSet.first();
+            do{
+                // Leggo le colonne "by name"
+                String petName = resultSet.getString("name");
+                String petImage = resultSet.getString("imgSrc");
+                String petAge = resultSet.getString("age");
+                String petGender = resultSet.getString("gender");
+
+                pet = new PetModel(petName, petImage, petAge, petGender);
+
+            }while(resultSet.next());
+
+            // STEP 5.1: Clean-up dell'ambiente
+            resultSet.close();
+
+        } finally {
+            // STEP 5.2: Clean-up dell'ambiente
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+        return pet;
     }
 }
