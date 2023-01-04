@@ -42,7 +42,25 @@ public class QuestionnaireResultBean {
     private int programEducation; // 0 -> no | 1 -> yes
     private int disabledPet; // 0 -> no | 1 -> yes
     private int specificArea; // 0 -> no | 1 -> yes
+    private int finalCity;
     private String city;
+    private String[] listOfCities;
+
+    public int getFinalCity() {
+        return finalCity;
+    }
+
+    public void setFinalCity(int finalCity) {
+        this.finalCity = finalCity;
+    }
+
+    public String[] getListOfCities() {
+        return listOfCities;
+    }
+
+    public void setListOfCities(String[] listOfCities) {
+        this.listOfCities = listOfCities;
+    }
 
     public QuestionnaireResultBean() {}
 
@@ -99,6 +117,31 @@ public class QuestionnaireResultBean {
         newArr[n] = age;
         this.age = newArr;
     }
+    public void removeAge(PetAge age) {
+        int i, n, x = -1;
+        if (this.age == null) {
+            n = 0;
+        } else {
+            n = this.age.length;
+        }
+        PetAge[] newArr = new PetAge[n - 1];
+        for(i = 0; i < n; i++) {
+            if(this.age[i] == age) {
+                x = i;
+            }
+        }
+        for(i = 0; i < x; i++) {
+            newArr[i] = this.age[i];
+        }
+        for(i = x + 1; i < n; i++) {
+            newArr[i-1] = this.age[i];
+        }
+        this.age = newArr;
+    }
+
+    public void resetAge() {
+        this.age = new PetAge[0];
+    }
 
     public int getHaveAPet() {
         return haveAPet;
@@ -124,6 +167,28 @@ public class QuestionnaireResultBean {
             newArr[i] = this.petAlreadyHave[i];
         }
         newArr[n] = petAlreadyHave;
+        this.petAlreadyHave = newArr;
+    }
+
+    public void removePetAlreadyHave(PetAlreadyHave petAlreadyHave) {
+        int i, n, x = -1;
+        if (this.petAlreadyHave == null) {
+            n = 0;
+        } else {
+            n = this.petAlreadyHave.length;
+        }
+        PetAlreadyHave[] newArr = new PetAlreadyHave[n - 1];
+        for(i = 0; i < n; i++) {
+            if(this.petAlreadyHave[i] == petAlreadyHave) {
+                x = i;
+            }
+        }
+        for(i = 0; i < x; i++) {
+            newArr[i] = this.petAlreadyHave[i];
+        }
+        for(i = x + 1; i < n; i++) {
+            newArr[i-1] = this.petAlreadyHave[i];
+        }
         this.petAlreadyHave = newArr;
     }
 

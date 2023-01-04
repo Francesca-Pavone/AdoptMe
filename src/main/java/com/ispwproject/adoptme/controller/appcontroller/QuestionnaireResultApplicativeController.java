@@ -4,6 +4,13 @@ import com.ispwproject.adoptme.model.ModelQuestionnaireResult;
 import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
 
 public class QuestionnaireResultApplicativeController {
+
+    public void searchCities(QuestionnaireResultBean questionnaireResultBean) {
+        String city = questionnaireResultBean.getCity();
+        //cerca nel database città che iniziano o sono uguali a city
+        //questionnaireResultBean.setListOfCities(); qui ci metto la lista delle città trovate
+    }
+
     public void findPets(QuestionnaireResultBean questionnaireResultBean) {
         ModelQuestionnaireResult modelQuestionnaireResult = new ModelQuestionnaireResult();
 

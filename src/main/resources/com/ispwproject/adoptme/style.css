@@ -160,3 +160,13 @@
     -fx-background-color: rgba(0,0,0,0);
     -fx-border-color: rgba(0,0,0,0);
 }
+
+.list-cell:filled:selected {
+	-fx-background-color: #C89C32;
+	-fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+	-fx-background-color: #417E70;
+	-fx-text-fill: white;
+}

@@ -3,14 +3,14 @@ package com.ispwproject.adoptme.controller.guicontroller;
 import com.ispwproject.adoptme.HelloApplication;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -30,9 +30,6 @@ public class QuestionnaireController {
 
     private List<PetModel> petList = new ArrayList<>();
     private PetDAO petDAO = new PetDAO();
-
-    private static int petType;
-    private static int haveAPet;
 
     private static Scene sceneExitQuestionnaire;
 
@@ -114,8 +111,12 @@ public class QuestionnaireController {
     private ToggleButton btnSpecificArea;
     @FXML
     private ToggleButton btnNoSpecificArea;
-
-
+    @FXML
+    private TextField cityTextField;
+    @FXML
+    private Button btnSearchCity;
+    @FXML
+    private ListView<String> cityListView;
 
     @FXML
     private Button btnNextQuestion1;
@@ -311,7 +312,10 @@ public class QuestionnaireController {
         if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected()) {
             btnNextQuestion3.setDisable(true);
         }
-        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.puppy);
+        if(btnPuppy.isSelected())
+            questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.puppy);
+        else
+            questionnaireResultBean.removeAge(QuestionnaireResultBean.PetAge.puppy);
     }
 
     public void selectYoung() {
@@ -320,7 +324,10 @@ public class QuestionnaireController {
         if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected()) {
             btnNextQuestion3.setDisable(true);
         }
-        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.young);
+        if(btnYoung.isSelected())
+            questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.young);
+        else
+            questionnaireResultBean.removeAge(QuestionnaireResultBean.PetAge.young);
     }
 
     public void selectAdult() {
@@ -329,7 +336,10 @@ public class QuestionnaireController {
         if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected()) {
             btnNextQuestion3.setDisable(true);
         }
-        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.adult);
+        if(btnAdult.isSelected())
+            questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.adult);
+        else
+            questionnaireResultBean.removeAge(QuestionnaireResultBean.PetAge.adult);
     }
 
     public void selectSenior() {
@@ -338,10 +348,14 @@ public class QuestionnaireController {
         if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected()) {
             btnNextQuestion3.setDisable(true);
         }
-        questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.senior);
+        if(btnSenior.isSelected())
+            questionnaireResultBean.setAge(QuestionnaireResultBean.PetAge.senior);
+        else
+            questionnaireResultBean.removeAge(QuestionnaireResultBean.PetAge.senior);
     }
 
     public void selectAgeNotImportant() {
+        questionnaireResultBean.resetAge();
         btnNextQuestion3.setDisable(false);
         if(!btnAgeNotImportant.isSelected()) {
             btnNextQuestion3.setDisable(true);
@@ -373,84 +387,131 @@ public class QuestionnaireController {
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatSterilized);
+        if(radioButton1.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatSterilized);
     }
+
     public void selectRadioButton2Cat() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatNonSterilized);
+        if(radioButton2.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatNonSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCatNonSterilized);
     }
+
     public void selectRadioButton3Cat() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatSterilized);
+        if(radioButton3.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatSterilized);
     }
+
     public void selectRadioButton4Cat() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatNonSterilized);
+        if(radioButton4.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatNonSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCatNonSterilized);
     }
+
     public void selectRadioButton5Cat() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDog);
+        if(radioButton5.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDog);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDog);
     }
+
     public void selectRadioButton6Cat() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDog);
+        if(radioButton6.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDog);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDog);
     }
+
     public void selectRadioButton1Dog() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogSterilized);
+        if(radioButton1.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogSterilized);
     }
+
     public void selectRadioButton2Dog() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogNonSterilized);
+        if(radioButton2.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogNonSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleDogNonSterilized);
     }
+
     public void selectRadioButton3Dog() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogSterilized);
+        if(radioButton3.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogSterilized);
     }
+
     public void selectRadioButton4Dog() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogNonSterilized);
+        if(radioButton4.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogNonSterilized);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleDogNonSterilized);
     }
+
     public void selectRadioButton5Dog() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCat);
+        if(radioButton5.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCat);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.maleCat);
     }
+
     public void selectRadioButton6Dog() {
         btnNextQuestion5.setDisable(false);
         if(!radioButton1.isSelected() && !radioButton2.isSelected() && !radioButton3.isSelected() && !radioButton4.isSelected() && !radioButton5.isSelected() && !radioButton6.isSelected()) {
             btnNextQuestion5.setDisable(true);
         }
-        questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCat);
+        if(radioButton5.isSelected())
+            questionnaireResultBean.setPetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCat);
+        else
+            questionnaireResultBean.removePetAlreadyHave(QuestionnaireResultBean.PetAlreadyHave.femaleCat);
     }
 
     public void selectGarden() {
@@ -463,7 +524,7 @@ public class QuestionnaireController {
 
     public void selectNoGarden() {
         btnNextQuestion6.setDisable(false);
-        if(!btnGarden.isSelected()) {
+        if(!btnNoGarden.isSelected()) {
             btnNextQuestion6.setDisable(true);
         }
         questionnaireResultBean.setHaveAGarden(0);
@@ -623,6 +684,26 @@ public class QuestionnaireController {
         questionnaireResultBean.setSpecificArea(0);
         btnNextQuestion15.setVisible(false);
         btnEndQuestionnaire.setVisible(true);
+    }
+
+    public void searchCity() {
+        btnEndQuestionnaire.setDisable(false);
+        questionnaireResultBean.setCity(cityTextField.getText());
+        String[] items = questionnaireResultBean.getListOfCities();
+        final String[] currentCity = new String[1];
+        cityListView.getItems().addAll(items);
+        cityListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                currentCity[0] = cityListView.getSelectionModel().getSelectedItem();
+                cityTextField.setText(currentCity[0]);
+            }
+        });
+        cityListView.setVisible(true);
+    }
+
+    public void insertCity() {
+        cityListView.setVisible(false);
     }
 
     public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
