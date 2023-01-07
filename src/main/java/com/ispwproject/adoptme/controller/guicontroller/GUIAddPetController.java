@@ -118,7 +118,7 @@ public class GUIAddPetController {
     private boolean disability;
     private String disabilityType;
     private boolean dogEducation;
-    
+
      */
 
     public static int getPetType() {
