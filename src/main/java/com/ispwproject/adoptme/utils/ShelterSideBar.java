@@ -24,12 +24,11 @@ public class ShelterSideBar {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ShelterWishlist.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         HelloApplication.getStage().setScene(scene);
-   }
+    }
 
     public void goToSettings() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ShelterSettings.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         HelloApplication.getStage().setScene(scene);
-   }
-
+    }
 }

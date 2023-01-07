@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_RIGHT" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
+<VBox alignment="CENTER_RIGHT" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.GUIAddPetController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -55,37 +55,37 @@
                <children>
                   <VBox spacing="15.0">
                      <children>
-                        <CheckBox mnemonicParsing="false" text="sterilized male dogs">
+                        <CheckBox fx:id="cb_sterMDog" mnemonicParsing="false" text="sterilized male dogs">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="sterilized female dogs">
+                        <CheckBox fx:id="cb_sterFDog" mnemonicParsing="false" text="sterilized female dogs">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="sterilized male cats">
+                        <CheckBox fx:id="cb_sterMCat" mnemonicParsing="false" text="sterilized male cats">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="sterilized female cats">
+                        <CheckBox fx:id="cb_sterFCat" mnemonicParsing="false" text="sterilized female cats">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="children">
+                        <CheckBox fx:id="cb_children" mnemonicParsing="false" text="children">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="apartment without garden">
+                        <CheckBox fx:id="cb_apartGarden" mnemonicParsing="false" text="apartment without garden">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="sleeping outside">
+                        <CheckBox fx:id="cb_sleepOut" mnemonicParsing="false" text="sleeping outside">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
@@ -94,37 +94,37 @@
                   </VBox>
                   <VBox spacing="15.0">
                      <children>
-                        <CheckBox mnemonicParsing="false" text="not sterilized male dogs">
+                        <CheckBox fx:id="cb_notSterMDog" mnemonicParsing="false" text="not sterilized male dogs">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="not sterilized female dogs">
+                        <CheckBox fx:id="cb_notSterFDog" mnemonicParsing="false" text="not sterilized female dogs">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="not sterilized male cats">
+                        <CheckBox fx:id="cb_notSterMCat" mnemonicParsing="false" text="not sterilized male cats">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="not sterilized female cats">
+                        <CheckBox fx:id="cb_notSterFCat" mnemonicParsing="false" text="not sterilized female cats">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="elders">
+                        <CheckBox fx:id="cb_elders" mnemonicParsing="false" text="elders">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="apartment without terrace">
+                        <CheckBox fx:id="cb_apartNoTerrace" mnemonicParsing="false" text="apartment without terrace">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
                         </CheckBox>
-                        <CheckBox mnemonicParsing="false" text="first experience">
+                        <CheckBox fx:id="cb_firstExp" mnemonicParsing="false" text="first experience">
                            <font>
                               <Font name="Arial" size="16.0" />
                            </font>
@@ -140,7 +140,7 @@
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                   </Label>
-                  <RadioButton mnemonicParsing="false" text="1-3">
+                  <RadioButton fx:id="rb_1" mnemonicParsing="false" text="1-3">
                      <font>
                         <Font name="Arial" size="16.0" />
                      </font>
@@ -148,12 +148,12 @@
                         <ToggleGroup fx:id="hoursAlone" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton layoutX="387.0" layoutY="12.0" mnemonicParsing="false" text="4-6" toggleGroup="$hoursAlone">
+                  <RadioButton fx:id="rb_2" layoutX="387.0" layoutY="12.0" mnemonicParsing="false" text="4-6" toggleGroup="$hoursAlone">
                      <font>
                         <Font name="Arial" size="16.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="more than 6" toggleGroup="$hoursAlone">
+                  <RadioButton fx:id="rb_3" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="more than 6" toggleGroup="$hoursAlone">
                      <font>
                         <Font name="Arial" size="16.0" />
                      </font>
@@ -171,7 +171,7 @@
             <Insets top="15.0" />
          </VBox.margin>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#close" prefWidth="80.0" styleClass="button1" stylesheets="@style.css" text="Done" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+      <Button mnemonicParsing="false" onAction="#confirmAddPet" prefWidth="80.0" styleClass="button1" stylesheets="@style.css" text="Done" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -181,7 +181,7 @@
       </Button>
       <HBox alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#goToPage2" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btn_3to2" mnemonicParsing="false" onAction="#goToPageN" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>

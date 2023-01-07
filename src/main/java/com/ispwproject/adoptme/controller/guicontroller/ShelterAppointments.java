@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterAppointments extends  ShelterSideBar {
+public class ShelterAppointments extends ShelterSideBar {
 
     @FXML
     private HBox acceptedReqList;
