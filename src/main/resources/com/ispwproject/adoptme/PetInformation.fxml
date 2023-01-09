@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSettings">
+   <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   <VBox alignment="TOP_CENTER" prefHeight="710.0" prefWidth="1100.0">
+      <children>
+         <ImageView fx:id="userImg" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@image/cane1_tondo.png" />
+            </image>
+         </ImageView>
+         <Label text="Aron">
+            <font>
+               <Font name="Arial Bold" size="24.0" />
+            </font>
+            <VBox.margin>
+               <Insets bottom="20.0" top="10.0" />
+            </VBox.margin>
+         </Label>
+         <VBox spacing="15.0">
+            <children>
+               <HBox alignment="CENTER_LEFT" spacing="7.0">
+                  <children>
+                     <Label text="Name:">
+                        <font>
+                           <Font name="Arial Bold" size="20.0" />
+                        </font>
+                     </Label>
+                     <Label layoutX="10.0" layoutY="10.0" text="Aron">
+                        <font>
+                           <Font name="Arial" size="20.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" spacing="7.0">
+                  <children>
+                     <Label text="Date of birth:">
+                        <font>
+                           <Font name="Arial Bold" size="20.0" />
+                        </font>
+                     </Label>
+                     <Label layoutX="10.0" layoutY="10.0" text="06/01/2022">
+                        <font>
+                           <Font name="Arial" size="20.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" spacing="7.0">
+                  <children>
+                     <Label text="Age:">
+                        <font>
+                           <Font name="Arial Bold" size="20.0" />
+                        </font>
+                     </Label>
+                     <Label layoutX="10.0" layoutY="10.0" text="1 year">
+                        <font>
+                           <Font name="Arial" size="20.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="162.0" spacing="7.0">
+                  <children>
+                     <Label text="Coat lenght:">
+                        <font>
+                           <Font name="Arial Bold" size="20.0" />
+                        </font>
+                     </Label>
+                     <Label layoutX="10.0" layoutY="10.0" text="Short">
+                        <font>
+                           <Font name="Arial" size="20.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+            </children>
+            <VBox.margin>
+               <Insets left="50.0" />
+            </VBox.margin>
+         </VBox>
+      </children>
+      <padding>
+         <Insets top="30.0" />
+      </padding>
+   </VBox>
+</AnchorPane>

@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
@@ -35,7 +35,7 @@ public class ShelterHomepage extends ShelterSideBar {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddPetForm1.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPetForm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
         dialog.show();
@@ -72,7 +72,7 @@ public class ShelterHomepage extends ShelterSideBar {
         try {
             for (PetModel pet : petList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(HelloApplication.class.getResource("PetItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
 

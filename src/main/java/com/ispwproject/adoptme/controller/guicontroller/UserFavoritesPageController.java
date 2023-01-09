@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
@@ -51,7 +51,7 @@ public class UserFavoritesPageController {
         try {
             for (PetModel pet : petList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(HelloApplication.class.getResource("UserPetItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("UserPetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
                 PetItemController petItemController = fxmlLoader.getController();
@@ -70,22 +70,22 @@ public class UserFavoritesPageController {
     }
 
     public void goToHomepage(ActionEvent event) throws IOException {
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserHomepage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
 
     public void goToAppointments(ActionEvent event) throws IOException {
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserSettingsPage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
 
     public void goToSettings(ActionEvent event) throws IOException {
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserSettingsPage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
