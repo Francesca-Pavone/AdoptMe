@@ -21,6 +21,11 @@ public class Shelter extends ShelterUserModel{
         setWebSite(webSite);
     }
 
+    public Shelter(String shelterName, String profileImg) {
+        super(profileImg);
+        setShelterName(shelterName);
+    }
+
     public Shelter(String profileImg, AccountInfo accountInfo) {
         super(profileImg, accountInfo);
     }

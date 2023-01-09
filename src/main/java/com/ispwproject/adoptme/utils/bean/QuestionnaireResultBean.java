@@ -3,6 +3,9 @@ package com.ispwproject.adoptme.utils.bean;
 //import com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController;
 
 import com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController;
+import com.ispwproject.adoptme.model.PetModel;
+
+import java.util.List;
 
 public class QuestionnaireResultBean {
     public enum PetAlreadyHave {
@@ -29,9 +32,9 @@ public class QuestionnaireResultBean {
 
     private int type; // 0 -> Dog | 1 -> Cat
     private int gender; // 0 -> male | 1 -> female
-    private PetAge[] age;
+    private List<PetAge> age;
     private int haveAPet; // 0 -> no | 1 -> yes
-    private PetAlreadyHave[] petAlreadyHave;
+    private List<PetAlreadyHave> petAlreadyHave;
     private int haveAGarden; // 0 -> no | 1 -> yes
     private int gardenSleepOutside; // 0 -> no | 1 -> yes
     private int haveATerrace; // 0 -> no | 1 -> yes
@@ -44,7 +47,17 @@ public class QuestionnaireResultBean {
     private int specificArea; // 0 -> no | 1 -> yes
     private int finalCity;
     private String city;
-    private String[] listOfCities;
+    private List<String> listOfCities;
+    private List<PetModel> listOfPets;
+
+    public List<PetModel> getListOfPets() {
+        return listOfPets;
+    }
+
+    public void setListOfPets(List<PetModel> listOfPets) {
+        this.listOfPets = listOfPets;
+    }
+
 
     public int getFinalCity() {
         return finalCity;
@@ -54,11 +67,11 @@ public class QuestionnaireResultBean {
         this.finalCity = finalCity;
     }
 
-    public String[] getListOfCities() {
+    public List<String> getListOfCities() {
         return listOfCities;
     }
 
-    public void setListOfCities(String[] listOfCities) {
+    public void setListOfCities(List<String> listOfCities) {
         this.listOfCities = listOfCities;
     }
 
@@ -67,9 +80,9 @@ public class QuestionnaireResultBean {
     public void QuestionnaireResult(int type, int gender, PetAge age, int haveAPet, PetAlreadyHave petAlreadyHave, int haveAGarden, int gardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, int specificArea, String city) {
         this.type = type;
         this.gender = gender;
-        this.age = new PetAge[0];
+        this.age = null;
         this.haveAPet = haveAPet;
-        this.petAlreadyHave = new PetAlreadyHave[0];
+        this.petAlreadyHave = null;
         this.haveAGarden = haveAGarden;
         this.gardenSleepOutside = gardenSleepOutside;
         this.haveATerrace = haveATerrace;
@@ -99,48 +112,20 @@ public class QuestionnaireResultBean {
         this.gender = gender;
     }
 
-    public PetAge[] getAge() {
+    public List<PetAge> getAge() {
         return age;
     }
 
     public void setAge(PetAge age) {
-        int i, n;
-        if (this.age == null) {
-            n = 0;
-        } else {
-            n = this.age.length;
-        }
-        PetAge[] newArr = new PetAge[n + 1];
-        for(i = 0; i < n; i++) {
-            newArr[i] = this.age[i];
-        }
-        newArr[n] = age;
-        this.age = newArr;
+        this.age.add(age);
     }
+
     public void removeAge(PetAge age) {
-        int i, n, x = -1;
-        if (this.age == null) {
-            n = 0;
-        } else {
-            n = this.age.length;
-        }
-        PetAge[] newArr = new PetAge[n - 1];
-        for(i = 0; i < n; i++) {
-            if(this.age[i] == age) {
-                x = i;
-            }
-        }
-        for(i = 0; i < x; i++) {
-            newArr[i] = this.age[i];
-        }
-        for(i = x + 1; i < n; i++) {
-            newArr[i-1] = this.age[i];
-        }
-        this.age = newArr;
+        this.age.remove(age);
     }
 
     public void resetAge() {
-        this.age = new PetAge[0];
+        this.age.clear();
     }
 
     public int getHaveAPet() {
@@ -151,45 +136,16 @@ public class QuestionnaireResultBean {
         this.haveAPet = haveAPet;
     }
 
-    public PetAlreadyHave[] getPetAlreadyHave() {
+    public List<PetAlreadyHave> getPetAlreadyHave() {
         return petAlreadyHave;
     }
 
     public void setPetAlreadyHave(PetAlreadyHave petAlreadyHave) {
-        int i, n;
-        if (this.petAlreadyHave == null) {
-            n = 0;
-        } else {
-            n = this.petAlreadyHave.length;
-        }
-        PetAlreadyHave[] newArr = new PetAlreadyHave[n + 1];
-        for(i = 0; i < n; i++) {
-            newArr[i] = this.petAlreadyHave[i];
-        }
-        newArr[n] = petAlreadyHave;
-        this.petAlreadyHave = newArr;
+        this.petAlreadyHave.add(petAlreadyHave);
     }
 
     public void removePetAlreadyHave(PetAlreadyHave petAlreadyHave) {
-        int i, n, x = -1;
-        if (this.petAlreadyHave == null) {
-            n = 0;
-        } else {
-            n = this.petAlreadyHave.length;
-        }
-        PetAlreadyHave[] newArr = new PetAlreadyHave[n - 1];
-        for(i = 0; i < n; i++) {
-            if(this.petAlreadyHave[i] == petAlreadyHave) {
-                x = i;
-            }
-        }
-        for(i = 0; i < x; i++) {
-            newArr[i] = this.petAlreadyHave[i];
-        }
-        for(i = x + 1; i < n; i++) {
-            newArr[i-1] = this.petAlreadyHave[i];
-        }
-        this.petAlreadyHave = newArr;
+        this.petAlreadyHave.remove(petAlreadyHave);
     }
 
     public int getHaveAGarden() {

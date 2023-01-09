@@ -689,7 +689,7 @@ public class QuestionnaireController {
     public void searchCity() {
         btnEndQuestionnaire.setDisable(false);
         questionnaireResultBean.setCity(cityTextField.getText());
-        String[] items = questionnaireResultBean.getListOfCities();
+        List<String> items = questionnaireResultBean.getListOfCities();
         final String[] currentCity = new String[1];
         cityListView.getItems().addAll(items);
         cityListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
