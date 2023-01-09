@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -211,29 +212,9 @@
          <children>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <RadioButton fx:id="radioBtnCity" mnemonicParsing="false" onAction="#selectCity" stylesheets="@style.css" text="City">
+                  <TextField fx:id="textFieldUserHomepage" prefHeight="45.0" prefWidth="600.0" promptText="Search shelters by city or shelter's name" stylesheets="@style.css">
                      <font>
-                        <Font name="Arial" size="22.0" />
-                     </font>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="SelectCityOrShelter" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="radioBtnShelter" mnemonicParsing="false" onAction="#selectShelter" stylesheets="@style.css" text="Shelter's name" toggleGroup="$SelectCityOrShelter">
-                     <font>
-                        <Font name="Arial" size="22.0" />
-                     </font>
-                  </RadioButton>
-               </children>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" spacing="30.0">
-               <children>
-                  <TextField fx:id="textFieldUserHomepage" prefHeight="45.0" prefWidth="600.0" promptText="..." stylesheets="@style.css">
-                     <font>
-                        <Font name="Arial" size="22.0" />
+                        <Font name="Arial" size="20.0" />
                      </font>
                   </TextField>
                   <Button fx:id="btnSearchUserHomepage" mnemonicParsing="false" onAction="#searchUserHomepage" prefHeight="50.0" prefWidth="50.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css">
@@ -247,9 +228,39 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets left="20.0" top="15.0" />
+                  <Insets top="30.0" />
                </VBox.margin>
             </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="30.0">
+               <children>
+                  <Label text="Search by:">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="radioBtnCity" mnemonicParsing="false" onAction="#selectCity" stylesheets="@style.css" text="City">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="SelectCityOrShelter" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="radioBtnShelter" mnemonicParsing="false" onAction="#selectShelter" stylesheets="@style.css" text="Shelter's name" toggleGroup="$SelectCityOrShelter">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Line endX="700.8" stroke="#00000086" strokeWidth="0.6" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Line>
          </children>
       </VBox>
       <ScrollPane fx:id="scrollPane" styleClass="transparent" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0">
@@ -261,7 +272,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Pane fx:id="pane1" layoutX="421.0" layoutY="266.0" AnchorPane.leftAnchor="421.0" AnchorPane.topAnchor="260.0">
+      <Pane fx:id="pane1" layoutX="421.0" layoutY="266.0" AnchorPane.leftAnchor="421.0" AnchorPane.topAnchor="275.0">
          <children>
             <Text fx:id="label1" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets change our lives, let’s save theirs">
                <font>
