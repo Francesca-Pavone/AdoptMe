@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="560.0" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetController_G">
+   <children>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Button mnemonicParsing="false" onAction="#close" styleClass="transparent" stylesheets="@style.css">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/close.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets right="-25.0" />
+         </VBox.margin>
+      </HBox>
+      <Label maxWidth="1.7976931348623157E308" text="Register a new pet">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </Label>
+      <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" prefWidth="660.0" styleClass="transparent" vbarPolicy="NEVER">
+         <content>
+            <VBox alignment="CENTER">
+               <children>
+                  <Button fx:id="btnLoadImage" mnemonicParsing="false" onAction="#loadImage" styleClass="transparent" stylesheets="@style.css">
+                     <graphic>
+                        <ImageView fx:id="petImg" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/load-photo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Button>
+                  <HBox layoutX="30.0" layoutY="104.0" spacing="60.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Name *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="7.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="tf_petName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="7.0">
+                                 <VBox.margin>
+                                    <Insets bottom="7.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label text="Full date of birth">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="(if known)">
+                                       <font>
+                                          <Font name="Arial" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <DatePicker fx:id="datePicker" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#setFullDate" prefHeight="40.0" prefWidth="280.0" showWeekNumbers="true" styleClass="transparent" />
+                              <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                                 <children>
+                                    <Label text="Not konwn" textFill="#34665a">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckBox fx:id="cb_noFullDate" mnemonicParsing="false" onAction="#hideShowYearMonthHBox" prefHeight="22.0" prefWidth="23.0">
+                                       <HBox.margin>
+                                          <Insets right="3.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="3.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox fx:id="yearMonth_hBox" spacing="60.0">
+                     <children>
+                        <VBox fx:id="year_vBox">
+                           <children>
+                              <Label text="Year of Birth *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="7.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ComboBox fx:id="boxYear" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
+                                 <padding>
+                                    <Insets left="10.0" right="5.0" />
+                                 </padding>
+                              </ComboBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="month_vBox" layoutX="10.0" layoutY="10.0">
+                           <children>
+                              <Label text="Month of Birth">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="7.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ComboBox fx:id="boxMonth" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
+                                 <padding>
+                                    <Insets left="10.0" right="5.0" />
+                                 </padding>
+                              </ComboBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <Label fx:id="coatLenght_txt" text="Coat lenght *">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="7.0" left="-180.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="boxCoatLenght" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
+                     <padding>
+                        <Insets left="10.0" right="5.0" />
+                     </padding>
+                  </ComboBox>
+                  <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <Label text="Type *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" onAction="#setDogType" text="Dog">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="tg_type" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#setCatType" text="Cat" toggleGroup="$tg_type">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
+                              <Label text="Vaccinated *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Yes">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="vaccinated" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$vaccinated">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Dewormed *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Yes">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="dewormed" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="No" toggleGroup="$dewormed">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
+                              <VBox fx:id="testFiv_vBox">
+                                 <children>
+                                    <Label fx:id="testFiv_txt" text="Test fiv *">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox fx:id="testFiv_PN" alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                       <padding>
+                                          <Insets left="30.0" />
+                                       </padding>
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Positive">
+                                             <font>
+                                                <Font name="Arial Bold" size="16.0" />
+                                             </font>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="dewormed1" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton mnemonicParsing="false" text="Negative" toggleGroup="$dewormed1">
+                                             <font>
+                                                <Font name="Arial Bold" size="16.0" />
+                                             </font>
+                                          </RadioButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Label text="Disability *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <children>
+                                    <RadioButton fx:id="yesDisability" mnemonicParsing="false" onAction="#showDisabilityType" text="Yes">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="disability" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="noDisability" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#hideDisabilityType" text="No" toggleGroup="$disability">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <TextField fx:id="txtDisabilityType" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" promptText="Type of disability" stylesheets="@style.css" visible="false">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="Compatiblity: *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox spacing="7.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Gender *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <children>
+                                    <RadioButton fx:id="rb_male" mnemonicParsing="false" text="Male">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="tg_gender" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Female" toggleGroup="$tg_gender">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Microchipped *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Yes">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="microchipped" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$microchipped">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Sterilized *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Yes">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="sterilized" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$sterilized">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                              <VBox fx:id="testFelv_vBox">
+                                 <children>
+                                    <Label fx:id="testFelv_txt" text="Test felv *">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox fx:id="testFelv_PN" alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Positive">
+                                             <font>
+                                                <Font name="Arial Bold" size="16.0" />
+                                             </font>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="sterilized1" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Negative" toggleGroup="$sterilized1">
+                                             <font>
+                                                <Font name="Arial Bold" size="16.0" />
+                                             </font>
+                                          </RadioButton>
+                                       </children>
+                                       <padding>
+                                          <Insets left="30.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Label fx:id="txtEducProg" text="Need of a program of dog education *">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox fx:id="boxEducProg" alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Yes">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="dogEducation" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$dogEducation">
+                                       <font>
+                                          <Font name="Arial Bold" size="16.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox prefWidth="300.0" spacing="7.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" spacing="100.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <VBox spacing="15.0">
+                                 <children>
+                                    <CheckBox fx:id="cb_sterMDog" mnemonicParsing="false" text="sterilized male dogs">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_sterFDog" mnemonicParsing="false" text="sterilized female dogs">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_sterMCat" mnemonicParsing="false" text="sterilized male cats">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_sterFCat" mnemonicParsing="false" text="sterilized female cats">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_children" mnemonicParsing="false" text="children">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_apartGarden" mnemonicParsing="false" text="apartment without garden">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_sleepOut" mnemonicParsing="false" text="sleeping outside">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                 </children>
+                              </VBox>
+                              <VBox spacing="15.0">
+                                 <children>
+                                    <CheckBox fx:id="cb_notSterMDog" mnemonicParsing="false" text="not sterilized male dogs">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_notSterFDog" mnemonicParsing="false" text="not sterilized female dogs">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_notSterMCat" mnemonicParsing="false" text="not sterilized male cats">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_notSterFCat" mnemonicParsing="false" text="not sterilized female cats">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_elders" mnemonicParsing="false" text="elders">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_apartNoTerrace" mnemonicParsing="false" text="apartment without terrace">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                    <CheckBox fx:id="cb_firstExp" mnemonicParsing="false" text="first experience">
+                                       <font>
+                                          <Font name="Arial" size="16.0" />
+                                       </font>
+                                    </CheckBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="60.0">
+                           <children>
+                              <Label text="hours alone:">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <RadioButton fx:id="rb_1" mnemonicParsing="false" text="1-3">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="hoursAlone" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rb_2" layoutX="387.0" layoutY="12.0" mnemonicParsing="false" text="4-6" toggleGroup="$hoursAlone">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </RadioButton>
+                              <RadioButton fx:id="rb_3" layoutX="409.0" layoutY="12.0" mnemonicParsing="false" text="more than 6" toggleGroup="$hoursAlone">
+                                 <font>
+                                    <Font name="Arial" size="16.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="45.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#confirmAddPet" prefWidth="80.0" styleClass="button1" stylesheets="@style.css" text="Done" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets left="40.0" right="40.0" top="15.0" />
+   </padding>
+</VBox>

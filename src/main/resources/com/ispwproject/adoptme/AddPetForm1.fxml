@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.GUIAddPetController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -67,7 +67,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0">
+                  <TextField fx:id="tf_petName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -95,15 +95,15 @@
                   </Label>
                   <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" prefHeight="40.0" spacing="50.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Male">
+                        <RadioButton fx:id="rb_male" mnemonicParsing="false" text="Male">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="gender" />
+                              <ToggleGroup fx:id="tg_gender" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Female" toggleGroup="$gender">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Female" toggleGroup="$tg_gender">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -127,22 +127,22 @@
                         <Insets left="30.0" />
                      </padding>
                      <children>
-                        <RadioButton fx:id="rdBtnDog" mnemonicParsing="false" onAction="#selectDogType" text="Dog">
+                        <RadioButton fx:id="rb_dog" mnemonicParsing="false" text="Dog">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="type" />
+                              <ToggleGroup fx:id="tg_type" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="rdBtnCat" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#selectCatType" text="Cat" toggleGroup="$type">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Cat" toggleGroup="$tg_type">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </RadioButton>
                      </children>
                   </HBox>
-                  <Label text="Day and month of birth">
+                  <Label text="Full date of birth">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
@@ -150,7 +150,7 @@
                         <Insets top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <DatePicker maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" showWeekNumbers="true" styleClass="transparent" />
+                  <DatePicker fx:id="datePicker" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" showWeekNumbers="true" styleClass="transparent" />
                   <Label text="Coat lenght *">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
@@ -159,7 +159,7 @@
                         <Insets top="40.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="boxYear1" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
+                  <ComboBox fx:id="boxCoatLenght" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="280.0" styleClass="text-field" visibleRowCount="4">
                      <padding>
                         <Insets left="10.0" right="5.0" />
                      </padding>
@@ -181,7 +181,7 @@
                   <Insets left="41.0" />
                </HBox.margin>
             </ImageView>
-            <Button fx:id="btnTo2" mnemonicParsing="false" onAction="#goToPage2" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btn_1to2" mnemonicParsing="false" onAction="#goToPageN" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -57,6 +57,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `AdoptMe`.`Users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `AdoptMe`.`Users` ;
+
+CREATE TABLE IF NOT EXISTS `AdoptMe`.`Users` (
+  `userId` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `surname` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `profileImg` VARCHAR(45) NULL,
+  PRIMARY KEY (`userId`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `AdoptMe`.`Requests`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `AdoptMe`.`Requests` ;
@@ -70,27 +86,17 @@ CREATE TABLE IF NOT EXISTS `AdoptMe`.`Requests` (
   `time` TIME NOT NULL,
   PRIMARY KEY (`requestId`, `shelterId`),
   INDEX `pet_fk_idx` (`shelterId` ASC, `petId` ASC) VISIBLE,
+  INDEX `user_fk_idx` (`userId` ASC) VISIBLE,
   CONSTRAINT `pet_fk`
     FOREIGN KEY (`shelterId` , `petId`)
     REFERENCES `AdoptMe`.`Pets` (`shelter` , `petId`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `user_fk`
+    FOREIGN KEY (`userId`)
+    REFERENCES `AdoptMe`.`Users` (`userId`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `AdoptMe`.`Users`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `AdoptMe`.`Users` ;
-
-CREATE TABLE IF NOT EXISTS `AdoptMe`.`Users` (
-  `userId` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `profileImg` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`userId`))
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -115,8 +121,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `AdoptMe`;
-INSERT INTO `AdoptMe`.`Shelters` (`shelterId`, `name`, `phoneNumber`, `address`, `city`, `webSite`, `email`, `password`, `profileImg`) VALUES (DEFAULT, 'Pensieri Bestiali', '3356278995', 'via Roma, 2', 'Roma', 'sito1', 'pensieri_bestiali@gmail.com', '123', NULL);
-INSERT INTO `AdoptMe`.`Shelters` (`shelterId`, `name`, `phoneNumber`, `address`, `city`, `webSite`, `email`, `password`, `profileImg`) VALUES (DEFAULT, 'Amici Di Onda', '3399776534', 'via Cavour, 16', 'Roma', 'sito2', 'amici_di_onda@gmail.com', '456', NULL);
+INSERT INTO `AdoptMe`.`Shelters` (`shelterId`, `name`, `phoneNumber`, `address`, `city`, `webSite`, `email`, `password`, `profileImg`) VALUES (DEFAULT, 'Pensieri Bestiali', '3356278995', 'via Roma, 2', 'Roma', 'sito1', 'pensieri_bestiali@gmail.com', '123', 'image/shelter1.JPG');
+INSERT INTO `AdoptMe`.`Shelters` (`shelterId`, `name`, `phoneNumber`, `address`, `city`, `webSite`, `email`, `password`, `profileImg`) VALUES (DEFAULT, 'Amici Di Onda', '3399776534', 'via Cavour, 16', 'Roma', 'sito2', 'amici_di_onda@gmail.com', '456', 'image/shelter2.JPG');
 
 COMMIT;
 
@@ -137,23 +143,21 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `AdoptMe`.`Requests`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `AdoptMe`;
-INSERT INTO `AdoptMe`.`Requests` (`requestId`, `shelterId`, `petId`, `userId`, `date`, `time`) VALUES (1, 1, 1, 1, '2022-07-27', '16:00:00');
-INSERT INTO `AdoptMe`.`Requests` (`requestId`, `shelterId`, `petId`, `userId`, `date`, `time`) VALUES (2, 1, 3, 2, '2022-06-06', '13:00:00');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `AdoptMe`.`Users`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `AdoptMe`;
 INSERT INTO `AdoptMe`.`Users` (`userId`, `name`, `surname`, `email`, `password`, `profileImg`) VALUES (DEFAULT, 'Francesca', 'Pavone', 'francesca@gmail.com', '123', NULL);
-INSERT INTO `AdoptMe`.`Users` (`userId`, `name`, `surname`, `email`, `password`, `profileImg`) VALUES (DEFAULT, 'Federica', 'Cantelmi', 'federica@gmail.com', '456', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `AdoptMe`.`Requests`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `AdoptMe`;
+INSERT INTO `AdoptMe`.`Requests` (`requestId`, `shelterId`, `petId`, `userId`, `date`, `time`) VALUES (1, 1, 1, 1, '2022-07-27', '16:00:00');
 
 COMMIT;
 
