@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.AddPetFormController">
+<VBox alignment="CENTER" prefHeight="573.5" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.GUIAddPetController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -60,10 +60,10 @@
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="vaccinated" />
+                              <ToggleGroup fx:id="tg_vaccinated" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$vaccinated">
+                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="No" toggleGroup="$tg_vaccinated">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -231,7 +231,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="btnBack1" mnemonicParsing="false" onAction="#goToPage1" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btn_2to1" mnemonicParsing="false" onAction="#goToPageN" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -248,7 +248,7 @@
                   <Image url="@image/2of3_page.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnTo3" mnemonicParsing="false" onAction="#goToPage3" styleClass="transparent" stylesheets="@style.css">
+            <Button fx:id="btn_2to3" mnemonicParsing="false" onAction="#goToPageN" styleClass="transparent" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>

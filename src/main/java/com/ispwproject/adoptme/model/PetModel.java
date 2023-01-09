@@ -19,7 +19,6 @@ public class PetModel {
     private int disability; // 0 -> no | 1 -> yes
     private int microchipped; // 0 -> no | 1 -> yes
     private int sterilized; // 0 -> no | 1 -> yes
-    private int programEducation; // 0 -> no | 1 -> yes
 
     private Shelter shelter;
 
@@ -110,15 +109,6 @@ public class PetModel {
     public void setSterilized(int sterilized) {
         this.sterilized = sterilized;
     }
-
-    public int getProgramEducation() {
-        return programEducation;
-    }
-
-    public void setProgramEducation(int programEducation) {
-        this.programEducation = programEducation;
-    }
-
 
     public Shelter getShelter() {
         return shelter;

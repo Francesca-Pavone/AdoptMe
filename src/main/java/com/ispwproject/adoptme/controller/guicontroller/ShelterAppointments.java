@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.AppointmentRequestModel;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.dao.AppointmentRequestDAO;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterAppointments extends  ShelterSideBar {
+public class ShelterAppointments extends ShelterSideBar {
 
     @FXML
     private HBox acceptedReqList;
@@ -56,7 +56,7 @@ public class ShelterAppointments extends  ShelterSideBar {
         try {
             for (AppointmentRequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(HelloApplication.class.getResource("RequestItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
                 RequestItemController requestItemController = fxmlLoader.getController();
@@ -67,7 +67,7 @@ public class ShelterAppointments extends  ShelterSideBar {
 
             for (AppointmentRequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(HelloApplication.class.getResource("RequestItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
                 RequestItemController requestItemController = fxmlLoader.getController();
@@ -78,7 +78,7 @@ public class ShelterAppointments extends  ShelterSideBar {
 
             for (AppointmentRequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(HelloApplication.class.getResource("RequestItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
                 RequestItemController requestItemController = fxmlLoader.getController();

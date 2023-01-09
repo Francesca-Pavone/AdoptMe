@@ -1,12 +1,11 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -53,22 +52,22 @@ public class UserSettingsPageController {
  */
     }
         public void goToHomepage(ActionEvent event) throws IOException {
-            Stage stage = HelloApplication.getStage();
-            FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserHomepage.fxml"));
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
         }
 
     public void goToFavorites(ActionEvent event) throws IOException {
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserFavoritesPage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
 
     public void goToAppointments(ActionEvent event) throws IOException {
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(HelloApplication.class.getResource("UserSettingsPage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }

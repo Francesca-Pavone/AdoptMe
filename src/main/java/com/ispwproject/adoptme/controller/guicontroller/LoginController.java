@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.HelloApplication;
+import com.ispwproject.adoptme.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +43,7 @@ public class LoginController {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ChooseAccountType.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ChooseAccountType.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
         dialog.show();
@@ -51,16 +51,16 @@ public class LoginController {
 
     public void goToShelterSignUp(ActionEvent event) throws IOException {
         ((Node)event.getSource()).getScene().getWindow().hide();
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ShelterSignUpPage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSignUpPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
 
     public void goToUserSignUp(ActionEvent event) throws IOException {
         ((Node)event.getSource()).getScene().getWindow().hide();
-        Stage stage = HelloApplication.getStage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("UserSignUpPage.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSignUpPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }

@@ -7,15 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class Main extends Application {
     private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("UserHomepage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
-        HelloApplication.stage = stage;
+        Main.stage = stage;
         stage.setTitle("AdoptMe");
         stage.setScene(scene);
         stage.show();
