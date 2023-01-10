@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +49,9 @@ public class PetDAO {
                 String petImage = resultSet.getString("imgSrc");
                 String petAge = resultSet.getString("age");
                 String petGender = resultSet.getString("gender");
+                int petType = resultSet.getInt("type");
 
-                PetModel pet = new PetModel(petName, petImage, petAge, petGender);
+                PetModel pet = new PetModel(petName, petImage, petAge, petGender, petType);
                 petList.add(pet);
 
             }while(resultSet.next());
@@ -110,8 +112,9 @@ public class PetDAO {
                 String petImage = resultSet.getString("imgSrc");
                 String petAge = resultSet.getString("age");
                 String petGender = resultSet.getString("gender");
+                int petType = resultSet.getInt("type");
 
-                pet = new PetModel(petName, petImage, petAge, petGender);
+                pet = new PetModel(petName, petImage, petAge, petGender, petType);
 
             }while(resultSet.next());
 

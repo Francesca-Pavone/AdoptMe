@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
@@ -27,9 +28,6 @@ public class ShelterHomepage extends ShelterSideBar {
     @FXML
     private GridPane grid;
 
-    private List<PetModel> petList = new ArrayList<>();
-
-    private PetDAO petDAO = new PetDAO();
 
     public void addPet(ActionEvent event) throws IOException {
         Stage dialog = new Stage();
@@ -40,7 +38,7 @@ public class ShelterHomepage extends ShelterSideBar {
         dialog.setScene(scene);
         dialog.show();
     }
-
+/*
     private List<PetModel> getPetList() {
 
         try {
@@ -62,15 +60,17 @@ public class ShelterHomepage extends ShelterSideBar {
         return petList;
     }
 
+ */
+
 
     public void initialize() {
-        petList.addAll(getPetList());
 
         int column = 0;
         int row = 1;
 
         try {
-            for (PetModel pet : petList) {
+            // TODO devo passare PetBean e non PetModel
+            for (PetModel pet : ShowShelterPetsController_A.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();

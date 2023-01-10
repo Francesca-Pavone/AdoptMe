@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.utils.ImageUtils;
+import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,18 +18,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class AddPetController_G {
-/*
-    @FXML
-    private Button btn_1to2;
-    @FXML
-    private Button btn_2to1;
-    @FXML
-    private Button btn_2to3;
-    @FXML
-    private Button btn_3to2;
-
- */
-
     @FXML
     private ImageView petImg;
     @FXML
@@ -52,14 +41,7 @@ public class AddPetController_G {
     @FXML
     private ComboBox<String> boxCoatLenght;
     @FXML
-    private ToggleGroup tg_type;
-    @FXML
-    private RadioButton rb_dog;
-    @FXML
     private ToggleGroup tg_gender;
-    @FXML
-    private RadioButton rb_male;
-
     @FXML
     private ToggleGroup vaccinated;
     @FXML
@@ -68,6 +50,10 @@ public class AddPetController_G {
     private ToggleGroup dewormed;
     @FXML
     private ToggleGroup sterilized;
+    @FXML
+    private ToggleGroup testFiv;
+    @FXML
+    private ToggleGroup testFelv;
     @FXML
     private HBox testFelv_PN;
 
@@ -87,11 +73,6 @@ public class AddPetController_G {
     private VBox testFiv_vBox;
     @FXML
     private ToggleGroup disability;
-    @FXML
-    private RadioButton noDisability;
-
-    @FXML
-    private RadioButton yesDisability;
     @FXML
     private TextField txtDisabilityType;
     @FXML
@@ -130,14 +111,9 @@ public class AddPetController_G {
     private CheckBox cb_sterMDog;
     @FXML
     private ToggleGroup hoursAlone;
-    @FXML
-    private RadioButton rb_1;
-    @FXML
-    private RadioButton rb_2;
-    @FXML
-    private RadioButton rb_3;
 
     private File file;
+    private int petType; // 0 -> DOG  |  1 -> CAT
 
     public void initialize() {
         String[] years = {"2022", "2021", "2020", "2019", "2018", "2017"};
@@ -166,36 +142,76 @@ public class AddPetController_G {
 
     public void confirmAddPet(ActionEvent event) {
 
-        DogBean dogBean = new DogBean(
-                file,
-                tf_petName.getText(),
-                ((RadioButton) tg_type.getSelectedToggle()).getText(),
-                datePicker.getValue(),
-                ((RadioButton) tg_gender.getSelectedToggle()).getText(),
-                boxCoatLenght.getValue(),
-                ((RadioButton) vaccinated.getSelectedToggle()).getText(),
-                ((RadioButton) microchipped.getSelectedToggle()).getText(),
-                ((RadioButton) dewormed.getSelectedToggle()).getText(),
-                ((RadioButton) sterilized.getSelectedToggle()).getText(),
-                ((RadioButton) disability.getSelectedToggle()).getText(),
-                txtDisabilityType.getText(),
-                ((RadioButton) dogEducation.getSelectedToggle()).getText(),
-                cb_sterMDog.isSelected(),
-                cb_notSterMDog.isSelected(),
-                cb_sterFDog.isSelected(),
-                cb_notSterFDog.isSelected(),
-                cb_sterMCat.isSelected(),
-                cb_notSterMCat.isSelected(),
-                cb_sterFCat.isSelected(),
-                cb_notSterFCat.isSelected(),
-                cb_children.isSelected(),
-                cb_elders.isSelected(),
-                cb_apartGarden.isSelected(),
-                cb_apartNoTerrace.isSelected(),
-                cb_sleepOut.isSelected(),
-                cb_firstExp.isSelected(),
-                ((RadioButton) hoursAlone.getSelectedToggle()).getText()
-        );
+        switch (petType) {
+            case 0 -> // DOG
+            {
+                System.out.println(this.petType + ": istanzio DogBean");
+                DogBean dogBean = new DogBean(
+                        file,
+                        tf_petName.getText(),
+                        datePicker.getValue(),
+                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
+                        boxCoatLenght.getValue(),
+                        ((RadioButton) vaccinated.getSelectedToggle()).getText(),
+                        ((RadioButton) microchipped.getSelectedToggle()).getText(),
+                        ((RadioButton) dewormed.getSelectedToggle()).getText(),
+                        ((RadioButton) sterilized.getSelectedToggle()).getText(),
+                        ((RadioButton) disability.getSelectedToggle()).getText(),
+                        txtDisabilityType.getText(),
+                        ((RadioButton) dogEducation.getSelectedToggle()).getText(),
+                        cb_sterMDog.isSelected(),
+                        cb_notSterMDog.isSelected(),
+                        cb_sterFDog.isSelected(),
+                        cb_notSterFDog.isSelected(),
+                        cb_sterMCat.isSelected(),
+                        cb_notSterMCat.isSelected(),
+                        cb_sterFCat.isSelected(),
+                        cb_notSterFCat.isSelected(),
+                        cb_children.isSelected(),
+                        cb_elders.isSelected(),
+                        cb_apartGarden.isSelected(),
+                        cb_apartNoTerrace.isSelected(),
+                        cb_sleepOut.isSelected(),
+                        cb_firstExp.isSelected(),
+                        ((RadioButton) hoursAlone.getSelectedToggle()).getText()
+                );
+            }
+            case 1 -> // CAT
+            {
+                System.out.println(this.petType + ": istanzio CatBean");
+                CatBean catBean = new CatBean(
+                        file,
+                        tf_petName.getText(),
+                        datePicker.getValue(),
+                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
+                        boxCoatLenght.getValue(),
+                        ((RadioButton) vaccinated.getSelectedToggle()).getText(),
+                        ((RadioButton) microchipped.getSelectedToggle()).getText(),
+                        ((RadioButton) dewormed.getSelectedToggle()).getText(),
+                        ((RadioButton) sterilized.getSelectedToggle()).getText(),
+                        ((RadioButton) testFiv.getSelectedToggle()).getText(),
+                        ((RadioButton) testFelv.getSelectedToggle()).getText(),
+                        ((RadioButton) disability.getSelectedToggle()).getText(),
+                        txtDisabilityType.getText(),
+                        cb_sterMDog.isSelected(),
+                        cb_notSterMDog.isSelected(),
+                        cb_sterFDog.isSelected(),
+                        cb_notSterFDog.isSelected(),
+                        cb_sterMCat.isSelected(),
+                        cb_notSterMCat.isSelected(),
+                        cb_sterFCat.isSelected(),
+                        cb_notSterFCat.isSelected(),
+                        cb_children.isSelected(),
+                        cb_elders.isSelected(),
+                        cb_apartGarden.isSelected(),
+                        cb_apartNoTerrace.isSelected(),
+                        cb_sleepOut.isSelected(),
+                        cb_firstExp.isSelected(),
+                        ((RadioButton) hoursAlone.getSelectedToggle()).getText()
+                );
+
+            }
+        }
 
         ((Node)event.getSource()).getScene().getWindow().hide();
 
@@ -235,6 +251,7 @@ public class AddPetController_G {
     }
 
     public void setDogType(ActionEvent event) {
+        this.petType = 0;
         boxEducProg.setVisible(true);
         txtEducProg.setVisible(true);
         testFiv_vBox.getChildren().removeAll(testFiv_txt, testFiv_PN);
@@ -242,6 +259,7 @@ public class AddPetController_G {
     }
 
     public void setCatType(ActionEvent event) {
+        this.petType = 1;
         boxEducProg.setVisible(false);
         txtEducProg.setVisible(false);
         if (testFiv_vBox.getChildren().isEmpty())

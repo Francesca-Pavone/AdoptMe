@@ -1,5 +1,8 @@
 package com.ispwproject.adoptme.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class PetModel {
 
     public enum CoatLenght{
@@ -10,8 +13,10 @@ public class PetModel {
 
     private int petId;
     private String name;
+    private int type; // 0 -> DOG  |  1 -> CAT
     private String imgSrc;
     private String age;
+    private LocalDate fullDateOfBirth;
     private String gender;
     private CoatLenght coatLenght;
     private int vaccinated; // 0 -> no | 1 -> yes
@@ -22,11 +27,12 @@ public class PetModel {
 
     private Shelter shelter;
 
-    public PetModel(String name, String imgSrc, String age, String gender) {
+    public PetModel(String name, String imgSrc, String age, String gender, int type) {
         setName(name);
         setImgSrc(imgSrc);
         setAge(age);
         setGender(gender);
+        setType(type);
     }
 
     public PetModel(int petId, String imgSrc, String name, String gender, String age, Shelter shelter) {
@@ -62,6 +68,14 @@ public class PetModel {
         this.name = name;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -76,6 +90,14 @@ public class PetModel {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public LocalDate getFullDateOfBirth() {
+        return fullDateOfBirth;
+    }
+
+    public void setFullDateOfBirth(LocalDate fullDateOfBirth) {
+        this.fullDateOfBirth = fullDateOfBirth;
     }
 
     public CoatLenght getCoatLenght() { return coatLenght; }

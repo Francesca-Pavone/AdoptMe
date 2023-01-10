@@ -286,10 +286,10 @@
                                                 <Font name="Arial Bold" size="16.0" />
                                              </font>
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="dewormed1" />
+                                                <ToggleGroup fx:id="testFiv" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton mnemonicParsing="false" text="Negative" toggleGroup="$dewormed1">
+                                          <RadioButton mnemonicParsing="false" text="Negative" toggleGroup="$testFiv">
                                              <font>
                                                 <Font name="Arial Bold" size="16.0" />
                                              </font>
@@ -444,10 +444,10 @@
                                                 <Font name="Arial Bold" size="16.0" />
                                              </font>
                                              <toggleGroup>
-                                                <ToggleGroup fx:id="sterilized1" />
+                                                <ToggleGroup fx:id="testFelv" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Negative" toggleGroup="$sterilized1">
+                                          <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Negative" toggleGroup="$testFelv">
                                              <font>
                                                 <Font name="Arial Bold" size="16.0" />
                                              </font>
