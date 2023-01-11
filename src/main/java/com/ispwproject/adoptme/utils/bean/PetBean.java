@@ -6,9 +6,6 @@ import javafx.scene.image.Image;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.Year;
-import java.util.Date;
 
 public class PetBean {
     private File petImage;
@@ -17,14 +14,14 @@ public class PetBean {
     private LocalDate fullDateOfBirth;
     private String yearOfBirth;
     private String monthOfBirth;
-    private int gender; // 0 -> MALE  |  1 -> FEMALE
+    private String gender; // 0 -> MALE  |  1 -> FEMALE
     private String coatLenght;
 
-    private boolean vaccinated;
-    private boolean microchipped;
-    private boolean dewormed;
-    private boolean sterilized;
-    private boolean disability;
+    private String vaccinated;
+    private String microchipped;
+    private String dewormed;
+    private String sterilized;
+    private String disability;
     private String disabilityType;
 
     // compatibility
@@ -176,11 +173,13 @@ public class PetBean {
     }
 
     public void setGender(String gender) {
+        /*
         if (gender.equals("Male"))
             this.gender = 0;
         else if (gender.equals("Female"))
             this.gender = 1;
-
+         */
+        this.gender = gender;
     }
 
     public void setCoatLenght(String coatLenght) {
@@ -188,38 +187,58 @@ public class PetBean {
     }
 
     public void setVaccinated(String vaccinated) {
+        /*
         if (vaccinated.equals("Yes"))
             this.vaccinated = true;
         else if (vaccinated.equals("No"))
             this.vaccinated = false;
+
+         */
+        this.vaccinated = vaccinated;
     }
 
     public void setMicrochipped(String microchipped) {
+        /*
         if (microchipped.equals("Yes"))
             this.microchipped = true;
         else if (microchipped.equals("No"))
             this.microchipped = false;
+
+         */
+        this.microchipped = microchipped;
     }
 
     public void setDewormed(String dewormed) {
+        /*
         if (dewormed.equals("Yes"))
             this.dewormed = true;
         else if (dewormed.equals("No"))
             this.dewormed = false;
+
+         */
+        this.dewormed = dewormed;
     }
 
     public void setSterilized(String sterilized) {
+        /*
         if (sterilized.equals("Yes"))
             this.sterilized = true;
         else if (sterilized.equals("No"))
             this.sterilized = false;
+
+         */
+        this.sterilized = sterilized;
     }
 
     public void setDisability(String disability) {
+        /*
         if (disability.equals("Yes"))
             this.disability = true;
         else if (disability.equals("No"))
             this.disability = false;
+
+         */
+        this.disability = disability;
     }
 
     public void setDisabilityType(String disabilityType) {
@@ -314,7 +333,7 @@ public class PetBean {
         return monthOfBirth;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
@@ -322,23 +341,23 @@ public class PetBean {
         return coatLenght;
     }
 
-    public boolean getVaccinated() {
+    public String getVaccinated() {
         return vaccinated;
     }
 
-    public boolean getMicrochipped() {
+    public String getMicrochipped() {
         return microchipped;
     }
 
-    public boolean getDewormed() {
+    public String getDewormed() {
         return dewormed;
     }
 
-    public boolean getSterilized() {
+    public String getSterilized() {
         return sterilized;
     }
 
-    public boolean getDisability() {
+    public String getDisability() {
         return disability;
     }
 

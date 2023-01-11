@@ -1,5 +1,8 @@
 package com.ispwproject.adoptme.model;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -14,7 +17,8 @@ public class PetModel {
     private int petId;
     private String name;
     private int type; // 0 -> DOG  |  1 -> CAT
-    private String imgSrc;
+    private File petImg;
+    private Image imgSrc;
     private String age;
     private LocalDate fullDateOfBirth;
     private String gender;
@@ -27,7 +31,35 @@ public class PetModel {
 
     private Shelter shelter;
 
-    public PetModel(String name, String imgSrc, String age, String gender, int type) {
+    // TODO: togliere questa parte (usata per prova inserimento Pet in db)
+    private int shelterId;
+    public int getShelterId() {
+        return shelterId;
+    }
+    public void setShelterId(int shelterId) {
+        this.shelterId = shelterId;
+    }
+
+    public PetModel(String name, int type, Image imgSrcmg, String age, String gender, /*Shelter shelter*/ int shelterId) {
+        setName(name);
+        setType(type);
+        setImgSrc(imgSrcmg);
+        setAge(age);
+        setGender(gender);
+        //setShelter(shelter);
+        setShelterId(shelterId); // TODO: togliere questa parte (usata per prova inserimento Pet in db)
+    }
+    public PetModel(String name, int type, File petImg, String age, String gender, /*Shelter shelter*/ int shelterId) {
+        setName(name);
+        setType(type);
+        setPetImg(petImg);
+        setAge(age);
+        setGender(gender);
+        //setShelter(shelter);
+        setShelterId(shelterId); // TODO: togliere questa parte (usata per prova inserimento Pet in db)
+    }
+
+    public PetModel(String name, Image imgSrc, String age, String gender, int type) {
         setName(name);
         setImgSrc(imgSrc);
         setAge(age);
@@ -35,7 +67,7 @@ public class PetModel {
         setType(type);
     }
 
-    public PetModel(int petId, String imgSrc, String name, String gender, String age, Shelter shelter) {
+    public PetModel(int petId, Image imgSrc, String name, String gender, String age, Shelter shelter) {
         setPetId(petId);
         setImgSrc(imgSrc);
         setName(name);
@@ -52,11 +84,19 @@ public class PetModel {
         this.petId = petId;
     }
 
-    public String getImgSrc() {
+    public File getPetImg() {
+        return petImg;
+    }
+
+    public void setPetImg(File petImg) {
+        this.petImg = petImg;
+    }
+
+    public Image getImgSrc() {
         return imgSrc;
     }
 
-    public void setImgSrc(String imgSrc) {
+    public void setImgSrc(Image imgSrc) {
         this.imgSrc = imgSrc;
     }
 

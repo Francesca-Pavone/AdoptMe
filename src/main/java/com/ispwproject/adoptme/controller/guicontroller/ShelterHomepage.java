@@ -4,7 +4,6 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
-import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShelterHomepage extends ShelterSideBar {
 
@@ -75,9 +71,8 @@ public class ShelterHomepage extends ShelterSideBar {
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-
-                PetItemController petItemController = fxmlLoader.getController();
-                petItemController.setData(pet);
+                PetItemController_G petItemControllerG = fxmlLoader.getController();
+                petItemControllerG.setData(pet);
 
                 if (column == 3) {
                     column = 0;

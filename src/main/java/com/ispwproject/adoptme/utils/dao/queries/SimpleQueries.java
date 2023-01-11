@@ -46,6 +46,11 @@ public class SimpleQueries {
         String sql = "SELECT * FROM Users WHERE userId = '" + userId + "';";
         return stmt.executeQuery(sql);
     }
+
+    public static ResultSet selectLastPetIdByShelterId(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT CASE WHEN MAX(petId) IS NULL THEN 1 ELSE MAX(petId)+1 END AS petId FROM Pets WHERE shelter = '" + shelterId + "';";
+        return stmt.executeQuery(sql);
+    }
 /*
     public static ResultSet selectAlbumByName(Statement stmt, String title) throws SQLException  {
         String sql = "SELECT * FROM Album where Titolo = '" + title + "';";

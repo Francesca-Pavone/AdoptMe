@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class DogBean extends PetBean{
-    private boolean dogEducation;
+    private String dogEducation;
 
     public DogBean() {
     }
@@ -32,13 +32,17 @@ public class DogBean extends PetBean{
 
 
     public void setDogEducation(String dogEducation) {
+        /*
         if (dogEducation.equals("Yes"))
             this.dogEducation = true;
         else if (dogEducation.equals("No"))
             this.dogEducation = false;
+
+         */
+        this.dogEducation = dogEducation;
     }
 
-    public boolean getDogEducation() {
+    public String getDogEducation() {
         return dogEducation;
     }
 }

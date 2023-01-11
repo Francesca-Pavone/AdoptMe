@@ -1,5 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
+import com.ispwproject.adoptme.controller.appcontroller.AddPetController_A;
+import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
@@ -140,11 +142,12 @@ public class AddPetController_G {
         txtDisabilityType.setVisible(false);
     }
 
-    public void confirmAddPet(ActionEvent event) {
+    public void confirmAddPet(ActionEvent event) throws Exception {
 
         switch (petType) {
             case 0 -> // DOG
             {
+                /*
                 System.out.println(this.petType + ": istanzio DogBean");
                 DogBean dogBean = new DogBean(
                         file,
@@ -175,9 +178,24 @@ public class AddPetController_G {
                         cb_firstExp.isSelected(),
                         ((RadioButton) hoursAlone.getSelectedToggle()).getText()
                 );
+
+                 */
+
+                // TODO: togliere questa parte (usata per prova inserimento Pet in db)
+                PetModel petModel = new PetModel(
+                        tf_petName.getText(),
+                        petType,
+                        file,
+                        "Puppy",
+                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
+                        1
+                );
+                AddPetController_A.savePet(petModel);
+
             }
             case 1 -> // CAT
             {
+                /*
                 System.out.println(this.petType + ": istanzio CatBean");
                 CatBean catBean = new CatBean(
                         file,
@@ -209,6 +227,19 @@ public class AddPetController_G {
                         cb_firstExp.isSelected(),
                         ((RadioButton) hoursAlone.getSelectedToggle()).getText()
                 );
+
+                 */
+
+                // TODO: togliere questa parte (usata per prova inserimento Pet in db)
+                PetModel petModel = new PetModel(
+                        tf_petName.getText(),
+                        petType,
+                        file,
+                        "Puppy",
+                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
+                        1
+                        );
+                AddPetController_A.savePet(petModel);
 
             }
         }
