@@ -11,6 +11,15 @@ public class SearchUserHomepageBean {
 
     List<PetModel> petList;
     List<Shelter> sheltersList;
+    Shelter shelter;
+
+    public Shelter getShelter() {
+        return shelter;
+    }
+
+    public void setShelter(Shelter shelter) {
+        this.shelter = shelter;
+    }
 
     public List<Shelter> getSheltersList() {
         return sheltersList;

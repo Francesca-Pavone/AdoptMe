@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterItemController">
    <children>
-      <Button mnemonicParsing="false" prefHeight="60.0" stylesheets="@style.css" textFill="#34665a" underline="true">
+      <Button fx:id="btnShelter" mnemonicParsing="false" onAction="#selectShelter" prefHeight="60.0" stylesheets="@style.css" textFill="#34665a" underline="true">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -19,10 +19,10 @@
             <String fx:value="button3" />
          </styleClass>
          <graphic>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="25.0">
                <children>
                   <ImageView fx:id="shelterImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="shelterName" textFill="#34665a">
+                  <Label fx:id="shelterName" prefWidth="300.0" textFill="#34665a">
                      <font>
                         <Font name="Arial Bold" size="24.0" />
                      </font>

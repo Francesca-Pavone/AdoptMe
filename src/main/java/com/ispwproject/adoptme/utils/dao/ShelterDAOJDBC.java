@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.utils.dao;
 import com.ispwproject.adoptme.model.Shelter;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
+import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,58 @@ public class ShelterDAOJDBC {
         }
 
         return sheltersList;
+    }
+
+    public static Shelter retrieveShelterByName(String shelterName) throws Exception {
+        Statement stmt = null;
+        Connection conn = null;
+        Shelter shelter;
+        try {
+            Class.forName(DRIVER_CLASS_NAME);
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet resultSet = SimpleQueries.searchSheltersByCity(stmt, shelterName);
+
+            if (!resultSet.first()){
+                Exception e = new Exception("No shelters found that begin with that input: "+shelterName);
+                throw e;
+            }
+
+            resultSet.first();
+            do{
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String address = resultSet.getString("address");
+                String city = resultSet.getString("city");
+                String shelterImage = resultSet.getString("profileImg");
+                String webSite = resultSet.getString("webSites");
+                URL webSiteURL = new URL(webSite);
+
+                shelter = new Shelter(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
+
+            }while(resultSet.next());
+
+            resultSet.close();
+
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+        return shelter;
     }
 
     /*public static List<String> retrieveCityByInputCity(String city) throws Exception {

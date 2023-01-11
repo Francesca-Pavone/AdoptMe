@@ -104,11 +104,12 @@ public class UserHomepageController {
                 try {
                     for (Shelter shelter: shelterList) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(HelloApplication.class.getResource("ShelterItem.fxml"));
+                        fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
                         Pane pane = fxmlLoader.load();
 
                         ShelterItemController shelterItemController = fxmlLoader.getController();
                         shelterItemController.setData(shelter);
+
 
                         grid.add(pane,1,  row);
                         row++;
