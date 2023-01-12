@@ -3,7 +3,8 @@ package com.ispwproject.adoptme.controller.guicontroller;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
-import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,13 +68,14 @@ public class ShelterHomepageController_G extends ShelterSideBar {
 
         try {
             // TODO devo passare PetBean e non PetModel
-            for (PreviewPetBean pet : showShelterPetsController_a.getPetList()) {
+            for (PetBean pet : showShelterPetsController_a.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
+                GIPreviewPetBean giPreviewPetBean = new GIPreviewPetBean(pet);
                 PetItemController_G petItemControllerG = fxmlLoader.getController();
-                petItemControllerG.setData(pet);
+                petItemControllerG.setData(giPreviewPetBean);
 
                 if (column == 3) {
                     column = 0;

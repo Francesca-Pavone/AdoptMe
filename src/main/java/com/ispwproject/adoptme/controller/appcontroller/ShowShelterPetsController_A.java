@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 
 import java.sql.SQLException;
@@ -19,7 +18,7 @@ public class ShowShelterPetsController_A {
         this.shelterId = shelterId;
     }
 
-    public List<PreviewPetBean> getPetList() {
+    public List<PetBean> getPetList() {
 
         try {
             int searchKey = 1;
@@ -37,13 +36,13 @@ public class ShowShelterPetsController_A {
             e.printStackTrace();
         }
 
-        List<PreviewPetBean> previewPetBeanList = new ArrayList<>();
+        List<PetBean> petBeanList = new ArrayList<>();
 
         for (PetModel petModel : petList) {
-            PreviewPetBean previewPetBean = new PreviewPetBean(petModel);
-            previewPetBeanList.add(previewPetBean);
+            PetBean petBean = new PetBean(petModel);
+            petBeanList.add(petBean);
         }
 
-        return previewPetBeanList;
+        return petBeanList;
     }
 }

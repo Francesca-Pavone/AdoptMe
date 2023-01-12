@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.utils.dao;
 
+import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
@@ -73,8 +74,9 @@ public class PetDAO {
                 LocalDate petAge = resultSet.getDate("dateOfBirth").toLocalDate();
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
+                PetCompatibility petCompatibility = new PetCompatibility();
 
-                PetModel pet = new PetModel(petName, petType, petImage, petAge, petGender);
+                PetModel pet = new PetModel(petName, petType, petImage, petAge, petGender, petCompatibility);
                 petList.add(pet);
 
             }
@@ -152,8 +154,9 @@ public class PetDAO {
                 LocalDate petAge = resultSet.getDate("dateOfBirth").toLocalDate();
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
+                PetCompatibility petCompatibility = new PetCompatibility();
 
-                pet = new PetModel(petName, petType, petImage, petAge, petGender);
+                pet = new PetModel(petName, petType, petImage, petAge, petGender, petCompatibility);
 
             }while(resultSet.next());
 

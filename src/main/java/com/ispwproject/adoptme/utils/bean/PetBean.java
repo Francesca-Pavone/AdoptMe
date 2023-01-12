@@ -2,11 +2,13 @@ package com.ispwproject.adoptme.utils.bean;
 
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.DogModel;
+import com.ispwproject.adoptme.model.PetCompatibility;
+import com.ispwproject.adoptme.model.PetModel;
 
 import java.io.File;
 import java.time.LocalDate;
 
-public abstract class PetBean {
+public class PetBean {
 
     protected File petImage;
     protected String name;
@@ -46,7 +48,9 @@ public abstract class PetBean {
     protected boolean testFiv;
     protected boolean testFelv;
 
+    public PetBean() {
 
+    }
 
     public PetBean(CatModel catModel) {
         this.setPetImage(catModel.getPetImage());
@@ -62,18 +66,19 @@ public abstract class PetBean {
         this.setDewormed(catModel.isDewormed());
         this.setSterilized(catModel.isSterilized());
         this.setDisability(catModel.isDisability());
-        this.setDisabilityType(catModel.isDisabilityType());
-        this.setMaleDog(catModel.isMaleDog());
-        this.setFemaleDog(catModel.isFemaleDog());
-        this.setMaleCat(catModel.isMaleCat());
-        this.setFemaleCat(catModel.isFemaleCat());
-        this.setChildren(catModel.isChildren());
-        this.setElders(catModel.isElders());
-        this.setApartmentNoGarden(catModel.isApartmentNoGarden());
-        this.setApartmentNoTerrace(catModel.isApartmentNoTerrace());
-        this.setSleepOutside(catModel.isSleepOutside());
-        this.setFirstExperience(catModel.isFirstExperience());
-        this.setHoursAlone(catModel.getHoursAlone());
+        this.setDisabilityType(catModel.getDisabilityType());
+
+        this.setMaleDog(catModel.getPetCompatibility().isMaleDog());
+        this.setFemaleDog(catModel.getPetCompatibility().isFemaleDog());
+        this.setMaleCat(catModel.getPetCompatibility().isMaleCat());
+        this.setFemaleCat(catModel.getPetCompatibility().isFemaleCat());
+        this.setChildren(catModel.getPetCompatibility().isChildren());
+        this.setElders(catModel.getPetCompatibility().isElders());
+        this.setApartmentNoGarden(catModel.getPetCompatibility().isApartmentNoGarden());
+        this.setApartmentNoTerrace(catModel.getPetCompatibility().isApartmentNoTerrace());
+        this.setSleepOutside(catModel.getPetCompatibility().isSleepOutside());
+        this.setFirstExperience(catModel.getPetCompatibility().isFirstExperience());
+        this.setHoursAlone(catModel.getPetCompatibility().getHoursAlone());
 
         this.setTestFiv(catModel.isTestFiv());
         this.setTestFelv(catModel.isTestFelv());
@@ -95,18 +100,19 @@ public abstract class PetBean {
         this.setDewormed(dogModel.isDewormed());
         this.setSterilized(dogModel.isSterilized());
         this.setDisability(dogModel.isDisability());
-        this.setDisabilityType(dogModel.isDisabilityType());
-        this.setMaleDog(dogModel.isMaleDog());
-        this.setFemaleDog(dogModel.isFemaleDog());
-        this.setMaleCat(dogModel.isMaleCat());
-        this.setFemaleCat(dogModel.isFemaleCat());
-        this.setChildren(dogModel.isChildren());
-        this.setElders(dogModel.isElders());
-        this.setApartmentNoGarden(dogModel.isApartmentNoGarden());
-        this.setApartmentNoTerrace(dogModel.isApartmentNoTerrace());
-        this.setSleepOutside(dogModel.isSleepOutside());
-        this.setFirstExperience(dogModel.isFirstExperience());
-        this.setHoursAlone(dogModel.getHoursAlone());
+        this.setDisabilityType(dogModel.getDisabilityType());
+
+        this.setMaleDog(dogModel.getPetCompatibility().isMaleDog());
+        this.setFemaleDog(dogModel.getPetCompatibility().isFemaleDog());
+        this.setMaleCat(dogModel.getPetCompatibility().isMaleCat());
+        this.setFemaleCat(dogModel.getPetCompatibility().isFemaleCat());
+        this.setChildren(dogModel.getPetCompatibility().isChildren());
+        this.setElders(dogModel.getPetCompatibility().isElders());
+        this.setApartmentNoGarden(dogModel.getPetCompatibility().isApartmentNoGarden());
+        this.setApartmentNoTerrace(dogModel.getPetCompatibility().isApartmentNoTerrace());
+        this.setSleepOutside(dogModel.getPetCompatibility().isSleepOutside());
+        this.setFirstExperience(dogModel.getPetCompatibility().isFirstExperience());
+        this.setHoursAlone(dogModel.getPetCompatibility().getHoursAlone());
 
         this.setDogEducation(dogModel.isProgramEducation());
         this.setSize(dogModel.getSize());
@@ -114,7 +120,34 @@ public abstract class PetBean {
 
     }
 
-    public PetBean() {
+    public PetBean(PetModel petModel) {
+        this.setPetImage(petModel.getPetImage());
+        this.setName(petModel.getName());
+        this.setType(petModel.getType());
+        this.setFullDateOfBirth(petModel.getFullDateOfBirth());
+        this.setYearOfBirth(petModel.getYearOfBirth());
+        this.setMonthOfBirth(petModel.getMonthOfBirth());
+        this.setGender(petModel.getGender());
+        this.setCoatLenght(petModel.getCoatLenght());
+        this.setVaccinated(petModel.isVaccinated());
+        this.setMicrochipped(petModel.isMicrochipped());
+        this.setDewormed(petModel.isDewormed());
+        this.setSterilized(petModel.isSterilized());
+        this.setDisability(petModel.isDisability());
+        this.setDisabilityType(petModel.getDisabilityType());
+
+        PetCompatibility petCompatibility = petModel.getPetCompatibility();
+        this.setMaleDog(petCompatibility.isMaleDog());
+        this.setFemaleDog(petCompatibility.isFemaleDog());
+        this.setMaleCat(petCompatibility.isMaleCat());
+        this.setFemaleCat(petCompatibility.isFemaleCat());
+        this.setChildren(petCompatibility.isChildren());
+        this.setElders(petCompatibility.isElders());
+        this.setApartmentNoGarden(petCompatibility.isApartmentNoGarden());
+        this.setApartmentNoTerrace(petCompatibility.isApartmentNoTerrace());
+        this.setSleepOutside(petCompatibility.isSleepOutside());
+        this.setFirstExperience(petCompatibility.isFirstExperience());
+        this.setHoursAlone(petCompatibility.getHoursAlone());
 
     }
 

@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.utils.bean.GI;
 
 import com.ispwproject.adoptme.utils.bean.DogBean;
-import com.ispwproject.adoptme.utils.bean.PetBean;
 
 import java.io.File;
 import java.time.LocalDate;
