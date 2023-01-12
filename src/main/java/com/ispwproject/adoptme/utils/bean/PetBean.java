@@ -1,445 +1,354 @@
 package com.ispwproject.adoptme.utils.bean;
 
-import com.ispwproject.adoptme.utils.ImageUtils;
-import javafx.scene.image.Image;
+import com.ispwproject.adoptme.model.CatModel;
+import com.ispwproject.adoptme.model.DogModel;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 
-public class PetBean {
-    private File petImage;
-    private String name;
-    private int type; // 0 -> DOG  |  1 -> CAT
-    private LocalDate fullDateOfBirth;
-    private String yearOfBirth;
-    private String monthOfBirth;
-    private String gender; // 0 -> MALE  |  1 -> FEMALE
-    private String coatLenght;
+public abstract class PetBean {
 
-    private String vaccinated;
-    private String microchipped;
-    private String dewormed;
-    private String sterilized;
-    private String disability;
-    private String disabilityType;
+    protected File petImage;
+    protected String name;
+    protected int type; // 0 -> DOG  |  1 -> CAT
+    protected LocalDate fullDateOfBirth;
+    protected int yearOfBirth;
+    protected int monthOfBirth;
+    protected int gender;
+    protected int coatLenght;
+
+    protected boolean vaccinated;
+    protected boolean microchipped;
+    protected boolean dewormed;
+    protected boolean sterilized;
+    protected boolean disability;
+    protected String disabilityType;
 
     // compatibility
-    private boolean sterMaleDog;
-    private boolean notSterMaleDog;
-    private boolean sterFemaleDog;
-    private boolean notSterFemaleDog;
-    private boolean sterMaleCat;
-    private boolean notSterMaleCat;
-    private boolean sterFemaleCat;
-    private boolean notSterFemaleCat;
-    private boolean children;
-    private boolean elders;
-    private boolean apartmentNoGarden;
-    private boolean apartmentNoTerrace;
-    private boolean sleepOutside;
-    private boolean firstExperience;
-    private String hoursAlone;
+    protected boolean maleDog;
+    protected boolean femaleDog;
+    protected boolean maleCat;
+    protected boolean femaleCat;
+    protected boolean children;
+    protected boolean elders;
+    protected boolean apartmentNoGarden;
+    protected boolean apartmentNoTerrace;
+    protected boolean sleepOutside;
+    protected boolean firstExperience;
+    protected int hoursAlone;
+
+
+    //dog attributes
+    protected boolean dogEducation;
+    protected int size;
+
+    //cat attributes
+    protected boolean testFiv;
+    protected boolean testFelv;
+
+
+
+    public PetBean(CatModel catModel) {
+        this.setPetImage(catModel.getPetImage());
+        this.setName(catModel.getName());
+        this.setType(catModel.getType());
+        this.setFullDateOfBirth(catModel.getFullDateOfBirth());
+        this.setYearOfBirth(catModel.getYearOfBirth());
+        this.setMonthOfBirth(catModel.getMonthOfBirth());
+        this.setGender(catModel.getGender());
+        this.setCoatLenght(catModel.getCoatLenght());
+        this.setVaccinated(catModel.isVaccinated());
+        this.setMicrochipped(catModel.isMicrochipped());
+        this.setDewormed(catModel.isDewormed());
+        this.setSterilized(catModel.isSterilized());
+        this.setDisability(catModel.isDisability());
+        this.setDisabilityType(catModel.isDisabilityType());
+        this.setMaleDog(catModel.isMaleDog());
+        this.setFemaleDog(catModel.isFemaleDog());
+        this.setMaleCat(catModel.isMaleCat());
+        this.setFemaleCat(catModel.isFemaleCat());
+        this.setChildren(catModel.isChildren());
+        this.setElders(catModel.isElders());
+        this.setApartmentNoGarden(catModel.isApartmentNoGarden());
+        this.setApartmentNoTerrace(catModel.isApartmentNoTerrace());
+        this.setSleepOutside(catModel.isSleepOutside());
+        this.setFirstExperience(catModel.isFirstExperience());
+        this.setHoursAlone(catModel.getHoursAlone());
+
+        this.setTestFiv(catModel.isTestFiv());
+        this.setTestFelv(catModel.isTestFelv());
+
+    }
+
+    public PetBean(DogModel dogModel) {
+        //TODO: devo passare un model non un bean
+        this.setPetImage(dogModel.getPetImage());
+        this.setName(dogModel.getName());
+        this.setType(dogModel.getType());
+        this.setFullDateOfBirth(dogModel.getFullDateOfBirth());
+        this.setYearOfBirth(dogModel.getYearOfBirth());
+        this.setMonthOfBirth(dogModel.getMonthOfBirth());
+        this.setGender(dogModel.getGender());
+        this.setCoatLenght(dogModel.getCoatLenght());
+        this.setVaccinated(dogModel.isVaccinated());
+        this.setMicrochipped(dogModel.isMicrochipped());
+        this.setDewormed(dogModel.isDewormed());
+        this.setSterilized(dogModel.isSterilized());
+        this.setDisability(dogModel.isDisability());
+        this.setDisabilityType(dogModel.isDisabilityType());
+        this.setMaleDog(dogModel.isMaleDog());
+        this.setFemaleDog(dogModel.isFemaleDog());
+        this.setMaleCat(dogModel.isMaleCat());
+        this.setFemaleCat(dogModel.isFemaleCat());
+        this.setChildren(dogModel.isChildren());
+        this.setElders(dogModel.isElders());
+        this.setApartmentNoGarden(dogModel.isApartmentNoGarden());
+        this.setApartmentNoTerrace(dogModel.isApartmentNoTerrace());
+        this.setSleepOutside(dogModel.isSleepOutside());
+        this.setFirstExperience(dogModel.isFirstExperience());
+        this.setHoursAlone(dogModel.getHoursAlone());
+
+        this.setDogEducation(dogModel.isProgramEducation());
+        this.setSize(dogModel.getSize());
+
+
+    }
 
     public PetBean() {
+
     }
 
 
-
-    // constructor with full date
-    public PetBean(File petImage, String name, int type, LocalDate fullDateOfBirth, String gender, String coatLenght, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType, boolean sterMaleDog, boolean notSterMaleDog, boolean sterFemaleDog, boolean notSterFemaleDog, boolean sterMaleCat, boolean notSterMaleCat, boolean sterFemaleCat, boolean notSterFemaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, String hoursAlone) {
-        this.setPetImage(petImage);
-        this.setName(name);
-        this.setType(type);
-        this.setFullDateOfBirth(fullDateOfBirth);
-        this.setGender(gender);
-        this.setCoatLenght(coatLenght);
-        this.setVaccinated(vaccinated);
-        this.setMicrochipped(microchipped);
-        this.setDewormed(dewormed);
-        this.setSterilized(sterilized);
-        this.setDisability(disability);
-        this.setDisabilityType(disabilityType);
-        this.setSterMaleDog(sterMaleDog);
-        this.setNotSterMaleDog(notSterMaleDog);
-        this.setSterFemaleDog(sterFemaleDog);
-        this.setNotSterFemaleDog(notSterFemaleDog);
-        this.setSterMaleCat(sterMaleCat);
-        this.setNotSterMaleCat(notSterMaleCat);
-        this.setSterFemaleCat(sterFemaleCat);
-        this.setNotSterFemaleCat(notSterFemaleCat);
-        this.setChildren(children);
-        this.setElders(elders);
-        this.setApartmentNoGarden(apartmentNoGarden);
-        this.setApartmentNoTerrace(apartmentNoTerrace);
-        this.setSleepOutside(sleepOutside);
-        this.setFirstExperience(firstExperience);
-        this.setHoursAlone(hoursAlone);
+    public File getPetImage() {
+        return petImage;
     }
 
-    // constructor without full date, with year and month of birth
-    public PetBean(File petImage, String name, int type, String yearOfBirth, String monthOfBirth, String gender, String coatLenght, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType, boolean sterMaleDog, boolean notSterMaleDog, boolean sterFemaleDog, boolean notSterFemaleDog, boolean sterMaleCat, boolean notSterMaleCat, boolean sterFemaleCat, boolean notSterFemaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, String hoursAlone) {
-        this.setPetImage(petImage);
-        this.setName(name);
-        this.setType(type);
-        this.setYearOfBirth(yearOfBirth);
-        this.setMonthOfBirth(monthOfBirth);
-        this.setGender(gender);
-        this.setCoatLenght(coatLenght);
-        this.setVaccinated(vaccinated);
-        this.setMicrochipped(microchipped);
-        this.setDewormed(dewormed);
-        this.setSterilized(sterilized);
-        this.setDisability(disability);
-        this.setDisabilityType(disabilityType);
-        this.setSterMaleDog(sterMaleDog);
-        this.setNotSterMaleDog(notSterMaleDog);
-        this.setSterFemaleDog(sterFemaleDog);
-        this.setNotSterFemaleDog(notSterFemaleDog);
-        this.setSterMaleCat(sterMaleCat);
-        this.setNotSterMaleCat(notSterMaleCat);
-        this.setSterFemaleCat(sterFemaleCat);
-        this.setNotSterFemaleCat(notSterFemaleCat);
-        this.setChildren(children);
-        this.setElders(elders);
-        this.setApartmentNoGarden(apartmentNoGarden);
-        this.setApartmentNoTerrace(apartmentNoTerrace);
-        this.setSleepOutside(sleepOutside);
-        this.setFirstExperience(firstExperience);
-        this.setHoursAlone(hoursAlone);
-    }
-
-    // constructor without full date, with year but without month of birth
-    public PetBean(File petImage, String name, int type, String yearOfBirth, String gender, String coatLenght, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType, boolean sterMaleDog, boolean notSterMaleDog, boolean sterFemaleDog, boolean notSterFemaleDog, boolean sterMaleCat, boolean notSterMaleCat, boolean sterFemaleCat, boolean notSterFemaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, String hoursAlone) {
-        this.setPetImage(petImage);
-        this.setName(name);
-        this.setType(type);
-        this.setYearOfBirth(yearOfBirth);
-        this.setGender(gender);
-        this.setCoatLenght(coatLenght);
-        this.setVaccinated(vaccinated);
-        this.setMicrochipped(microchipped);
-        this.setDewormed(dewormed);
-        this.setSterilized(sterilized);
-        this.setDisability(disability);
-        this.setDisabilityType(disabilityType);
-        this.setSterMaleDog(sterMaleDog);
-        this.setNotSterMaleDog(notSterMaleDog);
-        this.setSterFemaleDog(sterFemaleDog);
-        this.setNotSterFemaleDog(notSterFemaleDog);
-        this.setSterMaleCat(sterMaleCat);
-        this.setNotSterMaleCat(notSterMaleCat);
-        this.setSterFemaleCat(sterFemaleCat);
-        this.setNotSterFemaleCat(notSterFemaleCat);
-        this.setChildren(children);
-        this.setElders(elders);
-        this.setApartmentNoGarden(apartmentNoGarden);
-        this.setApartmentNoTerrace(apartmentNoTerrace);
-        this.setSleepOutside(sleepOutside);
-        this.setFirstExperience(firstExperience);
-        this.setHoursAlone(hoursAlone);
-    }
-
-
-    // setter
     public void setPetImage(File petImage) {
         this.petImage = petImage;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
-    public void setType(/*String*/ int type) {
-        /*
-        if (type.equals("Dog"))
-            this.type = 0;
-        else if (type.equals("Cat"))
-            this.type = 1;
-         */
-        this.type = type;
-    }
-
-    public void setFullDateOfBirth(LocalDate fullDateOfBirth) {
-        this.fullDateOfBirth = fullDateOfBirth;
-    }
-    public void setYearOfBirth(String yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
-    }
-
-    public void setMonthOfBirth(String monthOfBirth) {
-        this.monthOfBirth = monthOfBirth;
-    }
-
-    public void setGender(String gender) {
-        /*
-        if (gender.equals("Male"))
-            this.gender = 0;
-        else if (gender.equals("Female"))
-            this.gender = 1;
-         */
-        this.gender = gender;
-    }
-
-    public void setCoatLenght(String coatLenght) {
-        this.coatLenght = coatLenght;
-    }
-
-    public void setVaccinated(String vaccinated) {
-        /*
-        if (vaccinated.equals("Yes"))
-            this.vaccinated = true;
-        else if (vaccinated.equals("No"))
-            this.vaccinated = false;
-
-         */
-        this.vaccinated = vaccinated;
-    }
-
-    public void setMicrochipped(String microchipped) {
-        /*
-        if (microchipped.equals("Yes"))
-            this.microchipped = true;
-        else if (microchipped.equals("No"))
-            this.microchipped = false;
-
-         */
-        this.microchipped = microchipped;
-    }
-
-    public void setDewormed(String dewormed) {
-        /*
-        if (dewormed.equals("Yes"))
-            this.dewormed = true;
-        else if (dewormed.equals("No"))
-            this.dewormed = false;
-
-         */
-        this.dewormed = dewormed;
-    }
-
-    public void setSterilized(String sterilized) {
-        /*
-        if (sterilized.equals("Yes"))
-            this.sterilized = true;
-        else if (sterilized.equals("No"))
-            this.sterilized = false;
-
-         */
-        this.sterilized = sterilized;
-    }
-
-    public void setDisability(String disability) {
-        /*
-        if (disability.equals("Yes"))
-            this.disability = true;
-        else if (disability.equals("No"))
-            this.disability = false;
-
-         */
-        this.disability = disability;
-    }
-
-    public void setDisabilityType(String disabilityType) {
-        this.disabilityType = disabilityType;
-    }
-
-
-
-    public void setSterMaleDog(boolean sterMaleDog) {
-        this.sterMaleDog = sterMaleDog;
-    }
-
-    public void setNotSterMaleDog(boolean notSterMaleDog) {
-        this.notSterMaleDog = notSterMaleDog;
-    }
-
-    public void setSterFemaleDog(boolean sterFemaleDog) {
-        this.sterFemaleDog = sterFemaleDog;
-    }
-
-    public void setNotSterFemaleDog(boolean notSterFemaleDog) {
-        this.notSterFemaleDog = notSterFemaleDog;
-    }
-
-    public void setSterMaleCat(boolean sterMaleCat) {
-        this.sterMaleCat = sterMaleCat;
-    }
-
-    public void setNotSterMaleCat(boolean notSterMaleCat) {
-        this.notSterMaleCat = notSterMaleCat;
-    }
-
-    public void setSterFemaleCat(boolean sterFemaleCat) {
-        this.sterFemaleCat = sterFemaleCat;
-    }
-
-    public void setNotSterFemaleCat(boolean notSterFemaleCat) {
-        this.notSterFemaleCat = notSterFemaleCat;
-    }
-
-    public void setChildren(boolean children) {
-        this.children = children;
-    }
-
-    public void setElders(boolean elders) {
-        this.elders = elders;
-    }
-
-    public void setApartmentNoGarden(boolean apartmentNoGarden) {
-        this.apartmentNoGarden = apartmentNoGarden;
-    }
-
-    public void setApartmentNoTerrace(boolean apartmentNoTerrace) {
-        this.apartmentNoTerrace = apartmentNoTerrace;
-    }
-
-    public void setSleepOutside(boolean sleepOutside) {
-        this.sleepOutside = sleepOutside;
-    }
-
-    public void setFirstExperience(boolean firstExperience) {
-        this.firstExperience = firstExperience;
-    }
-
-    public void setHoursAlone(String hoursAlone) {
-        this.hoursAlone = hoursAlone;
-    }
-
-
-// getter
-
-    public Image getPetImage() throws IOException {
-        return ImageUtils.fromFileToImage(petImage);
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getType() {
         return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public LocalDate getFullDateOfBirth() {
         return fullDateOfBirth;
     }
-    public String getYearOfBirth() {
+
+    public void setFullDateOfBirth(LocalDate fullDateOfBirth) {
+        this.fullDateOfBirth = fullDateOfBirth;
+    }
+
+    public int getYearOfBirth() {
         return yearOfBirth;
     }
 
-    public String getMonthOfBirth() {
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public int getMonthOfBirth() {
         return monthOfBirth;
     }
 
-    public String getGender() {
+    public void setMonthOfBirth(int monthOfBirth) {
+        this.monthOfBirth = monthOfBirth;
+    }
+
+    public int getGender() {
         return gender;
     }
 
-    public String getCoatLenght() {
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getCoatLenght() {
         return coatLenght;
     }
 
-    public String getVaccinated() {
+    public void setCoatLenght(int coatLenght) {
+        this.coatLenght = coatLenght;
+    }
+
+
+    public boolean isVaccinated() {
         return vaccinated;
     }
 
-    public String getMicrochipped() {
+    public void setVaccinated(boolean vaccinated) {
+        this.vaccinated = vaccinated;
+    }
+
+    public boolean isMicrochipped() {
         return microchipped;
     }
 
-    public String getDewormed() {
+    public void setMicrochipped(boolean microchipped) {
+        this.microchipped = microchipped;
+    }
+
+    public boolean isDewormed() {
         return dewormed;
     }
 
-    public String getSterilized() {
+    public void setDewormed(boolean dewormed) {
+        this.dewormed = dewormed;
+    }
+
+    public boolean isSterilized() {
         return sterilized;
     }
 
-    public String getDisability() {
+    public void setSterilized(boolean sterilized) {
+        this.sterilized = sterilized;
+    }
+
+    public boolean isDisability() {
         return disability;
+    }
+
+    public void setDisability(boolean disability) {
+        this.disability = disability;
     }
 
     public String getDisabilityType() {
         return disabilityType;
     }
 
-    public boolean isCompSterMaleDog() {
-        return sterMaleDog;
+    public void setDisabilityType(String disabilityType) {
+        this.disabilityType = disabilityType;
     }
 
-    public boolean isCompNotSterMaleDog() {
-        return notSterMaleDog;
+    public boolean isMaleDog() {
+        return maleDog;
     }
 
-    public boolean isCompSterFemaleDog() {
-        return sterFemaleDog;
+    public void setMaleDog(boolean maleDog) {
+        this.maleDog = maleDog;
     }
 
-    public boolean isCompNotSterFemaleDog() {
-        return notSterFemaleDog;
+    public boolean isFemaleDog() {
+        return femaleDog;
     }
 
-    public boolean isCompSterMaleCat() {
-        return sterMaleCat;
+    public void setFemaleDog(boolean femaleDog) {
+        this.femaleDog = femaleDog;
     }
 
-    public boolean isCompNotSterMaleCat() {
-        return notSterMaleCat;
+    public boolean isMaleCat() {
+        return maleCat;
     }
 
-    public boolean isCompSterFemaleCat() {
-        return sterFemaleCat;
+    public void setMaleCat(boolean maleCat) {
+        this.maleCat = maleCat;
     }
 
-    public boolean isCompNotSterFemaleCat() {
-        return notSterFemaleCat;
+    public boolean isFemaleCat() {
+        return femaleCat;
     }
 
-    public boolean isCompChildren() {
+    public void setFemaleCat(boolean femaleCat) {
+        this.femaleCat = femaleCat;
+    }
+
+    public boolean isChildren() {
         return children;
     }
 
-    public boolean isCompElders() {
+    public void setChildren(boolean children) {
+        this.children = children;
+    }
+
+    public boolean isElders() {
         return elders;
     }
 
-    public boolean isCompApartmentNoGarden() {
+    public void setElders(boolean elders) {
+        this.elders = elders;
+    }
+
+    public boolean isApartmentNoGarden() {
         return apartmentNoGarden;
     }
 
-    public boolean isCompApartmentNoTerrace() {
+    public void setApartmentNoGarden(boolean apartmentNoGarden) {
+        this.apartmentNoGarden = apartmentNoGarden;
+    }
+
+    public boolean isApartmentNoTerrace() {
         return apartmentNoTerrace;
     }
 
-    public boolean isCompSleepOutside() {
+    public void setApartmentNoTerrace(boolean apartmentNoTerrace) {
+        this.apartmentNoTerrace = apartmentNoTerrace;
+    }
+
+    public boolean isSleepOutside() {
         return sleepOutside;
     }
 
-    public boolean isCompFirstExperience() {
+    public void setSleepOutside(boolean sleepOutside) {
+        this.sleepOutside = sleepOutside;
+    }
+
+    public boolean isFirstExperience() {
         return firstExperience;
     }
 
-    public String getCompHoursAlone() {
+    public void setFirstExperience(boolean firstExperience) {
+        this.firstExperience = firstExperience;
+    }
+
+    public int getHoursAlone() {
         return hoursAlone;
     }
 
-    /*
-    public String getAge(){
-        int currYear = Year.now().getValue();
-        LocalDate currDate = LocalDate.now();
-        int yearOfBirth;
-        int monthOfBirth;
-        if (fullDateOfBirth != null){
-            Period months = Period.between(currDate, fullDateOfBirth);
-            System.out.println(months);
-            return months.toString();
-
-        }
-        return "boh";
+    public void setHoursAlone(int hoursAlone) {
+        this.hoursAlone = hoursAlone;
     }
 
-     */
+    public boolean isDogEducation() {
+        return dogEducation;
+    }
 
+    public void setDogEducation(boolean dogEducation) {
+        this.dogEducation = dogEducation;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public boolean isTestFiv() {
+        return testFiv;
+    }
+
+    public void setTestFiv(boolean testFiv) {
+        this.testFiv = testFiv;
+    }
+
+    public boolean isTestFelv() {
+        return testFelv;
+    }
+
+    public void setTestFelv(boolean testFelv) {
+        this.testFelv = testFelv;
+    }
 }

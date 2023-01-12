@@ -4,7 +4,7 @@ import com.ispwproject.adoptme.utils.bean.AccountInfo;
 
 public abstract class ShelterUserModel {
     private int id ;
-    private String profileImg; // todo: riportare in formato file
+    private String profileImg; //todo: riportare in formato file
     private AccountInfo accountInfo;
 
     public ShelterUserModel(String profileImg, AccountInfo accountInfo) {

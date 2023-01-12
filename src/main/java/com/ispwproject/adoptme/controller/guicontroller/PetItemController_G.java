@@ -4,6 +4,8 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,11 +39,11 @@ public class PetItemController_G {
 
 
     // TODO devo passare PetBean e non PetModel
-    public void setData(PetModel pet) throws IOException {
-        petGender.setText(pet.getGender());
+    public void setData(PreviewPetBean pet) throws IOException {
+        petGender.setText(String.valueOf(pet.getGender()));
         petName.setText(pet.getName());
-        petAge.setText(pet.getAge());
-        InputStream inputStream = new FileInputStream(pet.getPetImg());
+        petAge.setText(pet.getFullDateOfBirth().toString());
+        InputStream inputStream = new FileInputStream(pet.getPetImage());
         Image image = new Image(inputStream);
         petImage.setImage(image);
     }

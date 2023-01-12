@@ -146,7 +146,7 @@ public class QuestionnaireController {
 
 
                     PetItemController_G petItemControllerG = fxmlLoader.getController();
-                    petItemControllerG.setData(pet);
+                    //petItemControllerG.setData(pet);
 
                     if (column == 3) {
                         column = 0;

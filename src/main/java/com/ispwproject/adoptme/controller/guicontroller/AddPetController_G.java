@@ -1,10 +1,13 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController_A;
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
+import com.ispwproject.adoptme.utils.bean.GI.GICatBean;
+import com.ispwproject.adoptme.utils.bean.GI.GIDogBean;
+import com.ispwproject.adoptme.utils.enums.CoatLenght;
+import com.ispwproject.adoptme.utils.enums.Size;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -18,6 +21,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Month;
+import java.time.Year;
+import java.time.temporal.ChronoUnit;
 
 public class AddPetController_G {
     @FXML
@@ -39,7 +45,15 @@ public class AddPetController_G {
     @FXML
     private ComboBox<String> boxMonth;
     @FXML
-    private Label coatLenght_txt;
+    private HBox typeGender_hBox;
+    @FXML
+    private HBox coatSize_hBox;
+    @FXML
+    private VBox size_vBox;
+    @FXML
+    private Label txtSize;
+    @FXML
+    private ComboBox<String> boxSize;
     @FXML
     private ComboBox<String> boxCoatLenght;
     @FXML
@@ -84,6 +98,17 @@ public class AddPetController_G {
     @FXML
     private Label txtEducProg;
     @FXML
+    private CheckBox cb_femaleCat;
+
+    @FXML
+    private CheckBox cb_femaleDog;
+
+    @FXML
+    private CheckBox cb_maleCat;
+
+    @FXML
+    private CheckBox cb_maleDog;
+    @FXML
     private CheckBox cb_apartGarden;
     @FXML
     private CheckBox cb_apartNoTerrace;
@@ -94,40 +119,34 @@ public class AddPetController_G {
     @FXML
     private CheckBox cb_firstExp;
     @FXML
-    private CheckBox cb_notSterFCat;
-    @FXML
-    private CheckBox cb_notSterFDog;
-    @FXML
-    private CheckBox cb_notSterMCat;
-    @FXML
-    private CheckBox cb_notSterMDog;
-    @FXML
     private CheckBox cb_sleepOut;
-    @FXML
-    private CheckBox cb_sterFCat;
-    @FXML
-    private CheckBox cb_sterFDog;
-    @FXML
-    private CheckBox cb_sterMCat;
-    @FXML
-    private CheckBox cb_sterMDog;
     @FXML
     private ToggleGroup hoursAlone;
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
+    private final int shelterId = 1; //TODO: questo valore dovrà essere preso dalla sessione
 
     public void initialize() {
-        String[] years = {"2022", "2021", "2020", "2019", "2018", "2017"};
-        boxYear.getItems().addAll(years);
 
-        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        Year year = Year.now();
+        while (Year.now().compareTo(year) < 30) {
+            boxYear.getItems().add(year.toString());
+            year = year.minus(1, ChronoUnit.YEARS);
+        }
+
+        String[] months = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        //boxMonth.getItems().addAll(Month.JANUARY.toString(), Month.FEBRUARY.toString(), Month.MARCH.toString(), Month.APRIL.toString(), Month.MAY.toString(), Month.JUNE.toString(), Month.JULY.toString(), Month.AUGUST.toString(), Month.SEPTEMBER.toString(), Month.OCTOBER.toString(), Month.NOVEMBER.toString(), Month.DECEMBER.toString() );
         boxMonth.getItems().addAll(months);
 
-        String[] coatLenght = {"Short", "Medium", "Long"};
-        boxCoatLenght.getItems().addAll(coatLenght);
+        //String[] size = {"Small", "Medium", "Large", "Extra large"};
+        boxSize.getItems().addAll(Size.Small.toString(), Size.Medium.toString(), Size.Large.toString(), Size.ExtraLarge.toString());
+
+        //String[] coatLenght = {"Short", "Medium", "Long"};
+        boxCoatLenght.getItems().addAll(CoatLenght.Short.toString(), CoatLenght.Medium.toString(), CoatLenght.Long.toString());
 
         yearMonth_hBox.getChildren().removeAll(year_vBox, month_vBox);
+        size_vBox.getChildren().removeAll(txtSize, boxSize);
     }
 
     public void close(ActionEvent event) {
@@ -147,12 +166,12 @@ public class AddPetController_G {
         switch (petType) {
             case 0 -> // DOG
             {
-                /*
-                System.out.println(this.petType + ": istanzio DogBean");
-                DogBean dogBean = new DogBean(
+                GIDogBean dogBean = new GIDogBean(
                         file,
                         tf_petName.getText(),
                         datePicker.getValue(),
+                        boxYear.getValue(),
+                        boxMonth.getValue(),
                         ((RadioButton) tg_gender.getSelectedToggle()).getText(),
                         boxCoatLenght.getValue(),
                         ((RadioButton) vaccinated.getSelectedToggle()).getText(),
@@ -161,92 +180,62 @@ public class AddPetController_G {
                         ((RadioButton) sterilized.getSelectedToggle()).getText(),
                         ((RadioButton) disability.getSelectedToggle()).getText(),
                         txtDisabilityType.getText(),
-                        ((RadioButton) dogEducation.getSelectedToggle()).getText(),
-                        cb_sterMDog.isSelected(),
-                        cb_notSterMDog.isSelected(),
-                        cb_sterFDog.isSelected(),
-                        cb_notSterFDog.isSelected(),
-                        cb_sterMCat.isSelected(),
-                        cb_notSterMCat.isSelected(),
-                        cb_sterFCat.isSelected(),
-                        cb_notSterFCat.isSelected(),
+                        cb_maleDog.isSelected(),
+                        cb_femaleDog.isSelected(),
+                        cb_maleCat.isSelected(),
+                        cb_femaleCat.isSelected(),
                         cb_children.isSelected(),
                         cb_elders.isSelected(),
                         cb_apartGarden.isSelected(),
                         cb_apartNoTerrace.isSelected(),
                         cb_sleepOut.isSelected(),
                         cb_firstExp.isSelected(),
-                        ((RadioButton) hoursAlone.getSelectedToggle()).getText()
+                        ((RadioButton) hoursAlone.getSelectedToggle()).getText(),
+                        ((RadioButton) dogEducation.getSelectedToggle()).getText(),
+                        boxSize.getValue()
                 );
 
-                 */
-
-                // TODO: togliere questa parte (usata per prova inserimento Pet in db)
-                PetModel petModel = new PetModel(
-                        tf_petName.getText(),
-                        petType,
-                        file,
-                        "Puppy",
-                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
-                        1
-                );
-                AddPetController_A.savePet(petModel);
-
+                AddPetController_A addPetController_a = new AddPetController_A();
+                addPetController_a.addDog(dogBean, shelterId);
             }
             case 1 -> // CAT
             {
-                /*
-                System.out.println(this.petType + ": istanzio CatBean");
-                CatBean catBean = new CatBean(
+                GICatBean catBean = new GICatBean(
                         file,
                         tf_petName.getText(),
                         datePicker.getValue(),
+                        boxYear.getValue(),
+                        boxMonth.getValue(),
                         ((RadioButton) tg_gender.getSelectedToggle()).getText(),
                         boxCoatLenght.getValue(),
                         ((RadioButton) vaccinated.getSelectedToggle()).getText(),
                         ((RadioButton) microchipped.getSelectedToggle()).getText(),
                         ((RadioButton) dewormed.getSelectedToggle()).getText(),
                         ((RadioButton) sterilized.getSelectedToggle()).getText(),
-                        ((RadioButton) testFiv.getSelectedToggle()).getText(),
-                        ((RadioButton) testFelv.getSelectedToggle()).getText(),
                         ((RadioButton) disability.getSelectedToggle()).getText(),
                         txtDisabilityType.getText(),
-                        cb_sterMDog.isSelected(),
-                        cb_notSterMDog.isSelected(),
-                        cb_sterFDog.isSelected(),
-                        cb_notSterFDog.isSelected(),
-                        cb_sterMCat.isSelected(),
-                        cb_notSterMCat.isSelected(),
-                        cb_sterFCat.isSelected(),
-                        cb_notSterFCat.isSelected(),
+                        cb_maleDog.isSelected(),
+                        cb_femaleDog.isSelected(),
+                        cb_maleCat.isSelected(),
+                        cb_femaleCat.isSelected(),
                         cb_children.isSelected(),
                         cb_elders.isSelected(),
                         cb_apartGarden.isSelected(),
                         cb_apartNoTerrace.isSelected(),
                         cb_sleepOut.isSelected(),
                         cb_firstExp.isSelected(),
-                        ((RadioButton) hoursAlone.getSelectedToggle()).getText()
+                        ((RadioButton) hoursAlone.getSelectedToggle()).getText(),
+                        ((RadioButton) testFiv.getSelectedToggle()).getText(),
+                        ((RadioButton) testFelv.getSelectedToggle()).getText()
                 );
 
-                 */
-
-                // TODO: togliere questa parte (usata per prova inserimento Pet in db)
-                PetModel petModel = new PetModel(
-                        tf_petName.getText(),
-                        petType,
-                        file,
-                        "Puppy",
-                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
-                        1
-                        );
-                AddPetController_A.savePet(petModel);
-
+                AddPetController_A addPetController_a = new AddPetController_A();
+                addPetController_a.addCat(catBean, shelterId);
             }
         }
 
         ((Node)event.getSource()).getScene().getWindow().hide();
 
-        //System.out.println(dogBean.getName() + "," + dogBean.getType() + "," + dogBean.getYearOfBirth() + "," + dogBean.getMonthOfBirth() + "," + dogBean.getFullDateOfBirth() + "," + dogBean.getGender() + "," + dogBean.getCoatLenght() + "," + dogBean.getVaccinated() + "," + dogBean.getMicrochipped() + "," + dogBean.getDewormed() + "," + dogBean.getSterilized() + "," + dogBean.getDisability() + "," + dogBean.getDisabilityType() + "," + dogBean.getDogEducation() + "," + dogBean.isCompSterMaleDog());
 
     }
 
@@ -263,12 +252,12 @@ public class AddPetController_G {
             datePicker.setValue(null);
             yearMonth_hBox.getChildren().add(year_vBox);
             yearMonth_hBox.getChildren().add(month_vBox);
-            coatLenght_txt.setPadding(new Insets(40,0,0,0));
+            typeGender_hBox.setPadding(new Insets(40,0,0,0));
         }
         else {
             yearMonth_hBox.getChildren().remove(year_vBox);
             yearMonth_hBox.getChildren().remove(month_vBox);
-            coatLenght_txt.setPadding(new Insets(0));
+            typeGender_hBox.setPadding(new Insets(0));
         }
     }
 
@@ -277,7 +266,8 @@ public class AddPetController_G {
             cb_noFullDate.setSelected(false);
             yearMonth_hBox.getChildren().remove(year_vBox);
             yearMonth_hBox.getChildren().remove(month_vBox);
-            coatLenght_txt.setPadding(new Insets(0));
+            typeGender_hBox.setPadding(new Insets(0));
+
         }
     }
 
@@ -285,6 +275,8 @@ public class AddPetController_G {
         this.petType = 0;
         boxEducProg.setVisible(true);
         txtEducProg.setVisible(true);
+        if (size_vBox.getChildren().isEmpty())
+            size_vBox.getChildren().addAll(txtSize,boxSize);
         testFiv_vBox.getChildren().removeAll(testFiv_txt, testFiv_PN);
         testFelv_vBox.getChildren().removeAll(testFelv_txt, testFelv_PN);
     }
@@ -293,6 +285,7 @@ public class AddPetController_G {
         this.petType = 1;
         boxEducProg.setVisible(false);
         txtEducProg.setVisible(false);
+        size_vBox.getChildren().removeAll(txtSize, boxSize);
         if (testFiv_vBox.getChildren().isEmpty())
             testFiv_vBox.getChildren().addAll(testFiv_txt, testFiv_PN);
         if (testFelv_vBox.getChildren().isEmpty())
