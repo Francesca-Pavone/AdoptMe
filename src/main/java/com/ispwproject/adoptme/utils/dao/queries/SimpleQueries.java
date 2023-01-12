@@ -51,22 +51,6 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    //da aggiustare
-    public static ResultSet selectCity(Statement stmt, String city) throws SQLException {
-        String sql = "SELECT city FROM Shelters WHERE city = '" + city + "';";
-        return stmt.executeQuery(sql);
-    }
-    // da aggiustare
-    public static ResultSet selectPetFromQuestionnaire(Statement stmt, int type, String gender, List<QuestionnaireResultApplicativeController.Tuple> ageList, int haveAPet, List<QuestionnaireResultBean.PetAlreadyHave> petAlreadyHaveList, int haveAGarden, int GardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, String city) throws SQLException {
-
-
-        int nAge = ageList.size();
-        int nOtherPets = petAlreadyHaveList.size();
-
-        String sql = "SELECT * FROM Pets WHERE type = '" + type + "'";
-        return stmt.executeQuery(sql);
-    }
-
     public static ResultSet searchPetsFromShelter(Statement stmt, String shelterName) throws SQLException {
         String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterName + "'";
         return stmt.executeQuery(sql);

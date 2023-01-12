@@ -12,9 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
@@ -37,8 +35,6 @@ public class UserHomepageController {
     private Label labelCity;
     @FXML
     private ScrollPane scrollPane;
-    @FXML
-    private Button btnStartQuestionnaire;
     @FXML
     private GridPane grid;
     @FXML
@@ -126,13 +122,10 @@ public class UserHomepageController {
     }
 
     public void startQuestionnaire(ActionEvent event) throws IOException {
-        Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("QuestionnairePage1.fxml"));
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserQuestionnairePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        dialog.setScene(scene);
-        dialog.show();
+        stage.setScene(scene);
     }
 
     public void goToFavorites(ActionEvent event) throws IOException {

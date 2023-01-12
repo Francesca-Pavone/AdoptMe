@@ -1,10 +1,8 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.utils.dao.PetDAO;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultApplicativeController;
+import com.ispwproject.adoptme.utils.bean.GI_QuestionnaireResultBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,35 +10,20 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-
 public class QuestionnaireController {
-
-    @FXML
-    private GridPane grid;
-
-    private List<PetModel> petList = new ArrayList<>();
-    private PetDAO petDAO = new PetDAO();
-
     private static int petType;
     private static Scene sceneExitQuestionnaire;
 
-    @FXML
-    private Label labelQuestionnaire;
     @FXML
     private ToggleButton btnDog;
     @FXML
@@ -125,10 +108,48 @@ public class QuestionnaireController {
     private ToggleButton btnExtraLarge;
     @FXML
     private TextField cityTextField;
+
     @FXML
-    private Button btnSearchCity;
+    private ToggleGroup AlreadyHaveAPetGroup;
+
     @FXML
-    private ListView<String> cityListView;
+    private ToggleGroup DisabledPetGroup;
+
+    @FXML
+    private ToggleGroup FirstPetGroup;
+
+    @FXML
+    private ToggleGroup GardenGroup;
+
+    @FXML
+    private ToggleGroup GardenSleepOutsideGroup;
+
+    @FXML
+    private ToggleGroup HoursAloneGroup1;
+
+    @FXML
+    private ToggleGroup PetSizeGroup;
+
+    @FXML
+    private ToggleGroup PetTypeGroup;
+
+    @FXML
+    private ToggleGroup ProgramEducationGroup;
+
+    @FXML
+    private ToggleGroup SpecificAreaGroup;
+
+    @FXML
+    private ToggleGroup SterilizePetGroup;
+
+    @FXML
+    private ToggleGroup TerraceGroup;
+
+    @FXML
+    private ToggleGroup TerraceSleepOutsideGroup;
+
+    @FXML
+    private ToggleGroup petGenderGroup;
 
     @FXML
     private VBox vboxAlreadyHaveAPet;
@@ -189,55 +210,8 @@ public class QuestionnaireController {
     @FXML
     private Button btnEndQuestionnaire;
 
-    private List<PetModel> getPetList() {
-        try {
-            int searchKey = 1;
-            //System.out.println("Looking for " + searchKey + "'s pets: ");
-            petList = this.petDAO.retreivePetByShelterId(searchKey);
-
-        } catch (SQLException se) {
-            // Errore durante l'apertura della connessione
-            se.printStackTrace();
-        } catch (ClassNotFoundException driverEx) {
-            // Errore nel loading del driver
-            driverEx.printStackTrace();
-        } catch (Exception e) {
-            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
-            e.printStackTrace();
-        }
-        return petList;
-    }
-
 
     public void initialize() {
-        if (this.grid != null) {
-            petList.addAll(getPetList());
-
-            int column = 0;
-            int row = 1;
-
-            try {
-                for (PetModel pet : petList) {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(Main.class.getResource("UserPetItem.fxml"));
-                    Pane pane = fxmlLoader.load();
-
-
-                    PetItemController petItemController = fxmlLoader.getController();
-                    petItemController.setData(pet);
-
-                    if (column == 3) {
-                        column = 0;
-                        row++;
-                    }
-
-
-                    grid.add(pane, column++, row);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         vboxList.add(vboxSelectPetType);
         vboxList.add(vboxPetGender);
         vboxList.add(vboxPetAge);
@@ -272,16 +246,18 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxPetGender) && btnDog.isSelected())
             vboxParent.getChildren().add(vboxPetGender);
         else if(!btnDog.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxSelectPetType));
+            btnDog.setSelected(true);
         }
     }
 
     public void selectCatType() {
         petType = 1;
+        if(vboxParent.getChildren().contains(vboxProgramEducation))
+            vboxParent.getChildren().remove(vboxProgramEducation);
         if(!vboxParent.getChildren().contains(vboxPetGender) && btnCat.isSelected())
             vboxParent.getChildren().add(vboxPetGender);
         else if(!btnCat.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxSelectPetType));
+            btnCat.setSelected(true);
         }
     }
 
@@ -289,7 +265,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxPetAge) && btnFemale.isSelected())
             vboxParent.getChildren().add(vboxPetAge);
         else if(!btnFemale.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetGender));
+            btnFemale.setSelected(true);
         }
     }
 
@@ -297,7 +273,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxPetAge) && btnMale.isSelected())
             vboxParent.getChildren().add(vboxPetAge);
         else if(!btnMale.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetGender));
+            btnMale.setSelected(true);
         }
     }
 
@@ -305,7 +281,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxPetAge) && btnGenderNotImportant.isSelected())
             vboxParent.getChildren().add(vboxPetAge);
         else if(!btnGenderNotImportant.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetGender));
+            btnGenderNotImportant.setSelected(true);
         }
     }
 
@@ -314,7 +290,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDogSize) && btnPuppy.isSelected())
             vboxParent.getChildren().add(vboxDogSize);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAge));
+            btnPuppy.setSelected(true);
         }
         btnAgeNotImportant.setSelected(false);
     }
@@ -324,7 +300,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDogSize) && btnYoung.isSelected())
             vboxParent.getChildren().add(vboxDogSize);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAge));
+            btnYoung.setSelected(true);
         }
         btnAgeNotImportant.setSelected(false);
     }
@@ -334,7 +310,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDogSize) && btnAdult.isSelected())
             vboxParent.getChildren().add(vboxDogSize);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAge));
+            btnAdult.setSelected(true);
         }
         btnAgeNotImportant.setSelected(false);
     }
@@ -343,7 +319,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDogSize) && btnSenior.isSelected())
             vboxParent.getChildren().add(vboxDogSize);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAge));
+            btnSenior.setSelected(true);
         }
         btnAgeNotImportant.setSelected(false);
     }
@@ -352,7 +328,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDogSize) && btnAgeNotImportant.isSelected())
             vboxParent.getChildren().add(vboxDogSize);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAge));
+            btnAgeNotImportant.setSelected(true);
         }
         btnPuppy.setSelected(false);
         btnYoung.setSelected(false);
@@ -364,46 +340,54 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnSmall.isSelected())
             vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnSmall.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxDogSize));
+            btnSmall.setSelected(true);
         }
     }
     public void selectMedium() {
         if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnMedium.isSelected())
             vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnMedium.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxDogSize));
+            btnMedium.setSelected(true);
         }
     }
     public void selectLarge() {
         if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnLarge.isSelected())
             vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnLarge.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxDogSize));
+            btnLarge.setSelected(true);
         }
     }
     public void selectExtraLarge() {
         if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnExtraLarge.isSelected())
             vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnSmall.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxDogSize));
+            btnExtraLarge.setSelected(true);
         }
     }
 
     public void selectHaveAPet() {
-        if(!vboxParent.getChildren().contains(vboxPetAlreadyHave) && btnHaveAPet.isSelected()) {
+        if(vboxParent.getChildren().contains(vboxGarden) && btnHaveAPet.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxAlreadyHaveAPet));
+            vboxParent.getChildren().add(vboxPetAlreadyHave);
+        }
+        else if(!vboxParent.getChildren().contains(vboxPetAlreadyHave) && btnHaveAPet.isSelected()) {
             vboxParent.getChildren().add(vboxPetAlreadyHave);
         }
         else if(!btnHaveAPet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxAlreadyHaveAPet));
+            btnHaveAPet.setSelected(true);
         }
     }
 
     public void selectDontHaveAPet() {
-        if(!vboxParent.getChildren().contains(vboxGarden) && btnDontHaveAPet.isSelected()) {
+        if(vboxParent.getChildren().contains(vboxPetAlreadyHave) && btnDontHaveAPet.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxAlreadyHaveAPet));
+            vboxParent.getChildren().add(vboxGarden);
+        }
+        else if(!vboxParent.getChildren().contains(vboxGarden) && btnDontHaveAPet.isSelected()) {
             vboxParent.getChildren().add(vboxGarden);
         }
         else if(!btnDontHaveAPet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxAlreadyHaveAPet));
+            btnDontHaveAPet.setSelected(true);
         }
     }
 
@@ -411,44 +395,52 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxGarden) && btnMaleCat.isSelected())
             vboxParent.getChildren().add(vboxGarden);
         else if(!btnMaleCat.isSelected() && !btnFemaleCat.isSelected() && !btnMaleDog.isSelected() &&!btnFemaleDog.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAlreadyHave));
+            btnMaleCat.setSelected(true);
         }
     }
     public void selectFemaleCat() {
         if(!vboxParent.getChildren().contains(vboxGarden) && btnFemaleCat.isSelected())
             vboxParent.getChildren().add(vboxGarden);
         else if(!btnMaleCat.isSelected() && !btnFemaleCat.isSelected() && !btnMaleDog.isSelected() &&!btnFemaleDog.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAlreadyHave));
+            btnFemaleCat.setSelected(true);
         }
     }
     public void selectMaleDog() {
         if(!vboxParent.getChildren().contains(vboxGarden) && btnMaleDog.isSelected())
             vboxParent.getChildren().add(vboxGarden);
         else if(!btnMaleCat.isSelected() && !btnFemaleCat.isSelected() && !btnMaleDog.isSelected() &&!btnFemaleDog.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAlreadyHave));
+            btnMaleDog.setSelected(true);
         }
     }
     public void selectFemaleDog() {
         if(!vboxParent.getChildren().contains(vboxGarden) && btnFemaleDog.isSelected())
             vboxParent.getChildren().add(vboxGarden);
         else if(!btnMaleCat.isSelected() && !btnFemaleCat.isSelected() && !btnMaleDog.isSelected() &&!btnFemaleDog.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxPetAlreadyHave));
+            btnFemaleDog.setSelected(true);
         }
     }
 
     public void selectGarden() {
-        if(!vboxParent.getChildren().contains(vboxGardenSleepOutside) && btnGarden.isSelected())
+        if(vboxParent.getChildren().contains(vboxTerrace) && btnGarden.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxGarden));
+            vboxParent.getChildren().add(vboxGardenSleepOutside);
+        }
+        else if(!vboxParent.getChildren().contains(vboxGardenSleepOutside) && btnGarden.isSelected())
             vboxParent.getChildren().add(vboxGardenSleepOutside);
         else if(!btnGarden.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGarden));
+            btnGarden.setSelected(true);
         }
     }
 
     public void selectNoGarden() {
-        if(!vboxParent.getChildren().contains(vboxTerrace) && btnNoGarden.isSelected())
+        if(vboxParent.getChildren().contains(vboxGardenSleepOutside) && btnNoGarden.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxGarden));
+            vboxParent.getChildren().add(vboxTerrace);
+        }
+        else if(!vboxParent.getChildren().contains(vboxTerrace) && btnNoGarden.isSelected())
             vboxParent.getChildren().add(vboxTerrace);
         else if(!btnNoGarden.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGarden));
+            btnNoGarden.setSelected(true);
         }
     }
 
@@ -456,7 +448,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxTerrace) && btnGardenSleepOutside.isSelected())
             vboxParent.getChildren().add(vboxTerrace);
         else if(!btnGardenSleepOutside.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGardenSleepOutside));
+            btnGardenSleepOutside.setSelected(true);
         }
     }
 
@@ -464,23 +456,31 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxTerrace) && btnGardenDontSleepOutside.isSelected())
             vboxParent.getChildren().add(vboxTerrace);
         else if(!btnGardenDontSleepOutside.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGardenSleepOutside));
+            btnGardenDontSleepOutside.setSelected(true);
         }
     }
 
     public void selectTerrace() {
-        if(!vboxParent.getChildren().contains(vboxTerraceSleepOutside) && btnTerrace.isSelected())
+        if(vboxParent.getChildren().contains(vboxHoursAlone) && btnTerrace.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxTerrace));
+            vboxParent.getChildren().add(vboxTerraceSleepOutside);
+        }
+        else if(!vboxParent.getChildren().contains(vboxTerraceSleepOutside) && btnTerrace.isSelected())
             vboxParent.getChildren().add(vboxTerraceSleepOutside);
         else if(!btnTerrace.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxTerrace));
+            btnTerrace.setSelected(true);
         }
     }
 
     public void selectNoTerrace() {
+        if(vboxParent.getChildren().contains(vboxTerraceSleepOutside) && btnNoTerrace.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxTerrace));
+            vboxParent.getChildren().add(vboxHoursAlone);
+        }
         if(!vboxParent.getChildren().contains(vboxHoursAlone) && btnNoTerrace.isSelected())
             vboxParent.getChildren().add(vboxHoursAlone);
-        else if(!btnNoTerrace.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxTerrace));
+        if(!btnNoTerrace.isSelected()) {
+            btnNoTerrace.setSelected(true);
         }
     }
 
@@ -488,7 +488,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxHoursAlone) && btnTerraceSleepOutside.isSelected())
             vboxParent.getChildren().add(vboxHoursAlone);
         else if(!btnTerraceSleepOutside.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxTerraceSleepOutside));
+            btnTerraceSleepOutside.setSelected(true);
         }
     }
 
@@ -496,7 +496,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxHoursAlone) && btnTerraceDontSleepOutside.isSelected())
             vboxParent.getChildren().add(vboxHoursAlone);
         else if(!btnTerraceDontSleepOutside.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxTerraceSleepOutside));
+            btnTerraceDontSleepOutside.setSelected(true);
         }
     }
 
@@ -504,7 +504,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxFirstPet) && btnHoursAloneOne.isSelected())
             vboxParent.getChildren().add(vboxFirstPet);
         else if(!btnHoursAloneOne.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxHoursAlone));
+            btnHoursAloneOne.setSelected(true);
         }
     }
 
@@ -512,7 +512,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxFirstPet) && btnHoursAloneTwo.isSelected())
             vboxParent.getChildren().add(vboxFirstPet);
         else if(!btnHoursAloneTwo.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxHoursAlone));
+            btnHoursAloneTwo.setSelected(true);
         }
     }
 
@@ -520,7 +520,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxFirstPet) && btnHoursAloneThree.isSelected())
             vboxParent.getChildren().add(vboxFirstPet);
         else if(!btnHoursAloneThree.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxHoursAlone));
+            btnHoursAloneThree.setSelected(true);
         }
     }
 
@@ -528,7 +528,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxSterilizePet) && btnNoFirstPet.isSelected())
             vboxParent.getChildren().add(vboxSterilizePet);
         else if(!btnNoFirstPet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxFirstPet));
+            btnNoFirstPet.setSelected(true);
         }
     }
 
@@ -536,7 +536,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxSterilizePet) && btnFirstPet.isSelected())
             vboxParent.getChildren().add(vboxSterilizePet);
         else if(!btnFirstPet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxFirstPet));
+            btnFirstPet.setSelected(true);
         }
     }
 
@@ -546,7 +546,7 @@ public class QuestionnaireController {
         if(petType == 1 && !vboxParent.getChildren().contains(vboxDisabledPet) && btnSterilizePet.isSelected())
             vboxParent.getChildren().add(vboxDisabledPet);
         else if(!btnSterilizePet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxSterilizePet));
+            btnSterilizePet.setSelected(true);
         }
     }
 
@@ -556,7 +556,7 @@ public class QuestionnaireController {
         if(petType == 1 && !vboxParent.getChildren().contains(vboxDisabledPet) && btnNoSterilizePet.isSelected())
             vboxParent.getChildren().add(vboxDisabledPet);
         else if(!btnNoSterilizePet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxSterilizePet));
+            btnNoSterilizePet.setSelected(true);
         }
     }
 
@@ -564,7 +564,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDisabledPet) && btnProgramEducation.isSelected())
             vboxParent.getChildren().add(vboxDisabledPet);
         else if(!btnProgramEducation.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxProgramEducation));
+            btnProgramEducation.setSelected(true);
         }
     }
 
@@ -572,7 +572,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxDisabledPet) && btnNoProgramEducation.isSelected())
             vboxParent.getChildren().add(vboxDisabledPet);
         else if(!btnNoProgramEducation.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxProgramEducation));
+            btnNoProgramEducation.setSelected(true);
         }
     }
 
@@ -580,7 +580,7 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxGeographicalArea) && btnDisabledPet.isSelected())
             vboxParent.getChildren().add(vboxGeographicalArea);
         else if(!btnDisabledPet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxDisabledPet));
+            btnDisabledPet.setSelected(true);
         }
     }
 
@@ -588,46 +588,37 @@ public class QuestionnaireController {
         if(!vboxParent.getChildren().contains(vboxGeographicalArea) && btnNoDisabledPet.isSelected())
             vboxParent.getChildren().add(vboxGeographicalArea);
         else if(!btnNoDisabledPet.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxDisabledPet));
+            btnNoDisabledPet.setSelected(true);
         }
     }
 
     public void selectSpecificArea() {
+        if(vboxParent.getChildren().contains(btnEndQuestionnaire) && btnSpecificArea.isSelected()) {
+            vboxParent.getChildren().remove(btnEndQuestionnaire);
+            vboxParent.getChildren().add(vboxCity);
+        }
         if(!vboxParent.getChildren().contains(vboxCity) && btnSpecificArea.isSelected())
             vboxParent.getChildren().add(vboxCity);
         else if(!btnSpecificArea.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGeographicalArea));
+            btnSpecificArea.setSelected(true);
         }
     }
 
     public void selectNoSpecificArea() {
+        if(vboxParent.getChildren().contains(vboxCity) && btnNoSpecificArea.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxGeographicalArea));
+            vboxParent.getChildren().add(btnEndQuestionnaire);
+        }
         if(!vboxParent.getChildren().contains(btnEndQuestionnaire) && btnNoSpecificArea.isSelected())
             vboxParent.getChildren().add(btnEndQuestionnaire);
         else if(!btnNoSpecificArea.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGeographicalArea));
+            btnNoSpecificArea.setSelected(true);
         }
     }
 
-    //aggiusta
     public void searchCity() {
         if(!vboxParent.getChildren().contains(btnEndQuestionnaire))
             vboxParent.getChildren().add(btnEndQuestionnaire);
-        /*questionnaireResultBean.setCity(cityTextField.getText());
-        List<String> items = questionnaireResultBean.getListOfCities();
-        final String[] currentCity = new String[1];
-        cityListView.getItems().addAll(items);
-        cityListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                currentCity[0] = cityListView.getSelectionModel().getSelectedItem();
-                cityTextField.setText(currentCity[0]);
-            }
-        });
-        cityListView.setVisible(true);*/
-    }
-
-    public void insertCity() {
-        cityListView.setVisible(false);
     }
 
     public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
@@ -644,22 +635,40 @@ public class QuestionnaireController {
             dialog.show();
     }
 
-    public void closeQuestionnaire(ActionEvent event) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
-        getSceneExitQuestionnaire().getWindow().hide();
-    }
+    public void endQuestionnaire(ActionEvent event) throws Exception {
+        GI_QuestionnaireResultBean questionnaireResultBean = new GI_QuestionnaireResultBean();
+        questionnaireResultBean.setTypeGI(((ToggleButton) PetTypeGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setGenderGI(((ToggleButton) petGenderGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setPuppy(btnPuppy.isSelected());
+        questionnaireResultBean.setYoung(btnYoung.isSelected());
+        questionnaireResultBean.setAdult(btnAdult.isSelected());
+        questionnaireResultBean.setSenior(btnSenior.isSelected());
+        questionnaireResultBean.setSizeGI(((ToggleButton) PetSizeGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setHaveAPetGI(((ToggleButton) AlreadyHaveAPetGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setMaleCat(btnMaleCat.isSelected());
+        questionnaireResultBean.setFemaleCat(btnFemaleCat.isSelected());
+        questionnaireResultBean.setMaleDog(btnMaleDog.isSelected());
+        questionnaireResultBean.setFemaleDog(btnFemaleDog.isSelected());
+        questionnaireResultBean.setHaveAGardenGI(((ToggleButton) GardenGroup.getSelectedToggle()).getText());
+        if (GardenSleepOutsideGroup.getSelectedToggle() != null)
+            questionnaireResultBean.setGardenSleepOutsideGI(((ToggleButton) GardenSleepOutsideGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setHaveATerraceGI(((ToggleButton) TerraceGroup.getSelectedToggle()).getText());
+        if(TerraceSleepOutsideGroup.getSelectedToggle() != null)
+            questionnaireResultBean.setTerraceSleepOutsideGI(((ToggleButton) TerraceSleepOutsideGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setHoursAloneGI(((ToggleButton) HoursAloneGroup1.getSelectedToggle()).getText());
+        questionnaireResultBean.setFirstPetGI(((ToggleButton) FirstPetGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setSterilizePetGI(((ToggleButton) SterilizePetGroup.getSelectedToggle()).getText());
+        if(ProgramEducationGroup.getSelectedToggle() != null)
+            questionnaireResultBean.setProgramEducationGI(((ToggleButton) ProgramEducationGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setDisabledPetGI(((ToggleButton) DisabledPetGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setSpecificAreaGI(((ToggleButton) SpecificAreaGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setCity(cityTextField.getText());
 
-    public void continueQuestionnaire(ActionEvent event) {
-        ((Node)event.getSource()).getScene().getWindow().hide();
-    }
-
-    public void endQuestionnaire(ActionEvent event) throws IOException {
-        QuestionnaireResultBean questionnaireResultBean = new QuestionnaireResultBean(
-
-        );
+        QuestionnaireResultApplicativeController questionnaireResultApplicativeController = new QuestionnaireResultApplicativeController();
+        questionnaireResultApplicativeController.findPets(questionnaireResultBean);
         Stage stage = (Stage) btnEndQuestionnaire.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
-    }
+        }
 }

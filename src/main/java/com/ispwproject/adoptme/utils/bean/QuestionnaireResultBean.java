@@ -8,95 +8,67 @@ import com.ispwproject.adoptme.model.PetModel;
 import java.util.List;
 
 public class QuestionnaireResultBean {
-    public enum PetAlreadyHave {
-        maleCatSterilized,
-        maleCatNonSterilized,
-        femaleCatSterilized,
-        femaleCatNonSterilized,
-        maleDog,
-        femaleDog,
-        maleDogSterilized,
-        maleDogNonSterilized,
-        femaleDogSterilized,
-        femaleDogNonSterilized,
-        maleCat,
-        femaleCat
-    }
-
-    public enum PetAge {
-        puppy,
-        young,
-        adult,
-        senior
-    }
-
-    private int type; // 0 -> Dog | 1 -> Cat
-    private int gender; // 0 -> male | 1 -> female
-    private List<PetAge> age;
-    private int haveAPet; // 0 -> no | 1 -> yes
-    private List<PetAlreadyHave> petAlreadyHave;
-    private int haveAGarden; // 0 -> no | 1 -> yes
-    private int gardenSleepOutside; // 0 -> no | 1 -> yes
-    private int haveATerrace; // 0 -> no | 1 -> yes
-    private int terraceSleepOutside; // 0 -> no | 1 -> yes
-    private int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
-    private int firstPet; // 0 -> no | 1 -> yes
-    private int sterilizePet; // 0 -> no | 1 -> yes
-    private int programEducation; // 0 -> no | 1 -> yes
-    private int disabledPet; // 0 -> no | 1 -> yes
-    private int specificArea; // 0 -> no | 1 -> yes
-    private int finalCity;
-    private String city;
-    private List<String> listOfCities;
-    private List<PetModel> listOfPets;
-
-    public List<PetModel> getListOfPets() {
-        return listOfPets;
-    }
-
-    public void setListOfPets(List<PetModel> listOfPets) {
-        this.listOfPets = listOfPets;
-    }
-
-
-    public int getFinalCity() {
-        return finalCity;
-    }
-
-    public void setFinalCity(int finalCity) {
-        this.finalCity = finalCity;
-    }
-
-    public List<String> getListOfCities() {
-        return listOfCities;
-    }
-
-    public void setListOfCities(List<String> listOfCities) {
-        this.listOfCities = listOfCities;
-    }
+    protected int type; // 0 -> Dog | 1 -> Cat
+    protected int gender; // 0 -> male | 1 -> female | 2 -> not important
+    protected boolean puppy;
+    protected boolean young;
+    protected boolean adult;
+    protected boolean senior;
+    protected int size; //0 -> small | 1 -> medium | 2 -> large | 3 -> extra large
+    protected boolean haveAPet; // 0 -> no | 1 -> yes
+    protected boolean maleCat;
+    protected boolean femaleCat;
+    protected boolean maleDog;
+    protected boolean femaleDog;
+    protected boolean haveAGarden; // 0 -> no | 1 -> yes
+    protected boolean gardenSleepOutside; // 0 -> no | 1 -> yes
+    protected boolean haveATerrace; // 0 -> no | 1 -> yes
+    protected boolean terraceSleepOutside; // 0 -> no | 1 -> yes
+    protected int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
+    protected boolean firstPet; // 0 -> no | 1 -> yes
+    protected boolean sterilizePet; // 0 -> no | 1 -> yes
+    protected boolean programEducation; // 0 -> no | 1 -> yes
+    protected boolean disabledPet; // 0 -> no | 1 -> yes
+    protected boolean specificArea; // 0 -> no | 1 -> yes
+    protected String city;
 
     public QuestionnaireResultBean() {}
 
-    public void QuestionnaireResult(int type, int gender, PetAge age, int haveAPet, PetAlreadyHave petAlreadyHave, int haveAGarden, int gardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, int specificArea, String city) {
-        this.type = type;
-        this.gender = gender;
-        this.age = null;
-        this.haveAPet = haveAPet;
-        this.petAlreadyHave = null;
-        this.haveAGarden = haveAGarden;
-        this.gardenSleepOutside = gardenSleepOutside;
-        this.haveATerrace = haveATerrace;
-        this.terraceSleepOutside = terraceSleepOutside;
-        this.hoursAlone = hoursAlone;
-        this.firstPet = firstPet;
-        this.sterilizePet = sterilizePet;
-        this.programEducation = programEducation;
-        this.disabledPet = disabledPet;
-        this.specificArea = specificArea;
-        this.city = city;
+    public QuestionnaireResultBean(int type, int gender, boolean puppy, boolean young, boolean adult, boolean senior, int size, boolean haveAPet, boolean maleCat, boolean femaleCat, boolean maleDog, boolean femaleDog, boolean haveAGarden, boolean gardenSleepOutside, boolean haveATerrace, boolean terraceSleepOutside, int hoursAlone, boolean firstPet, boolean sterilizePet, boolean programEducation, boolean disabledPet, boolean specificArea, String city) {
+        setType(type);
+        setGender(gender);
+        setPuppy(puppy);
+        setYoung(young);
+        setAdult(adult);
+        setSenior(senior);
+        setSize(size);
+        setHaveAPet(haveAPet);
+        setMaleCat(maleCat);
+        setFemaleCat(femaleCat);
+        setMaleDog(maleDog);
+        setFemaleDog(femaleDog);
+        setHaveAGarden(haveAGarden);
+        setGardenSleepOutside(gardenSleepOutside);
+        setHaveATerrace(haveATerrace);
+        setTerraceSleepOutside(terraceSleepOutside);
+        setHoursAlone(hoursAlone);
+        setFirstPet(firstPet);
+        setSterilizePet(sterilizePet);
+        setProgramEducation(programEducation);
+        setDisabledPet(disabledPet);
+        setSpecificArea(specificArea);
+        setCity(city);
     }
 
-    public int getType() {
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int isType() {
         return type;
     }
 
@@ -104,7 +76,7 @@ public class QuestionnaireResultBean {
         this.type = type;
     }
 
-    public int getGender() {
+    public int isGender() {
         return gender;
     }
 
@@ -112,71 +84,107 @@ public class QuestionnaireResultBean {
         this.gender = gender;
     }
 
-    public List<PetAge> getAge() {
-        return age;
+    public boolean isPuppy() {
+        return puppy;
     }
 
-    public void setAge(PetAge age) {
-        this.age.add(age);
+    public void setPuppy(boolean puppy) {
+        this.puppy = puppy;
     }
 
-    public void removeAge(PetAge age) {
-        this.age.remove(age);
+    public boolean isYoung() {
+        return young;
     }
 
-    public void resetAge() {
-        this.age.clear();
+    public void setYoung(boolean young) {
+        this.young = young;
     }
 
-    public int getHaveAPet() {
+    public boolean isAdult() {
+        return adult;
+    }
+
+    public void setAdult(boolean adult) {
+        this.adult = adult;
+    }
+
+    public boolean isSenior() {
+        return senior;
+    }
+
+    public void setSenior(boolean senior) {
+        this.senior = senior;
+    }
+
+    public boolean isHaveAPet() {
         return haveAPet;
     }
 
-    public void setHaveAPet(int haveAPet) {
+    public void setHaveAPet(boolean haveAPet) {
         this.haveAPet = haveAPet;
     }
 
-    public List<PetAlreadyHave> getPetAlreadyHave() {
-        return petAlreadyHave;
+    public boolean isMaleCat() {
+        return maleCat;
     }
 
-    public void setPetAlreadyHave(PetAlreadyHave petAlreadyHave) {
-        this.petAlreadyHave.add(petAlreadyHave);
+    public void setMaleCat(boolean maleCat) {
+        this.maleCat = maleCat;
     }
 
-    public void removePetAlreadyHave(PetAlreadyHave petAlreadyHave) {
-        this.petAlreadyHave.remove(petAlreadyHave);
+    public boolean isFemaleCat() {
+        return femaleCat;
     }
 
-    public int getHaveAGarden() {
+    public void setFemaleCat(boolean femaleCat) {
+        this.femaleCat = femaleCat;
+    }
+
+    public boolean isMaleDog() {
+        return maleDog;
+    }
+
+    public void setMaleDog(boolean maleDog) {
+        this.maleDog = maleDog;
+    }
+
+    public boolean isFemaleDog() {
+        return femaleDog;
+    }
+
+    public void setFemaleDog(boolean femaleDog) {
+        this.femaleDog = femaleDog;
+    }
+
+    public boolean isHaveAGarden() {
         return haveAGarden;
     }
 
-    public void setHaveAGarden(int haveAGarden) {
+    public void setHaveAGarden(boolean haveAGarden) {
         this.haveAGarden = haveAGarden;
     }
 
-    public int getGardenSleepOutside() {
+    public boolean isGardenSleepOutside() {
         return gardenSleepOutside;
     }
 
-    public void setGardenSleepOutside(int gardenSleepOutside) {
+    public void setGardenSleepOutside(boolean gardenSleepOutside) {
         this.gardenSleepOutside = gardenSleepOutside;
     }
 
-    public int getHaveATerrace() {
+    public boolean isHaveATerrace() {
         return haveATerrace;
     }
 
-    public void setHaveATerrace(int haveATerrace) {
+    public void setHaveATerrace(boolean haveATerrace) {
         this.haveATerrace = haveATerrace;
     }
 
-    public int getTerraceSleepOutside() {
+    public boolean isTerraceSleepOutside() {
         return terraceSleepOutside;
     }
 
-    public void setTerraceSleepOutside(int terraceSleepOutside) {
+    public void setTerraceSleepOutside(boolean terraceSleepOutside) {
         this.terraceSleepOutside = terraceSleepOutside;
     }
 
@@ -188,43 +196,43 @@ public class QuestionnaireResultBean {
         this.hoursAlone = hoursAlone;
     }
 
-    public int getFirstPet() {
+    public boolean isFirstPet() {
         return firstPet;
     }
 
-    public void setFirstPet(int firstPet) {
+    public void setFirstPet(boolean firstPet) {
         this.firstPet = firstPet;
     }
 
-    public int getSterilizePet() {
+    public boolean isSterilizePet() {
         return sterilizePet;
     }
 
-    public void setSterilizePet(int sterilizePet) {
+    public void setSterilizePet(boolean sterilizePet) {
         this.sterilizePet = sterilizePet;
     }
 
-    public int getProgramEducation() {
+    public boolean isProgramEducation() {
         return programEducation;
     }
 
-    public void setProgramEducation(int programEducation) {
+    public void setProgramEducation(boolean programEducation) {
         this.programEducation = programEducation;
     }
 
-    public int getDisabledPet() {
+    public boolean isDisabledPet() {
         return disabledPet;
     }
 
-    public void setDisabledPet(int disabledPet) {
+    public void setDisabledPet(boolean disabledPet) {
         this.disabledPet = disabledPet;
     }
 
-    public int getSpecificArea() {
+    public boolean isSpecificArea() {
         return specificArea;
     }
 
-    public void setSpecificArea(int specificArea) {
+    public void setSpecificArea(boolean specificArea) {
         this.specificArea = specificArea;
     }
 
