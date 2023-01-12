@@ -12,6 +12,10 @@ public abstract class ShelterUserModel {
         setAccountInfo(accountInfo);
     }
 
+    public ShelterUserModel(String profileImg) {
+        this.profileImg = profileImg;
+    }
+
     public int getId() {
         return id;
     }
