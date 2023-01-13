@@ -21,11 +21,22 @@
 package com.ispwproject.adoptme.utils.dao.queries;
 
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.ispwproject.adoptme.model.PetModel;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.sql.*;
 
 public class CRUDQueries {
+
+    public static PreparedStatement insertPet(Connection connection) throws SQLException, FileNotFoundException {
+
+        //String insertStatement = String.format("INSERT INTO Pets (petId, shelter, name, imgSrc, age, gender, type) VALUES ('%d', '%d', '%s', '%s', '%s', '%s', '%d')", petId, pet.getShelterId(), pet.getName(), inputStream, pet.getAge(), pet.getGender(), pet.getType());
+
+        //return stmt.executeUpdate(insertStatement);
+        return connection.prepareStatement("INSERT INTO Pets (petId, shelter, name, imgSrc, gender, type, dateOfBirth) VALUES (?,?,?,?,?,?,?)");
+    }
     /*
     public static int inserisciAlbum(Statement stmt, Album album) throws SQLException  {
         String insertStatement = String.format("INSERT INTO Album (AlbumId, Titolo, Artista, Anno) VALUES (%s,'%s','%s',%s)", album.getAlbumId(), album.getTitolo(), album.getArtista(), album.getAnno());
