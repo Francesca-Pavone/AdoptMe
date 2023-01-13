@@ -40,7 +40,7 @@ public class PetItemController_G {
     public void setData(GIPreviewPetBean previewPetBean) throws IOException {
         petGender.setText(previewPetBean.getGenderGI());
         petName.setText(previewPetBean.getNameGI());
-        petAge.setText(previewPetBean.getFullDateOfBirth());
+        petAge.setText(previewPetBean.getYearOfBirthGI());
         InputStream inputStream = new FileInputStream(previewPetBean.getPetImageGI());
         Image image = new Image(inputStream);
         petImage.setImage(image);

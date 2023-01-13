@@ -13,10 +13,9 @@ public class DogBean extends PetBean{
     public DogBean() {
     }
 
-    public DogBean(File petImage, String name, LocalDate fullDateOfBirth, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience) {
+    public DogBean(File petImage, String name, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience) {
         this.setPetImage(petImage);
         this.setName(name);
-        this.setFullDateOfBirth(fullDateOfBirth);
         this.setDisabilityType(disabilityType);
         this.setMaleDog(maleDog);
         this.setFemaleDog(femaleDog);
@@ -29,13 +28,14 @@ public class DogBean extends PetBean{
         this.setSleepOutside(sleepOutside);
         this.setFirstExperience(firstExperience);
     }
+
     public DogBean(DogBean dogBean) throws IOException {
         this.setPetImage(dogBean.getPetImage());
         this.setName(dogBean.getName());
         this.setType(dogBean.getType());
-        this.setFullDateOfBirth(dogBean.getFullDateOfBirth());
         this.setYearOfBirth(dogBean.getYearOfBirth());
         this.setMonthOfBirth(dogBean.getMonthOfBirth());
+        this.setDayOfBirth(dogBean.getDayOfBirth());
         this.setGender(dogBean.getGender());
         this.setCoatLenght(dogBean.getCoatLenght());
         this.setVaccinated(dogBean.isVaccinated());

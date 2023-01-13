@@ -71,12 +71,12 @@ public class PetDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                LocalDate petAge = resultSet.getDate("dateOfBirth").toLocalDate();
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                PetModel pet = new PetModel(petName, petType, petImage, petAge, petGender, petCompatibility);
+                PetModel pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
                 petList.add(pet);
 
             }
@@ -151,12 +151,12 @@ public class PetDAO {
                 }
 
 
-                LocalDate petAge = resultSet.getDate("dateOfBirth").toLocalDate();
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                pet = new PetModel(petName, petType, petImage, petAge, petGender, petCompatibility);
+                pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
 
             }while(resultSet.next());
 
@@ -215,11 +215,25 @@ public class PetDAO {
             do{
                 // Leggo le colonne "by name"
                 String petName = resultSet.getString("name");
-                String petImage = resultSet.getString("imgSrc");
-                String petAge = resultSet.getString("age");
-                String petGender = resultSet.getString("gender");
+                Blob blob = resultSet.getBlob("imgSrc");
+                InputStream in = blob.getBinaryStream();
+                //Image petImage = new Image(in);
 
-                pet = new PetModel(petName, petImage, petAge, petGender);
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = petName + "Photo" + ".png";
+                File petImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(petImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+                int petType = resultSet.getInt("type");
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                int petGender = resultSet.getInt("gender");
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
                 petList.add(pet);
 
             }while(resultSet.next());
@@ -269,11 +283,25 @@ public class PetDAO {
             resultSet.first();
             do{
                 String petName = resultSet.getString("name");
-                String petImage = resultSet.getString("imgSrc");
-                String petAge = resultSet.getString("age");
-                String petGender = resultSet.getString("gender");
+                Blob blob = resultSet.getBlob("imgSrc");
+                InputStream in = blob.getBinaryStream();
+                //Image petImage = new Image(in);
 
-                PetModel pet = new PetModel(petName, petImage, petAge, petGender);
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = petName + "Photo" + ".png";
+                File petImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(petImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+                int petType = resultSet.getInt("type");
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                int petGender = resultSet.getInt("gender");
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                PetModel pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
 
                 petList.add(pet);
 
@@ -341,8 +369,8 @@ public class PetDAO {
             preparedStatement.setInt(5, dogBean.getGender());
             preparedStatement.setInt(6, 0);
 
-            Date date = Date.valueOf(dogBean.getFullDateOfBirth());
-            preparedStatement.setDate(7, date);
+
+            preparedStatement.setInt(7, dogBean.getYearOfBirth());
 
             preparedStatement.executeUpdate();
 
@@ -401,8 +429,7 @@ public class PetDAO {
             preparedStatement.setInt(5, catBean.getGender());
             preparedStatement.setInt(6, 1);
 
-            Date date = Date.valueOf(catBean.getFullDateOfBirth());
-            preparedStatement.setDate(7, date);
+            preparedStatement.setInt(7, catBean.getYearOfBirth());
 
             preparedStatement.executeUpdate();
 

@@ -8,10 +8,9 @@ public class CatBean extends PetBean{
     public CatBean() {
     }
 
-    public CatBean(File petImage, String name, LocalDate fullDateOfBirth, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience) {
+    public CatBean(File petImage, String name, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience) {
         this.setPetImage(petImage);
         this.setName(name);
-        this.setFullDateOfBirth(fullDateOfBirth);
         this.setDisabilityType(disabilityType);
         this.setMaleDog(maleDog);
         this.setFemaleDog(femaleDog);
@@ -29,9 +28,9 @@ public class CatBean extends PetBean{
         this.setPetImage(catBean.getPetImage());
         this.setName(catBean.getName());
         this.setType(catBean.getType());
-        this.setFullDateOfBirth(catBean.getFullDateOfBirth());
         this.setYearOfBirth(catBean.getYearOfBirth());
         this.setMonthOfBirth(catBean.getMonthOfBirth());
+        this.setDayOfBirth(catBean.getDayOfBirth());
         this.setGender(catBean.getGender());
         this.setCoatLenght(catBean.getCoatLenght());
         this.setVaccinated(catBean.isVaccinated());
