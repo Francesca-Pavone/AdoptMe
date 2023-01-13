@@ -20,13 +20,9 @@
  */
 package com.ispwproject.adoptme.utils.dao.queries;
 
-import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultApplicativeController;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 public class SimpleQueries {
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {

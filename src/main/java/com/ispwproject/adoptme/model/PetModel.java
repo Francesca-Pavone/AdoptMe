@@ -9,9 +9,9 @@ public class PetModel {
     private File petImage;
     private String name;
     private int type; // 0 -> DOG  |  1 -> CAT
-    private LocalDate fullDateOfBirth;
     private int yearOfBirth;
     private int monthOfBirth;
+    private int dayOfBirth;
     private int gender;
     private int coatLenght;
 
@@ -25,14 +25,14 @@ public class PetModel {
 
     private Shelter shelter;
 
-    public PetModel(int petId, File petImage, String name, int type, LocalDate fullDateOfBirth, int yearOfBirth, int monthOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
+    public PetModel(int petId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
         this.petId = petId;
         this.petImage = petImage;
         this.name = name;
         this.type = type;
-        this.fullDateOfBirth = fullDateOfBirth;
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
         this.gender = gender;
         this.coatLenght = coatLenght;
         this.vaccinated = vaccinated;
@@ -47,11 +47,11 @@ public class PetModel {
 
 
 
-    public PetModel(String name, int type, File petImg, LocalDate fullDateOfBirth, int gender, PetCompatibility petCompatibility) {
+    public PetModel(String name, int type, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
         setName(name);
         setType(type);
         setPetImage(petImg);
-        setFullDateOfBirth(fullDateOfBirth);
+        setYearOfBirth(yearOfBirth);
         setGender(gender);
         setPetCompatibility(petCompatibility);
     }
@@ -96,14 +96,6 @@ public class PetModel {
         this.type = type;
     }
 
-    public LocalDate getFullDateOfBirth() {
-        return fullDateOfBirth;
-    }
-
-    public void setFullDateOfBirth(LocalDate fullDateOfBirth) {
-        this.fullDateOfBirth = fullDateOfBirth;
-    }
-
     public int getYearOfBirth() {
         return yearOfBirth;
     }
@@ -119,6 +111,10 @@ public class PetModel {
     public void setMonthOfBirth(int monthOfBirth) {
         this.monthOfBirth = monthOfBirth;
     }
+
+    public int getDayOfBirth() { return dayOfBirth; }
+
+    public void setDayOfBirth(int dayOfBirth) { this.dayOfBirth = dayOfBirth; }
 
     public int getGender() {
         return gender;

@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultApplicativeController;
-import com.ispwproject.adoptme.utils.bean.GI_QuestionnaireResultBean;
+import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController_A;
+import com.ispwproject.adoptme.utils.bean.GI.GIQuestionnaireResultBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -637,7 +636,7 @@ public class QuestionnaireController {
     }
 
     public void endQuestionnaire(ActionEvent event) throws Exception {
-        GI_QuestionnaireResultBean questionnaireResultBean = new GI_QuestionnaireResultBean();
+        GIQuestionnaireResultBean questionnaireResultBean = new GIQuestionnaireResultBean();
         questionnaireResultBean.setTypeGI(((ToggleButton) PetTypeGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setGenderGI(((ToggleButton) petGenderGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setPuppy(btnPuppy.isSelected());
@@ -665,8 +664,8 @@ public class QuestionnaireController {
         questionnaireResultBean.setSpecificAreaGI(((ToggleButton) SpecificAreaGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setCity(cityTextField.getText());
 
-        QuestionnaireResultApplicativeController questionnaireResultApplicativeController = new QuestionnaireResultApplicativeController();
-        questionnaireResultApplicativeController.findPets(questionnaireResultBean);
+        QuestionnaireResultController_A questionnaireResultControllerA = new QuestionnaireResultController_A();
+        questionnaireResultControllerA.findPets(questionnaireResultBean);
         Stage stage = (Stage) btnEndQuestionnaire.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

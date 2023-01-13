@@ -13,9 +13,9 @@ public class PetBean {
     protected File petImage;
     protected String name;
     protected int type; // 0 -> DOG  |  1 -> CAT
-    protected LocalDate fullDateOfBirth;
     protected int yearOfBirth;
     protected int monthOfBirth;
+    protected int dayOfBirth;
     protected int gender;
     protected int coatLenght;
 
@@ -56,9 +56,9 @@ public class PetBean {
         this.setPetImage(catModel.getPetImage());
         this.setName(catModel.getName());
         this.setType(catModel.getType());
-        this.setFullDateOfBirth(catModel.getFullDateOfBirth());
         this.setYearOfBirth(catModel.getYearOfBirth());
         this.setMonthOfBirth(catModel.getMonthOfBirth());
+        this.setDayOfBirth(catModel.getDayOfBirth());
         this.setGender(catModel.getGender());
         this.setCoatLenght(catModel.getCoatLenght());
         this.setVaccinated(catModel.isVaccinated());
@@ -90,9 +90,9 @@ public class PetBean {
         this.setPetImage(dogModel.getPetImage());
         this.setName(dogModel.getName());
         this.setType(dogModel.getType());
-        this.setFullDateOfBirth(dogModel.getFullDateOfBirth());
         this.setYearOfBirth(dogModel.getYearOfBirth());
         this.setMonthOfBirth(dogModel.getMonthOfBirth());
+        this.setDayOfBirth(dogModel.getDayOfBirth());
         this.setGender(dogModel.getGender());
         this.setCoatLenght(dogModel.getCoatLenght());
         this.setVaccinated(dogModel.isVaccinated());
@@ -124,7 +124,6 @@ public class PetBean {
         this.setPetImage(petModel.getPetImage());
         this.setName(petModel.getName());
         this.setType(petModel.getType());
-        this.setFullDateOfBirth(petModel.getFullDateOfBirth());
         this.setYearOfBirth(petModel.getYearOfBirth());
         this.setMonthOfBirth(petModel.getMonthOfBirth());
         this.setGender(petModel.getGender());
@@ -176,14 +175,6 @@ public class PetBean {
         this.type = type;
     }
 
-    public LocalDate getFullDateOfBirth() {
-        return fullDateOfBirth;
-    }
-
-    public void setFullDateOfBirth(LocalDate fullDateOfBirth) {
-        this.fullDateOfBirth = fullDateOfBirth;
-    }
-
     public int getYearOfBirth() {
         return yearOfBirth;
     }
@@ -198,6 +189,14 @@ public class PetBean {
 
     public void setMonthOfBirth(int monthOfBirth) {
         this.monthOfBirth = monthOfBirth;
+    }
+
+    public int getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(int dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
     }
 
     public int getGender() {
