@@ -7,6 +7,11 @@ public abstract class ShelterUserModel {
     private String profileImg; //todo: riportare in formato file
     private AccountInfo accountInfo;
 
+
+    public ShelterUserModel(int id) {
+        this.id = id;
+    }
+
     public ShelterUserModel(String profileImg, AccountInfo accountInfo) {
         setProfileImg(profileImg);
         setAccountInfo(accountInfo);

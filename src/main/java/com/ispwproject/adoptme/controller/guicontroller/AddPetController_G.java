@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController_A;
+import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.utils.Factory;
 import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
@@ -126,6 +128,8 @@ public class AddPetController_G {
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
     private final int shelterId = 1; //TODO: questo valore dovrà essere preso dalla sessione
+    private PetModel pet;
+
 
     public void initialize() {
 
@@ -162,9 +166,11 @@ public class AddPetController_G {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
+
         int year;
         int month;
         int day;
+        AddPetController_A addPetController_a = null;
 
         if (datePicker.getValue() != null) {
             year = datePicker.getValue().getYear();
@@ -181,6 +187,7 @@ public class AddPetController_G {
         switch (petType) {
             case 0 -> // DOG
             {
+
                 GIDogBean dogBean = new GIDogBean(
                         file,
                         tf_petName.getText(),
@@ -210,8 +217,7 @@ public class AddPetController_G {
                         boxSize.getValue()
                 );
 
-                AddPetController_A addPetController_a = new AddPetController_A();
-                addPetController_a.addDog(dogBean, shelterId);
+                addPetController_a = new AddPetController_A(dogBean);
             }
             case 1 -> // CAT
             {
@@ -244,11 +250,11 @@ public class AddPetController_G {
                         ((RadioButton) testFelv.getSelectedToggle()).getText()
                 );
 
-                AddPetController_A addPetController_a = new AddPetController_A();
-                addPetController_a.addCat(catBean, shelterId);
+                addPetController_a = new AddPetController_A(catBean);
             }
-        }
 
+        }
+        addPetController_a.addPet();
         ((Node)event.getSource()).getScene().getWindow().hide();
 
 

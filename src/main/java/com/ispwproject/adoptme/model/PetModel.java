@@ -3,8 +3,7 @@ package com.ispwproject.adoptme.model;
 import java.io.File;
 import java.time.LocalDate;
 
-public class PetModel {
-
+public abstract class PetModel {
     private int petId;
     private File petImage;
     private String name;
@@ -25,11 +24,14 @@ public class PetModel {
 
     private Shelter shelter;
 
-    public PetModel(int petId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
-        this.petId = petId;
-        this.petImage = petImage;
-        this.name = name;
+    public PetModel() {
+
+    }
+
+    public PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
         this.type = type;
+        this.name = name;
+        this.petImage = petImage;
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
@@ -47,13 +49,13 @@ public class PetModel {
 
 
 
-    public PetModel(String name, int type, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
+    public PetModel(int type, String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
         setName(name);
         setType(type);
         setPetImage(petImg);
         setYearOfBirth(yearOfBirth);
         setGender(gender);
-        setPetCompatibility(petCompatibility);
+        this.petCompatibility = new PetCompatibility();
     }
 
     public Shelter getShelter() {
@@ -187,4 +189,6 @@ public class PetModel {
     public void setPetCompatibility(PetCompatibility petCompatibility) {
         this.petCompatibility = petCompatibility;
     }
+
+    public abstract void getPlusInfo();
 }

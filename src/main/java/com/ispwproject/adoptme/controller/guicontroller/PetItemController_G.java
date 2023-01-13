@@ -32,11 +32,9 @@ public class PetItemController_G {
     @FXML
     private Label petName;
 
-    private DogBean dogBean;
-    private CatBean catBean;
 
 
-    // TODO devo passare PetBean e non PetModel
+
     public void setData(GIPreviewPetBean previewPetBean) throws IOException {
         petGender.setText(previewPetBean.getGenderGI());
         petName.setText(previewPetBean.getNameGI());

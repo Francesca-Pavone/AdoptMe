@@ -69,7 +69,7 @@ public class ShelterHomepageController_G extends ShelterSideBar {
 
         try {
             // TODO devo passare PetBean e non PetModel
-            for (PreviewPetBean pet : showShelterPetsController_a.getPetList()) {
+            for (PetBean pet : showShelterPetsController_a.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();

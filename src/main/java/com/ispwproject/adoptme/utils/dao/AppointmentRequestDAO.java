@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.controller.guicontroller.LoginController;
 import com.ispwproject.adoptme.model.AppointmentRequestModel;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.User;
@@ -52,7 +51,7 @@ public class AppointmentRequestDAO {
             do {
                 // Leggo le colonne "by name"
                 int petId = resultSet.getInt("petId");
-                PetModel pet = PetDAO.retreivePetById(petId, shelterId);
+                PetModel pet = PetDAO.retrivePetById(petId, shelterId);
 
                 int userId = resultSet.getInt("userId");
                 User user = UserDAO.retreiveUserById(userId);

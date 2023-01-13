@@ -123,11 +123,11 @@
 }
 
 
-.radio-button:hover .radio {
+.radio-button1:hover .radio {
     -fx-border-color: #C89C32;
 }
 
-.radio-button:selected .radio {
+.radio-button1:selected .radio {
     -fx-border-color: #C89C32;
 }
 
@@ -214,12 +214,4 @@
     -fx-border-color: rgba(0,0,0,0);
 }
 
-.list-cell:filled:selected {
-	-fx-background-color: #C89C32;
-	-fx-text-fill: white;
-}
 
-.list-cell:filled:hover {
-	-fx-background-color: #417E70;
-	-fx-text-fill: white;
-}

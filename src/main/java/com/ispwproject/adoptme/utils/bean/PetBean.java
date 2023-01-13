@@ -86,7 +86,6 @@ public class PetBean {
     }
 
     public PetBean(DogModel dogModel) {
-        //TODO: devo passare un model non un bean
         this.setPetImage(dogModel.getPetImage());
         this.setName(dogModel.getName());
         this.setType(dogModel.getType());

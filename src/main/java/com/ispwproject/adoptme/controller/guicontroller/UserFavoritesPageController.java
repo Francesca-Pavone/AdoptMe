@@ -27,7 +27,7 @@ public class UserFavoritesPageController {
         try {
             int searchKey = 1;
             //System.out.println("Looking for " + searchKey + "'s pets: ");
-            petList = this.petDAO.retreivePetByShelterId(searchKey);
+            petList = this.petDAO.retrivePetByShelterId(searchKey);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

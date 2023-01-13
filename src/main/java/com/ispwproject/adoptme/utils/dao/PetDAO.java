@@ -2,17 +2,14 @@ package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.utils.Factory;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
-import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
-import javafx.scene.image.Image;
 
 import java.io.*;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class PetDAO {
     //TODO: passare il model non il bean
 
 
-    public List<PetModel> retreivePetByShelterId(int shelterId) throws Exception {
+    public List<PetModel> retrivePetByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
@@ -76,7 +73,10 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                PetModel pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
+                Factory factory = new Factory();
+                PetModel pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
+                System.out.println("NelDA0: "+pet.getPetImage() + pet.getName() + pet.getGender() + pet.getYearOfBirth());
+
                 petList.add(pet);
 
             }
@@ -104,7 +104,7 @@ public class PetDAO {
         return petList;
     }
 
-    public static PetModel retreivePetById(int petId, int shelterId) throws Exception {
+    public static PetModel retrivePetById(int petId, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
@@ -156,7 +156,8 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
+                Factory factory = new Factory();
+                pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
 
             }while(resultSet.next());
 
@@ -182,7 +183,7 @@ public class PetDAO {
         return pet;
     }
 
-    public static List<PetModel> retreivePetFromQuestionnaire(int petId, int shelterId) throws Exception {
+    public static List<PetModel> retrivePetFromQuestionnaire(int petId, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
@@ -231,9 +232,11 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
-
                 PetCompatibility petCompatibility = new PetCompatibility();
-                pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
+
+                Factory factory = new Factory();
+                pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
+
                 petList.add(pet);
 
             }while(resultSet.next());
@@ -299,9 +302,10 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
-
                 PetCompatibility petCompatibility = new PetCompatibility();
-                PetModel pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
+
+                Factory factory = new Factory();
+                PetModel pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
 
                 petList.add(pet);
 
@@ -326,6 +330,66 @@ public class PetDAO {
 
         return petList;
     }
+    public void savePet(PetModel petModel) throws Exception {
+        // STEP 1: dichiarazioni
+        Statement stmt = null;
+        Connection conn = null;
+        int petId = 1;
+
+        try {
+            // STEP 2: loading dinamico del driver mysql
+            Class.forName(DRIVER_CLASS_NAME);
+
+            // STEP 3: apertura connessione
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+
+            // STEP 4.1: creazione ed esecuzione della query
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            // In pratica i risultati delle query possono essere visti come un Array Associativo o un Map
+            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, petModel.getShelter().getId());
+            while (rs.next()) {
+                // lettura delle colonne "by name"
+                petId = rs.getInt("petId");
+            }
+
+            rs.close();
+            stmt.close();
+
+            // STEP 4.2: creazione ed esecuzione della query
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            PreparedStatement preparedStatement = CRUDQueries.insertPet(conn);
+            preparedStatement.setInt(1, petId);
+            preparedStatement.setInt(2, petModel.getShelter().getId());
+            preparedStatement.setString(3, petModel.getName());
+
+            InputStream inputStream = new FileInputStream(petModel.getPetImage());
+            preparedStatement.setBlob(4, inputStream);
+
+            preparedStatement.setInt(5, petModel.getGender());
+            preparedStatement.setInt(6, petModel.getType());
+
+
+            preparedStatement.setInt(7, petModel.getYearOfBirth());
+            preparedStatement.executeUpdate();
+
+            //int result = CRUDQueries.insertPet(stmt, petId, petModel, inputStream);
+
+            // STEP 5.1: Clean-up dell'ambiente
+            rs.close();
+        } finally {
+            // STEP 5.2: Clean-up dell'ambiente
+            if (stmt != null)
+                stmt.close();
+            if (conn != null)
+                conn.close();
+        }
+    }
+
     public void saveDog(DogBean dogBean, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
