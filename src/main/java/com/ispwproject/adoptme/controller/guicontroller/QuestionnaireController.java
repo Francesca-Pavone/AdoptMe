@@ -238,6 +238,7 @@ public class QuestionnaireController {
         for(j = i + 1; j < vboxParent.getChildren().size(); j++) {
             if(vboxParent.getChildren().contains(vboxList.get(j)))
                 vboxParent.getChildren().remove(vboxList.get(j));
+
         }
     }
 

@@ -61,17 +61,10 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-/*
-    public static ResultSet selectAlbumByName(Statement stmt, String title) throws SQLException  {
-        String sql = "SELECT * FROM Album where Titolo = '" + title + "';";
-        System.out.println(sql);
+
+    public static ResultSet selectLastPetIdByShelterId(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT CASE WHEN MAX(petId) IS NULL THEN 1 ELSE MAX(petId)+1 END AS petId FROM Pets WHERE shelter = '" + shelterId + "';";
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectAlbumIds(Statement stmt) throws SQLException  {
-        String sql = "SELECT DISTINCT AlbumId FROM Album ;";
-        System.out.println(sql);
-        return stmt.executeQuery(sql);
-    }
-	*/
 }

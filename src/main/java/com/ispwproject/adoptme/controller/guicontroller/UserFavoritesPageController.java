@@ -54,8 +54,8 @@ public class UserFavoritesPageController {
                 fxmlLoader.setLocation(Main.class.getResource("UserPetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                PetItemController petItemController = fxmlLoader.getController();
-                petItemController.setData(pet);
+                PetItemController_G petItemControllerG = fxmlLoader.getController();
+                //petItemControllerG.setData(pet);
 
                 if (column == 3) {
                     column = 0;
