@@ -71,12 +71,12 @@ public class PetDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                LocalDate petAge = resultSet.getDate("dateOfBirth").toLocalDate();
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                PetModel pet = new PetModel(petName, petType, petImage, petAge, petGender, petCompatibility);
+                PetModel pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
                 petList.add(pet);
 
             }
@@ -151,12 +151,12 @@ public class PetDAO {
                 }
 
 
-                LocalDate petAge = resultSet.getDate("dateOfBirth").toLocalDate();
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                pet = new PetModel(petName, petType, petImage, petAge, petGender, petCompatibility);
+                pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
 
             }while(resultSet.next());
 
@@ -182,6 +182,150 @@ public class PetDAO {
         return pet;
     }
 
+    public static List<PetModel> retreivePetFromQuestionnaire(int petId, int shelterId) throws Exception {
+        // STEP 1: dichiarazioni
+        Statement stmt = null;
+        Connection conn = null;
+        PetModel pet;
+        List<PetModel> petList = new ArrayList<PetModel>();
+
+
+        try {
+            // STEP 2: loading dinamico del driver mysql
+            Class.forName(DRIVER_CLASS_NAME);
+
+            // STEP 3: apertura connessione
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // STEP 4: creazione ed esecuzione della query
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
+            ResultSet resultSet = SimpleQueries.selectPetById(stmt, petId, shelterId);
+
+            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
+            if (!resultSet.first()){
+                Exception e = new Exception("No pets found for the shelter with id: "+shelterId);
+                throw e;
+            }
+
+            // Riposiziono il cursore sul primo record del result set
+            resultSet.first();
+            do{
+                // Leggo le colonne "by name"
+                String petName = resultSet.getString("name");
+                Blob blob = resultSet.getBlob("imgSrc");
+                InputStream in = blob.getBinaryStream();
+                //Image petImage = new Image(in);
+
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = petName + "Photo" + ".png";
+                File petImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(petImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+                int petType = resultSet.getInt("type");
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                int petGender = resultSet.getInt("gender");
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
+                petList.add(pet);
+
+            }while(resultSet.next());
+
+            // STEP 5.1: Clean-up dell'ambiente
+            resultSet.close();
+
+        } finally {
+            // STEP 5.2: Clean-up dell'ambiente
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+        return petList;
+    }
+
+    public static List<PetModel> retrievePetByShelterName(String shelterName) throws Exception {
+        Statement stmt = null;
+        Connection conn = null;
+        List<PetModel> petList = new ArrayList<>();
+
+        try {
+            Class.forName(DRIVER_CLASS_NAME);
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet resultSet = SimpleQueries.searchPetsFromShelter(stmt, shelterName);
+
+            if (!resultSet.first()){
+                Exception e = new Exception("No shelters found with that input: "+shelterName);
+                throw e;
+            }
+
+            resultSet.first();
+            do{
+                String petName = resultSet.getString("name");
+                Blob blob = resultSet.getBlob("imgSrc");
+                InputStream in = blob.getBinaryStream();
+                //Image petImage = new Image(in);
+
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = petName + "Photo" + ".png";
+                File petImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(petImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+                int petType = resultSet.getInt("type");
+                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                int petGender = resultSet.getInt("gender");
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                PetModel pet = new PetModel(petName, petType, petImage, petYearOfBirth, petGender, petCompatibility);
+
+                petList.add(pet);
+
+            }while(resultSet.next());
+
+            resultSet.close();
+
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+        return petList;
+    }
     public void saveDog(DogBean dogBean, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
@@ -194,6 +338,7 @@ public class PetDAO {
 
             // STEP 3: apertura connessione
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
 
             // STEP 4.1: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -224,8 +369,8 @@ public class PetDAO {
             preparedStatement.setInt(5, dogBean.getGender());
             preparedStatement.setInt(6, 0);
 
-            Date date = Date.valueOf(dogBean.getFullDateOfBirth());
-            preparedStatement.setDate(7, date);
+
+            preparedStatement.setInt(7, dogBean.getYearOfBirth());
 
             preparedStatement.executeUpdate();
 
@@ -284,8 +429,7 @@ public class PetDAO {
             preparedStatement.setInt(5, catBean.getGender());
             preparedStatement.setInt(6, 1);
 
-            Date date = Date.valueOf(catBean.getFullDateOfBirth());
-            preparedStatement.setDate(7, date);
+            preparedStatement.setInt(7, catBean.getYearOfBirth());
 
             preparedStatement.executeUpdate();
 

@@ -162,16 +162,31 @@ public class AddPetController_G {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
+        int year;
+        int month;
+        int day;
 
+        if (datePicker.getValue() != null) {
+            year = datePicker.getValue().getYear();
+            month = datePicker.getValue().getMonthValue();
+            day = datePicker.getValue().getDayOfMonth();
+        } else {
+            year = Integer.parseInt(boxYear.getValue());
+            if( boxMonth.getValue() != null)
+                month = Integer.parseInt(boxMonth.getValue());
+            else
+                month = -1;
+            day = -1;
+        }
         switch (petType) {
             case 0 -> // DOG
             {
                 GIDogBean dogBean = new GIDogBean(
                         file,
                         tf_petName.getText(),
-                        datePicker.getValue(),
-                        boxYear.getValue(),
-                        boxMonth.getValue(),
+                        year,
+                        month,
+                        day,
                         ((RadioButton) tg_gender.getSelectedToggle()).getText(),
                         boxCoatLenght.getValue(),
                         ((RadioButton) vaccinated.getSelectedToggle()).getText(),
@@ -203,9 +218,9 @@ public class AddPetController_G {
                 GICatBean catBean = new GICatBean(
                         file,
                         tf_petName.getText(),
-                        datePicker.getValue(),
-                        boxYear.getValue(),
-                        boxMonth.getValue(),
+                        year,
+                        month,
+                        day,
                         ((RadioButton) tg_gender.getSelectedToggle()).getText(),
                         boxCoatLenght.getValue(),
                         ((RadioButton) vaccinated.getSelectedToggle()).getText(),

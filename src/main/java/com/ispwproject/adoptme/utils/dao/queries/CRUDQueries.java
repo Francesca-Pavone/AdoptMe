@@ -35,7 +35,7 @@ public class CRUDQueries {
         //String insertStatement = String.format("INSERT INTO Pets (petId, shelter, name, imgSrc, age, gender, type) VALUES ('%d', '%d', '%s', '%s', '%s', '%s', '%d')", petId, pet.getShelterId(), pet.getName(), inputStream, pet.getAge(), pet.getGender(), pet.getType());
 
         //return stmt.executeUpdate(insertStatement);
-        return connection.prepareStatement("INSERT INTO Pets (petId, shelter, name, imgSrc, gender, type, dateOfBirth) VALUES (?,?,?,?,?,?,?)");
+        return connection.prepareStatement("INSERT INTO Pets (petId, shelter, name, imgSrc, gender, type, yearOfBirth) VALUES (?,?,?,?,?,?,?)");
     }
     /*
     public static int inserisciAlbum(Statement stmt, Album album) throws SQLException  {

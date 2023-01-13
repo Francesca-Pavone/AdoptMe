@@ -7,17 +7,18 @@ import java.time.LocalDate;
 
 public class GIDogBean extends DogBean {
 
-    public GIDogBean(File petImage, String name, LocalDate fullDateOfBirth, String gender){
+    public GIDogBean(File petImage, String name, int yearOfBirth, String gender){
         setPetImage(petImage);
         setName(name);
-        setFullDateOfBirth(fullDateOfBirth);
+        setYearOfBirthGI(yearOfBirth);
         setGenderGI(gender);
     }
 
-    public GIDogBean(File petImage, String name, LocalDate fullDateOfBirth, String yearOfBirth, String monthOfBirth, String gender, String coatLenght, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, String hoursAlone, String dogEducation, String size) {
-        super(petImage, name, fullDateOfBirth, disabilityType, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience);
+    public GIDogBean(File petImage, String name, int yearOfBirth, int monthOfBirth, int dayOfBirth, String gender, String coatLenght, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, String hoursAlone, String dogEducation, String size) {
+        super(petImage, name, disabilityType, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience);
         setYearOfBirthGI(yearOfBirth);
         setMonthOfBirthGI(monthOfBirth);
+        setDayOfBirthGI(dayOfBirth);
         setGenderGI(gender);
         setCoatLenghtGI(coatLenght);
         setVaccinatedGI(vaccinated);
@@ -30,18 +31,17 @@ public class GIDogBean extends DogBean {
         setSizeGI(size);
     }
 
-    public void setYearOfBirthGI(String yearOfBirth) {
-        if (yearOfBirth != null)
-            this.yearOfBirth = Integer.parseInt(yearOfBirth);
-        else
-            this.yearOfBirth = 0;
+    public void setYearOfBirthGI(int yearOfBirth) {
+            this.yearOfBirth = yearOfBirth;
         //TODO: togliere questa cosa, messa solo per prova
     }
-    public void setMonthOfBirthGI(String monthOfBirth) {
-        if (monthOfBirth != null)
-            this.monthOfBirth = Integer.parseInt(monthOfBirth);
-        else
-            this.monthOfBirth = 0;
+    public void setMonthOfBirthGI(int monthOfBirth) {
+        this.monthOfBirth = monthOfBirth;
+        //TODO: togliere questa cosa, messa solo per prova
+    }
+
+    private void setDayOfBirthGI(int dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
         //TODO: togliere questa cosa, messa solo per prova
     }
 

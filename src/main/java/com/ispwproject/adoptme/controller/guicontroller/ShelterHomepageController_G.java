@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsControlle
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,7 +69,7 @@ public class ShelterHomepageController_G extends ShelterSideBar {
 
         try {
             // TODO devo passare PetBean e non PetModel
-            for (PetBean pet : showShelterPetsController_a.getPetList()) {
+            for (PreviewPetBean pet : showShelterPetsController_a.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
@@ -81,7 +82,6 @@ public class ShelterHomepageController_G extends ShelterSideBar {
                     column = 0;
                     row++;
                 }
-
 
                 grid.add(pane, column++, row);
             }

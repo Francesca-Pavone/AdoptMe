@@ -47,21 +47,20 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet searchPetsFromShelter(Statement stmt, String shelterName) throws SQLException {
+        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterName + "'";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet searchSheltersByCity(Statement stmt, String city) throws SQLException {
+        String sql = "SELECT name, profileImg FROM Shelters WHERE city = '" + city + "'";
+        return stmt.executeQuery(sql);
+    }
+
+
     public static ResultSet selectLastPetIdByShelterId(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT CASE WHEN MAX(petId) IS NULL THEN 1 ELSE MAX(petId)+1 END AS petId FROM Pets WHERE shelter = '" + shelterId + "';";
         return stmt.executeQuery(sql);
     }
-/*
-    public static ResultSet selectAlbumByName(Statement stmt, String title) throws SQLException  {
-        String sql = "SELECT * FROM Album where Titolo = '" + title + "';";
-        System.out.println(sql);
-        return stmt.executeQuery(sql);
-    }
 
-    public static ResultSet selectAlbumIds(Statement stmt) throws SQLException  {
-        String sql = "SELECT DISTINCT AlbumId FROM Album ;";
-        System.out.println(sql);
-        return stmt.executeQuery(sql);
-    }
-	*/
 }
