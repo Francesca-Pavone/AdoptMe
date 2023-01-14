@@ -1,12 +1,18 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.Shelter;
+import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ShelterDAOJDBC {
 
@@ -17,10 +23,10 @@ public class ShelterDAOJDBC {
 
     private ShelterDAOJDBC() {}
 
-    public static List<Shelter> retrieveShelterByCity(String city) throws Exception {
+    public static List<ShelterModel> retrieveShelterByCity(String city) throws Exception {
         Statement stmt = null;
         Connection conn = null;
-        List<Shelter> sheltersList = new ArrayList<>();
+        List<ShelterModel> sheltersList = new ArrayList<>();
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -37,13 +43,26 @@ public class ShelterDAOJDBC {
             }
 
             resultSet.first();
-            do{
+            do {
+                File shelterImage;
+                Blob blob = resultSet.getBlob("profileImg");
                 String shelterName = resultSet.getString("name");
-                String shelterImage = resultSet.getString("profileImg");
+                if (blob != null) {
+                    InputStream in = blob.getBinaryStream();
+                    String filePath = shelterName + "Photo" + ".png";
+                    shelterImage = new File(filePath);
+                    FileOutputStream outputStream = new FileOutputStream(shelterImage);
+                    int read;
+                    byte[] bytes = new byte[4096];
+                    while ((read = in.read(bytes)) != -1) {
+                        outputStream.write(bytes, 0, read);
+                    }
+                } else {
+                    shelterImage = null;
+                }
 
-                Shelter shelter = new Shelter(shelterName, shelterImage);
-
-                sheltersList.add(shelter);
+                ShelterModel shelterModel = new ShelterModel(shelterName, shelterImage);
+                sheltersList.add(shelterModel);
 
             }while(resultSet.next());
 
@@ -67,10 +86,10 @@ public class ShelterDAOJDBC {
         return sheltersList;
     }
 
-    public static Shelter retrieveShelterByName(String shelterName) throws Exception {
+    public static ShelterModel retrieveShelterByName(String shelterName) throws Exception {
         Statement stmt = null;
         Connection conn = null;
-        Shelter shelter;
+        ShelterModel shelterModel;
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -79,7 +98,7 @@ public class ShelterDAOJDBC {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            ResultSet resultSet = SimpleQueries.searchSheltersByCity(stmt, shelterName);
+            ResultSet resultSet = SimpleQueries.selectSheltersByName(stmt, shelterName);
 
             if (!resultSet.first()){
                 Exception e = new Exception("No shelters found that begin with that input: "+shelterName);
@@ -91,11 +110,26 @@ public class ShelterDAOJDBC {
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String address = resultSet.getString("address");
                 String city = resultSet.getString("city");
-                String shelterImage = resultSet.getString("profileImg");
-                String webSite = resultSet.getString("webSites");
+
+                File shelterImage;
+                Blob blob = resultSet.getBlob("profileImg");
+                if (blob != null) {
+                    InputStream in = blob.getBinaryStream();
+                    String filePath = shelterName + "Photo" + ".png";
+                    shelterImage = new File(filePath);
+                    FileOutputStream outputStream = new FileOutputStream(shelterImage);
+                    int read;
+                    byte[] bytes = new byte[4096];
+                    while ((read = in.read(bytes)) != -1) {
+                        outputStream.write(bytes, 0, read);
+                    }
+                } else {
+                    shelterImage = null;
+                }
+                String webSite = resultSet.getString("webSite");
                 URL webSiteURL = new URL(webSite);
 
-                shelter = new Shelter(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
+                shelterModel = new ShelterModel(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
 
             }while(resultSet.next());
 
@@ -116,6 +150,6 @@ public class ShelterDAOJDBC {
             }
         }
 
-        return shelter;
+        return shelterModel;
     }
 }

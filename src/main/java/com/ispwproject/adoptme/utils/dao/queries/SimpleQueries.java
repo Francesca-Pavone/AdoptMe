@@ -63,4 +63,13 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet selectSheltersByName(Statement stmt, String shelterName) throws SQLException {
+        String sql = "SELECT * FROM Shelters WHERE name = '" + shelterName + "'";
+        return stmt.executeQuery(sql);
+    }
+    /*public static ResultSet checkLogin(Statement stmt, String email, String password) {
+        String sql = "SELECT type FROM Shelters JOIN Users WHERE";
+        return stmt.executeQuery(sql);
+    }*/
+
 }

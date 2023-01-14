@@ -1,9 +1,9 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 
-import com.ispwproject.adoptme.controller.appcontroller.SearchUserHomepageApplicativeController;
-import com.ispwproject.adoptme.model.Shelter;
+import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ispwproject.adoptme.utils.bean.SearchUserHomepageBean;
+import com.ispwproject.adoptme.utils.bean.UserResearchBean;
 
 public class UserHomepageController {
 
@@ -41,9 +41,6 @@ public class UserHomepageController {
     private Pane pane1;
     @FXML
     private Button backButton;
-
-    SearchUserHomepageBean searchUserHomepageBean = new SearchUserHomepageBean();
-    SearchUserHomepageApplicativeController searchUserHomepageApplicativeController = new SearchUserHomepageApplicativeController();
 
     public void initialize() {
         textFieldUserHomepage.setDisable(true);
@@ -77,8 +74,9 @@ public class UserHomepageController {
     }
 
     public void searchUserHomepage(ActionEvent event) throws Exception {
+        UserResearchBean userResearchBean = new UserResearchBean();
         if(!textFieldUserHomepage.getText().equals("")) {
-            searchUserHomepageBean.setCityShelter(textFieldUserHomepage.getText());
+            userResearchBean.setCityShelter(textFieldUserHomepage.getText());
 
             pane1.setVisible(false);
 
@@ -88,23 +86,21 @@ public class UserHomepageController {
             btnSearchUserHomepage.setDisable(true);
 
             if (radioBtnCity.isSelected()) {
-                searchUserHomepageBean.setCityOrShelter(0);
-
                 labelCity.setVisible(true);
                 backButton.setVisible(true);
                 scrollPane.setVisible(true);
-                labelCity.setText("Shelters you can find in '" + searchUserHomepageBean.getCityShelter() + "':");
-                searchUserHomepageApplicativeController.searchCity(searchUserHomepageBean);
+                labelCity.setText("Shelters you can find in '" + userResearchBean.getCityShelter() + "':");
+                UserResearchController_A userResearchControllerA = new UserResearchController_A();
                 int row = 1;
-                List<Shelter> shelterList = new ArrayList<>(searchUserHomepageBean.getSheltersList());
+                List<ShelterBean> shelterList = new ArrayList<>(userResearchControllerA.searchCity(userResearchBean));
                 try {
-                    for (Shelter shelter: shelterList) {
+                    for (ShelterBean shelterBean : shelterList) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
                         Pane pane = fxmlLoader.load();
 
-                        ShelterItemController shelterItemController = fxmlLoader.getController();
-                        shelterItemController.setData(shelter);
+                        ShelterItemController_G shelterItemControllerG = fxmlLoader.getController();
+                        shelterItemControllerG.setData(shelterBean);
 
 
                         grid.add(pane,1,  row);
@@ -114,8 +110,8 @@ public class UserHomepageController {
                     e.printStackTrace();
                 }
             }
-            if (radioBtnShelter.isSelected())
-                searchUserHomepageBean.setCityOrShelter(1);
+            //if (radioBtnShelter.isSelected())
+                //
         } else {
             System.out.println("Scrivere qualcosa...");
         }

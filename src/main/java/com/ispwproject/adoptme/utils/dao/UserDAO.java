@@ -1,9 +1,12 @@
 package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.User;
-import com.ispwproject.adoptme.utils.bean.AccountInfo;
+import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.*;
 
 public class UserDAO {
@@ -46,11 +49,21 @@ public class UserDAO {
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
                 String email = resultSet.getString("email");
-                String profileImg = resultSet.getString("profileImg");
 
-                AccountInfo accountInfo = new AccountInfo(email, 0);
+                Blob blob = resultSet.getBlob("profileImg");
+                InputStream in = blob.getBinaryStream();
+                String filePath = userId + "Photo" + ".png";
+                File profileImg = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(profileImg);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
 
-                user = new User(profileImg, accountInfo, name, surname);
+                AccountInfoBean accountInfoBean = new AccountInfoBean(email, 0);
+
+                user = new User(profileImg, accountInfoBean, name, surname);
 
             }while(resultSet.next());
 

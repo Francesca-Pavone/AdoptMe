@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.controller.guicontroller.LoginController;
 import com.ispwproject.adoptme.model.AppointmentRequestModel;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.User;

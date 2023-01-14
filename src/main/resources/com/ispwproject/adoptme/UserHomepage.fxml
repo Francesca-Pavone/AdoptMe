@@ -212,7 +212,7 @@
          <children>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <TextField fx:id="textFieldUserHomepage" prefHeight="45.0" prefWidth="600.0" promptText="Search shelters by city or shelter's name" stylesheets="@style.css">
+                  <TextField fx:id="textFieldUserHomepage" prefHeight="45.0" prefWidth="600.0" promptText="Search shelters by city or shelterModel's name" stylesheets="@style.css">
                      <font>
                         <Font name="Arial" size="20.0" />
                      </font>

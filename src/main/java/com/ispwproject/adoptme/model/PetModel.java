@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.model;
 
 import java.io.File;
-import java.time.LocalDate;
 
 public class PetModel {
 
@@ -23,9 +22,9 @@ public class PetModel {
     private String disabilityType;
     private PetCompatibility petCompatibility;
 
-    private Shelter shelter;
+    private ShelterModel shelterModel;
 
-    public PetModel(int petId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
+    public PetModel(int petId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, ShelterModel shelterModel) {
         this.petId = petId;
         this.petImage = petImage;
         this.name = name;
@@ -42,7 +41,7 @@ public class PetModel {
         this.disability = disability;
         this.disabilityType = disabilityType;
         this.petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone);
-        this.shelter = shelter;
+        this.shelterModel = shelterModel;
     }
 
 
@@ -56,12 +55,12 @@ public class PetModel {
         setPetCompatibility(petCompatibility);
     }
 
-    public Shelter getShelter() {
-        return shelter;
+    public ShelterModel getShelter() {
+        return shelterModel;
     }
 
-    public void setShelter(Shelter shelter) {
-        this.shelter = shelter;
+    public void setShelter(ShelterModel shelterModel) {
+        this.shelterModel = shelterModel;
     }
 
     public int getPetId() {

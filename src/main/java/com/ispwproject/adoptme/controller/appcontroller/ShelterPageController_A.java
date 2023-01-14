@@ -1,22 +1,29 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.model.Shelter;
-import com.ispwproject.adoptme.utils.bean.ShelterPageBean;
-import com.ispwproject.adoptme.utils.dao.PetDAO;
+import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.model.ShelterModel;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.ShelterDAOJDBC;
+import javafx.scene.image.Image;
 
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class ShelterPageController_A {
-    public void searchShelter(ShelterPageBean shelterPageBean, String shelterName) throws Exception {
-        Shelter shelter = ShelterDAOJDBC.retrieveShelterByName(shelterName);
-        shelterPageBean.setShelterName(shelter.getShelterName());
-        shelterPageBean.setShelterCity(shelter.getCity());
-        shelterPageBean.setShelterImg(shelter.getProfileImg());
-        shelterPageBean.setShelterNumber(shelter.getPhoneNumber());
-        shelterPageBean.setShelterAddress(shelter.getAddress());
 
-        shelterPageBean.setSheltersPet(PetDAO.retrievePetByShelterName(shelterName));
+    ShelterBean shelterBean = new ShelterBean();
+    public void setData(String shelterName) throws Exception {
+        ShelterModel shelterModel = ShelterDAOJDBC.retrieveShelterByName(shelterName);
+        ShelterBean shelterBean = new ShelterBean();
+        shelterBean.setShelterId(shelterModel.getId());
+        shelterBean.setName(shelterModel.getShelterName());
+        shelterBean.setAddress(shelterModel.getAddress());
+        shelterBean.setEmail(shelterModel.getAccountInfo().getEmail());
+        shelterBean.setCity(shelterModel.getCity());
+        shelterBean.setShelterImg(shelterModel.getProfileImg());
+    }
+
+    public ShelterBean getData() {
+        return shelterBean;
     }
 }
