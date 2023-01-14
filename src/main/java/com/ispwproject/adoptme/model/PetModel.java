@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.model;
 import java.io.File;
 import java.time.LocalDate;
 
-public abstract class PetModel {
+public class PetModel {
     protected int petId;
     protected File petImage;
     protected String name;

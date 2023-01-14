@@ -1,8 +1,9 @@
 package com.ispwproject.adoptme.utils.dao;
 
+import com.ispwproject.adoptme.model.CatModel;
+import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.utils.Factory;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
@@ -71,8 +72,8 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                Factory factory = new Factory();
-                PetModel pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
+
+                PetModel pet = new PetModel(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
                 System.out.println("NelDA0: "+pet.getPetImage() + pet.getName() + pet.getGender() + pet.getYearOfBirth());
 
                 petList.add(pet);
@@ -154,8 +155,7 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                Factory factory = new Factory();
-                pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
+                pet = new PetModel(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
 
             }while(resultSet.next());
 
@@ -232,8 +232,7 @@ public class PetDAO {
                 int petGender = resultSet.getInt("gender");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                Factory factory = new Factory();
-                pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
+                pet = new PetModel(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
 
                 petList.add(pet);
 
@@ -302,8 +301,7 @@ public class PetDAO {
                 int petGender = resultSet.getInt("gender");
                 PetCompatibility petCompatibility = new PetCompatibility();
 
-                Factory factory = new Factory();
-                PetModel pet = factory.createPet(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
+                PetModel pet = new PetModel(petType, petName, petImage, petYearOfBirth, petGender, petCompatibility);
 
                 petList.add(pet);
 
@@ -387,8 +385,8 @@ public class PetDAO {
                 conn.close();
         }
     }
-/*
-    public void saveDog(DogBean dogBean, int shelterId) throws Exception {
+
+    public void saveDog(DogModel dogModel, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
@@ -423,16 +421,16 @@ public class PetDAO {
             PreparedStatement preparedStatement = CRUDQueries.insertPet(conn);
             preparedStatement.setInt(1, petId);
             preparedStatement.setInt(2, shelterId);
-            preparedStatement.setString(3, dogBean.getName());
+            preparedStatement.setString(3, dogModel.getName());
 
-            InputStream inputStream = new FileInputStream(dogBean.getPetImage());
+            InputStream inputStream = new FileInputStream(dogModel.getPetImage());
             preparedStatement.setBlob(4, inputStream);
 
-            preparedStatement.setInt(5, dogBean.getGender());
+            preparedStatement.setInt(5, dogModel.getGender());
             preparedStatement.setInt(6, 0);
 
 
-            preparedStatement.setInt(7, dogBean.getYearOfBirth());
+            preparedStatement.setInt(7, dogModel.getYearOfBirth());
 
             preparedStatement.executeUpdate();
 
@@ -449,7 +447,7 @@ public class PetDAO {
         }
     }
 
-    public void saveCat(CatBean catBean, int shelterId) throws Exception {
+    public void saveCat(CatModel catModel, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
@@ -483,15 +481,15 @@ public class PetDAO {
             PreparedStatement preparedStatement = CRUDQueries.insertPet(conn);
             preparedStatement.setInt(1, petId);
             preparedStatement.setInt(2, shelterId);
-            preparedStatement.setString(3, catBean.getName());
+            preparedStatement.setString(3, catModel.getName());
 
-            InputStream inputStream = new FileInputStream(catBean.getPetImage());
+            InputStream inputStream = new FileInputStream(catModel.getPetImage());
             preparedStatement.setBlob(4, inputStream);
 
-            preparedStatement.setInt(5, catBean.getGender());
+            preparedStatement.setInt(5, catModel.getGender());
             preparedStatement.setInt(6, 1);
 
-            preparedStatement.setInt(7, catBean.getYearOfBirth());
+            preparedStatement.setInt(7, catModel.getYearOfBirth());
 
             preparedStatement.executeUpdate();
 
@@ -507,8 +505,4 @@ public class PetDAO {
                 conn.close();
         }
     }
-
-
- */
-
 }
