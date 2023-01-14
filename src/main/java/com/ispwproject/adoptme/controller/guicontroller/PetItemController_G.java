@@ -1,8 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.bean.CatBean;
-import com.ispwproject.adoptme.utils.bean.DogBean;
 import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

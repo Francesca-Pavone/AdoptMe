@@ -52,6 +52,38 @@ public class PetBean {
 
     }
 
+    public PetBean(File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, boolean dogEducation, int size, boolean testFiv, boolean testFelv) {
+        this.petImage = petImage;
+        this.name = name;
+        this.type = type;
+        this.yearOfBirth = yearOfBirth;
+        this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
+        this.gender = gender;
+        this.coatLenght = coatLenght;
+        this.vaccinated = vaccinated;
+        this.microchipped = microchipped;
+        this.dewormed = dewormed;
+        this.sterilized = sterilized;
+        this.disability = disability;
+        this.disabilityType = disabilityType;
+        this.maleDog = maleDog;
+        this.femaleDog = femaleDog;
+        this.maleCat = maleCat;
+        this.femaleCat = femaleCat;
+        this.children = children;
+        this.elders = elders;
+        this.apartmentNoGarden = apartmentNoGarden;
+        this.apartmentNoTerrace = apartmentNoTerrace;
+        this.sleepOutside = sleepOutside;
+        this.firstExperience = firstExperience;
+        this.hoursAlone = hoursAlone;
+        this.dogEducation = dogEducation;
+        this.size = size;
+        this.testFiv = testFiv;
+        this.testFelv = testFelv;
+    }
+
     public PetBean(CatModel catModel) {
         this.setPetImage(catModel.getPetImage());
         this.setName(catModel.getName());

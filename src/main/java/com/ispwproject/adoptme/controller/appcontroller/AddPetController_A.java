@@ -1,12 +1,8 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.model.CatModel;
-import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.Shelter;
 import com.ispwproject.adoptme.utils.Factory;
-import com.ispwproject.adoptme.utils.bean.CatBean;
-import com.ispwproject.adoptme.utils.bean.DogBean;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 
@@ -27,7 +23,7 @@ public class AddPetController_A {
 
         petDAO.savePet(petModel);
     }
-
+/*
     public void addDog(DogBean dogBean, int shelterId) throws Exception {
         PetDAO petDAO = new PetDAO();
 
@@ -38,4 +34,6 @@ public class AddPetController_A {
 
         petDAO.saveCat(catBean, shelterId);
     }
+
+ */
 }

@@ -12,11 +12,6 @@ public class CatModel extends PetModel{
     public CatModel() {
     }
 
-    @Override
-    public void getPlusInfo() {
-
-    }
-
     public CatModel(String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
         super(1, name, petImg, yearOfBirth, gender, petCompatibility);
     }
