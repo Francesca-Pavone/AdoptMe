@@ -39,6 +39,10 @@ public class Shelter extends ShelterUserModel{
         super(profileImg, accountInfo);
     }
 
+    public Shelter(int id) {
+        super(id);
+    }
+
 
     public String getShelterName() {
         return shelterName;

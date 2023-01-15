@@ -26,7 +26,7 @@ import java.sql.Statement;
 
 public class SimpleQueries {
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
-        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterId + "';";
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
         //System.out.println(sql);
         return stmt.executeQuery(sql);
     }
@@ -59,7 +59,7 @@ public class SimpleQueries {
 
 
     public static ResultSet selectLastPetIdByShelterId(Statement stmt, int shelterId) throws SQLException {
-        String sql = "SELECT CASE WHEN MAX(petId) IS NULL THEN 1 ELSE MAX(petId)+1 END AS petId FROM Pets WHERE shelter = '" + shelterId + "';";
+        String sql = "SELECT CASE WHEN MAX(id) IS NULL THEN 1 ELSE MAX(id)+1 END AS petId FROM (SELECT dogId AS id FROM Dogs  WHERE shelter = '" + shelterId + "' UNION SELECT catId AS id FROM Cats WHERE shelter = '" + shelterId + "') AS PetsId;";
         return stmt.executeQuery(sql);
     }
 
