@@ -21,13 +21,13 @@ public class PetModel {
     protected String disabilityType;
     protected PetCompatibility petCompatibility;
 
-    protected Shelter shelter;
+    protected ShelterModel shelter;
 
 
     public PetModel() {
 
     }
-    public PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
+    public PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, ShelterModel shelter) {
         this.type = type;
         this.name = name;
         this.petImage = petImage;
@@ -43,7 +43,7 @@ public class PetModel {
         this.disability = disability;
         this.disabilityType = disabilityType;
         this.petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone);
-        this.shelterModel = shelterModel;
+        this.shelter = shelter;
     }
 
 
@@ -69,11 +69,11 @@ public class PetModel {
     }
 
     public ShelterModel getShelter() {
-        return shelterModel;
+        return shelter;
     }
 
     public void setShelter(ShelterModel shelterModel) {
-        this.shelterModel = shelterModel;
+        this.shelter = shelterModel;
     }
 
     public int getPetId() {

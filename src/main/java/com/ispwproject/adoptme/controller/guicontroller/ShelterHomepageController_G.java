@@ -73,9 +73,8 @@ public class ShelterHomepageController_G extends ShelterSideBar {
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                GIPreviewPetBean giPreviewPetBean = new GIPreviewPetBean(pet);
                 PetItemController_G petItemControllerG = fxmlLoader.getController();
-                petItemControllerG.setData(giPreviewPetBean);
+                petItemControllerG.setData(pet);
 
                 if (column == 3) {
                     column = 0;

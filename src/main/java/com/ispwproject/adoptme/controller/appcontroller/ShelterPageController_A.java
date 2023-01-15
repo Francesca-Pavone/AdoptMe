@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import com.ispwproject.adoptme.utils.dao.ShelterDAOJDBC;
@@ -18,8 +19,9 @@ public class ShelterPageController_A {
         return shelterBean;
     }
 
-    public List<GIPreviewPetBean> getPetList(String shelterName) {
+    public List<PetBean> getPetList(String shelterName) {
         PetDAO petDAO= new PetDAO();
+        System.out.println(shelterName + "2");
         List<PetModel> petList = new ArrayList<>();
         try {
             petList = petDAO.retrievePetByShelterName(shelterName);
@@ -36,13 +38,13 @@ public class ShelterPageController_A {
             e.printStackTrace();
         }
 
-        List<GIPreviewPetBean> petBeanList = new ArrayList<>();
+        List<PetBean> petBeanList = new ArrayList<>();
 
         for (PetModel petModel : petList) {
-            GIPreviewPetBean petBean = new GIPreviewPetBean(petModel);
+            PetBean petBean = new PetBean(petModel);
             petBeanList.add(petBean);
         }
-
+        System.out.println(petBeanList.size());
         return petBeanList;
     }
 }

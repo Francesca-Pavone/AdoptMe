@@ -48,7 +48,7 @@ public class SimpleQueries {
     }
 
     public static ResultSet searchPetsFromShelterName(Statement stmt, String shelterName) throws SQLException {
-        String sql = "SELECT * FROM Pets WHERE shelter = (SELECT shelterId FROM Shelters WHERE name = '" + shelterName + "')";
+        String sql = "SELECT * FROM Pets WHERE shelter = (SELECT shelterId FROM Shelters WHERE name = '" + shelterName + "');";
         return stmt.executeQuery(sql);
     }
 

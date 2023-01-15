@@ -243,7 +243,7 @@ public class PetDAO {
         }
     }
 
-    private void prepCommonInfo(PreparedStatement preparedStatement, int id, String name, File petImage, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int coatLenght, Shelter shelter) throws SQLException, FileNotFoundException {
+    private void prepCommonInfo(PreparedStatement preparedStatement, int id, String name, File petImage, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int coatLenght, ShelterModel shelter) throws SQLException, FileNotFoundException {
         preparedStatement.setInt(1, id);
         preparedStatement.setInt(2, shelter.getId());
         preparedStatement.setString(3, name);
@@ -346,7 +346,6 @@ public class PetDAO {
         Statement stmt = null;
         Connection conn = null;
         List<PetModel> petList = new ArrayList<>();
-
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -364,7 +363,7 @@ public class PetDAO {
 
             resultSet.first();
             do{
-                int petId = resultSet.getInt("id");
+                int petId = resultSet.getInt("petId");
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob("imgSrc");
@@ -380,13 +379,13 @@ public class PetDAO {
                 while ((read = in.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
-                int petDayOfBirth = resultSet.getInt("dayOfBirth");
-                int petMonthOfBirth = resultSet.getInt("monthOfBirth");
+                //int petDayOfBirth = resultSet.getInt("dayOfBirth");
+                //int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
 
 
-                PetModel pet = new PetModel(petId, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                PetModel pet = new PetModel(petId, petName, petImage, petGender, 0, 0, petYearOfBirth); // todo: cambia day of birth e year of birth
 
                 petList.add(pet);
 

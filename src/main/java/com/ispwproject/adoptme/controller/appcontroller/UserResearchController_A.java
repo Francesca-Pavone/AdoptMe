@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.UserResearchBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
@@ -15,12 +16,12 @@ import java.util.List;
 
 public class UserResearchController_A {
 
-    public List<PreviewPetBean> searchShelter(String shelterName) throws Exception {
-        List<PreviewPetBean> petList = new ArrayList<>();
+    public List<PetBean> searchShelter(String shelterName) throws Exception {
+        List<PetBean> petList = new ArrayList<>();
         try {
             for(PetModel petModel : PetDAO.retrievePetByShelterName(shelterName)) {
-                PreviewPetBean previewPetBean = new PreviewPetBean(petModel);
-                petList.add(previewPetBean);
+                PetBean petBean = new PetBean(petModel);
+                petList.add(petBean);
             }
         } catch (IOException e) {
             e.printStackTrace();

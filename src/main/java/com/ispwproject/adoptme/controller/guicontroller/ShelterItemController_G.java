@@ -52,11 +52,12 @@ public class ShelterItemController_G {
         dialog.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserShelterPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        dialog.setScene(scene);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
 
         ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
         shelterPageController_g.setData(shelterPageController_a.setData(n.getId()), shelterPageController_a.getPetList(n.getId()));
 
-        dialog.show();
+        stage.show();
     }
 }

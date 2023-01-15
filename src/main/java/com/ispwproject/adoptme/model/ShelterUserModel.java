@@ -18,6 +18,9 @@ public abstract class ShelterUserModel {
         this.profileImg = profileImg;
     }
 
+    public ShelterUserModel(int id) {
+        this.id = id;
+    }
     public ShelterUserModel() {
 
     }

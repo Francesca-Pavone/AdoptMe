@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
@@ -111,7 +112,7 @@ public class UserHomepageController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+                //todo: se effettu ricerca per shelter e poi per città -> devo rimuovere i dati caricati nello scroll pane e viceversa
             }
             if (radioBtnShelter.isSelected()) {
                 labelCity.setVisible(true);
@@ -125,14 +126,13 @@ public class UserHomepageController {
 
                 try {
                     // TODO devo passare PetBean e non PetModel
-                    for (PreviewPetBean pet : userResearchControllerA.searchShelter(userResearchBean.getCityShelter())) {
+                    for (PetBean pet : userResearchControllerA.searchShelter(userResearchBean.getCityShelter())) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
                         Pane pane = fxmlLoader.load();
 
-                        GIPreviewPetBean giPreviewPetBean = new GIPreviewPetBean(pet);
                         PetItemController_G petItemControllerG = fxmlLoader.getController();
-                        petItemControllerG.setData(giPreviewPetBean);
+                        petItemControllerG.setData(pet);
 
                         if (column == 3) {
                             column = 0;

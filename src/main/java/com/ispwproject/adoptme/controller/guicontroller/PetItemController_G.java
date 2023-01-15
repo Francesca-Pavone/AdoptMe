@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,13 +34,13 @@ public class PetItemController_G {
 
 
 
-    public void setData(GIPreviewPetBean previewPetBean) throws IOException {
-        petGender.setText(previewPetBean.getGenderGI());
-        petName.setText(previewPetBean.getNameGI());
-        petAge.setText(previewPetBean.getYearOfBirthGI());
+    public void setData(PetBean petBean) throws IOException {
+        petGender.setText(String.valueOf(petBean.getGender()));
+        petName.setText(petBean.getName());
+        petAge.setText(String.valueOf(petBean.getYearOfBirth()));
         Image image;
-        if(previewPetBean.getPetImageGI() != null) {
-            InputStream inputStream = new FileInputStream(previewPetBean.getPetImageGI());
+        if(petBean.getPetImage() != null) {
+            InputStream inputStream = new FileInputStream(petBean.getPetImage());
             image = new Image(inputStream);
         } else {
             image = new Image(Main.class.getResource("image/photo.png").openStream());

@@ -41,7 +41,7 @@ public class ShelterModel extends ShelterUserModel{
         super(profileImg, accountInfoBean);
     }
 
-    public Shelter(int id) {
+    public ShelterModel(int id) {
         super(id);
     }
 
