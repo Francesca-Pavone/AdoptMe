@@ -4,15 +4,11 @@ import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.CatBean;
 import com.ispwproject.adoptme.utils.bean.DogBean;
-import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
-import javafx.scene.image.Image;
 
 import java.io.*;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -273,10 +269,10 @@ public class PetDAO {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            ResultSet resultSet = SimpleQueries.searchPetsFromShelter(stmt, shelterName);
+            ResultSet resultSet = SimpleQueries.searchPetsFromShelterName(stmt, shelterName);
 
             if (!resultSet.first()){
-                Exception e = new Exception("No shelters found with that input: "+shelterName);
+                Exception e = new Exception("No pets found in that shelter: "+shelterName);
                 throw e;
             }
 
@@ -297,7 +293,7 @@ public class PetDAO {
                     outputStream.write(bytes, 0, read);
                 }
                 int petType = resultSet.getInt("type");
-                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                int petYearOfBirth = resultSet.getInt("dateOfBirth");
                 int petGender = resultSet.getInt("gender");
 
                 PetCompatibility petCompatibility = new PetCompatibility();

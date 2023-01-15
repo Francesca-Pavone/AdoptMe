@@ -17,6 +17,12 @@ public class GIPreviewPetBean extends PreviewPetBean {
         setYearOfBirthGI(petBean.getYearOfBirth());
     }
 
+    public GIPreviewPetBean(PetModel petModel) {
+        setPrevImageGI(petModel.getPetImage());
+        setNameGI(petModel.getName());
+        setGenderGI(petModel.getGender());
+        setYearOfBirthGI(petModel.getYearOfBirth());
+    }
     //setter
     public void setPrevImageGI(File petImage) {
         petImage = petImage;

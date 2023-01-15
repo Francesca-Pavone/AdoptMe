@@ -19,7 +19,74 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterPageController_G">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c79a32c9" height="185.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1101.0" AnchorPane.bottomAnchor="605.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c79a32c9" height="170.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1101.0" AnchorPane.bottomAnchor="620.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+      <Pane fx:id="paneInformations" style="-fx-background-color: #e6e6e6; -fx-background-radius: 20;" visible="false" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="225.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="0.03662109375">
+               <children>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Email:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelEmail">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Phone number:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelPhoneNumber">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Web Site:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelWebSite" textFill="#0010ec" underline="true">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Address:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelAddress">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
       <VBox prefHeight="790.0" prefWidth="1100.0">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" stylesheets="@style.css">
@@ -40,12 +107,12 @@
             </Button>
             <ImageView fx:id="shelterImage" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
-                  <Insets left="475.0" top="30.0" />
+                  <Insets left="475.0" top="18.0" />
                </VBox.margin>
             </ImageView>
-            <HBox alignment="CENTER" prefWidth="1100.0">
+            <HBox fx:id="hbox" alignment="CENTER" prefWidth="1100.0">
                <VBox.margin>
-                  <Insets top="-20.0" />
+                  <Insets />
                </VBox.margin>
                <children>
                   <Label fx:id="shelterName" text="Name">
@@ -53,7 +120,7 @@
                         <Font name="Arial Bold" size="30.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="280.0" />
+                        <Insets />
                      </HBox.margin>
                   </Label>
                   <ToggleButton fx:id="btnInformations" mnemonicParsing="false" onAction="#selectInformations" styleClass="transparent" stylesheets="@style.css">
@@ -65,76 +132,6 @@
                         </ImageView>
                      </graphic>
                   </ToggleButton>
-                  <Pane fx:id="paneInformations" style="-fx-background-color: #e6e6e6; -fx-background-radius: 20;" visible="false">
-                     <children>
-                        <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="0.03662109375">
-                           <children>
-                              <HBox alignment="CENTER" spacing="15.0">
-                                 <children>
-                                    <Label text="Email:">
-                                       <font>
-                                          <Font name="Arial" size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="labelEmail">
-                                       <font>
-                                          <Font name="Arial Bold" size="25.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" spacing="15.0">
-                                 <children>
-                                    <Label text="Phone number:">
-                                       <font>
-                                          <Font name="Arial" size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="labelPhoneNumber">
-                                       <font>
-                                          <Font name="Arial Bold" size="25.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" spacing="15.0">
-                                 <children>
-                                    <Label text="Web Site:">
-                                       <font>
-                                          <Font name="Arial" size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="labelWebSite" textFill="#0010ec" underline="true">
-                                       <font>
-                                          <Font name="Arial Bold" size="25.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" spacing="15.0">
-                                 <children>
-                                    <Label text="Address:">
-                                       <font>
-                                          <Font name="Arial" size="25.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="labelAddress">
-                                       <font>
-                                          <Font name="Arial Bold" size="25.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                           </padding>
-                        </VBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="40.0" />
-                     </HBox.margin>
-                  </Pane>
                </children>
             </HBox>
             <ScrollPane styleClass="transparent" stylesheets="@style.css">

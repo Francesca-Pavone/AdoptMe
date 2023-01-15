@@ -46,13 +46,19 @@ public class ShelterItemController_G {
     public void selectShelter(ActionEvent event) throws Exception {
         Node n = (Node)event.getSource();
         ShelterPageController_A shelterPageController_a = new ShelterPageController_A();
-        shelterPageController_a.setData(n.getId());
+
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserShelterPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
+
+
+        ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
+        shelterPageController_g.setData(shelterPageController_a.setData(n.getId()), shelterPageController_a.getPetList(n.getId()));
+        System.out.println(shelterPageController_a.setData(n.getId()).getName());
+
         dialog.show();
     }
 }

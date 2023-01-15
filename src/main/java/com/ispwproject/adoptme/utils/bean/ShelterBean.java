@@ -12,25 +12,25 @@ public class ShelterBean {
     protected String phoneNumber;
     protected String address;
     protected String city;
-    protected URL webSite;
+    protected String webSite;
     protected String email;
     protected String password; // todo: vedere se lasciarla nel bean
     protected File shelterImg;
 
     public ShelterBean() {}
     public ShelterBean(ShelterModel shelterModel) {
-        shelterModel.getId();
-        shelterModel.getShelterName();
-        shelterModel.getPhoneNumber();
-        shelterModel.getAddress();
-        shelterModel.getCity();
-        shelterModel.getWebSite();
-        shelterModel.getAccountInfo().getEmail();
-        shelterModel.getAccountInfo().getPassword();
-        shelterModel.getProfileImg();
+        this.shelterId = shelterModel.getId();
+        this.name = shelterModel.getShelterName();
+        this.phoneNumber = shelterModel.getPhoneNumber();
+        this.address = shelterModel.getAddress();
+        this.city = shelterModel.getCity();
+        this.webSite = shelterModel.getWebSite();
+        this.email = shelterModel.getAccountInfo().getEmail();
+        this.password = shelterModel.getAccountInfo().getPassword();
+        this.shelterImg = shelterModel.getProfileImg();
     }
 
-    public ShelterBean(int shelterId, String name, String phoneNumber, String address, String city, URL webSite, String email, String password, File shelterImg) {
+    public ShelterBean(int shelterId, String name, String phoneNumber, String address, String city, String webSite, String email, String password, File shelterImg) {
         this.shelterId = shelterId;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -94,11 +94,11 @@ public class ShelterBean {
         this.city = city;
     }
 
-    public URL getWebSite() {
+    public String getWebSite() {
         return webSite;
     }
 
-    public void setWebSite(URL webSite) throws MalformedURLException {
+    public void setWebSite(String webSite) {
         this.webSite = webSite;
     }
 

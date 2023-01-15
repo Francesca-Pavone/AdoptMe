@@ -11,10 +11,10 @@ public class ShelterModel extends ShelterUserModel{
     private String phoneNumber;
     private String address;
     private String city;
-    private URL webSite;
+    private String webSite;
 
 
-    public ShelterModel(File profileImg, AccountInfoBean accountInfoBean, String shelterName, String phoneNumber, String address, String city, URL webSite) {
+    public ShelterModel(File profileImg, AccountInfoBean accountInfoBean, String shelterName, String phoneNumber, String address, String city, String webSite) {
         super(profileImg, accountInfoBean);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
@@ -23,7 +23,7 @@ public class ShelterModel extends ShelterUserModel{
         setWebSite(webSite);
     }
 
-    public ShelterModel(String shelterName, String phoneNumber, String address, String city, File profileImg, URL webSite) {
+    public ShelterModel(String shelterName, String phoneNumber, String address, String city, File profileImg, String webSite) {
         super(profileImg);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
@@ -74,11 +74,11 @@ public class ShelterModel extends ShelterUserModel{
         this.city = city;
     }
 
-    public URL getWebSite() {
+    public String getWebSite() {
         return webSite;
     }
 
-    public void setWebSite(URL webSite) {
+    public void setWebSite(String webSite) {
         this.webSite = webSite;
     }
 

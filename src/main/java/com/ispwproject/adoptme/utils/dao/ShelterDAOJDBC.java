@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.ShelterModel;
+import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.File;
@@ -110,6 +111,9 @@ public class ShelterDAOJDBC {
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String address = resultSet.getString("address");
                 String city = resultSet.getString("city");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                int shelterId = resultSet.getInt("shelterId");
 
                 File shelterImage;
                 Blob blob = resultSet.getBlob("profileImg");
@@ -127,10 +131,10 @@ public class ShelterDAOJDBC {
                     shelterImage = null;
                 }
                 String webSite = resultSet.getString("webSite");
-                URL webSiteURL = new URL(webSite);
 
-                shelterModel = new ShelterModel(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
 
+                AccountInfoBean accountInfoBean = new AccountInfoBean(email, password, 1);
+                shelterModel = new ShelterModel(shelterImage, accountInfoBean, shelterName, phoneNumber, address, city, webSite);
             }while(resultSet.next());
 
             resultSet.close();
