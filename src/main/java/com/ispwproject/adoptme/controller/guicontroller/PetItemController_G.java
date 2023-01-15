@@ -1,8 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.bean.CatBean;
-import com.ispwproject.adoptme.utils.bean.DogBean;
 import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,11 +30,9 @@ public class PetItemController_G {
     @FXML
     private Label petName;
 
-    private DogBean dogBean;
-    private CatBean catBean;
 
 
-    // TODO devo passare PetBean e non PetModel
+
     public void setData(GIPreviewPetBean previewPetBean) throws IOException {
         petGender.setText(previewPetBean.getGenderGI());
         petName.setText(previewPetBean.getNameGI());

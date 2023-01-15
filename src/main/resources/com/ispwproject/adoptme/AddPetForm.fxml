@@ -555,7 +555,7 @@
                                           <Font name="Arial" size="16.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="cb_apartGarden" mnemonicParsing="false" text="apartment without garden">
+                                    <CheckBox fx:id="cb_apartNoGarden" mnemonicParsing="false" text="apartment without garden">
                                        <font>
                                           <Font name="Arial" size="16.0" />
                                        </font>

@@ -8,52 +8,48 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class GIPreviewPetBean extends PreviewPetBean {
+public class GIPreviewPetBean   {
 
-    public GIPreviewPetBean(PreviewPetBean petBean) {
-        setPrevImageGI(petBean.getPetImage());
-        setNameGI(petBean.getName());
-        setGenderGI(petBean.getGender());
-        setYearOfBirthGI(petBean.getYearOfBirth());
-    }
+        private File petImage;
+        private String name;
+        private int gender;
+        private int yearOfBirth;
 
-    public GIPreviewPetBean(PetModel petModel) {
-        setPrevImageGI(petModel.getPetImage());
-        setNameGI(petModel.getName());
-        setGenderGI(petModel.getGender());
-        setYearOfBirthGI(petModel.getYearOfBirth());
-    }
-    //setter
-    public void setPrevImageGI(File petImage) {
-        petImage = petImage;
-    }
-    public void setNameGI(String name) {
-        name = name;
-    }
-    public void setGenderGI(int gender) {
-        gender = gender;
-    }
-    public void setYearOfBirthGI(int yearOfBirth) {
-        yearOfBirth = yearOfBirth;
-    }
+        public GIPreviewPetBean(PetBean petBean) {
+            setPrevImageGI(petBean.getPetImage());
+            setNameGI(petBean.getName());
+            setGenderGI(petBean.getGender());
+            setYearOfBirthGI(petBean.getYearOfBirth());
+        }
 
-    //getter
-    public File getPetImageGI() throws IOException {
-        //return ImageUtils.fromFileToImage(petImage);
-        return petImage;
-    }
-    public String getNameGI() {
-        return name;
-    }
-    public String getGenderGI() {
-        if (gender == 0)
-            return "Male";
-        else
-            return "Female";
-    }
-    public String getYearOfBirthGI() {
-        return String.valueOf(yearOfBirth);
-    }
+        //setter
+        public void setPrevImageGI(File petImage) {
+            this.petImage = petImage;
+        }
+        public void setNameGI(String name) {
+            this.name = name;
+        }
+        public void setGenderGI(int gender) {
+            this.gender = gender;
+        }
+        public void setYearOfBirthGI(int yearOfBirth) {
+            this.yearOfBirth = yearOfBirth;
+        }
 
-
+        //getter
+        public File getPetImageGI() throws IOException {
+            return this.petImage;
+        }
+        public String getNameGI() {
+            return name;
+        }
+        public String getGenderGI() {
+            if (gender == 0)
+                return "Male";
+            else
+                return "Female";
+        }
+        public String getYearOfBirthGI() {
+            return String.valueOf(yearOfBirth);
+        }
 }

@@ -21,6 +21,7 @@
 package com.ispwproject.adoptme.utils.dao.queries;
 
 
+import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 
 import java.io.FileInputStream;
@@ -30,13 +31,19 @@ import java.sql.*;
 
 public class CRUDQueries {
 
-    public static PreparedStatement insertPet(Connection connection) throws SQLException, FileNotFoundException {
-
-        //String insertStatement = String.format("INSERT INTO Pets (petId, shelter, name, imgSrc, age, gender, type) VALUES ('%d', '%d', '%s', '%s', '%s', '%s', '%d')", petId, pet.getShelterId(), pet.getName(), inputStream, pet.getAge(), pet.getGender(), pet.getType());
-
-        //return stmt.executeUpdate(insertStatement);
-        return connection.prepareStatement("INSERT INTO Pets (petId, shelter, name, imgSrc, gender, type, yearOfBirth) VALUES (?,?,?,?,?,?,?)");
+    public static PreparedStatement insertDog(Connection connection) throws SQLException, FileNotFoundException {
+        return connection.prepareStatement("INSERT INTO Dogs (dogId, shelter, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, coatLenght, size, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, education) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     }
+
+    public static PreparedStatement insertCat(Connection connection) throws SQLException, FileNotFoundException {
+
+        return connection.prepareStatement("INSERT INTO Cats (catId, shelter, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, coatLenght, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    }
+
+    public static PreparedStatement insertPetCompatibility(Connection connection) throws SQLException {
+        return connection.prepareStatement("INSERT INTO Compatibility (petId, shelterId, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    }
+
     /*
     public static int inserisciAlbum(Statement stmt, Album album) throws SQLException  {
         String insertStatement = String.format("INSERT INTO Album (AlbumId, Titolo, Artista, Anno) VALUES (%s,'%s','%s',%s)", album.getAlbumId(), album.getTitolo(), album.getArtista(), album.getAnno());

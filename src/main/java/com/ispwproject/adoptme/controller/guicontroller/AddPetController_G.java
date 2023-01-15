@@ -1,11 +1,10 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController_A;
+import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ImageUtils;
-import com.ispwproject.adoptme.utils.bean.CatBean;
-import com.ispwproject.adoptme.utils.bean.DogBean;
-import com.ispwproject.adoptme.utils.bean.GI.GICatBean;
-import com.ispwproject.adoptme.utils.bean.GI.GIDogBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
 import com.ispwproject.adoptme.utils.enums.CoatLenght;
 import com.ispwproject.adoptme.utils.enums.Size;
 import javafx.event.ActionEvent;
@@ -21,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Month;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 
@@ -109,7 +107,7 @@ public class AddPetController_G {
     @FXML
     private CheckBox cb_maleDog;
     @FXML
-    private CheckBox cb_apartGarden;
+    private CheckBox cb_apartNoGarden;
     @FXML
     private CheckBox cb_apartNoTerrace;
     @FXML
@@ -126,6 +124,8 @@ public class AddPetController_G {
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
     private final int shelterId = 1; //TODO: questo valore dovrà essere preso dalla sessione
+    private PetModel pet;
+
 
     public void initialize() {
 
@@ -162,10 +162,14 @@ public class AddPetController_G {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
+
         int year;
         int month;
         int day;
+        AddPetController_A addPetController_a = null;
+        PetBean petBean = null;
 
+        // retrive data of birth information
         if (datePicker.getValue() != null) {
             year = datePicker.getValue().getYear();
             month = datePicker.getValue().getMonthValue();
@@ -178,77 +182,118 @@ public class AddPetController_G {
                 month = -1;
             day = -1;
         }
+
+        PetBeanBuilder petBeanBuilder = PetBeanBuilder.newPetBean()
+
+                .petImage(file)
+                .name(tf_petName.getText())
+                .type(petType)
+                .yearOfBirth(year)
+                .monthOfBirth(month)
+                .dayOfBirth(day)
+
+                .gender(switch (((RadioButton) tg_gender.getSelectedToggle()).getText()) {
+                    //case "Male" -> 0;
+                    default -> 0;
+                    case "Female" -> 1;
+                })
+
+                .coatLenght(switch (boxCoatLenght.getValue()) {
+                    //case "Short" -> 0;
+                    default -> 0;
+                    case "Medium" -> 1;
+                    case "Long" -> 2;
+                })
+
+                .vaccinated(switch (((RadioButton) vaccinated.getSelectedToggle()).getText()) {
+                    //case "Yes" -> true;
+                    default -> true;
+                    case "No" -> false;
+                })
+
+                .microchipped(switch (((RadioButton) microchipped.getSelectedToggle()).getText()) {
+                    //case "Yes" -> true;
+                    default -> true;
+                    case "No" -> false;
+                })
+
+                .dewormed(switch (((RadioButton) dewormed.getSelectedToggle()).getText()) {
+                    //case "Yes" -> true;
+                    default -> true;
+                    case "No" -> false;
+                })
+
+                .sterilized(switch (((RadioButton) sterilized.getSelectedToggle()).getText()) {
+                    //case "Yes" -> true;
+                    default -> true;
+                    case "No" -> false;
+                })
+
+                .disability(switch (((RadioButton) disability.getSelectedToggle()).getText()) {
+                    //case "Yes" -> true;
+                    default -> true;
+                    case "No" -> false;
+                })
+
+                .disabilityType(txtDisabilityType.getText())
+                .maleDog(cb_maleDog.isSelected())
+                .femaleDog(cb_femaleDog.isSelected())
+                .maleCat(cb_maleCat.isSelected())
+                .femaleCat(cb_femaleCat.isSelected())
+                .children(cb_children.isSelected())
+                .elders(cb_elders.isSelected())
+                .apartmentNoGarden(cb_apartNoGarden.isSelected())
+                .apartmentNoTerrace(cb_apartNoTerrace.isSelected())
+                .sleepOutside(cb_sleepOut.isSelected())
+                .firstExperience(cb_firstExp.isSelected())
+                
+                .hoursAlone(switch (((RadioButton) hoursAlone.getSelectedToggle()).getText()) {
+                    default -> 0;   //case "1-3"
+                    case "4-6" -> 1;
+                    case "more than 6" -> 2;
+                });
+
+
         switch (petType) {
             case 0 -> // DOG
             {
-                GIDogBean dogBean = new GIDogBean(
-                        file,
-                        tf_petName.getText(),
-                        year,
-                        month,
-                        day,
-                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
-                        boxCoatLenght.getValue(),
-                        ((RadioButton) vaccinated.getSelectedToggle()).getText(),
-                        ((RadioButton) microchipped.getSelectedToggle()).getText(),
-                        ((RadioButton) dewormed.getSelectedToggle()).getText(),
-                        ((RadioButton) sterilized.getSelectedToggle()).getText(),
-                        ((RadioButton) disability.getSelectedToggle()).getText(),
-                        txtDisabilityType.getText(),
-                        cb_maleDog.isSelected(),
-                        cb_femaleDog.isSelected(),
-                        cb_maleCat.isSelected(),
-                        cb_femaleCat.isSelected(),
-                        cb_children.isSelected(),
-                        cb_elders.isSelected(),
-                        cb_apartGarden.isSelected(),
-                        cb_apartNoTerrace.isSelected(),
-                        cb_sleepOut.isSelected(),
-                        cb_firstExp.isSelected(),
-                        ((RadioButton) hoursAlone.getSelectedToggle()).getText(),
-                        ((RadioButton) dogEducation.getSelectedToggle()).getText(),
-                        boxSize.getValue()
-                );
+                petBean = petBeanBuilder
 
-                AddPetController_A addPetController_a = new AddPetController_A();
-                addPetController_a.addDog(dogBean, shelterId);
+                        .size(switch (boxSize.getValue()) {
+                            default -> 0;   //case "Small"
+                            case "Medium" -> 1;
+                            case "Large" -> 2;
+                            case "ExtraLarge" -> 3;
+                        })
+
+                        .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {
+                            default -> true;    //case "Yes"
+                            case "No" -> false;
+                        })
+
+                        .build();
+
             }
             case 1 -> // CAT
             {
-                GICatBean catBean = new GICatBean(
-                        file,
-                        tf_petName.getText(),
-                        year,
-                        month,
-                        day,
-                        ((RadioButton) tg_gender.getSelectedToggle()).getText(),
-                        boxCoatLenght.getValue(),
-                        ((RadioButton) vaccinated.getSelectedToggle()).getText(),
-                        ((RadioButton) microchipped.getSelectedToggle()).getText(),
-                        ((RadioButton) dewormed.getSelectedToggle()).getText(),
-                        ((RadioButton) sterilized.getSelectedToggle()).getText(),
-                        ((RadioButton) disability.getSelectedToggle()).getText(),
-                        txtDisabilityType.getText(),
-                        cb_maleDog.isSelected(),
-                        cb_femaleDog.isSelected(),
-                        cb_maleCat.isSelected(),
-                        cb_femaleCat.isSelected(),
-                        cb_children.isSelected(),
-                        cb_elders.isSelected(),
-                        cb_apartGarden.isSelected(),
-                        cb_apartNoTerrace.isSelected(),
-                        cb_sleepOut.isSelected(),
-                        cb_firstExp.isSelected(),
-                        ((RadioButton) hoursAlone.getSelectedToggle()).getText(),
-                        ((RadioButton) testFiv.getSelectedToggle()).getText(),
-                        ((RadioButton) testFelv.getSelectedToggle()).getText()
-                );
+                petBean = petBeanBuilder
 
-                AddPetController_A addPetController_a = new AddPetController_A();
-                addPetController_a.addCat(catBean, shelterId);
+                        .testFiv(switch (((RadioButton) testFiv.getSelectedToggle()).getText()) {
+                            case "Positive" -> true;
+                            default -> false;   //case "Negative"
+                        })
+
+                        .testFelv(switch (((RadioButton) testFelv.getSelectedToggle()).getText()) {
+                            case "Positive" -> true;
+                            default -> false;   //case "Negative"
+                        })
+
+                        .build();
             }
-        }
 
+        }
+        addPetController_a = new AddPetController_A(petBean);
+        addPetController_a.addPet();
         ((Node)event.getSource()).getScene().getWindow().hide();
 
 
@@ -307,4 +352,6 @@ public class AddPetController_G {
             testFelv_vBox.getChildren().addAll(testFelv_txt, testFelv_PN);
 
     }
+
+
 }
