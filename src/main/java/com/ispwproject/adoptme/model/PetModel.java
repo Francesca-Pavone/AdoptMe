@@ -48,12 +48,23 @@ public class PetModel {
 
 
 
-    public PetModel(int type, String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
+    public PetModel(int petId, String name, File petImg, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth) {
+        setPetId(petId);
         setName(name);
-        setType(type);
         setPetImage(petImg);
-        setYearOfBirth(yearOfBirth);
         setGender(gender);
+        setDayOfBirth(dayOfBirth);
+        setMonthOfBirth(monthOfBirth);
+        setYearOfBirth(yearOfBirth);
+        this.petCompatibility = new PetCompatibility();
+    }
+
+    public PetModel(int type, String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
+        setType(type);
+        setName(name);
+        setPetImage(petImg);
+        setGender(gender);
+        setYearOfBirth(yearOfBirth);
         this.petCompatibility = new PetCompatibility();
     }
 
