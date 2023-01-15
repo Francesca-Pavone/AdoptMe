@@ -54,10 +54,8 @@ public class ShelterItemController_G {
         Scene scene = new Scene(fxmlLoader.load());
         dialog.setScene(scene);
 
-
         ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
         shelterPageController_g.setData(shelterPageController_a.setData(n.getId()), shelterPageController_a.getPetList(n.getId()));
-        System.out.println(shelterPageController_a.setData(n.getId()).getName());
 
         dialog.show();
     }

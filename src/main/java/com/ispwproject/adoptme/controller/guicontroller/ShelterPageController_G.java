@@ -70,18 +70,22 @@ public class ShelterPageController_G {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
+        int column = 0;
         int row = 1;
         for (GIPreviewPetBean petBean : petBeanList) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
             Pane pane = fxmlLoader.load();
 
+            GIPreviewPetBean giPreviewPetBean = new GIPreviewPetBean(petBean);
             PetItemController_G petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setData(petBean);
+            petItemControllerG.setData(giPreviewPetBean);
 
-
-            grid.add(pane, 1, row);
-            row++;
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+            grid.add(pane, column, row);
         }
     }
 

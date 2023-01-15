@@ -41,8 +41,13 @@ public class PetItemController_G {
         petGender.setText(previewPetBean.getGenderGI());
         petName.setText(previewPetBean.getNameGI());
         petAge.setText(previewPetBean.getYearOfBirthGI());
-        InputStream inputStream = new FileInputStream(previewPetBean.getPetImageGI());
-        Image image = new Image(inputStream);
+        Image image;
+        if(previewPetBean.getPetImageGI() != null) {
+            InputStream inputStream = new FileInputStream(previewPetBean.getPetImageGI());
+            image = new Image(inputStream);
+        } else {
+            image = new Image(Main.class.getResource("image/photo.png").openStream());
+        }
         petImage.setImage(image);
     }
 

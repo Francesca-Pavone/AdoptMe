@@ -4,6 +4,8 @@ import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -109,9 +111,41 @@ public class UserHomepageController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
-            //if (radioBtnShelter.isSelected())
-                //
+            if (radioBtnShelter.isSelected()) {
+                labelCity.setVisible(true);
+                backButton.setVisible(true);
+                scrollPane.setVisible(true);
+                labelCity.setText("Pets you can find in '" + userResearchBean.getCityShelter() + "':");
+                UserResearchController_A userResearchControllerA = new UserResearchController_A();
+
+                int column = 0;
+                int row = 1;
+
+                try {
+                    // TODO devo passare PetBean e non PetModel
+                    for (PreviewPetBean pet : userResearchControllerA.searchShelter(userResearchBean.getCityShelter())) {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
+                        Pane pane = fxmlLoader.load();
+
+                        GIPreviewPetBean giPreviewPetBean = new GIPreviewPetBean(pet);
+                        PetItemController_G petItemControllerG = fxmlLoader.getController();
+                        petItemControllerG.setData(giPreviewPetBean);
+
+                        if (column == 3) {
+                            column = 0;
+                            row++;
+                        }
+
+                        grid.add(pane, column++, row);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         } else {
             System.out.println("Scrivere qualcosa...");
         }

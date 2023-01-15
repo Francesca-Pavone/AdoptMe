@@ -67,7 +67,7 @@ public class PetDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                int petYearOfBirth = resultSet.getInt("dateOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
                 PetCompatibility petCompatibility = new PetCompatibility();
