@@ -1,25 +1,31 @@
 package com.ispwproject.adoptme.model;
 
+import java.io.File;
+
 public class DogModel extends PetModel{
+    private boolean programEducation;
+    private int size;
 
-    private int programEducation; // 0 -> no | 1 -> yes
-
-    public DogModel(String name, String imgSrc, String age, String gender, int programEducation) {
-        super(name, imgSrc, age, gender);
-        this.programEducation = programEducation;
+    public DogModel(int petId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, ShelterModel shelterModel, boolean programEducation, int size) {
+        super(petId, petImage, name, type, yearOfBirth, monthOfBirth, dayOfBirth, gender, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone, shelterModel);
+        setProgramEducation(programEducation);
+        setSize(size);
     }
 
-    public DogModel(int petId, String imgSrc, String name, String gender, String age, Shelter shelter, int programEducation) {
-        super(petId, imgSrc, name, gender, age, shelter);
-        this.programEducation = programEducation;
-    }
 
-    public int getProgramEducation() {
+    public boolean isProgramEducation() {
         return programEducation;
     }
 
-    public void setProgramEducation(int programEducation) {
+    public void setProgramEducation(boolean programEducation) {
         this.programEducation = programEducation;
     }
 
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
 }

@@ -20,13 +20,9 @@
  */
 package com.ispwproject.adoptme.utils.dao.queries;
 
-import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultApplicativeController;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 public class SimpleQueries {
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
@@ -51,24 +47,8 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    //da aggiustare
-    public static ResultSet selectCity(Statement stmt, String city) throws SQLException {
-        String sql = "SELECT city FROM Shelters WHERE city = '" + city + "';";
-        return stmt.executeQuery(sql);
-    }
-    // da aggiustare
-    public static ResultSet selectPetFromQuestionnaire(Statement stmt, int type, String gender, List<QuestionnaireResultApplicativeController.Tuple> ageList, int haveAPet, List<QuestionnaireResultBean.PetAlreadyHave> petAlreadyHaveList, int haveAGarden, int GardenSleepOutside, int haveATerrace, int terraceSleepOutside, int hoursAlone, int firstPet, int sterilizePet, int programEducation, int disabledPet, String city) throws SQLException {
-
-
-        int nAge = ageList.size();
-        int nOtherPets = petAlreadyHaveList.size();
-
-        String sql = "SELECT * FROM Pets WHERE type = '" + type + "'";
-        return stmt.executeQuery(sql);
-    }
-
-    public static ResultSet searchPetsFromShelter(Statement stmt, String shelterName) throws SQLException {
-        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterName + "'";
+    public static ResultSet searchPetsFromShelterName(Statement stmt, String shelterName) throws SQLException {
+        String sql = "SELECT * FROM Pets WHERE shelter = (SELECT shelterId FROM Shelters WHERE name = '" + shelterName + "')";
         return stmt.executeQuery(sql);
     }
 
@@ -77,17 +57,19 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-/*
-    public static ResultSet selectAlbumByName(Statement stmt, String title) throws SQLException  {
-        String sql = "SELECT * FROM Album where Titolo = '" + title + "';";
-        System.out.println(sql);
+
+    public static ResultSet selectLastPetIdByShelterId(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT CASE WHEN MAX(petId) IS NULL THEN 1 ELSE MAX(petId)+1 END AS petId FROM Pets WHERE shelter = '" + shelterId + "';";
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectAlbumIds(Statement stmt) throws SQLException  {
-        String sql = "SELECT DISTINCT AlbumId FROM Album ;";
-        System.out.println(sql);
+    public static ResultSet selectSheltersByName(Statement stmt, String shelterName) throws SQLException {
+        String sql = "SELECT * FROM Shelters WHERE name = '" + shelterName + "'";
         return stmt.executeQuery(sql);
     }
-	*/
+    /*public static ResultSet checkLogin(Statement stmt, String email, String password) {
+        String sql = "SELECT type FROM Shelters JOIN Users WHERE";
+        return stmt.executeQuery(sql);
+    }*/
+
 }

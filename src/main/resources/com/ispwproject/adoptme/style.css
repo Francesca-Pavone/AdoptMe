@@ -38,6 +38,36 @@
 	-fx-scale-y: 1.2;
 }
 
+.button4 {
+	-fx-background-color: white;
+	-fx-background-radius: 40 40 40 40;
+	-fx-border-color: #34665A;
+	-fx-text-fill: #34665A;
+	-fx-border-radius: 40;
+	-fx-border-width: 5;
+	-fx-effect:  dropshadow(two-pass-box, grey, 10, 0, 3, 3);
+}
+
+.button4:hover {
+	-fx-background-color: white;
+	-fx-border-color: #C89C32;
+	-fx-text-fill: #C89C32;
+	-fx-border-width: 7;
+}
+
+.button4:pressed {
+	-fx-background-color: #C89C32;
+	-fx-border-color: #C89C32;
+	-fx-text-fill: white;
+}
+
+.button4:selected {
+    -fx-background-color: #C89C32;
+	-fx-border-color: #C89C32;
+	-fx-text-fill: white;
+}
+
+
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
@@ -78,6 +108,12 @@
     -fx-background-color: #DADADA;
 }
 
+.request-box{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);
+}
+
 
 .radio-button1 {
 	-fx-border-color: #34665A;
@@ -86,18 +122,35 @@
 	-fx-text-fill: #34665A;
 }
 
+
+.radio-button1:hover .radio {
+    -fx-border-color: #C89C32;
+}
+
+.radio-button1:selected .radio {
+    -fx-border-color: #C89C32;
+}
+
+.radio-button1:hover {
+	-fx-border-color: #C89C32;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+	-fx-text-fill: #C89C32;
+}
+
 .radio-button1:selected {
-    -fx-background-color: #34665A;
+    -fx-background-color: #C89C32;
     -fx-background-radius: 20;
-    -fx-border-color: #34665A;
+    -fx-border-color: #C89C32;
     -fx-border-radius: 20;
     -fx-border-width: 0.3;
     -fx-text-fill: #ffffff;
 }
 
 .radio-button1:selected .dot{
-    -fx-background-color: #34665A;
+    -fx-background-color: #C89C32;
 }
+
 
 .request-box{
     -fx-background-color: #ffffff;
@@ -161,12 +214,3 @@
     -fx-border-color: rgba(0,0,0,0);
 }
 
-.list-cell:filled:selected {
-	-fx-background-color: #C89C32;
-	-fx-text-fill: white;
-}
-
-.list-cell:filled:hover {
-	-fx-background-color: #417E70;
-	-fx-text-fill: white;
-}
