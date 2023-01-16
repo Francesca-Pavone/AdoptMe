@@ -15,8 +15,6 @@ public class PetDAO {
     private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
-    //TODO: passare il model non il bean
-
 
     public List<PetModel> retrivePetByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni
@@ -68,9 +66,11 @@ public class PetDAO {
                 int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
+                int petType = resultSet.getInt("type");
 
+                ShelterModel shelter = ShelterDAOJDBC.retrieveShelterById(shelterId);
 
-                PetModel pet = new PetModel(petId, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                PetModel pet = new PetModel(petId, shelter, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
 
                 petList.add(pet);
 
@@ -99,149 +99,8 @@ public class PetDAO {
         return petList;
     }
 
-    public void saveDog(DogModel dogModel) throws Exception {
-        // STEP 1: dichiarazioni
-        Statement stmt = null;
-        Connection conn = null;
-        int dogId = 1;
 
-        try {
-            // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
-
-            // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-
-            // STEP 4.1: creazione ed esecuzione della query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            // In pratica i risultati delle query possono essere visti come un Array Associativo o un Map
-            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, dogModel.getShelter().getId());
-            while (rs.next()) {
-                // lettura delle colonne "by name"
-                dogId = rs.getInt("petId");
-            }
-
-            rs.close();
-            stmt.close();
-
-            // STEP 4.2: creazione ed esecuzione della query
-
-            //utilizzo i prepared statement per poter passare alla query il tipo di dato blob usato per le immagini
-            PreparedStatement preparedStatement = CRUDQueries.insertDog(conn);
-            prepCommonInfo(preparedStatement, dogId, dogModel.getName(), dogModel.getPetImage(), dogModel.getGender(), dogModel.getDayOfBirth(), dogModel.getMonthOfBirth(), dogModel.getYearOfBirth(), dogModel.getCoatLenght(), dogModel.getShelter());
-            preparedStatement.setInt(10, dogModel.getSize());
-            preparedStatement.setBoolean(11, dogModel.isVaccinated());
-            preparedStatement.setBoolean(12, dogModel.isMicrochipped());
-            preparedStatement.setBoolean(13, dogModel.isDewormed());
-            preparedStatement.setBoolean(14, dogModel.isSterilized());
-            preparedStatement.setBoolean(15, dogModel.isDisability());
-            preparedStatement.setString(16, dogModel.getDisabilityType());
-            preparedStatement.setBoolean(17, dogModel.isProgramEducation());
-            preparedStatement.executeUpdate();
-            rs.close();
-
-            PreparedStatement preparedStatement1 = CRUDQueries.insertPetCompatibility(conn);
-            preparedStatement1.setInt(1, dogId);
-            preparedStatement1.setInt(2, dogModel.getShelter().getId());
-            preparedStatement1.setBoolean(3, dogModel.getPetCompatibility().isMaleDog());
-            preparedStatement1.setBoolean(4, dogModel.getPetCompatibility().isFemaleDog());
-            preparedStatement1.setBoolean(5, dogModel.getPetCompatibility().isMaleCat());
-            preparedStatement1.setBoolean(6, dogModel.getPetCompatibility().isFemaleCat());
-            preparedStatement1.setBoolean(7, dogModel.getPetCompatibility().isChildren());
-            preparedStatement1.setBoolean(8, dogModel.getPetCompatibility().isElders());
-            preparedStatement1.setBoolean(9, dogModel.getPetCompatibility().isApartmentNoGarden());
-            preparedStatement1.setBoolean(10, dogModel.getPetCompatibility().isApartmentNoTerrace());
-            preparedStatement1.setBoolean(11, dogModel.getPetCompatibility().isSleepOutside());
-            preparedStatement1.setBoolean(12, dogModel.getPetCompatibility().isFirstExperience());
-            preparedStatement1.setInt(13, dogModel.getPetCompatibility().getHoursAlone());
-            preparedStatement1.executeUpdate();
-
-
-            // STEP 5.1: Clean-up dell'ambiente
-            rs.close();
-        } finally {
-            // STEP 5.2: Clean-up dell'ambiente
-            if (stmt != null)
-                stmt.close();
-            if (conn != null)
-                conn.close();
-        }
-    }
-
-    public void saveCat(CatModel catModel) throws Exception {
-        // STEP 1: dichiarazioni
-        Statement stmt = null;
-        Connection conn = null;
-        int catId = 1;
-
-        try {
-            // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
-
-            // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            // STEP 4.1: creazione ed esecuzione della query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            // In pratica i risultati delle query possono essere visti come un Array Associativo o un Map
-            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, catModel.getShelter().getId());
-            while (rs.next()) {
-                // lettura delle colonne "by name"
-                catId = rs.getInt("petId");
-            }
-
-            rs.close();
-            stmt.close();
-
-            // STEP 4.2: creazione ed esecuzione della query
-
-            PreparedStatement preparedStatement = CRUDQueries.insertCat(conn);
-            prepCommonInfo(preparedStatement, catId, catModel.getName(), catModel.getPetImage(), catModel.getGender(), catModel.getDayOfBirth(), catModel.getMonthOfBirth(), catModel.getYearOfBirth(), catModel.getCoatLenght(), catModel.getShelter());
-            preparedStatement.setBoolean(10, catModel.isVaccinated());
-            preparedStatement.setBoolean(11, catModel.isMicrochipped());
-            preparedStatement.setBoolean(12, catModel.isDewormed());
-            preparedStatement.setBoolean(13, catModel.isSterilized());
-            preparedStatement.setBoolean(14, catModel.isTestFiv());
-            preparedStatement.setBoolean(15, catModel.isTestFelv());
-            preparedStatement.setBoolean(16, catModel.isDisability());
-            preparedStatement.setString(17, catModel.getDisabilityType());
-            preparedStatement.executeUpdate();
-            rs.close();
-
-
-            PreparedStatement preparedStatement1 = CRUDQueries.insertPetCompatibility(conn);
-            preparedStatement1.setInt(1, catId);
-            preparedStatement1.setInt(2, catModel.getShelter().getId());
-            preparedStatement1.setBoolean(3, catModel.getPetCompatibility().isMaleDog());
-            preparedStatement1.setBoolean(4, catModel.getPetCompatibility().isFemaleDog());
-            preparedStatement1.setBoolean(5, catModel.getPetCompatibility().isMaleCat());
-            preparedStatement1.setBoolean(6, catModel.getPetCompatibility().isFemaleCat());
-            preparedStatement1.setBoolean(7, catModel.getPetCompatibility().isChildren());
-            preparedStatement1.setBoolean(8, catModel.getPetCompatibility().isElders());
-            preparedStatement1.setBoolean(9, catModel.getPetCompatibility().isApartmentNoGarden());
-            preparedStatement1.setBoolean(10, catModel.getPetCompatibility().isApartmentNoTerrace());
-            preparedStatement1.setBoolean(11, catModel.getPetCompatibility().isSleepOutside());
-            preparedStatement1.setBoolean(12, catModel.getPetCompatibility().isFirstExperience());
-            preparedStatement1.setInt(13, catModel.getPetCompatibility().getHoursAlone());
-            preparedStatement1.executeUpdate();
-
-            // STEP 5.1: Clean-up dell'ambiente
-            rs.close();
-        } finally {
-            // STEP 5.2: Clean-up dell'ambiente
-            if (stmt != null)
-                stmt.close();
-            if (conn != null)
-                conn.close();
-        }
-    }
-
-    private void prepCommonInfo(PreparedStatement preparedStatement, int id, String name, File petImage, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int coatLenght, Shelter shelter) throws SQLException, FileNotFoundException {
+    private void prepCommonInfo(PreparedStatement preparedStatement, int id, String name, File petImage, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int coatLenght, ShelterModel shelter) throws SQLException, FileNotFoundException {
         preparedStatement.setInt(1, id);
         preparedStatement.setInt(2, shelter.getId());
         preparedStatement.setString(3, name);
@@ -258,7 +117,7 @@ public class PetDAO {
     }
 
 
-
+/*
     public static List<PetModel> retrivePetFromQuestionnaire(int petId, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
@@ -310,9 +169,10 @@ public class PetDAO {
                 int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
+                int petType = resultSet.getInt("type");
 
 
-                pet = new PetModel(petId, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                pet = new PetModel(petId, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
 
                 petList.add(pet);
 
@@ -339,6 +199,8 @@ public class PetDAO {
 
         return petList;
     }
+
+ */
 
     public static List<PetModel> retrievePetByShelterName(String shelterName) throws Exception {
         Statement stmt = null;
@@ -382,9 +244,10 @@ public class PetDAO {
                 int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
+                int petType = resultSet.getInt("type");
 
 
-                PetModel pet = new PetModel(petId, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                PetModel pet = new PetModel(petId, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
 
                 petList.add(pet);
 
@@ -409,7 +272,7 @@ public class PetDAO {
 
         return petList;
     }
-
+/*
     public static PetModel retrivePetById(int petId, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
@@ -459,9 +322,10 @@ public class PetDAO {
                 int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
+                int petType = resultSet.getInt("type");
 
 
-                pet = new PetModel(petId, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                pet = new PetModel(petId, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
 
             }while(resultSet.next());
 
@@ -486,5 +350,7 @@ public class PetDAO {
 
         return pet;
     }
+
+ */
 
 }

@@ -45,6 +45,8 @@ public class AddPetController_G {
     @FXML
     private HBox typeGender_hBox;
     @FXML
+    private ToggleGroup tg_type;
+    @FXML
     private HBox coatSize_hBox;
     @FXML
     private VBox size_vBox;
@@ -179,12 +181,13 @@ public class AddPetController_G {
             if( boxMonth.getValue() != null)
                 month = Integer.parseInt(boxMonth.getValue());
             else
-                month = -1;
-            day = -1;
+                month = 0;
+            day = 0;
         }
 
         PetBeanBuilder petBeanBuilder = PetBeanBuilder.newPetBean()
 
+                .shelterId(shelterId)
                 .petImage(file)
                 .name(tf_petName.getText())
                 .type(petType)

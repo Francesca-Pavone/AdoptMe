@@ -2,7 +2,7 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 
 import com.ispwproject.adoptme.controller.appcontroller.SearchUserHomepageApplicativeController;
-import com.ispwproject.adoptme.model.Shelter;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -96,9 +96,9 @@ public class UserHomepageController {
                 labelCity.setText("Shelters you can find in '" + searchUserHomepageBean.getCityShelter() + "':");
                 searchUserHomepageApplicativeController.searchCity(searchUserHomepageBean);
                 int row = 1;
-                List<Shelter> shelterList = new ArrayList<>(searchUserHomepageBean.getSheltersList());
+                List<ShelterModel> shelterList = new ArrayList<>(searchUserHomepageBean.getSheltersList());
                 try {
-                    for (Shelter shelter: shelterList) {
+                    for (ShelterModel shelter: shelterList) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
                         Pane pane = fxmlLoader.load();

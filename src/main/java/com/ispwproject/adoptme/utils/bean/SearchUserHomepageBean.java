@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.utils.bean;
 
 import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.model.Shelter;
+import com.ispwproject.adoptme.model.ShelterModel;
 
 import java.util.List;
 
@@ -10,22 +10,22 @@ public class SearchUserHomepageBean {
     int cityOrShelter; // 0 -> city | 1 -> shelter's name
 
     List<PetModel> petList;
-    List<Shelter> sheltersList;
-    Shelter shelter;
+    List<ShelterModel> sheltersList;
+    ShelterModel shelter;
 
-    public Shelter getShelter() {
+    public ShelterModel getShelter() {
         return shelter;
     }
 
-    public void setShelter(Shelter shelter) {
+    public void setShelter(ShelterModel shelter) {
         this.shelter = shelter;
     }
 
-    public List<Shelter> getSheltersList() {
+    public List<ShelterModel> getSheltersList() {
         return sheltersList;
     }
 
-    public void setSheltersList(List<Shelter> sheltersList) {
+    public void setSheltersList(List<ShelterModel> sheltersList) {
         this.sheltersList = sheltersList;
     }
 

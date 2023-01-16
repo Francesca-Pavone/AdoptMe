@@ -2,12 +2,14 @@ package com.ispwproject.adoptme.model;
 
 import com.ispwproject.adoptme.utils.bean.AccountInfo;
 
+import java.io.File;
+
 public class User extends ShelterUserModel{
 
     private String name;
     private String surname;
 
-    public User(String profileImg, AccountInfo accountInfo, String name, String surname) {
+    public User(File profileImg, AccountInfo accountInfo, String name, String surname) {
         super(profileImg, accountInfo);
         this.name = name;
         this.surname = surname;

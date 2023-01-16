@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.model;
 
 import java.io.File;
-import java.time.LocalDate;
 
 public class PetModel {
     protected int petId;
@@ -22,12 +21,28 @@ public class PetModel {
     protected String disabilityType;
     protected PetCompatibility petCompatibility;
 
-    protected Shelter shelter;
+    protected ShelterModel shelter;
 
     public PetModel() {
 
     }
-    public PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, Shelter shelter) {
+
+    public PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility, int shelterId) {
+        this.yearOfBirth = yearOfBirth;
+        this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
+        this.coatLenght = coatLenght;
+        this.vaccinated = vaccinated;
+        this.microchipped = microchipped;
+        this.dewormed = dewormed;
+        this.sterilized = sterilized;
+        this.disability = disability;
+        this.disabilityType = disabilityType;
+        this.petCompatibility = petCompatibility;
+        this.shelter = new ShelterModel(shelterId);
+    }
+
+    public PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, ShelterModel shelter) {
         this.type = type;
         this.name = name;
         this.petImage = petImage;
@@ -48,8 +63,9 @@ public class PetModel {
 
 
 
-    public PetModel(int petId, String name, File petImg, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth) {
+    public PetModel(int petId, ShelterModel shelter, int petType, String name, File petImg, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth) {
         setPetId(petId);
+        setType(petType);
         setName(name);
         setPetImage(petImg);
         setGender(gender);
@@ -57,6 +73,7 @@ public class PetModel {
         setMonthOfBirth(monthOfBirth);
         setYearOfBirth(yearOfBirth);
         this.petCompatibility = new PetCompatibility();
+        this.shelter = shelter;
     }
 
     public PetModel(int type, String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
@@ -68,11 +85,23 @@ public class PetModel {
         this.petCompatibility = new PetCompatibility();
     }
 
-    public Shelter getShelter() {
+    public PetModel(int petId, int type, String petName, File petImage, int petGender, int petDayOfBirth, int petMonthOfBirth, int petYearOfBirth) {
+        setPetId(petId);
+        setType(type);
+        setName(petName);
+        setPetImage(petImage);
+        setGender(petGender);
+        setDayOfBirth(petDayOfBirth);
+        setMonthOfBirth(petMonthOfBirth);
+        setYearOfBirth(petYearOfBirth);
+        this.petCompatibility = new PetCompatibility();
+    }
+
+    public ShelterModel getShelter() {
         return shelter;
     }
 
-    public void setShelter(Shelter shelter) {
+    public void setShelter(ShelterModel shelter) {
         this.shelter = shelter;
     }
 

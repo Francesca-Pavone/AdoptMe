@@ -21,8 +21,8 @@ public class ShowShelterPetsController_A {
     public List<PetBean> getPetList() {
 
         try {
-            int searchKey = 1;
-            petList = petDAO.retrivePetByShelterId(searchKey);
+
+            petList = petDAO.retrivePetByShelterId(this.shelterId);
 
 
         } catch (SQLException se) {
