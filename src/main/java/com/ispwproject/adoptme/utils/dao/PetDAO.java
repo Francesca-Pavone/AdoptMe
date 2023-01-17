@@ -69,7 +69,7 @@ public class PetDAO {
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
 
-                ShelterModel shelter = ShelterDAOJDBC.retrieveShelterById(shelterId);
+                ShelterModel shelter = ShelterDAO.retrieveShelterById(shelterId);
 
                 PetModel pet = new PetModel(petId, shelter, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
 

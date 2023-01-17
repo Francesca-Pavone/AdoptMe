@@ -1,19 +1,18 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
-
 import java.io.File;
 
 
 public abstract class ShelterUserModel {
     private int id ;
     private File profileImg;
-    private AccountInfoBean accountInfo;
+    private AccountInfo accountInfo;
 
-    public ShelterUserModel(File profileImg, AccountInfoBean accountInfoBean) {
+    public ShelterUserModel(File profileImg, AccountInfo accountInfo) {
         setProfileImg(profileImg);
-        setAccountInfo(accountInfoBean);
+        setAccountInfo(accountInfo);
     }
+
 
     public ShelterUserModel(int id) {
         this.id = id;
@@ -21,7 +20,7 @@ public abstract class ShelterUserModel {
     public ShelterUserModel() {}
 
 
-    public ShelterUserModel(int id, File profileImg, AccountInfoBean accountInfo) {
+    public ShelterUserModel(int id, File profileImg, AccountInfo accountInfo) {
         this.id = id;
         this.profileImg = profileImg;
         this.accountInfo = accountInfo;
@@ -47,11 +46,11 @@ public abstract class ShelterUserModel {
         this.profileImg = profileImg;
     }
 
-    public AccountInfoBean getAccountInfo() {
+    public AccountInfo getAccountInfo() {
         return accountInfo;
     }
 
-    public void setAccountInfo(AccountInfoBean accountInfoBean) {
-        this.accountInfo = accountInfoBean;
+    public void setAccountInfo(AccountInfo accountInfo) {
+        this.accountInfo = accountInfo;
     }
 }

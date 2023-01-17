@@ -1,7 +1,5 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
-
 import java.io.File;
 
 public class UserModel extends ShelterUserModel{
@@ -9,10 +7,14 @@ public class UserModel extends ShelterUserModel{
     private String name;
     private String surname;
 
-    public UserModel(File profileImg, AccountInfoBean accountInfo, String name, String surname) {
-        super(profileImg, accountInfo);
+    public UserModel(int userId, File profileImg, AccountInfo accountInfo, String name, String surname) {
+        super(userId, profileImg, accountInfo);
         this.name = name;
         this.surname = surname;
+    }
+
+    public UserModel(String email) {
+        AccountInfo accountInfo = new AccountInfo(email, 0);
     }
 
     public String getName() {

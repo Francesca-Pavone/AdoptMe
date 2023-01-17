@@ -25,14 +25,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SimpleQueries {
-    public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
-        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
-        //System.out.println(sql);
+    public static ResultSet selectUserById(Statement stmt, int userId) throws SQLException {
+        String sql = "SELECT * FROM Users WHERE userId = '" + userId + "';";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectUserByEmail(Statement stmt, String email) throws SQLException {
+        String sql = "SELECT * FROM Users WHERE email = '" + email + "';";
         return stmt.executeQuery(sql);
     }
 
     public static ResultSet selectShelterById(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Shelters WHERE shelterId ='" + shelterId + "';";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectShelterByEmail(Statement stmt, String email) throws SQLException {
+        String sql = "SELECT * FROM Shelters WHERE email ='" + email + "';";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
+        //System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 
@@ -49,11 +64,6 @@ public class SimpleQueries {
     public static ResultSet selectCatById(Statement stmt, int catId, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Cats JOIN Compatibility ON catId = petId AND shelter = shelterId WHERE shelter = '" + shelterId + "' and catId = '" + catId + "';";
         //System.out.println(sql);
-        return stmt.executeQuery(sql);
-    }
-
-    public static ResultSet selectUserById(Statement stmt, int userId) throws SQLException {
-        String sql = "SELECT * FROM Users WHERE userId = '" + userId + "';";
         return stmt.executeQuery(sql);
     }
 
@@ -78,7 +88,7 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
     public static ResultSet checkLogin(Statement stmt, String email, String password) throws SQLException {
-        String sql = "SELECT CASE WHEN EXISTS (SELECT name, password FROM Users WHERE email = '" + email + "' AND password = '" + password + "') THEN 0 WHEN EXISTS (SELECT name, password FROM Shelters WHERE email = '" + email + "' AND password = '" + password + "') THEN 1 END;";
+        String sql = "SELECT CASE WHEN EXISTS (SELECT name, password FROM Users WHERE email = '" + email + "' AND password = '" + password + "') THEN 1 WHEN EXISTS (SELECT name, password FROM Shelters WHERE email = '" + email + "' AND password = '" + password + "') THEN 2 END;";
         return stmt.executeQuery(sql);
     }
 
