@@ -60,7 +60,7 @@ public class ShelterItemController_G {
         stage.setScene(scene);
 
         ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
-        shelterPageController_g.setData(shelterBean, shelterPageController_a.getPetList(shelterBean.getName()));
+        shelterPageController_g.setData(shelterBean, shelterPageController_a.getPetList(shelterBean.getShelterId()));
 
         stage.show();
     }

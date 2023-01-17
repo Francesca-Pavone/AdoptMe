@@ -223,8 +223,8 @@ public class PetDAO {
                 while ((read = in.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
-                //int petDayOfBirth = resultSet.getInt("dayOfBirth");
-                //int petMonthOfBirth = resultSet.getInt("monthOfBirth");
+                int petDayOfBirth = resultSet.getInt("dayOfBirth");
+                int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");

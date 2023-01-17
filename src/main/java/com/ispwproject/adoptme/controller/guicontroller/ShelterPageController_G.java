@@ -58,7 +58,7 @@ public class ShelterPageController_G {
         }
         labelEmail.setText(shelterBean.getEmail());
         labelPhoneNumber.setText(shelterBean.getPhoneNumber());
-        labelWebSite.setText(shelterBean.getWebSite()); // todo: portalo a URL
+        labelWebSite.setText(shelterBean.getWebSite().toString());
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
@@ -70,7 +70,8 @@ public class ShelterPageController_G {
             Pane pane = fxmlLoader.load();
 
             PetItemController_G petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setData(petBean);
+            petItemControllerG.setPet(petBean);
+            petItemControllerG.setData();
 
             if (column == 4) {
                 column = 0;

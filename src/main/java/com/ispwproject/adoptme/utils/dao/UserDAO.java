@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.UserModel;
-import com.ispwproject.adoptme.utils.bean.AccountInfo;
+import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.File;
@@ -61,7 +61,7 @@ public class UserDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                AccountInfoBean accountInfoBean = new AccountInfoBean(email, 0);
+                AccountInfoBean accountInfo = new AccountInfoBean(email, 0);
                 user = new UserModel(profileImg, accountInfo, name, surname);
 
 
@@ -86,6 +86,6 @@ public class UserDAO {
             }
         }
 
-        return userModel;
+        return user;
     }
 }

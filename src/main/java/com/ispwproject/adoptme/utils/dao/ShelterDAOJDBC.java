@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.utils.bean.AccountInfo;
+import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import com.ispwproject.adoptme.Main;
@@ -47,6 +47,7 @@ public class ShelterDAOJDBC {
             resultSet.first();
             do {
                 File shelterImage;
+                int shelterId = resultSet.getInt("shelterId");
                 Blob blob = resultSet.getBlob("profileImg");
                 String shelterName = resultSet.getString("name");
 
@@ -54,8 +55,8 @@ public class ShelterDAOJDBC {
                 String address = resultSet.getString("address");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
-                int shelterId = resultSet.getInt("shelterId");
                 String webSite = resultSet.getString("webSite");
+                URL webSiteURL = new URL(webSite);
 
                 if (blob != null) {
                     InputStream in = blob.getBinaryStream();
@@ -72,7 +73,8 @@ public class ShelterDAOJDBC {
                 }
 
                 AccountInfoBean accountInfoBean = new AccountInfoBean(email, password, 1);
-                ShelterModel shelterModel = new ShelterModel(shelterImage, accountInfoBean, shelterName, phoneNumber, address, city, webSite);
+
+                ShelterModel shelterModel = new ShelterModel(shelterId, shelterImage, accountInfoBean, shelterName, phoneNumber, address, city, webSiteURL);
                 sheltersList.add(shelterModel);
 
             }while(resultSet.next());
@@ -101,7 +103,7 @@ public class ShelterDAOJDBC {
         Statement stmt = null;
         Connection conn = null;
 
-        ShelterModel shelterModel;
+        ShelterModel shelter;
 
         try {
             Class.forName(DRIVER_CLASS_NAME);
@@ -205,11 +207,9 @@ public class ShelterDAOJDBC {
                     outputStream.write(bytes, 0, read);
                 }
 
-                AccountInfo accountInfo = new AccountInfo(email, 1);
+                AccountInfoBean accountInfo = new AccountInfoBean(email, 1);
                 shelter = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
 
-                AccountInfoBean accountInfoBean = new AccountInfoBean(email, password, 1);
-                shelterModel = new ShelterModel(shelterImage, accountInfoBean, shelterName, phoneNumber, address, city, webSite);
             }while(resultSet.next());
 
             resultSet.close();
@@ -229,6 +229,6 @@ public class ShelterDAOJDBC {
             }
         }
 
-        return shelterModel;
+        return shelter;
     }
 }

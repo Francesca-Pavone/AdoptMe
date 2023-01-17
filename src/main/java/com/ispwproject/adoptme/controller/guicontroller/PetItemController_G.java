@@ -42,13 +42,7 @@ public class PetItemController_G {
                 });
         petName.setText(petBean.getName());
         petAge.setText((String.valueOf(petBean.getYearOfBirth())));
-        InputStream inputStream = new FileInputStream(petBean.getPetImage());
-        Image image = new Image(inputStream);
 
-    public void setData(PetBean petBean) throws IOException {
-        petGender.setText(String.valueOf(petBean.getGender()));
-        petName.setText(petBean.getName());
-        petAge.setText(String.valueOf(petBean.getYearOfBirth()));
         Image image;
         if(petBean.getPetImage() != null) {
             InputStream inputStream = new FileInputStream(petBean.getPetImage());
