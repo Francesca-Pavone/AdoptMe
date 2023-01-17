@@ -103,7 +103,8 @@ public class UserHomepageController {
                         Pane pane = fxmlLoader.load();
 
                         ShelterItemController_G shelterItemControllerG = fxmlLoader.getController();
-                        shelterItemControllerG.setData(shelterBean);
+                        shelterItemControllerG.setShelter(shelterBean);
+                        shelterItemControllerG.setData();
 
 
                         grid.add(pane,1,  row);

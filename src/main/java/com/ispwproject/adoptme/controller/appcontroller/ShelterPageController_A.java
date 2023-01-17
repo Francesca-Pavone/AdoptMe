@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ShelterPageController_A {
 
-    public ShelterBean setData(String shelterName) throws Exception {
+    public ShelterBean getShelterBean(String shelterName) throws Exception {
         ShelterBean shelterBean = new ShelterBean(ShelterDAOJDBC.retrieveShelterByName(shelterName));
         System.out.println(shelterBean.getName());
         return shelterBean;

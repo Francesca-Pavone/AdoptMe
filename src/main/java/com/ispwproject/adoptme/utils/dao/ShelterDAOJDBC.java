@@ -48,6 +48,13 @@ public class ShelterDAOJDBC {
                 File shelterImage;
                 Blob blob = resultSet.getBlob("profileImg");
                 String shelterName = resultSet.getString("name");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String address = resultSet.getString("address");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                int shelterId = resultSet.getInt("shelterId");
+                String webSite = resultSet.getString("webSite");
+
                 if (blob != null) {
                     InputStream in = blob.getBinaryStream();
                     String filePath = shelterName + "Photo" + ".png";
@@ -62,7 +69,8 @@ public class ShelterDAOJDBC {
                     shelterImage = null;
                 }
 
-                ShelterModel shelterModel = new ShelterModel(shelterName, shelterImage);
+                AccountInfoBean accountInfoBean = new AccountInfoBean(email, password, 1);
+                ShelterModel shelterModel = new ShelterModel(shelterImage, accountInfoBean, shelterName, phoneNumber, address, city, webSite);
                 sheltersList.add(shelterModel);
 
             }while(resultSet.next());

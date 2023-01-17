@@ -18,6 +18,7 @@ public class ShelterBean {
     protected File shelterImg;
 
     public ShelterBean() {}
+
     public ShelterBean(ShelterModel shelterModel) {
         this.shelterId = shelterModel.getId();
         this.name = shelterModel.getShelterName();
@@ -26,7 +27,6 @@ public class ShelterBean {
         this.city = shelterModel.getCity();
         this.webSite = shelterModel.getWebSite();
         this.email = shelterModel.getAccountInfo().getEmail();
-        this.password = shelterModel.getAccountInfo().getPassword();
         this.shelterImg = shelterModel.getProfileImg();
     }
 
@@ -45,6 +45,7 @@ public class ShelterBean {
     public ShelterBean(String name){
         this.name = name;
     }
+
 
     public String getName() {
         return name;

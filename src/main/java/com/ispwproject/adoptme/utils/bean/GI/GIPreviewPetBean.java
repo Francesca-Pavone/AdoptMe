@@ -22,6 +22,8 @@ public class GIPreviewPetBean   {
             setYearOfBirthGI(petBean.getYearOfBirth());
         }
 
+
+
         //setter
         public void setPrevImageGI(File petImage) {
             this.petImage = petImage;

@@ -33,7 +33,7 @@ public class UserResearchController_A {
         List<ShelterBean> listShelterBean = new ArrayList<>();
         try {
             for (ShelterModel shelterModel : ShelterDAOJDBC.retrieveShelterByCity(userResearchBean.getCityShelter())) {
-                ShelterBean shelterBean = new ShelterBean(shelterModel.getShelterName());
+                ShelterBean shelterBean = new ShelterBean(shelterModel);
                 listShelterBean.add(shelterBean);
             }
         } catch (IOException e) { // todo: non penso sia IO exception

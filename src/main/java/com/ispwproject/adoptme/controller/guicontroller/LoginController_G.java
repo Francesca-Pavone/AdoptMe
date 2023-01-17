@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.controller.appcontroller.LoginController_A;
 import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController_G {
 
@@ -66,9 +68,31 @@ public class LoginController_G {
         stage.setScene(scene);
     }
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
         AccountInfoBean accountInfoBean = new AccountInfoBean(txtFieldEmail.getText(), txtFieldPass.getText());
+        LoginController_A loginController_a = new LoginController_A();
+        int type = loginController_a.checkLogin(accountInfoBean);
+        System.out.println(type);
+        if (type == -1) {
+            //todo: popup email o password sbagliate
+            //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
+        }
+        else if(type == 0) {
+            loginController_a.getShelter(accountInfoBean);
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            //todo: capire se serve prelevare dati utente già qui
+        }
+        else if (type == 1) {
+            loginController_a.getShelter(accountInfoBean);
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
 
+        }
     }
 
     public void loginGoogle(ActionEvent event) {

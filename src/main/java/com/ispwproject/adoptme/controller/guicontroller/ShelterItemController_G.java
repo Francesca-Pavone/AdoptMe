@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController_A;
-import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +29,13 @@ public class ShelterItemController_G {
     @FXML
     private Button btnShelter;
 
-    public void setData(ShelterBean shelterBean) throws IOException {
+    private ShelterBean shelterBean;
+
+    public void setShelter(ShelterBean shelterBean) {
+        this.shelterBean = shelterBean;
+    }
+
+    public void setData() throws IOException {
         shelterName.setText(shelterBean.getName());
         Image image;
         if (shelterBean.getShelterImg() != null) {
@@ -44,7 +49,6 @@ public class ShelterItemController_G {
     }
 
     public void selectShelter(ActionEvent event) throws Exception {
-        Node n = (Node)event.getSource();
         ShelterPageController_A shelterPageController_a = new ShelterPageController_A();
 
         Stage dialog = new Stage();
@@ -56,7 +60,7 @@ public class ShelterItemController_G {
         stage.setScene(scene);
 
         ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
-        shelterPageController_g.setData(shelterPageController_a.setData(n.getId()), shelterPageController_a.getPetList(n.getId()));
+        shelterPageController_g.setData(shelterBean, shelterPageController_a.getPetList(shelterBean.getName()));
 
         stage.show();
     }

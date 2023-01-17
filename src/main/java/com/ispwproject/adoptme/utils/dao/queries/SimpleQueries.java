@@ -53,7 +53,7 @@ public class SimpleQueries {
     }
 
     public static ResultSet searchSheltersByCity(Statement stmt, String city) throws SQLException {
-        String sql = "SELECT name, profileImg FROM Shelters WHERE city = '" + city + "'";
+        String sql = "SELECT * FROM Shelters WHERE city = '" + city + "'";
         return stmt.executeQuery(sql);
     }
 
@@ -67,9 +67,9 @@ public class SimpleQueries {
         String sql = "SELECT * FROM Shelters WHERE name = '" + shelterName + "'";
         return stmt.executeQuery(sql);
     }
-    /*public static ResultSet checkLogin(Statement stmt, String email, String password) {
-        String sql = "SELECT type FROM Shelters JOIN Users WHERE";
+    public static ResultSet checkLogin(Statement stmt, String email, String password) throws SQLException {
+        String sql = "SELECT CASE WHEN EXISTS (SELECT name, password FROM Users WHERE email = '" + email + "' AND password = '" + password + "') THEN 0 WHEN EXISTS (SELECT name, password FROM Shelters WHERE email = '" + email + "' AND password = '" + password + "') THEN 1 END;";
         return stmt.executeQuery(sql);
-    }*/
+    }
 
 }
