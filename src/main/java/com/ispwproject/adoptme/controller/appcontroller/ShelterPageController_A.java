@@ -16,7 +16,7 @@ public class ShelterPageController_A {
         PetDAO petDAO= new PetDAO();
         List<PetModel> petList = new ArrayList<>();
         try {
-            petList = petDAO.retrivePetByShelterId(shelterId);
+            petList = petDAO.retrievePetByShelterId(shelterId);
 
 
         } catch (SQLException se) {

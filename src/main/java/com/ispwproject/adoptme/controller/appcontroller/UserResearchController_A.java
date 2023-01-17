@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
+import com.ispwproject.adoptme.model.ShelterUserModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.UserResearchBean;
@@ -18,8 +19,9 @@ public class UserResearchController_A {
 
     public List<PetBean> searchShelter(String shelterName) throws Exception {
         List<PetBean> petList = new ArrayList<>();
+        int shelterId= ShelterDAOJDBC.retrieveIdByShelterName(shelterName);
         try {
-            for(PetModel petModel : PetDAO.retrievePetByShelterName(shelterName)) {
+            for(PetModel petModel : PetDAO.retrievePetByShelterId(shelterId)) {
                 PetBean petBean = new PetBean(petModel);
                 petList.add(petBean);
             }

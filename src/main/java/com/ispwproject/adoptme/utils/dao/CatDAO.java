@@ -16,7 +16,7 @@ public class CatDAO {
     private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
-    public static CatModel retriveCatById(int catId, int shelterId)  throws Exception {
+    public static CatModel retrieveCatById(int catId, int shelterId)  throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;

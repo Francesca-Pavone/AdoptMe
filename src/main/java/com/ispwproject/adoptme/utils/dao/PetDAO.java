@@ -17,7 +17,7 @@ public class PetDAO {
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
-    public List<PetModel> retrivePetByShelterId(int shelterId) throws Exception {
+    public static List<PetModel> retrievePetByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;

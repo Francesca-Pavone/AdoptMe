@@ -19,7 +19,7 @@ public class DogDAO {
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
-    public static DogModel retriveDogById(int dogId, int shelterId)  throws Exception {
+    public static DogModel retrieveDogById(int dogId, int shelterId)  throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;

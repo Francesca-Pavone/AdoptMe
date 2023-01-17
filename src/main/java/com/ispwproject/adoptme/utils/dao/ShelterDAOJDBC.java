@@ -99,12 +99,13 @@ public class ShelterDAOJDBC {
         return sheltersList;
     }
 
-    public static ShelterModel retrieveShelterByName(String shelterName) throws Exception {
+    public static int retrieveIdByShelterName(String shelterName ) throws Exception {
         Statement stmt = null;
         Connection conn = null;
 
         ShelterModel shelter;
 
+        int shelterId = -1;
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -121,29 +122,7 @@ public class ShelterDAOJDBC {
             }
 
             resultSet.first();
-            do{
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String address = resultSet.getString("address");
-                String city = resultSet.getString("city");
-
-                Blob blob = resultSet.getBlob("profileImg");
-                InputStream in = blob.getBinaryStream();
-                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + "Photo" + ".png";
-                File shelterImage = new File(filePath);
-                FileOutputStream outputStream = new FileOutputStream(shelterImage);
-                int read;
-                byte[] bytes = new byte[4096];
-                while ((read = in.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
-                }
-
-                String webSite = resultSet.getString("webSites");
-                URL webSiteURL = new URL(webSite);
-
-                shelter = new ShelterModel(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
-
-            }while(resultSet.next());
+            shelterId = resultSet.getInt("shelterId");
 
             resultSet.close();
 
@@ -162,7 +141,7 @@ public class ShelterDAOJDBC {
             }
         }
 
-        return shelter;
+        return shelterId;
     }
 
     public static ShelterModel retrieveShelterById(int shelterId) throws Exception {
