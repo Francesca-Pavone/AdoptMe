@@ -4,6 +4,9 @@ import com.ispwproject.adoptme.model.User;
 import com.ispwproject.adoptme.utils.bean.AccountInfo;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.*;
 
 public class UserDAO {
@@ -46,7 +49,18 @@ public class UserDAO {
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
                 String email = resultSet.getString("email");
-                String profileImg = resultSet.getString("profileImg");
+
+                Blob blob = resultSet.getBlob("profileImg");
+                InputStream in = blob.getBinaryStream();
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = name + "Photo" + ".png";
+                File profileImg = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(profileImg);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
 
                 AccountInfo accountInfo = new AccountInfo(email, 0);
 

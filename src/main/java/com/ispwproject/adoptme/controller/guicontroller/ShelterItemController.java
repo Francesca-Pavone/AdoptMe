@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.model.Shelter;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.ShelterPageBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ShelterItemController {
     @FXML
@@ -27,9 +29,10 @@ public class ShelterItemController {
     @FXML
     private Button btnShelter;
 
-    public void setData(Shelter shelter) throws IOException {
+    public void setData(ShelterModel shelter) throws IOException {
         shelterName.setText(shelter.getShelterName());
-        Image image = new Image(Main.class.getResourceAsStream(shelter.getProfileImg()));
+        InputStream inputStream = new FileInputStream(shelter.getProfileImg());
+        Image image = new Image(inputStream);
         shelterImage.setImage(image);
         btnShelter.setId(shelter.getShelterName());
     }

@@ -1,8 +1,12 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.Shelter;
+import com.ispwproject.adoptme.model.ShelterModel;
+import com.ispwproject.adoptme.utils.bean.AccountInfo;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,10 +21,10 @@ public class ShelterDAOJDBC {
 
     private ShelterDAOJDBC() {}
 
-    public static List<Shelter> retrieveShelterByCity(String city) throws Exception {
+    public static List<ShelterModel> retrieveShelterByCity(String city) throws Exception {
         Statement stmt = null;
         Connection conn = null;
-        List<Shelter> sheltersList = new ArrayList<>();
+        List<ShelterModel> sheltersList = new ArrayList<>();
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -39,9 +43,19 @@ public class ShelterDAOJDBC {
             resultSet.first();
             do{
                 String shelterName = resultSet.getString("name");
-                String shelterImage = resultSet.getString("profileImg");
+                Blob blob = resultSet.getBlob("profileImg");
+                InputStream in = blob.getBinaryStream();
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = shelterName + "Photo" + ".png";
+                File shelterImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(shelterImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
 
-                Shelter shelter = new Shelter(shelterName, shelterImage);
+                ShelterModel shelter = new ShelterModel(shelterName, shelterImage);
 
                 sheltersList.add(shelter);
 
@@ -67,10 +81,10 @@ public class ShelterDAOJDBC {
         return sheltersList;
     }
 
-    public static Shelter retrieveShelterByName(String shelterName) throws Exception {
+    public static ShelterModel retrieveShelterByName(String shelterName) throws Exception {
         Statement stmt = null;
         Connection conn = null;
-        Shelter shelter;
+        ShelterModel shelter;
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -91,11 +105,90 @@ public class ShelterDAOJDBC {
                 String phoneNumber = resultSet.getString("phoneNumber");
                 String address = resultSet.getString("address");
                 String city = resultSet.getString("city");
-                String shelterImage = resultSet.getString("profileImg");
+
+                Blob blob = resultSet.getBlob("profileImg");
+                InputStream in = blob.getBinaryStream();
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = shelterName + "Photo" + ".png";
+                File shelterImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(shelterImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
                 String webSite = resultSet.getString("webSites");
                 URL webSiteURL = new URL(webSite);
 
-                shelter = new Shelter(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
+                shelter = new ShelterModel(shelterName, phoneNumber, address, city, shelterImage, webSiteURL);
+
+            }while(resultSet.next());
+
+            resultSet.close();
+
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+        return shelter;
+    }
+
+    public static ShelterModel retrieveShelterById(int shelterId) throws Exception {
+        Statement stmt = null;
+        Connection conn = null;
+        ShelterModel shelter;
+        try {
+            Class.forName(DRIVER_CLASS_NAME);
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet resultSet = SimpleQueries.selectShelterById(stmt, shelterId);
+
+            if (!resultSet.first()){
+                Exception e = new Exception("No shelters found with the id: "+shelterId);
+                throw e;
+            }
+
+            resultSet.first();
+            do{
+                String shelterName = resultSet.getString("name");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String address = resultSet.getString("address");
+                String city = resultSet.getString("city");
+                String webSite = resultSet.getString("webSite");
+                URL webSiteURL = new URL(webSite);
+
+                String email = resultSet.getString("email");
+
+                Blob blob = resultSet.getBlob("profileImg");
+                InputStream in = blob.getBinaryStream();
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = shelterName + "Photo" + ".png";
+                File shelterImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(shelterImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
+                AccountInfo accountInfo = new AccountInfo(email, 1);
+                shelter = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
 
             }while(resultSet.next());
 

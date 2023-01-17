@@ -2,13 +2,14 @@ package com.ispwproject.adoptme.utils.bean;
 
 import com.ispwproject.adoptme.model.PetModel;
 
+import java.io.File;
 import java.util.List;
 
 public class ShelterPageBean {
     String shelterName;
     String shelterNumber;
     String shelterEmail;
-    String shelterImg;
+    File shelterImg;
     String shelterAddress;
     String shelterCity;
     String shelterWebSite;
@@ -38,11 +39,11 @@ public class ShelterPageBean {
         this.shelterEmail = shelterEmail;
     }
 
-    public String getShelterImg() {
+    public File getShelterImg() {
         return shelterImg;
     }
 
-    public void setShelterImg(String shelterImg) {
+    public void setShelterImg(File shelterImg) {
         this.shelterImg = shelterImg;
     }
 

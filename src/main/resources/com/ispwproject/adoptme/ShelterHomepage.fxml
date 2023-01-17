@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterHomepageController_G">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterHomepageController_G">
    <HBox prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <AnchorPane style="-fx-background-color: #34665A;">
          <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
