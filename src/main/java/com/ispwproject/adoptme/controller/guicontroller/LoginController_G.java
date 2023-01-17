@@ -2,7 +2,8 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController_A;
-import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
+import com.ispwproject.adoptme.model.AccountInfo;
+import com.ispwproject.adoptme.utils.bean.LoginBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,25 +69,26 @@ public class LoginController_G {
         stage.setScene(scene);
     }
 
-    public void login(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
-        AccountInfoBean accountInfoBean = new AccountInfoBean(txtFieldEmail.getText(), txtFieldPass.getText());
+    public void login(ActionEvent event) throws Exception {
+        LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
         LoginController_A loginController_a = new LoginController_A();
-        int type = loginController_a.checkLogin(accountInfoBean);
-        System.out.println(type);
-        if (type == -1) {
+        loginController_a.checkLogin(loginBean);
+
+        if (loginBean.getAccountType() == 0) {
+            System.out.println("Utente non trovato");
             //todo: popup email o password sbagliate
             //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
         }
-        else if(type == 0) {
-            loginController_a.getShelter(accountInfoBean);
+        else if(loginBean.getAccountType() == 1) {
+            loginController_a.getLoginInfo(loginBean);
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             //todo: capire se serve prelevare dati utente già qui
         }
-        else if (type == 1) {
-            loginController_a.getShelter(accountInfoBean);
+        else if (loginBean.getAccountType() == 2) {
+            loginController_a.getLoginInfo(loginBean);
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -100,6 +102,7 @@ public class LoginController_G {
     }
 
     public void noLogin(ActionEvent event) {
-
+        LoginController_A loginController_a = new LoginController_A();
+        loginController_a.noLogin();
     }
 }
