@@ -1,8 +1,5 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.ShelterUserModel;
-import com.ispwproject.adoptme.model.User;
-import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.*;

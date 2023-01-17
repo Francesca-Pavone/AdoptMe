@@ -4,12 +4,12 @@ import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 
 import java.io.File;
 
-public class User extends ShelterUserModel{
+public class UserModel extends ShelterUserModel{
 
     private String name;
     private String surname;
 
-    public User(File profileImg, AccountInfoBean accountInfoBean, String name, String surname) {
+    public UserModel(File profileImg, AccountInfoBean accountInfoBean, String name, String surname) {
         super(profileImg, accountInfoBean);
         this.name = name;
         this.surname = surname;

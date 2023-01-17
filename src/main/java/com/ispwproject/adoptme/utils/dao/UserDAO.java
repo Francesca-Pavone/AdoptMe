@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.User;
+import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
@@ -16,11 +16,11 @@ public class UserDAO {
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
-    public static User retreiveUserById(int userId) throws Exception {
+    public static UserModel retreiveUserById(int userId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
-        User user;
+        UserModel userModel;
 
         try {
             // STEP 2: loading dinamico del driver mysql
@@ -63,7 +63,7 @@ public class UserDAO {
 
                 AccountInfoBean accountInfoBean = new AccountInfoBean(email, 0);
 
-                user = new User(profileImg, accountInfoBean, name, surname);
+                userModel = new UserModel(profileImg, accountInfoBean, name, surname);
 
             }while(resultSet.next());
 
@@ -86,6 +86,6 @@ public class UserDAO {
             }
         }
 
-        return user;
+        return userModel;
     }
 }
