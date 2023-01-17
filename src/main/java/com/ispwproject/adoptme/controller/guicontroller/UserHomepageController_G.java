@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import com.ispwproject.adoptme.utils.bean.UserResearchBean;
 
-public class UserHomepageController {
+public class UserHomepageController_G {
     @FXML
     private TextField textFieldUserHomepage;
     @FXML
@@ -41,6 +42,14 @@ public class UserHomepageController {
     private VBox vBox;
     @FXML
     private Button backButton;
+
+    private UserBean userBean;
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
+        //System.out.println(userBean.getUserId()+" "+ userBean.getName()+" "+userBean.getSurname()+" "+userBean.getEmail());
+
+    }
 
     public void initialize() {
         textFieldUserHomepage.setDisable(true);

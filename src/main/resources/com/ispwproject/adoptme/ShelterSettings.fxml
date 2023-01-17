@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSettings">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSettingsController_G">
    <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="0.0" />
    <HBox alignment="CENTER_LEFT" prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
@@ -155,7 +155,7 @@
          </AnchorPane>
          <VBox alignment="TOP_CENTER" prefHeight="710.0" prefWidth="790.0">
             <children>
-               <Button mnemonicParsing="false" stylesheets="@style.css">
+               <Button mnemonicParsing="false" onAction="#signOut" stylesheets="@style.css">
                   <graphic>
                      <ImageView fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -171,7 +171,7 @@
                      <String fx:value="button3" />
                   </styleClass>
                </Button>
-               <Button mnemonicParsing="false"  prefHeight="120.0" prefWidth="120.0" styleClass="transparent" stylesheets="@style.css">
+               <Button mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" styleClass="transparent" stylesheets="@style.css">
                   <graphic>
                      <ImageView fx:id="userImg" fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -183,7 +183,7 @@
                      <Insets />
                   </VBox.margin>
                </Button>
-               <Label text="Pensieri Bestiali">
+               <Label fx:id="name_title" text="Pensieri Bestiali">
                   <font>
                      <Font name="Arial Bold" size="24.0" />
                   </font>
@@ -191,7 +191,7 @@
                      <Insets />
                   </VBox.margin>
                </Label>
-               <Label text="pensieribestiali@gmail.com">
+               <Label fx:id="email_title" text="pensieribestiali@gmail.com">
                   <font>
                      <Font name="Arial" size="16.0" />
                   </font>
@@ -216,7 +216,7 @@
                                  <Insets right="10.0" />
                               </HBox.margin>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="400.0" promptText="Pensieri Bestiali" styleClass="transparent" stylesheets="@style.css">
+                           <TextField fx:id="name" prefHeight="30.0" prefWidth="400.0" promptText="Pensieri Bestiali" styleClass="transparent" stylesheets="@style.css">
                               <font>
                                  <Font name="Arial" size="14.0" />
                               </font>
@@ -238,7 +238,7 @@
                                  <Font name="Arial" size="16.0" />
                               </font>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="400.0" promptText="3398713445" styleClass="transparent" stylesheets="@style.css">
+                           <TextField fx:id="number" prefHeight="30.0" prefWidth="400.0" promptText="3398713445" styleClass="transparent" stylesheets="@style.css">
                               <font>
                                  <Font name="Arial" size="14.0" />
                               </font>
@@ -263,7 +263,7 @@
                                  <Insets right="49.0" />
                               </HBox.margin>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="400.0" promptText="Via Iotti, 3" styleClass="transparent" stylesheets="@style.css">
+                           <TextField fx:id="address" prefHeight="30.0" prefWidth="400.0" promptText="Via Iotti, 3" styleClass="transparent" stylesheets="@style.css">
                               <font>
                                  <Font name="Arial" size="14.0" />
                               </font>
@@ -288,7 +288,7 @@
                                  <Insets right="43.0" />
                               </HBox.margin>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="400.0" promptText="pensieribestiali.com" styleClass="transparent" stylesheets="@style.css">
+                           <TextField fx:id="site" prefHeight="30.0" prefWidth="400.0" promptText="pensieribestiali.com" styleClass="transparent" stylesheets="@style.css">
                               <font>
                                  <Font name="Arial" size="14.0" />
                               </font>
@@ -313,7 +313,7 @@
                                  <Insets right="67.5" />
                               </HBox.margin>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="400.0" promptText="pensieribestiali@gmail.com" styleClass="transparent" stylesheets="@style.css">
+                           <TextField fx:id="email" prefHeight="30.0" prefWidth="400.0" promptText="pensieribestiali@gmail.com" styleClass="transparent" stylesheets="@style.css">
                               <font>
                                  <Font name="Arial" size="14.0" />
                               </font>
