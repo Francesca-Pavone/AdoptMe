@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController_A;
+import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.fxml.FXML;
@@ -42,12 +44,8 @@ public class ShelterPageController_G {
     private GridPane grid;
 
 
-    public void initialize() {
 
-
-    }
-
-    public void setData(ShelterBean shelterBean, List<PetBean> petBeanList) throws IOException {
+    public void setData(ShelterBean shelterBean) throws IOException {
         shelterName.setText(shelterBean.getName());
         Image image;
         if (shelterBean.getShelterImg() != null) {
@@ -61,6 +59,9 @@ public class ShelterPageController_G {
         labelWebSite.setText(shelterBean.getWebSite().toString());
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
+
+        ShelterPageController_A shelterPageController_a = new ShelterPageController_A();
+        List<PetBean> petBeanList = shelterPageController_a.getPetList(shelterBean.getShelterId());
 
         int column = 0;
         int row = 1;
@@ -79,6 +80,8 @@ public class ShelterPageController_G {
             }
             grid.add(pane, column++, row);
         }
+
+
     }
 
     public void selectInformations() {

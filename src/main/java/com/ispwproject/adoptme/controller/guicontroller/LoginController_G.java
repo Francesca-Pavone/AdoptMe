@@ -74,28 +74,37 @@ public class LoginController_G {
         LoginController_A loginController_a = new LoginController_A();
         loginController_a.checkLogin(loginBean);
 
-        Session session = loginController_a.getLoginInfo(loginBean);
+        if (loginBean.getAccountType() != 0) {
+            Session session = loginController_a.getLoginInfo(loginBean);
 
-        if (loginBean.getAccountType() == 0) {
+            if (loginBean.getAccountType() == 1) {
+                userLogin(stage, session);
+            } else if (loginBean.getAccountType() == 2) {
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+
+                stage.setScene(scene);
+            }
+        }
+        else
             System.out.println("Utente non trovato");
-            //todo: popup email o password sbagliate
-            //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
-        }
-        else if(loginBean.getAccountType() == 1) {
-            userLogin(stage, session);
-        }
-        else if (loginBean.getAccountType() == 2) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+        //todo: popup email o password sbagliate
+        //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
 
-            ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
-            shelterHomepageController_g.setShelterBean(session.getShelterBean());
-            shelterHomepageController_g.loadPets();
-
-            stage.setScene(scene);
-        }
     }
 
+
+
+    public void loginGoogle(ActionEvent event) {
+
+    }
+
+    public void noLogin(ActionEvent event) throws IOException {
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Session session = new Session();
+
+        userLogin(stage, session);
+    }
     private static void userLogin(Stage stage, Session session) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -104,16 +113,5 @@ public class LoginController_G {
         userHomepageControllerG.setUserBean(session.getUserBean());
 
         stage.setScene(scene);
-    }
-
-    public void loginGoogle(ActionEvent event) {
-
-    }
-
-    public void noLogin(ActionEvent event) throws IOException {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        Session session = new Session();
-        userLogin(stage, session);
     }
 }

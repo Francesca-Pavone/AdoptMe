@@ -3,14 +3,14 @@ package com.ispwproject.adoptme.model;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class AppointmentRequestModel {
+public abstract class RequestModel {
 
     private PetModel pet;
     private UserModel user;
     private Date date;
     private LocalTime time;
 
-    public AppointmentRequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
+    public RequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
         this.pet = pet;
         this.user = user;
         this.date = date;

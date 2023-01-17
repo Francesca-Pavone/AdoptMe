@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,11 +34,9 @@ public class ShelterHomepageController_G extends ShelterSideBar {
         dialog.show();
     }
 
+    public void initialize() {
 
-
-    public void loadPets() {
-
-        ShowShelterPetsController_A showShelterPetsController_a = new ShowShelterPetsController_A(shelterBean);
+        ShowShelterPetsController_A showShelterPetsController_a = new ShowShelterPetsController_A(Session.getShelterBean());
         int column = 0;
         int row = 1;
 

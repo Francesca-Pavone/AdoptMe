@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSettingsController_G">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterSettingsController_G">
    <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="0.0" />
    <HBox alignment="CENTER_LEFT" prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
@@ -350,11 +351,7 @@
                                  <Insets right="27.5" />
                               </HBox.margin>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="300.0" promptText="**********" styleClass="transparent" stylesheets="@style.css">
-                              <font>
-                                 <Font name="Arial" size="14.0" />
-                              </font>
-                           </TextField>
+                           <PasswordField prefHeight="30.0" prefWidth="300.0" promptText="********" />
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" spacing="20.0">
@@ -367,11 +364,7 @@
                                  <Insets right="58.0" />
                               </HBox.margin>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="300.0" styleClass="transparent" stylesheets="@style.css">
-                              <font>
-                                 <Font name="Arial" size="14.0" />
-                              </font>
-                           </TextField>
+                           <PasswordField prefHeight="30.0" prefWidth="300.0" />
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" spacing="20.0">
@@ -381,11 +374,7 @@
                                  <Font name="Arial" size="16.0" />
                               </font>
                            </Label>
-                           <TextField prefHeight="30.0" prefWidth="300.0" styleClass="transparent" stylesheets="@style.css">
-                              <font>
-                                 <Font name="Arial" size="14.0" />
-                              </font>
-                           </TextField>
+                           <PasswordField prefHeight="30.0" prefWidth="300.0" />
                         </children>
                      </HBox>
                      <HBox alignment="BOTTOM_LEFT">

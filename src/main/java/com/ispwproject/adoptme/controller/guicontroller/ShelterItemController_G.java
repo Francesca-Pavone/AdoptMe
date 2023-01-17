@@ -49,7 +49,6 @@ public class ShelterItemController_G {
     }
 
     public void selectShelter(ActionEvent event) throws Exception {
-        ShelterPageController_A shelterPageController_a = new ShelterPageController_A();
 
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -60,7 +59,7 @@ public class ShelterItemController_G {
         stage.setScene(scene);
 
         ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
-        shelterPageController_g.setData(shelterBean, shelterPageController_a.getPetList(shelterBean.getShelterId()));
+        shelterPageController_g.setData(shelterBean);
 
         stage.show();
     }

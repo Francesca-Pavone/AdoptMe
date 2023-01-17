@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.controller.guicontroller;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,7 @@ public class ShelterSettingsController_G extends ShelterSideBar {
     @FXML
     private ImageView userImg;
 
+    private ShelterBean shelterBean;
 
     public void signOut(ActionEvent event) throws IOException {
         this.shelterBean = null;
@@ -53,9 +55,12 @@ public class ShelterSettingsController_G extends ShelterSideBar {
         stage.setScene(scene);
     }
 
-    public void setShelterBean(ShelterBean shelterBean) throws IOException {
-        this.shelterBean = shelterBean;
+    public void setShelterSession() throws IOException {
+        this.shelterBean = Session.getShelterBean();
+        loadShelterInfo();
+    }
 
+    private void loadShelterInfo() throws IOException {
         Image image;
         if (shelterBean.getShelterImg() != null) {
             InputStream inputStream = new FileInputStream(shelterBean.getShelterImg());
@@ -72,6 +77,5 @@ public class ShelterSettingsController_G extends ShelterSideBar {
         address.setPromptText(shelterBean.getAddress());
         site.setPromptText(shelterBean.getWebSite().toString());
         email.setPromptText(shelterBean.getEmail());
-
     }
 }

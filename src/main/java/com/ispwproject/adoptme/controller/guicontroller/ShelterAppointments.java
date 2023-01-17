@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.model.AppointmentRequestModel;
+import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.dao.AppointmentRequestDAO;
 import javafx.fxml.FXML;
@@ -10,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +22,12 @@ public class ShelterAppointments extends ShelterSideBar {
     @FXML
     private HBox pendingReqList;
 
-    private List<AppointmentRequestModel> pendingRequestList = new ArrayList<>();
-    private List<AppointmentRequestModel> acceptedRequestList = new ArrayList<>();
-    private List<AppointmentRequestModel> doneAppointmentList = new ArrayList<>();
+    private List<RequestModel> pendingRequestList = new ArrayList<>();
+    private List<RequestModel> acceptedRequestList = new ArrayList<>();
+    private List<RequestModel> doneAppointmentList = new ArrayList<>();
     private AppointmentRequestDAO appointmentRequestDAO = new AppointmentRequestDAO();
 
-    private List<AppointmentRequestModel> getAcceptedReqList(){
+    private List<RequestModel> getAcceptedReqList(){
         /*
         try {
             int searchKey = 1;
@@ -57,7 +56,7 @@ public class ShelterAppointments extends ShelterSideBar {
         doneAppointmentList.addAll(getAcceptedReqList());
 
         try {
-            for (AppointmentRequestModel appointment : pendingRequestList) {
+            for (RequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
@@ -68,7 +67,7 @@ public class ShelterAppointments extends ShelterSideBar {
                 pendingReqList.getChildren().add(pane);
             }
 
-            for (AppointmentRequestModel appointment : pendingRequestList) {
+            for (RequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
@@ -79,7 +78,7 @@ public class ShelterAppointments extends ShelterSideBar {
                 acceptedReqList.getChildren().add(pane);
             }
 
-            for (AppointmentRequestModel appointment : pendingRequestList) {
+            for (RequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();

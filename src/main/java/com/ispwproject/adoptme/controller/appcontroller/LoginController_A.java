@@ -16,34 +16,25 @@ import java.sql.SQLException;
 
 public class LoginController_A {
     public void checkLogin(LoginBean loginBean) throws SQLException, ClassNotFoundException {
-        System.out.println("Email: "+loginBean.getEmail());
-        System.out.println("Password: "+loginBean.getPassword());
         int type = LoginDAO.checkLogin(loginBean.getEmail(), loginBean.getPassword());
-        System.out.println("Type: "+type);
         loginBean.setAccountType(type);
-        System.out.println("Account type: "+loginBean.getAccountType());
     }
 
     public Session getLoginInfo(LoginBean loginBean) throws Exception {
         Session session;
         if (loginBean.getAccountType() == 1) {
-            UserModel userModel;
-            userModel = UserDAO.retrieveUserByEmail(loginBean.getEmail());
+            UserModel userModel = UserDAO.retrieveUserByEmail(loginBean.getEmail());
             UserBean userBean = new UserBean(userModel);
 
             session = new Session(userBean);
 
-        } else if (loginBean.getAccountType() == 2) {
-            ShelterModel shelterModel;
-            shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
+        } else {
+            ShelterModel shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
             ShelterBean shelterBean = new ShelterBean(shelterModel);
 
             session = new Session(shelterBean);
 
         }
-        else
-            session = new Session();
-
         return session;
     }
 }

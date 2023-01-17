@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.model.AppointmentRequestModel;
+import com.ispwproject.adoptme.model.RequestModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -21,7 +21,7 @@ public class RequestItemController {
     @FXML
     private VBox vBox;
 
-    public void setDataAcceptedReq(AppointmentRequestModel appointmentRequest) {
+    public void setDataAcceptedReq(RequestModel appointmentRequest) {
         date.setText(appointmentRequest.getDate().toString());
         time.setText(appointmentRequest.getTime().toString());
         //vBox.getChildren().remove(manageReqBox);
