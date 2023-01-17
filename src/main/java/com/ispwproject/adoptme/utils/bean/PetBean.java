@@ -10,6 +10,8 @@ import java.time.LocalDate;
 
 public class PetBean {
 
+    private int petId;
+    private int shelterId;
     protected File petImage;
     protected String name;
     protected int type; // 0 -> DOG  |  1 -> CAT
@@ -52,7 +54,9 @@ public class PetBean {
 
     }
 
-    public PetBean(File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, boolean dogEducation, int size, boolean testFiv, boolean testFelv) {
+    public PetBean(int petId, int shelterId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, boolean dogEducation, int size, boolean testFiv, boolean testFelv) {
+        this.petId = petId;
+        this.shelterId = shelterId;
         this.petImage = petImage;
         this.name = name;
         this.type = type;
@@ -85,6 +89,7 @@ public class PetBean {
     }
 
     public PetBean(CatModel catModel) {
+        this.setShelterId(catModel.getShelter().getId());
         this.setPetImage(catModel.getPetImage());
         this.setName(catModel.getName());
         this.setType(catModel.getType());
@@ -118,6 +123,7 @@ public class PetBean {
     }
 
     public PetBean(DogModel dogModel) {
+        this.setShelterId(dogModel.getShelter().getId());
         this.setPetImage(dogModel.getPetImage());
         this.setName(dogModel.getName());
         this.setType(dogModel.getType());
@@ -152,6 +158,8 @@ public class PetBean {
     }
 
     public PetBean(PetModel petModel) {
+        this.setPetId(petModel.getPetId());
+        this.setShelterId(petModel.getShelter().getId());
         this.setPetImage(petModel.getPetImage());
         this.setName(petModel.getName());
         this.setType(petModel.getType());
@@ -181,6 +189,21 @@ public class PetBean {
 
     }
 
+    public int getPetId() {
+        return petId;
+    }
+
+    public void setPetId(int petId) {
+        this.petId = petId;
+    }
+
+    public int getShelterId() {
+        return shelterId;
+    }
+
+    public void setShelterId(int shelterId) {
+        this.shelterId = shelterId;
+    }
 
     public File getPetImage() {
         return petImage;

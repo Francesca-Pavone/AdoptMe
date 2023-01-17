@@ -1,18 +1,5 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.AppointmentRequestModel;
-import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.model.UserModel;
-import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
-
-import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class AppointmentRequestDAO {
 
     private static String USER = "user1";
@@ -20,6 +7,7 @@ public class AppointmentRequestDAO {
     private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
+    /*
     public List<AppointmentRequestModel> retreiveReqByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
@@ -89,5 +77,7 @@ public class AppointmentRequestDAO {
         return appointmentRequestList;
 
     }
+
+     */
 }
 

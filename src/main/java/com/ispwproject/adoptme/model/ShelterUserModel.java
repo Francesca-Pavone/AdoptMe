@@ -4,25 +4,31 @@ import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 
 import java.io.File;
 
+
 public abstract class ShelterUserModel {
     private int id ;
-    private File profileImg; //todo: riportare in formato file
-    private AccountInfoBean accountInfoBean;
+    private File profileImg;
+    private AccountInfoBean accountInfo;
 
     public ShelterUserModel(File profileImg, AccountInfoBean accountInfoBean) {
         setProfileImg(profileImg);
         setAccountInfo(accountInfoBean);
     }
 
-    public ShelterUserModel(File profileImg) {
-        this.profileImg = profileImg;
-    }
-
     public ShelterUserModel(int id) {
         this.id = id;
     }
-    public ShelterUserModel() {
+    public ShelterUserModel() {}
 
+
+    public ShelterUserModel(int id, File profileImg, AccountInfoBean accountInfo) {
+        this.id = id;
+        this.profileImg = profileImg;
+        this.accountInfo = accountInfo;
+    }
+
+    public ShelterUserModel(File profileImg) {
+        this.profileImg = profileImg;
     }
 
     public int getId() {
@@ -42,10 +48,10 @@ public abstract class ShelterUserModel {
     }
 
     public AccountInfoBean getAccountInfo() {
-        return accountInfoBean;
+        return accountInfo;
     }
 
     public void setAccountInfo(AccountInfoBean accountInfoBean) {
-        this.accountInfoBean = accountInfoBean;
+        this.accountInfo = accountInfoBean;
     }
 }

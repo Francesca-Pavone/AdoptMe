@@ -11,6 +11,12 @@ public class CatModel extends PetModel{
     public CatModel() {
     }
 
+    public CatModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility, boolean testFiv, boolean testFelv, int shelterId) {
+        super(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, petCompatibility, shelterId);
+        setTestFiv(testFiv);
+        setTestFelv(testFelv);
+    }
+
     public CatModel(String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
         super(1, name, petImg, yearOfBirth, gender, petCompatibility);
     }

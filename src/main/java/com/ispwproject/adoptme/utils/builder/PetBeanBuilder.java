@@ -5,6 +5,8 @@ import com.ispwproject.adoptme.utils.bean.PetBean;
 import java.io.File;
 
 public final class PetBeanBuilder {
+    private int petId;
+    private int shelterId;
     private File petImage;
     private String name;
     private int type;
@@ -42,6 +44,14 @@ public final class PetBeanBuilder {
         return new PetBeanBuilder();
     }
 
+    public PetBeanBuilder petId(int petId) {
+        this.petId = petId;
+        return this;
+    }
+    public PetBeanBuilder shelterId(int shelterId) {
+        this.shelterId = shelterId;
+        return this;
+    }
     public PetBeanBuilder petImage(File petImage) {
         this.petImage = petImage;
         return this;
@@ -188,6 +198,6 @@ public final class PetBeanBuilder {
     }
 
     public PetBean build() {
-        return new PetBean(petImage, name, type, yearOfBirth, monthOfBirth, dayOfBirth, gender, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone, dogEducation, size, testFiv, testFelv);
+        return new PetBean(petId, shelterId, petImage, name, type, yearOfBirth, monthOfBirth, dayOfBirth, gender, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone, dogEducation, size, testFiv, testFelv);
     }
 }

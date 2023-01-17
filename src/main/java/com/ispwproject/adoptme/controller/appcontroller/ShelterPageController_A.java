@@ -1,11 +1,8 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
-import com.ispwproject.adoptme.utils.dao.ShelterDAOJDBC;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,18 +10,13 @@ import java.util.List;
 
 public class ShelterPageController_A {
 
-    public ShelterBean getShelterBean(String shelterName) throws Exception {
-        ShelterBean shelterBean = new ShelterBean(ShelterDAOJDBC.retrieveShelterByName(shelterName));
-        System.out.println(shelterBean.getName());
-        return shelterBean;
-    }
 
-    public List<PetBean> getPetList(String shelterName) {
+
+    public List<PetBean> getPetList(int shelterId) {
         PetDAO petDAO= new PetDAO();
-        System.out.println(shelterName + "2");
         List<PetModel> petList = new ArrayList<>();
         try {
-            petList = petDAO.retrievePetByShelterName(shelterName);
+            petList = petDAO.retrivePetByShelterId(shelterId);
 
 
         } catch (SQLException se) {

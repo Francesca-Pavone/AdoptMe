@@ -9,8 +9,8 @@ public class UserModel extends ShelterUserModel{
     private String name;
     private String surname;
 
-    public UserModel(File profileImg, AccountInfoBean accountInfoBean, String name, String surname) {
-        super(profileImg, accountInfoBean);
+    public UserModel(File profileImg, AccountInfoBean accountInfo, String name, String surname) {
+        super(profileImg, accountInfo);
         this.name = name;
         this.surname = surname;
     }

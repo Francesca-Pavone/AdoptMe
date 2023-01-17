@@ -1,5 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
+import com.ispwproject.adoptme.model.ShelterModel;
+
 import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
@@ -133,7 +135,8 @@ public class UserHomepageController {
                         Pane pane = fxmlLoader.load();
 
                         PetItemController_G petItemControllerG = fxmlLoader.getController();
-                        petItemControllerG.setData(pet);
+                        petItemControllerG.setPet(pet);
+                        petItemControllerG.setData();
 
                         if (column == 3) {
                             column = 0;

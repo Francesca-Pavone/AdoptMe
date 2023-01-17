@@ -29,6 +29,7 @@ public class ShelterAppointments extends ShelterSideBar {
     private AppointmentRequestDAO appointmentRequestDAO = new AppointmentRequestDAO();
 
     private List<AppointmentRequestModel> getAcceptedReqList(){
+        /*
         try {
             int searchKey = 1;
             pendingRequestList = appointmentRequestDAO.retreiveReqByShelterId(searchKey);
@@ -45,6 +46,8 @@ public class ShelterAppointments extends ShelterSideBar {
             e.printStackTrace();
         }
 
+
+         */
         return pendingRequestList;
     }
 

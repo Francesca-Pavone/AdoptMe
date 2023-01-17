@@ -12,7 +12,7 @@ public class ShelterBean {
     protected String phoneNumber;
     protected String address;
     protected String city;
-    protected String webSite;
+    protected URL webSite;
     protected String email;
     protected String password; // todo: vedere se lasciarla nel bean
     protected File shelterImg;
@@ -30,7 +30,7 @@ public class ShelterBean {
         this.shelterImg = shelterModel.getProfileImg();
     }
 
-    public ShelterBean(int shelterId, String name, String phoneNumber, String address, String city, String webSite, String email, String password, File shelterImg) {
+    public ShelterBean(int shelterId, String name, String phoneNumber, String address, String city, URL webSite, String email, String password, File shelterImg) {
         this.shelterId = shelterId;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -95,11 +95,11 @@ public class ShelterBean {
         this.city = city;
     }
 
-    public String getWebSite() {
+    public URL getWebSite() {
         return webSite;
     }
 
-    public void setWebSite(String webSite) {
+    public void setWebSite(URL webSite) {
         this.webSite = webSite;
     }
 

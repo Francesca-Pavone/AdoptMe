@@ -6,13 +6,13 @@ import java.util.Date;
 public class AppointmentRequestModel {
 
     private PetModel pet;
-    private UserModel userModel;
+    private UserModel user;
     private Date date;
     private LocalTime time;
 
-    public AppointmentRequestModel(PetModel pet, UserModel userModel, Date date, LocalTime time) {
+    public AppointmentRequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
         this.pet = pet;
-        this.userModel = userModel;
+        this.user = user;
         this.date = date;
         this.time = time;
     }
@@ -26,11 +26,11 @@ public class AppointmentRequestModel {
     }
 
     public UserModel getUser() {
-        return userModel;
+        return user;
     }
 
-    public void setUser(UserModel userModel) {
-        this.userModel = userModel;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
     public Date getDate() {

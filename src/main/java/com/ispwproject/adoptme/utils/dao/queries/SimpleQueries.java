@@ -26,8 +26,13 @@ import java.sql.Statement;
 
 public class SimpleQueries {
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
-        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
         //System.out.println(sql);
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectShelterById(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT * FROM Shelters WHERE shelterId ='" + shelterId + "';";
         return stmt.executeQuery(sql);
     }
 
@@ -36,8 +41,13 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectPetById(Statement stmt, int petId, int shelterId) throws SQLException {
-        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterId + "' AND petId = '" + petId + "';";
+    public static ResultSet selectDogById(Statement stmt, int dogId, int shelterId) throws SQLException {
+        String sql = "SELECT * FROM Dogs JOIN Compatibility ON dogId = petId AND shelter = shelterId WHERE shelter = '" + shelterId + "' and dogId = '" + dogId + "';";
+        //System.out.println(sql);
+        return stmt.executeQuery(sql);
+    }
+    public static ResultSet selectCatById(Statement stmt, int catId, int shelterId) throws SQLException {
+        String sql = "SELECT * FROM Cats JOIN Compatibility ON catId = petId AND shelter = shelterId WHERE shelter = '" + shelterId + "' and catId = '" + catId + "';";
         //System.out.println(sql);
         return stmt.executeQuery(sql);
     }

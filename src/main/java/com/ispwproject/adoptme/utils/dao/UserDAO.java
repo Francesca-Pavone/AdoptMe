@@ -20,7 +20,7 @@ public class UserDAO {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
-        UserModel userModel;
+        UserModel user;
 
         try {
             // STEP 2: loading dinamico del driver mysql
@@ -61,9 +61,9 @@ public class UserDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                AccountInfoBean accountInfoBean = new AccountInfoBean(email, 0);
+                AccountInfoBean accountInfo = new AccountInfoBean(email, 0);
+                user = new UserModel(profileImg, accountInfo, name, surname);
 
-                userModel = new UserModel(profileImg, accountInfoBean, name, surname);
 
             }while(resultSet.next());
 
@@ -86,6 +86,6 @@ public class UserDAO {
             }
         }
 
-        return userModel;
+        return user;
     }
 }
