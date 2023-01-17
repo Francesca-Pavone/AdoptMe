@@ -68,7 +68,7 @@ public class QuestionnaireResultPageController_G {
 
 
                     PetItemController petItemController = fxmlLoader.getController();
-                    petItemController.setData(pet);
+                    petItemController.getShelterBean(pet);
 
                     if (column == 3) {
                         column = 0;

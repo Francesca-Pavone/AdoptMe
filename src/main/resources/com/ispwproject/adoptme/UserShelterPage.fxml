@@ -5,27 +5,95 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserShelterPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.ShelterPageController_G">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c79a32c9" height="185.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1101.0" AnchorPane.bottomAnchor="605.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c79a32c9" height="170.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1101.0" AnchorPane.bottomAnchor="620.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+      <Pane fx:id="paneInformations" style="-fx-background-color: #e6e6e6; -fx-background-radius: 20;" visible="false" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="225.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="0.03662109375">
+               <children>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Email:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelEmail">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Phone number:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelPhoneNumber">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Web Site:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelWebSite" textFill="#0010ec" underline="true">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label text="Address:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelAddress">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </Pane>
       <VBox prefHeight="790.0" prefWidth="1100.0">
          <children>
-            <Button mnemonicParsing="false" stylesheets="@style.css">
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/back_arrow.png" />
+                        <Image url="@image/back_arrow_white.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -39,20 +107,23 @@
             </Button>
             <ImageView fx:id="shelterImage" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
-                  <Insets left="475.0" top="30.0" />
+                  <Insets left="475.0" top="18.0" />
                </VBox.margin>
             </ImageView>
-            <HBox alignment="CENTER">
+            <HBox fx:id="hbox" alignment="CENTER" prefWidth="1100.0">
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets />
                </VBox.margin>
                <children>
                   <Label fx:id="shelterName" text="Name">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Label>
-                  <Button fx:id="informations" mnemonicParsing="false" onAction="#selectInformations" styleClass="transparent" stylesheets="@style.css">
+                  <ToggleButton fx:id="btnInformations" mnemonicParsing="false" onAction="#selectInformations" styleClass="transparent" stylesheets="@style.css">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -60,7 +131,7 @@
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
+                  </ToggleButton>
                </children>
             </HBox>
             <ScrollPane styleClass="transparent" stylesheets="@style.css">
@@ -68,7 +139,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
                <content>
-                  <GridPane fx:id="grid">
+                  <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" vgap="33.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>

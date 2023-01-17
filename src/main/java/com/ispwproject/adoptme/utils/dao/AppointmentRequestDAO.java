@@ -42,7 +42,7 @@ public class AppointmentRequestDAO {
                 PetModel pet = PetDAO.retrivePetById(petId, shelterId);
 
                 int userId = resultSet.getInt("userId");
-                User user = UserDAO.retreiveUserById(userId);
+                UserModel userModel = UserDAO.retreiveUserById(userId);
 
                 Date date = resultSet.getDate("date");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,7 +50,7 @@ public class AppointmentRequestDAO {
 
                 LocalTime time = resultSet.getObject("time", LocalTime.class);
 
-                AppointmentRequestModel appointmentRequestModel = new AppointmentRequestModel(pet, user, date, time);
+                AppointmentRequestModel appointmentRequestModel = new AppointmentRequestModel(pet, userModel, date, time);
                 appointmentRequestList.add(appointmentRequestModel);
 
             } while (resultSet.next());

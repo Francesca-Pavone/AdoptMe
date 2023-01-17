@@ -71,9 +71,11 @@ public class ShelterHomepageController_G extends ShelterSideBar {
             for (PetBean pet : showShelterPetsController_a.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
+
                 PetItemController_G petItemControllerG = fxmlLoader.getController();
                 petItemControllerG.setPet(pet);
                 petItemControllerG.setData();
+
 
                 if (column == 3) {
                     column = 0;

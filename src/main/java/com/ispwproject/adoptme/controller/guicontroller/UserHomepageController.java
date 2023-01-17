@@ -1,28 +1,34 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-
 import com.ispwproject.adoptme.controller.appcontroller.SearchUserHomepageApplicativeController;
 import com.ispwproject.adoptme.model.ShelterModel;
+
 import com.ispwproject.adoptme.Main;
+
+import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
+import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ispwproject.adoptme.utils.bean.SearchUserHomepageBean;
+import com.ispwproject.adoptme.utils.bean.UserResearchBean;
 
 public class UserHomepageController {
-
     @FXML
     private TextField textFieldUserHomepage;
     @FXML
@@ -41,9 +47,6 @@ public class UserHomepageController {
     private Pane pane1;
     @FXML
     private Button backButton;
-
-    SearchUserHomepageBean searchUserHomepageBean = new SearchUserHomepageBean();
-    SearchUserHomepageApplicativeController searchUserHomepageApplicativeController = new SearchUserHomepageApplicativeController();
 
     public void initialize() {
         textFieldUserHomepage.setDisable(true);
@@ -77,8 +80,9 @@ public class UserHomepageController {
     }
 
     public void searchUserHomepage(ActionEvent event) throws Exception {
+        UserResearchBean userResearchBean = new UserResearchBean();
         if(!textFieldUserHomepage.getText().equals("")) {
-            searchUserHomepageBean.setCityShelter(textFieldUserHomepage.getText());
+            userResearchBean.setCityShelter(textFieldUserHomepage.getText());
 
             pane1.setVisible(false);
 
@@ -88,23 +92,22 @@ public class UserHomepageController {
             btnSearchUserHomepage.setDisable(true);
 
             if (radioBtnCity.isSelected()) {
-                searchUserHomepageBean.setCityOrShelter(0);
-
                 labelCity.setVisible(true);
                 backButton.setVisible(true);
                 scrollPane.setVisible(true);
-                labelCity.setText("Shelters you can find in '" + searchUserHomepageBean.getCityShelter() + "':");
-                searchUserHomepageApplicativeController.searchCity(searchUserHomepageBean);
+                labelCity.setText("Shelters you can find in '" + userResearchBean.getCityShelter() + "':");
+                UserResearchController_A userResearchControllerA = new UserResearchController_A();
                 int row = 1;
-                List<ShelterModel> shelterList = new ArrayList<>(searchUserHomepageBean.getSheltersList());
+                List<ShelterBean> shelterList = new ArrayList<>(userResearchControllerA.searchCity(userResearchBean));
                 try {
-                    for (ShelterModel shelter: shelterList) {
+                    for (ShelterBean shelterBean : shelterList) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
                         Pane pane = fxmlLoader.load();
 
-                        ShelterItemController shelterItemController = fxmlLoader.getController();
-                        shelterItemController.setData(shelter);
+                        ShelterItemController_G shelterItemControllerG = fxmlLoader.getController();
+                        shelterItemControllerG.setShelter(shelterBean);
+                        shelterItemControllerG.setData();
 
 
                         grid.add(pane,1,  row);
@@ -113,9 +116,40 @@ public class UserHomepageController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                //todo: se effettu ricerca per shelter e poi per città -> devo rimuovere i dati caricati nello scroll pane e viceversa
             }
-            if (radioBtnShelter.isSelected())
-                searchUserHomepageBean.setCityOrShelter(1);
+            if (radioBtnShelter.isSelected()) {
+                labelCity.setVisible(true);
+                backButton.setVisible(true);
+                scrollPane.setVisible(true);
+                labelCity.setText("Pets you can find in '" + userResearchBean.getCityShelter() + "':");
+                UserResearchController_A userResearchControllerA = new UserResearchController_A();
+
+                int column = 0;
+                int row = 1;
+
+                try {
+                    // TODO devo passare PetBean e non PetModel
+                    for (PetBean pet : userResearchControllerA.searchShelter(userResearchBean.getCityShelter())) {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
+                        Pane pane = fxmlLoader.load();
+
+                        PetItemController_G petItemControllerG = fxmlLoader.getController();
+                        petItemControllerG.setData(pet);
+
+                        if (column == 3) {
+                            column = 0;
+                            row++;
+                        }
+
+                        grid.add(pane, column++, row);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         } else {
             System.out.println("Scrivere qualcosa...");
         }

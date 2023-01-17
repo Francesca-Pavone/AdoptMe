@@ -20,8 +20,9 @@ public class GIPreviewPetBean   {
             setNameGI(petBean.getName());
             setGenderGI(petBean.getGender());
             setYearOfBirthGI(petBean.getYearOfBirth());
-
         }
+
+
 
         //setter
         public void setPrevImageGI(File petImage) {

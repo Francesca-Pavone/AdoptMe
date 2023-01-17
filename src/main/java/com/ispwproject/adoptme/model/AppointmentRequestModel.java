@@ -12,7 +12,7 @@ public class AppointmentRequestModel {
 
     public AppointmentRequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
         this.pet = pet;
-        this.user = user;
+        this.userModel = userModel;
         this.date = date;
         this.time = time;
     }
