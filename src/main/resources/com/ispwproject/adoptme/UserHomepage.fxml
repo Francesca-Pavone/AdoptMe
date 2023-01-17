@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserHomepageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserHomepageController">
    <children>
       <AnchorPane style="-fx-background-color: #34665A;">
          <children>
@@ -272,24 +272,24 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Pane fx:id="pane1" layoutX="421.0" layoutY="266.0" AnchorPane.leftAnchor="421.0" AnchorPane.topAnchor="275.0">
+      <VBox fx:id="vBox" alignment="CENTER" layoutX="377.0" layoutY="299.0" prefWidth="790.0" spacing="20.0" AnchorPane.leftAnchor="310.0">
          <children>
             <Text fx:id="label1" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets change our lives, let’s save theirs">
                <font>
                   <Font name="Copperplate" size="34.0" />
                </font>
             </Text>
-            <Text fx:id="label2" layoutX="154.0" layoutY="63.583984375" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready to find your new pet?">
+            <Text fx:id="label2" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready to find your new pet?">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </Text>
-            <Text fx:id="label3" layoutX="254.0" layoutY="131.0" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;&lt;&lt;">
+            <Text fx:id="label3" rotate="-90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;&lt;&lt;">
                <font>
                   <Font name="Chalkboard SE Light" size="24.0" />
                </font>
             </Text>
-            <Button fx:id="btnStartQuestionnaire" layoutX="196.0" layoutY="182.0" mnemonicParsing="false" onAction="#startQuestionnaire" styleClass="button1" stylesheets="@style.css" text="Start now" textFill="WHITE">
+            <Button fx:id="btnStartQuestionnaire" mnemonicParsing="false" onAction="#startQuestionnaire" styleClass="button1" stylesheets="@style.css" text="Start now" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
@@ -298,6 +298,6 @@
                </padding>
             </Button>
          </children>
-      </Pane>
+      </VBox>
    </children>
 </AnchorPane>

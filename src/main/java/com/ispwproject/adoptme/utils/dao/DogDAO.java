@@ -2,13 +2,10 @@ package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -19,7 +16,7 @@ public class DogDAO {
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
-    public static DogModel retriveDogById(int dogId, int shelterId)  throws Exception {
+    public static DogModel retrieveDogById(int dogId, int shelterId)  throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;

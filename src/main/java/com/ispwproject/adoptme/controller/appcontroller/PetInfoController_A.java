@@ -12,7 +12,7 @@ public class PetInfoController_A {
 
     public void getPetInfo(PetBean petBean) throws Exception {
         if (petBean.getType() == 0) {
-            DogModel dogModel = DogDAO.retriveDogById(petBean.getPetId(), petBean.getShelterId());
+            DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());
 
             //vado a settare nel bean le nuove info del pet che mi servono
             setCommonAttr(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth(), dogModel.getCoatLenght(), dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getPetCompatibility());
@@ -21,7 +21,7 @@ public class PetInfoController_A {
 
         }
         else {
-            CatModel catModel = CatDAO.retriveCatById(petBean.getPetId(), petBean.getShelterId());
+            CatModel catModel = CatDAO.retrieveCatById(petBean.getPetId(), petBean.getShelterId());
             //vado a settare nel bean le nuove info del pet che mi servono
             setCommonAttr(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth(), catModel.getCoatLenght(), catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getPetCompatibility());
             petBean.setTestFiv(catModel.isTestFiv());

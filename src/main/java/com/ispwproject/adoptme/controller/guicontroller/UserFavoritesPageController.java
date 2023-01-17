@@ -21,13 +21,12 @@ public class UserFavoritesPageController {
     private GridPane grid;
 
     private List<PetModel> petList = new ArrayList<>();
-    private PetDAO petDAO = new PetDAO();
     private List<PetModel> getPetList() {
 
         try {
             int searchKey = 1;
             //System.out.println("Looking for " + searchKey + "'s pets: ");
-            petList = this.petDAO.retrivePetByShelterId(searchKey);
+            petList = PetDAO.retrievePetByShelterId(searchKey);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

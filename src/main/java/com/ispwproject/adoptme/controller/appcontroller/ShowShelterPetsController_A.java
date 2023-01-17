@@ -12,7 +12,6 @@ public class ShowShelterPetsController_A {
 
     int shelterId;
     private static List<PetModel> petList = new ArrayList<>();
-    private static PetDAO petDAO = new PetDAO();
 
     public ShowShelterPetsController_A(int shelterId) {
         this.shelterId = shelterId;
@@ -22,7 +21,7 @@ public class ShowShelterPetsController_A {
 
         try {
 
-            petList = petDAO.retrivePetByShelterId(this.shelterId);
+            petList = PetDAO.retrievePetByShelterId(this.shelterId);
 
 
         } catch (SQLException se) {

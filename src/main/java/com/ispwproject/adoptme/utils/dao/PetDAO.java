@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.utils.dao;
 
 
 import com.ispwproject.adoptme.model.*;
-import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.*;
@@ -17,7 +16,7 @@ public class PetDAO {
     private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
-    public List<PetModel> retrivePetByShelterId(int shelterId) throws Exception {
+    public static List<PetModel> retrievePetByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
