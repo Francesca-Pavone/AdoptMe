@@ -1,19 +1,42 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.utils.bean.ShelterPageBean;
+import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
-import com.ispwproject.adoptme.utils.dao.ShelterDAOJDBC;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShelterPageController_A {
-    public void searchShelter(ShelterPageBean shelterPageBean, String shelterName) throws Exception {
-        ShelterModel shelter = ShelterDAOJDBC.retrieveShelterByName(shelterName);
-        shelterPageBean.setShelterName(shelter.getShelterName());
-        shelterPageBean.setShelterCity(shelter.getCity());
-        shelterPageBean.setShelterImg(shelter.getProfileImg());
-        shelterPageBean.setShelterNumber(shelter.getPhoneNumber());
-        shelterPageBean.setShelterAddress(shelter.getAddress());
 
-        shelterPageBean.setSheltersPet(PetDAO.retrievePetByShelterName(shelterName));
+
+
+    public List<PetBean> getPetList(int shelterId) {
+        PetDAO petDAO= new PetDAO();
+        List<PetModel> petList = new ArrayList<>();
+        try {
+            petList = petDAO.retrivePetByShelterId(shelterId);
+
+
+        } catch (SQLException se) {
+            // Errore durante l'apertura della connessione
+            se.printStackTrace();
+        } catch (ClassNotFoundException driverEx) {
+            // Errore nel loading del driver
+            driverEx.printStackTrace();
+        } catch (Exception e) {
+            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
+            e.printStackTrace();
+        }
+
+        List<PetBean> petBeanList = new ArrayList<>();
+
+        for (PetModel petModel : petList) {
+            PetBean petBean = new PetBean(petModel);
+            petBeanList.add(petBean);
+        }
+        System.out.println(petBeanList.size());
+        return petBeanList;
     }
 }

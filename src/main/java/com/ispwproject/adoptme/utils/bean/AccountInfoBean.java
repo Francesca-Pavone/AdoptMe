@@ -1,18 +1,23 @@
 package com.ispwproject.adoptme.utils.bean;
 
-public class AccountInfo {
+public class AccountInfoBean {
     private String password;
     private String email;
     private int accountType; // 0 -> USER  |  1 -> SHELTER
     private int gmailVerified; // 0 -> no Gmail | 1 -> Gmail
 
-    public AccountInfo(String email,String password, int accountType) {
+    public AccountInfoBean(String email, String password, int accountType) {
         this.email = email;
         this.password = password;
         this.accountType = accountType;
     }
 
-    public AccountInfo(String email, int accountType) {
+    public AccountInfoBean(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public AccountInfoBean(String email, int accountType) {
         this.email = email;
         this.accountType = accountType;
     }

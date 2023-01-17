@@ -42,8 +42,14 @@ public class PetItemController_G {
                 });
         petName.setText(petBean.getName());
         petAge.setText((String.valueOf(petBean.getYearOfBirth())));
-        InputStream inputStream = new FileInputStream(petBean.getPetImage());
-        Image image = new Image(inputStream);
+
+        Image image;
+        if(petBean.getPetImage() != null) {
+            InputStream inputStream = new FileInputStream(petBean.getPetImage());
+            image = new Image(inputStream);
+        } else {
+            image = new Image(Main.class.getResource("image/photo.png").openStream());
+        }
         petImage.setImage(image);
     }
 

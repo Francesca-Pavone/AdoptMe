@@ -6,6 +6,7 @@ public class DogModel extends PetModel{
     private boolean programEducation;
     private int size;
 
+
     public DogModel() {
     }
 

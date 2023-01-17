@@ -57,19 +57,28 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet searchPetsFromShelter(Statement stmt, String shelterName) throws SQLException {
-        String sql = "SELECT * FROM Pets WHERE shelter = '" + shelterName + "'";
+    public static ResultSet searchPetsFromShelterName(Statement stmt, String shelterName) throws SQLException {
+        String sql = "SELECT * FROM Pets WHERE shelter = (SELECT shelterId FROM Shelters WHERE name = '" + shelterName + "');";
         return stmt.executeQuery(sql);
     }
 
     public static ResultSet searchSheltersByCity(Statement stmt, String city) throws SQLException {
-        String sql = "SELECT name, profileImg FROM Shelters WHERE city = '" + city + "'";
+        String sql = "SELECT * FROM Shelters WHERE city = '" + city + "'";
         return stmt.executeQuery(sql);
     }
 
 
     public static ResultSet selectLastPetIdByShelterId(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT CASE WHEN MAX(id) IS NULL THEN 1 ELSE MAX(id)+1 END AS petId FROM (SELECT dogId AS id FROM Dogs  WHERE shelter = '" + shelterId + "' UNION SELECT catId AS id FROM Cats WHERE shelter = '" + shelterId + "') AS PetsId;";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectSheltersByName(Statement stmt, String shelterName) throws SQLException {
+        String sql = "SELECT * FROM Shelters WHERE name = '" + shelterName + "'";
+        return stmt.executeQuery(sql);
+    }
+    public static ResultSet checkLogin(Statement stmt, String email, String password) throws SQLException {
+        String sql = "SELECT CASE WHEN EXISTS (SELECT name, password FROM Users WHERE email = '" + email + "' AND password = '" + password + "') THEN 0 WHEN EXISTS (SELECT name, password FROM Shelters WHERE email = '" + email + "' AND password = '" + password + "') THEN 1 END;";
         return stmt.executeQuery(sql);
     }
 

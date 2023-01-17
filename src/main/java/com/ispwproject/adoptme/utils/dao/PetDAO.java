@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.utils.dao;
 
+
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
@@ -62,6 +63,7 @@ public class PetDAO {
                 while ((read = in.read(bytes)) != -1) {
                     outputStream.write(bytes, 0, read);
                 }
+
                 int petDayOfBirth = resultSet.getInt("dayOfBirth");
                 int petMonthOfBirth = resultSet.getInt("monthOfBirth");
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
@@ -98,24 +100,6 @@ public class PetDAO {
 
         return petList;
     }
-
-
-    private void prepCommonInfo(PreparedStatement preparedStatement, int id, String name, File petImage, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int coatLenght, ShelterModel shelter) throws SQLException, FileNotFoundException {
-        preparedStatement.setInt(1, id);
-        preparedStatement.setInt(2, shelter.getId());
-        preparedStatement.setString(3, name);
-
-        InputStream inputStream = new FileInputStream(petImage);
-        preparedStatement.setBlob(4, inputStream);
-
-        preparedStatement.setInt(5, gender);
-        preparedStatement.setInt(6, dayOfBirth);
-        preparedStatement.setInt(7, monthOfBirth);
-        preparedStatement.setInt(8, yearOfBirth);
-        preparedStatement.setInt(9, coatLenght);
-
-    }
-
 
 /*
     public static List<PetModel> retrivePetFromQuestionnaire(int petId, int shelterId) throws Exception {
@@ -206,7 +190,6 @@ public class PetDAO {
         Statement stmt = null;
         Connection conn = null;
         List<PetModel> petList = new ArrayList<>();
-
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -215,16 +198,16 @@ public class PetDAO {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            ResultSet resultSet = SimpleQueries.searchPetsFromShelter(stmt, shelterName);
+            ResultSet resultSet = SimpleQueries.searchPetsFromShelterName(stmt, shelterName);
 
             if (!resultSet.first()){
-                Exception e = new Exception("No shelters found with that input: "+shelterName);
+                Exception e = new Exception("No pets found in that shelter: "+shelterName);
                 throw e;
             }
 
             resultSet.first();
             do{
-                int petId = resultSet.getInt("id");
+                int petId = resultSet.getInt("petId");
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob("imgSrc");
@@ -245,7 +228,6 @@ public class PetDAO {
                 int petYearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
-
 
                 PetModel pet = new PetModel(petId, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
 

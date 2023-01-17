@@ -1,16 +1,20 @@
 package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.utils.bean.AccountInfo;
+import com.ispwproject.adoptme.utils.bean.AccountInfoBean;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
+import com.ispwproject.adoptme.Main;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ShelterDAOJDBC {
 
@@ -41,23 +45,37 @@ public class ShelterDAOJDBC {
             }
 
             resultSet.first();
-            do{
-                String shelterName = resultSet.getString("name");
+            do {
+                File shelterImage;
+                int shelterId = resultSet.getInt("shelterId");
                 Blob blob = resultSet.getBlob("profileImg");
-                InputStream in = blob.getBinaryStream();
-                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + "Photo" + ".png";
-                File shelterImage = new File(filePath);
-                FileOutputStream outputStream = new FileOutputStream(shelterImage);
-                int read;
-                byte[] bytes = new byte[4096];
-                while ((read = in.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
+                String shelterName = resultSet.getString("name");
+
+                String phoneNumber = resultSet.getString("phoneNumber");
+                String address = resultSet.getString("address");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String webSite = resultSet.getString("webSite");
+                URL webSiteURL = new URL(webSite);
+
+                if (blob != null) {
+                    InputStream in = blob.getBinaryStream();
+                    String filePath = shelterName + "Photo" + ".png";
+                    shelterImage = new File(filePath);
+                    FileOutputStream outputStream = new FileOutputStream(shelterImage);
+                    int read;
+                    byte[] bytes = new byte[4096];
+                    while ((read = in.read(bytes)) != -1) {
+                        outputStream.write(bytes, 0, read);
+                    }
+                } else {
+                    shelterImage = null;
                 }
 
-                ShelterModel shelter = new ShelterModel(shelterName, shelterImage);
+                AccountInfoBean accountInfoBean = new AccountInfoBean(email, password, 1);
 
-                sheltersList.add(shelter);
+                ShelterModel shelterModel = new ShelterModel(shelterId, shelterImage, accountInfoBean, shelterName, phoneNumber, address, city, webSiteURL);
+                sheltersList.add(shelterModel);
 
             }while(resultSet.next());
 
@@ -84,7 +102,9 @@ public class ShelterDAOJDBC {
     public static ShelterModel retrieveShelterByName(String shelterName) throws Exception {
         Statement stmt = null;
         Connection conn = null;
+
         ShelterModel shelter;
+
         try {
             Class.forName(DRIVER_CLASS_NAME);
 
@@ -93,7 +113,7 @@ public class ShelterDAOJDBC {
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
 
-            ResultSet resultSet = SimpleQueries.searchSheltersByCity(stmt, shelterName);
+            ResultSet resultSet = SimpleQueries.selectSheltersByName(stmt, shelterName);
 
             if (!resultSet.first()){
                 Exception e = new Exception("No shelters found that begin with that input: "+shelterName);
@@ -187,7 +207,7 @@ public class ShelterDAOJDBC {
                     outputStream.write(bytes, 0, read);
                 }
 
-                AccountInfo accountInfo = new AccountInfo(email, 1);
+                AccountInfoBean accountInfo = new AccountInfoBean(email, 1);
                 shelter = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
 
             }while(resultSet.next());
