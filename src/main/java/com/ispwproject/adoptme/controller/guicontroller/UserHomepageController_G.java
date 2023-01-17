@@ -5,6 +5,8 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,7 +25,7 @@ import java.util.List;
 
 import com.ispwproject.adoptme.utils.bean.UserResearchBean;
 
-public class UserHomepageController {
+public class UserHomepageController_G {
     @FXML
     private TextField textFieldUserHomepage;
     @FXML
@@ -41,6 +44,8 @@ public class UserHomepageController {
     private VBox vBox;
     @FXML
     private Button backButton;
+
+    private UserBean userBean;
 
     public void initialize() {
         textFieldUserHomepage.setDisable(true);
@@ -172,9 +177,27 @@ public class UserHomepageController {
     }
 
     public void goToSettings(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
+        if(userBean == null) {
+            Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.setResizable(false);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("NeedAccountToContinue.fxml"));
+            Scene scene1 = new Scene(fxmlLoader.load());
+            dialog.setScene(scene1);
+            dialog.show();
+        } else {
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+
+            UserSettingsPageController userSettingsPageController = fxmlLoader.getController();
+            userSettingsPageController.setData(userBean);
+        }
+
+    }
+
+    public void setUserSession(UserBean userBean) {
+        this.userBean = userBean;
     }
 }

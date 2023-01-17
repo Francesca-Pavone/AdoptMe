@@ -1,11 +1,15 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -15,12 +19,24 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class UserSettingsPageController {
     @FXML
     private ImageView userImg;
+    @FXML
+    private Label labelNameSurname;
+    @FXML
+    private Label labelEmail;
+    @FXML
+    private TextField textFieldName;
+    @FXML
+    private TextField textFieldSurname;
+    @FXML
+    private TextField textFieldEmail;
+    @FXML
+    private PasswordField textFieldPsw;
+
 
     public void loadImage(ActionEvent event) throws IOException {
 
@@ -70,5 +86,17 @@ public class UserSettingsPageController {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+    }
+
+    public void setData(UserBean userBean) throws FileNotFoundException {
+        /*InputStream inputStream = new FileInputStream(userBean.getProfileImg());
+        Image image = new Image(inputStream);
+        userImg.setImage(image);*/
+        labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
+        labelEmail.setText(userBean.getEmail());
+        textFieldName.setPromptText(userBean.getName());
+        textFieldSurname.setPromptText(userBean.getSurname());
+        textFieldEmail.setPromptText(userBean.getEmail());
+        textFieldPsw.setPromptText(userBean.getPassword());
     }
 }

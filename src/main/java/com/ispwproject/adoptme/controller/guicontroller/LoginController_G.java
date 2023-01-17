@@ -2,8 +2,9 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController_A;
-import com.ispwproject.adoptme.model.AccountInfo;
 import com.ispwproject.adoptme.utils.bean.LoginBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class LoginController_G {
 
@@ -80,15 +80,19 @@ public class LoginController_G {
             //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
         }
         else if(loginBean.getAccountType() == 1) {
-            loginController_a.getLoginInfo(loginBean);
+            UserBean userBean = loginController_a.getUserSession(loginBean);
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
+
+            UserHomepageController_G userHomepageController_g = fxmlLoader.getController();
+            userHomepageController_g.setUserSession(userBean);
+
             //todo: capire se serve prelevare dati utente già qui
         }
         else if (loginBean.getAccountType() == 2) {
-            loginController_a.getLoginInfo(loginBean);
+            ShelterBean shelterBean = loginController_a.getShelterSession(loginBean);
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -101,8 +105,14 @@ public class LoginController_G {
 
     }
 
-    public void noLogin(ActionEvent event) {
+    public void noLogin(ActionEvent event) throws IOException {
         LoginController_A loginController_a = new LoginController_A();
         loginController_a.noLogin();
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        UserHomepageController_G userHomepageController_g = fxmlLoader.getController();
+        userHomepageController_g.setUserSession(null);
     }
 }
