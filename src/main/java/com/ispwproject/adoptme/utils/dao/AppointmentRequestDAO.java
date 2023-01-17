@@ -1,18 +1,5 @@
 package com.ispwproject.adoptme.utils.dao;
 
-import com.ispwproject.adoptme.model.AppointmentRequestModel;
-import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.model.User;
-import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
-
-import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class AppointmentRequestDAO {
 
     private static String USER = "user1";
