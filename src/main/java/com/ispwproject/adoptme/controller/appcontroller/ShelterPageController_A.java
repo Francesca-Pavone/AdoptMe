@@ -17,7 +17,6 @@ public class ShelterPageController_A {
         try {
             petList = PetDAO.retrievePetByShelterId(shelterId);
 
-
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();

@@ -20,10 +20,7 @@ public class ShowShelterPetsController_A {
     public List<PetBean> getPetList() {
 
         try {
-
             petList = PetDAO.retrievePetByShelterId(this.shelterId);
-
-
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();
