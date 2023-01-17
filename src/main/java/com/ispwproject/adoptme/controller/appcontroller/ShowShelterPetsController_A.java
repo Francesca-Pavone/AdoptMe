@@ -22,7 +22,7 @@ public class ShowShelterPetsController_A {
 
         try {
 
-            petList = petDAO.retrivePetByShelterId(this.shelterId);
+            petList = petDAO.retrievePetByShelterId(this.shelterId);
 
 
         } catch (SQLException se) {
