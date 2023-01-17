@@ -13,11 +13,9 @@ public class ShelterPageController_A {
 
 
     public List<PetBean> getPetList(int shelterId) {
-        PetDAO petDAO= new PetDAO();
         List<PetModel> petList = new ArrayList<>();
         try {
-            petList = petDAO.retrievePetByShelterId(shelterId);
-
+            petList = PetDAO.retrievePetByShelterId(shelterId);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

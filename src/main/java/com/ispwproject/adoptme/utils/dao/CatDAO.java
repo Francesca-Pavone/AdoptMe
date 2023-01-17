@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.CatModel;
-import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;

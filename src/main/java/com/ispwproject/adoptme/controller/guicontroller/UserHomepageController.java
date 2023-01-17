@@ -1,20 +1,15 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
-import com.ispwproject.adoptme.model.ShelterModel;
-
 import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
-import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -43,7 +38,7 @@ public class UserHomepageController {
     @FXML
     private GridPane grid;
     @FXML
-    private Pane pane1;
+    private VBox vBox;
     @FXML
     private Button backButton;
 
@@ -67,7 +62,7 @@ public class UserHomepageController {
     }
 
     public void goBack() {
-        pane1.setVisible(true);
+        vBox.setVisible(true);
         radioBtnShelter.setDisable(false);
         radioBtnCity.setDisable(false);
         textFieldUserHomepage.setDisable(false);
@@ -83,7 +78,7 @@ public class UserHomepageController {
         if(!textFieldUserHomepage.getText().equals("")) {
             userResearchBean.setCityShelter(textFieldUserHomepage.getText());
 
-            pane1.setVisible(false);
+            vBox.setVisible(false);
 
             radioBtnShelter.setDisable(true);
             radioBtnCity.setDisable(true);

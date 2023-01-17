@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.utils.dao;
 
 
 import com.ispwproject.adoptme.model.*;
-import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.*;

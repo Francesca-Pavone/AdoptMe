@@ -2,13 +2,10 @@ package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.*;
 
