@@ -13,13 +13,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class UserSideBar {
 
     protected UserBean userBean;
 
-    public void setUserSession(UserBean userBean) {
+    public void setUserSession(UserBean userBean) throws IOException {
             this.userBean = userBean;
     }
 

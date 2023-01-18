@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
@@ -39,33 +40,12 @@ public class UserSettingsPageController extends UserSideBar {
     private PasswordField textFieldPsw;
 
     public void loadImage(ActionEvent event) throws IOException {
-
+        File file;
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser=new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagine Files","*.png","*.jpg"));
-        File image = fileChooser.showOpenDialog(stage).getAbsoluteFile();
-
-        BufferedImage bfImage = null;
-        bfImage = ImageIO.read(image);
-        WritableImage wr = null;
-        if (bfImage != null) {
-            wr = new WritableImage(bfImage.getWidth(), bfImage.getHeight());
-            PixelWriter pw = wr.getPixelWriter();
-            for (int x = 0; x < bfImage.getWidth(); x++) {
-                for (int y = 0; y < bfImage.getHeight(); y++) {
-                    pw.setArgb(x, y, bfImage.getRGB(x, y));
-                }
-            }
-        }
-
-        Image newUserImage = new ImageView(wr).getImage();
-
-        userImg.setImage(newUserImage);
-/*
-        btnLoadImage.getStyleClass().clear();
-        btnLoadImage.getStyleClass().add("photo-loaded");
-
- */
+        file = fileChooser.showOpenDialog(stage).getAbsoluteFile();
+        userImg.setImage(ImageUtils.fromFileToImage(file));
     }
 
     public void signOut(ActionEvent event) throws IOException {
@@ -77,11 +57,16 @@ public class UserSettingsPageController extends UserSideBar {
     }
 
     @Override
-    public void setUserSession(UserBean userBean) {
+    public void setUserSession(UserBean userBean) throws IOException {
         this.userBean = userBean;
-        /*InputStream inputStream = new FileInputStream(userBean.getProfileImg());
-        Image image = new Image(inputStream);
-        userImg.setImage(image);*/
+        Image image;
+        if (this.userBean.getProfileImg() != null) {
+            InputStream inputStream = new FileInputStream(this.userBean.getProfileImg());
+            image = new Image(inputStream);
+        } else {
+            image = new Image(Main.class.getResource("image/photo.png").openStream());
+        }
+        userImg.setImage(image);
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());
         textFieldName.setPromptText(userBean.getName());
