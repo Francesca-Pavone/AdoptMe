@@ -12,7 +12,7 @@ import java.util.List;
 public class ShowShelterPetsController {
 
     int shelterId;
-    private static List<PetModel> petList = new ArrayList<>();
+    private List<PetModel> petList = new ArrayList<>();
 
     public ShowShelterPetsController(ShelterBean shelterBean) {
         this.shelterId = shelterBean.getShelterId();
