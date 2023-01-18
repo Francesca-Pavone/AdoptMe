@@ -9,12 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowShelterPetsController_A {
+public class ShowShelterPetsController {
 
     int shelterId;
-    private static List<PetModel> petList = new ArrayList<>();
+    private List<PetModel> petList = new ArrayList<>();
 
-    public ShowShelterPetsController_A(ShelterBean shelterBean) {
+    public ShowShelterPetsController(ShelterBean shelterBean) {
         this.shelterId = shelterBean.getShelterId();
     }
 

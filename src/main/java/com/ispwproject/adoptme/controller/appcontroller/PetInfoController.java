@@ -10,7 +10,7 @@ import com.ispwproject.adoptme.utils.dao.CatDAO;
 import com.ispwproject.adoptme.utils.dao.DogDAO;
 import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 
-public class PetInfoController_A {
+public class PetInfoController {
 
 
     public ShelterBean getPetInfo(PetBean petBean) throws Exception {

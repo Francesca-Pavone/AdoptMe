@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SignUpController {
+public class GUISignUpController {
 
     public void goToLogin() throws IOException {
         Stage stage = Main.getStage();

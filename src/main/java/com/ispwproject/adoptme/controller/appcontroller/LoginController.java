@@ -1,8 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.model.AccountInfo;
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.model.ShelterUserModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.bean.LoginBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
@@ -14,7 +12,8 @@ import com.ispwproject.adoptme.utils.session.Session;
 
 import java.sql.SQLException;
 
-public class LoginController_A {
+public class LoginController {
+
     public void checkLogin(LoginBean loginBean) throws SQLException, ClassNotFoundException {
         int type = LoginDAO.checkLogin(loginBean.getEmail(), loginBean.getPassword());
         loginBean.setAccountType(type);
@@ -25,7 +24,6 @@ public class LoginController_A {
         if (loginBean.getAccountType() == 1) {
             UserModel userModel = UserDAO.retrieveUserByEmail(loginBean.getEmail());
             UserBean userBean = new UserBean(userModel);
-
             session = new Session(userBean);
 
         } else {

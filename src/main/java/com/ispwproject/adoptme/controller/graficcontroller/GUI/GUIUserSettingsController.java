@@ -1,12 +1,16 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -16,18 +20,23 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
-public class UserSettingsPageController {
+public class GUIUserSettingsController extends UserSideBar {
     @FXML
     private ImageView userImg;
-
-    private UserBean userBean;
-
-    public void setSessionData(UserBean userBean) {
-        this.userBean = userBean;
-    }
+    @FXML
+    private Label labelNameSurname;
+    @FXML
+    private Label labelEmail;
+    @FXML
+    private TextField textFieldName;
+    @FXML
+    private TextField textFieldSurname;
+    @FXML
+    private TextField textFieldEmail;
+    @FXML
+    private PasswordField textFieldPsw;
 
     public void loadImage(ActionEvent event) throws IOException {
 
@@ -58,27 +67,26 @@ public class UserSettingsPageController {
 
  */
     }
-        public void goToHomepage(ActionEvent event) throws IOException {
-            Stage stage = Main.getStage();
-            FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
 
-            UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
-            userHomepageControllerG.setSessionData(this.userBean);
-            stage.setScene(scene);
-        }
-
-    public void goToFavorites(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
+    public void signOut(ActionEvent event) throws IOException {
+        this.userBean = null;
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
 
-    public void goToAppointments(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
+    @Override
+    public void setUserSession(UserBean userBean) {
+        this.userBean = userBean;
+        /*InputStream inputStream = new FileInputStream(userBean.getProfileImg());
+        Image image = new Image(inputStream);
+        userImg.setImage(image);*/
+        labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
+        labelEmail.setText(userBean.getEmail());
+        textFieldName.setPromptText(userBean.getName());
+        textFieldSurname.setPromptText(userBean.getSurname());
+        textFieldEmail.setPromptText(userBean.getEmail());
+        textFieldPsw.setPromptText(userBean.getPassword());
     }
 }

@@ -6,13 +6,12 @@ import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.dao.CatDAO;
 import com.ispwproject.adoptme.utils.dao.DogDAO;
-import com.ispwproject.adoptme.utils.dao.PetDAO;
 
-public class AddPetController_A {
+public class AddPetController {
 
     private PetBean petBean;
 
-    public AddPetController_A(PetBean petBean) {
+    public AddPetController(PetBean petBean) {
         this.petBean = petBean;
     }
 

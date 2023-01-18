@@ -1,26 +1,27 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-public class QuestionnaireResultPageController_G {
+public class GUIQuestionnaireResultController {
 
     @FXML
     private GridPane grid;
     private static Scene sceneExitQuestionnaire;
     public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
     public void setSceneExitQuestionnaire(Scene type) {sceneExitQuestionnaire = type;}
+
+    private UserBean userBean;
 
     public void exitQuestionnaire(ActionEvent event) throws IOException {
         setSceneExitQuestionnaire(((Node)event.getSource()).getScene());
@@ -29,8 +30,15 @@ public class QuestionnaireResultPageController_G {
         dialog.setResizable(false);
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());
+
+        GUIConfirmExitQuestionnaireController GUIConfirmExitQuestionnaireController_ = fxmlLoader.getController();
+        GUIConfirmExitQuestionnaireController_.setUserSession(this.userBean);
         dialog.setScene(scene1);
         dialog.show();
+    }
+
+    public void setUserSession(UserBean userBean) {
+        this.userBean = userBean;
     }
 
     /*private List<PetBean> getPetList() {

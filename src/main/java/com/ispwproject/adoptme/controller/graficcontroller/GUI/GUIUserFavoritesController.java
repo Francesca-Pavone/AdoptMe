@@ -1,26 +1,25 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserFavoritesPageController {
+public class GUIUserFavoritesController extends UserSideBar {
     @FXML
     private GridPane grid;
 
     private List<PetModel> petList = new ArrayList<>();
+
     private List<PetModel> getPetList() {
 
         try {
@@ -53,7 +52,7 @@ public class UserFavoritesPageController {
                 fxmlLoader.setLocation(Main.class.getResource("UserPetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                PetItemController_G petItemControllerG = fxmlLoader.getController();
+                GUIPetItemController petItemControllerG = fxmlLoader.getController();
                 //petItemControllerG.getShelterBean(pet);
 
                 if (column == 3) {
@@ -66,26 +65,5 @@ public class UserFavoritesPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void goToHomepage(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
-
-    public void goToAppointments(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
-
-    public void goToSettings(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
     }
 }

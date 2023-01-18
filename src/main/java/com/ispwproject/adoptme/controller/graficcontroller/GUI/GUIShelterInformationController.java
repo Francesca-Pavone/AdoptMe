@@ -1,8 +1,7 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController_A;
-import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
+import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
@@ -23,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class ShelterPageController_G {
+public class GUIShelterInformationController {
 
     @FXML
     private Label shelterName;
@@ -66,8 +65,8 @@ public class ShelterPageController_G {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
-        ShelterPageController_A shelterPageController_a = new ShelterPageController_A();
-        List<PetBean> petBeanList = shelterPageController_a.getPetList(shelterBean.getShelterId());
+        ShelterPageController shelterPageController_ = new ShelterPageController();
+        List<PetBean> petBeanList = shelterPageController_.getPetList(shelterBean.getShelterId());
 
         int column = 0;
         int row = 1;
@@ -76,7 +75,7 @@ public class ShelterPageController_G {
             fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
             Pane pane = fxmlLoader.load();
 
-            PetItemController_G petItemControllerG = fxmlLoader.getController();
+            GUIPetItemController petItemControllerG = fxmlLoader.getController();
             petItemControllerG.setSessionData(this.userBean);
             petItemControllerG.setPetData(petBean);
 
@@ -102,6 +101,9 @@ public class ShelterPageController_G {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
+        userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
     }
 }
