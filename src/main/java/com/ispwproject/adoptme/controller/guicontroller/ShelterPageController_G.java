@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController_A;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -43,6 +44,11 @@ public class ShelterPageController_G {
     @FXML
     private GridPane grid;
 
+    private UserBean userBean;
+
+    public void setSessionData(UserBean userBean) {
+        this.userBean = userBean;
+    }
 
 
     public void setData(ShelterBean shelterBean) throws IOException {
@@ -71,8 +77,8 @@ public class ShelterPageController_G {
             Pane pane = fxmlLoader.load();
 
             PetItemController_G petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setPet(petBean);
-            petItemControllerG.setData();
+            petItemControllerG.setSessionData(this.userBean);
+            petItemControllerG.setPetData(petBean);
 
             if (column == 4) {
                 column = 0;

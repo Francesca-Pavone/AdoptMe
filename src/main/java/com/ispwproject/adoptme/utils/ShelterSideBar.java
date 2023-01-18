@@ -13,18 +13,20 @@ import java.io.IOException;
 
 public class ShelterSideBar {
 
-    //protected ShelterBean shelterBean;
+    protected ShelterBean shelterBean;
 
-    /*public void setShelterSession(ShelterBean shelterBean) throws IOException {
+    public void setShelterSession(ShelterBean shelterBean) throws IOException {
         this.shelterBean = shelterBean;
     }
 
-     */
+
 
     public void goToHomePage() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
+        shelterHomepageController_g.setShelterSession(this.shelterBean);
+
         Main.getStage().setScene(scene);
     }
 
@@ -45,7 +47,7 @@ public class ShelterSideBar {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSettings.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         ShelterSettingsController_G shelterSettingsController_g = fxmlLoader.getController();
-        shelterSettingsController_g.setShelterSession();
+        shelterSettingsController_g.setShelterSession(this.shelterBean);
         Main.getStage().setScene(scene);
     }
 }

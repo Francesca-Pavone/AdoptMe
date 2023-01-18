@@ -10,8 +10,8 @@ import com.ispwproject.adoptme.utils.dao.UserDAO;
 public class Session {
 
     //private boolean logged; TODO: aggiungere al database ed controllare se l'utente è già loggato
-    private static UserBean userBean;
-    private static ShelterBean shelterBean;
+    private UserBean userBean;
+    private ShelterBean shelterBean;
 
     public Session() {
     }
@@ -24,7 +24,7 @@ public class Session {
         setShelterBean(shelterBean);
     }
 
-    public static UserBean getUserBean() {
+    public UserBean getUserBean() {
         return userBean;
     }
 
@@ -32,7 +32,7 @@ public class Session {
         this.userBean = userBean;
     }
 
-    public static ShelterBean getShelterBean() {
+    public ShelterBean getShelterBean() {
         return shelterBean;
     }
 

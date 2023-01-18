@@ -34,9 +34,10 @@ public class ShelterHomepageController_G extends ShelterSideBar {
         dialog.show();
     }
 
-    public void initialize() {
+    public void setShelterSession(ShelterBean shelterBean) {
+        this.shelterBean = shelterBean;
 
-        ShowShelterPetsController_A showShelterPetsController_a = new ShowShelterPetsController_A(Session.getShelterBean());
+        ShowShelterPetsController_A showShelterPetsController_a = new ShowShelterPetsController_A(shelterBean);
         int column = 0;
         int row = 1;
 
@@ -46,8 +47,8 @@ public class ShelterHomepageController_G extends ShelterSideBar {
                 Pane pane = fxmlLoader.load();
 
                 PetItemController_G petItemControllerG = fxmlLoader.getController();
-                petItemControllerG.setPet(pet);
-                petItemControllerG.setData();
+                petItemControllerG.setSessionData(shelterBean);
+                petItemControllerG.setPetData(pet);
 
 
                 if (column == 3) {

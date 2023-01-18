@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -111,6 +112,11 @@ public class PetInfoController_G {
     private HBox info_hBox;
 
     private ShelterBean shelterBean;
+    private Object object;
+
+    public void setSessionData(Object ob) {
+        this.object = ob;
+    }
 
     public void setPetInfo(PetBean petBean) throws Exception {
 
@@ -118,7 +124,7 @@ public class PetInfoController_G {
 
         shelterBean = petInfoControllerA.getPetInfo(petBean);
 
-        if (Session.getShelterBean() != null) { // sono uno Shelter
+        if (this.object instanceof ShelterBean) { // sono uno Shelter
             info_hBox.getChildren().remove(request_vBox);
         }
         else {
@@ -288,19 +294,35 @@ public class PetInfoController_G {
 
     public void goBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader;
+        Scene scene;
+        if (this.object instanceof ShelterBean) {
+            fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+            scene = new Scene(fxmlLoader.load());
+
+            ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
+            shelterHomepageController_g.setShelterSession((ShelterBean) this.object);
+        }
+        else {
+            fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
+            scene = new Scene(fxmlLoader.load());
+
+            UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+            userHomepageControllerG.setSessionData((UserBean) object);
+        }
+
         stage.setScene(scene);
     }
 
     public void goToShelterPage(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserShelterPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-
 
         ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
         shelterPageController_g.setData(shelterBean);
+        stage.setScene(scene);
+
+
     }
 }

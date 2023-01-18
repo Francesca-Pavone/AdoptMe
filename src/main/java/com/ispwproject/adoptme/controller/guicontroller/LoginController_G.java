@@ -83,6 +83,8 @@ public class LoginController_G {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
 
+                ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
+                shelterHomepageController_g.setShelterSession(session.getShelterBean());
                 stage.setScene(scene);
             }
         }
@@ -110,7 +112,7 @@ public class LoginController_G {
         Scene scene = new Scene(fxmlLoader.load());
 
         UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
-        userHomepageControllerG.setUserBean(session.getUserBean());
+        userHomepageControllerG.setSessionData(session.getUserBean());
 
         stage.setScene(scene);
     }

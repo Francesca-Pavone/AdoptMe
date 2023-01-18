@@ -45,8 +45,6 @@ public class ShelterSettingsController_G extends ShelterSideBar {
     @FXML
     private ImageView userImg;
 
-    private ShelterBean shelterBean;
-
     public void signOut(ActionEvent event) throws IOException {
         this.shelterBean = null;
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -55,8 +53,8 @@ public class ShelterSettingsController_G extends ShelterSideBar {
         stage.setScene(scene);
     }
 
-    public void setShelterSession() throws IOException {
-        this.shelterBean = Session.getShelterBean();
+    public void setShelterSession(ShelterBean shelterBean) throws IOException {
+        this.shelterBean = shelterBean;
         loadShelterInfo();
     }
 

@@ -45,7 +45,7 @@ public class UserHomepageController_G {
 
     private UserBean userBean;
 
-    public void setUserBean(UserBean userBean) {
+    public void setSessionData(UserBean userBean) {
         this.userBean = userBean;
         //System.out.println(userBean.getUserId()+" "+ userBean.getName()+" "+userBean.getSurname()+" "+userBean.getEmail());
 
@@ -139,8 +139,8 @@ public class UserHomepageController_G {
                         Pane pane = fxmlLoader.load();
 
                         PetItemController_G petItemControllerG = fxmlLoader.getController();
-                        petItemControllerG.setPet(pet);
-                        petItemControllerG.setData();
+                        petItemControllerG.setSessionData(this.userBean);
+                        petItemControllerG.setPetData(pet);
 
                         if (column == 3) {
                             column = 0;
@@ -184,6 +184,9 @@ public class UserHomepageController_G {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        UserSettingsPageController userSettingsPageController = fxmlLoader.getController();
+        userSettingsPageController.setSessionData(this.userBean);
         stage.setScene(scene);
     }
 }
