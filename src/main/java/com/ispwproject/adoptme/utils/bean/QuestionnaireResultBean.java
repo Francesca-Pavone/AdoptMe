@@ -1,11 +1,6 @@
 package com.ispwproject.adoptme.utils.bean;
 
-//import com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController;
-
-import com.ispwproject.adoptme.controller.guicontroller.QuestionnaireController;
-import com.ispwproject.adoptme.model.PetModel;
-
-import java.util.List;
+//import com.ispwproject.adoptme.controller.guicontroller.GUIQuestionnaireController;
 
 public class QuestionnaireResultBean {
     protected int type; // 0 -> Dog | 1 -> Cat

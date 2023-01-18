@@ -1,10 +1,9 @@
 package com.ispwproject.adoptme.utils;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.guicontroller.NeedAccountToContinueController_G;
-import com.ispwproject.adoptme.controller.guicontroller.UserFavoritesPageController;
-import com.ispwproject.adoptme.controller.guicontroller.UserHomepageController_G;
-import com.ispwproject.adoptme.controller.guicontroller.UserSettingsPageController;
+import com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIUserFavoritesController;
+import com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIUserHomepageController;
+import com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIUserSettingsController;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +27,7 @@ public class UserSideBar {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+        GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
         userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
     }
@@ -49,7 +48,7 @@ public class UserSideBar {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
 
-            UserFavoritesPageController userFavoritesPageController = fxmlLoader.getController();
+            GUIUserFavoritesController userFavoritesPageController = fxmlLoader.getController();
             userFavoritesPageController.setUserSession(this.userBean);
         }
     }
@@ -74,7 +73,7 @@ public class UserSideBar {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
 
-            UserSettingsPageController userSettingsPageController = fxmlLoader.getController();
+            GUIUserSettingsController userSettingsPageController = fxmlLoader.getController();
             userSettingsPageController.setUserSession(this.userBean);
         }
 

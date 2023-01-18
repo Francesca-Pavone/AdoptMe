@@ -1,7 +1,7 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.PetInfoController_A;
+import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
@@ -23,7 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PetInfoController_G {
+public class GUIPetInfoController {
 
     @FXML
     private Label coatLenght;
@@ -118,7 +118,7 @@ public class PetInfoController_G {
 
     public void setPetInfo(PetBean petBean) throws Exception {
 
-        PetInfoController_A petInfoControllerA = new PetInfoController_A();
+        PetInfoController petInfoControllerA = new PetInfoController();
 
         shelterBean = petInfoControllerA.getPetInfo(petBean);
 
@@ -298,14 +298,14 @@ public class PetInfoController_G {
             fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
 
-            ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
+            GUIShelterHomepageController shelterHomepageController_g = fxmlLoader.getController();
             shelterHomepageController_g.setShelterSession((ShelterBean) this.object);
         }
         else {
             fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
 
-            UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+            GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
             userHomepageControllerG.setUserSession((UserBean) object);
         }
 
@@ -317,7 +317,7 @@ public class PetInfoController_G {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        ShelterInformationControllerG shelterInformationController_g = fxmlLoader.getController();
+        GUIShelterInformationController shelterInformationController_g = fxmlLoader.getController();
         shelterInformationController_g.setData(shelterBean);
         stage.setScene(scene);
 

@@ -1,9 +1,8 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ShelterSettingsController_G extends ShelterSideBar {
+public class GUIShelterSettingsController extends ShelterSideBar {
     @FXML
     private TextField address;
 

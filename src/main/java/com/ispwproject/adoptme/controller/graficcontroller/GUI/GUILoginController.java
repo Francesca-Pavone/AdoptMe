@@ -1,7 +1,7 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.LoginController_A;
+import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.utils.bean.LoginBean;
 import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
@@ -17,7 +17,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class LoginController_G {
+public class GUILoginController {
 
     @FXML
     private Button btnForgotPass;
@@ -71,11 +71,11 @@ public class LoginController_G {
     public void login(ActionEvent event) throws Exception {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
-        LoginController_A loginController_a = new LoginController_A();
-        loginController_a.checkLogin(loginBean);
+        LoginController loginController_ = new LoginController();
+        loginController_.checkLogin(loginBean);
 
         if (loginBean.getAccountType() != 0) {
-            Session session = loginController_a.getLoginInfo(loginBean);
+            Session session = loginController_.getLoginInfo(loginBean);
 
             if (loginBean.getAccountType() == 1) {
                 userLogin(stage, session);
@@ -83,7 +83,7 @@ public class LoginController_G {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
 
-                ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
+                GUIShelterHomepageController shelterHomepageController_g = fxmlLoader.getController();
                 shelterHomepageController_g.setShelterSession(session.getShelterBean());
                 stage.setScene(scene);
             }
@@ -111,7 +111,7 @@ public class LoginController_G {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+        GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
         userHomepageControllerG.setUserSession(session.getUserBean());
 
         stage.setScene(scene);

@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.UserBean;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ConfirmExitQuestionnaireController_G {
+public class GUIConfirmExitQuestionnaireController {
 
     private UserBean userBean;
 
@@ -19,7 +19,7 @@ public class ConfirmExitQuestionnaireController_G {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+        GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
         userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
         ((Node)event.getSource()).getScene().getWindow().hide();

@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.UserSideBar;
@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-public class UserSettingsPageController extends UserSideBar {
+public class GUIUserSettingsController extends UserSideBar {
     @FXML
     private ImageView userImg;
     @FXML

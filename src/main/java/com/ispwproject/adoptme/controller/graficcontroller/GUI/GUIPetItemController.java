@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.PetBean;
@@ -16,7 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PetItemController_G {
+public class GUIPetItemController {
 
     @FXML
     private Label petAge;
@@ -61,7 +61,7 @@ public class PetItemController_G {
     public void openPetInfoPage(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        PetInfoController_G petInformationControllerG = fxmlLoader.getController();
+        GUIPetInfoController petInformationControllerG = fxmlLoader.getController();
         petInformationControllerG.setSessionData(object);
         petInformationControllerG.setPetInfo(petBean);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

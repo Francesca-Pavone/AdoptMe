@@ -1,13 +1,10 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
+import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.utils.ShelterSideBar;
-import com.ispwproject.adoptme.utils.bean.GI.GIPreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.PreviewPetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +17,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class ShelterHomepageController_G extends ShelterSideBar {
+public class GUIShelterHomepageController extends ShelterSideBar {
     @FXML
     private GridPane grid;
 
@@ -37,16 +34,16 @@ public class ShelterHomepageController_G extends ShelterSideBar {
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
 
-        ShowShelterPetsController_A showShelterPetsController_a = new ShowShelterPetsController_A(shelterBean);
+        ShowShelterPetsController showShelterPetsController_ = new ShowShelterPetsController(shelterBean);
         int column = 0;
         int row = 1;
 
         try {
-            for (PetBean pet : showShelterPetsController_a.getPetList()) {
+            for (PetBean pet : showShelterPetsController_.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                PetItemController_G petItemControllerG = fxmlLoader.getController();
+                GUIPetItemController petItemControllerG = fxmlLoader.getController();
                 petItemControllerG.setSessionData(shelterBean);
                 petItemControllerG.setPetData(pet);
 

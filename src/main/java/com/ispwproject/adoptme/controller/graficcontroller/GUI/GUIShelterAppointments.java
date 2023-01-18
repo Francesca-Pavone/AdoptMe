@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.RequestModel;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShelterAppointments extends ShelterSideBar {
+public class GUIShelterAppointments extends ShelterSideBar {
 
     @FXML
     private HBox acceptedReqList;
@@ -61,7 +61,7 @@ public class ShelterAppointments extends ShelterSideBar {
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                RequestItemController requestItemController = fxmlLoader.getController();
+                GUIRequestItemController requestItemController = fxmlLoader.getController();
                 requestItemController.setDataAcceptedReq(appointment);
 
                 pendingReqList.getChildren().add(pane);
@@ -72,7 +72,7 @@ public class ShelterAppointments extends ShelterSideBar {
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                RequestItemController requestItemController = fxmlLoader.getController();
+                GUIRequestItemController requestItemController = fxmlLoader.getController();
                 requestItemController.setDataAcceptedReq(appointment);
 
                 acceptedReqList.getChildren().add(pane);
@@ -83,7 +83,7 @@ public class ShelterAppointments extends ShelterSideBar {
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
-                RequestItemController requestItemController = fxmlLoader.getController();
+                GUIRequestItemController requestItemController = fxmlLoader.getController();
                 requestItemController.setDataAcceptedReq(appointment);
 
                 doneAppList.getChildren().add(pane);

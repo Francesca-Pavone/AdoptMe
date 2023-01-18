@@ -15,7 +15,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0"
             prefWidth="1100.0" style="-fx-background-color: #34665A;" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.ispwproject.adoptme.controller.guicontroller.SignUpController">
+            fx:controller="com.ispwproject.adoptme.controller.graficcontroller.GUI.GUISignUpController">
    <VBox alignment="CENTER" style="-fx-background-color: #ffffff; -fx-background-radius: 40;"
          AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0"
          AnchorPane.topAnchor="13.0">

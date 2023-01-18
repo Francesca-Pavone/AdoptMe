@@ -1,6 +1,6 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
-import com.ispwproject.adoptme.controller.appcontroller.AddPetController_A;
+import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.bean.PetBean;
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 
-public class AddPetController_G {
+public class GUIAddPetController {
     @FXML
     private ImageView petImg;
     @FXML
@@ -168,7 +168,7 @@ public class AddPetController_G {
         int year;
         int month;
         int day;
-        AddPetController_A addPetController_a = null;
+        AddPetController addPetController_ = null;
         PetBean petBean = null;
 
         // retrive data of birth information
@@ -295,8 +295,8 @@ public class AddPetController_G {
             }
 
         }
-        addPetController_a = new AddPetController_A(petBean);
-        addPetController_a.addPet();
+        addPetController_ = new AddPetController(petBean);
+        addPetController_.addPet();
         ((Node)event.getSource()).getScene().getWindow().hide();
 
 
