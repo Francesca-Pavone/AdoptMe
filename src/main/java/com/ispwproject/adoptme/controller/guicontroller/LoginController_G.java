@@ -104,15 +104,15 @@ public class LoginController_G {
     public void noLogin(ActionEvent event) throws IOException {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Session session = new Session();
-
         userLogin(stage, session);
     }
+
     private static void userLogin(Stage stage, Session session) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
-        userHomepageControllerG.setSessionData(session.getUserBean());
+        userHomepageControllerG.setUserSession(session.getUserBean());
 
         stage.setScene(scene);
     }

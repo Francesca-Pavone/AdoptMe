@@ -183,7 +183,7 @@
       <Pane layoutX="309.0" prefHeight="114.0" prefWidth="789.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <VBox layoutX="310.0" prefHeight="710.0" prefWidth="790.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" stylesheets="@style.css">
+            <Button mnemonicParsing="false" onAction="#signOut" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>

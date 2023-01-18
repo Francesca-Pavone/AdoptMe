@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController_A;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +31,12 @@ public class ShelterItemController_G {
 
     private ShelterBean shelterBean;
 
+    private UserBean userBean;
+
+    public void setUserSession(UserBean userBean) {
+        this.userBean = userBean;
+    }
+
     public void setShelter(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
     }
@@ -53,13 +59,17 @@ public class ShelterItemController_G {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserShelterPage.fxml"));
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        ShelterInformationControllerG shelterInformationController_g = fxmlLoader.getController();
+        shelterInformationController_g.setSessionData(this.userBean);
+        shelterInformationController_g.setData(shelterBean);
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
 
-        ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
-        shelterPageController_g.setData(shelterBean);
+
 
         stage.show();
     }

@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class NeedAccountToContinueController_G {
+    private UserBean userBean;
 
     public void close(ActionEvent event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -31,4 +33,7 @@ public class NeedAccountToContinueController_G {
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
+    public void setUserSession(UserBean userBean) {
+        this.userBean = userBean;
+    }
 }

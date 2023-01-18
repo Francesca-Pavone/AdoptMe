@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,8 @@ public class QuestionnaireResultPageController_G {
     public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
     public void setSceneExitQuestionnaire(Scene type) {sceneExitQuestionnaire = type;}
 
+    private UserBean userBean;
+
     public void exitQuestionnaire(ActionEvent event) throws IOException {
         setSceneExitQuestionnaire(((Node)event.getSource()).getScene());
         Stage dialog = new Stage();
@@ -29,8 +32,15 @@ public class QuestionnaireResultPageController_G {
         dialog.setResizable(false);
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());
+
+        ConfirmExitQuestionnaireController_G confirmExitQuestionnaireController_g = fxmlLoader.getController();
+        confirmExitQuestionnaireController_g.setUserSession(this.userBean);
         dialog.setScene(scene1);
         dialog.show();
+    }
+
+    public void setUserSession(UserBean userBean) {
+        this.userBean = userBean;
     }
 
     /*private List<PetBean> getPetList() {
