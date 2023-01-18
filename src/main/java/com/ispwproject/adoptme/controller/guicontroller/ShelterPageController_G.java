@@ -1,8 +1,11 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController_A;
+import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -41,13 +44,14 @@ public class ShelterPageController_G {
     @FXML
     private GridPane grid;
 
+    private UserBean userBean;
 
-    public void initialize() {
-
-
+    public void setSessionData(UserBean userBean) {
+        this.userBean = userBean;
     }
 
-    public void setData(ShelterBean shelterBean, List<PetBean> petBeanList) throws IOException {
+
+    public void setData(ShelterBean shelterBean) throws IOException {
         shelterName.setText(shelterBean.getName());
         Image image;
         if (shelterBean.getShelterImg() != null) {
@@ -62,6 +66,9 @@ public class ShelterPageController_G {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
+        ShelterPageController_A shelterPageController_a = new ShelterPageController_A();
+        List<PetBean> petBeanList = shelterPageController_a.getPetList(shelterBean.getShelterId());
+
         int column = 0;
         int row = 1;
         for (PetBean petBean : petBeanList) {
@@ -70,8 +77,8 @@ public class ShelterPageController_G {
             Pane pane = fxmlLoader.load();
 
             PetItemController_G petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setPet(petBean);
-            petItemControllerG.setData();
+            petItemControllerG.setSessionData(this.userBean);
+            petItemControllerG.setPetData(petBean);
 
             if (column == 4) {
                 column = 0;
@@ -79,6 +86,8 @@ public class ShelterPageController_G {
             }
             grid.add(pane, column++, row);
         }
+
+
     }
 
     public void selectInformations() {

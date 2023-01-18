@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.PetInfoController_G">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.PetInfoController_G">
    <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <VBox alignment="TOP_CENTER" prefHeight="710.0" prefWidth="1100.0">
       <children>
@@ -47,7 +47,7 @@
                <Insets bottom="20.0" top="10.0" />
             </VBox.margin>
          </Label>
-         <HBox alignment="TOP_CENTER" spacing="150.0">
+         <HBox fx:id="info_hBox" alignment="TOP_CENTER" spacing="150.0">
             <VBox.margin>
                <Insets />
             </VBox.margin>
@@ -268,7 +268,7 @@
                      </VBox>
                   </content>
                </ScrollPane>
-               <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="340.0" spacing="10.0" styleClass="request-box">
+               <VBox fx:id="request_vBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="340.0" spacing="10.0" styleClass="request-box">
                   <children>
                      <HBox alignment="CENTER">
                         <children>
@@ -287,7 +287,7 @@
                            </Label>
                         </children>
                      </HBox>
-                     <HBox alignment="CENTER" spacing="6.0">
+                     <HBox alignment="CENTER">
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>
@@ -297,11 +297,11 @@
                                  <Font name="Arial Bold" size="18.0" />
                               </font>
                            </Label>
-                           <Label text="Pensieri Bestiali" textFill="#c89c32" underline="true">
+                           <Button fx:id="shelter_btn" mnemonicParsing="false" onAction="#goToShelterPage" styleClass="transparent" text="Pensieri Bestiali" textFill="#c89c32" underline="true">
                               <font>
                                  <Font name="Arial Bold" size="20.0" />
                               </font>
-                           </Label>
+                           </Button>
                         </children>
                      </HBox>
                      <Pane layoutX="40.0" layoutY="73.0" VBox.vgrow="ALWAYS" />

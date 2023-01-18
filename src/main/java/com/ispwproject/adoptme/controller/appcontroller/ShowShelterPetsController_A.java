@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 
 import java.sql.SQLException;
@@ -13,8 +14,8 @@ public class ShowShelterPetsController_A {
     int shelterId;
     private static List<PetModel> petList = new ArrayList<>();
 
-    public ShowShelterPetsController_A(int shelterId) {
-        this.shelterId = shelterId;
+    public ShowShelterPetsController_A(ShelterBean shelterBean) {
+        this.shelterId = shelterBean.getShelterId();
     }
 
     public List<PetBean> getPetList() {

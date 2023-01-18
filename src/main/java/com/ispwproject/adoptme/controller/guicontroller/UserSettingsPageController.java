@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,12 @@ import java.io.IOException;
 public class UserSettingsPageController {
     @FXML
     private ImageView userImg;
+
+    private UserBean userBean;
+
+    public void setSessionData(UserBean userBean) {
+        this.userBean = userBean;
+    }
 
     public void loadImage(ActionEvent event) throws IOException {
 
@@ -55,6 +62,9 @@ public class UserSettingsPageController {
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+
+            UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+            userHomepageControllerG.setSessionData(this.userBean);
             stage.setScene(scene);
         }
 

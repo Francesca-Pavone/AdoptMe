@@ -14,7 +14,7 @@ public class ShelterBean {
     protected String city;
     protected URL webSite;
     protected String email;
-    protected String password; // todo: vedere se lasciarla nel bean
+    protected String password; //todo: vedere se lasciarla nel bean
     protected File shelterImg;
 
     public ShelterBean() {}
