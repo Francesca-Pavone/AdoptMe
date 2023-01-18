@@ -30,11 +30,16 @@ public class PetItemController_G {
     @FXML
     private Label petName;
     private PetBean petBean;
-    public void setPet(PetBean pet) {
-        this.petBean = pet;
+
+    private Object object;
+    public void setSessionData(Object ob) {
+        this.object = ob;
     }
 
-    public void setData() throws IOException {
+
+    public void setPetData(PetBean pet) throws IOException {
+        this.petBean = pet;
+
         petGender.setText(
                 switch (petBean.getGender()) {
                     case 0 -> "Male";
@@ -57,6 +62,7 @@ public class PetItemController_G {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         PetInfoController_G petInformationControllerG = fxmlLoader.getController();
+        petInformationControllerG.setSessionData(object);
         petInformationControllerG.setPetInfo(petBean);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

@@ -3,8 +3,7 @@ package com.ispwproject.adoptme.controller.guicontroller;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController_A;
 import com.ispwproject.adoptme.utils.bean.LoginBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,49 +69,51 @@ public class LoginController_G {
     }
 
     public void login(ActionEvent event) throws Exception {
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
         LoginController_A loginController_a = new LoginController_A();
         loginController_a.checkLogin(loginBean);
 
-        if (loginBean.getAccountType() == 0) {
+        if (loginBean.getAccountType() != 0) {
+            Session session = loginController_a.getLoginInfo(loginBean);
+
+            if (loginBean.getAccountType() == 1) {
+                userLogin(stage, session);
+            } else if (loginBean.getAccountType() == 2) {
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+
+                ShelterHomepageController_G shelterHomepageController_g = fxmlLoader.getController();
+                shelterHomepageController_g.setShelterSession(session.getShelterBean());
+                stage.setScene(scene);
+            }
+        }
+        else
             System.out.println("Utente non trovato");
-            //todo: popup email o password sbagliate
-            //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
-        }
-        else if(loginBean.getAccountType() == 1) {
-            UserBean userBean = loginController_a.getUserSession(loginBean);
-            Stage stage = Main.getStage();
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
+        //todo: popup email o password sbagliate
+        //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
 
-            UserHomepageController_G userHomepageController_g = fxmlLoader.getController();
-            userHomepageController_g.setUserSession(userBean);
-
-            //todo: capire se serve prelevare dati utente già qui
-        }
-        else if (loginBean.getAccountType() == 2) {
-            ShelterBean shelterBean = loginController_a.getShelterSession(loginBean);
-            Stage stage = Main.getStage();
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
-
-        }
     }
+
+
 
     public void loginGoogle(ActionEvent event) {
 
     }
 
     public void noLogin(ActionEvent event) throws IOException {
-        LoginController_A loginController_a = new LoginController_A();
-        loginController_a.noLogin();
-        Stage stage = Main.getStage();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Session session = new Session();
+
+        userLogin(stage, session);
+    }
+    private static void userLogin(Stage stage, Session session) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+        userHomepageControllerG.setSessionData(session.getUserBean());
+
         stage.setScene(scene);
-        UserHomepageController_G userHomepageController_g = fxmlLoader.getController();
-        userHomepageController_g.setUserSession(null);
     }
 }

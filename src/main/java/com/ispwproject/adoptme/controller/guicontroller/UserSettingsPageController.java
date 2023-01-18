@@ -38,6 +38,12 @@ public class UserSettingsPageController {
     private PasswordField textFieldPsw;
 
 
+    private UserBean userBean;
+
+    public void setSessionData(UserBean userBean) {
+        this.userBean = userBean;
+    }
+
     public void loadImage(ActionEvent event) throws IOException {
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -71,6 +77,9 @@ public class UserSettingsPageController {
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+
+            UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+            userHomepageControllerG.setSessionData(this.userBean);
             stage.setScene(scene);
         }
 

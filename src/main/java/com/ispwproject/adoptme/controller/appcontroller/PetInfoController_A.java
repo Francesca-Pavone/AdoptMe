@@ -3,14 +3,19 @@ package com.ispwproject.adoptme.controller.appcontroller;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.CatDAO;
 import com.ispwproject.adoptme.utils.dao.DogDAO;
+import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 
 public class PetInfoController_A {
 
 
-    public void getPetInfo(PetBean petBean) throws Exception {
+    public ShelterBean getPetInfo(PetBean petBean) throws Exception {
+        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+
         if (petBean.getType() == 0) {
             DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());
 
@@ -22,12 +27,13 @@ public class PetInfoController_A {
         }
         else {
             CatModel catModel = CatDAO.retrieveCatById(petBean.getPetId(), petBean.getShelterId());
+
             //vado a settare nel bean le nuove info del pet che mi servono
             setCommonAttr(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth(), catModel.getCoatLenght(), catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getPetCompatibility());
             petBean.setTestFiv(catModel.isTestFiv());
             petBean.setTestFelv(catModel.isTestFelv());
         }
-
+        return new ShelterBean(shelterModel);
 
     }
 

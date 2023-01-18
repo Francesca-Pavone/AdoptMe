@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.model.UserModel;
 import java.io.File;
 
 public class UserBean {
+
     protected int userId;
     protected String name;
     protected String surname;
@@ -70,5 +71,13 @@ public class UserBean {
 
     public void setProfileImg(File profileImg) {
         this.profileImg = profileImg;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
