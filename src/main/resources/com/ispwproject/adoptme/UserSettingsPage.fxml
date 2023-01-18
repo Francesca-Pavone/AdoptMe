@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserSettingsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.guicontroller.UserSettingsPageController">
    <children>
       <AnchorPane style="-fx-background-color: #34665A;">
          <children>
@@ -176,7 +183,7 @@
       <Pane layoutX="309.0" prefHeight="114.0" prefWidth="789.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <VBox layoutX="310.0" prefHeight="710.0" prefWidth="790.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" stylesheets="@style.css">
+            <Button mnemonicParsing="false" onAction="#signOut" stylesheets="@style.css">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -204,15 +211,15 @@
                   <Insets left="325.0" />
                </VBox.margin>
             </Button>
-            <Label text="Marco Rossi">
+            <Label fx:id="labelNameSurname" text="Marco Rossi">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
                <VBox.margin>
-                  <Insets left="315.0" />
+                  <Insets left="290.0" />
                </VBox.margin>
             </Label>
-            <Label text="marcorossi@gmail.com">
+            <Label fx:id="labelEmail" text="marcorossi@gmail.com">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
@@ -235,7 +242,7 @@
                         <Font name="Arial" size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Marco" styleClass="transparent" stylesheets="@style.css">
+                  <TextField fx:id="textFieldName" prefHeight="30.0" prefWidth="300.0" promptText="Marco" styleClass="transparent" stylesheets="@style.css">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -252,7 +259,7 @@
                         <Font name="Arial" size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="Rossi" styleClass="transparent" stylesheets="@style.css">
+                  <TextField fx:id="textFieldSurname" prefHeight="30.0" prefWidth="300.0" promptText="Rossi" styleClass="transparent" stylesheets="@style.css">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -269,7 +276,7 @@
                         <Font name="Arial" size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="marcorossi@gmail.com" styleClass="transparent" stylesheets="@style.css">
+                  <TextField fx:id="textFieldEmail" prefHeight="30.0" prefWidth="300.0" promptText="marcorossi@gmail.com" styleClass="transparent" stylesheets="@style.css">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -302,11 +309,7 @@
                         <Font name="Arial" size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="30.0" prefWidth="300.0" promptText="**********" styleClass="transparent" stylesheets="@style.css">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </TextField>
+                  <PasswordField fx:id="textFieldPsw" prefHeight="30.0" prefWidth="300.0" promptText="********" styleClass="transparent" stylesheets="@style.css" />
                </children>
                <VBox.margin>
                   <Insets left="40.0" top="10.0" />

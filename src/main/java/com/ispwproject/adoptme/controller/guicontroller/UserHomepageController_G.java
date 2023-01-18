@@ -3,9 +3,11 @@ package com.ispwproject.adoptme.controller.guicontroller;
 import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController_A;
+import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,7 +26,7 @@ import java.util.List;
 
 import com.ispwproject.adoptme.utils.bean.UserResearchBean;
 
-public class UserHomepageController_G {
+public class UserHomepageController_G extends UserSideBar {
     @FXML
     private TextField textFieldUserHomepage;
     @FXML
@@ -42,14 +45,6 @@ public class UserHomepageController_G {
     private VBox vBox;
     @FXML
     private Button backButton;
-
-    private UserBean userBean;
-
-    public void setSessionData(UserBean userBean) {
-        this.userBean = userBean;
-        //System.out.println(userBean.getUserId()+" "+ userBean.getName()+" "+userBean.getSurname()+" "+userBean.getEmail());
-
-    }
 
     public void initialize() {
         textFieldUserHomepage.setDisable(true);
@@ -110,6 +105,7 @@ public class UserHomepageController_G {
 
                         ShelterItemController_G shelterItemControllerG = fxmlLoader.getController();
                         shelterItemControllerG.setShelter(shelterBean);
+                        shelterItemControllerG.setUserSession(this.userBean);
                         shelterItemControllerG.setData();
 
 
@@ -163,30 +159,9 @@ public class UserHomepageController_G {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserQuestionnairePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
 
-    public void goToFavorites(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
-
-    public void goToAppointments(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
-
-    public void goToSettings(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        UserSettingsPageController userSettingsPageController = fxmlLoader.getController();
-        userSettingsPageController.setSessionData(this.userBean);
+        QuestionnaireController questionnaireController = fxmlLoader.getController();
+        questionnaireController.setUserSession(this.userBean);
         stage.setScene(scene);
     }
 }

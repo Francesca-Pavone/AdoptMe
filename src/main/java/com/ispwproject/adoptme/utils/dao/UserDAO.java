@@ -124,14 +124,19 @@ public class UserDAO {
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
                 Blob blob = resultSet.getBlob("profileImg");
-                InputStream in = blob.getBinaryStream();
-                String filePath = userId + "Photo" + ".png";
-                File profileImg = new File(filePath);
-                FileOutputStream outputStream = new FileOutputStream(profileImg);
-                int read;
-                byte[] bytes = new byte[4096];
-                while ((read = in.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
+                File profileImg;
+                if (blob != null) {
+                    InputStream in = blob.getBinaryStream();
+                    String filePath = userId + "Photo" + ".png";
+                    profileImg = new File(filePath);
+                    FileOutputStream outputStream = new FileOutputStream(profileImg);
+                    int read;
+                    byte[] bytes = new byte[4096];
+                    while ((read = in.read(bytes)) != -1) {
+                        outputStream.write(bytes, 0, read);
+                    }
+                } else {
+                    profileImg = null;
                 }
 
                 AccountInfo accountInfo = new AccountInfo(email, 0);

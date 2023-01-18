@@ -15,6 +15,7 @@ import com.ispwproject.adoptme.utils.session.Session;
 import java.sql.SQLException;
 
 public class LoginController_A {
+
     public void checkLogin(LoginBean loginBean) throws SQLException, ClassNotFoundException {
         int type = LoginDAO.checkLogin(loginBean.getEmail(), loginBean.getPassword());
         loginBean.setAccountType(type);
@@ -25,7 +26,6 @@ public class LoginController_A {
         if (loginBean.getAccountType() == 1) {
             UserModel userModel = UserDAO.retrieveUserByEmail(loginBean.getEmail());
             UserBean userBean = new UserBean(userModel);
-
             session = new Session(userBean);
 
         } else {

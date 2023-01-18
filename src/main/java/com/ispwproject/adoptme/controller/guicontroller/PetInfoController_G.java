@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController_A;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +20,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -308,7 +306,7 @@ public class PetInfoController_G {
             scene = new Scene(fxmlLoader.load());
 
             UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
-            userHomepageControllerG.setSessionData((UserBean) object);
+            userHomepageControllerG.setUserSession((UserBean) object);
         }
 
         stage.setScene(scene);
@@ -316,11 +314,11 @@ public class PetInfoController_G {
 
     public void goToShelterPage(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserShelterPage.fxml"));
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        ShelterPageController_G shelterPageController_g = fxmlLoader.getController();
-        shelterPageController_g.setData(shelterBean);
+        ShelterInformationControllerG shelterInformationController_g = fxmlLoader.getController();
+        shelterInformationController_g.setData(shelterBean);
         stage.setScene(scene);
 
 

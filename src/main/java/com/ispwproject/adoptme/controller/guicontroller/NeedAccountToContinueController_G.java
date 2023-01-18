@@ -10,22 +10,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ConfirmExitQuestionnaireController_G {
-
+public class NeedAccountToContinueController_G {
     private UserBean userBean;
 
-    public void closeQuestionnaire(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+    public void close(ActionEvent event) {
+        ((Node)event.getSource()).getScene().getWindow().hide();
+    }
 
-        UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
-        userHomepageControllerG.setUserSession(this.userBean);
+    public void goToLogin(ActionEvent event) throws IOException {
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("Login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
-    public void continueQuestionnaire(ActionEvent event) {
+    public void goToRegistration(ActionEvent event) throws IOException {
+        Stage stage = Main.getStage();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSIgnUpPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

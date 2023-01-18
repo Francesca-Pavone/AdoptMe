@@ -2,6 +2,8 @@ package com.ispwproject.adoptme.controller.guicontroller;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.utils.UserSideBar;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +18,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserFavoritesPageController {
+public class UserFavoritesPageController extends UserSideBar {
     @FXML
     private GridPane grid;
 
     private List<PetModel> petList = new ArrayList<>();
+
     private List<PetModel> getPetList() {
 
         try {
@@ -66,26 +69,5 @@ public class UserFavoritesPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void goToHomepage(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
-
-    public void goToAppointments(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
-
-    public void goToSettings(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
     }
 }

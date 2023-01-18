@@ -5,26 +5,24 @@ import com.ispwproject.adoptme.model.UserModel;
 import java.io.File;
 
 public class UserBean {
-    private int userId ;
-    private String name;
-    private String surname;
-    private File profileImg;
-    private String email;
 
-    public UserBean(int userId, String name, String surname, File profileImg, String email) {
-        setUserId(userId);
-        setName(name);
-        setSurname(surname);
-        setProfileImg(profileImg);
-        setEmail(email);
-    }
+    protected int userId;
+    protected String name;
+    protected String surname;
+    protected String email;
+    protected String password;
+    protected File profileImg;
 
     public UserBean(UserModel userModel) {
-        setUserId(userModel.getId());
-        setName(userModel.getName());
-        setSurname(userModel.getSurname());
-        setProfileImg(userModel.getProfileImg());
-        setEmail(userModel.getAccountInfo().getEmail());
+        this.userId = userModel.getId();
+        this.name = userModel.getName();
+        this.surname = userModel.getSurname();
+        this.email = userModel.getAccountInfo().getEmail();
+        this.password = userModel.getAccountInfo().getPassword();
+        this.profileImg = userModel.getProfileImg();
+    }
+
+    public UserBean() {
     }
 
     public int getUserId() {
@@ -49,6 +47,14 @@ public class UserBean {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public File getProfileImg() {

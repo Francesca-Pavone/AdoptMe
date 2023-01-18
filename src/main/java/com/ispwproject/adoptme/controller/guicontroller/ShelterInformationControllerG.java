@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class ShelterPageController_G {
+public class ShelterInformationControllerG {
 
     @FXML
     private Label shelterName;
@@ -102,6 +102,9 @@ public class ShelterPageController_G {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        UserHomepageController_G userHomepageControllerG = fxmlLoader.getController();
+        userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
     }
 }
