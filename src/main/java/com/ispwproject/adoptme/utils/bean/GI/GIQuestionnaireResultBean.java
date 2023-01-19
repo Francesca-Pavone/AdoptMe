@@ -48,10 +48,10 @@ public class GIQuestionnaireResultBean extends QuestionnaireResultBean {
 
     public void setSizeGI(String size) {
         switch (size) {
-            case "Small" -> this.gender = 0;
             case "Medium" -> this.gender = 1;
             case "Large" -> this.gender = 2;
             case "Extra Large" -> this.gender = 3;
+            default -> this.gender = 0; // case small
         }
     }
 
@@ -92,9 +92,9 @@ public class GIQuestionnaireResultBean extends QuestionnaireResultBean {
 
     public void setHoursAloneGI(String hoursAlone) {
         switch (hoursAlone) {
-            case "1 - 3 hours" -> this.hoursAlone = 0;
             case "4 - 6 hours" -> this.hoursAlone = 1;
             case "More than 6 hours" -> this.hoursAlone = 2;
+            default -> this.hoursAlone = 0; // case 1-3 hours
         }
     }
 
