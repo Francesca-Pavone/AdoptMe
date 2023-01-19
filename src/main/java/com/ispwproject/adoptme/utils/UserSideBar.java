@@ -22,7 +22,7 @@ public class UserSideBar {
             this.userBean = userBean;
     }
 
-    public void goToHomepage(ActionEvent event) throws IOException {
+    public void goToHomepage() throws IOException {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -32,7 +32,7 @@ public class UserSideBar {
         stage.setScene(scene);
     }
 
-    public void goToFavorites(ActionEvent event) throws IOException {
+    public void goToFavorites() throws IOException {
         if(userBean == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
@@ -53,11 +53,11 @@ public class UserSideBar {
         }
     }
 
-    public void goToAppointments(ActionEvent event) throws IOException {
+    public void goToAppointments() {
 
     }
 
-    public void goToSettings(ActionEvent event) throws IOException {
+    public void goToSettings() throws IOException {
         if(userBean == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);

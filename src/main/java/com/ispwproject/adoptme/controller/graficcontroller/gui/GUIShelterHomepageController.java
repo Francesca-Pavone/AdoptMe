@@ -34,6 +34,7 @@ public class GUIShelterHomepageController extends ShelterSideBar {
         dialog.show();
     }
 
+    @Override
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
 
