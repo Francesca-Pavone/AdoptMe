@@ -27,21 +27,9 @@ public class ShelterSideBar {
     }
 
     public void goToAppointments() throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterAppointments.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        //GUIShelterAppointments shelterAppointments = fxmlLoader.getController();
-        Main.getStage().setScene(scene);
-
-         */
     }
 
     public void goToWishlist() throws IOException {
-        /*
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterWishlist.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Main.getStage().setScene(scene);
-
-         */
     }
 
     public void goToSettings() throws IOException {
