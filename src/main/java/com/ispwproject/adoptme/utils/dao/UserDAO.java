@@ -13,10 +13,10 @@ public class UserDAO {
     //costruttore privato
     private UserDAO() {}
 
-    private static String user = "user1";
-    private static String pass = "user1";
-    private static String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String driverClassName = "com.mysql.cj.jdbc.Driver";
+    private static final String user = "user1";
+    private static final String pass = "user1";
+    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
 
 
     public static UserModel retrieveUserById(int userId) throws Exception {
