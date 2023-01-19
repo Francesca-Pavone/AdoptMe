@@ -25,6 +25,7 @@ public class QuestionnaireResultBean {
     protected boolean specificArea; // 0 -> no | 1 -> yes
     protected String city;
 
+    //Costruttore vuoto
     public QuestionnaireResultBean() {}
 
     public void setSize(int size) {
