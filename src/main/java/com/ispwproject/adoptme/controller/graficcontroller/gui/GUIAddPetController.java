@@ -133,9 +133,9 @@ public class GUIAddPetController {
         String[] months = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
         boxMonth.getItems().addAll(months);
 
-        boxSize.getItems().addAll(Size.Small.toString(), Size.Medium.toString(), Size.Large.toString(), Size.ExtraLarge.toString());
+        boxSize.getItems().addAll(Size.SMALL.toString(), Size.MEDIUM.toString(), Size.LARGE.toString(), Size.EXTRALARGE.toString());
 
-        boxCoatLenght.getItems().addAll(CoatLenght.Short.toString(), CoatLenght.Medium.toString(), CoatLenght.Long.toString());
+        boxCoatLenght.getItems().addAll(CoatLenght.SHORT.toString(), CoatLenght.MEDIUM.toString(), CoatLenght.LONG.toString());
 
         yearMonthHBox.getChildren().removeAll(yearVBox, monthVBox);
         sizeVBox.getChildren().removeAll(txtSize, boxSize);
