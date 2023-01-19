@@ -38,12 +38,12 @@ public class GUIShelterHomepageController extends ShelterSideBar {
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
 
-        ShowShelterPetsController showShelterPetsController_ = new ShowShelterPetsController(shelterBean);
+        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
         int column = 0;
         int row = 1;
 
         try {
-            for (PetBean pet : showShelterPetsController_.getPetList()) {
+            for (PetBean pet : showShelterPetsController.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 

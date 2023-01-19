@@ -65,8 +65,8 @@ public class GUIShelterInformationController {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
-        ShelterPageController shelterPageController_ = new ShelterPageController();
-        List<PetBean> petBeanList = shelterPageController_.getPetList(shelterBean.getShelterId());
+        ShelterPageController shelterPageController = new ShelterPageController();
+        List<PetBean> petBeanList = shelterPageController.getPetList(shelterBean.getShelterId());
 
         int column = 0;
         int row = 1;
@@ -90,10 +90,7 @@ public class GUIShelterInformationController {
     }
 
     public void selectInformations() {
-        if(btnInformations.isSelected())
-            paneInformations.setVisible(true);
-        else
-            paneInformations.setVisible(false);
+        paneInformations.setVisible(btnInformations.isSelected());
 
     }
 

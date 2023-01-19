@@ -493,10 +493,10 @@
                                     <Insets top="15.0" />
                                  </VBox.margin>
                                  <toggleGroup>
-                                    <ToggleGroup fx:id="HoursAloneGroup1" />
+                                    <ToggleGroup fx:id="hoursAloneGroup1" />
                                  </toggleGroup>
                               </ToggleButton>
-                              <ToggleButton fx:id="btnHoursAloneTwo" mnemonicParsing="false" onAction="#selectHoursAloneTwo" prefHeight="70.0" prefWidth="418.0" styleClass="button4" stylesheets="@style.css" text="4 - 6 hours" textFill="WHITE" toggleGroup="$HoursAloneGroup1">
+                              <ToggleButton fx:id="btnHoursAloneTwo" mnemonicParsing="false" onAction="#selectHoursAloneTwo" prefHeight="70.0" prefWidth="418.0" styleClass="button4" stylesheets="@style.css" text="4 - 6 hours" textFill="WHITE" toggleGroup="$hoursAloneGroup1">
                                  <font>
                                     <Font name="Arial Bold" size="30.0" />
                                  </font>
@@ -504,7 +504,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="btnHoursAloneThree" mnemonicParsing="false" onAction="#selectHoursAloneThree" prefHeight="70.0" prefWidth="418.0" styleClass="button4" stylesheets="@style.css" text="More than 6 hours" textFill="WHITE" toggleGroup="$HoursAloneGroup1">
+                              <ToggleButton fx:id="btnHoursAloneThree" mnemonicParsing="false" onAction="#selectHoursAloneThree" prefHeight="70.0" prefWidth="418.0" styleClass="button4" stylesheets="@style.css" text="More than 6 hours" textFill="WHITE" toggleGroup="$hoursAloneGroup1">
                                  <font>
                                     <Font name="Arial Bold" size="30.0" />
                                  </font>
