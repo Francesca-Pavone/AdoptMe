@@ -14,20 +14,20 @@ import java.util.List;
 
 public class ShelterDAO {
 
-    private static final String user = "user1";
-    private static final String pass = "user1";
-    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
+    private static final String USER = "user1";
+    private static final String PASS = "user1";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
-    private static final String photo = "Photo";
-    private static final String addressDb = "address";
-    private static final String webSiteDb = "webSite";
-    private static final String phoneNumberDb = "phoneNumber";
-    private static final String profileImgDb = "profileImg";
-    private static final String shelterIdDb = "shelterId";
-    private static final String nameDb = "name";
-    private static final String cityDb = "city";
-    private static final String emailDb = "email";
+    private static final String PHOTO = "Photo";
+    private static final String ADDRESS = "address";
+    private static final String WEB_SITE = "webSite";
+    private static final String PHONE_NUMBER = "phoneNumber";
+    private static final String PROFILE_IMG = "profileImg";
+    private static final String SHELTER_ID = "shelterId";
+    private static final String NAME = "name";
+    private static final String CITY = "city";
+    private static final String EMAIL = "email";
 
     private ShelterDAO() {}
 
@@ -36,9 +36,9 @@ public class ShelterDAO {
         Connection conn = null;
         List<ShelterModel> sheltersList = new ArrayList<>();
         try {
-            Class.forName(driverClassName);
+            Class.forName(DRIVER_CLASS_NAME);
 
-            conn = DriverManager.getConnection(dbUrl, user, pass);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -52,20 +52,20 @@ public class ShelterDAO {
             resultSet.first();
             do {
                 File shelterImage;
-                int shelterId = resultSet.getInt(shelterIdDb);
-                Blob blob = resultSet.getBlob(profileImgDb);
-                String shelterName = resultSet.getString(nameDb);
+                int shelterId = resultSet.getInt(SHELTER_ID);
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
+                String shelterName = resultSet.getString(NAME);
 
-                String phoneNumber = resultSet.getString(phoneNumberDb);
-                String address = resultSet.getString(addressDb);
-                String email = resultSet.getString(emailDb);
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String address = resultSet.getString(ADDRESS);
+                String email = resultSet.getString(EMAIL);
                 String password = resultSet.getString("password");
-                String webSite = resultSet.getString(webSiteDb);
+                String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
                 if (blob != null) {
                     InputStream in = blob.getBinaryStream();
-                    String filePath = shelterName + photo + ".png";
+                    String filePath = shelterName + PHOTO + ".png";
                     shelterImage = new File(filePath);
                     FileOutputStream outputStream = new FileOutputStream(shelterImage);
                     int read;
@@ -110,9 +110,9 @@ public class ShelterDAO {
 
         int shelterId = -1;
         try {
-            Class.forName(driverClassName);
+            Class.forName(DRIVER_CLASS_NAME);
 
-            conn = DriverManager.getConnection(dbUrl, user, pass);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -124,7 +124,7 @@ public class ShelterDAO {
             }
 
             resultSet.first();
-            shelterId = resultSet.getInt(shelterIdDb);
+            shelterId = resultSet.getInt(SHELTER_ID);
 
             resultSet.close();
 
@@ -151,9 +151,9 @@ public class ShelterDAO {
         Connection conn = null;
         ShelterModel shelter;
         try {
-            Class.forName(driverClassName);
+            Class.forName(DRIVER_CLASS_NAME);
 
-            conn = DriverManager.getConnection(dbUrl, user, pass);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -166,19 +166,19 @@ public class ShelterDAO {
 
             resultSet.first();
             do{
-                String shelterName = resultSet.getString(nameDb);
-                String phoneNumber = resultSet.getString(phoneNumberDb);
-                String address = resultSet.getString(addressDb);
-                String city = resultSet.getString(cityDb);
-                String webSite = resultSet.getString(webSiteDb);
+                String shelterName = resultSet.getString(NAME);
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String address = resultSet.getString(ADDRESS);
+                String city = resultSet.getString(CITY);
+                String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
-                String email = resultSet.getString(emailDb);
+                String email = resultSet.getString(EMAIL);
 
-                Blob blob = resultSet.getBlob(profileImgDb);
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
                 InputStream in = blob.getBinaryStream();
                 //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + photo + ".png";
+                String filePath = shelterName + PHOTO + ".png";
                 File shelterImage = new File(filePath);
                 FileOutputStream outputStream = new FileOutputStream(shelterImage);
                 int read;
@@ -217,9 +217,9 @@ public class ShelterDAO {
         Connection conn = null;
         ShelterModel shelter;
         try {
-            Class.forName(driverClassName);
+            Class.forName(DRIVER_CLASS_NAME);
 
-            conn = DriverManager.getConnection(dbUrl, user, pass);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -232,19 +232,19 @@ public class ShelterDAO {
 
             resultSet.first();
             do{
-                int shelterId = resultSet.getInt(shelterIdDb);
-                String shelterName = resultSet.getString(nameDb);
-                String phoneNumber = resultSet.getString(phoneNumberDb);
-                String address = resultSet.getString(addressDb);
-                String city = resultSet.getString(cityDb);
-                String webSite = resultSet.getString(webSiteDb);
+                int shelterId = resultSet.getInt(SHELTER_ID);
+                String shelterName = resultSet.getString(NAME);
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String address = resultSet.getString(ADDRESS);
+                String city = resultSet.getString(CITY);
+                String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
 
-                Blob blob = resultSet.getBlob(profileImgDb);
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
                 InputStream in = blob.getBinaryStream();
                 //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + photo + ".png";
+                String filePath = shelterName + PHOTO + ".png";
                 File shelterImage = new File(filePath);
                 FileOutputStream outputStream = new FileOutputStream(shelterImage);
                 int read;

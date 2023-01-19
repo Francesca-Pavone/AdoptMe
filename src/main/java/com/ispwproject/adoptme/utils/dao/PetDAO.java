@@ -13,10 +13,10 @@ public class PetDAO {
     //costruttore privato
     private PetDAO() {}
 
-    private static final String user = "user1";
-    private static final String pass = "user1";
-    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
+    private static final String USER = "user1";
+    private static final String PASS = "user1";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
     public static List<PetModel> retrievePetByShelterId(int shelterId) throws Exception {
@@ -27,10 +27,10 @@ public class PetDAO {
 
         try {
             // STEP 2: loading dinamico del driver mysql
-            Class.forName(driverClassName);
+            Class.forName(DRIVER_CLASS_NAME);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(dbUrl, user, pass);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -101,7 +101,7 @@ public class PetDAO {
 
         return petList;
     }
-    
+
 /*
     public static PetModel retrivePetById(int petId, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
