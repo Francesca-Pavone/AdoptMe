@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class LoginDAO {
     //costruttore privato
-    public LoginDAO() {}
+    private LoginDAO() {}
 
     private static final String USER = "user1";
     private static final String PASS = "user1";

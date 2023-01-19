@@ -6,11 +6,14 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
 import javax.imageio.ImageIO;
+import java.awt.font.ImageGraphicAttribute;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 public class ImageUtils {
+    //Costruttore privato
+    private ImageUtils() {}
 
     public static Image fromFileToImage(File file) throws IOException {
         BufferedImage bfImage = null;

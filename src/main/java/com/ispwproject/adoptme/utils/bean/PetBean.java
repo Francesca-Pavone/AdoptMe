@@ -6,7 +6,6 @@ import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 
 import java.io.File;
-import java.time.LocalDate;
 
 public class PetBean {
 

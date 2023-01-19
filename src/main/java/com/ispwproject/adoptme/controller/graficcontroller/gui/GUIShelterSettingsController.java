@@ -50,7 +50,7 @@ public class GUIShelterSettingsController extends ShelterSideBar {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
-
+    @Override
     public void setShelterSession(ShelterBean shelterBean) throws IOException {
         this.shelterBean = shelterBean;
         loadShelterInfo();

@@ -53,7 +53,6 @@ public class PetDAO {
 
                 Blob blob = resultSet.getBlob("imgSrc");
                 InputStream in = blob.getBinaryStream();
-                //Image petImage = new Image(in);
 
                 //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
                 String filePath = petName + "Photo" + ".png";

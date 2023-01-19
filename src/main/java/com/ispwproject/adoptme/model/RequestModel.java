@@ -10,7 +10,7 @@ public abstract class RequestModel {
     private Date date;
     private LocalTime time;
 
-    public RequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
+    protected RequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
         this.pet = pet;
         this.user = user;
         this.date = date;
