@@ -5,9 +5,16 @@ module com.ispwproject.adoptme {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires com.opencsv;
+    requires java.sql;
+    requires java.desktop;
 
     opens com.ispwproject.adoptme to javafx.fxml;
     exports com.ispwproject.adoptme;
-    exports com.ispwproject.adoptme.controller;
-    opens com.ispwproject.adoptme.controller to javafx.fxml;
+    exports com.ispwproject.adoptme.model;
+    opens com.ispwproject.adoptme.model to javafx.fxml;
+    exports com.ispwproject.adoptme.utils;
+    opens com.ispwproject.adoptme.utils to javafx.fxml;
+    exports com.ispwproject.adoptme.controller.graficcontroller.GUI;
+    opens com.ispwproject.adoptme.controller.graficcontroller.GUI to javafx.fxml;
 }

@@ -1,65 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.PetItemController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIPetItemController">
    <children>
-      <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <ImageView fx:id="petImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-               <image>
-                  <Image url="@image/gatto1.png" />
-               </image></ImageView>
-            <Label fx:id="petName" text="Name" VBox.vgrow="ALWAYS">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="8.0" VBox.vgrow="ALWAYS">
+      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openPetInfoPage" prefHeight="290.0" prefWidth="200.0" styleClass="pet-box" stylesheets="@style.css">
+         <graphic>
+            <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Label text="Gender:">
+                  <ImageView fx:id="petImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                  <Label fx:id="petName" VBox.vgrow="ALWAYS">
                      <font>
-                        <Font size="15.0" />
+                        <Font name="Arial Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
                   </Label>
-                  <Label fx:id="petGender" layoutX="10.0" layoutY="10.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="8.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Gender:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="petGender" layoutX="10.0" layoutY="10.0">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="8.0">
+                     <children>
+                        <Label text="Age:">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="petAge" layoutX="10.0" layoutY="10.0">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                  </HBox>
                </children>
                <padding>
-                  <Insets left="25.0" />
+                  <Insets bottom="15.0" top="15.0" />
                </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="8.0">
-               <children>
-                  <Label text="Age:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="petAge" layoutX="10.0" layoutY="10.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="25.0" />
-               </padding>
-            </HBox>
-         </children>
-         <padding>
-            <Insets bottom="15.0" top="15.0" />
-         </padding>
-      </VBox>
+            </VBox>
+         </graphic>
+      </Button>
    </children>
 </Pane>
