@@ -71,11 +71,11 @@ public class GUILoginController {
     public void login(ActionEvent event) throws Exception {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
-        LoginController loginController_ = new LoginController();
-        loginController_.checkLogin(loginBean);
+        LoginController loginController = new LoginController();
+        loginController.checkLogin(loginBean);
 
         if (loginBean.getAccountType() != 0) {
-            Session session = loginController_.getLoginInfo(loginBean);
+            Session session = loginController.getLoginInfo(loginBean);
 
             if (loginBean.getAccountType() == 1) {
                 userLogin(stage, session);
@@ -83,8 +83,8 @@ public class GUILoginController {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
 
-                GUIShelterHomepageController shelterHomepageController_g = fxmlLoader.getController();
-                shelterHomepageController_g.setShelterSession(session.getShelterBean());
+                GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+                guiShelterHomepageController.setShelterSession(session.getShelterBean());
                 stage.setScene(scene);
             }
         }
@@ -98,7 +98,7 @@ public class GUILoginController {
 
 
     public void loginGoogle(ActionEvent event) {
-
+        // mostrare il messaggio "funzionalità non implementata"
     }
 
     public void noLogin(ActionEvent event) throws IOException {
