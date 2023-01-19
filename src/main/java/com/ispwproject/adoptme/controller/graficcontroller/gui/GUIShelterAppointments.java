@@ -50,6 +50,7 @@ public class GUIShelterAppointments extends ShelterSideBar {
     }
 
     public void initialize(){
+        String reqItem = "RequestItem.fxml";
         pendingRequestList.addAll(getAcceptedReqList());
         acceptedRequestList.addAll(getAcceptedReqList());
         doneAppointmentList.addAll(getAcceptedReqList());
@@ -57,7 +58,7 @@ public class GUIShelterAppointments extends ShelterSideBar {
         try {
             for (RequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource(reqItem));
                 Pane pane = fxmlLoader.load();
 
                 GUIRequestItemController requestItemController = fxmlLoader.getController();
@@ -68,7 +69,7 @@ public class GUIShelterAppointments extends ShelterSideBar {
 
             for (RequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource(reqItem));
                 Pane pane = fxmlLoader.load();
 
                 GUIRequestItemController requestItemController = fxmlLoader.getController();
@@ -79,7 +80,7 @@ public class GUIShelterAppointments extends ShelterSideBar {
 
             for (RequestModel appointment : pendingRequestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
+                fxmlLoader.setLocation(Main.class.getResource(reqItem));
                 Pane pane = fxmlLoader.load();
 
                 GUIRequestItemController requestItemController = fxmlLoader.getController();

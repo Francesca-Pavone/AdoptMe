@@ -54,7 +54,7 @@ public class UserSideBar {
     }
 
     public void goToAppointments() {
-
+        //da implementare
     }
 
     public void goToSettings() throws IOException {

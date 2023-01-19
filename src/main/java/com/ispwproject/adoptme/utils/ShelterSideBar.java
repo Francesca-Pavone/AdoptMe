@@ -26,10 +26,12 @@ public class ShelterSideBar {
         Main.getStage().setScene(scene);
     }
 
-    public void goToAppointments() throws IOException {
+    public void goToAppointments() {
+        //da implementare
     }
 
-    public void goToWishlist() throws IOException {
+    public void goToWishlist() {
+        // non lo implementeremo
     }
 
     public void goToSettings() throws IOException {
