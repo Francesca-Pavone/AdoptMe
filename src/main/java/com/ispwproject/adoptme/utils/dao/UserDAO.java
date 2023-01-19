@@ -13,7 +13,7 @@ public class UserDAO {
     //costruttore privato
     private UserDAO() {}
 
-    private static final String user = "user1";
+    private static final String User = "user1";
     private static final String pass = "user1";
     private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
     private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
@@ -30,7 +30,7 @@ public class UserDAO {
             Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(dbUrl, UserDAO.user, pass);
+            conn = DriverManager.getConnection(dbUrl, UserDAO.User, pass);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -103,7 +103,7 @@ public class UserDAO {
             Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(dbUrl, UserDAO.user, pass);
+            conn = DriverManager.getConnection(dbUrl, UserDAO.User, pass);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
