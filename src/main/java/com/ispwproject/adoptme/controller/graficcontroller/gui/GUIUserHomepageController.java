@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 
@@ -125,7 +125,6 @@ public class GUIUserHomepageController extends UserSideBar {
                 int row = 1;
 
                 try {
-                    // TODO devo passare PetBean e non PetModel
                     for (PetBean pet : userResearchControllerA.searchShelter(userResearchBean.getCityShelter())) {
                         FXMLLoader fxmlLoader = new FXMLLoader();
                         fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));

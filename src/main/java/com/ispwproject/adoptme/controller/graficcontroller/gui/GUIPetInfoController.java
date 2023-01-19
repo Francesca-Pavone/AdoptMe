@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
@@ -29,7 +29,7 @@ public class GUIPetInfoController {
     private Label coatLenght;
 
     @FXML
-    private VBox compatibility_vBox;
+    private VBox compatibilityVBox;
 
     @FXML
     private Label dayOfBirth;
@@ -59,19 +59,19 @@ public class GUIPetInfoController {
     private Label name;
 
     @FXML
-    private Label name_title;
+    private Label nameTitle;
 
     @FXML
     private ImageView petImg;
 
     @FXML
-    private VBox petInfo_vBox;
+    private VBox petInfoVBox;
 
     @FXML
     private Label size;
 
     @FXML
-    private HBox size_box;
+    private HBox sizeBox;
 
     @FXML
     private Label slash1;
@@ -97,17 +97,17 @@ public class GUIPetInfoController {
     @FXML
     private Label yearOfBirth;
     @FXML
-    private HBox disability_box;
+    private HBox disabilityBox;
     @FXML
-    private HBox date_box;
+    private HBox dateBox;
     @FXML
-    private Label name_req;
+    private Label nameReq;
     @FXML
-    private Button shelter_btn;
+    private Button shelterBtn;
     @FXML
-    private VBox request_vBox;
+    private VBox requestVBox;
     @FXML
-    private HBox info_hBox;
+    private HBox infoHBox;
 
     private ShelterBean shelterBean;
     private Object object;
@@ -123,11 +123,11 @@ public class GUIPetInfoController {
         shelterBean = petInfoControllerA.getPetInfo(petBean);
 
         if (this.object instanceof ShelterBean) { // sono uno Shelter
-            info_hBox.getChildren().remove(request_vBox);
+            infoHBox.getChildren().remove(requestVBox);
         }
         else {
-            name_req.setText(petBean.getName());
-            shelter_btn.setText(shelterBean.getName());
+            nameReq.setText(petBean.getName());
+            shelterBtn.setText(shelterBean.getName());
         }
 
         InputStream inputStream = new FileInputStream(petBean.getPetImage());
@@ -135,17 +135,17 @@ public class GUIPetInfoController {
         petImg.setImage(image);
 
         name.setText(petBean.getName());
-        name_title.setText(petBean.getName());
+        nameTitle.setText(petBean.getName());
 
 
         // check date value
         if (petBean.getDayOfBirth() == 0)  // day of birth not known
-            date_box.getChildren().removeAll(dayOfBirth, slash1);
+            dateBox.getChildren().removeAll(dayOfBirth, slash1);
         else
             dayOfBirth.setText(String.valueOf(petBean.getDayOfBirth()));
 
         if (petBean.getMonthOfBirth() == 0)  // month of birth not known
-            date_box.getChildren().removeAll(monthOfBirth, slash2);
+            dateBox.getChildren().removeAll(monthOfBirth, slash2);
         else
             monthOfBirth.setText(String.valueOf(petBean.getMonthOfBirth()));
 
@@ -154,35 +154,35 @@ public class GUIPetInfoController {
 
         type.setText(
                 switch (petBean.getType()) {
-                    default -> "Dog";
                     case 1 -> "Cat";
+                    default -> "Dog";
                 }
         );
         gender.setText(
                 switch (petBean.getGender()) {
-                    default -> "Male";
                     case 1 -> "Female";
+                    default -> "Male";
                 }
         );
         coatLenght.setText(
                 switch (petBean.getCoatLenght()) {
-                    default -> "Short";     // case 0
                     case 1 -> "Medium";
                     case 2 -> "Long";
+                    default -> "Short";     // case 0
                 }
         );
 
         // check if it isn't a dog
         if (petBean.getType() != 0) {
-            petInfo_vBox.getChildren().removeAll(size_box, dogEducation);
+            petInfoVBox.getChildren().removeAll(sizeBox, dogEducation);
         }
         else {
             size.setText(
                     switch (petBean.getSize()) {
-                        default -> "Small";   //case 0
                         case 1 -> "Medium";
                         case 2 -> "Large";
                         case 3 -> "ExtraLarge";
+                        default -> "Small";   //case 0
                     }
             );
 
@@ -216,7 +216,7 @@ public class GUIPetInfoController {
 
         // check if it isn't a cat
         if (petBean.getType() != 1){
-            petInfo_vBox.getChildren().removeAll(testFiv, testFelv);
+            petInfoVBox.getChildren().removeAll(testFiv, testFelv);
         }
         else {
             if (petBean.isTestFiv())
@@ -231,7 +231,7 @@ public class GUIPetInfoController {
         }
 
         if (!petBean.isDisability())
-            petInfo_vBox.getChildren().remove(disability_box);
+            petInfoVBox.getChildren().remove(disabilityBox);
         else {
             disability.setText("Disability");
             if (petBean.getDisabilityType().equals(""))
@@ -287,7 +287,7 @@ public class GUIPetInfoController {
     private void setCompatibilityLabel(String text) {
         Label label = new Label(text);
         label.setFont(new Font("Arial", 20));
-        compatibility_vBox.getChildren().add(label);
+        compatibilityVBox.getChildren().add(label);
     }
 
     public void goBack(ActionEvent event) throws IOException {
@@ -298,15 +298,15 @@ public class GUIPetInfoController {
             fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
 
-            GUIShelterHomepageController shelterHomepageController_g = fxmlLoader.getController();
-            shelterHomepageController_g.setShelterSession((ShelterBean) this.object);
+            GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+            guiShelterHomepageController.setShelterSession((ShelterBean) this.object);
         }
         else {
             fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
 
-            GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
-            userHomepageControllerG.setUserSession((UserBean) object);
+            GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
+            guiUserHomepageController.setUserSession((UserBean) object);
         }
 
         stage.setScene(scene);
@@ -317,8 +317,8 @@ public class GUIPetInfoController {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        GUIShelterInformationController shelterInformationController_g = fxmlLoader.getController();
-        shelterInformationController_g.setData(shelterBean);
+        GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setData(shelterBean);
         stage.setScene(scene);
 
 

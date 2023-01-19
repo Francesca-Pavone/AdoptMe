@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.UserSideBar;
@@ -61,11 +61,6 @@ public class GUIUserSettingsController extends UserSideBar {
         Image newUserImage = new ImageView(wr).getImage();
 
         userImg.setImage(newUserImage);
-/*
-        btnLoadImage.getStyleClass().clear();
-        btnLoadImage.getStyleClass().add("photo-loaded");
-
- */
     }
 
     public void signOut(ActionEvent event) throws IOException {
@@ -79,9 +74,6 @@ public class GUIUserSettingsController extends UserSideBar {
     @Override
     public void setUserSession(UserBean userBean) {
         this.userBean = userBean;
-        /*InputStream inputStream = new FileInputStream(userBean.getProfileImg());
-        Image image = new Image(inputStream);
-        userImg.setImage(image);*/
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());
         textFieldName.setPromptText(userBean.getName());

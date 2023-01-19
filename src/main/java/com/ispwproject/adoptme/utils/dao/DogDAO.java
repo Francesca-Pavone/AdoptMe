@@ -10,10 +10,13 @@ import java.io.InputStream;
 import java.sql.*;
 
 public class DogDAO {
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    //costruttore Privato
+    private DogDAO() {}
+
+    private static final String USER = "user1";
+    private static final String PASS = "user1";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 
     public static DogModel retrieveDogById(int dogId, int shelterId)  throws Exception {
@@ -38,8 +41,7 @@ public class DogDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                Exception e = new Exception("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
-                throw e;
+                throw new Exception("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set

@@ -14,10 +14,20 @@ import java.util.List;
 
 public class ShelterDAO {
 
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    private static final String USER = "user1";
+    private static final String PASS = "user1";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+
+    private static final String PHOTO = "Photo";
+    private static final String ADDRESS = "address";
+    private static final String WEB_SITE = "webSite";
+    private static final String PHONE_NUMBER = "phoneNumber";
+    private static final String PROFILE_IMG = "profileImg";
+    private static final String SHELTER_ID = "shelterId";
+    private static final String NAME = "name";
+    private static final String CITY = "city";
+    private static final String EMAIL = "email";
 
     private ShelterDAO() {}
 
@@ -36,27 +46,26 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.searchSheltersByCity(stmt, city);
 
             if (!resultSet.first()){
-                Exception e = new Exception("No cities found that begin with that input: "+city);
-                throw e;
+                throw new Exception("No cities found that begin with that input: "+city);
             }
 
             resultSet.first();
             do {
                 File shelterImage;
-                int shelterId = resultSet.getInt("shelterId");
-                Blob blob = resultSet.getBlob("profileImg");
-                String shelterName = resultSet.getString("name");
+                int shelterId = resultSet.getInt(SHELTER_ID);
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
+                String shelterName = resultSet.getString(NAME);
 
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String address = resultSet.getString("address");
-                String email = resultSet.getString("email");
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String address = resultSet.getString(ADDRESS);
+                String email = resultSet.getString(EMAIL);
                 String password = resultSet.getString("password");
-                String webSite = resultSet.getString("webSite");
+                String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
                 if (blob != null) {
                     InputStream in = blob.getBinaryStream();
-                    String filePath = shelterName + "Photo" + ".png";
+                    String filePath = shelterName + PHOTO + ".png";
                     shelterImage = new File(filePath);
                     FileOutputStream outputStream = new FileOutputStream(shelterImage);
                     int read;
@@ -99,8 +108,6 @@ public class ShelterDAO {
         Statement stmt = null;
         Connection conn = null;
 
-        ShelterModel shelter;
-
         int shelterId = -1;
         try {
             Class.forName(DRIVER_CLASS_NAME);
@@ -113,12 +120,11 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.selectSheltersByName(stmt, shelterName);
 
             if (!resultSet.first()){
-                Exception e = new Exception("No shelters found that begin with that input: "+shelterName);
-                throw e;
+                throw new Exception("No shelters found that begin with that input: "+shelterName);
             }
 
             resultSet.first();
-            shelterId = resultSet.getInt("shelterId");
+            shelterId = resultSet.getInt(SHELTER_ID);
 
             resultSet.close();
 
@@ -155,25 +161,24 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.selectShelterById(stmt, shelterId);
 
             if (!resultSet.first()){
-                Exception e = new Exception("No shelters found with the id: "+shelterId);
-                throw e;
+                throw new Exception("No shelters found with the id: "+shelterId);
             }
 
             resultSet.first();
             do{
-                String shelterName = resultSet.getString("name");
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String address = resultSet.getString("address");
-                String city = resultSet.getString("city");
-                String webSite = resultSet.getString("webSite");
+                String shelterName = resultSet.getString(NAME);
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String address = resultSet.getString(ADDRESS);
+                String city = resultSet.getString(CITY);
+                String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
-                String email = resultSet.getString("email");
+                String email = resultSet.getString(EMAIL);
 
-                Blob blob = resultSet.getBlob("profileImg");
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
                 InputStream in = blob.getBinaryStream();
                 //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + "Photo" + ".png";
+                String filePath = shelterName + PHOTO + ".png";
                 File shelterImage = new File(filePath);
                 FileOutputStream outputStream = new FileOutputStream(shelterImage);
                 int read;
@@ -222,25 +227,24 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.selectShelterByEmail(stmt, email);
 
             if (!resultSet.first()){
-                Exception e = new Exception("No shelters found with the email: "+email);
-                throw e;
+                throw new Exception("No shelters found with the email: "+email);
             }
 
             resultSet.first();
             do{
-                int shelterId = resultSet.getInt("shelterId");
-                String shelterName = resultSet.getString("name");
-                String phoneNumber = resultSet.getString("phoneNumber");
-                String address = resultSet.getString("address");
-                String city = resultSet.getString("city");
-                String webSite = resultSet.getString("webSite");
+                int shelterId = resultSet.getInt(SHELTER_ID);
+                String shelterName = resultSet.getString(NAME);
+                String phoneNumber = resultSet.getString(PHONE_NUMBER);
+                String address = resultSet.getString(ADDRESS);
+                String city = resultSet.getString(CITY);
+                String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
 
-                Blob blob = resultSet.getBlob("profileImg");
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
                 InputStream in = blob.getBinaryStream();
                 //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + "Photo" + ".png";
+                String filePath = shelterName + PHOTO + ".png";
                 File shelterImage = new File(filePath);
                 FileOutputStream outputStream = new FileOutputStream(shelterImage);
                 int read;

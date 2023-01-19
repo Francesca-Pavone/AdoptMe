@@ -1,9 +1,10 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
 import com.ispwproject.adoptme.utils.enums.CoatLenght;
 import com.ispwproject.adoptme.utils.enums.Size;
@@ -27,29 +28,25 @@ public class GUIAddPetController {
     @FXML
     private ImageView petImg;
     @FXML
-    private TextField tf_petName;
+    private TextField petNameTxtF;
     @FXML
     private DatePicker datePicker;
     @FXML
-    private CheckBox cb_noFullDate;
+    private CheckBox noFullDateCBox;
     @FXML
-    private HBox yearMonth_hBox;
+    private HBox yearMonthHBox;
     @FXML
-    private VBox year_vBox;
+    private VBox yearVBox;
     @FXML
     private ComboBox<String> boxYear;
     @FXML
-    private VBox month_vBox;
+    private VBox monthVBox;
     @FXML
     private ComboBox<String> boxMonth;
     @FXML
-    private HBox typeGender_hBox;
+    private HBox typeGenderHBox;
     @FXML
-    private ToggleGroup tg_type;
-    @FXML
-    private HBox coatSize_hBox;
-    @FXML
-    private VBox size_vBox;
+    private VBox sizeVBox;
     @FXML
     private Label txtSize;
     @FXML
@@ -57,7 +54,7 @@ public class GUIAddPetController {
     @FXML
     private ComboBox<String> boxCoatLenght;
     @FXML
-    private ToggleGroup tg_gender;
+    private ToggleGroup genderTogG;
     @FXML
     private ToggleGroup vaccinated;
     @FXML
@@ -71,22 +68,22 @@ public class GUIAddPetController {
     @FXML
     private ToggleGroup testFelv;
     @FXML
-    private HBox testFelv_PN;
+    private HBox testFelvHBox;
 
     @FXML
-    private Label testFelv_txt;
+    private Label testFelvTxt;
 
     @FXML
-    private VBox testFelv_vBox;
+    private VBox testFelvVBox;
 
     @FXML
-    private HBox testFiv_PN;
+    private HBox testFivHBox;
 
     @FXML
-    private Label testFiv_txt;
+    private Label testFivTxt;
 
     @FXML
-    private VBox testFiv_vBox;
+    private VBox testFivVBox;
     @FXML
     private ToggleGroup disability;
     @FXML
@@ -98,36 +95,32 @@ public class GUIAddPetController {
     @FXML
     private Label txtEducProg;
     @FXML
-    private CheckBox cb_femaleCat;
-
+    private CheckBox cbFemaleCat;
     @FXML
-    private CheckBox cb_femaleDog;
-
+    private CheckBox cbFemaleDog;
     @FXML
-    private CheckBox cb_maleCat;
-
+    private CheckBox cbMaleCat;
     @FXML
-    private CheckBox cb_maleDog;
+    private CheckBox cbMaleDog;
     @FXML
-    private CheckBox cb_apartNoGarden;
+    private CheckBox cbApartNoGarden;
     @FXML
-    private CheckBox cb_apartNoTerrace;
+    private CheckBox cbApartNoTerrace;
     @FXML
-    private CheckBox cb_children;
+    private CheckBox cbChildren;
     @FXML
-    private CheckBox cb_elders;
+    private CheckBox cbElders;
     @FXML
-    private CheckBox cb_firstExp;
+    private CheckBox cbFirstExp;
     @FXML
-    private CheckBox cb_sleepOut;
+    private CheckBox cbSleepOut;
     @FXML
     private ToggleGroup hoursAlone;
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
-    private final int shelterId = 1; //TODO: questo valore dovrà essere preso dalla sessione
     private PetModel pet;
-
+    private int shelterId;
 
     public void initialize() {
 
@@ -138,17 +131,14 @@ public class GUIAddPetController {
         }
 
         String[] months = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        //boxMonth.getItems().addAll(Month.JANUARY.toString(), Month.FEBRUARY.toString(), Month.MARCH.toString(), Month.APRIL.toString(), Month.MAY.toString(), Month.JUNE.toString(), Month.JULY.toString(), Month.AUGUST.toString(), Month.SEPTEMBER.toString(), Month.OCTOBER.toString(), Month.NOVEMBER.toString(), Month.DECEMBER.toString() );
         boxMonth.getItems().addAll(months);
 
-        //String[] size = {"Small", "Medium", "Large", "Extra large"};
-        boxSize.getItems().addAll(Size.Small.toString(), Size.Medium.toString(), Size.Large.toString(), Size.ExtraLarge.toString());
+        boxSize.getItems().addAll(Size.SMALL.toString(), Size.MEDIUM.toString(), Size.LARGE.toString(), Size.EXTRALARGE.toString());
 
-        //String[] coatLenght = {"Short", "Medium", "Long"};
-        boxCoatLenght.getItems().addAll(CoatLenght.Short.toString(), CoatLenght.Medium.toString(), CoatLenght.Long.toString());
+        boxCoatLenght.getItems().addAll(CoatLenght.SHORT.toString(), CoatLenght.MEDIUM.toString(), CoatLenght.LONG.toString());
 
-        yearMonth_hBox.getChildren().removeAll(year_vBox, month_vBox);
-        size_vBox.getChildren().removeAll(txtSize, boxSize);
+        yearMonthHBox.getChildren().removeAll(yearVBox, monthVBox);
+        sizeVBox.getChildren().removeAll(txtSize, boxSize);
     }
 
     public void close(ActionEvent event) {
@@ -168,7 +158,7 @@ public class GUIAddPetController {
         int year;
         int month;
         int day;
-        AddPetController addPetController_ = null;
+        AddPetController addPetController = null;
         PetBean petBean = null;
 
         // retrive data of birth information
@@ -189,117 +179,105 @@ public class GUIAddPetController {
 
                 .shelterId(shelterId)
                 .petImage(file)
-                .name(tf_petName.getText())
+                .name(petNameTxtF.getText())
                 .type(petType)
                 .yearOfBirth(year)
                 .monthOfBirth(month)
                 .dayOfBirth(day)
 
-                .gender(switch (((RadioButton) tg_gender.getSelectedToggle()).getText()) {
-                    //case "Male" -> 0;
-                    default -> 0;
+                .gender(switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
                     case "Female" -> 1;
+                    default -> 0;   //case "Male"
                 })
 
                 .coatLenght(switch (boxCoatLenght.getValue()) {
-                    //case "Short" -> 0;
-                    default -> 0;
                     case "Medium" -> 1;
                     case "Long" -> 2;
+                    default -> 0;   //case "Short"
                 })
 
                 .vaccinated(switch (((RadioButton) vaccinated.getSelectedToggle()).getText()) {
-                    //case "Yes" -> true;
-                    default -> true;
                     case "No" -> false;
+                    default -> true;    //case "Yes"
                 })
 
                 .microchipped(switch (((RadioButton) microchipped.getSelectedToggle()).getText()) {
-                    //case "Yes" -> true;
-                    default -> true;
                     case "No" -> false;
+                    default -> true;    //case "Yes"
                 })
 
                 .dewormed(switch (((RadioButton) dewormed.getSelectedToggle()).getText()) {
-                    //case "Yes" -> true;
-                    default -> true;
                     case "No" -> false;
+                    default -> true;    //case "Yes"
                 })
 
                 .sterilized(switch (((RadioButton) sterilized.getSelectedToggle()).getText()) {
-                    //case "Yes" -> true;
-                    default -> true;
                     case "No" -> false;
+                    default -> true;    //case "Yes"
                 })
 
                 .disability(switch (((RadioButton) disability.getSelectedToggle()).getText()) {
-                    //case "Yes" -> true;
-                    default -> true;
                     case "No" -> false;
+                    default -> true;    //case "Yes"
                 })
 
                 .disabilityType(txtDisabilityType.getText())
-                .maleDog(cb_maleDog.isSelected())
-                .femaleDog(cb_femaleDog.isSelected())
-                .maleCat(cb_maleCat.isSelected())
-                .femaleCat(cb_femaleCat.isSelected())
-                .children(cb_children.isSelected())
-                .elders(cb_elders.isSelected())
-                .apartmentNoGarden(cb_apartNoGarden.isSelected())
-                .apartmentNoTerrace(cb_apartNoTerrace.isSelected())
-                .sleepOutside(cb_sleepOut.isSelected())
-                .firstExperience(cb_firstExp.isSelected())
+                .maleDog(cbMaleDog.isSelected())
+                .femaleDog(cbFemaleDog.isSelected())
+                .maleCat(cbMaleCat.isSelected())
+                .femaleCat(cbFemaleCat.isSelected())
+                .children(cbChildren.isSelected())
+                .elders(cbElders.isSelected())
+                .apartmentNoGarden(cbApartNoGarden.isSelected())
+                .apartmentNoTerrace(cbApartNoTerrace.isSelected())
+                .sleepOutside(cbSleepOut.isSelected())
+                .firstExperience(cbFirstExp.isSelected())
                 
                 .hoursAlone(switch (((RadioButton) hoursAlone.getSelectedToggle()).getText()) {
-                    default -> 0;   //case "1-3"
                     case "4-6" -> 1;
                     case "more than 6" -> 2;
+                    default -> 0;   //case "1-3"
                 });
 
 
-        switch (petType) {
-            case 0 -> // DOG
-            {
-                petBean = petBeanBuilder
+        if (petType == 0) { // DOG
+            
+            petBean = petBeanBuilder
 
-                        .size(switch (boxSize.getValue()) {
-                            default -> 0;   //case "Small"
-                            case "Medium" -> 1;
-                            case "Large" -> 2;
-                            case "ExtraLarge" -> 3;
-                        })
+                    .size(switch (boxSize.getValue()) {
+                        case "Medium" -> 1;
+                        case "Large" -> 2;
+                        case "ExtraLarge" -> 3;
+                        default -> 0;   //case "Small"
+                    })
 
-                        .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {
-                            default -> true;    //case "Yes"
-                            case "No" -> false;
-                        })
+                    .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {
+                        case "No" -> false;
+                        default -> true;    //case "Yes"
+                    })
 
-                        .build();
-
-            }
-            case 1 -> // CAT
-            {
-                petBean = petBeanBuilder
-
-                        .testFiv(switch (((RadioButton) testFiv.getSelectedToggle()).getText()) {
-                            case "Positive" -> true;
-                            default -> false;   //case "Negative"
-                        })
-
-                        .testFelv(switch (((RadioButton) testFelv.getSelectedToggle()).getText()) {
-                            case "Positive" -> true;
-                            default -> false;   //case "Negative"
-                        })
-
-                        .build();
-            }
-
+                    .build();
         }
-        addPetController_ = new AddPetController(petBean);
-        addPetController_.addPet();
+        else // CAT
+        {
+            petBean = petBeanBuilder
+
+                    .testFiv(switch (((RadioButton) testFiv.getSelectedToggle()).getText()) {
+                        case "Positive" -> true;
+                        default -> false;   //case "Negative"
+                    })
+
+                    .testFelv(switch (((RadioButton) testFelv.getSelectedToggle()).getText()) {
+                        case "Positive" -> true;
+                        default -> false;   //case "Negative"
+                    })
+
+                    .build();
+        }
+
+        addPetController = new AddPetController(petBean);
+        addPetController.addPet();
         ((Node)event.getSource()).getScene().getWindow().hide();
-
-
     }
 
     public void loadImage(ActionEvent event) throws IOException {
@@ -313,23 +291,23 @@ public class GUIAddPetController {
     public void hideShowYearMonthHBox(ActionEvent event) {
         if (((CheckBox)event.getSource()).isSelected()) {
             datePicker.setValue(null);
-            yearMonth_hBox.getChildren().add(year_vBox);
-            yearMonth_hBox.getChildren().add(month_vBox);
-            typeGender_hBox.setPadding(new Insets(40,0,0,0));
+            yearMonthHBox.getChildren().add(yearVBox);
+            yearMonthHBox.getChildren().add(monthVBox);
+            typeGenderHBox.setPadding(new Insets(40,0,0,0));
         }
         else {
-            yearMonth_hBox.getChildren().remove(year_vBox);
-            yearMonth_hBox.getChildren().remove(month_vBox);
-            typeGender_hBox.setPadding(new Insets(0));
+            yearMonthHBox.getChildren().remove(yearVBox);
+            yearMonthHBox.getChildren().remove(monthVBox);
+            typeGenderHBox.setPadding(new Insets(0));
         }
     }
 
     public void setFullDate(ActionEvent event) {
         if (datePicker.getValue() != null) {
-            cb_noFullDate.setSelected(false);
-            yearMonth_hBox.getChildren().remove(year_vBox);
-            yearMonth_hBox.getChildren().remove(month_vBox);
-            typeGender_hBox.setPadding(new Insets(0));
+            noFullDateCBox.setSelected(false);
+            yearMonthHBox.getChildren().remove(yearVBox);
+            yearMonthHBox.getChildren().remove(monthVBox);
+            typeGenderHBox.setPadding(new Insets(0));
 
         }
     }
@@ -338,23 +316,25 @@ public class GUIAddPetController {
         this.petType = 0;
         boxEducProg.setVisible(true);
         txtEducProg.setVisible(true);
-        if (size_vBox.getChildren().isEmpty())
-            size_vBox.getChildren().addAll(txtSize,boxSize);
-        testFiv_vBox.getChildren().removeAll(testFiv_txt, testFiv_PN);
-        testFelv_vBox.getChildren().removeAll(testFelv_txt, testFelv_PN);
+        if (sizeVBox.getChildren().isEmpty())
+            sizeVBox.getChildren().addAll(txtSize,boxSize);
+        testFivVBox.getChildren().removeAll(testFivTxt, testFivHBox);
+        testFelvVBox.getChildren().removeAll(testFelvTxt, testFelvHBox);
     }
 
     public void setCatType(ActionEvent event) {
         this.petType = 1;
         boxEducProg.setVisible(false);
         txtEducProg.setVisible(false);
-        size_vBox.getChildren().removeAll(txtSize, boxSize);
-        if (testFiv_vBox.getChildren().isEmpty())
-            testFiv_vBox.getChildren().addAll(testFiv_txt, testFiv_PN);
-        if (testFelv_vBox.getChildren().isEmpty())
-            testFelv_vBox.getChildren().addAll(testFelv_txt, testFelv_PN);
+        sizeVBox.getChildren().removeAll(txtSize, boxSize);
+        if (testFivVBox.getChildren().isEmpty())
+            testFivVBox.getChildren().addAll(testFivTxt, testFivHBox);
+        if (testFelvVBox.getChildren().isEmpty())
+            testFelvVBox.getChildren().addAll(testFelvTxt, testFelvHBox);
 
     }
 
-
+    public void setShelterId(ShelterBean shelterBean) {
+        this.shelterId = shelterBean.getShelterId();
+    }
 }

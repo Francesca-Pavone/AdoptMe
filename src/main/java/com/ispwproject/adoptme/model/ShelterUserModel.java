@@ -8,25 +8,25 @@ public abstract class ShelterUserModel {
     private File profileImg;
     private AccountInfo accountInfo;
 
-    public ShelterUserModel(File profileImg, AccountInfo accountInfo) {
+    protected ShelterUserModel(File profileImg, AccountInfo accountInfo) {
         setProfileImg(profileImg);
         setAccountInfo(accountInfo);
     }
 
 
-    public ShelterUserModel(int id) {
+    protected ShelterUserModel(int id) {
         this.id = id;
     }
-    public ShelterUserModel() {}
+    protected ShelterUserModel() {}
 
 
-    public ShelterUserModel(int id, File profileImg, AccountInfo accountInfo) {
+    protected ShelterUserModel(int id, File profileImg, AccountInfo accountInfo) {
         this.id = id;
         this.profileImg = profileImg;
         this.accountInfo = accountInfo;
     }
 
-    public ShelterUserModel(File profileImg) {
+    protected ShelterUserModel(File profileImg) {
         this.profileImg = profileImg;
     }
 
