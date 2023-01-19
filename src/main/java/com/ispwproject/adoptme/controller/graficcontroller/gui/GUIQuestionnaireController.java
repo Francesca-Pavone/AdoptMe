@@ -7,7 +7,6 @@ import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -118,9 +117,9 @@ public class GUIQuestionnaireController {
     @FXML
     private ToggleGroup HoursAloneGroup1;
     @FXML
-    private ToggleGroup PetSizeGroup;
+    private ToggleGroup petSizeGroup;
     @FXML
-    private ToggleGroup PetTypeGroup;
+    private ToggleGroup petTypeGroup;
     @FXML
     private ToggleGroup programEducationGroup;
     @FXML
@@ -610,13 +609,13 @@ public class GUIQuestionnaireController {
 
     public void endQuestionnaire(ActionEvent event) throws Exception {
         GIQuestionnaireResultBean questionnaireResultBean = new GIQuestionnaireResultBean();
-        questionnaireResultBean.setTypeGI(((ToggleButton) PetTypeGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setTypeGI(((ToggleButton) petTypeGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setGenderGI(((ToggleButton) petGenderGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setPuppy(btnPuppy.isSelected());
         questionnaireResultBean.setYoung(btnYoung.isSelected());
         questionnaireResultBean.setAdult(btnAdult.isSelected());
         questionnaireResultBean.setSenior(btnSenior.isSelected());
-        questionnaireResultBean.setSizeGI(((ToggleButton) PetSizeGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setSizeGI(((ToggleButton) petSizeGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setHaveAPetGI(((ToggleButton) alreadyHaveAPetGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setMaleCat(btnMaleCat.isSelected());
         questionnaireResultBean.setFemaleCat(btnFemaleCat.isSelected());
