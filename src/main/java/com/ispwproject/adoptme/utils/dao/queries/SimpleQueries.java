@@ -25,6 +25,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SimpleQueries {
+    //costruttore privato
+    private SimpleQueries() {}
+
     public static ResultSet selectUserById(Statement stmt, int userId) throws SQLException {
         String sql = "SELECT * FROM Users WHERE userId = '" + userId + "';";
         return stmt.executeQuery(sql);
@@ -47,7 +50,6 @@ public class SimpleQueries {
 
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
-        //System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 
@@ -58,12 +60,10 @@ public class SimpleQueries {
 
     public static ResultSet selectDogById(Statement stmt, int dogId, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Dogs JOIN Compatibility ON dogId = petId AND shelter = shelterId WHERE shelter = '" + shelterId + "' and dogId = '" + dogId + "';";
-        //System.out.println(sql);
         return stmt.executeQuery(sql);
     }
     public static ResultSet selectCatById(Statement stmt, int catId, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Cats JOIN Compatibility ON catId = petId AND shelter = shelterId WHERE shelter = '" + shelterId + "' and catId = '" + catId + "';";
-        //System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 

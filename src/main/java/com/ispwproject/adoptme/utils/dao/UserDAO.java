@@ -10,10 +10,13 @@ import java.io.InputStream;
 import java.sql.*;
 
 public class UserDAO {
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    //costruttore privato
+    private UserDAO() {}
+
+    private static String user = "user1";
+    private static String pass = "user1";
+    private static String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static String driverClassName = "com.mysql.cj.jdbc.Driver";
 
 
     public static UserModel retrieveUserById(int userId) throws Exception {
@@ -24,10 +27,10 @@ public class UserDAO {
 
         try {
             // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
+            Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrl, UserDAO.user, pass);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -38,8 +41,7 @@ public class UserDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                Exception e = new Exception("No user find with the id: " + userId);
-                throw e;
+                throw new Exception("No user find with the id: " + userId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -98,10 +100,10 @@ public class UserDAO {
 
         try {
             // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
+            Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrl, UserDAO.user, pass);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -112,8 +114,7 @@ public class UserDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                Exception e = new Exception("No user found with email: " + email);
-                throw e;
+                throw new Exception("No user found with email: " + email);
             }
 
             // Riposiziono il cursore sul primo record del result set
