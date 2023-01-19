@@ -154,21 +154,21 @@ public class GUIPetInfoController {
 
         type.setText(
                 switch (petBean.getType()) {
-                    default -> "Dog";
                     case 1 -> "Cat";
+                    default -> "Dog";
                 }
         );
         gender.setText(
                 switch (petBean.getGender()) {
-                    default -> "Male";
                     case 1 -> "Female";
+                    default -> "Male";
                 }
         );
         coatLenght.setText(
                 switch (petBean.getCoatLenght()) {
-                    default -> "Short";     // case 0
                     case 1 -> "Medium";
                     case 2 -> "Long";
+                    default -> "Short";     // case 0
                 }
         );
 
@@ -179,10 +179,10 @@ public class GUIPetInfoController {
         else {
             size.setText(
                     switch (petBean.getSize()) {
-                        default -> "Small";   //case 0
                         case 1 -> "Medium";
                         case 2 -> "Large";
                         case 3 -> "ExtraLarge";
+                        default -> "Small";   //case 0
                     }
             );
 
@@ -298,15 +298,15 @@ public class GUIPetInfoController {
             fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
 
-            GUIShelterHomepageController shelterHomepageController_g = fxmlLoader.getController();
-            shelterHomepageController_g.setShelterSession((ShelterBean) this.object);
+            GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+            guiShelterHomepageController.setShelterSession((ShelterBean) this.object);
         }
         else {
             fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
 
-            GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
-            userHomepageControllerG.setUserSession((UserBean) object);
+            GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
+            guiUserHomepageController.setUserSession((UserBean) object);
         }
 
         stage.setScene(scene);
@@ -317,8 +317,8 @@ public class GUIPetInfoController {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        GUIShelterInformationController shelterInformationController_g = fxmlLoader.getController();
-        shelterInformationController_g.setData(shelterBean);
+        GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setData(shelterBean);
         stage.setScene(scene);
 
 

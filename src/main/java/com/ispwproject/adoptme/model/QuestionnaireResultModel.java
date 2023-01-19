@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface QuestionnaireResultModel {
     enum Ages {
-        Puppy(0, 1),
-        Young(1, 3),
-        Adult(3, 10),
-        Senior(10, 30);
+        PUPPY(0, 1),
+        YOUNG(1, 3),
+        ADULT(3, 10),
+        SENIOR(10, 30);
 
         private final int i;
         private final int j;

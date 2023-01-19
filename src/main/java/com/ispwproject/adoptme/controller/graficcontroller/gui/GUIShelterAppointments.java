@@ -25,7 +25,6 @@ public class GUIShelterAppointments extends ShelterSideBar {
     private List<RequestModel> pendingRequestList = new ArrayList<>();
     private List<RequestModel> acceptedRequestList = new ArrayList<>();
     private List<RequestModel> doneAppointmentList = new ArrayList<>();
-    private AppointmentRequestDAO appointmentRequestDAO = new AppointmentRequestDAO();
 
     private List<RequestModel> getAcceptedReqList(){
         /*

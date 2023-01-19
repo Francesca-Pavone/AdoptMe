@@ -26,13 +26,13 @@ public class GUIShelterSettingsController extends ShelterSideBar {
     private TextField email;
 
     @FXML
-    private Label email_title;
+    private Label emailTitle;
 
     @FXML
     private TextField name;
 
     @FXML
-    private Label name_title;
+    private Label nameTitle;
 
     @FXML
     private TextField number;
@@ -51,6 +51,7 @@ public class GUIShelterSettingsController extends ShelterSideBar {
         stage.setScene(scene);
     }
 
+    @Override
     public void setShelterSession(ShelterBean shelterBean) throws IOException {
         this.shelterBean = shelterBean;
         loadShelterInfo();
@@ -65,8 +66,8 @@ public class GUIShelterSettingsController extends ShelterSideBar {
             image = new Image(Main.class.getResource("image/photo.png").openStream());
         }
         userImg.setImage(image);
-        name_title.setText(shelterBean.getName());
-        email_title.setText(shelterBean.getEmail());
+        nameTitle.setText(shelterBean.getName());
+        emailTitle.setText(shelterBean.getEmail());
 
         name.setPromptText(shelterBean.getName());
         number.setPromptText(shelterBean.getPhoneNumber());

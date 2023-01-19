@@ -253,10 +253,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="AlreadyHaveAPetGroup" />
+                                          <ToggleGroup fx:id="alreadyHaveAPetGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnDontHaveAPet" mnemonicParsing="false" onAction="#selectDontHaveAPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$AlreadyHaveAPetGroup">
+                                    <ToggleButton fx:id="btnDontHaveAPet" mnemonicParsing="false" onAction="#selectDontHaveAPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$alreadyHaveAPetGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -349,10 +349,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="GardenGroup" />
+                                          <ToggleGroup fx:id="gardenGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoGarden" mnemonicParsing="false" onAction="#selectNoGarden" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$GardenGroup">
+                                    <ToggleButton fx:id="btnNoGarden" mnemonicParsing="false" onAction="#selectNoGarden" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$gardenGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -386,10 +386,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="GardenSleepOutsideGroup" />
+                                          <ToggleGroup fx:id="gardenSleepOutsideGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnGardenDontSleepOutside" mnemonicParsing="false" onAction="#selectGardenDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$GardenSleepOutsideGroup">
+                                    <ToggleButton fx:id="btnGardenDontSleepOutside" mnemonicParsing="false" onAction="#selectGardenDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$gardenSleepOutsideGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -418,10 +418,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="TerraceGroup" />
+                                          <ToggleGroup fx:id="terraceGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoTerrace" mnemonicParsing="false" onAction="#selectNoTerrace" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$TerraceGroup">
+                                    <ToggleButton fx:id="btnNoTerrace" mnemonicParsing="false" onAction="#selectNoTerrace" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$terraceGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -455,10 +455,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="TerraceSleepOutsideGroup" />
+                                          <ToggleGroup fx:id="terraceSleepOutsideGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnTerraceDontSleepOutside" mnemonicParsing="false" onAction="#selectTerraceDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$TerraceSleepOutsideGroup">
+                                    <ToggleButton fx:id="btnTerraceDontSleepOutside" mnemonicParsing="false" onAction="#selectTerraceDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$terraceSleepOutsideGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -531,10 +531,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="FirstPetGroup" />
+                                          <ToggleGroup fx:id="firstPetGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnFirstPet" maxHeight="-Infinity" mnemonicParsing="false" onAction="#selectFirstPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" textFill="WHITE" toggleGroup="$FirstPetGroup">
+                                    <ToggleButton fx:id="btnFirstPet" maxHeight="-Infinity" mnemonicParsing="false" onAction="#selectFirstPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" textFill="WHITE" toggleGroup="$firstPetGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -590,10 +590,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="SterilizePetGroup" />
+                                          <ToggleGroup fx:id="sterilizePetGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoSterilizePet" mnemonicParsing="false" onAction="#selectNoSterilizePet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$SterilizePetGroup">
+                                    <ToggleButton fx:id="btnNoSterilizePet" mnemonicParsing="false" onAction="#selectNoSterilizePet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$sterilizePetGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -627,10 +627,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="ProgramEducationGroup" />
+                                          <ToggleGroup fx:id="programEducationGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoProgramEducation" mnemonicParsing="false" onAction="#selectNoProgramEducation" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$ProgramEducationGroup">
+                                    <ToggleButton fx:id="btnNoProgramEducation" mnemonicParsing="false" onAction="#selectNoProgramEducation" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$programEducationGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -664,10 +664,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="DisabledPetGroup" />
+                                          <ToggleGroup fx:id="disabledPetGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoDisabledPet" mnemonicParsing="false" onAction="#selectNoDisabledPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$DisabledPetGroup">
+                                    <ToggleButton fx:id="btnNoDisabledPet" mnemonicParsing="false" onAction="#selectNoDisabledPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$disabledPetGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
@@ -701,10 +701,10 @@
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="SpecificAreaGroup" />
+                                          <ToggleGroup fx:id="specificAreaGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoSpecificArea" mnemonicParsing="false" onAction="#selectNoSpecificArea" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" textFill="WHITE" toggleGroup="$SpecificAreaGroup">
+                                    <ToggleButton fx:id="btnNoSpecificArea" mnemonicParsing="false" onAction="#selectNoSpecificArea" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" textFill="WHITE" toggleGroup="$specificAreaGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>

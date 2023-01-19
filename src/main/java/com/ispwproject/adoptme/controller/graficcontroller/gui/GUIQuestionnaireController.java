@@ -21,9 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GUIQuestionnaireController {
-    private static int petType;
-    private static Scene sceneExitQuestionnaire;
-
     @FXML
     private ToggleButton btnDog;
     @FXML
@@ -108,107 +105,76 @@ public class GUIQuestionnaireController {
     private ToggleButton btnExtraLarge;
     @FXML
     private TextField cityTextField;
-
     @FXML
-    private ToggleGroup AlreadyHaveAPetGroup;
-
+    private ToggleGroup alreadyHaveAPetGroup;
     @FXML
-    private ToggleGroup DisabledPetGroup;
-
+    private ToggleGroup disabledPetGroup;
     @FXML
-    private ToggleGroup FirstPetGroup;
-
+    private ToggleGroup firstPetGroup;
     @FXML
-    private ToggleGroup GardenGroup;
-
+    private ToggleGroup gardenGroup;
     @FXML
-    private ToggleGroup GardenSleepOutsideGroup;
-
+    private ToggleGroup gardenSleepOutsideGroup;
     @FXML
     private ToggleGroup HoursAloneGroup1;
-
     @FXML
     private ToggleGroup PetSizeGroup;
-
     @FXML
     private ToggleGroup PetTypeGroup;
-
     @FXML
-    private ToggleGroup ProgramEducationGroup;
-
+    private ToggleGroup programEducationGroup;
     @FXML
-    private ToggleGroup SpecificAreaGroup;
-
+    private ToggleGroup specificAreaGroup;
     @FXML
-    private ToggleGroup SterilizePetGroup;
-
+    private ToggleGroup sterilizePetGroup;
     @FXML
-    private ToggleGroup TerraceGroup;
-
+    private ToggleGroup terraceGroup;
     @FXML
-    private ToggleGroup TerraceSleepOutsideGroup;
-
+    private ToggleGroup terraceSleepOutsideGroup;
     @FXML
     private ToggleGroup petGenderGroup;
-
     @FXML
     private VBox vboxAlreadyHaveAPet;
-
     @FXML
     private VBox vboxCity;
-
     @FXML
     private VBox vboxDisabledPet;
-
     @FXML
     private VBox vboxFirstPet;
-
     @FXML
     private VBox vboxGarden;
-
     @FXML
     private VBox vboxGardenSleepOutside;
-
     @FXML
     private VBox vboxGeographicalArea;
-
     @FXML
     private VBox vboxHoursAlone;
-
     @FXML
     private VBox vboxParent;
-
     @FXML
     private VBox vboxPetAge;
-
     @FXML
     private VBox vboxPetAlreadyHave;
-
     @FXML
     private VBox vboxPetGender;
-
     @FXML
     private VBox vboxProgramEducation;
-
     @FXML
     private VBox vboxSelectPetType;
-
     @FXML
     private VBox vboxSterilizePet;
-
     @FXML
     private VBox vboxTerrace;
-
     @FXML
     private VBox vboxTerraceSleepOutside;
-
     @FXML
     private VBox vboxDogSize;
-
-    List<VBox> vboxList = new ArrayList<>();
-
     @FXML
     private Button btnEndQuestionnaire;
+
+    List<VBox> vboxList = new ArrayList<>();
+    private int petType;
+
 
     private UserBean userBean;
 
@@ -627,19 +593,17 @@ public class GUIQuestionnaireController {
             vboxParent.getChildren().add(btnEndQuestionnaire);
     }
 
-    public static Scene getSceneExitQuestionnaire() {return sceneExitQuestionnaire;}
-    public void setSceneExitQuestionnaire(Scene type) {sceneExitQuestionnaire = type;}
+
 
     public void goBack(ActionEvent event) throws IOException {
-            setSceneExitQuestionnaire(((Node)event.getSource()).getScene());
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
             FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
             Scene scene1 = new Scene(fxmlLoader.load());
 
-            GUIConfirmExitQuestionnaireController GUIConfirmExitQuestionnaireController_ = fxmlLoader.getController();
-            GUIConfirmExitQuestionnaireController_.setUserSession(this.userBean);
+            GUIConfirmExitQuestionnaireController guiConfirmExitQuestionnaireController = fxmlLoader.getController();
+            guiConfirmExitQuestionnaireController.setUserSession(this.userBean);
             dialog.setScene(scene1);
             dialog.show();
     }
@@ -653,24 +617,24 @@ public class GUIQuestionnaireController {
         questionnaireResultBean.setAdult(btnAdult.isSelected());
         questionnaireResultBean.setSenior(btnSenior.isSelected());
         questionnaireResultBean.setSizeGI(((ToggleButton) PetSizeGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setHaveAPetGI(((ToggleButton) AlreadyHaveAPetGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setHaveAPetGI(((ToggleButton) alreadyHaveAPetGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setMaleCat(btnMaleCat.isSelected());
         questionnaireResultBean.setFemaleCat(btnFemaleCat.isSelected());
         questionnaireResultBean.setMaleDog(btnMaleDog.isSelected());
         questionnaireResultBean.setFemaleDog(btnFemaleDog.isSelected());
-        questionnaireResultBean.setHaveAGardenGI(((ToggleButton) GardenGroup.getSelectedToggle()).getText());
-        if (GardenSleepOutsideGroup.getSelectedToggle() != null)
-            questionnaireResultBean.setGardenSleepOutsideGI(((ToggleButton) GardenSleepOutsideGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setHaveATerraceGI(((ToggleButton) TerraceGroup.getSelectedToggle()).getText());
-        if(TerraceSleepOutsideGroup.getSelectedToggle() != null)
-            questionnaireResultBean.setTerraceSleepOutsideGI(((ToggleButton) TerraceSleepOutsideGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setHaveAGardenGI(((ToggleButton) gardenGroup.getSelectedToggle()).getText());
+        if (gardenSleepOutsideGroup.getSelectedToggle() != null)
+            questionnaireResultBean.setGardenSleepOutsideGI(((ToggleButton) gardenSleepOutsideGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setHaveATerraceGI(((ToggleButton) terraceGroup.getSelectedToggle()).getText());
+        if(terraceSleepOutsideGroup.getSelectedToggle() != null)
+            questionnaireResultBean.setTerraceSleepOutsideGI(((ToggleButton) terraceSleepOutsideGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setHoursAloneGI(((ToggleButton) HoursAloneGroup1.getSelectedToggle()).getText());
-        questionnaireResultBean.setFirstPetGI(((ToggleButton) FirstPetGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setSterilizePetGI(((ToggleButton) SterilizePetGroup.getSelectedToggle()).getText());
-        if(ProgramEducationGroup.getSelectedToggle() != null)
-            questionnaireResultBean.setProgramEducationGI(((ToggleButton) ProgramEducationGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setDisabledPetGI(((ToggleButton) DisabledPetGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setSpecificAreaGI(((ToggleButton) SpecificAreaGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setFirstPetGI(((ToggleButton) firstPetGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setSterilizePetGI(((ToggleButton) sterilizePetGroup.getSelectedToggle()).getText());
+        if(programEducationGroup.getSelectedToggle() != null)
+            questionnaireResultBean.setProgramEducationGI(((ToggleButton) programEducationGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setDisabledPetGI(((ToggleButton) disabledPetGroup.getSelectedToggle()).getText());
+        questionnaireResultBean.setSpecificAreaGI(((ToggleButton) specificAreaGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setCity(cityTextField.getText());
 
         QuestionnaireResultController questionnaireResultControllerA = new QuestionnaireResultController();
@@ -679,8 +643,8 @@ public class GUIQuestionnaireController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        GUIQuestionnaireResultController questionnaireResultPageController_g = fxmlLoader.getController();
-        questionnaireResultPageController_g.setUserSession(this.userBean);
+        GUIQuestionnaireResultController guiQuestionnaireResultController = fxmlLoader.getController();
+        guiQuestionnaireResultController.setUserSession(this.userBean);
         stage.setScene(scene);
         }
 }
