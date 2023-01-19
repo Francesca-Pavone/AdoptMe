@@ -115,7 +115,7 @@ public class GUIQuestionnaireController {
     @FXML
     private ToggleGroup gardenSleepOutsideGroup;
     @FXML
-    private ToggleGroup HoursAloneGroup1;
+    private ToggleGroup hoursAloneGroup1;
     @FXML
     private ToggleGroup petSizeGroup;
     @FXML
@@ -627,7 +627,7 @@ public class GUIQuestionnaireController {
         questionnaireResultBean.setHaveATerraceGI(((ToggleButton) terraceGroup.getSelectedToggle()).getText());
         if(terraceSleepOutsideGroup.getSelectedToggle() != null)
             questionnaireResultBean.setTerraceSleepOutsideGI(((ToggleButton) terraceSleepOutsideGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setHoursAloneGI(((ToggleButton) HoursAloneGroup1.getSelectedToggle()).getText());
+        questionnaireResultBean.setHoursAloneGI(((ToggleButton) hoursAloneGroup1.getSelectedToggle()).getText());
         questionnaireResultBean.setFirstPetGI(((ToggleButton) firstPetGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setSterilizePetGI(((ToggleButton) sterilizePetGroup.getSelectedToggle()).getText());
         if(programEducationGroup.getSelectedToggle() != null)
