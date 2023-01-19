@@ -10,7 +10,6 @@ import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 import com.ispwproject.adoptme.utils.dao.UserDAO;
 import com.ispwproject.adoptme.utils.session.Session;
 
-import java.sql.SQLException;
 
 public class LoginController {
 
