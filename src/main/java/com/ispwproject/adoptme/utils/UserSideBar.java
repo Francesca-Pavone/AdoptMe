@@ -1,9 +1,9 @@
 package com.ispwproject.adoptme.utils;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIUserFavoritesController;
-import com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIUserHomepageController;
-import com.ispwproject.adoptme.controller.graficcontroller.GUI.GUIUserSettingsController;
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController;
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserHomepageController;
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserSettingsController;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
