@@ -10,10 +10,13 @@ import java.io.InputStream;
 import java.sql.*;
 
 public class DogDAO {
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    //costruttore Privato
+    private DogDAO() {}
+
+    private static final String user = "user1";
+    private static final String pass = "user1";
+    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
 
 
     public static DogModel retrieveDogById(int dogId, int shelterId)  throws Exception {
@@ -24,10 +27,10 @@ public class DogDAO {
 
         try {
             // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
+            Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrl, user, pass);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -38,8 +41,7 @@ public class DogDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                Exception e = new Exception("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
-                throw e;
+                throw new Exception("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -110,10 +112,10 @@ public class DogDAO {
 
         try {
             // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
+            Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrl, user, pass);
 
 
             // STEP 4.1: creazione ed esecuzione della query

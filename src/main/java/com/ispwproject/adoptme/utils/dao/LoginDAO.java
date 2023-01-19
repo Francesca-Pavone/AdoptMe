@@ -6,12 +6,15 @@ import java.io.*;
 import java.sql.*;
 
 public class LoginDAO {
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    //costruttore privato
+    public LoginDAO() {}
 
-    public static int checkLogin(String email, String password) throws ClassNotFoundException, SQLException {
+    private static final String user = "user1";
+    private static final String pass = "user1";
+    private static final String dbUrl = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
+
+    public static int checkLogin(String email, String password) {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         Connection conn = null;
@@ -19,10 +22,10 @@ public class LoginDAO {
         int type = 0;
         try {
             // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
+            Class.forName(driverClassName);
 
             // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(dbUrl, user, pass);
 
             // STEP 4: creazione ed esecuzione della query
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -33,8 +36,7 @@ public class LoginDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                Exception e = new Exception("No user founds with "+ email);
-                throw e;
+                throw new Exception("No user founds with "+ email);
             }
 
             resultSet.next();
@@ -46,10 +48,6 @@ public class LoginDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
