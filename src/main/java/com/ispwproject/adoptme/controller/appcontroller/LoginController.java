@@ -10,11 +10,10 @@ import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 import com.ispwproject.adoptme.utils.dao.UserDAO;
 import com.ispwproject.adoptme.utils.session.Session;
 
-import java.sql.SQLException;
 
 public class LoginController {
 
-    public void checkLogin(LoginBean loginBean) throws SQLException, ClassNotFoundException {
+    public void checkLogin(LoginBean loginBean) {
         int type = LoginDAO.checkLogin(loginBean.getEmail(), loginBean.getPassword());
         loginBean.setAccountType(type);
     }

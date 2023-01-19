@@ -22,13 +22,13 @@ public class QuestionnaireAdapter implements QuestionnaireResultModel {
     public List<Ages> returnAges() {
         List<Ages> agesList = new ArrayList<>();
         if(this.puppy)
-            agesList.add(Ages.Puppy);
+            agesList.add(Ages.PUPPY);
         if(this.young)
-            agesList.add(Ages.Young);
+            agesList.add(Ages.YOUNG);
         if (this.adult)
-            agesList.add(Ages.Adult);
+            agesList.add(Ages.ADULT);
         if (this.senior)
-            agesList.add(Ages.Senior);
+            agesList.add(Ages.SENIOR);
         return agesList;
     }
 

@@ -10,10 +10,13 @@ import java.io.InputStream;
 import java.sql.*;
 
 public class CatDAO {
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    //Costruttore privato
+    private CatDAO() {}
+
+    private static final String USER = "user1";
+    private static final String PASS = "user1";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
+    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
     public static CatModel retrieveCatById(int catId, int shelterId)  throws Exception {
         // STEP 1: dichiarazioni
@@ -37,8 +40,7 @@ public class CatDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                Exception e = new Exception("Cat with the id " + catId + " NOT found for the shelter with id: "+shelterId);
-                throw e;
+                throw new Exception("Cat with the id " + catId + " NOT found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set

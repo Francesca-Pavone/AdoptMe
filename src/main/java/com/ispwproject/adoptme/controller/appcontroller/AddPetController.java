@@ -9,7 +9,7 @@ import com.ispwproject.adoptme.utils.dao.DogDAO;
 
 public class AddPetController {
 
-    private PetBean petBean;
+    private final PetBean petBean;
 
     public AddPetController(PetBean petBean) {
         this.petBean = petBean;
@@ -17,7 +17,6 @@ public class AddPetController {
 
     public void addPet() throws Exception {
 
-        //Factory factory = new Factory();
         ShelterModel shelter = new ShelterModel(1);
 
         if (petBean.getType() == 0) {

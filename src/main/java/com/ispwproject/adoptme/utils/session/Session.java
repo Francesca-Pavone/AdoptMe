@@ -1,11 +1,7 @@
 package com.ispwproject.adoptme.utils.session;
 
-import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.dao.ShelterDAO;
-import com.ispwproject.adoptme.utils.dao.UserDAO;
 
 public class Session {
 
