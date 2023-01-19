@@ -39,7 +39,7 @@
                <Insets top="-10.0" />
             </VBox.margin>
          </ImageView>
-         <Label fx:id="name_title" text="Aron">
+         <Label fx:id="nameTitle" text="Aron">
             <font>
                <Font name="Arial Black" size="24.0" />
             </font>
@@ -47,14 +47,14 @@
                <Insets bottom="20.0" top="10.0" />
             </VBox.margin>
          </Label>
-         <HBox fx:id="info_hBox" alignment="TOP_CENTER" spacing="150.0">
+         <HBox fx:id="infoHBox" alignment="TOP_CENTER" spacing="150.0">
             <VBox.margin>
                <Insets />
             </VBox.margin>
             <children>
                <ScrollPane hbarPolicy="NEVER" styleClass="transparent" vbarPolicy="NEVER">
                   <content>
-                     <VBox fx:id="petInfo_vBox" spacing="15.0">
+                     <VBox fx:id="petInfoVBox" spacing="15.0">
                         <children>
                            <HBox alignment="CENTER_LEFT" spacing="7.0">
                               <children>
@@ -70,7 +70,7 @@
                                  </Label>
                               </children>
                            </HBox>
-                           <HBox fx:id="date_box" alignment="CENTER_LEFT" spacing="5.0">
+                           <HBox fx:id="dateBox" alignment="CENTER_LEFT" spacing="5.0">
                               <children>
                                  <Label text="Date of birth:">
                                     <font>
@@ -146,7 +146,7 @@
                                  </Label>
                               </children>
                            </HBox>
-                           <HBox fx:id="size_box" alignment="CENTER_LEFT" layoutX="10.0" layoutY="162.0" spacing="7.0">
+                           <HBox fx:id="sizeBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="162.0" spacing="7.0">
                               <children>
                                  <Label text="Size:">
                                     <font>
@@ -213,7 +213,7 @@
                                  <Insets left="30.0" />
                               </VBox.margin>
                            </Label>
-                           <HBox fx:id="disability_box" alignment="CENTER_LEFT">
+                           <HBox fx:id="disabilityBox" alignment="CENTER_LEFT">
                               <children>
                                  <Label fx:id="disability" text="Disability">
                                     <font>
@@ -256,7 +256,7 @@
                                  <Font name="Arial Bold" size="20.0" />
                               </font>
                            </Label>
-                           <VBox fx:id="compatibility_vBox" spacing="15.0">
+                           <VBox fx:id="compatibilityVBox" spacing="15.0">
                               <VBox.margin>
                                  <Insets left="30.0" />
                               </VBox.margin>
@@ -268,7 +268,7 @@
                      </VBox>
                   </content>
                </ScrollPane>
-               <VBox fx:id="request_vBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="340.0" spacing="10.0" styleClass="request-box">
+               <VBox fx:id="requestVBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="340.0" spacing="10.0" styleClass="request-box">
                   <children>
                      <HBox alignment="CENTER">
                         <children>
@@ -280,7 +280,7 @@
                                  <Insets right="5.0" />
                               </HBox.margin>
                            </Label>
-                           <Label fx:id="name_req" text="Aron">
+                           <Label fx:id="nameReq" text="Aron">
                               <font>
                                  <Font name="Arial Black" size="20.0" />
                               </font>
@@ -297,7 +297,7 @@
                                  <Font name="Arial Bold" size="18.0" />
                               </font>
                            </Label>
-                           <Button fx:id="shelter_btn" mnemonicParsing="false" onAction="#goToShelterPage" styleClass="transparent" text="Pensieri Bestiali" textFill="#c89c32" underline="true">
+                           <Button fx:id="shelterBtn" mnemonicParsing="false" onAction="#goToShelterPage" styleClass="transparent" text="Pensieri Bestiali" textFill="#c89c32" underline="true">
                               <font>
                                  <Font name="Arial Bold" size="20.0" />
                               </font>

@@ -241,24 +241,22 @@ public class GUIAddPetController {
 
 
         if (petType == 0) { // DOG
-            {
-                petBean = petBeanBuilder
+            
+            petBean = petBeanBuilder
 
-                        .size(switch (boxSize.getValue()) {
-                            case "Medium" -> 1;
-                            case "Large" -> 2;
-                            case "ExtraLarge" -> 3;
-                            default -> 0;   //case "Small"
-                        })
+                    .size(switch (boxSize.getValue()) {
+                        case "Medium" -> 1;
+                        case "Large" -> 2;
+                        case "ExtraLarge" -> 3;
+                        default -> 0;   //case "Small"
+                    })
 
-                        .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {
-                            case "No" -> false;
-                            default -> true;    //case "Yes"
-                        })
+                    .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {
+                        case "No" -> false;
+                        default -> true;    //case "Yes"
+                    })
 
-                        .build();
-
-            }
+                    .build();
         }
         else // CAT
         {
