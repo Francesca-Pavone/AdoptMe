@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
@@ -21,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ShelterItemController_G {
+public class GUIShelterItemController {
     @FXML
     private Label shelterName;
     @FXML
@@ -62,7 +62,7 @@ public class ShelterItemController_G {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        ShelterInformationControllerG shelterInformationController_g = fxmlLoader.getController();
+        GUIShelterInformationController shelterInformationController_g = fxmlLoader.getController();
         shelterInformationController_g.setSessionData(this.userBean);
         shelterInformationController_g.setData(shelterBean);
 

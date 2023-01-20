@@ -1,7 +1,7 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController_A;
+import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController;
 import com.ispwproject.adoptme.utils.bean.GI.GIQuestionnaireResultBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionnaireController {
+public class GUIQuestionnaireController {
     private static int petType;
     private static Scene sceneExitQuestionnaire;
 
@@ -638,8 +638,8 @@ public class QuestionnaireController {
             FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
             Scene scene1 = new Scene(fxmlLoader.load());
 
-            ConfirmExitQuestionnaireController_G confirmExitQuestionnaireController_g = fxmlLoader.getController();
-            confirmExitQuestionnaireController_g.setUserSession(this.userBean);
+            GUIConfirmExitQuestionnaireController GUIConfirmExitQuestionnaireController_ = fxmlLoader.getController();
+            GUIConfirmExitQuestionnaireController_.setUserSession(this.userBean);
             dialog.setScene(scene1);
             dialog.show();
     }
@@ -673,13 +673,13 @@ public class QuestionnaireController {
         questionnaireResultBean.setSpecificAreaGI(((ToggleButton) SpecificAreaGroup.getSelectedToggle()).getText());
         questionnaireResultBean.setCity(cityTextField.getText());
 
-        QuestionnaireResultController_A questionnaireResultControllerA = new QuestionnaireResultController_A();
+        QuestionnaireResultController questionnaireResultControllerA = new QuestionnaireResultController();
         questionnaireResultControllerA.findPets(questionnaireResultBean);
         Stage stage = (Stage) btnEndQuestionnaire.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        QuestionnaireResultPageController_G questionnaireResultPageController_g = fxmlLoader.getController();
+        GUIQuestionnaireResultController questionnaireResultPageController_g = fxmlLoader.getController();
         questionnaireResultPageController_g.setUserSession(this.userBean);
         stage.setScene(scene);
         }

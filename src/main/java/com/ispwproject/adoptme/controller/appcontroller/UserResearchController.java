@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserResearchController_A {
+public class UserResearchController {
 
     public List<PetBean> searchShelter(String shelterName) throws Exception {
         List<PetBean> petList = new ArrayList<>();

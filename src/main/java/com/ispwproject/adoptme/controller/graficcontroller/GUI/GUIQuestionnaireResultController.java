@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.guicontroller;
+package com.ispwproject.adoptme.controller.graficcontroller.GUI;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.UserBean;
@@ -8,14 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-public class QuestionnaireResultPageController_G {
+public class GUIQuestionnaireResultController {
 
     @FXML
     private GridPane grid;
@@ -33,8 +31,8 @@ public class QuestionnaireResultPageController_G {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());
 
-        ConfirmExitQuestionnaireController_G confirmExitQuestionnaireController_g = fxmlLoader.getController();
-        confirmExitQuestionnaireController_g.setUserSession(this.userBean);
+        GUIConfirmExitQuestionnaireController GUIConfirmExitQuestionnaireController_ = fxmlLoader.getController();
+        GUIConfirmExitQuestionnaireController_.setUserSession(this.userBean);
         dialog.setScene(scene1);
         dialog.show();
     }
