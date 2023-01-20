@@ -8,7 +8,6 @@ public class QuestionnaireResultBean {
     protected boolean adult;
     protected boolean senior;
     protected int size; //0 -> small | 1 -> medium | 2 -> large | 3 -> extra large
-    protected boolean haveAPet; // 0 -> no | 1 -> yes
     protected boolean maleCat;
     protected boolean femaleCat;
     protected boolean maleDog;
@@ -22,8 +21,9 @@ public class QuestionnaireResultBean {
     protected boolean sterilizePet; // 0 -> no | 1 -> yes
     protected boolean programEducation; // 0 -> no | 1 -> yes
     protected boolean disabledPet; // 0 -> no | 1 -> yes
-    protected boolean specificArea; // 0 -> no | 1 -> yes
     protected String city;
+
+
 
     //Costruttore vuoto
     public QuestionnaireResultBean() {}
@@ -82,14 +82,6 @@ public class QuestionnaireResultBean {
 
     public void setSenior(boolean senior) {
         this.senior = senior;
-    }
-
-    public boolean isHaveAPet() {
-        return haveAPet;
-    }
-
-    public void setHaveAPet(boolean haveAPet) {
-        this.haveAPet = haveAPet;
     }
 
     public boolean isMaleCat() {
@@ -194,14 +186,6 @@ public class QuestionnaireResultBean {
 
     public void setDisabledPet(boolean disabledPet) {
         this.disabledPet = disabledPet;
-    }
-
-    public boolean isSpecificArea() {
-        return specificArea;
-    }
-
-    public void setSpecificArea(boolean specificArea) {
-        this.specificArea = specificArea;
     }
 
     public String getCity() {

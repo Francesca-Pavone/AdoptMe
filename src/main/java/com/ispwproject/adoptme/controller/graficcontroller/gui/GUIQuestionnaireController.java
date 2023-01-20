@@ -1,9 +1,11 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
+
 import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController;
-import com.ispwproject.adoptme.utils.bean.GI.GIQuestionnaireResultBean;
+import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.builder.QuestionnaireResultBeanBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -174,8 +176,10 @@ public class GUIQuestionnaireController {
     List<VBox> vboxList = new ArrayList<>();
     private int petType;
 
-
     private UserBean userBean;
+    @FXML
+    private ToggleButton btnSizeNotImportant;
+
 
     public void setUserSession(UserBean userBean) {
         this.userBean = userBean;
@@ -334,6 +338,18 @@ public class GUIQuestionnaireController {
         else if(!btnSmall.isSelected()) {
             btnExtraLarge.setSelected(true);
         }
+    }
+
+    public void selectSizeNotImportant() {
+        if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnSizeNotImportant.isSelected())
+            vboxParent.getChildren().add(vboxAlreadyHaveAPet);
+        else if(!btnSmall.isSelected() && !btnMedium.isSelected() && !btnLarge.isSelected() && !btnExtraLarge.isSelected() && !btnSizeNotImportant.isSelected()) {
+            btnSizeNotImportant.setSelected(true);
+        }
+        btnSmall.setSelected(false);
+        btnMedium.setSelected(false);
+        btnLarge.setSelected(false);
+        btnExtraLarge.setSelected(false);
     }
 
     public void selectHaveAPet() {
@@ -593,7 +609,7 @@ public class GUIQuestionnaireController {
     }
 
 
-
+//todo: non aprire dialog MA nello stesso stage
     public void goBack(ActionEvent event) throws IOException {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
@@ -608,36 +624,86 @@ public class GUIQuestionnaireController {
     }
 
     public void endQuestionnaire(ActionEvent event) throws Exception {
-        GIQuestionnaireResultBean questionnaireResultBean = new GIQuestionnaireResultBean();
-        questionnaireResultBean.setTypeGI(((ToggleButton) petTypeGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setGenderGI(((ToggleButton) petGenderGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setPuppy(btnPuppy.isSelected());
-        questionnaireResultBean.setYoung(btnYoung.isSelected());
-        questionnaireResultBean.setAdult(btnAdult.isSelected());
-        questionnaireResultBean.setSenior(btnSenior.isSelected());
-        questionnaireResultBean.setSizeGI(((ToggleButton) petSizeGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setHaveAPetGI(((ToggleButton) alreadyHaveAPetGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setMaleCat(btnMaleCat.isSelected());
-        questionnaireResultBean.setFemaleCat(btnFemaleCat.isSelected());
-        questionnaireResultBean.setMaleDog(btnMaleDog.isSelected());
-        questionnaireResultBean.setFemaleDog(btnFemaleDog.isSelected());
-        questionnaireResultBean.setHaveAGardenGI(((ToggleButton) gardenGroup.getSelectedToggle()).getText());
-        if (gardenSleepOutsideGroup.getSelectedToggle() != null)
-            questionnaireResultBean.setGardenSleepOutsideGI(((ToggleButton) gardenSleepOutsideGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setHaveATerraceGI(((ToggleButton) terraceGroup.getSelectedToggle()).getText());
-        if(terraceSleepOutsideGroup.getSelectedToggle() != null)
-            questionnaireResultBean.setTerraceSleepOutsideGI(((ToggleButton) terraceSleepOutsideGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setHoursAloneGI(((ToggleButton) hoursAloneGroup1.getSelectedToggle()).getText());
-        questionnaireResultBean.setFirstPetGI(((ToggleButton) firstPetGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setSterilizePetGI(((ToggleButton) sterilizePetGroup.getSelectedToggle()).getText());
-        if(programEducationGroup.getSelectedToggle() != null)
-            questionnaireResultBean.setProgramEducationGI(((ToggleButton) programEducationGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setDisabledPetGI(((ToggleButton) disabledPetGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setSpecificAreaGI(((ToggleButton) specificAreaGroup.getSelectedToggle()).getText());
-        questionnaireResultBean.setCity(cityTextField.getText());
 
-        QuestionnaireResultController questionnaireResultControllerA = new QuestionnaireResultController();
-        questionnaireResultControllerA.findPets(questionnaireResultBean);
+        boolean haveAGarden = switch (((ToggleButton)gardenGroup.getSelectedToggle()).getText()) {
+            case "Yes" -> true;
+            default -> false;
+        };
+        boolean haveATerrace = switch (((ToggleButton)terraceGroup.getSelectedToggle()).getText()) {
+            case "Yes" -> true;
+            default -> false;
+        };
+
+        QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder = QuestionnaireResultBeanBuilder.newQuestionnaireResultBean()
+                .type(petType)
+                .gender(switch (((ToggleButton) petGenderGroup.getSelectedToggle()).getText()) {
+                            case "Female" -> 1;
+                            default -> 0;
+                        })
+                .haveAGarden(haveAGarden)
+                .haveATerrace(haveATerrace)
+                .hoursAlone(switch (((ToggleButton) hoursAloneGroup1.getSelectedToggle()).getText()) {
+                    case "4 - 6 hours" -> 1;
+                    case "More than 6 hours" -> 2;
+                    default -> 0;
+                })
+                .firstPet(switch (((ToggleButton) firstPetGroup.getSelectedToggle()).getText()) {
+                    case "No" -> false;
+                    default -> true;
+                })
+                .sterilizePet(switch (((ToggleButton) sterilizePetGroup.getSelectedToggle()).getText()) {
+                    case "Yes" -> true;
+                    default -> false;
+                })
+                .disabledPet(switch (((ToggleButton) disabledPetGroup.getSelectedToggle()).getText()) {
+                    case "Yes" -> true;
+                    default -> false;
+                });
+        if(petType == 0) {
+            questionnaireResultBeanBuilder.programEducation(switch (((ToggleButton) programEducationGroup.getSelectedToggle()).getText()) {
+                case "No" -> false;
+                default -> true;
+            });
+            if(!btnSizeNotImportant.isSelected()) {
+                questionnaireResultBeanBuilder.size(switch (((ToggleButton) petSizeGroup.getSelectedToggle()).getText()) {
+                    case "Medium" -> 1;
+                    case "Large" -> 2;
+                    case "Extra Large" -> 3;
+                    default -> 0;
+                });
+            }
+        }
+        if(!btnAgeNotImportant.isSelected()) {
+            questionnaireResultBeanBuilder.puppy(btnPuppy.isSelected())
+                    .young(btnYoung.isSelected())
+                    .adult(btnAdult.isSelected())
+                    .senior(btnSenior.isSelected());
+        }
+        if(btnHaveAPet.isSelected()) {
+            questionnaireResultBeanBuilder.maleCat(btnMaleCat.isSelected())
+                    .femaleCat(btnFemaleCat.isSelected())
+                    .maleDog(btnMaleDog.isSelected())
+                    .femaleDog(btnFemaleDog.isSelected());
+        }
+        if(haveAGarden) {
+            questionnaireResultBeanBuilder.gardenSleepOutside(switch (((ToggleButton) gardenSleepOutsideGroup.getSelectedToggle()).getText()) {
+                case "Yes" -> true;
+                default -> false;
+            });
+        }
+        if(haveATerrace) {
+            questionnaireResultBeanBuilder.gardenSleepOutside(switch (((ToggleButton) terraceSleepOutsideGroup.getSelectedToggle()).getText()) {
+                case "Yes" -> true;
+                default -> false;
+            });
+        }
+        if(btnSpecificArea.isSelected()) {
+            questionnaireResultBeanBuilder.city(cityTextField.getText());
+        }
+
+        QuestionnaireResultBean questionnaireResultBean = questionnaireResultBeanBuilder.build();
+
+        //questionnaireResultControllerA.findPets(questionnaireResultBean);
         Stage stage = (Stage) btnEndQuestionnaire.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

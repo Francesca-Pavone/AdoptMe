@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIQuestionnaireController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIQuestionnaireController">
    <children>
       <VBox prefHeight="710.0" prefWidth="1100.0">
          <children>
@@ -226,7 +226,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <ToggleButton fx:id="btnAgeNotImportant1" mnemonicParsing="false" onAction="#selectAgeNotImportant" prefHeight="70.0" prefWidth="267.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" text="Not important" textFill="WHITE" toggleGroup="$petSizeGroup">
+                              <ToggleButton fx:id="btnSizeNotImportant" mnemonicParsing="false" onAction="#selectSizeNotImportant" prefHeight="70.0" prefWidth="267.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" text="Not important" textFill="WHITE" toggleGroup="$petSizeGroup">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
