@@ -4,11 +4,6 @@ public class AppointmentRequestDAO {
     //Costruttore privato
     private AppointmentRequestDAO() {}
 
-    private static final String USER = "user1";
-    private static final String PASS = "user1";
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
-
     /*
     public List<AppointmentRequestModel> retreiveReqByShelterId(int shelterId) throws Exception {
         // STEP 1: dichiarazioni

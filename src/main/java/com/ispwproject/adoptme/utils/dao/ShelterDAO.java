@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.AccountInfo;
+import com.ispwproject.adoptme.utils.connection.ConnectionDB;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.File;
@@ -13,12 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterDAO {
-
-    private static final String USER = "user1";
-    private static final String PASS = "user1";
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
-
     private static final String PHOTO = "Photo";
     private static final String ADDRESS = "address";
     private static final String WEB_SITE = "webSite";
@@ -33,15 +28,9 @@ public class ShelterDAO {
 
     public static List<ShelterModel> retrieveShelterByCity(String city) throws Exception {
         Statement stmt = null;
-        Connection conn = null;
         List<ShelterModel> sheltersList = new ArrayList<>();
         try {
-            Class.forName(DRIVER_CLASS_NAME);
-
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = ConnectionDB.getConnection();
 
             ResultSet resultSet = SimpleQueries.searchSheltersByCity(stmt, city);
 
@@ -86,7 +75,12 @@ public class ShelterDAO {
 
             resultSet.close();
 
-        } finally {
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        /*
+        finally {
             try {
                 if (stmt != null)
                     stmt.close();
@@ -101,21 +95,17 @@ public class ShelterDAO {
             }
         }
 
+         */
+
         return sheltersList;
     }
 
     public static int retrieveIdByShelterName(String shelterName ) throws Exception {
         Statement stmt = null;
-        Connection conn = null;
 
         int shelterId = -1;
         try {
-            Class.forName(DRIVER_CLASS_NAME);
-
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = ConnectionDB.getConnection();
 
             ResultSet resultSet = SimpleQueries.selectSheltersByName(stmt, shelterName);
 
@@ -128,19 +118,9 @@ public class ShelterDAO {
 
             resultSet.close();
 
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return shelterId;
@@ -148,15 +128,9 @@ public class ShelterDAO {
 
     public static ShelterModel retrieveShelterById(int shelterId) throws Exception {
         Statement stmt = null;
-        Connection conn = null;
-        ShelterModel shelter;
+        ShelterModel shelter = null;
         try {
-            Class.forName(DRIVER_CLASS_NAME);
-
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = ConnectionDB.getConnection();
 
             ResultSet resultSet = SimpleQueries.selectShelterById(stmt, shelterId);
 
@@ -194,35 +168,18 @@ public class ShelterDAO {
 
             resultSet.close();
 
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
-
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         return shelter;
     }
 
     public static ShelterModel retrieveShelterByEmail(String email) throws Exception {
         Statement stmt = null;
-        Connection conn = null;
-        ShelterModel shelter;
+        ShelterModel shelter = null;
         try {
-            Class.forName(DRIVER_CLASS_NAME);
-
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = ConnectionDB.getConnection();
 
             ResultSet resultSet = SimpleQueries.selectShelterByEmail(stmt, email);
 
@@ -260,19 +217,9 @@ public class ShelterDAO {
 
             resultSet.close();
 
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return shelter;
