@@ -27,7 +27,7 @@ public class ShelterSideBar {
     }
 
     public void goToAppointments() {
-        //da implementare
+        // da implementare
     }
 
     public void goToWishlist() {

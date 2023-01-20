@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.utils.dao;
 
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.model.AccountInfo;
+import com.ispwproject.adoptme.utils.connection.ConnectionDB;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 
 import java.io.File;
@@ -13,28 +14,12 @@ public class UserDAO {
     //costruttore privato
     private UserDAO() {}
 
-    private static final String USER = "user1";
-    private static final String PASS = "user1";
-    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
-
-
     public static UserModel retrieveUserById(int userId) throws Exception {
-        // STEP 1: dichiarazioni
         Statement stmt = null;
-        Connection conn = null;
-        UserModel user;
+        UserModel user = null;
 
         try {
-            // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
-
-            // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, UserDAO.USER, PASS);
-
-            // STEP 4: creazione ed esecuzione della query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = ConnectionDB.getConnection();
 
             // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectUserById(stmt, userId);
@@ -72,20 +57,9 @@ public class UserDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } finally {
-            // STEP 5.2: Clean-up dell'ambiente
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return user;
@@ -93,21 +67,11 @@ public class UserDAO {
 
 
     public static UserModel retrieveUserByEmail(String email) throws Exception {
-        // STEP 1: dichiarazioni
         Statement stmt = null;
-        Connection conn = null;
-        UserModel user;
+        UserModel user = null;
 
         try {
-            // STEP 2: loading dinamico del driver mysql
-            Class.forName(DRIVER_CLASS_NAME);
-
-            // STEP 3: apertura connessione
-            conn = DriverManager.getConnection(DB_URL, UserDAO.USER, PASS);
-
-            // STEP 4: creazione ed esecuzione della query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
+            stmt = ConnectionDB.getConnection();
 
             // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectUserByEmail(stmt, email);
@@ -149,20 +113,9 @@ public class UserDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } finally {
-            // STEP 5.2: Clean-up dell'ambiente
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return user;

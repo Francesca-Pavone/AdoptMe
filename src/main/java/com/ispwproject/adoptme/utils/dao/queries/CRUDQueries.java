@@ -26,16 +26,5 @@ public class CRUDQueries {
     //costruttore privato
     private CRUDQueries() {}
 
-    public static PreparedStatement insertDog(Connection connection) throws SQLException {
-        return connection.prepareStatement("INSERT INTO Dogs (dogId, shelter, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, coatLenght, size, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, education) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    }
 
-    public static PreparedStatement insertCat(Connection connection) throws SQLException {
-
-        return connection.prepareStatement("INSERT INTO Cats (catId, shelter, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, coatLenght, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    }
-
-    public static PreparedStatement insertPetCompatibility(Connection connection) throws SQLException {
-        return connection.prepareStatement("INSERT INTO Compatibility (petId, shelterId, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    }
 }
