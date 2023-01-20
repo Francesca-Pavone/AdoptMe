@@ -16,7 +16,7 @@ public class ConnectionDB {
     private static Connection connection;
 
 
-    public static Statement getConnection() throws SQLException, IOException {
+    public static Statement getConnection() throws SQLException {
         Statement stmt = null;
 
         try {
@@ -29,6 +29,9 @@ public class ConnectionDB {
         return stmt;
     }
 
+    public static void closeConnection() throws SQLException {
+        connection.close();
+    }
     private static void conn() {
         String user;
         String password;
