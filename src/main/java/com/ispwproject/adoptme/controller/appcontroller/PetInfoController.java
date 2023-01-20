@@ -20,7 +20,9 @@ public class PetInfoController {
             DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());
 
             //vado a settare nel bean le nuove info del pet che mi servono
-            setCommonAttr(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth(), dogModel.getCoatLenght(), dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getPetCompatibility());
+            setGeneralInfo(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth(), dogModel.getCoatLenght());
+            setMedicalInfo(petBean, dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType());
+            setCompatibility(petBean, dogModel.getPetCompatibility());
             petBean.setDogEducation(dogModel.isProgramEducation());
             petBean.setSize(dogModel.getSize());
 
@@ -28,8 +30,9 @@ public class PetInfoController {
         else {
             CatModel catModel = CatDAO.retrieveCatById(petBean.getPetId(), petBean.getShelterId());
 
-            //vado a settare nel bean le nuove info del pet che mi servono
-            setCommonAttr(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth(), catModel.getCoatLenght(), catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getPetCompatibility());
+            setGeneralInfo(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth(), catModel.getCoatLenght());
+            setMedicalInfo(petBean, catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType());
+            setCompatibility(petBean, catModel.getPetCompatibility());
             petBean.setTestFiv(catModel.isTestFiv());
             petBean.setTestFelv(catModel.isTestFelv());
         }
@@ -37,17 +40,23 @@ public class PetInfoController {
 
     }
 
-    private void setCommonAttr(PetBean petBean, int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility) {
+    private void setGeneralInfo(PetBean petBean, int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght) {
         petBean.setYearOfBirth(yearOfBirth);
         petBean.setMonthOfBirth(monthOfBirth);
         petBean.setDayOfBirth(dayOfBirth);
         petBean.setCoatLenght(coatLenght);
+    }
+
+    private void setMedicalInfo(PetBean petBean, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType){
         petBean.setVaccinated(vaccinated);
         petBean.setMicrochipped(microchipped);
         petBean.setDewormed(dewormed);
         petBean.setSterilized(sterilized);
         petBean.setDisability(disability);
         petBean.setDisabilityType(disabilityType);
+    }
+
+    private void setCompatibility(PetBean petBean, PetCompatibility petCompatibility) {
         petBean.setMaleDog(petCompatibility.isMaleDog());
         petBean.setFemaleDog(petCompatibility.isFemaleDog());
         petBean.setMaleCat(petCompatibility.isMaleCat());
@@ -60,6 +69,5 @@ public class PetInfoController {
         petBean.setFirstExperience(petCompatibility.isFirstExperience());
         petBean.setHoursAlone(petCompatibility.getHoursAlone());
     }
-
 
 }

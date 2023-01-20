@@ -36,7 +36,7 @@ public class UserResearchController {
                 ShelterBean shelterBean = new ShelterBean(shelterModel);
                 listShelterBean.add(shelterBean);
             }
-        } catch (IOException e) { // todo: non penso sia IO exception
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return listShelterBean;

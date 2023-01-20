@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
@@ -62,9 +62,9 @@ public class GUIShelterItemController {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        GUIShelterInformationController shelterInformationController_g = fxmlLoader.getController();
-        shelterInformationController_g.setSessionData(this.userBean);
-        shelterInformationController_g.setData(shelterBean);
+        GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setSessionData(this.userBean);
+        guiShelterInformationController.setData(shelterBean);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

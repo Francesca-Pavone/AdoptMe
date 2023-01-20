@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
@@ -27,19 +27,23 @@ public class GUIShelterHomepageController extends ShelterSideBar {
         dialog.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPetForm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        GUIAddPetController guiAddPetController = fxmlLoader.getController();
+        guiAddPetController.setShelterId(this.shelterBean);
         dialog.setScene(scene);
         dialog.show();
     }
 
+    @Override
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
 
-        ShowShelterPetsController showShelterPetsController_ = new ShowShelterPetsController(shelterBean);
+        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
         int column = 0;
         int row = 1;
 
         try {
-            for (PetBean pet : showShelterPetsController_.getPetList()) {
+            for (PetBean pet : showShelterPetsController.getPetList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 

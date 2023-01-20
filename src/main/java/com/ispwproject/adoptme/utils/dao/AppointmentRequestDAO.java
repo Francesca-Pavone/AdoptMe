@@ -1,11 +1,8 @@
 package com.ispwproject.adoptme.utils.dao;
 
 public class AppointmentRequestDAO {
-
-    private static String USER = "user1";
-    private static String PASS = "user1";
-    private static String DB_URL = "jdbc:mysql://127.0.0.1:3306/AdoptMe";
-    private static String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    //Costruttore privato
+    private AppointmentRequestDAO() {}
 
     /*
     public List<AppointmentRequestModel> retreiveReqByShelterId(int shelterId) throws Exception {

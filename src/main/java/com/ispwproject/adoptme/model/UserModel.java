@@ -13,10 +13,6 @@ public class UserModel extends ShelterUserModel{
         this.surname = surname;
     }
 
-    public UserModel(String email) {
-        AccountInfo accountInfo = new AccountInfo(email, 0);
-    }
-
     public String getName() {
         return name;
     }

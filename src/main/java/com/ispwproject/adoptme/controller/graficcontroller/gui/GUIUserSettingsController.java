@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.controller.graficcontroller.GUI;
+package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.ImageUtils;
@@ -44,8 +44,24 @@ public class GUIUserSettingsController extends UserSideBar {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser=new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagine Files","*.png","*.jpg"));
-        file = fileChooser.showOpenDialog(stage).getAbsoluteFile();
-        userImg.setImage(ImageUtils.fromFileToImage(file));
+        File image = fileChooser.showOpenDialog(stage).getAbsoluteFile();
+
+        BufferedImage bfImage = null;
+        bfImage = ImageIO.read(image);
+        WritableImage wr = null;
+        if (bfImage != null) {
+            wr = new WritableImage(bfImage.getWidth(), bfImage.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < bfImage.getWidth(); x++) {
+                for (int y = 0; y < bfImage.getHeight(); y++) {
+                    pw.setArgb(x, y, bfImage.getRGB(x, y));
+                }
+            }
+        }
+
+        Image newUserImage = new ImageView(wr).getImage();
+
+        userImg.setImage(newUserImage);
     }
 
     public void signOut(ActionEvent event) throws IOException {
@@ -59,14 +75,6 @@ public class GUIUserSettingsController extends UserSideBar {
     @Override
     public void setUserSession(UserBean userBean) throws IOException {
         this.userBean = userBean;
-        Image image;
-        if (this.userBean.getProfileImg() != null) {
-            InputStream inputStream = new FileInputStream(this.userBean.getProfileImg());
-            image = new Image(inputStream);
-        } else {
-            image = new Image(Main.class.getResource("image/photo.png").openStream());
-        }
-        userImg.setImage(image);
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());
         textFieldName.setPromptText(userBean.getName());

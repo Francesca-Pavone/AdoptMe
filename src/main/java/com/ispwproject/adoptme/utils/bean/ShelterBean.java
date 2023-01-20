@@ -3,7 +3,6 @@ package com.ispwproject.adoptme.utils.bean;
 import com.ispwproject.adoptme.model.ShelterModel;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ShelterBean {
