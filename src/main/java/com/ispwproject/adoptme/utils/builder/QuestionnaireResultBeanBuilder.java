@@ -5,24 +5,26 @@ import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
 public final class QuestionnaireResultBeanBuilder {
     private int type;
     private int gender;
-    private boolean puppy;
+    private int age;
+    /*private boolean puppy;
     private boolean young;
     private boolean adult;
-    private boolean senior;
+    private boolean senior;*/
     private int size;
     private boolean maleCat;
     private boolean femaleCat;
     private boolean maleDog;
     private boolean femaleDog;
-    private boolean haveAGarden;
+    private int haveAGarden;
     private boolean gardenSleepOutside;
-    private boolean haveATerrace;
+    private int haveATerrace;
     private boolean terraceSleepOutside;
     private int hoursAlone;
-    private boolean firstPet;
+    private int firstPet;
     private boolean sterilizePet;
-    private boolean programEducation;
+    private int programEducation;
     private boolean disabledPet;
+    private boolean specificArea;
     private String city;
 
     private QuestionnaireResultBeanBuilder() {
@@ -42,7 +44,7 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder puppy(boolean puppy) {
+    /*public QuestionnaireResultBeanBuilder puppy(boolean puppy) {
         this.puppy = puppy;
         return this;
     }
@@ -59,6 +61,11 @@ public final class QuestionnaireResultBeanBuilder {
 
     public QuestionnaireResultBeanBuilder senior(boolean senior) {
         this.senior = senior;
+        return this;
+    }*/
+
+    public QuestionnaireResultBeanBuilder age(int age) {
+        this.age = age;
         return this;
     }
 
@@ -87,7 +94,7 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder haveAGarden(boolean haveAGarden) {
+    public QuestionnaireResultBeanBuilder haveAGarden(int haveAGarden) {
         this.haveAGarden = haveAGarden;
         return this;
     }
@@ -97,7 +104,7 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder haveATerrace(boolean haveATerrace) {
+    public QuestionnaireResultBeanBuilder haveATerrace(int haveATerrace) {
         this.haveATerrace = haveATerrace;
         return this;
     }
@@ -112,7 +119,7 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder firstPet(boolean firstPet) {
+    public QuestionnaireResultBeanBuilder firstPet(int firstPet) {
         this.firstPet = firstPet;
         return this;
     }
@@ -122,8 +129,13 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder programEducation(boolean programEducation) {
+    public QuestionnaireResultBeanBuilder programEducation(int programEducation) {
         this.programEducation = programEducation;
+        return this;
+    }
+
+    public QuestionnaireResultBeanBuilder specificArea(boolean specificArea) {
+        this.specificArea = specificArea;
         return this;
     }
 
@@ -141,10 +153,11 @@ public final class QuestionnaireResultBeanBuilder {
         QuestionnaireResultBean questionnaireResultBean = new QuestionnaireResultBean();
         questionnaireResultBean.setType(type);
         questionnaireResultBean.setGender(gender);
-        questionnaireResultBean.setPuppy(puppy);
+        /*questionnaireResultBean.setPuppy(puppy);
         questionnaireResultBean.setYoung(young);
         questionnaireResultBean.setAdult(adult);
-        questionnaireResultBean.setSenior(senior);
+        questionnaireResultBean.setSenior(senior);*/
+        questionnaireResultBean.setAge(age);
         questionnaireResultBean.setSize(size);
         questionnaireResultBean.setMaleCat(maleCat);
         questionnaireResultBean.setFemaleCat(femaleCat);
@@ -159,6 +172,7 @@ public final class QuestionnaireResultBeanBuilder {
         questionnaireResultBean.setSterilizePet(sterilizePet);
         questionnaireResultBean.setProgramEducation(programEducation);
         questionnaireResultBean.setDisabledPet(disabledPet);
+        questionnaireResultBean.setSpecificArea(specificArea);
         questionnaireResultBean.setCity(city);
         return questionnaireResultBean;
     }
