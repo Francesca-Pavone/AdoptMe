@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class GUIShelterInformationController {
+public class GUIShelterInformationController implements Observer {
 
     @FXML
     private Label shelterName;
@@ -102,5 +103,10 @@ public class GUIShelterInformationController {
         GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
         userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
+    }
+
+    @Override
+    public void update(Object object) {
+
     }
 }

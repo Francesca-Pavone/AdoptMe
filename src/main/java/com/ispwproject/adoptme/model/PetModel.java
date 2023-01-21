@@ -2,7 +2,7 @@ package com.ispwproject.adoptme.model;
 
 import java.io.File;
 
-public class PetModel {
+public abstract class PetModel {
     protected int petId;
     protected File petImage;
     protected String name;
@@ -10,6 +10,7 @@ public class PetModel {
     protected int yearOfBirth;
     protected int monthOfBirth;
     protected int dayOfBirth;
+    protected String age;
     protected int gender;
     protected int coatLenght;
 
@@ -60,7 +61,6 @@ public class PetModel {
         this.petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone);
         this.shelter = shelter;
     }
-
 
 
     public PetModel(int petId, ShelterModel shelter, int petType, String name, File petImg, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth) {
@@ -157,6 +157,14 @@ public class PetModel {
 
     public void setDayOfBirth(int dayOfBirth) { this.dayOfBirth = dayOfBirth; }
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public int getGender() {
         return gender;
     }
@@ -228,5 +236,6 @@ public class PetModel {
     public void setPetCompatibility(PetCompatibility petCompatibility) {
         this.petCompatibility = petCompatibility;
     }
+
 
 }
