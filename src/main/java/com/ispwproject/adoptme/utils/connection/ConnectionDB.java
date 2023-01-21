@@ -16,6 +16,7 @@ public class ConnectionDB {
     private static Connection connection;
 
 
+    // se fosse stata un'applicazione multi thread avrei dovuto mettere "synchronized"
     public static Statement getConnection() throws SQLException {
         Statement stmt = null;
 

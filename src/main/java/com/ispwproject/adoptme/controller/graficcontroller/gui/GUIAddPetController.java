@@ -119,8 +119,11 @@ public class GUIAddPetController {
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
-    private PetModel pet;
-    private int shelterId;
+    private ShelterBean shelterBean;
+
+    public void setShelterSession(ShelterBean shelterBean) {
+        this.shelterBean = shelterBean;
+    }
 
     public void initialize() {
 
@@ -177,7 +180,7 @@ public class GUIAddPetController {
 
         PetBeanBuilder petBeanBuilder = PetBeanBuilder.newPetBean()
 
-                .shelterId(shelterId)
+                .shelterId(shelterBean.getShelterId())
                 .petImage(file)
                 .name(petNameTxtF.getText())
                 .type(petType)
@@ -276,7 +279,7 @@ public class GUIAddPetController {
         }
 
         addPetController = new AddPetController(petBean);
-        addPetController.addPet();
+        addPetController.addPet(shelterBean);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
@@ -334,7 +337,4 @@ public class GUIAddPetController {
 
     }
 
-    public void setShelterId(ShelterBean shelterBean) {
-        this.shelterId = shelterBean.getShelterId();
-    }
 }

@@ -17,7 +17,7 @@ public class PetDAO {
     public static List<PetModel> retrievePetByShelterId(int shelterId) throws Exception {
         Statement stmt = null;
         List<PetModel> petList = new ArrayList<PetModel>();
-
+        PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
 
@@ -49,15 +49,28 @@ public class PetDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                int petDayOfBirth = resultSet.getInt("dayOfBirth");
-                int petMonthOfBirth = resultSet.getInt("monthOfBirth");
-                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                String petAge = resultSet.getString("age");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
 
                 ShelterModel shelter = ShelterDAO.retrieveShelterById(shelterId);
 
-                PetModel pet = new PetModel(petId, shelter, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                if (petType == 0)
+                    pet = new DogModel();
+                else
+                    pet = new CatModel();
+
+                pet.setPetId(petId);
+                pet.setShelter(shelter);
+                pet.setType(petType);
+                pet.setName(petName);
+                pet.setPetImage(petImage);
+                pet.setGender(petGender);
+                pet.setAge(petAge);
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                pet.setPetCompatibility(petCompatibility);
+
 
                 petList.add(pet);
 

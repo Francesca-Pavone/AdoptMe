@@ -46,7 +46,7 @@ public class GUIPetItemController {
                     default -> "Female";
                 });
         petName.setText(petBean.getName());
-        petAge.setText((String.valueOf(petBean.getYearOfBirth())));
+        petAge.setText((petBean.getAge()));
 
         Image image;
         if(petBean.getPetImage() != null) {

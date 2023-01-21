@@ -17,6 +17,7 @@ public class PetBean {
     protected int yearOfBirth;
     protected int monthOfBirth;
     protected int dayOfBirth;
+    protected String age;
     protected int gender;
     protected int coatLenght;
 
@@ -95,6 +96,7 @@ public class PetBean {
         this.setYearOfBirth(catModel.getYearOfBirth());
         this.setMonthOfBirth(catModel.getMonthOfBirth());
         this.setDayOfBirth(catModel.getDayOfBirth());
+        this.setAge(catModel.getAge());
         this.setGender(catModel.getGender());
         this.setCoatLenght(catModel.getCoatLenght());
         this.setVaccinated(catModel.isVaccinated());
@@ -129,6 +131,7 @@ public class PetBean {
         this.setYearOfBirth(dogModel.getYearOfBirth());
         this.setMonthOfBirth(dogModel.getMonthOfBirth());
         this.setDayOfBirth(dogModel.getDayOfBirth());
+        this.setAge(dogModel.getAge());
         this.setGender(dogModel.getGender());
         this.setCoatLenght(dogModel.getCoatLenght());
         this.setVaccinated(dogModel.isVaccinated());
@@ -250,6 +253,14 @@ public class PetBean {
 
     public void setDayOfBirth(int dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public int getGender() {
