@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.observer.Observer;
+import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -86,7 +87,11 @@ public class GUIShelterInformationController implements Observer {
             }
             grid.add(pane, column++, row);
         }
+    }
 
+    public void setShelterData(String shelterName) throws Exception {
+        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
+        setData(shelterBean);
 
     }
 

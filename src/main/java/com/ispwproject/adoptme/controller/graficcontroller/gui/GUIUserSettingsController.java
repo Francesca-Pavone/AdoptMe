@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.utils.ImageUtils;
+import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +40,7 @@ public class GUIUserSettingsController extends UserSideBar {
     private PasswordField textFieldPsw;
 
     public void loadImage(ActionEvent event) throws IOException {
-
+        File file;
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser=new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagine Files","*.png","*.jpg"));
@@ -71,7 +73,7 @@ public class GUIUserSettingsController extends UserSideBar {
     }
 
     @Override
-    public void setUserSession(UserBean userBean) {
+    public void setUserSession(UserBean userBean) throws IOException {
         this.userBean = userBean;
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());

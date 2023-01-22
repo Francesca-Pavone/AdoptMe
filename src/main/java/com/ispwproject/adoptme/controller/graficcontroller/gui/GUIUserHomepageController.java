@@ -4,15 +4,18 @@ import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ispwproject.adoptme.utils.bean.UserResearchBean;
+import javafx.stage.StageStyle;
 
 public class GUIUserHomepageController extends UserSideBar {
     @FXML
@@ -43,8 +47,8 @@ public class GUIUserHomepageController extends UserSideBar {
     private Button backButton;
 
     public void initialize() {
-        textFieldUserHomepage.setDisable(true);
-        btnSearchUserHomepage.setDisable(true);
+        radioBtnCity.setSelected(true);
+        textFieldUserHomepage.setPromptText("Insert city...");
     }
 
     public void selectCity(ActionEvent event) {
@@ -75,7 +79,7 @@ public class GUIUserHomepageController extends UserSideBar {
 
     public void searchUserHomepage(ActionEvent event) throws Exception {
         UserResearchBean userResearchBean = new UserResearchBean();
-        if(!textFieldUserHomepage.getText().equals("")) {
+        if (!textFieldUserHomepage.getText().equals("")) {
             userResearchBean.setCityShelter(textFieldUserHomepage.getText());
 
             vBox.setVisible(false);
@@ -105,7 +109,7 @@ public class GUIUserHomepageController extends UserSideBar {
                         shelterItemControllerG.setData();
 
 
-                        grid.add(pane,1,  row);
+                        grid.add(pane, 1, row);
                         row++;
                     }
                 } catch (IOException e) {
@@ -120,33 +124,21 @@ public class GUIUserHomepageController extends UserSideBar {
                 labelCity.setText("Pets you can find in '" + userResearchBean.getCityShelter() + "':");
                 UserResearchController userResearchControllerA = new UserResearchController();
 
-                int column = 0;
-                int row = 1;
+                Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.initStyle(StageStyle.UNDECORATED);
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
 
-                try {
-                    for (PetBean pet : userResearchControllerA.searchShelter(userResearchBean.getCityShelter())) {
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
-                        Pane pane = fxmlLoader.load();
+                GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+                guiShelterInformationController.setSessionData(this.userBean);
+                guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
 
-                        GUIPetItemController petItemControllerG = fxmlLoader.getController();
-                        petItemControllerG.setSessionData(this.userBean);
-                        petItemControllerG.setPetData(pet);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
 
-                        if (column == 3) {
-                            column = 0;
-                            row++;
-                        }
-
-                        grid.add(pane, column++, row);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+                stage.show();
             }
-        } else {
-            System.out.println("Scrivere qualcosa...");
         }
     }
 

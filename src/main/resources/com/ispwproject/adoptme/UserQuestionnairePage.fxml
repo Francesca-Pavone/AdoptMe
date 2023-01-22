@@ -141,8 +141,11 @@
                                        <font>
                                           <Font name="Arial Bold" size="20.0" />
                                        </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="petAgeGroup" />
+                                       </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnYoung" mnemonicParsing="false" onAction="#selectYoung" prefHeight="80.0" prefWidth="350.0" styleClass="button4" stylesheets="@style.css" text="Young (13 months - 3 years)" textFill="WHITE">
+                                    <ToggleButton fx:id="btnYoung" mnemonicParsing="false" onAction="#selectYoung" prefHeight="80.0" prefWidth="350.0" styleClass="button4" stylesheets="@style.css" text="Young (13 months - 3 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
                                        <font>
                                           <Font name="Arial Bold" size="20.0" />
                                        </font>
@@ -154,12 +157,12 @@
                               </HBox>
                               <HBox alignment="CENTER" spacing="45.0">
                                  <children>
-                                    <ToggleButton fx:id="btnAdult" mnemonicParsing="false" onAction="#selectAdult" prefHeight="80.0" prefWidth="350.0" styleClass="button4" stylesheets="@style.css" text="Adult (4 years - 10 years)" textFill="WHITE">
+                                    <ToggleButton fx:id="btnAdult" mnemonicParsing="false" onAction="#selectAdult" prefHeight="80.0" prefWidth="350.0" styleClass="button4" stylesheets="@style.css" text="Adult (4 years - 10 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
                                        <font>
                                           <Font name="Arial Bold" size="20.0" />
                                        </font>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnSenior" mnemonicParsing="false" onAction="#selectSenior" prefHeight="80.0" prefWidth="350.0" styleClass="button4" stylesheets="@style.css" text="Senior (more than 11 years)" textFill="WHITE">
+                                    <ToggleButton fx:id="btnSenior" mnemonicParsing="false" onAction="#selectSenior" prefHeight="80.0" prefWidth="350.0" styleClass="button4" stylesheets="@style.css" text="Senior (more than 11 years)" textFill="WHITE" toggleGroup="$petAgeGroup">
                                        <font>
                                           <Font name="Arial Bold" size="20.0" />
                                        </font>
@@ -169,7 +172,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <ToggleButton fx:id="btnAgeNotImportant" mnemonicParsing="false" onAction="#selectAgeNotImportant" prefHeight="70.0" prefWidth="267.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" text="Not important" textFill="WHITE">
+                              <ToggleButton fx:id="btnAgeNotImportant" mnemonicParsing="false" onAction="#selectAgeNotImportant" prefHeight="70.0" prefWidth="267.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button2" stylesheets="@style.css" text="Not important" textFill="WHITE" toggleGroup="$petAgeGroup">
                                  <font>
                                     <Font name="Arial Bold" size="20.0" />
                                  </font>
