@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class GUIShelterInformationController {
+public class GUIShelterInformationController implements Observer {
 
     @FXML
     private Label shelterName;
@@ -66,8 +67,8 @@ public class GUIShelterInformationController {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
-        ShelterPageController shelterPageController = new ShelterPageController();
-        List<PetBean> petBeanList = shelterPageController.getPetList(shelterBean.getShelterId());
+        ShelterPageController shelterPageController = new ShelterPageController(shelterBean);
+        List<PetBean> petBeanList = shelterPageController.getPetList(this);
 
         int column = 0;
         int row = 1;
@@ -107,5 +108,10 @@ public class GUIShelterInformationController {
         GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
         userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
+    }
+
+    @Override
+    public void update(Object object) {
+
     }
 }

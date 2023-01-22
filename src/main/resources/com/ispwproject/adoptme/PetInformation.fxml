@@ -31,14 +31,18 @@
                </Button>
             </children>
          </HBox>
-         <ImageView fx:id="petImg" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@image/cane1_tondo.png" />
-            </image>
+         <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="130.0" style="-fx-background-radius: 100; -fx-background-color: #000000;">
             <VBox.margin>
                <Insets top="-10.0" />
             </VBox.margin>
-         </ImageView>
+            <children>
+               <ImageView fx:id="petImg" blendMode="SCREEN" cache="true" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/cane4.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </Pane>
          <Label fx:id="nameTitle" text="Aron">
             <font>
                <Font name="Arial Black" size="24.0" />

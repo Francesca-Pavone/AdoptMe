@@ -1,21 +1,29 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterInformationController;
 import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterPageController {
+    ShelterModel shelterModel;
+    ShelterPetsList shelterPetsList;
 
+    public ShelterPageController(ShelterBean shelterBean) {
+        this.shelterModel = new ShelterModel(shelterBean);
+    }
 
-
-    public List<PetBean> getPetList(int shelterId) {
-        List<PetModel> petList = new ArrayList<>();
+    public List<PetBean> getPetList(GUIShelterInformationController observer) {
+        //List<PetModel> petList = new ArrayList<>();
         try {
-            petList = PetDAO.retrievePetByShelterId(shelterId);
+            shelterPetsList = PetDAO.retrievePetByShelterId(shelterModel,observer);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
@@ -30,7 +38,7 @@ public class ShelterPageController {
 
         List<PetBean> petBeanList = new ArrayList<>();
 
-        for (PetModel petModel : petList) {
+        for (PetModel petModel : shelterPetsList.getPetList()) {
             PetBean petBean = new PetBean(petModel);
             petBeanList.add(petBean);
         }

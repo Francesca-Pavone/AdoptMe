@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.ShelterSideBar;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

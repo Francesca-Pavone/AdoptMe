@@ -22,8 +22,8 @@ public class DogModel extends PetModel{
         setSize(size);
     }
 
-    public DogModel(String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
-        super(0, name, petImg, yearOfBirth, gender, petCompatibility);
+    public DogModel(int id, ShelterModel shelter, String name, File petImg, int gender,  int dayOfBirth, int monthOfBirth, int yearOfBirth) {
+        super(id, shelter, 0, name, petImg, gender, dayOfBirth, monthOfBirth,yearOfBirth);
     }
 
     public boolean isProgramEducation() {

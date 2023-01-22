@@ -3,18 +3,30 @@ package com.ispwproject.adoptme.model;
 import java.time.LocalTime;
 import java.util.Date;
 
-public abstract class RequestModel {
+public class RequestModel {
 
+    private int id;
     private PetModel pet;
     private UserModel user;
     private Date date;
     private LocalTime time;
+    private int status; // 0 -> send  |  1 -> pending  |  2 -> accepted  | 3 -> rejected
 
-    protected RequestModel(PetModel pet, UserModel user, Date date, LocalTime time) {
+    public RequestModel(int id, PetModel pet, UserModel user, Date date, LocalTime time, int status) {
+        this.id = id;
         this.pet = pet;
         this.user = user;
         this.date = date;
         this.time = time;
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public PetModel getPet() {
@@ -48,4 +60,13 @@ public abstract class RequestModel {
     public void setTime(LocalTime time) {
         this.time = time;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
 }
