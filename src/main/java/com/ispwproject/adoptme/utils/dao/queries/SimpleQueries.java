@@ -47,6 +47,10 @@ public class SimpleQueries {
         String sql = "SELECT * FROM Shelters WHERE email ='" + email + "';";
         return stmt.executeQuery(sql);
     }
+    public static ResultSet selectShelterByName(Statement stmt, String name) throws SQLException {
+        String sql = "SELECT * FROM Shelters WHERE name ='" + name + "';";
+        return stmt.executeQuery(sql);
+    }
 
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT dogId AS id, name, imgSrc, gender, age, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, age, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
@@ -58,6 +62,15 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet selectReqByUserId(Statement stmt, int id) throws SQLException {
+        String sql = "SELECT * FROM Requests WHERE userId = '" + id + "';";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectPetById(Statement stmt, int petId, int shelterId) throws SQLException {
+        String sql = "SELECT name, imgSrc, 0 as type FROM Dogs WHERE shelter = '" + shelterId + "' and dogId = '" + petId + "'UNION SELECT name, imgSrc, 1 as type FROM Cats WHERE shelter = '" + shelterId + "' and catId = '" + petId + "';";
+        return stmt.executeQuery(sql);
+    }
     public static ResultSet selectDogById(Statement stmt, int dogId, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Dogs JOIN Compatibility ON dogId = petId AND shelter = shelterId WHERE shelter = '" + shelterId + "' and dogId = '" + dogId + "';";
         return stmt.executeQuery(sql);

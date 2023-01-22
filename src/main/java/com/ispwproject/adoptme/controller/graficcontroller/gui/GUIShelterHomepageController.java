@@ -38,7 +38,10 @@ public class GUIShelterHomepageController implements Observer {
 
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
+        loadShelterPets();
+    }
 
+    private void loadShelterPets() {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
         int column = 0;
         int row = 1;

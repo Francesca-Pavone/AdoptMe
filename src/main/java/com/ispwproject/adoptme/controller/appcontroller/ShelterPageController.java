@@ -1,7 +1,9 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 
 import java.sql.SQLException;
@@ -11,11 +13,16 @@ import java.util.List;
 public class ShelterPageController {
 
 
+    ShelterModel shelterModel;
 
-    public List<PetBean> getPetList(int shelterId) {
+    public ShelterPageController(ShelterBean shelterBean) {
+        this.shelterModel = new ShelterModel(shelterBean);
+    }
+
+    public List<PetBean> getPetList() {
         List<PetModel> petList = new ArrayList<>();
         try {
-            petList = PetDAO.retrievePetByShelterId(shelterId);
+            petList = PetDAO.retrievePetByShelterId(shelterModel);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

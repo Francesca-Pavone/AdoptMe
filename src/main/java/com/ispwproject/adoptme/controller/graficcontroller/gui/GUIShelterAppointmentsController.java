@@ -1,7 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.model.RequestModel;
+import com.ispwproject.adoptme.controller.appcontroller.RequestsController;
+import com.ispwproject.adoptme.utils.bean.RequestBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import javafx.event.ActionEvent;
@@ -20,89 +21,43 @@ import java.util.List;
 public class GUIShelterAppointmentsController implements Observer {
 
     @FXML
-    private HBox acceptedReqList;
-    @FXML
-    private HBox doneAppList;
+    private HBox sentReqList;
     @FXML
     private HBox pendingReqList;
-
-    private List<RequestModel> pendingRequestList = new ArrayList<>();
-    private List<RequestModel> acceptedRequestList = new ArrayList<>();
-    private List<RequestModel> doneAppointmentList = new ArrayList<>();
+    @FXML
+    private HBox confirmedReqList;
 
     private ShelterBean shelterBean;
 
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
+        loadShelterRequest();
     }
 
-    private List<RequestModel> getAcceptedReqList(){
-        /*
-        try {
-            int searchKey = 1;
-            pendingRequestList = appointmentRequestDAO.retreiveReqByShelterId(searchKey);
-
-
-        } catch (SQLException se) {
-            // Errore durante l'apertura della connessione
-            se.printStackTrace();
-        } catch (ClassNotFoundException driverEx) {
-            // Errore nel loading del driver
-            driverEx.printStackTrace();
-        } catch (Exception e) {
-            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
-            e.printStackTrace();
-        }
-
-
-         */
-        return pendingRequestList;
-    }
-
-    public void initialize(){
-        String reqItem = "RequestItem.fxml";
-        pendingRequestList.addAll(getAcceptedReqList());
-        acceptedRequestList.addAll(getAcceptedReqList());
-        doneAppointmentList.addAll(getAcceptedReqList());
+    private void loadShelterRequest() {
+        RequestsController requestsController = new RequestsController(shelterBean);
 
         try {
-            for (RequestModel appointment : pendingRequestList) {
+            for (RequestBean request : requestsController.getRequestList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource(reqItem));
+                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
                 GUIRequestItemController requestItemController = fxmlLoader.getController();
-                requestItemController.setDataAcceptedReq(appointment);
+                requestItemController.setRequestData(request);
 
-                pendingReqList.getChildren().add(pane);
+                switch (request.getStatus()) {
+                    case 0 -> sentReqList.getChildren().add(pane);
+                    case 1 -> pendingReqList.getChildren().add(pane);
+                    case 2 -> confirmedReqList.getChildren().add(pane);
+                }
             }
-
-            for (RequestModel appointment : pendingRequestList) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource(reqItem));
-                Pane pane = fxmlLoader.load();
-
-                GUIRequestItemController requestItemController = fxmlLoader.getController();
-                requestItemController.setDataAcceptedReq(appointment);
-
-                acceptedReqList.getChildren().add(pane);
-            }
-
-            for (RequestModel appointment : pendingRequestList) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource(reqItem));
-                Pane pane = fxmlLoader.load();
-
-                GUIRequestItemController requestItemController = fxmlLoader.getController();
-                requestItemController.setDataAcceptedReq(appointment);
-
-                doneAppList.getChildren().add(pane);
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     // metodi ShelterSidebar, devo obbligatoriamente metterli qui perché in java non ho ereditarietà multipla
     // quindi questa classe potrà estenderne solamente un'altra e in questo caso deve estendere "Observer"
