@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
+import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.ImageUtils;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
@@ -10,8 +10,10 @@ import com.ispwproject.adoptme.utils.enums.CoatLenght;
 import com.ispwproject.adoptme.utils.enums.Size;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -279,7 +281,15 @@ public class GUIAddPetController {
         }
 
         addPetController = new AddPetController(petBean);
-        addPetController.addPet(shelterBean);
+        addPetController.addNewPet(shelterBean);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+        guiShelterHomepageController.setShelterSession(shelterBean);
+        Main.getStage().setScene(scene);
+
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

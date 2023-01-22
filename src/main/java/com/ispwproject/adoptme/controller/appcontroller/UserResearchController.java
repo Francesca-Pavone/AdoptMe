@@ -16,7 +16,9 @@ import java.util.List;
 public class UserResearchController {
 
     public List<PetBean> searchShelter(String shelterName) throws Exception {
+
         List<PetBean> petList = new ArrayList<>();
+        /*
         ShelterModel shelter = ShelterDAO.retrieveShelterByName(shelterName);
         try {
             for(PetModel petModel : PetDAO.retrievePetByShelterId(shelter)) {
@@ -26,6 +28,8 @@ public class UserResearchController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */
         return petList;
     }
 

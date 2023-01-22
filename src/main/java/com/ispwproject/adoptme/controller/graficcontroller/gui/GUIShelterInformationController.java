@@ -67,7 +67,7 @@ public class GUIShelterInformationController implements Observer {
         shelterImage.setImage(image);
 
         ShelterPageController shelterPageController = new ShelterPageController(shelterBean);
-        List<PetBean> petBeanList = shelterPageController.getPetList();
+        List<PetBean> petBeanList = shelterPageController.getPetList(this);
 
         int column = 0;
         int row = 1;

@@ -26,7 +26,7 @@
                            <children>
                               <ImageView fx:id="userImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
                                  <image>
-                                    
+
                                  </image>
                               </ImageView>
                            </children>
