@@ -86,15 +86,15 @@ public class PetDAO {
         return shelterPetsList;
     }
 
-    public static List<PetModel> retrievePetByQuestionnaire(String query, int sleepOutside, int gender, String age, String city, int dogEducation, int firstExperience, int garden, int hoursAlone, int size, int terrace) throws Exception {
+    public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
         Statement stmt = null;
         List<PetModel> petList = new ArrayList<PetModel>();
-
+        PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
 
             // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
-            ResultSet resultSet = SimpleQueries.selectPetsFromQuestionnaire(stmt, query, sleepOutside, gender, age, city, dogEducation, firstExperience, garden, hoursAlone, size, terrace);
+            ResultSet resultSet = SimpleQueries.selectPetsFromQuestionnaire(stmt, query);
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
@@ -121,15 +121,29 @@ public class PetDAO {
                     outputStream.write(bytes, 0, read);
                 }
 
-                int petDayOfBirth = resultSet.getInt("dayOfBirth");
-                int petMonthOfBirth = resultSet.getInt("monthOfBirth");
-                int petYearOfBirth = resultSet.getInt("yearOfBirth");
+                String petAge = resultSet.getString("age");
                 int petGender = resultSet.getInt("gender");
                 int petType = resultSet.getInt("type");
                 int shelterId = resultSet.getInt("shelter");
-                ShelterModel shelter = ShelterDAO.retrieveShelterById(shelterId);
 
-                PetModel pet = new PetModel(petId, shelter, petType, petName, petImage, petGender, petDayOfBirth, petMonthOfBirth, petYearOfBirth);
+                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
+
+
+                if (petType == 0)
+                    pet = new DogModel();
+                else
+                    pet = new CatModel();
+
+                pet.setPetId(petId);
+                pet.setShelter(shelterModel);
+                pet.setType(petType);
+                pet.setName(petName);
+                pet.setPetImage(petImage);
+                pet.setGender(petGender);
+                pet.setAge(petAge);
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                pet.setPetCompatibility(petCompatibility);
 
                 petList.add(pet);
 
@@ -146,8 +160,7 @@ public class PetDAO {
         return petList;
     }
 
-/*
-    public static PetModel retrivePetById(int petId, int shelterId) throws Exception {
+    public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
         // STEP 1: dichiarazioni
         Statement stmt = null;
         PetModel pet = null;
@@ -213,7 +226,4 @@ public class PetDAO {
 
         return pet;
     }
-
-
-
 }

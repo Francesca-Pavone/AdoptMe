@@ -1,8 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.ImageUtils;
-import com.ispwproject.adoptme.utils.UserSideBar;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

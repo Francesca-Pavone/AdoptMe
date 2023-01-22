@@ -265,8 +265,10 @@ public class GUIQuestionnaireController {
 
     public void selectPuppy() {
         btnAgeNotImportant.setSelected(false);
-        if(!vboxParent.getChildren().contains(vboxDogSize) && btnPuppy.isSelected())
+        if(!vboxParent.getChildren().contains(vboxDogSize) && btnPuppy.isSelected() && petType == 0)
             vboxParent.getChildren().add(vboxDogSize);
+        else if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnPuppy.isSelected() && petType == 1)
+            vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
             btnPuppy.setSelected(true);
         }
@@ -275,8 +277,10 @@ public class GUIQuestionnaireController {
 
     public void selectYoung() {
         btnAgeNotImportant.setSelected(false);
-        if(!vboxParent.getChildren().contains(vboxDogSize) && btnYoung.isSelected())
+        if(!vboxParent.getChildren().contains(vboxDogSize) && btnYoung.isSelected() && petType == 0)
             vboxParent.getChildren().add(vboxDogSize);
+        else if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnYoung.isSelected() && petType == 1)
+            vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
             btnYoung.setSelected(true);
         }
@@ -285,8 +289,10 @@ public class GUIQuestionnaireController {
 
     public void selectAdult() {
         btnAgeNotImportant.setSelected(false);
-        if(!vboxParent.getChildren().contains(vboxDogSize) && btnAdult.isSelected())
+        if(!vboxParent.getChildren().contains(vboxDogSize) && btnAdult.isSelected() && petType == 0)
             vboxParent.getChildren().add(vboxDogSize);
+        else if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnAdult.isSelected() && petType == 1)
+            vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
             btnAdult.setSelected(true);
         }
@@ -294,8 +300,10 @@ public class GUIQuestionnaireController {
     }
 
     public void selectSenior() {
-        if(!vboxParent.getChildren().contains(vboxDogSize) && btnSenior.isSelected())
+        if(!vboxParent.getChildren().contains(vboxDogSize) && btnSenior.isSelected() && petType == 0)
             vboxParent.getChildren().add(vboxDogSize);
+        else if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnSenior.isSelected() && petType == 1)
+            vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
             btnSenior.setSelected(true);
         }
@@ -303,8 +311,10 @@ public class GUIQuestionnaireController {
     }
 
     public void selectAgeNotImportant() {
-        if(!vboxParent.getChildren().contains(vboxDogSize) && btnAgeNotImportant.isSelected())
+        if(!vboxParent.getChildren().contains(vboxDogSize) && btnAgeNotImportant.isSelected() && petType == 0)
             vboxParent.getChildren().add(vboxDogSize);
+        else if(!vboxParent.getChildren().contains(vboxAlreadyHaveAPet) && btnAgeNotImportant.isSelected() && petType == 1)
+            vboxParent.getChildren().add(vboxAlreadyHaveAPet);
         else if(!btnPuppy.isSelected() && !btnYoung.isSelected() && !btnAdult.isSelected() && !btnSenior.isSelected() && !btnAgeNotImportant.isSelected()) {
             btnAgeNotImportant.setSelected(true);
         }

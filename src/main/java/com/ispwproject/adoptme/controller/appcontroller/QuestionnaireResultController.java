@@ -90,7 +90,7 @@ public class QuestionnaireResultController {
         questionnaireQuery = new EndDecorator(questionnaireQuery);
 
         List<PetBean> petList = new ArrayList<>();
-        for (PetModel pet : PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery(), questionnaireResultBean.isSleepOutside(), questionnaireResultBean.isGender(), questionnaireResultBean.getAge(), questionnaireResultBean.getCity(), questionnaireResultBean.isProgramEducation(), questionnaireResultBean.isFirstPet(), questionnaireResultBean.isHaveAGarden(), questionnaireResultBean.getHoursAlone(), questionnaireResultBean.getSize(), questionnaireResultBean.isHaveATerrace())) {
+        for (PetModel pet : PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery())) {
             PetBean petBean = new PetBean(pet);
             petList.add(petBean);
         }
