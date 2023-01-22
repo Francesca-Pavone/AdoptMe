@@ -1,9 +1,12 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController;
 import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,17 +14,16 @@ import java.util.List;
 
 public class ShowShelterPetsController {
 
-    int shelterId;
-    private List<PetModel> petList = new ArrayList<>();
-
+    private final ShelterModel shelterModel;
+    //private List<PetModel> petList = new ArrayList<>();
+    private ShelterPetsList shelterPetsList;
     public ShowShelterPetsController(ShelterBean shelterBean) {
-        this.shelterId = shelterBean.getShelterId();
+        this.shelterModel = new ShelterModel(shelterBean);
     }
 
-    public List<PetBean> getPetList() {
-
+    public List<PetBean> getPetList(GUIShelterHomepageController observer) {
         try {
-            petList = PetDAO.retrievePetByShelterId(this.shelterId);
+            shelterPetsList = PetDAO.retrievePetByShelterId(this.shelterModel, observer);
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();
@@ -35,12 +37,10 @@ public class ShowShelterPetsController {
 
         List<PetBean> petBeanList = new ArrayList<>();
 
-        for (PetModel petModel : petList) {
-
+        for (PetModel petModel : shelterPetsList.getPetList()) {
             PetBean petBean = new PetBean(petModel);
             petBeanList.add(petBean);
         }
-
         return petBeanList;
     }
 }

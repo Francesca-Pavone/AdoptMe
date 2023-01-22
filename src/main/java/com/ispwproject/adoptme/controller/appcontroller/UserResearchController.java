@@ -16,16 +16,20 @@ import java.util.List;
 public class UserResearchController {
 
     public List<PetBean> searchShelter(String shelterName) throws Exception {
+
         List<PetBean> petList = new ArrayList<>();
-        int shelterId= ShelterDAO.retrieveIdByShelterName(shelterName);
+        /*
+        ShelterModel shelter = ShelterDAO.retrieveShelterByName(shelterName);
         try {
-            for(PetModel petModel : PetDAO.retrievePetByShelterId(shelterId)) {
+            for(PetModel petModel : PetDAO.retrievePetByShelterId(shelter)) {
                 PetBean petBean = new PetBean(petModel);
                 petList.add(petBean);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */
         return petList;
     }
 

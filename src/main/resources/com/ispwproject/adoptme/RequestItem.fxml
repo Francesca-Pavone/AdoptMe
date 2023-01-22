@@ -13,31 +13,62 @@
 
 <AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIRequestItemController">
    <children>
-      <VBox fx:id="vBox" alignment="CENTER" spacing="10.0" styleClass="request-box" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+      <VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="250.0" spacing="8.0" styleClass="request-box" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="7.0">
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding>
          <children>
-            <HBox alignment="CENTER" prefWidth="250.0" spacing="10.0">
+            <HBox alignment="CENTER" prefWidth="250.0" spacing="15.0">
                <children>
-                  <ImageView fx:id="userImg" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/profile_img.png" />
-                     </image></ImageView>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Pane style="-fx-background-color: #000000; -fx-background-radius: 100;">
+                           <children>
+                              <ImageView fx:id="userImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
+                                 <image>
+
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="useName" text="user">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                   <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="35.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/join.png" />
                      </image></ImageView>
-                  <ImageView fx:id="petImg" fitHeight="50.0" fitWidth="50.0" layoutX="220.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/cane1_tondo.png" />
-                     </image></ImageView>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Pane style="-fx-background-color: #000000; -fx-background-radius: 100;">
+                           <children>
+                              <ImageView fx:id="petImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/gatto1.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="petName" text="pet">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <Label fx:id="time" text="16:30">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="-5.0" />
+               </VBox.margin>
             </Label>
             <Label fx:id="date" text="22-05-2023">
                <font>

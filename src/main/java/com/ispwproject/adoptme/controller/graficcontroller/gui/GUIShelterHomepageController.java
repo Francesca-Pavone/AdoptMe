@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -17,10 +18,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GUIShelterHomepageController implements Observer {
     @FXML
     private GridPane grid;
+    @FXML
+    private Label petsNumber;
     private ShelterBean shelterBean;
 
     public void addPet(ActionEvent event) throws IOException {
@@ -38,13 +43,16 @@ public class GUIShelterHomepageController implements Observer {
 
     public void setShelterSession(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
+        loadShelterPets();
+    }
 
+    private void loadShelterPets() {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
         int column = 0;
         int row = 1;
 
         try {
-            for (PetBean pet : showShelterPetsController.getPetList()) {
+            for (PetBean pet : showShelterPetsController.getPetList(this)) {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
 
@@ -92,6 +100,6 @@ public class GUIShelterHomepageController implements Observer {
 
     @Override
     public void update(Object object) {
-
+        petsNumber.setText(object.toString());
     }
 }

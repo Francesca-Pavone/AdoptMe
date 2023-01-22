@@ -46,17 +46,14 @@
          <content>
             <VBox alignment="CENTER">
                <children>
-                  <Button fx:id="btnLoadImage" mnemonicParsing="false" onAction="#loadImage" styleClass="transparent" stylesheets="@style.css">
+                  <Button fx:id="btnLoadImage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadImage" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #000000; -fx-background-radius: 100;" styleClass="transparent" stylesheets="@style.css">
                      <graphic>
-                        <ImageView fx:id="petImg" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="petImg" blendMode="SCREEN" fitHeight="100.0" fitWidth="100.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@image/load-photo.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                     <padding>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </padding>
                   </Button>
                   <HBox layoutX="30.0" layoutY="104.0" spacing="60.0">
                      <children>

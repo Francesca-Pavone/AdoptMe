@@ -66,8 +66,8 @@ public class GUIShelterInformationController implements Observer {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
-        ShelterPageController shelterPageController = new ShelterPageController();
-        List<PetBean> petBeanList = shelterPageController.getPetList(shelterBean.getShelterId());
+        ShelterPageController shelterPageController = new ShelterPageController(shelterBean);
+        List<PetBean> petBeanList = shelterPageController.getPetList(this);
 
         int column = 0;
         int row = 1;
