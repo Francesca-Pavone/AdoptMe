@@ -74,7 +74,7 @@ public class PetDAO {
         return petList;
     }
 
-    public static List<PetModel> retrievePetByQuestionnaire(String query, int gender, int age, String city, int dogEducation, int firstExperience, int garden, int hoursAlone, int size, int terrace) throws Exception {
+    public static List<PetModel> retrievePetByQuestionnaire(String query, int sleepOutside, int gender, String age, String city, int dogEducation, int firstExperience, int garden, int hoursAlone, int size, int terrace) throws Exception {
         Statement stmt = null;
         List<PetModel> petList = new ArrayList<PetModel>();
 
@@ -82,7 +82,7 @@ public class PetDAO {
             stmt = ConnectionDB.getConnection();
 
             // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
-            ResultSet resultSet = SimpleQueries.selectPetsFromQuestionnaire(stmt, query, gender, age, city, dogEducation, firstExperience, garden, hoursAlone, size, terrace);
+            ResultSet resultSet = SimpleQueries.selectPetsFromQuestionnaire(stmt, query, sleepOutside, gender, age, city, dogEducation, firstExperience, garden, hoursAlone, size, terrace);
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){

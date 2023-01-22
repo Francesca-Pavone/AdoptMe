@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.utils.bean;
 public class QuestionnaireResultBean {
     protected int type; // 0 -> Dog | 1 -> Cat
     protected int gender; // 0 -> male | 1 -> female | 2 -> not important
-    protected int age; // 0 -> puppy | 1 -> young | 2 -> adult | 3 -> senior
+    protected String age; // 0 -> puppy | 1 -> young | 2 -> adult | 3 -> senior
     /*protected boolean puppy;
     protected boolean young;
     protected boolean adult;
@@ -14,9 +14,8 @@ public class QuestionnaireResultBean {
     protected boolean maleDog;
     protected boolean femaleDog;
     protected int haveAGarden; // 0 -> no | 1 -> yes
-    protected boolean gardenSleepOutside; // 0 -> no | 1 -> yes
+    protected int sleepOutside; // 0 -> no | 1 -> yes
     protected int haveATerrace; // 0 -> no | 1 -> yes
-    protected boolean terraceSleepOutside; // 0 -> no | 1 -> yes
     protected int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
     protected int firstPet; // 0 -> no | 1 -> yes
     protected boolean sterilizePet; // 0 -> no | 1 -> yes
@@ -86,11 +85,11 @@ public class QuestionnaireResultBean {
         this.senior = senior;
     }*/
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -134,12 +133,12 @@ public class QuestionnaireResultBean {
         this.haveAGarden = haveAGarden;
     }
 
-    public boolean isGardenSleepOutside() {
-        return gardenSleepOutside;
+    public int isSleepOutside() {
+        return sleepOutside;
     }
 
-    public void setGardenSleepOutside(boolean gardenSleepOutside) {
-        this.gardenSleepOutside = gardenSleepOutside;
+    public void setSleepOutside(int sleepOutside) {
+        this.sleepOutside = sleepOutside;
     }
 
     public int isHaveATerrace() {
@@ -148,14 +147,6 @@ public class QuestionnaireResultBean {
 
     public void setHaveATerrace(int haveATerrace) {
         this.haveATerrace = haveATerrace;
-    }
-
-    public boolean isTerraceSleepOutside() {
-        return terraceSleepOutside;
-    }
-
-    public void setTerraceSleepOutside(boolean terraceSleepOutside) {
-        this.terraceSleepOutside = terraceSleepOutside;
     }
 
     public int getHoursAlone() {

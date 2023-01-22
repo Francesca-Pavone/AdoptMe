@@ -5,7 +5,7 @@ import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
 public final class QuestionnaireResultBeanBuilder {
     private int type;
     private int gender;
-    private int age;
+    private String age;
     /*private boolean puppy;
     private boolean young;
     private boolean adult;
@@ -16,7 +16,7 @@ public final class QuestionnaireResultBeanBuilder {
     private boolean maleDog;
     private boolean femaleDog;
     private int haveAGarden;
-    private boolean gardenSleepOutside;
+    private int sleepOutside;
     private int haveATerrace;
     private boolean terraceSleepOutside;
     private int hoursAlone;
@@ -64,7 +64,7 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }*/
 
-    public QuestionnaireResultBeanBuilder age(int age) {
+    public QuestionnaireResultBeanBuilder age(String age) {
         this.age = age;
         return this;
     }
@@ -99,18 +99,13 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder gardenSleepOutside(boolean gardenSleepOutside) {
-        this.gardenSleepOutside = gardenSleepOutside;
+    public QuestionnaireResultBeanBuilder sleepOutside(int gardenSleepOutside) {
+        this.sleepOutside = gardenSleepOutside;
         return this;
     }
 
     public QuestionnaireResultBeanBuilder haveATerrace(int haveATerrace) {
         this.haveATerrace = haveATerrace;
-        return this;
-    }
-
-    public QuestionnaireResultBeanBuilder terraceSleepOutside(boolean terraceSleepOutside) {
-        this.terraceSleepOutside = terraceSleepOutside;
         return this;
     }
 
@@ -164,9 +159,8 @@ public final class QuestionnaireResultBeanBuilder {
         questionnaireResultBean.setMaleDog(maleDog);
         questionnaireResultBean.setFemaleDog(femaleDog);
         questionnaireResultBean.setHaveAGarden(haveAGarden);
-        questionnaireResultBean.setGardenSleepOutside(gardenSleepOutside);
+        questionnaireResultBean.setSleepOutside(sleepOutside);
         questionnaireResultBean.setHaveATerrace(haveATerrace);
-        questionnaireResultBean.setTerraceSleepOutside(terraceSleepOutside);
         questionnaireResultBean.setHoursAlone(hoursAlone);
         questionnaireResultBean.setFirstPet(firstPet);
         questionnaireResultBean.setSterilizePet(sterilizePet);

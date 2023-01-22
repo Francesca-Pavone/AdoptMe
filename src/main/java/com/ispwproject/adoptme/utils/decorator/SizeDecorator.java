@@ -1,12 +1,14 @@
 package com.ispwproject.adoptme.utils.decorator;
 
 public class SizeDecorator extends Decorator{
-    public SizeDecorator(IQuestionnaireQuery questionnaireQuery) {
+    int size;
+    public SizeDecorator(IQuestionnaireQuery questionnaireQuery, int size) {
         super(questionnaireQuery);
+        this.size = size;
     }
 
     @Override
     public String getQuery() {
-        return super.getQuery() + " size = '\" + dogSize + \"'";
+        return super.getQuery() + " size = '" + size + "'";
     }
 }

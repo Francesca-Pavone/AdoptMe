@@ -1,12 +1,14 @@
 package com.ispwproject.adoptme.utils.decorator;
 
 public class TerraceDecorator extends Decorator{
-    public TerraceDecorator(IQuestionnaireQuery questionnaireQuery) {
+    int terrace;
+    public TerraceDecorator(IQuestionnaireQuery questionnaireQuery, int terrace) {
         super(questionnaireQuery);
+        this.terrace = terrace;
     }
 
     @Override
     public String getQuery() {
-        return super.getQuery() + " apartmentNoTerrace = '\" + terrace + \"'";
+        return super.getQuery() + " apartmentNoTerrace = '" + terrace + "'";
     }
 }

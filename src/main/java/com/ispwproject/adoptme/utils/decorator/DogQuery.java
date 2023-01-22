@@ -7,7 +7,7 @@ public class DogQuery implements IQuestionnaireQuery{
 
     @Override
     public String getQuery() {
-        return "SELECT * FROM Dogs JOIN Compatibility ON dogId = petId WHERE";
+        return "SELECT dogId as id, name, imgSrc, dayOfBirth, monthOfBirth, yearOfBirth, gender, type, shelter FROM Dogs JOIN Compatibility ON id = petId WHERE";
     }
 
 }

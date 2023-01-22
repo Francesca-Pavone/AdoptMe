@@ -1,13 +1,15 @@
 package com.ispwproject.adoptme.utils.decorator;
 
 public class GenderDecorator extends Decorator {
-    public GenderDecorator(IQuestionnaireQuery questionnaireQuery) {
+    int gender;
+    public GenderDecorator(IQuestionnaireQuery questionnaireQuery, int gender) {
         super(questionnaireQuery);
+        this.gender = gender;
     }
 
     @Override
     public String getQuery() {
-        return super.getQuery() + " gender = '\" + gender + \"'";
+        return super.getQuery() + " gender = '" + gender + "'";
     }
 
 

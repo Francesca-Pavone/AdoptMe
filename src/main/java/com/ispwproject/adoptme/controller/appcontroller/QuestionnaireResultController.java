@@ -1,11 +1,20 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetItemController;
+import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import com.ispwproject.adoptme.utils.decorator.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionnaireResultController {
-    public void searchPets(QuestionnaireResultBean questionnaireResultBean) throws Exception {
+    public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) throws Exception {
         IQuestionnaireQuery questionnaireQuery;
         switch (questionnaireResultBean.isType()) {
             case 1 -> {
@@ -18,19 +27,19 @@ public class QuestionnaireResultController {
             default -> {
                 questionnaireQuery = new DogQuery();
                 if (questionnaireResultBean.getSize() != -1) {
-                    questionnaireQuery = new SizeDecorator(questionnaireQuery);
+                    questionnaireQuery = new SizeDecorator(questionnaireQuery, questionnaireResultBean.getSize());
                     questionnaireQuery = new AndDecorator(questionnaireQuery);
                 }
-                questionnaireQuery = new DogEducationDecorator(questionnaireQuery);
+                questionnaireQuery = new DogEducationDecorator(questionnaireQuery, questionnaireResultBean.isProgramEducation());
                 questionnaireQuery = new AndDecorator(questionnaireQuery);
             }
         }
         if (questionnaireResultBean.isGender() != -1) {
-            questionnaireQuery = new GenderDecorator(questionnaireQuery);
+            questionnaireQuery = new GenderDecorator(questionnaireQuery, questionnaireResultBean.isGender());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
-        if (questionnaireResultBean.getAge() != -1) {
-            questionnaireQuery = new AgeDecorator(questionnaireQuery);
+        if (!questionnaireResultBean.getAge().equals("")) {
+            questionnaireQuery = new AgeDecorator(questionnaireQuery, questionnaireResultBean.getAge());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if (questionnaireResultBean.isMaleCat()) {
@@ -50,17 +59,17 @@ public class QuestionnaireResultController {
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if (questionnaireResultBean.isHaveAGarden() == 1) {
-            questionnaireQuery = new GardenDecorator(new AndDecorator(new SleepOutsideDecorator(questionnaireQuery)));
+            questionnaireQuery = new GardenDecorator(new AndDecorator(new SleepOutsideDecorator(questionnaireQuery, questionnaireResultBean.isSleepOutside())), questionnaireResultBean.isHaveAGarden());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         } else {
-            questionnaireQuery = new GardenDecorator(questionnaireQuery);
+            questionnaireQuery = new GardenDecorator(questionnaireQuery, questionnaireResultBean.isHaveAGarden());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if (questionnaireResultBean.isHaveATerrace() == 1) {
-            questionnaireQuery = new TerraceDecorator(new AndDecorator(new SleepOutsideDecorator(questionnaireQuery)));
+            questionnaireQuery = new TerraceDecorator(new AndDecorator(new SleepOutsideDecorator(questionnaireQuery, questionnaireResultBean.isSleepOutside())), questionnaireResultBean.isHaveATerrace());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         } else {
-            questionnaireQuery = new TerraceDecorator(questionnaireQuery);
+            questionnaireQuery = new TerraceDecorator(questionnaireQuery, questionnaireResultBean.isHaveATerrace());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if(!questionnaireResultBean.isSterilizePet()) {
@@ -71,9 +80,21 @@ public class QuestionnaireResultController {
             questionnaireQuery = new DisabledDecorator(questionnaireQuery);
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
-        questionnaireQuery = new HoursAloneDecorator(new AndDecorator(new FirstExperienceDecorator(questionnaireQuery)));
+        if(questionnaireResultBean.isFirstPet() == 1) {
+            questionnaireQuery = new FirstExperienceDecorator(questionnaireQuery);
+            questionnaireQuery = new AndDecorator(questionnaireQuery);
+        }
+        questionnaireQuery = new HoursAloneDecorator(questionnaireQuery, questionnaireResultBean.getHoursAlone());
         if(questionnaireResultBean.isSpecificArea())
-            questionnaireQuery = new CityDecorator(new AndDecorator(questionnaireQuery));
-        PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery(), questionnaireResultBean.isGender(), questionnaireResultBean.getAge(), questionnaireResultBean.getCity(), questionnaireResultBean.isProgramEducation(), questionnaireResultBean.isFirstPet(), questionnaireResultBean.isHaveAGarden(), questionnaireResultBean.getHoursAlone(), questionnaireResultBean.getSize(), questionnaireResultBean.isHaveATerrace());
+            questionnaireQuery = new CityDecorator(new AndDecorator(questionnaireQuery), questionnaireResultBean.getCity());
+        questionnaireQuery = new EndDecorator(questionnaireQuery);
+        System.out.println(questionnaireQuery.getQuery());
+
+        List<PetBean> petList = new ArrayList<>();
+        for (PetModel pet : PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery(), questionnaireResultBean.isSleepOutside(), questionnaireResultBean.isGender(), questionnaireResultBean.getAge(), questionnaireResultBean.getCity(), questionnaireResultBean.isProgramEducation(), questionnaireResultBean.isFirstPet(), questionnaireResultBean.isHaveAGarden(), questionnaireResultBean.getHoursAlone(), questionnaireResultBean.getSize(), questionnaireResultBean.isHaveATerrace())) {
+            PetBean petBean = new PetBean(pet);
+            petList.add(petBean);
+        }
+        return petList;
     }
 }

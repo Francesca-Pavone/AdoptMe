@@ -1,12 +1,14 @@
 package com.ispwproject.adoptme.utils.decorator;
 
 public class GardenDecorator extends Decorator{
-    public GardenDecorator(IQuestionnaireQuery questionnaireQuery) {
+    int garden;
+    public GardenDecorator(IQuestionnaireQuery questionnaireQuery, int garden) {
         super(questionnaireQuery);
+        this.garden = garden;
     }
 
     @Override
     public String getQuery() {
-        return super.getQuery() + " apartmentNoGarden = '\" + garden + \"'";
+        return super.getQuery() + " apartmentNoGarden = '" + garden + "'";
     }
 }
