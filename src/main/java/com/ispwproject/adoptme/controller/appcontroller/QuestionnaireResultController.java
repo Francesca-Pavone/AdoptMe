@@ -88,7 +88,6 @@ public class QuestionnaireResultController {
         if(questionnaireResultBean.isSpecificArea())
             questionnaireQuery = new CityDecorator(new AndDecorator(questionnaireQuery), questionnaireResultBean.getCity());
         questionnaireQuery = new EndDecorator(questionnaireQuery);
-        System.out.println(questionnaireQuery.getQuery());
 
         List<PetBean> petList = new ArrayList<>();
         for (PetModel pet : PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery(), questionnaireResultBean.isSleepOutside(), questionnaireResultBean.isGender(), questionnaireResultBean.getAge(), questionnaireResultBean.getCity(), questionnaireResultBean.isProgramEducation(), questionnaireResultBean.isFirstPet(), questionnaireResultBean.isHaveAGarden(), questionnaireResultBean.getHoursAlone(), questionnaireResultBean.getSize(), questionnaireResultBean.isHaveATerrace())) {
