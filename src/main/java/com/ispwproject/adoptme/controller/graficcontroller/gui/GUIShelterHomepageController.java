@@ -76,7 +76,6 @@ public class GUIShelterHomepageController implements Observer {
             Pane pane = fxmlLoader.load();
 
             GUIPetItemController petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setSessionData(shelterBean);
             petItemControllerG.setPetData((PetBean) object);
 
             if (column == 3) {

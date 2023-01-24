@@ -122,10 +122,11 @@ public class GUIPetInfoController implements Observer {
     private TextField timeField;
 
     private ShelterBean shelterBean;
-
+    private PetBean petBean;
 
     public void setPetInfo(PetBean petBean) throws Exception {
         this.petBean = petBean;
+
         PetInfoController petInfoControllerA = new PetInfoController();
 
         shelterBean = petInfoControllerA.getPetInfo(petBean);
@@ -294,7 +295,7 @@ public class GUIPetInfoController implements Observer {
         RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
 
         SendRequestController sendRequestController = new SendRequestController();
-        sendRequestController.createUserRequest(object, petBean, requestBean);
+        sendRequestController.createUserRequest(Session.getSession().getUserBean(), petBean, requestBean);
         datePicker.setValue(null);
         timeField.setText(null);
         /*

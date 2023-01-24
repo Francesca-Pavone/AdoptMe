@@ -146,8 +146,6 @@ public class GUIAddPetController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-        guiShelterHomepageController.setShelterSession(shelterBean);
         Main.getStage().setScene(scene);
 
         ((Node)event.getSource()).getScene().getWindow().hide();

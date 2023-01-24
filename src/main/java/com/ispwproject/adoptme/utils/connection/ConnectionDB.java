@@ -58,7 +58,7 @@ public class ConnectionDB {
 
     private static Properties loadProperties() throws IOException {
         Properties properties = new Properties();
-        FileInputStream fileInputStream = new FileInputStream("C:/Users/feder/IdeaProjects/AdoptMe/src/main/java/com/ispwproject/adoptme/utils/connection/connection.properties");
+        FileInputStream fileInputStream = new FileInputStream("src/main/java/com/ispwproject/adoptme/utils/connection/connection.properties");
         properties.load(fileInputStream);
         return properties;
     }
