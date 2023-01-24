@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterAppoint
 import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController;
 import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterSettingsController;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +16,7 @@ import java.io.IOException;
 
 public class ShelterSideBar {
 
-    protected  ShelterBean shelterBean;
+    protected ShelterBean shelterBean;
 
     public void setShelterSession(ShelterBean shelterBean) throws IOException {
         this.shelterBean = shelterBean;

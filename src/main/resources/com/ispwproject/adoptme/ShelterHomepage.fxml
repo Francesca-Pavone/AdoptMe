@@ -208,4 +208,5 @@
          </ScrollPane>
       </VBox>
    </HBox>
+   <Pane fx:id="blackPane" opacity="0.7" style="-fx-background-color: #000000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 </AnchorPane>

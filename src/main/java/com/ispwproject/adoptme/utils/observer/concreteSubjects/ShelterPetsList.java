@@ -25,7 +25,7 @@ public class ShelterPetsList extends Subject {
     public void addPet(PetModel petModel) throws Exception {
         this.petList.add(petModel);
         PetBean petBean = new PetBean(PetDAO.retrievePetById(petModel.getPetId(), petModel.getShelter().getId()));
-        this.notifyObservers(petList.size());
+        this.notifyObservers(petBean);
     }
 
     public List<PetModel> getPetList() {

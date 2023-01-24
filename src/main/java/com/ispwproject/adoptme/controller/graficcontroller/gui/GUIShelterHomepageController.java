@@ -26,9 +26,15 @@ public class GUIShelterHomepageController implements Observer {
     private GridPane grid;
     @FXML
     private Label petsNumber;
+    @FXML
+    private Pane blackPane;
     private ShelterBean shelterBean;
 
+    int column = 0;
+    int row = 1;
+
     public void addPet(ActionEvent event) throws IOException {
+        blackPane.setVisible(true);
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
@@ -48,29 +54,7 @@ public class GUIShelterHomepageController implements Observer {
 
     private void loadShelterPets() {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
-        int column = 0;
-        int row = 1;
-
-        try {
-            for (PetBean pet : showShelterPetsController.getPetList(this)) {
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
-                Pane pane = fxmlLoader.load();
-
-                GUIPetItemController petItemControllerG = fxmlLoader.getController();
-                petItemControllerG.setSessionData(shelterBean);
-                petItemControllerG.setPetData(pet);
-
-
-                if (column == 3) {
-                    column = 0;
-                    row++;
-                }
-
-                grid.add(pane, column++, row);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        showShelterPetsController.getPetList(this);
     }
 
 
@@ -100,6 +84,24 @@ public class GUIShelterHomepageController implements Observer {
 
     @Override
     public void update(Object object) {
-        petsNumber.setText(object.toString());
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
+            Pane pane = fxmlLoader.load();
+
+            GUIPetItemController petItemControllerG = fxmlLoader.getController();
+            petItemControllerG.setSessionData(shelterBean);
+            petItemControllerG.setPetData((PetBean) object);
+
+            if (column == 3) {
+                column = 0;
+                row++;
+            }
+            grid.add(pane, column++, row);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        petsNumber.setText(String.valueOf(((PetBean)object).getPetId()));
     }
 }

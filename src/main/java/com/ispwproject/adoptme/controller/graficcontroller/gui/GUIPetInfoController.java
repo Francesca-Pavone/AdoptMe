@@ -2,16 +2,21 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
+import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
+import com.ispwproject.adoptme.utils.bean.RequestBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -23,7 +28,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class GUIPetInfoController {
+public class GUIPetInfoController implements Observer {
 
     @FXML
     private Label coatLenght;
@@ -107,17 +112,25 @@ public class GUIPetInfoController {
     @FXML
     private VBox requestVBox;
     @FXML
+    private Button btnSend;
+    @FXML
     private HBox infoHBox;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private TextField timeField;
 
     private ShelterBean shelterBean;
     private Object object;
+
+    private PetBean petBean;
 
     public void setSessionData(Object ob) {
         this.object = ob;
     }
 
     public void setPetInfo(PetBean petBean) throws Exception {
-
+        this.petBean = petBean;
         PetInfoController petInfoControllerA = new PetInfoController();
 
         shelterBean = petInfoControllerA.getPetInfo(petBean);
@@ -278,10 +291,26 @@ public class GUIPetInfoController {
                     default -> "Stay more than 6 hours alone"; // case 2
                 }
         );
+    }
 
+    public void sendRequest(ActionEvent event) throws Exception {
 
+        String[] time = timeField.getText().split(":");
+        RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
 
+        SendRequestController sendRequestController = new SendRequestController();
+        sendRequestController.createUserRequest(object, petBean, requestBean);
+        datePicker.setValue(null);
+        timeField.setText(null);
+        /*
+        requestVBox.getChildren().remove(btnSend);
+        ImageView done = new ImageView(new Image(Main.class.getResource("image/done.png").openStream()));
+        requestVBox.getChildren().add(done);
 
+        requestVBox.getChildren().add(btnSend);
+        requestVBox.getChildren().remove(done);
+
+         */
     }
 
     private void setCompatibilityLabel(String text) {
@@ -320,7 +349,12 @@ public class GUIPetInfoController {
         GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
         guiShelterInformationController.setData(shelterBean);
         stage.setScene(scene);
+    }
 
+    @Override
+    public void update(Object object) {
+        Label label = new Label("You have already sended a request");
+        requestVBox.getChildren().add(label);
 
     }
 }

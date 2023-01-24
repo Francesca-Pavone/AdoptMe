@@ -31,7 +31,7 @@ public class GUIUserAppointmentsController extends UserSideBar implements Observ
     private void loadUserRequest() {
         RequestsController requestsController = new RequestsController(userBean);
         try {
-            for (RequestBean request : requestsController.getRequestList()) {
+            for (RequestBean request : requestsController.getUserRequestList(this)) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
                 Pane pane = fxmlLoader.load();

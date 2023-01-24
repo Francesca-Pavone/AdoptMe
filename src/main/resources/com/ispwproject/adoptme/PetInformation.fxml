@@ -314,7 +314,7 @@
                            <Font name="Arial" size="20.0" />
                         </font>
                      </Label>
-                     <DatePicker prefHeight="35.0" prefWidth="200.0" promptText="DD/MM/YYYY" styleClass="transparent">
+                     <DatePicker fx:id="datePicker" prefHeight="35.0" prefWidth="200.0" promptText="DD/MM/YYYY" styleClass="transparent">
                         <VBox.margin>
                            <Insets left="25.0" />
                         </VBox.margin>
@@ -327,12 +327,15 @@
                            <Insets top="10.0" />
                         </VBox.margin>
                      </Label>
-                     <TextField maxWidth="-Infinity" prefHeight="35.0" prefWidth="175.0" promptText="hh:mm" />
+                     <TextField fx:id="timeField" maxWidth="-Infinity" prefHeight="35.0" prefWidth="175.0" promptText="hh:mm" />
                      <Pane layoutX="40.0" layoutY="73.0" VBox.vgrow="ALWAYS" />
-                     <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="104.0" styleClass="button1" text="Send" textFill="WHITE">
+                     <Button fx:id="btnSend" mnemonicParsing="false" onAction="#sendRequest" styleClass="button1" text="Send" textFill="WHITE">
                         <font>
                            <Font name="Arial Bold" size="20.0" />
                         </font>
+                        <padding>
+                           <Insets bottom="6.0" left="25.0" right="25.0" top="6.0" />
+                        </padding>
                      </Button>
                   </children>
                   <HBox.margin>

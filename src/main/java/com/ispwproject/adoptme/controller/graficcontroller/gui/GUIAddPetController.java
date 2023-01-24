@@ -146,7 +146,14 @@ public class GUIAddPetController {
         sizeVBox.getChildren().removeAll(txtSize, boxSize);
     }
 
-    public void close(ActionEvent event) {
+    public void close(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+        guiShelterHomepageController.setShelterSession(shelterBean);
+        Main.getStage().setScene(scene);
+
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
@@ -282,14 +289,7 @@ public class GUIAddPetController {
 
         addPetController = new AddPetController(petBean);
         addPetController.addNewPet(shelterBean);
-
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-        guiShelterHomepageController.setShelterSession(shelterBean);
-        Main.getStage().setScene(scene);
-
+        close(event);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

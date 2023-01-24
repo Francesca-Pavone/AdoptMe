@@ -77,7 +77,7 @@
             </Label>
             <HBox fx:id="manageReqBox" alignment="CENTER">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" styleClass="button-refuse">
+                  <Button fx:id="rejectBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#rejectRequest" styleClass="button-refuse">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -87,13 +87,13 @@
                      </graphic>
                   </Button>
                   <Pane HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" styleClass="button1" text="Accept" textFill="WHITE">
+                  <Button fx:id="acceptBtn" mnemonicParsing="false" onAction="#acceptRequest" styleClass="button1" text="Accept" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
                   </Button>
                   <Pane HBox.hgrow="ALWAYS" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" styleClass="button-modify">
+                  <Button fx:id="modifyBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#modifyRequest" styleClass="button-modify">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
