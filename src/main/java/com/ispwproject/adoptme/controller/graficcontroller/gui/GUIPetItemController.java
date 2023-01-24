@@ -31,12 +31,6 @@ public class GUIPetItemController {
     private Label petName;
     private PetBean petBean;
 
-    private Object object;
-    public void setSessionData(Object ob) {
-        this.object = ob;
-    }
-
-
     public void setPetData(PetBean pet) throws IOException {
         this.petBean = pet;
 
@@ -62,7 +56,6 @@ public class GUIPetItemController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         GUIPetInfoController petInformationControllerG = fxmlLoader.getController();
-        petInformationControllerG.setSessionData(object);
         petInformationControllerG.setPetInfo(petBean);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

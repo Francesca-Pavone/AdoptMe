@@ -3,7 +3,6 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,15 +17,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GUIShelterHomepageController implements Observer {
     @FXML
     private GridPane grid;
     @FXML
     private Label petsNumber;
-    private ShelterBean shelterBean;
 
     public void addPet(ActionEvent event) throws IOException {
         Stage dialog = new Stage();
@@ -35,19 +31,12 @@ public class GUIShelterHomepageController implements Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPetForm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        GUIAddPetController guiAddPetController = fxmlLoader.getController();
-        guiAddPetController.setShelterSession(this.shelterBean);
         dialog.setScene(scene);
         dialog.show();
     }
 
-    public void setShelterSession(ShelterBean shelterBean) {
-        this.shelterBean = shelterBean;
-        loadShelterPets();
-    }
-
-    private void loadShelterPets() {
-        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
+    public void initialize() {
+        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
         int column = 0;
         int row = 1;
 
@@ -57,7 +46,6 @@ public class GUIShelterHomepageController implements Observer {
                 Pane pane = fxmlLoader.load();
 
                 GUIPetItemController petItemControllerG = fxmlLoader.getController();
-                petItemControllerG.setSessionData(shelterBean);
                 petItemControllerG.setPetData(pet);
 
 
@@ -80,8 +68,6 @@ public class GUIShelterHomepageController implements Observer {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterAppointments.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        GUIShelterAppointmentsController guiShelterAppointmentsController = fxmlLoader.getController();
-        guiShelterAppointmentsController.setShelterSession(this.shelterBean);
         stage.setScene(scene);
     }
 
@@ -93,8 +79,6 @@ public class GUIShelterHomepageController implements Observer {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSettings.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        GUIShelterSettingsController guiShelterSettingsController = fxmlLoader.getController();
-        guiShelterSettingsController.setShelterSession(this.shelterBean);
         stage.setScene(scene);
     }
 

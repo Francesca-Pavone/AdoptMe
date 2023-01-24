@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
 import com.ispwproject.adoptme.utils.enums.CoatLenght;
 import com.ispwproject.adoptme.utils.enums.Size;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -121,11 +122,6 @@ public class GUIAddPetController {
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
-    private ShelterBean shelterBean;
-
-    public void setShelterSession(ShelterBean shelterBean) {
-        this.shelterBean = shelterBean;
-    }
 
     public void initialize() {
 
@@ -159,7 +155,7 @@ public class GUIAddPetController {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
-
+        ShelterBean shelterBean = Session.getSession().getShelterBean();
         int year;
         int month;
         int day;
@@ -285,9 +281,6 @@ public class GUIAddPetController {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
-        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-        guiShelterHomepageController.setShelterSession(shelterBean);
         Main.getStage().setScene(scene);
 
         ((Node)event.getSource()).getScene().getWindow().hide();

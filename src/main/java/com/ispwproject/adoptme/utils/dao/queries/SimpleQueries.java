@@ -105,7 +105,7 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectPetsFromQuestionnaire(Statement stmt, String query, int sleepOutside, int gender, String age, String city, int dogEducation, int firstExperience, int garden, int hoursAlone, int dogSize, int terrace) throws SQLException {
+    public static ResultSet selectPetsFromQuestionnaire(Statement stmt, String query) throws SQLException {
         String sql = query;
         return stmt.executeQuery(sql);
     }

@@ -20,16 +20,8 @@ public class GUIUserAppointmentsController extends UserSideBar implements Observ
     @FXML
     private HBox confirmedReqList;
 
-    private UserBean userBean;
-
-   @Override
-    public void setUserSession(UserBean userBean) {
-        this.userBean = userBean;
-        loadUserRequest();
-    }
-
     private void loadUserRequest() {
-        RequestsController requestsController = new RequestsController(userBean);
+        RequestsController requestsController = new RequestsController();
         try {
             for (RequestBean request : requestsController.getRequestList()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();

@@ -100,9 +100,9 @@ public class ShelterDAO {
         return sheltersList;
     }
 
-    public static ShelterModel retrieveShelterByName(String shelterName) throws Exception {
+    public static int retrieveIdByShelterName(String shelterName) throws Exception {
         Statement stmt = null;
-        ShelterModel shelter = null;
+        int shelterId = 0;
         try {
             stmt = ConnectionDB.getConnection();
 
@@ -113,32 +113,7 @@ public class ShelterDAO {
             }
 
             resultSet.first();
-            do{
-                int shelterId = resultSet.getInt(SHELTER_ID);
-                String phoneNumber = resultSet.getString(PHONE_NUMBER);
-                String address = resultSet.getString(ADDRESS);
-                String city = resultSet.getString(CITY);
-                String webSite = resultSet.getString(WEB_SITE);
-                URL webSiteURL = new URL(webSite);
-
-                String email = resultSet.getString(EMAIL);
-
-                Blob blob = resultSet.getBlob(PROFILE_IMG);
-                InputStream in = blob.getBinaryStream();
-                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                String filePath = shelterName + PHOTO + ".png";
-                File shelterImage = new File(filePath);
-                FileOutputStream outputStream = new FileOutputStream(shelterImage);
-                int read;
-                byte[] bytes = new byte[4096];
-                while ((read = in.read(bytes)) != -1) {
-                    outputStream.write(bytes, 0, read);
-                }
-
-                AccountInfo accountInfo = new AccountInfo(email, 1);
-                shelter = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
-
-            }while(resultSet.next());
+            shelterId = resultSet.getInt(SHELTER_ID);
 
             resultSet.close();
 
@@ -146,7 +121,7 @@ public class ShelterDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return shelter;
+        return shelterId;
     }
 
     public static ShelterModel retrieveShelterById(int shelterId) throws Exception {

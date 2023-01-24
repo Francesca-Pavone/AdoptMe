@@ -3,6 +3,8 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.utils.bean.LoginBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,19 +76,18 @@ public class GUILoginController {
         LoginController loginController = new LoginController();
         loginController.checkLogin(loginBean);
 
-        if (loginBean.getAccountType() != 0) {
-            Session session = loginController.getLoginInfo(loginBean);
+        if (loginBean.getAccountType() == 1) {
+            UserBean userBean = loginController.getLoginInfoUser(loginBean);
+            Session.getSessionInstance(userBean);
+            userLogin(stage);
+        } else if (loginBean.getAccountType() == 2) {
+            ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
+            Session.getSessionInstance(shelterBean);
 
-            if (loginBean.getAccountType() == 1) {
-                userLogin(stage, session);
-            } else if (loginBean.getAccountType() == 2) {
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
 
-                GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-                guiShelterHomepageController.setShelterSession(session.getShelterBean());
-                stage.setScene(scene);
-            }
+            stage.setScene(scene);
         }
         else
             System.out.println("Utente non trovato");
@@ -102,18 +103,14 @@ public class GUILoginController {
     }
 
     public void noLogin(ActionEvent event) throws IOException {
+        Session.getSessionInstance(null);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Session session = new Session();
-        userLogin(stage, session);
+        userLogin(stage);
     }
 
-    private static void userLogin(Stage stage, Session session) throws IOException {
+    private static void userLogin(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
-        GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
-        userHomepageControllerG.setUserSession(session.getUserBean());
-
         stage.setScene(scene);
     }
 }
