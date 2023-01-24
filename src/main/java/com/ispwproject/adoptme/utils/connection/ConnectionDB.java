@@ -63,6 +63,10 @@ public class ConnectionDB {
         return properties;
     }
 
+    public static PreparedStatement insertRequest() throws SQLException {
+        return connection.prepareStatement("INSERT INTO Requests (shelterId, petId, userId, date, time, status) VALUES (?,?,?,?,?,?)");
+    }
+
     public static PreparedStatement insertDog() throws SQLException {
         return connection.prepareStatement("INSERT INTO Dogs (dogId, shelter, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, coatLenght, size, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, education) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     }

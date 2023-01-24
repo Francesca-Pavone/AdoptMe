@@ -6,23 +6,40 @@ import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.connection.ConnectionDB;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.utils.observer.Observer;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RequestDAO {
 
-    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws Exception {
+    public static void saveRequest(RequestModel requestModel) {
+        try {
+            //CRUDQueries.insertRequest(stmt, requestModel);
+            try (PreparedStatement preparedStatement = ConnectionDB.insertRequest()) {
+                preparedStatement.setInt(1, requestModel.getPet().getShelter().getId());
+                preparedStatement.setInt(2, requestModel.getPet().getPetId());
+                preparedStatement.setInt(3, requestModel.getUser().getId());
+                preparedStatement.setDate(4, Date.valueOf(requestModel.getDate()));
+                preparedStatement.setTime(5, Time.valueOf(requestModel.getTime()));
+                preparedStatement.setInt(6, requestModel.getStatus());
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static RequestList retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
         Statement stmt = null;
-        List<RequestModel> requestList = new ArrayList<>();
+        List<RequestModel> requestModelList = new ArrayList<>();
+        RequestList requestList = new RequestList(observer,requestModelList, shelterModel);
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -50,20 +67,19 @@ public class RequestDAO {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 dateFormat.format(date);
 
-                LocalTime time = resultSet.getObject("time", LocalTime.class);
+                LocalTime time = resultSet.getTime("time").toLocalTime();
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm");
                 time.format(timeFormatter);
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date, time, status);
-                requestList.add(requestModel);
+                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date.toLocalDate(), time, status);
+                requestList.addRequest(requestModel);
 
             } while (resultSet.next());
 
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -71,9 +87,10 @@ public class RequestDAO {
         return requestList;
     }
 
-    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws Exception {
+    public static RequestList retrieveReqByUser(UserModel userModel, Observer observer) throws Exception {
         Statement stmt = null;
-        List<RequestModel> requestList = new ArrayList<>();
+        List<RequestModel> requestModelList = new ArrayList<>();
+        RequestList requestList = new RequestList(observer,requestModelList, userModel);
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -105,8 +122,8 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date, time, status);
-                requestList.add(requestModel);
+                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date.toLocalDate(), time, status);
+                requestList.addRequest(requestModel);
 
             } while (resultSet.next());
 

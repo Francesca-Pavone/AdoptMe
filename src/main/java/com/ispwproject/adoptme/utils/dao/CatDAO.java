@@ -115,8 +115,6 @@ public class CatDAO {
             preparedStatement.setBoolean(16, catModel.isDisability());
             preparedStatement.setString(17, catModel.getDisabilityType());
             preparedStatement.executeUpdate();
-            rs.close();
-
 
             PreparedStatement preparedStatement1 = ConnectionDB.insertPetCompatibility();
             preparedStatement1.setInt(1, catId);
@@ -134,8 +132,6 @@ public class CatDAO {
             preparedStatement1.setInt(13, catModel.getPetCompatibility().getHoursAlone());
             preparedStatement1.executeUpdate();
 
-            // STEP 5.1: Clean-up dell'ambiente
-            rs.close();
         }
         catch (SQLException e) {
             e.printStackTrace();

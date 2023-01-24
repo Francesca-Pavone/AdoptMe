@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.RequestBean;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -52,12 +53,20 @@ public class GUIRequestItemController {
         petImg.setImage(image);
         petName.setText(requestBean.getPetName());
 
-        date.setText(requestBean.getDate());
-        time.setText(requestBean.getTime());
+        date.setText(requestBean.getDate().toString());
+        time.setText(requestBean.getHour() + ":"+ requestBean.getMinutes());
         if (requestBean.getStatus() == 2) // confirmed request
             vBox.getChildren().remove(manageReqBox);
 
     }
 
 
+    public void acceptRequest(ActionEvent event) {
+    }
+
+    public void rejectRequest(ActionEvent event) {
+    }
+
+    public void modifyRequest(ActionEvent event) {
+    }
 }

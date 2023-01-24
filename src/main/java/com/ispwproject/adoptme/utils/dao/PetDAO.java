@@ -196,6 +196,7 @@ public class PetDAO {
                 }
 
                 int petType = resultSet.getInt("type");
+                String petAge = resultSet.getString("age");
 
                 ShelterModel shelter = ShelterDAO.retrieveShelterById(shelterId);
 
@@ -209,6 +210,7 @@ public class PetDAO {
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
+                pet.setAge(petAge);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);

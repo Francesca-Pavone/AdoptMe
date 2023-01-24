@@ -167,6 +167,8 @@ public class PetBean {
         this.setType(petModel.getType());
         this.setYearOfBirth(petModel.getYearOfBirth());
         this.setMonthOfBirth(petModel.getMonthOfBirth());
+        this.setDayOfBirth(petModel.getDayOfBirth());
+        this.setAge(petModel.getAge());
         this.setGender(petModel.getGender());
         this.setCoatLenght(petModel.getCoatLenght());
         this.setVaccinated(petModel.isVaccinated());

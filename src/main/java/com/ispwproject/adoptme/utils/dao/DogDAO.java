@@ -120,7 +120,6 @@ public class DogDAO {
             preparedStatement.setString(16, dogModel.getDisabilityType());
             preparedStatement.setBoolean(17, dogModel.isProgramEducation());
             preparedStatement.executeUpdate();
-            rs.close();
 
             PreparedStatement preparedStatement1 = ConnectionDB.insertPetCompatibility();
             preparedStatement1.setInt(1, dogId);
@@ -138,9 +137,6 @@ public class DogDAO {
             preparedStatement1.setInt(13, dogModel.getPetCompatibility().getHoursAlone());
             preparedStatement1.executeUpdate();
 
-
-            // STEP 5.1: Clean-up dell'ambiente
-            rs.close();
         }
         catch (SQLException e) {
             e.printStackTrace();

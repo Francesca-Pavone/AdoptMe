@@ -1,12 +1,10 @@
 package com.ispwproject.adoptme.utils.bean;
 
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
-import com.ispwproject.adoptme.model.UserModel;
 
 import java.io.File;
-import java.time.LocalTime;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RequestBean {
 
@@ -15,11 +13,15 @@ public class RequestBean {
     private File userImg;
     private String petName;
     private String userName;
-    private String date;
-    private String time;
+    private LocalDate date;
+    private String hour;
+    private String minutes;
     private int status; // 0 -> send  |  1 -> pending  |  2 -> accepted  | 3 -> rejected
 
-    public RequestBean() {
+    public RequestBean(LocalDate date, String hour, String minutes) {
+        this.date = date;
+        this.hour = hour;
+        this.minutes = minutes;
     }
 
     public RequestBean(RequestModel requestModel) {
@@ -28,8 +30,9 @@ public class RequestBean {
         this.petName = requestModel.getPet().getName();
         this.userImg = requestModel.getUser().getProfileImg();
         this.userName = requestModel.getUser().getName();
-        this.date = requestModel.getDate().toString();
-        this.time = requestModel.getTime().toString();
+        this.date = requestModel.getDate();
+        this.hour = String.valueOf(requestModel.getTime().getHour());
+        this.minutes = requestModel.getTime().format(DateTimeFormatter.ofPattern("mm"));
         this.status = requestModel.getStatus();
     }
 
@@ -73,20 +76,28 @@ public class RequestBean {
         this.userName = userName;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
+    public String getHour() {
+        return hour;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public String getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(String minutes) {
+        this.minutes = minutes;
     }
 
     public int getStatus() {

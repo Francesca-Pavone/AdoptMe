@@ -11,7 +11,7 @@ import com.ispwproject.adoptme.utils.dao.PetDAO;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
 
-public class AddPetController implements Observer {
+public class AddPetController {
 
     private final PetBean petBean;
 
@@ -31,8 +31,4 @@ public class AddPetController implements Observer {
         }
     }
 
-    @Override
-    public void update(Object object) {
-
-    }
 }

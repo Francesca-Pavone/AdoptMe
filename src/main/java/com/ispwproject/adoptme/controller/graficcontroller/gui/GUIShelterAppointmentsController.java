@@ -15,8 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GUIShelterAppointmentsController implements Observer {
 
@@ -29,25 +27,8 @@ public class GUIShelterAppointmentsController implements Observer {
 
     public void initialize() {
         RequestsController requestsController = new RequestsController();
+        requestsController.getShelterRequestList(this);
 
-        try {
-            for (RequestBean request : requestsController.getRequestList()) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(Main.class.getResource("RequestItem.fxml"));
-                Pane pane = fxmlLoader.load();
-
-                GUIRequestItemController requestItemController = fxmlLoader.getController();
-                requestItemController.setRequestData(request);
-
-                switch (request.getStatus()) {
-                    case 0 -> sentReqList.getChildren().add(pane);
-                    case 1 -> pendingReqList.getChildren().add(pane);
-                    case 2 -> confirmedReqList.getChildren().add(pane);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -77,6 +58,21 @@ public class GUIShelterAppointmentsController implements Observer {
 
     @Override
     public void update(Object object) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("RequestItem.fxml"));
+            Pane pane = fxmlLoader.load();
 
+            GUIRequestItemController requestItemController = fxmlLoader.getController();
+            requestItemController.setRequestData((RequestBean) object);
+
+            switch (((RequestBean)object).getStatus()) {
+                case 0 -> pendingReqList.getChildren().add(pane);
+                case 1 -> sentReqList.getChildren().add(pane);
+                case 2 -> confirmedReqList.getChildren().add(pane);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

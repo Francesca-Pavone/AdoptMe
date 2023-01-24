@@ -163,7 +163,7 @@
                      <HBox fx:id="sentReqList" />
                   </content>
                   <VBox.margin>
-                     <Insets left="20.0" right="-10.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </ScrollPane>
                <Label text="Pending Requests">
@@ -179,7 +179,7 @@
                      <HBox fx:id="pendingReqList" />
                   </content>
                   <VBox.margin>
-                     <Insets left="20.0" right="-10.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </ScrollPane>
                <Label layoutX="10.0" layoutY="355.0" text="Confirmed Requests">
@@ -195,12 +195,12 @@
                      <HBox fx:id="confirmedReqList" />
                   </content>
                   <VBox.margin>
-                     <Insets left="20.0" right="-10.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </ScrollPane>
             </children>
             <HBox.margin>
-               <Insets left="20.0" right="20.0" top="20.0" />
+               <Insets left="20.0" top="20.0" />
             </HBox.margin>
          </VBox>
       </children>
