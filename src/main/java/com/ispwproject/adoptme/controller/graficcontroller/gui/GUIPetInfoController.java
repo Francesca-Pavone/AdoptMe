@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -110,11 +111,6 @@ public class GUIPetInfoController {
     private HBox infoHBox;
 
     private ShelterBean shelterBean;
-    private Object object;
-
-    public void setSessionData(Object ob) {
-        this.object = ob;
-    }
 
     public void setPetInfo(PetBean petBean) throws Exception {
 
@@ -122,7 +118,7 @@ public class GUIPetInfoController {
 
         shelterBean = petInfoControllerA.getPetInfo(petBean);
 
-        if (this.object instanceof ShelterBean) { // sono uno Shelter
+        if (Session.getSession().getUserBean() == null) { // sono uno Shelter
             infoHBox.getChildren().remove(requestVBox);
         }
         else {
@@ -294,19 +290,13 @@ public class GUIPetInfoController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader;
         Scene scene;
-        if (this.object instanceof ShelterBean) {
+        if (Session.getSession().getUserBean() == null) {
             fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
-
-            GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-            guiShelterHomepageController.setShelterSession((ShelterBean) this.object);
         }
         else {
             fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
-
-            GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
-            guiUserHomepageController.setUserSession((UserBean) object);
         }
 
         stage.setScene(scene);

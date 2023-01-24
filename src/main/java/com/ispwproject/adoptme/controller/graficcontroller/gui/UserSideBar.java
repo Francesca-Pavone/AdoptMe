@@ -1,10 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserHomepageController;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserSettingsController;
-import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,24 +15,15 @@ import java.io.IOException;
 
 public class UserSideBar {
 
-    protected UserBean userBean;
-
-    public void setUserSession(UserBean userBean) throws IOException {
-            this.userBean = userBean;
-    }
-
     public void goToHomepage() throws IOException {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
-        GUIUserHomepageController userHomepageControllerG = fxmlLoader.getController();
-        userHomepageControllerG.setUserSession(this.userBean);
         stage.setScene(scene);
     }
 
     public void goToFavorites() throws IOException {
-        if(userBean == null) {
+        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -50,13 +38,11 @@ public class UserSideBar {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
 
-            GUIUserFavoritesController userFavoritesPageController = fxmlLoader.getController();
-            userFavoritesPageController.setUserSession(this.userBean);
         }
     }
 
     public void goToAppointments(ActionEvent event) throws IOException {
-        if(userBean == null) {
+        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -69,14 +55,12 @@ public class UserSideBar {
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserAppointments.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            GUIUserAppointmentsController guiUserAppointmentsController = fxmlLoader.getController();
-            guiUserAppointmentsController.setUserSession(this.userBean);
             stage.setScene(scene);
         }
     }
 
     public void goToSettings() throws IOException {
-        if(userBean == null) {
+        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -90,9 +74,6 @@ public class UserSideBar {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
-
-            GUIUserSettingsController userSettingsPageController = fxmlLoader.getController();
-            userSettingsPageController.setUserSession(this.userBean);
         }
 
     }

@@ -179,14 +179,8 @@ public class GUIQuestionnaireController {
     List<VBox> vboxList = new ArrayList<>();
     private int petType;
 
-    private UserBean userBean;
     @FXML
     private ToggleButton btnSizeNotImportant;
-
-
-    public void setUserSession(UserBean userBean) {
-        this.userBean = userBean;
-    }
 
     public void initialize() {
         vboxList.add(vboxSelectPetType);
@@ -630,8 +624,6 @@ public class GUIQuestionnaireController {
             FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
             Scene scene1 = new Scene(fxmlLoader.load());
 
-            GUIConfirmExitQuestionnaireController guiConfirmExitQuestionnaireController = fxmlLoader.getController();
-            guiConfirmExitQuestionnaireController.setUserSession(this.userBean);
             dialog.setScene(scene1);
             dialog.show();
     }
@@ -747,7 +739,6 @@ public class GUIQuestionnaireController {
         Scene scene = new Scene(fxmlLoader.load());
 
         GUIQuestionnaireResultController guiQuestionnaireResultController = fxmlLoader.getController();
-        guiQuestionnaireResultController.setUserSession(this.userBean);
         guiQuestionnaireResultController.setData(questionnaireResultController.searchPets(questionnaireResultBean));
         stage.setScene(scene);
         }

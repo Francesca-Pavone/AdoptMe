@@ -3,22 +3,22 @@ package com.ispwproject.adoptme.utils.session;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 
-public class Session {
-    private static Session sessionInstance = null;
+public class Session1 {
+    private static Session1 sessionInstance = null;
     private int type; // 0 -> user; 1 -> shelter
     private UserBean userBean;
     private ShelterBean shelterBean;
 
-    private Session(Object ob) {
+    private Session1(Object ob) {
         if(ob instanceof UserBean)
             userBean = (UserBean) ob;
         else if(ob instanceof ShelterBean)
             shelterBean = (ShelterBean) ob;
     }
 
-    public static Session getSessionInstance(Object ob) {
+    public static Session1 getSessionInstance(Object ob) {
         if(sessionInstance == null)
-            sessionInstance = new Session(ob);
+            sessionInstance = new Session1(ob);
         return sessionInstance;
     }
 
@@ -26,7 +26,7 @@ public class Session {
            sessionInstance = null;
     }
 
-    public static Session getSession() {
+    public static Session1 getSession() {
         return sessionInstance;
     }
 

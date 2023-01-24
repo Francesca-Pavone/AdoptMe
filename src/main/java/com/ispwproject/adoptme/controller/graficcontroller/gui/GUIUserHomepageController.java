@@ -103,7 +103,6 @@ public class GUIUserHomepageController extends UserSideBar {
 
                         GUIShelterItemController shelterItemControllerG = fxmlLoader.getController();
                         shelterItemControllerG.setShelter(shelterBean);
-                        shelterItemControllerG.setUserSession(this.userBean);
                         shelterItemControllerG.setData();
 
 
@@ -129,7 +128,6 @@ public class GUIUserHomepageController extends UserSideBar {
                 Scene scene = new Scene(fxmlLoader.load());
 
                 GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
-                guiShelterInformationController.setSessionData(this.userBean);
                 guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -144,9 +142,6 @@ public class GUIUserHomepageController extends UserSideBar {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserQuestionnairePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
-        GUIQuestionnaireController questionnaireController = fxmlLoader.getController();
-        questionnaireController.setUserSession(this.userBean);
         stage.setScene(scene);
     }
 }

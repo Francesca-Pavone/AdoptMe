@@ -27,15 +27,8 @@ public class GUIShelterAppointmentsController implements Observer {
     @FXML
     private HBox confirmedReqList;
 
-    private ShelterBean shelterBean;
-
-    public void setShelterSession(ShelterBean shelterBean) {
-        this.shelterBean = shelterBean;
-        loadShelterRequest();
-    }
-
-    private void loadShelterRequest() {
-        RequestsController requestsController = new RequestsController(shelterBean);
+    public void initialize() {
+        RequestsController requestsController = new RequestsController();
 
         try {
             for (RequestBean request : requestsController.getRequestList()) {
@@ -66,7 +59,6 @@ public class GUIShelterAppointmentsController implements Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-        guiShelterHomepageController.setShelterSession(this.shelterBean);
         stage.setScene(scene);
     }
 
@@ -80,7 +72,6 @@ public class GUIShelterAppointmentsController implements Observer {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSettings.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         GUIShelterSettingsController guiShelterSettingsController = fxmlLoader.getController();
-        guiShelterSettingsController.setShelterSession(this.shelterBean);
         stage.setScene(scene);
     }
 

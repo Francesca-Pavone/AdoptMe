@@ -2,11 +2,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -21,9 +19,6 @@ public class GUIQuestionnaireResultController {
     @FXML
     private GridPane grid;
 
-
-    private UserBean userBean;
-
     public void exitQuestionnaire(ActionEvent event) throws IOException {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -31,8 +26,6 @@ public class GUIQuestionnaireResultController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());
 
-        GUIConfirmExitQuestionnaireController guiConfirmExitQuestionnaireController = fxmlLoader.getController();
-        guiConfirmExitQuestionnaireController.setUserSession(this.userBean);
         dialog.setScene(scene1);
         dialog.show();
     }
@@ -49,7 +42,6 @@ public class GUIQuestionnaireResultController {
                 Pane pane = fxmlLoader.load();
 
                 GUIPetItemController petItemControllerG = fxmlLoader.getController();
-                petItemControllerG.setSessionData(this.userBean);
                 petItemControllerG.setPetData(pet);
 
                 if (column == 3) {
@@ -67,9 +59,4 @@ public class GUIQuestionnaireResultController {
         }
 
     }
-
-    public void setUserSession(UserBean userBean) {
-        this.userBean = userBean;
-    }
-
 }
