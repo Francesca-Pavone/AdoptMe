@@ -5,10 +5,13 @@ import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.utils.connection.ConnectionDB;
 import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.utils.observer.Observer;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DogDAO {
     //costruttore Privato
@@ -78,7 +81,7 @@ public class DogDAO {
 
 
 
-    public static void saveDog(DogModel dogModel) throws Exception {
+    public static int saveDog(DogModel dogModel, Observer observer) throws Exception {
         Statement stmt = null;
         int dogId = 1;
 
@@ -141,6 +144,7 @@ public class DogDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
+        return dogId;
     }
 
 }

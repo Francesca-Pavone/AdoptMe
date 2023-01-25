@@ -32,12 +32,14 @@ public class GUIShelterHomepageController implements Observer {
     int row = 1;
 
     public void addPet(ActionEvent event) throws IOException {
-        blackPane.setVisible(true);
+        //blackPane.setVisible(true);
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPetForm.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        GUIAddPetController guiAddPetController = fxmlLoader.getController();
+        guiAddPetController.setObserver(this);
 
         dialog.setScene(scene);
         dialog.show();

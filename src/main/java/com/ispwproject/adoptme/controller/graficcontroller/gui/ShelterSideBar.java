@@ -33,10 +33,6 @@ public class ShelterSideBar {
         stage.setScene(scene);
     }
 
-    public void goToWishlist() {
-        // non lo implementeremo
-    }
-
     public void goToSettings(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSettings.fxml"));

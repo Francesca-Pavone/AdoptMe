@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.utils.observer;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,7 +30,7 @@ public abstract class Subject {
         observerList.remove(observer);
     }
 
-    public void notifyObservers(Object object) {
+    public void notifyObservers(Object object) throws IOException {
         for (Observer observer : observerList) {
             observer.update(object);
         }

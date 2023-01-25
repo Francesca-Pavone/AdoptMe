@@ -122,6 +122,11 @@ public class GUIAddPetController {
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
+    private GUIShelterHomepageController observer;
+
+    public void setObserver(GUIShelterHomepageController observer) {
+        this.observer = observer;
+    }
 
     public void initialize() {
 
@@ -143,11 +148,6 @@ public class GUIAddPetController {
     }
 
     public void close(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        Main.getStage().setScene(scene);
-
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
@@ -164,8 +164,8 @@ public class GUIAddPetController {
         int year;
         int month;
         int day;
-        AddPetController addPetController = null;
-        PetBean petBean = null;
+        AddPetController addPetController;
+        PetBean petBean;
 
         // retrive data of birth information
         if (datePicker.getValue() != null) {
@@ -282,8 +282,7 @@ public class GUIAddPetController {
         }
 
         addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(shelterBean);
-
+        addPetController.addNewPet(shelterBean, observer);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
