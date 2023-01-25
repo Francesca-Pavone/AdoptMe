@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,21 +44,16 @@ public class GUIShelterSettingsController extends ShelterSideBar {
     private ImageView userImg;
 
     public void signOut(ActionEvent event) throws IOException {
-        this.shelterBean = null;
+        Session.getSession().closeSession();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
 
-    @Override
-    public void setShelterSession(ShelterBean shelterBean) throws IOException {
-        this.shelterBean = shelterBean;
-        loadShelterInfo();
-    }
-
-    private void loadShelterInfo() throws IOException {
+    public void initialize() throws IOException {
         Image image;
+        ShelterBean shelterBean = Session.getSession().getShelterBean();
         if (shelterBean.getShelterImg() != null) {
             InputStream inputStream = new FileInputStream(shelterBean.getShelterImg());
             image = new Image(inputStream);

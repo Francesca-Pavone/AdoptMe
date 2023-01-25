@@ -1,20 +1,22 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUISendRequestController;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.dao.RequestDAO;
 import com.ispwproject.adoptme.utils.dao.ShelterDAO;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
+import com.ispwproject.adoptme.utils.session.Session;
 
 import java.time.LocalTime;
 
 public class SendRequestController {
 
-    public void createUserRequest(Object sender, PetBean petBean, RequestBean requestBean) throws Exception {
+    public void createUserRequest(PetBean petBean, RequestBean requestBean, GUISendRequestController observer) throws Exception {
         PetModel petModel;
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+        RequestList requestList = new RequestList(observer, shelterModel);
 
         RequestModel requestModel = new RequestModel();
         requestModel.setStatus(0);
@@ -32,13 +34,9 @@ public class SendRequestController {
         petModel.setName(petBean.getName());
         petModel.setShelter(shelterModel);
         requestModel.setPet(petModel);
+        requestModel.setUser(new UserModel(Session.getSession().getUserBean()));
 
-        if (sender instanceof ShelterBean) {
-// todo
-        } else if (sender instanceof UserBean) {
-            requestModel.setUser(new UserModel((UserBean) sender));
-        }
-
-        RequestDAO.saveRequest(requestModel);
+        RequestDAO.saveRequest(requestModel, observer);
+        requestList.addRequest(requestModel);
     }
 }

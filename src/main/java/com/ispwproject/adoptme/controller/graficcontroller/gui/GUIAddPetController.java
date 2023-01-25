@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
 import com.ispwproject.adoptme.utils.enums.CoatLenght;
 import com.ispwproject.adoptme.utils.enums.Size;
+import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -121,10 +122,10 @@ public class GUIAddPetController {
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
-    private ShelterBean shelterBean;
+    private GUIShelterHomepageController observer;
 
-    public void setShelterSession(ShelterBean shelterBean) {
-        this.shelterBean = shelterBean;
+    public void setObserver(GUIShelterHomepageController observer) {
+        this.observer = observer;
     }
 
     public void initialize() {
@@ -147,13 +148,6 @@ public class GUIAddPetController {
     }
 
     public void close(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-        guiShelterHomepageController.setShelterSession(shelterBean);
-        Main.getStage().setScene(scene);
-
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
@@ -166,12 +160,12 @@ public class GUIAddPetController {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
-
+        ShelterBean shelterBean = Session.getSession().getShelterBean();
         int year;
         int month;
         int day;
-        AddPetController addPetController = null;
-        PetBean petBean = null;
+        AddPetController addPetController;
+        PetBean petBean;
 
         // retrive data of birth information
         if (datePicker.getValue() != null) {
@@ -288,8 +282,7 @@ public class GUIAddPetController {
         }
 
         addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(shelterBean);
-        close(event);
+        addPetController.addNewPet(shelterBean, observer);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

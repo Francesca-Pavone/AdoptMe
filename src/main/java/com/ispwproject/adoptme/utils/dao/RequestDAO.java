@@ -9,6 +9,7 @@ import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 
+import java.io.IOException;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,8 @@ import java.util.List;
 
 public class RequestDAO {
 
-    public static void saveRequest(RequestModel requestModel) {
+    public static void saveRequest(RequestModel requestModel, Observer observer) throws IOException {
+
         try {
             //CRUDQueries.insertRequest(stmt, requestModel);
             try (PreparedStatement preparedStatement = ConnectionDB.insertRequest()) {

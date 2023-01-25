@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.utils.bean.RequestBean;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.observer.Subject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,16 +16,20 @@ public class RequestList extends Subject {
     private List<RequestModel> requestList = new ArrayList<>();
     private ShelterUserModel receiver;
 
-    public RequestList(Observer observer, List<RequestModel> requestList, ShelterUserModel receiver) {
+    public RequestList(Observer observer, List<RequestModel> requestList, ShelterUserModel receiver) throws IOException {
         super(observer);
         for (RequestModel request : requestList) {
             this.addRequest(request);
         }
-
         this.receiver = receiver;
     }
 
-    public void addRequest(RequestModel request) {
+    public RequestList(Observer observer, ShelterUserModel receiver) {
+        super(observer);
+        this.receiver = receiver;
+    }
+
+    public void addRequest(RequestModel request) throws IOException {
         this.requestList.add(request);
         RequestBean requestBean = new RequestBean(request);
         notifyObservers(requestBean);

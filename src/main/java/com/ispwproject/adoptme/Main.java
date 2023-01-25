@@ -22,6 +22,16 @@ public class Main extends Application {
         stage.setTitle("AdoptMe");
         stage.setScene(scene);
         stage.show();
+/*
+        Stage stage1 = new Stage();
+        FXMLLoader fxmlLoader1 = new FXMLLoader(Main.class.getResource("Login.fxml"));
+        Scene scene1 = new Scene(fxmlLoader1.load());
+        setStage(stage1);
+        stage1.setTitle("AdoptMe");
+        stage1.setScene(scene1);
+        stage1.show();
+
+ */
     }
 
     @Override

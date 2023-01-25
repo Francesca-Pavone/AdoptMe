@@ -1,14 +1,16 @@
 package com.ispwproject.adoptme.utils.dao;
 
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.utils.connection.ConnectionDB;
-import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class CatDAO {
     //Costruttore privato
@@ -74,8 +76,9 @@ public class CatDAO {
     }
 
 
-    public static void saveCat(CatModel catModel) throws Exception {
+    public static int saveCat(CatModel catModel, GUIShelterHomepageController observer) throws Exception {
         Statement stmt = null;
+
         int catId = 1;
 
         try {
@@ -136,6 +139,6 @@ public class CatDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return catId;
     }
 }

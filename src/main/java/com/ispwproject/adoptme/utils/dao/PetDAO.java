@@ -86,8 +86,82 @@ public class PetDAO {
         return shelterPetsList;
     }
 
+    public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
+        Statement stmt = null;
+        List<PetModel> petList = new ArrayList<PetModel>();
+        PetModel pet;
+        try {
+            stmt = ConnectionDB.getConnection();
+
+            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
+            ResultSet resultSet = SimpleQueries.selectPetsFromQuestionnaire(stmt, query);
+
+            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
+            if (!resultSet.first()){
+                throw new Exception("No pets found for that questionnaire results");
+            }
+
+            // Riposiziono il cursore sul primo record del result set
+            resultSet.first();
+            do {
+                // Leggo le colonne "by name"
+                int petId = resultSet.getInt("id");
+                String petName = resultSet.getString("name");
+
+                Blob blob = resultSet.getBlob("imgSrc");
+                InputStream in = blob.getBinaryStream();
+
+                //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
+                String filePath = petName + "Photo" + ".png";
+                File petImage = new File(filePath);
+                FileOutputStream outputStream = new FileOutputStream(petImage);
+                int read;
+                byte[] bytes = new byte[4096];
+                while ((read = in.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
+                String petAge = resultSet.getString("age");
+                int petGender = resultSet.getInt("gender");
+                int petType = resultSet.getInt("type");
+                int shelterId = resultSet.getInt("shelter");
+
+                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
+
+
+                if (petType == 0)
+                    pet = new DogModel();
+                else
+                    pet = new CatModel();
+
+                pet.setPetId(petId);
+                pet.setShelter(shelterModel);
+                pet.setType(petType);
+                pet.setName(petName);
+                pet.setPetImage(petImage);
+                pet.setGender(petGender);
+                pet.setAge(petAge);
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                pet.setPetCompatibility(petCompatibility);
+
+                petList.add(pet);
+
+            }
+            while (resultSet.next()) ;
+
+            // STEP 5.1: Clean-up dell'ambiente
+            resultSet.close();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return petList;
+    }
 
     public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
+        // STEP 1: dichiarazioni
         Statement stmt = null;
         PetModel pet = null;
         try {
@@ -154,7 +228,4 @@ public class PetDAO {
 
         return pet;
     }
-
-
-
 }

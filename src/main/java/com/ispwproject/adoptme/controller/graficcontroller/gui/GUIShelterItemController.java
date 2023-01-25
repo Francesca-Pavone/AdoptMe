@@ -31,12 +31,6 @@ public class GUIShelterItemController {
 
     private ShelterBean shelterBean;
 
-    private UserBean userBean;
-
-    public void setUserSession(UserBean userBean) {
-        this.userBean = userBean;
-    }
-
     public void setShelter(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
     }
@@ -63,13 +57,10 @@ public class GUIShelterItemController {
         Scene scene = new Scene(fxmlLoader.load());
 
         GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
-        guiShelterInformationController.setSessionData(this.userBean);
         guiShelterInformationController.setData(shelterBean);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
-
-
 
         stage.show();
     }

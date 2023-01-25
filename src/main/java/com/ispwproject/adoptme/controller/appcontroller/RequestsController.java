@@ -6,9 +6,8 @@ import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.dao.RequestDAO;
+import com.ispwproject.adoptme.utils.session.Session;
 import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 
 import java.sql.SQLException;
@@ -22,12 +21,11 @@ public class RequestsController {
     //private List<RequestModel> requestList = new ArrayList<>();
     private RequestList requestList;
 
-    public RequestsController(Object object) {
-        if (object instanceof ShelterBean) {
-            shelterModel = new ShelterModel((ShelterBean) object);
-        }
-        else if (object instanceof UserBean) {
-            userModel = new UserModel((UserBean) object);
+    public RequestsController() {
+        if (Session.getSession().getShelterBean() != null)
+            shelterModel = new ShelterModel(Session.getSession().getShelterBean());
+        else if (Session.getSession().getUserBean() != null) {
+            userModel = new UserModel(Session.getSession().getUserBean());
         }
     }
 

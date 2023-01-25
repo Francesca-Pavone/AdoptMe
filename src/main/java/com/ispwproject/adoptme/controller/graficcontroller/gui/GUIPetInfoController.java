@@ -2,24 +2,20 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
-import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.RequestBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -106,41 +102,21 @@ public class GUIPetInfoController implements Observer {
     @FXML
     private HBox dateBox;
     @FXML
-    private Label nameReq;
-    @FXML
-    private Button shelterBtn;
-    @FXML
-    private VBox requestVBox;
-    @FXML
-    private Button btnSend;
-    @FXML
     private HBox infoHBox;
-    @FXML
-    private DatePicker datePicker;
-    @FXML
-    private TextField timeField;
 
-    private ShelterBean shelterBean;
-    private Object object;
-
-    private PetBean petBean;
-
-    public void setSessionData(Object ob) {
-        this.object = ob;
-    }
 
     public void setPetInfo(PetBean petBean) throws Exception {
-        this.petBean = petBean;
+
         PetInfoController petInfoControllerA = new PetInfoController();
 
-        shelterBean = petInfoControllerA.getPetInfo(petBean);
+        ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean);
 
-        if (this.object instanceof ShelterBean) { // sono uno Shelter
-            infoHBox.getChildren().remove(requestVBox);
-        }
-        else {
-            nameReq.setText(petBean.getName());
-            shelterBtn.setText(shelterBean.getName());
+        if (Session.getSession().getUserBean() != null) { // sono uno Shelter
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestBox.fxml"));
+            Pane pane = fxmlLoader.load();
+            GUISendRequestController guiSendRequestController = fxmlLoader.getController();
+            guiSendRequestController.setData(petBean, shelterBean);
+            infoHBox.getChildren().add(pane);
         }
 
         InputStream inputStream = new FileInputStream(petBean.getPetImage());
@@ -293,25 +269,7 @@ public class GUIPetInfoController implements Observer {
         );
     }
 
-    public void sendRequest(ActionEvent event) throws Exception {
 
-        String[] time = timeField.getText().split(":");
-        RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
-
-        SendRequestController sendRequestController = new SendRequestController();
-        sendRequestController.createUserRequest(object, petBean, requestBean);
-        datePicker.setValue(null);
-        timeField.setText(null);
-        /*
-        requestVBox.getChildren().remove(btnSend);
-        ImageView done = new ImageView(new Image(Main.class.getResource("image/done.png").openStream()));
-        requestVBox.getChildren().add(done);
-
-        requestVBox.getChildren().add(btnSend);
-        requestVBox.getChildren().remove(done);
-
-         */
-    }
 
     private void setCompatibilityLabel(String text) {
         Label label = new Label(text);
@@ -323,38 +281,21 @@ public class GUIPetInfoController implements Observer {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader;
         Scene scene;
-        if (this.object instanceof ShelterBean) {
+        if (Session.getSession().getUserBean() == null) {
             fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
-
-            GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-            guiShelterHomepageController.setShelterSession((ShelterBean) this.object);
         }
         else {
             fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
-
-            GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
-            guiUserHomepageController.setUserSession((UserBean) object);
         }
 
         stage.setScene(scene);
     }
 
-    public void goToShelterPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
-        GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
-        guiShelterInformationController.setData(shelterBean);
-        stage.setScene(scene);
-    }
 
     @Override
     public void update(Object object) {
-        Label label = new Label("You have already sended a request");
-        requestVBox.getChildren().add(label);
 
     }
 }

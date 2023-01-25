@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GUINeedAccountToContinueController {
-    private UserBean userBean;
 
     public void close(ActionEvent event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -31,9 +30,5 @@ public class GUINeedAccountToContinueController {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         ((Node)event.getSource()).getScene().getWindow().hide();
-    }
-
-    public void setUserSession(UserBean userBean) {
-        this.userBean = userBean;
     }
 }

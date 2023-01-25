@@ -22,9 +22,14 @@ public class ShelterPetsList extends Subject {
         }
     }
 
+    public ShelterPetsList(Observer observer, ShelterModel shelter) {
+        super(observer);
+        this.shelter = shelter;
+    }
+
     public void addPet(PetModel petModel) throws Exception {
         this.petList.add(petModel);
-        PetBean petBean = new PetBean(PetDAO.retrievePetById(petModel.getPetId(), petModel.getShelter().getId()));
+        PetBean petBean = new PetBean(petModel);
         this.notifyObservers(petBean);
     }
 

@@ -3,27 +3,28 @@ package com.ispwproject.adoptme.utils.bean;
 public class QuestionnaireResultBean {
     protected int type; // 0 -> Dog | 1 -> Cat
     protected int gender; // 0 -> male | 1 -> female | 2 -> not important
-    protected boolean puppy;
+    protected String age; // 0 -> puppy | 1 -> young | 2 -> adult | 3 -> senior
+    /*protected boolean puppy;
     protected boolean young;
     protected boolean adult;
-    protected boolean senior;
+    protected boolean senior;*/
     protected int size; //0 -> small | 1 -> medium | 2 -> large | 3 -> extra large
-    protected boolean haveAPet; // 0 -> no | 1 -> yes
     protected boolean maleCat;
     protected boolean femaleCat;
     protected boolean maleDog;
     protected boolean femaleDog;
-    protected boolean haveAGarden; // 0 -> no | 1 -> yes
-    protected boolean gardenSleepOutside; // 0 -> no | 1 -> yes
-    protected boolean haveATerrace; // 0 -> no | 1 -> yes
-    protected boolean terraceSleepOutside; // 0 -> no | 1 -> yes
+    protected int haveAGarden; // 0 -> no | 1 -> yes
+    protected int sleepOutside; // 0 -> no | 1 -> yes
+    protected int haveATerrace; // 0 -> no | 1 -> yes
     protected int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
-    protected boolean firstPet; // 0 -> no | 1 -> yes
+    protected int firstPet; // 0 -> no | 1 -> yes
     protected boolean sterilizePet; // 0 -> no | 1 -> yes
-    protected boolean programEducation; // 0 -> no | 1 -> yes
+    protected int programEducation; // 0 -> no | 1 -> yes
     protected boolean disabledPet; // 0 -> no | 1 -> yes
-    protected boolean specificArea; // 0 -> no | 1 -> yes
+    protected boolean specificArea;
     protected String city;
+
+
 
     //Costruttore vuoto
     public QuestionnaireResultBean() {}
@@ -52,7 +53,7 @@ public class QuestionnaireResultBean {
         this.gender = gender;
     }
 
-    public boolean isPuppy() {
+    /*public boolean isPuppy() {
         return puppy;
     }
 
@@ -82,14 +83,14 @@ public class QuestionnaireResultBean {
 
     public void setSenior(boolean senior) {
         this.senior = senior;
+    }*/
+
+    public String getAge() {
+        return age;
     }
 
-    public boolean isHaveAPet() {
-        return haveAPet;
-    }
-
-    public void setHaveAPet(boolean haveAPet) {
-        this.haveAPet = haveAPet;
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public boolean isMaleCat() {
@@ -124,36 +125,28 @@ public class QuestionnaireResultBean {
         this.femaleDog = femaleDog;
     }
 
-    public boolean isHaveAGarden() {
+    public int isHaveAGarden() {
         return haveAGarden;
     }
 
-    public void setHaveAGarden(boolean haveAGarden) {
+    public void setHaveAGarden(int haveAGarden) {
         this.haveAGarden = haveAGarden;
     }
 
-    public boolean isGardenSleepOutside() {
-        return gardenSleepOutside;
+    public int isSleepOutside() {
+        return sleepOutside;
     }
 
-    public void setGardenSleepOutside(boolean gardenSleepOutside) {
-        this.gardenSleepOutside = gardenSleepOutside;
+    public void setSleepOutside(int sleepOutside) {
+        this.sleepOutside = sleepOutside;
     }
 
-    public boolean isHaveATerrace() {
+    public int isHaveATerrace() {
         return haveATerrace;
     }
 
-    public void setHaveATerrace(boolean haveATerrace) {
+    public void setHaveATerrace(int haveATerrace) {
         this.haveATerrace = haveATerrace;
-    }
-
-    public boolean isTerraceSleepOutside() {
-        return terraceSleepOutside;
-    }
-
-    public void setTerraceSleepOutside(boolean terraceSleepOutside) {
-        this.terraceSleepOutside = terraceSleepOutside;
     }
 
     public int getHoursAlone() {
@@ -164,11 +157,11 @@ public class QuestionnaireResultBean {
         this.hoursAlone = hoursAlone;
     }
 
-    public boolean isFirstPet() {
+    public int isFirstPet() {
         return firstPet;
     }
 
-    public void setFirstPet(boolean firstPet) {
+    public void setFirstPet(int firstPet) {
         this.firstPet = firstPet;
     }
 
@@ -180,11 +173,11 @@ public class QuestionnaireResultBean {
         this.sterilizePet = sterilizePet;
     }
 
-    public boolean isProgramEducation() {
+    public int isProgramEducation() {
         return programEducation;
     }
 
-    public void setProgramEducation(boolean programEducation) {
+    public void setProgramEducation(int programEducation) {
         this.programEducation = programEducation;
     }
 
@@ -196,19 +189,19 @@ public class QuestionnaireResultBean {
         this.disabledPet = disabledPet;
     }
 
-    public boolean isSpecificArea() {
-        return specificArea;
-    }
-
-    public void setSpecificArea(boolean specificArea) {
-        this.specificArea = specificArea;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setSpecificArea(boolean specificArea) {
+        this.specificArea = specificArea;
+    }
+
+    public boolean isSpecificArea() {
+        return specificArea;
     }
 }
