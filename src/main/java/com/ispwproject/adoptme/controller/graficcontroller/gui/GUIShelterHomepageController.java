@@ -92,4 +92,9 @@ public class GUIShelterHomepageController implements Observer {
 
         petsNumber.setText(String.valueOf(((PetBean)object).getPetId()));
     }
+
+    @Override
+    public void update2(Object object1, Object object2) {
+
+    }
 }

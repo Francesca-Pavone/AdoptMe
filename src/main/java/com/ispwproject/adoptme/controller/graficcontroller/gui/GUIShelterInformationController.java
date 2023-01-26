@@ -104,4 +104,9 @@ public class GUIShelterInformationController implements Observer {
     public void update(Object object) {
 
     }
+
+    @Override
+    public void update2(Object object1, Object object2) {
+
+    }
 }

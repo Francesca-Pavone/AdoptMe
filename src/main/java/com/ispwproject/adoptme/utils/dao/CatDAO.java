@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.utils.connection.ConnectionDB;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
 
 import java.io.FileInputStream;
@@ -76,7 +77,7 @@ public class CatDAO {
     }
 
 
-    public static int saveCat(CatModel catModel, GUIShelterHomepageController observer) throws Exception {
+    public static int saveCat(CatModel catModel) throws Exception {
         Statement stmt = null;
 
         int catId = 1;

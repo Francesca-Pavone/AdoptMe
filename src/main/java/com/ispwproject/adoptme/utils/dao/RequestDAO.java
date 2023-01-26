@@ -5,11 +5,11 @@ import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.connection.ConnectionDB;
+import com.ispwproject.adoptme.utils.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.utils.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 
-import java.io.IOException;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class RequestDAO {
 
-    public static void saveRequest(RequestModel requestModel, Observer observer) throws IOException {
+    public static void saveRequest(RequestModel requestModel) {
 
         try {
             //CRUDQueries.insertRequest(stmt, requestModel);
@@ -38,10 +38,46 @@ public class RequestDAO {
             throw new RuntimeException(e);
         }
     }
-    public static RequestList retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
-        Statement stmt = null;
+
+    public static void modifyRequest(RequestModel requestModel) {
+        try {
+            try (PreparedStatement preparedStatement = ConnectionDB.modifyReq()) {
+                preparedStatement.setDate(1, Date.valueOf(requestModel.getDate()));
+                preparedStatement.setTime(2, Time.valueOf(requestModel.getTime()));
+                preparedStatement.setInt(3, requestModel.getStatus());
+                preparedStatement.setInt(4, requestModel.getId());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void updateRequestState(RequestModel requestModel) {
+        Statement stmt;
+        try {
+            stmt = ConnectionDB.getConnection();
+            CRUDQueries.updateReqState(stmt, requestModel.getId(), requestModel.getStatus());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteRequest(int requestId) {
+        Statement stmt;
+        try {
+            stmt = ConnectionDB.getConnection();
+            CRUDQueries.deleteReq(stmt, requestId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
+        Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
-        RequestList requestList = new RequestList(observer,requestModelList, shelterModel);
+        RequestList requestList = new RequestList(observer, requestModelList, shelterModel);
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -75,24 +111,22 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date.toLocalDate(), time, status);
+                RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
                 requestList.addRequest(requestModel);
 
             } while (resultSet.next());
 
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return requestList;
     }
 
-    public static RequestList retrieveReqByUser(UserModel userModel, Observer observer) throws Exception {
-        Statement stmt = null;
+    public static void retrieveReqByUser(UserModel userModel, Observer observer) throws Exception {
+        Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
-        RequestList requestList = new RequestList(observer,requestModelList, userModel);
+        RequestList requestList = new RequestList(observer, requestModelList, userModel);
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -124,7 +158,7 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date.toLocalDate(), time, status);
+                RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
                 requestList.addRequest(requestModel);
 
             } while (resultSet.next());
@@ -132,11 +166,10 @@ public class RequestDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return requestList;
     }
+
 }
 

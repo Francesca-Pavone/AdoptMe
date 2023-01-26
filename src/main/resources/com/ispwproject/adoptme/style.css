@@ -149,7 +149,7 @@
 .request-box{
     -fx-background-color: #ffffff;
     -fx-background-radius: 30;
-    -fx-effect: dropshadow(three-pass-box, grey, 31, 0,11, 10);
+    -fx-effect: dropshadow(three-pass-box, grey, 25, 0,11, 10);
 }
 
 

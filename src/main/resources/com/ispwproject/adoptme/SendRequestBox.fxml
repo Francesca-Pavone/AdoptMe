@@ -66,7 +66,6 @@
          </VBox.margin>
       </Label>
       <TextField fx:id="timeField" maxWidth="-Infinity" prefHeight="35.0" prefWidth="175.0" promptText="hh:mm" />
-      <Pane layoutX="40.0" layoutY="73.0" VBox.vgrow="ALWAYS" />
       <Button fx:id="btnSend" mnemonicParsing="false" onAction="#sendRequest" styleClass="button1" text="Send" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -74,6 +73,9 @@
          <padding>
             <Insets bottom="6.0" left="25.0" right="25.0" top="6.0" />
          </padding>
+         <VBox.margin>
+            <Insets top="25.0" />
+         </VBox.margin>
       </Button>
    </children>
    <padding>

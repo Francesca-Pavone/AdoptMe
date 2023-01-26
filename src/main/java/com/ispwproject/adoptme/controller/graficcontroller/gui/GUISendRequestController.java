@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.RequestBean;
@@ -16,10 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -33,8 +28,6 @@ public class GUISendRequestController implements Observer {
     private Button shelterBtn;
     @FXML
     private VBox requestVBox;
-    @FXML
-    private Button btnSend;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -57,7 +50,7 @@ public class GUISendRequestController implements Observer {
         RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
 
         SendRequestController sendRequestController = new SendRequestController();
-        sendRequestController.createUserRequest(petBean, requestBean, this);
+        sendRequestController.sendUserRequest(petBean, requestBean, this);
         datePicker.setValue(null);
         timeField.setText(null);
 
@@ -81,5 +74,10 @@ public class GUISendRequestController implements Observer {
         label.setFont(new Font("Arial", 14));
         label.setStyle("-fx-text-fill: #34665A; -fx-font-weight: bold");
         requestVBox.getChildren().add(label);
+    }
+
+    @Override
+    public void update2(Object object1, Object object2) {
+
     }
 }

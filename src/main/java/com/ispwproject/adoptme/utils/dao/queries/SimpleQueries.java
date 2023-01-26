@@ -57,13 +57,18 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectReqByShelterId(Statement stmt, int id) throws SQLException {
-        String sql = "SELECT * FROM Requests WHERE shelterId = '" + id + "';";
+    public static ResultSet selectReqByShelterId(Statement stmt, int shelterId) throws SQLException {
+        String sql = "SELECT * FROM Requests WHERE shelterId = '" + shelterId + "';";
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectReqByUserId(Statement stmt, int id) throws SQLException {
-        String sql = "SELECT * FROM Requests WHERE userId = '" + id + "';";
+    public static ResultSet selectReqByUserId(Statement stmt, int userId) throws SQLException {
+        String sql = "SELECT * FROM Requests WHERE userId = '" + userId + "';";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet selectReqById(Statement stmt, int requestId) throws SQLException {
+        String sql = "SELECT * FROM Requests WHERE requestId = '" + requestId + "';";
         return stmt.executeQuery(sql);
     }
 
