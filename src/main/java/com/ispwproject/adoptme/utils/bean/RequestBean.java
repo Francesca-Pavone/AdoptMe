@@ -12,7 +12,10 @@ public class RequestBean {
     private File petImg;
     private File userImg;
     private String petName;
+    private int petId;
+    private int shelterId;
     private String userName;
+    private int userId;
     private LocalDate date;
     private String hour;
     private String minutes;
@@ -28,8 +31,11 @@ public class RequestBean {
         this.id = requestModel.getId();
         this.petImg = requestModel.getPet().getPetImage();
         this.petName = requestModel.getPet().getName();
+        this.petId = requestModel.getPet().getPetId();
+        this.shelterId = requestModel.getPet().getShelter().getId();
         this.userImg = requestModel.getUser().getProfileImg();
         this.userName = requestModel.getUser().getName();
+        this.userId = requestModel.getUser().getId();
         this.date = requestModel.getDate();
         this.hour = String.valueOf(requestModel.getTime().getHour());
         this.minutes = requestModel.getTime().format(DateTimeFormatter.ofPattern("mm"));
@@ -68,12 +74,36 @@ public class RequestBean {
         this.petName = petName;
     }
 
+    public int getPetId() {
+        return petId;
+    }
+
+    public void setPetId(int petId) {
+        this.petId = petId;
+    }
+
+    public int getShelterId() {
+        return shelterId;
+    }
+
+    public void setShelterId(int shelterId) {
+        this.shelterId = shelterId;
+    }
+
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public LocalDate getDate() {

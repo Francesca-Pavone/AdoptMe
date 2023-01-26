@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 public class Main extends Application {
     private static Stage stage;
+    //private static Stage stage1;
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
@@ -26,7 +27,7 @@ public class Main extends Application {
         Stage stage1 = new Stage();
         FXMLLoader fxmlLoader1 = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene1 = new Scene(fxmlLoader1.load());
-        setStage(stage1);
+        setStage1(stage1);
         stage1.setTitle("AdoptMe");
         stage1.setScene(scene1);
         stage1.show();
@@ -49,4 +50,14 @@ public class Main extends Application {
     public static void setStage(Stage stage) {
         Main.stage = stage;
     }
+/*
+    public static Stage getStage1() {
+        return stage1;
+    }
+
+    public static void setStage1(Stage stage1) {
+        Main.stage1 = stage1;
+    }
+
+ */
 }

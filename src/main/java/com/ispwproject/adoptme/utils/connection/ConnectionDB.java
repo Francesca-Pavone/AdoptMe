@@ -67,6 +67,10 @@ public class ConnectionDB {
         return connection.prepareStatement("INSERT INTO Requests (shelterId, petId, userId, date, time, status) VALUES (?,?,?,?,?,?)");
     }
 
+    // la utilizzo nel caso in cui vengono modificati: data, ora, stato
+    public static PreparedStatement modifyReq() throws SQLException  {
+        return connection.prepareStatement("UPDATE Requests set date = ?, time = ?, status = ? WHERE requestId = ?");
+    }
     public static PreparedStatement insertDog() throws SQLException {
         return connection.prepareStatement("INSERT INTO Dogs (dogId, shelter, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, coatLenght, size, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, education) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     }

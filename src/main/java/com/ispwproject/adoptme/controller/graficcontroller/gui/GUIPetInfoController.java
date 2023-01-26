@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class GUIPetInfoController implements Observer {
-
     @FXML
     private Label coatLenght;
 
@@ -296,6 +295,11 @@ public class GUIPetInfoController implements Observer {
 
     @Override
     public void update(Object object) {
+
+    }
+
+    @Override
+    public void update2(Object object1, Object object2) {
 
     }
 }

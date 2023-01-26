@@ -1,11 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterAppointmentsController;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterSettingsController;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

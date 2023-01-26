@@ -81,7 +81,7 @@ public class DogDAO {
 
 
 
-    public static int saveDog(DogModel dogModel, Observer observer) throws Exception {
+    public static int saveDog(DogModel dogModel) throws Exception {
         Statement stmt = null;
         int dogId = 1;
 

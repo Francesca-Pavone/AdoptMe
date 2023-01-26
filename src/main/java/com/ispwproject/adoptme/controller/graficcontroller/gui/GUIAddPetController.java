@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
 import com.ispwproject.adoptme.utils.enums.CoatLenght;
 import com.ispwproject.adoptme.utils.enums.Size;
+import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -122,9 +123,9 @@ public class GUIAddPetController {
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
-    private GUIShelterHomepageController observer;
+    private Observer observer;
 
-    public void setObserver(GUIShelterHomepageController observer) {
+    public void setObserver(Observer observer) {
         this.observer = observer;
     }
 
