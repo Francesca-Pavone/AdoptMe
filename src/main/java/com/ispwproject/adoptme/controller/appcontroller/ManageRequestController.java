@@ -3,12 +3,12 @@ package com.ispwproject.adoptme.controller.appcontroller;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.UserModel;
-import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.dao.PetDAO;
-import com.ispwproject.adoptme.utils.dao.RequestDAO;
-import com.ispwproject.adoptme.utils.dao.UserDAO;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.dao.PetDAO;
+import com.ispwproject.adoptme.engineering.dao.RequestDAO;
+import com.ispwproject.adoptme.engineering.dao.UserDAO;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.time.LocalTime;
 
@@ -22,7 +22,7 @@ public class ManageRequestController {
             RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
             requestModel.updateStatus(3, object);
 
-            if (Session.getSession().getUserBean() != null)
+            if (Session.getCurrentSession().getUserBean() != null)
                 RequestDAO.deleteRequest(requestModel.getId());
             else
                 RequestDAO.updateRequestState(requestModel);
@@ -48,9 +48,9 @@ public class ManageRequestController {
         RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
         requestModel.register(itemObserver);
 
-        if (Session.getSession().getShelterBean() != null)
+        if (Session.getCurrentSession().getShelterBean() != null)
             requestModel.updateStatus(1, object);
-        else if (Session.getSession().getUserBean() != null)
+        else if (Session.getCurrentSession().getUserBean() != null)
             requestModel.updateStatus(0, object);
 
         RequestDAO.modifyRequest(requestModel);

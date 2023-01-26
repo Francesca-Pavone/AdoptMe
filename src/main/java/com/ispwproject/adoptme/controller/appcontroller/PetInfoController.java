@@ -4,11 +4,11 @@ import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.dao.CatDAO;
-import com.ispwproject.adoptme.utils.dao.DogDAO;
-import com.ispwproject.adoptme.utils.dao.ShelterDAO;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.dao.CatDAO;
+import com.ispwproject.adoptme.engineering.dao.DogDAO;
+import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 
 public class PetInfoController {
 

@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme;
 
-import com.ispwproject.adoptme.utils.connection.ConnectionDB;
+import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

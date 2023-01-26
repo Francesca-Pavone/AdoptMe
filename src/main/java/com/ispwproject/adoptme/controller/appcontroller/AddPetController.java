@@ -1,17 +1,14 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.dao.CatDAO;
-import com.ispwproject.adoptme.utils.dao.DogDAO;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.observer.concreteSubjects.ShelterPetsList;
-
-import java.util.ArrayList;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.dao.CatDAO;
+import com.ispwproject.adoptme.engineering.dao.DogDAO;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.observer.concreteSubjects.ShelterPetsList;
 
 public class AddPetController {
 

@@ -2,13 +2,13 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
-import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.dao.ShelterDAO;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -45,6 +45,21 @@ public class GUIShelterInformationController implements Observer {
     @FXML
     private GridPane grid;
 
+    private Parent previousPage;
+    private Parent currentPage;
+
+    public void setPreviousPage(Parent previousPage) {
+        this.previousPage = previousPage;
+        System.out.println("4) SHELTER INFO PREVIOUS PAGE -> " + this.previousPage);
+
+    }
+
+    public void setCurrentPage(Parent currentPage) {
+        this.currentPage = currentPage;
+        System.out.println("4) SHELTER INFO CURRENT PAGE -> " + this.currentPage);
+
+    }
+
     public void setData(ShelterBean shelterBean) throws IOException {
         shelterName.setText(shelterBean.getName());
         Image image;
@@ -71,6 +86,7 @@ public class GUIShelterInformationController implements Observer {
             Pane pane = fxmlLoader.load();
 
             GUIPetItemController petItemControllerG = fxmlLoader.getController();
+            petItemControllerG.setPageContainer(currentPage);
             petItemControllerG.setPetData(petBean);
 
             if (column == 4) {
@@ -94,9 +110,10 @@ public class GUIShelterInformationController implements Observer {
 
     public void goBack() throws IOException {
         Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-
+        //FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
+        //Scene scene = new Scene(fxmlLoader.load());
+        //stage.setScene(scene);
+        Scene scene = this.previousPage.getScene();
         stage.setScene(scene);
     }
 

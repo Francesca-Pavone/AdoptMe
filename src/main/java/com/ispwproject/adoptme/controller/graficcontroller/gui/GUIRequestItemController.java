@@ -2,9 +2,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
-import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,7 +88,7 @@ public class GUIRequestItemController implements Observer {
             vBox.getChildren().remove(manageReqBox);
             vBox.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(75,159,39, 0.8), 25, 0,11, 10)");
         }
-        else if ((requestBean.getStatus() == 1 && Session.getSession().getShelterBean() != null) || (requestBean.getStatus() == 0 && Session.getSession().getUserBean() != null)) // shelter's || user's sent request
+        else if ((requestBean.getStatus() == 1 && Session.getCurrentSession().getShelterBean() != null) || (requestBean.getStatus() == 0 && Session.getCurrentSession().getUserBean() != null)) // shelter's || user's sent request
             manageReqBox.getChildren().remove(acceptBtn);
         else if (requestBean.getStatus() == 3) {
             manageReqBox.getChildren().removeAll(acceptBtn, modifyBtn);
@@ -137,7 +137,7 @@ public class GUIRequestItemController implements Observer {
             vBox.getChildren().remove(manageReqBox);
             vBox.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(75,159,39, 0.8), 25, 0, 11, 10)");
         }
-        else if ((((RequestBean)object1).getStatus() == 1 && Session.getSession().getShelterBean() != null) || ((RequestBean)object1).getStatus() == 0 && Session.getSession().getUserBean() != null) {
+        else if ((((RequestBean)object1).getStatus() == 1 && Session.getCurrentSession().getShelterBean() != null) || ((RequestBean)object1).getStatus() == 0 && Session.getCurrentSession().getUserBean() != null) {
             manageReqBox.getChildren().remove(acceptBtn);
             date.setText(((RequestBean)object1).getDate().toString());
             time.setText(((RequestBean)object1).getHour() + ":"+ ((RequestBean)object1).getMinutes());

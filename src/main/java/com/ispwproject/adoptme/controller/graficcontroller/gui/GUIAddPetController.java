@@ -1,21 +1,18 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
-import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
-import com.ispwproject.adoptme.utils.ImageUtils;
-import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
-import com.ispwproject.adoptme.utils.enums.CoatLenght;
-import com.ispwproject.adoptme.utils.enums.Size;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.ImageUtils;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.builder.PetBeanBuilder;
+import com.ispwproject.adoptme.engineering.enums.CoatLenght;
+import com.ispwproject.adoptme.engineering.enums.Size;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -161,7 +158,7 @@ public class GUIAddPetController {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
-        ShelterBean shelterBean = Session.getSession().getShelterBean();
+        ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
         int year;
         int month;
         int day;

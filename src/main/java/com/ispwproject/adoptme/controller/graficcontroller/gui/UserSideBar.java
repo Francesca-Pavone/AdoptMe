@@ -1,16 +1,16 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class UserSideBar {
@@ -18,12 +18,15 @@ public class UserSideBar {
     public void goToHomepage() throws IOException {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
+        guiUserHomepageController.setCurrentPage(root);
         stage.setScene(scene);
     }
 
     public void goToFavorites() throws IOException {
-        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
+        if(Session.getCurrentSession().getUserBean() == null && Session.getCurrentSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -42,7 +45,7 @@ public class UserSideBar {
     }
 
     public void goToAppointments(ActionEvent event) throws IOException {
-        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
+        if(Session.getCurrentSession().getUserBean() == null && Session.getCurrentSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -60,7 +63,7 @@ public class UserSideBar {
     }
 
     public void goToSettings() throws IOException {
-        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
+        if(Session.getCurrentSession().getUserBean() == null && Session.getCurrentSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);

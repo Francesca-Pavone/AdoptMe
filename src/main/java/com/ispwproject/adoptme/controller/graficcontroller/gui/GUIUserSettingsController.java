@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,7 +63,7 @@ public class GUIUserSettingsController extends UserSideBar {
     }
 
     public void signOut(ActionEvent event) throws IOException {
-        Session.getSession().closeSession();
+        Session.getCurrentSession().closeSession();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -71,7 +71,7 @@ public class GUIUserSettingsController extends UserSideBar {
     }
 
     public void initialize() throws IOException {
-        UserBean userBean = Session.getSession().getUserBean();
+        UserBean userBean = Session.getCurrentSession().getUserBean();
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());
         textFieldName.setPromptText(userBean.getName());
