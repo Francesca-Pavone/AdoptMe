@@ -48,7 +48,6 @@ public class GUIUserHomepageController extends UserSideBar {
 
     public void setCurrentPage(Parent currentPage) {
         this.currentPage = currentPage;
-        System.out.println("2) USER HOMEPAGE -> " + this.currentPage);
     }
 
     public void initialize() {

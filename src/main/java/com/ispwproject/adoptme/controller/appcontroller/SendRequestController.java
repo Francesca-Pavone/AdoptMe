@@ -1,5 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.exception.PastDateException;
+import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
@@ -11,7 +13,11 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concreteSubjects.RequestList;
 import com.ispwproject.adoptme.engineering.session.Session;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 public class SendRequestController {
 
@@ -19,6 +25,7 @@ public class SendRequestController {
         PetModel petModel;
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
         RequestList requestList = new RequestList(observer, shelterModel);
+        RequestModel requestModel = new RequestModel();
 
         if (petBean.getType() == 0){
             //DOG
@@ -31,25 +38,20 @@ public class SendRequestController {
         petModel.setName(petBean.getName());
         petModel.setShelter(shelterModel);
 
-        RequestModel requestModel = new RequestModel(
-                null,
-                0,
-                petModel,
-                new UserModel(Session.getCurrentSession().getUserBean()),
-                requestBean.getDate(),
-                LocalTime.of(Integer.parseInt(requestBean.getHour()), Integer.parseInt(requestBean.getMinutes())),
-                0);
+        requestModel.setPet(petModel);
+        requestModel.setUser(new UserModel(Session.getCurrentSession().getUserBean()));
+
+        //non permetto di prendere appuntamenti nei giorni già passati
+        if (requestBean.getDate().isBefore(LocalDate.now())){
+            Trigger trigger = new Trigger();
+            trigger.pastDate(requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        }
+        requestModel.setDate(requestBean.getDate());
+
+        requestModel.setTime(LocalTime.of(Integer.parseInt(requestBean.getHour()), Integer.parseInt(requestBean.getMinutes())));
+        requestModel.setStatus(0);
 
         RequestDAO.saveRequest(requestModel);
         requestList.addRequest(requestModel);
-    }
-
-    public void sendShelterRequest(RequestBean requestBean, Object object, Observer observer) throws Exception {
-        PetModel petModel = PetDAO.retrievePetById(requestBean.getPetId(), requestBean.getShelterId());
-        UserModel userModel = UserDAO.retrieveUserById(requestBean.getUserId());
-        LocalTime time = LocalTime.of(Integer.parseInt(requestBean.getHour()), Integer.parseInt(requestBean.getMinutes()));
-
-        RequestModel requestModel = new RequestModel(observer, requestBean.getId(), petModel, userModel, requestBean.getDate(), time, requestBean.getStatus());
-        requestModel.updateStatus(1, object);
     }
 }

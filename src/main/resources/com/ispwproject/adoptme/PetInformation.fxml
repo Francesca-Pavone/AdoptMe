@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController">
    <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <VBox alignment="TOP_CENTER" prefHeight="710.0" prefWidth="1100.0">
       <children>

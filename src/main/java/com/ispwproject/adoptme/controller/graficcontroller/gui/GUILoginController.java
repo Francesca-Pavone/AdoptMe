@@ -92,7 +92,6 @@ public class GUILoginController {
             Parent root = fxmlLoader.load();
             scene = new Scene(root);
             GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-            System.out.println("1) SHELTER LOGIN -> " + root);
             guiShelterHomepageController.setCurrentPage(root);
         }
         else

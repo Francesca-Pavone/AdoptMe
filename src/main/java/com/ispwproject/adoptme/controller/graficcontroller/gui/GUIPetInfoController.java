@@ -108,7 +108,6 @@ public class GUIPetInfoController {
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
-        System.out.println("4) PET INFO PAGE -> " + this.previousPage);
     }
 
     public void setPetInfo(PetBean petBean) throws Exception {

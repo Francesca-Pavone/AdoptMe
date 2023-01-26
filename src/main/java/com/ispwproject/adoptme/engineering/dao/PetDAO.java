@@ -204,16 +204,8 @@ public class PetDAO {
                 File petImage = null;
                 try {
                     if (blob != null) {
-                        InputStream in = blob.getBinaryStream();
-                        //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
                         String filePath = petName + "Photo" + ".png";
-                        petImage = new File(filePath);
-                        FileOutputStream outputStream = new FileOutputStream(petImage);
-                        int read;
-                        byte[] bytes = new byte[4096];
-                        while ((read = in.read(bytes)) != -1) {
-                            outputStream.write(bytes, 0, read);
-                        }
+                        ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
                         Trigger trigger = new Trigger();
