@@ -11,7 +11,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class UserSideBar {
@@ -27,7 +26,7 @@ public class UserSideBar {
     }
 
     public void goToFavorites() throws IOException {
-        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
+        if(Session.getCurrentSession().getUserBean() == null && Session.getCurrentSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -46,7 +45,7 @@ public class UserSideBar {
     }
 
     public void goToAppointments(ActionEvent event) throws IOException {
-        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
+        if(Session.getCurrentSession().getUserBean() == null && Session.getCurrentSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
@@ -64,7 +63,7 @@ public class UserSideBar {
     }
 
     public void goToSettings() throws IOException {
-        if(Session.getSession().getUserBean() == null && Session.getSession().getShelterBean() == null) {
+        if(Session.getCurrentSession().getUserBean() == null && Session.getCurrentSession().getShelterBean() == null) {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);

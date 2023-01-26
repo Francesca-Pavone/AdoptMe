@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.utils.dao.RequestDAO;
 import com.ispwproject.adoptme.utils.observer.Observer;
 import com.ispwproject.adoptme.utils.session.Session;
-import com.ispwproject.adoptme.utils.observer.concreteSubjects.RequestList;
 
 import java.sql.SQLException;
 
@@ -15,10 +14,10 @@ public class RequestsController {
     private UserModel userModel;
 
     public RequestsController() {
-        if (Session.getSession().getShelterBean() != null)
-            this.shelterModel = new ShelterModel(Session.getSession().getShelterBean());
-        else if (Session.getSession().getUserBean() != null) {
-            this.userModel = new UserModel(Session.getSession().getUserBean());
+        if (Session.getCurrentSession().getShelterBean() != null)
+            this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean());
+        else if (Session.getCurrentSession().getUserBean() != null) {
+            this.userModel = new UserModel(Session.getCurrentSession().getUserBean());
         }
     }
 

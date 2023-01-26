@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.session.Session;
-import com.ispwproject.adoptme.utils.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +21,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class GUIPetInfoController {
@@ -117,7 +115,7 @@ public class GUIPetInfoController {
 
         ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean);
 
-        if (Session.getSession().getUserBean() != null) { // sono uno Shelter
+        if (Session.getCurrentSession().getUserBean() != null) { // sono uno Shelter
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestBox.fxml"));
             Pane pane = fxmlLoader.load();
             GUISendRequestController guiSendRequestController = fxmlLoader.getController();

@@ -35,7 +35,7 @@ public class SendRequestController {
                 null,
                 0,
                 petModel,
-                new UserModel(Session.getSession().getUserBean()),
+                new UserModel(Session.getCurrentSession().getUserBean()),
                 requestBean.getDate(),
                 LocalTime.of(Integer.parseInt(requestBean.getHour()), Integer.parseInt(requestBean.getMinutes())),
                 0);

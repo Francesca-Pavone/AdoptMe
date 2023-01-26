@@ -18,7 +18,7 @@ public class ShowShelterPetsController {
 
     public List<PetBean> getPetList(GUIShelterHomepageController observer) {
         try {
-            shelterPetsList = PetDAO.retrievePetByShelterId(new ShelterModel(Session.getSession().getShelterBean()), observer);
+            shelterPetsList = PetDAO.retrievePetByShelterId(new ShelterModel(Session.getCurrentSession().getShelterBean()), observer);
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();

@@ -26,7 +26,7 @@ public class Session {
            sessionInstance = null;
     }
 
-    public static Session getSession() {
+    public static Session getCurrentSession() {
         return sessionInstance;
     }
 
@@ -38,35 +38,4 @@ public class Session {
         return shelterBean;
     }
 
-    /*
-    //private boolean logged; TODO: aggiungere al database ed controllare se l'utente è già loggato
-    private UserBean userBean;
-    private ShelterBean shelterBean;
-
-    public Session() {
-    }
-
-    public Session(UserBean userBean) {
-        setUserBean(userBean);
-    }
-
-    public Session(ShelterBean shelterBean) {
-        setShelterBean(shelterBean);
-    }
-
-    public UserBean getUserBean() {
-        return userBean;
-    }
-
-    private void setUserBean(UserBean userBean) {
-        this.userBean = userBean;
-    }
-
-    public ShelterBean getShelterBean() {
-        return shelterBean;
-    }
-
-    private void setShelterBean(ShelterBean shelterBean) {
-        this.shelterBean = shelterBean;
-    }*/
 }

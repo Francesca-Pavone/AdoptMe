@@ -22,7 +22,7 @@ public class ManageRequestController {
             RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
             requestModel.updateStatus(3, object);
 
-            if (Session.getSession().getUserBean() != null)
+            if (Session.getCurrentSession().getUserBean() != null)
                 RequestDAO.deleteRequest(requestModel.getId());
             else
                 RequestDAO.updateRequestState(requestModel);
@@ -48,9 +48,9 @@ public class ManageRequestController {
         RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
         requestModel.register(itemObserver);
 
-        if (Session.getSession().getShelterBean() != null)
+        if (Session.getCurrentSession().getShelterBean() != null)
             requestModel.updateStatus(1, object);
-        else if (Session.getSession().getUserBean() != null)
+        else if (Session.getCurrentSession().getUserBean() != null)
             requestModel.updateStatus(0, object);
 
         RequestDAO.modifyRequest(requestModel);
