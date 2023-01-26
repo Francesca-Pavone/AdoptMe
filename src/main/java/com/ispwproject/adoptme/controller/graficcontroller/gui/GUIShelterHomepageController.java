@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -26,10 +27,18 @@ public class GUIShelterHomepageController implements Observer {
 
     @FXML
     private Pane blackPane;
+    private Parent currentPage;
 
 
-    int column = 0;
-    int row = 1;
+    private int column = 0;
+    private int row = 1;
+
+    public void setCurrentPage(Parent currentPage) {
+        this.currentPage = currentPage;
+        System.out.println("2) SHELTER HOMEPAGE -> " + this.currentPage);
+        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
+        showShelterPetsController.getPetList(this);
+    }
 
     public void addPet(ActionEvent event) throws IOException {
         //blackPane.setVisible(true);
@@ -46,8 +55,10 @@ public class GUIShelterHomepageController implements Observer {
     }
 
     public void initialize() {
+/*
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
         showShelterPetsController.getPetList(this);
+ */
     }
 
 
@@ -78,6 +89,7 @@ public class GUIShelterHomepageController implements Observer {
             Pane pane = fxmlLoader.load();
 
             GUIPetItemController petItemControllerG = fxmlLoader.getController();
+            petItemControllerG.setPageContainer(currentPage);
             petItemControllerG.setPetData((PetBean) object);
 
             if (column == 3) {

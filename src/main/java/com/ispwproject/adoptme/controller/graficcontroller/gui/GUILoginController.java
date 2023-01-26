@@ -10,9 +10,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -70,8 +73,9 @@ public class GUILoginController {
         stage.setScene(scene);
     }
 
-    public void login(ActionEvent event) throws Exception {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    public void login() throws Exception {
+        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = null;
         LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
         LoginController loginController = new LoginController();
         loginController.checkLogin(loginBean);
@@ -79,20 +83,24 @@ public class GUILoginController {
         if (loginBean.getAccountType() == 1) {
             UserBean userBean = loginController.getLoginInfoUser(loginBean);
             Session.getSessionInstance(userBean);
-            userLogin(stage);
+            scene = userLogin();
         } else if (loginBean.getAccountType() == 2) {
             ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
             Session.getSessionInstance(shelterBean);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-
-            stage.setScene(scene);
+            Parent root = fxmlLoader.load();
+            scene = new Scene(root);
+            GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+            System.out.println("1) SHELTER LOGIN -> " + root);
+            guiShelterHomepageController.setCurrentPage(root);
         }
         else
             System.out.println("Utente non trovato");
         //todo: popup email o password sbagliate
         //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
+
+        Main.getStage().setScene(scene);
 
     }
 
@@ -104,13 +112,23 @@ public class GUILoginController {
 
     public void noLogin(ActionEvent event) throws IOException {
         Session.getSessionInstance(null);
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        userLogin(stage);
+        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = userLogin();
+        Main.getStage().setScene(scene);
     }
 
-    private static void userLogin(Stage stage) throws IOException {
+    private static Scene userLogin() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
+        guiUserHomepageController.setCurrentPage(root);
+        return scene;
+    }
+
+    public void enterLogin(KeyEvent keyEvent) throws Exception {
+        if( keyEvent.getCode() == KeyCode.ENTER ) {
+            login();
+        }
     }
 }

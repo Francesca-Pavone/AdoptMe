@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,7 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class GUIPetInfoController implements Observer {
+public class GUIPetInfoController {
     @FXML
     private Label coatLenght;
 
@@ -103,6 +104,12 @@ public class GUIPetInfoController implements Observer {
     @FXML
     private HBox infoHBox;
 
+    private Parent previousPage;
+
+    public void setPreviousPage(Parent previousPage) {
+        this.previousPage = previousPage;
+        System.out.println("4) PET INFO PAGE -> " + this.previousPage);
+    }
 
     public void setPetInfo(PetBean petBean) throws Exception {
 
@@ -276,30 +283,22 @@ public class GUIPetInfoController implements Observer {
         compatibilityVBox.getChildren().add(label);
     }
 
-    public void goBack(ActionEvent event) throws IOException {
+    public void goBack(ActionEvent event) {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader;
-        Scene scene;
+        Scene scene = this.previousPage.getScene();
+
+        /*
         if (Session.getSession().getUserBean() == null) {
             fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             scene = new Scene(fxmlLoader.load());
         }
         else {
-            fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
+            fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
             scene = new Scene(fxmlLoader.load());
         }
 
+         */
         stage.setScene(scene);
     }
 
-
-    @Override
-    public void update(Object object) {
-
-    }
-
-    @Override
-    public void update2(Object object1, Object object2) {
-
-    }
 }
