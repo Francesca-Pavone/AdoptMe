@@ -41,7 +41,7 @@ public class GUIRequestItemController implements Observer {
     @FXML
     private Label time;
     @FXML
-    private Label useName;
+    private Label userName;
     @FXML
     private ImageView userImg;
     @FXML
@@ -70,7 +70,7 @@ public class GUIRequestItemController implements Observer {
             image = new Image(Main.class.getResource("image/photo.png").openStream());
         }
         userImg.setImage(image);
-        useName.setText(requestBean.getUserName());
+        userName.setText(requestBean.getUserName());
 
         if (requestBean.getPetImg() != null) {
             InputStream inputStream= new FileInputStream(requestBean.getPetImg());
