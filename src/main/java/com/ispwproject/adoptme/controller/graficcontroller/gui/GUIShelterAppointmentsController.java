@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GUIShelterAppointmentsController implements Observer {
+public class GUIShelterAppointmentsController extends ShelterSideBar implements Observer {
 
     @FXML
     private HBox sentReqList;
@@ -30,29 +30,6 @@ public class GUIShelterAppointmentsController implements Observer {
 
     }
 
-
-
-    // metodi ShelterSidebar, devo obbligatoriamente metterli qui perché in java non ho ereditarietà multipla
-    // quindi questa classe potrà estenderne solamente un'altra e in questo caso deve estendere "Observer"
-    public void goToHomePage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-        stage.setScene(scene);
-    }
-
-
-    public void goToWishlist() {
-        // non lo implementeremo
-    }
-
-    public void goToSettings(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSettings.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-    }
 
     @Override
     public void update(Object object) {
