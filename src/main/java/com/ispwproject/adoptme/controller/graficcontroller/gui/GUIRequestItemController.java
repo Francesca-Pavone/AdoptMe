@@ -2,9 +2,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
-import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,13 +1,11 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import com.ispwproject.adoptme.utils.observer.Subject;
-import javafx.scene.layout.Pane;
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.observer.Subject;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class RequestModel extends Subject{
 

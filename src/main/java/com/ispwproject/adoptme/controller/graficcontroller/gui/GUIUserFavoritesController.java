@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
-import com.ispwproject.adoptme.utils.observer.Observer;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 

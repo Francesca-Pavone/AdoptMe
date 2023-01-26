@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ispwproject.adoptme.utils.bean.UserResearchBean;
+import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
 import javafx.stage.StageStyle;
 
 public class GUIUserHomepageController extends UserSideBar {

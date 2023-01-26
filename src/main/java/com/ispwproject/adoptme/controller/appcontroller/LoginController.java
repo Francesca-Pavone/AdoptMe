@@ -2,12 +2,12 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
-import com.ispwproject.adoptme.utils.bean.LoginBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.dao.LoginDAO;
-import com.ispwproject.adoptme.utils.dao.ShelterDAO;
-import com.ispwproject.adoptme.utils.dao.UserDAO;
+import com.ispwproject.adoptme.engineering.bean.LoginBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.dao.LoginDAO;
+import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
+import com.ispwproject.adoptme.engineering.dao.UserDAO;
 
 
 public class LoginController {

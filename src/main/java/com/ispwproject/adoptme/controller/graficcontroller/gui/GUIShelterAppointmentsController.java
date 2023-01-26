@@ -2,16 +2,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.RequestsController;
-import com.ispwproject.adoptme.utils.bean.RequestBean;
-import com.ispwproject.adoptme.utils.observer.Observer;
-import javafx.event.ActionEvent;
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
