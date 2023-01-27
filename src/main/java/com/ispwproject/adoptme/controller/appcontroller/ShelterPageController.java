@@ -43,7 +43,6 @@ public class ShelterPageController {
             PetBean petBean = new PetBean(petModel);
             petBeanList.add(petBean);
         }
-        System.out.println(petBeanList.size());
         return petBeanList;
     }
 

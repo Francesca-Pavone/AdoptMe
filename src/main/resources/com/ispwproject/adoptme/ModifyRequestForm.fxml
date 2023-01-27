@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10.0" style="-fx-border-color: #000000; -fx-border-width: 5;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIModifyRequestController">
+<VBox alignment="CENTER" spacing="10.0" style="-fx-border-color: #000000; -fx-border-width: 5;" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIModifyRequestController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
