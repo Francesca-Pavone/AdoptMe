@@ -23,6 +23,7 @@ import javafx.stage.StageStyle;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.format.DateTimeFormatter;
 
 public class GUIRequestItemController implements Observer {
     @FXML
@@ -41,7 +42,7 @@ public class GUIRequestItemController implements Observer {
     @FXML
     private Label time;
     @FXML
-    private Label useName;
+    private Label userName;
     @FXML
     private ImageView userImg;
     @FXML
@@ -70,7 +71,7 @@ public class GUIRequestItemController implements Observer {
             image = new Image(Main.class.getResource("image/photo.png").openStream());
         }
         userImg.setImage(image);
-        useName.setText(requestBean.getUserName());
+        userName.setText(requestBean.getUserName());
 
         if (requestBean.getPetImg() != null) {
             InputStream inputStream= new FileInputStream(requestBean.getPetImg());
@@ -81,7 +82,7 @@ public class GUIRequestItemController implements Observer {
         petImg.setImage(image);
         petName.setText(requestBean.getPetName());
 
-        date.setText(requestBean.getDate().toString());
+        date.setText(requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         time.setText(requestBean.getHour() + ":"+ requestBean.getMinutes());
 
         if (requestBean.getStatus() == 2) { // confirmed request

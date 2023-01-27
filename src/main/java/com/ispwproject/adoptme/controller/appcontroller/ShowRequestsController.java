@@ -8,12 +8,12 @@ import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.sql.SQLException;
 
-public class RequestsController {
+public class ShowRequestsController {
 
     private ShelterModel shelterModel;
     private UserModel userModel;
 
-    public RequestsController() {
+    public ShowRequestsController() {
         if (Session.getCurrentSession().getShelterBean() != null)
             this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean());
         else if (Session.getCurrentSession().getUserBean() != null) {

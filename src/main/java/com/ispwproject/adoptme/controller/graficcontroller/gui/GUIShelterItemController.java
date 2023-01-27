@@ -34,7 +34,6 @@ public class GUIShelterItemController {
 
     public void setPageContainer(Parent pageContainer) {
         this.pageContainer = pageContainer;
-        System.out.println("3) SHELTER ITEM -> " + this.pageContainer);
     }
     public void setShelter(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;

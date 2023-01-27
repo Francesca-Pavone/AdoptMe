@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.RequestsController;
+import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
@@ -22,8 +22,8 @@ public class GUIUserAppointmentsController extends UserSideBar implements Observ
     private HBox confirmedReqList;
 
     public void initialize() {
-        RequestsController requestsController = new RequestsController();
-        requestsController.getRequestList(this);
+        ShowRequestsController showRequestsController = new ShowRequestsController();
+        showRequestsController.getRequestList(this);
     }
 
     @Override

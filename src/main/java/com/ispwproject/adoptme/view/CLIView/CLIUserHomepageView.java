@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.view.CLIView;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 import java.util.List;
 import java.util.Scanner;

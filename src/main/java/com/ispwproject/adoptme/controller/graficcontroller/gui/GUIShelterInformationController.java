@@ -50,13 +50,11 @@ public class GUIShelterInformationController implements Observer {
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
-        System.out.println("4) SHELTER INFO PREVIOUS PAGE -> " + this.previousPage);
 
     }
 
     public void setCurrentPage(Parent currentPage) {
         this.currentPage = currentPage;
-        System.out.println("4) SHELTER INFO CURRENT PAGE -> " + this.currentPage);
 
     }
 

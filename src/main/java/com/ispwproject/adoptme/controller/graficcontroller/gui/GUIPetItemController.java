@@ -38,7 +38,6 @@ public class GUIPetItemController {
 
     public void setPageContainer(Parent pageContainer) {
         this.pageContainer = pageContainer;
-        System.out.println("3) PET ITEM -> " + this.pageContainer);
     }
 
     public void setPetData(PetBean pet) throws IOException {

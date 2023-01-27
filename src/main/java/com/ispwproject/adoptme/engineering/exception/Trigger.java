@@ -6,4 +6,8 @@ public class Trigger {
         throw new ImageNotFoundException();
     }
 
+    public void pastDate(String date) throws PastDateException {
+        throw new PastDateException(date);
+    }
+
 }

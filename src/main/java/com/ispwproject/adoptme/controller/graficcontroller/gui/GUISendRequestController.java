@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.PastDateException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -50,7 +53,22 @@ public class GUISendRequestController implements Observer {
         RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
 
         SendRequestController sendRequestController = new SendRequestController();
-        sendRequestController.sendUserRequest(petBean, requestBean, this);
+        try {
+            sendRequestController.sendUserRequest(petBean, requestBean, this);
+        }
+        catch (PastDateException e) {
+            Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initStyle(StageStyle.UNDECORATED);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AlertBox.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            GUIAlertBox guiAlertBox = fxmlLoader.getController();
+            guiAlertBox.setMessage(e.getMessage());
+            dialog.setScene(scene);
+            dialog.show();
+
+        }
         datePicker.setValue(null);
         timeField.setText(null);
 

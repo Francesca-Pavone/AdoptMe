@@ -11,27 +11,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIRequestItemController">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIRequestItemController">
    <children>
-      <VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="250.0" spacing="8.0" styleClass="request-box" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="7.0">
+      <VBox fx:id="vBox" alignment="CENTER" spacing="7.0" styleClass="request-box" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding>
          <children>
-            <HBox alignment="CENTER" prefWidth="250.0" spacing="15.0">
+            <HBox alignment="CENTER" prefWidth="250.0" spacing="20.0">
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <Pane style="-fx-background-color: #000000; -fx-background-radius: 100;">
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000000; -fx-background-radius: 100;">
                            <children>
-                              <ImageView fx:id="userImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                 <image>
-
-                                 </image>
-                              </ImageView>
+                              <ImageView fx:id="userImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" />
                            </children>
                         </Pane>
-                        <Label fx:id="useName" text="user">
+                        <Label fx:id="userName" text="Label">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -42,18 +38,14 @@
                      <image>
                         <Image url="@image/join.png" />
                      </image></ImageView>
-                  <VBox alignment="CENTER">
+                  <VBox alignment="CENTER" layoutX="90.0" layoutY="10.0">
                      <children>
-                        <Pane style="-fx-background-color: #000000; -fx-background-radius: 100;">
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000000; -fx-background-radius: 100;">
                            <children>
-                              <ImageView fx:id="petImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/gatto1.png" />
-                                 </image>
-                              </ImageView>
+                              <ImageView fx:id="petImg" blendMode="SCREEN" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" />
                            </children>
                         </Pane>
-                        <Label fx:id="petName" text="pet">
+                        <Label fx:id="petName" text="Label">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -67,7 +59,7 @@
                   <Font name="Arial Bold" size="13.0" />
                </font>
                <VBox.margin>
-                  <Insets top="-5.0" />
+                  <Insets top="-2.0" />
                </VBox.margin>
             </Label>
             <Label fx:id="date" text="22-05-2023">
@@ -77,7 +69,7 @@
             </Label>
             <HBox fx:id="manageReqBox" alignment="CENTER">
                <children>
-                  <Button fx:id="rejectBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#rejectRequest" styleClass="button-refuse">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#rejectRequest" styleClass="button-refuse">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>

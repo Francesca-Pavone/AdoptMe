@@ -34,7 +34,6 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
 
     public void setCurrentPage(Parent currentPage) {
         this.currentPage = currentPage;
-        System.out.println("2) SHELTER HOMEPAGE -> " + this.currentPage);
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
         showShelterPetsController.getPetList(this);
     }
