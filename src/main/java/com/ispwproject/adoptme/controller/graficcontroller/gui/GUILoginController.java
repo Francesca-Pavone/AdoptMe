@@ -2,10 +2,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.utils.bean.LoginBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,7 +40,10 @@ public class GUILoginController {
     private TextField txtFieldPass;
     @FXML
     private Button btnShelterAccount;
-
+    @FXML
+    private ToggleButton guiInterface;
+    @FXML
+    private ToggleButton cliInterface;
     @FXML
     private Button btnUserAccount;
 
@@ -112,5 +118,13 @@ public class GUILoginController {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
+    }
+
+
+    public void switchInterface(ActionEvent actionEvent) throws Exception {
+        ((((Node)actionEvent.getSource()).getScene().getWindow())).hide();
+        //todo deve partire il CLI login
+        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+        cliUserHomepageView.run();
     }
 }

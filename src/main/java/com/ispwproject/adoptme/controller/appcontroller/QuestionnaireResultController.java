@@ -1,14 +1,10 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetItemController;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.utils.bean.PetBean;
 import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
 import com.ispwproject.adoptme.utils.dao.PetDAO;
 import com.ispwproject.adoptme.utils.decorator.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
