@@ -27,7 +27,7 @@ public class CLIUserHomepageController {
                 CLIUserHomepageView.searchCity();
                 break;
             case SEARCH_SHELTER:
-                // vai a search shelter
+                CLIUserHomepageView.searchShelter();
             default:
                 System.out.println(MSG_ERROR);
         }
@@ -59,5 +59,10 @@ public class CLIUserHomepageController {
         UserResearchController userResearchController = new UserResearchController();
         List<ShelterBean> shelterList = userResearchController.searchCity(userResearchBean);
         CLIUserHomepageView.showShelterList(shelterList);
+    }
+
+    public void searchShelter(String shelter) throws Exception {
+        CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
+        cliShelterInfoController.setShelterData(shelter);
     }
 }

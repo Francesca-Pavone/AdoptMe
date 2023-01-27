@@ -100,7 +100,6 @@ public class GUIShelterInformationController implements Observer {
     public void setShelterData(String shelterName) throws Exception {
         ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
         setData(shelterBean);
-
     }
 
     public void selectInformations() {
