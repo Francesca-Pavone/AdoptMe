@@ -205,7 +205,7 @@ public class PetDAO {
                 try {
                     if (blob != null) {
                         String filePath = petName + "Photo" + ".png";
-                        ImageUtils.fromBlobToFile(blob, filePath);
+                        petImage = ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
                         Trigger trigger = new Trigger();
