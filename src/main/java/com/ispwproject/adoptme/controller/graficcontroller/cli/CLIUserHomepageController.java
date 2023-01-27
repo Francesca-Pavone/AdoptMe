@@ -3,9 +3,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 import com.ispwproject.adoptme.view.CLIView.CLIQuestionnaireView;
 import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserResearchBean;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
+import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class CLIUserHomepageController {
                 System.out.println(MSG_ERROR);
         }
 
-        if (Session.getSession().getUserBean() != null) {
+        if (Session.getCurrentSession().getUserBean() != null) {
             switch (input) {
                 case FAVORITES:
                     //vai a favoriti
