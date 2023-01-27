@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
+import com.ispwproject.adoptme.utils.dao.ShelterDAO;
 import com.ispwproject.adoptme.view.CLIView.CLIShelterInfoView;
 import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.utils.bean.PetBean;
@@ -15,11 +16,13 @@ public class CLIShelterInfoController implements Observer {
         CLIShelterInfoView.showShelter(shelterBean, petBeanList);
     }
 
-    public void showPet(String petName) {
-
+    public void setShelterData(String shelterName) throws Exception {
+        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
+        setData(shelterBean);
     }
 
     @Override
     public void update(Object object) {
     }
+
 }

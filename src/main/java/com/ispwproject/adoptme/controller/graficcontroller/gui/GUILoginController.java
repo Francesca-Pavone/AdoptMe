@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.utils.bean.LoginBean;
 import com.ispwproject.adoptme.utils.bean.ShelterBean;
 import com.ispwproject.adoptme.utils.bean.UserBean;
 import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.view.CLIView.CLILoginView;
 import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,7 +125,6 @@ public class GUILoginController {
     public void switchInterface(ActionEvent actionEvent) throws Exception {
         ((((Node)actionEvent.getSource()).getScene().getWindow())).hide();
         //todo deve partire il CLI login
-        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-        cliUserHomepageView.run();
+        CLILoginView.run();
     }
 }
