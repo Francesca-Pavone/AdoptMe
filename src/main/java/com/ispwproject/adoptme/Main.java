@@ -25,6 +25,8 @@ public class Main extends Application {
         stage.show();
 /*
         Stage stage1 = new Stage();
+
+        /*Stage stage1 = new Stage();
         FXMLLoader fxmlLoader1 = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene1 = new Scene(fxmlLoader1.load());
         setStage1(stage1);

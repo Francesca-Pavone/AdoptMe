@@ -6,6 +6,8 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
+import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,7 +43,10 @@ public class GUILoginController {
     private TextField txtFieldPass;
     @FXML
     private Button btnShelterAccount;
-
+    @FXML
+    private ToggleButton guiInterface;
+    @FXML
+    private ToggleButton cliInterface;
     @FXML
     private Button btnUserAccount;
 
@@ -130,5 +136,13 @@ public class GUILoginController {
         if( keyEvent.getCode() == KeyCode.ENTER ) {
             login();
         }
+    }
+
+
+    public void switchInterface(ActionEvent actionEvent) throws Exception {
+        ((((Node)actionEvent.getSource()).getScene().getWindow())).hide();
+        //todo deve partire il CLI login
+        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+        cliUserHomepageView.run();
     }
 }
