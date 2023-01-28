@@ -248,6 +248,11 @@ public class GUIQuestionnaireController {
         }
     }
 
+    @FXML
+    private Label firstPetText1;
+    @FXML
+    private Label firstPetText2;
+
     public void selectGenderNotImportant() {
         if(!vboxParent.getChildren().contains(vboxPetAge) && btnGenderNotImportant.isSelected())
             vboxParent.getChildren().add(vboxPetAge);
@@ -599,8 +604,7 @@ public class GUIQuestionnaireController {
 
     public void selectNoSpecificArea() {
         if(vboxParent.getChildren().contains(vboxCity) && btnNoSpecificArea.isSelected()) {
-            removeNextNodes(vboxList.indexOf(vboxGeographicalArea));
-            vboxParent.getChildren().add(btnEndQuestionnaire);
+            vboxParent.getChildren().remove(vboxCity);
         }
         if(!vboxParent.getChildren().contains(btnEndQuestionnaire) && btnNoSpecificArea.isSelected())
             vboxParent.getChildren().add(btnEndQuestionnaire);
@@ -686,11 +690,6 @@ public class GUIQuestionnaireController {
             }
         }
         if(!btnAgeNotImportant.isSelected()) {
-            /*
-            questionnaireResultBeanBuilder.puppy(btnPuppy.isSelected())
-                    .young(btnYoung.isSelected())
-                    .adult(btnAdult.isSelected())
-                    .senior(btnSenior.isSelected());*/
             questionnaireResultBeanBuilder.age(switch (((ToggleButton) petAgeGroup.getSelectedToggle()).getText()) {
                 case "Puppy (0-12 months)" -> "puppy";
                 case "Young (13 months - 3 years)" -> "young";

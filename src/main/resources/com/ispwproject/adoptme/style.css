@@ -208,3 +208,22 @@
     -fx-border-color: rgba(0,0,0,0);
 }
 
+.switchInterface {
+	-fx-background-color: #CCC9C3;
+	
+}
+
+.switchInterface:selected {
+	-fx-background-color: #A6A29A;
+}
+
+
+.radio-button2 .radio {
+    -fx-border-width: 2px;
+    -fx-border-color: #ffffff;
+    -fx-background-color: #34665A;
+    -fx-border-radius: 15px;
+}
+.radio-button2:selected .dot {
+	-fx-background-color: #ffffff;
+}

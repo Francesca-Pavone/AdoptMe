@@ -537,32 +537,10 @@
                                           <ToggleGroup fx:id="firstPetGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnFirstPet" maxHeight="-Infinity" mnemonicParsing="false" onAction="#selectFirstPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" textFill="WHITE" toggleGroup="$firstPetGroup">
+                                    <ToggleButton fx:id="btnFirstPet" contentDisplay="CENTER" maxHeight="-Infinity" mnemonicParsing="false" onAction="#selectFirstPet" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No, this is&#10;my first time" textAlignment="CENTER" textFill="WHITE" toggleGroup="$firstPetGroup">
                                        <font>
-                                          <Font name="Arial Bold" size="30.0" />
+                                          <Font name="Arial Bold" size="22.0" />
                                        </font>
-                                       <graphic>
-                                          <VBox alignment="CENTER">
-                                             <children>
-                                                <Label text="No, this is" textFill="#34665a">
-                                                   <font>
-                                                      <Font name="Arial Bold" size="25.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="my first time" textFill="#34665a">
-                                                   <font>
-                                                      <Font name="Arial Bold" size="25.0" />
-                                                   </font>
-                                                   <VBox.margin>
-                                                      <Insets top="-5.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="-5.0" top="-5.0" />
-                                             </padding>
-                                          </VBox>
-                                       </graphic>
                                     </ToggleButton>
                                  </children>
                                  <VBox.margin>
@@ -706,42 +684,37 @@
                                        <toggleGroup>
                                           <ToggleGroup fx:id="specificAreaGroup" />
                                        </toggleGroup>
+                                       <HBox.margin>
+                                          <Insets left="175.0" />
+                                       </HBox.margin>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnNoSpecificArea" mnemonicParsing="false" onAction="#selectNoSpecificArea" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" textFill="WHITE" toggleGroup="$specificAreaGroup">
+                                    <ToggleButton fx:id="btnNoSpecificArea" mnemonicParsing="false" onAction="#selectNoSpecificArea" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$specificAreaGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
-                                       <graphic>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <Label text="No" textFill="#34665a">
-                                                   <font>
-                                                      <Font name="Arial Bold" size="30.0" />
-                                                   </font>
-                                                   <VBox.margin>
-                                                      <Insets top="2.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label text="*remember that you'll pay for" textFill="#34665a">
-                                                   <font>
-                                                      <Font name="Arial" size="15.0" />
-                                                   </font>
-                                                   <VBox.margin>
-                                                      <Insets top="-2.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <Label text="all the transfer costs" textFill="#34665a">
-                                                   <font>
-                                                      <Font name="Arial" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="-10.0" top="-10.0" />
-                                             </padding>
-                                          </VBox>
-                                       </graphic>
                                     </ToggleButton>
+                                    <VBox alignment="CENTER">
+                                       <children>
+                                          <Label text="*if no, remember that" textFill="#34665a">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="you'll pay for all " textFill="#34665a">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="the transfer costs" textFill="#34665a">
+                                             <font>
+                                                <Font name="Arial" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="-10.0" />
+                                       </HBox.margin>
+                                    </VBox>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="15.0" />

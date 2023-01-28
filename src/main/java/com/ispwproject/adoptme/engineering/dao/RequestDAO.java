@@ -99,7 +99,14 @@ public class RequestDAO {
                 PetModel pet = PetDAO.retrievePetById(petId, shelterModel.getId());
 
                 int userId = resultSet.getInt("userId");
-                UserModel userModel = UserDAO.retrieveUserById(userId);
+
+                UserDAO userDAO;
+                if (LocalTime.now().getMinute()%2 == 0) {
+                    userDAO = new UserDAOJDBC();
+                } else {
+                    userDAO = new UserDAOCSV();
+                }
+                UserModel userModel = userDAO.retrieveUserById(userId);
 
                 Date date = resultSet.getDate("date");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

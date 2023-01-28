@@ -1,13 +1,13 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.dao.*;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.dao.LoginDAO;
-import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
-import com.ispwproject.adoptme.engineering.dao.UserDAO;
+
+import java.time.LocalTime;
 
 
 public class LoginController {
@@ -18,7 +18,15 @@ public class LoginController {
     }
 
     public UserBean getLoginInfoUser(LoginBean loginBean) throws Exception {
-        UserModel userModel = UserDAO.retrieveUserByEmail(loginBean.getEmail());
+
+        UserDAO userDAO;
+        if (LocalTime.now().getMinute()%2 == 0) {
+            userDAO = new UserDAOJDBC();
+        } else {
+            userDAO = new UserDAOCSV();
+        }
+        UserModel userModel = userDAO.retrieveUserByEmail(loginBean.getEmail());
+
         return new UserBean(userModel);
     }
     public ShelterBean getLoginInfoShelter(LoginBean loginBean) throws Exception {

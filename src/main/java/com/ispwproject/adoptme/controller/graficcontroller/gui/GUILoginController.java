@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,7 +41,10 @@ public class GUILoginController {
     private TextField txtFieldPass;
     @FXML
     private Button btnShelterAccount;
-
+    @FXML
+    private ToggleButton guiInterface;
+    @FXML
+    private ToggleButton cliInterface;
     @FXML
     private Button btnUserAccount;
 
@@ -84,6 +88,7 @@ public class GUILoginController {
             UserBean userBean = loginController.getLoginInfoUser(loginBean);
             Session.getSessionInstance(userBean);
             scene = userLogin();
+            Main.getStage().setScene(scene);
         } else if (loginBean.getAccountType() == 2) {
             ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
             Session.getSessionInstance(shelterBean);
@@ -93,6 +98,7 @@ public class GUILoginController {
             scene = new Scene(root);
             GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
             guiShelterHomepageController.setCurrentPage(root);
+            Main.getStage().setScene(scene);
         }
         else
             System.out.println("Utente non trovato");
@@ -129,5 +135,9 @@ public class GUILoginController {
         if( keyEvent.getCode() == KeyCode.ENTER ) {
             login();
         }
+    }
+
+
+    public void switchInterface(ActionEvent actionEvent) throws Exception {
     }
 }
