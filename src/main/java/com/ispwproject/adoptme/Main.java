@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme;
 
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
+import com.ispwproject.adoptme.view.cli.CLILoginView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -56,8 +57,7 @@ public class Main extends Application {
                 launch();
                 break;
             } else if (selection == 2) {
-                CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                cliUserHomepageView.run();
+                CLILoginView.run();
             } else {
                 System.out.println("Number not valid, please insert 1 or 2");
             }

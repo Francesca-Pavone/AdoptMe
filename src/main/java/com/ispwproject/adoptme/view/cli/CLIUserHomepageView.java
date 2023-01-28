@@ -26,7 +26,7 @@ public class CLIUserHomepageView {
 
     public static void showShelterList(List<ShelterBean> shelterList) throws Exception {
         int i = 1;
-        System.out.println("\n");
+        System.out.println("\n------------------------------------------ Shelters ------------------------------------------");
         for(ShelterBean shelter: shelterList) {
             System.out.println(i + ") " + shelter.getName() );
             i++;
@@ -40,7 +40,8 @@ public class CLIUserHomepageView {
     }
     public static void searchCity() throws Exception {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Insert a city:");
+        System.out.println("\n---------------------------------------- Insert a city ----------------------------------------");
+
         String city = scanner.nextLine();
         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
         cliUserHomepageController.searchCity(city);
