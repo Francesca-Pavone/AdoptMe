@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.view.CLIView;
+package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLILoginController;
 

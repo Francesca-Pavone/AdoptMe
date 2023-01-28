@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
-import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 

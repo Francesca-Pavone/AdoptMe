@@ -1,12 +1,9 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.session.Session;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.session.Session;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,8 +12,11 @@ public class CLIUserHomepageView {
         System.out.println("---------------------------------------- USER HOMEPAGE ----------------------------------------");
         System.out.println("------------------------------------------- commands ------------------------------------------");
         System.out.println(" 1) Search shelters in a specific city. \n 2) Search pets of a specific shelter.\n 3) Compile the questionnaire.");
-        if(Session.getSession().getUserBean() != null)
-            System.out.println(" 4) Go to favorites.\n 5) Go to appointments.\n 6) Go to settings.");
+        //if(Session.getCurrentSession().getUserBean() != null)
+        if(Session.getCurrentSession() != null) {
+            if(Session.getCurrentSession().getUserBean() != null)
+                System.out.println(" 4) Go to favorites.\n 5) Go to appointments.\n 6) Go to settings.");
+        }
         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
 
         Scanner scanner = new Scanner(System.in);
@@ -51,6 +51,8 @@ public class CLIUserHomepageView {
         System.out.println("Insert the name of a shelter:");
         String shelter = scanner.nextLine();
         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
-        cliUserHomepageController.searchShelter(shelter);
+
+        // todo: l'ho commentato perché nel CLIUserHomepageController non ho trobato questo metodo (neanche nelle versioni precedenti viste su github)
+        //cliUserHomepageController.searchShelter(shelter);
     }
 }

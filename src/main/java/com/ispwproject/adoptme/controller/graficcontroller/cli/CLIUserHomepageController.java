@@ -28,7 +28,7 @@ public class CLIUserHomepageController {
             default -> System.out.println(MSG_ERROR);
         }
 
-        if (Session.getCurrentSession().getUserBean() != null) {
+        if (Session.getCurrentSession() != null) {
             switch (input) {
                 case FAVORITES:
                     //vai a favoriti
