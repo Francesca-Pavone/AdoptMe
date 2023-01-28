@@ -32,7 +32,7 @@ public class CLIQuestionnaireView {
         String city = "";
         int question = 1;
 
-        System.out.println("----------------------------------- QUESTIONNAIRE -----------------------------------");
+        System.out.println("---------------------------------------- QUESTIONNAIRE ----------------------------------------");
         while(question < 18) {
             switch (question) {
                 case 1:

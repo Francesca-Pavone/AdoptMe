@@ -6,6 +6,13 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
+import com.ispwproject.adoptme.utils.bean.LoginBean;
+import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.view.CLIView.CLILoginView;
+import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -102,9 +109,11 @@ public class GUILoginController {
         }
         else
             System.out.println("Utente non trovato");
-
         //todo: popup email o password sbagliate
         //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
+
+        Main.getStage().setScene(scene);
+
     }
 
 
