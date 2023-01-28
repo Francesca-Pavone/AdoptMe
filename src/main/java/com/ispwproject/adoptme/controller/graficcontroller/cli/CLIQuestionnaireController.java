@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController;
-import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-import com.ispwproject.adoptme.utils.builder.QuestionnaireResultBeanBuilder;
+import com.ispwproject.adoptme.engineering.bean.QuestionnaireResultBean;
+import com.ispwproject.adoptme.engineering.builder.QuestionnaireResultBeanBuilder;
 
 import java.util.List;
 

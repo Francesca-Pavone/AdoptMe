@@ -3,11 +3,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ispwproject.adoptme.utils.bean.UserResearchBean;
+import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
 import javafx.stage.StageStyle;
 
 public class GUIUserHomepageController extends UserSideBar {
@@ -43,6 +44,11 @@ public class GUIUserHomepageController extends UserSideBar {
     private VBox vBox;
     @FXML
     private Button backButton;
+    private Parent currentPage;
+
+    public void setCurrentPage(Parent currentPage) {
+        this.currentPage = currentPage;
+    }
 
     public void initialize() {
         radioBtnCity.setSelected(true);
@@ -102,6 +108,7 @@ public class GUIUserHomepageController extends UserSideBar {
                         Pane pane = fxmlLoader.load();
 
                         GUIShelterItemController shelterItemControllerG = fxmlLoader.getController();
+                        shelterItemControllerG.setPageContainer(currentPage);
                         shelterItemControllerG.setShelter(shelterBean);
                         shelterItemControllerG.setData();
 
@@ -125,9 +132,12 @@ public class GUIUserHomepageController extends UserSideBar {
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.initStyle(StageStyle.UNDECORATED);
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
+                Parent root = fxmlLoader.load();
+                Scene scene = new Scene(root);
 
                 GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+                guiShelterInformationController.setPreviousPage(currentPage);
+                guiShelterInformationController.setCurrentPage(root);
                 guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

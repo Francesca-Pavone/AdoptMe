@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterSettingsController">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterSettingsController">
    <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="0.0" />
    <HBox alignment="CENTER_LEFT" prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
@@ -89,34 +89,6 @@
                            <Image url="@image/schedule.png" />
                         </ImageView>
                         <Label text="APPOINTMENTES" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </HBox>
-                  </graphic>
-               </Button>
-               <Button fx:id="btnWishList" layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToWishlist" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                  <graphic>
-                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <Pane fx:id="wishlistSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <Image url="@image/wishlist.png" />
-                        </ImageView>
-                        <Label text="WISH LIST" textFill="WHITE">
                            <font>
                               <Font name="Arial" size="20.0" />
                            </font>
@@ -202,7 +174,7 @@
                </Label>
                <VBox spacing="10.0">
                   <children>
-                     <Label text="Modifica profilo">
+                     <Label text="Modify profile">
                         <font>
                            <Font name="Arial Bold" size="18.0" />
                         </font>
@@ -222,14 +194,6 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </TextField>
-                           <Button mnemonicParsing="false" prefHeight="30.0" styleClass="button1" stylesheets="@style.css" text="Conferma" textFill="WHITE">
-                              <font>
-                                 <Font name="Arial Bold" size="16.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="10.0" right="10.0" />
-                              </padding>
-                           </Button>
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" spacing="30.0">
@@ -244,14 +208,6 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </TextField>
-                           <Button mnemonicParsing="false" prefHeight="30.0" styleClass="button1" stylesheets="@style.css" text="Conferma" textFill="WHITE">
-                              <font>
-                                 <Font name="Arial Bold" size="16.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="10.0" right="10.0" />
-                              </padding>
-                           </Button>
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" spacing="30.0">
@@ -269,14 +225,6 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </TextField>
-                           <Button mnemonicParsing="false" prefHeight="30.0" styleClass="button1" stylesheets="@style.css" text="Conferma" textFill="WHITE">
-                              <font>
-                                 <Font name="Arial Bold" size="16.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="10.0" right="10.0" />
-                              </padding>
-                           </Button>
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="121.0" spacing="30.0">
@@ -294,14 +242,6 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </TextField>
-                           <Button mnemonicParsing="false" prefHeight="30.0" styleClass="button1" stylesheets="@style.css" text="Conferma" textFill="WHITE">
-                              <font>
-                                 <Font name="Arial Bold" size="16.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="10.0" right="10.0" />
-                              </padding>
-                           </Button>
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="161.0" spacing="30.0">
@@ -319,16 +259,19 @@
                                  <Font name="Arial" size="14.0" />
                               </font>
                            </TextField>
-                           <Button mnemonicParsing="false" prefHeight="30.0" styleClass="button1" stylesheets="@style.css" text="Conferma" textFill="WHITE">
-                              <font>
-                                 <Font name="Arial Bold" size="16.0" />
-                              </font>
-                              <padding>
-                                 <Insets left="10.0" right="10.0" />
-                              </padding>
-                           </Button>
                         </children>
                      </HBox>
+                     <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="button1" stylesheets="@style.css" text="Confirm" textFill="WHITE">
+                        <font>
+                           <Font name="Arial Bold" size="16.0" />
+                        </font>
+                        <padding>
+                           <Insets left="10.0" right="10.0" />
+                        </padding>
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </Button>
                   </children>
                   <padding>
                      <Insets left="30.0" />
@@ -336,7 +279,7 @@
                </VBox>
                <VBox spacing="10.0">
                   <children>
-                     <Label text="Modifica password">
+                     <Label text="Modify password">
                         <font>
                            <Font name="Arial Bold" size="18.0" />
                         </font>
@@ -379,7 +322,7 @@
                      </HBox>
                      <HBox alignment="BOTTOM_LEFT">
                         <children>
-                           <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="button1" stylesheets="@style.css" text="Conferma modifica" textFill="WHITE">
+                           <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="button1" stylesheets="@style.css" text="Confirm" textFill="WHITE">
                               <font>
                                  <Font name="Arial Bold" size="16.0" />
                               </font>
@@ -400,7 +343,7 @@
                      </HBox>
                   </children>
                   <VBox.margin>
-                     <Insets top="40.0" />
+                     <Insets top="20.0" />
                   </VBox.margin>
                   <padding>
                      <Insets left="30.0" />

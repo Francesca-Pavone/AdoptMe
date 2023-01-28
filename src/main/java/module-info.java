@@ -13,10 +13,10 @@ module com.ispwproject.adoptme {
     exports com.ispwproject.adoptme;
     exports com.ispwproject.adoptme.model;
     opens com.ispwproject.adoptme.model to javafx.fxml;
-    exports com.ispwproject.adoptme.utils;
-    opens com.ispwproject.adoptme.utils to javafx.fxml;
+    exports com.ispwproject.adoptme.engineering;
+    opens com.ispwproject.adoptme.engineering to javafx.fxml;
     exports com.ispwproject.adoptme.controller.graficcontroller.gui;
     opens com.ispwproject.adoptme.controller.graficcontroller.gui to javafx.fxml;
-    exports com.ispwproject.adoptme.utils.connection;
-    opens com.ispwproject.adoptme.utils.connection to javafx.fxml;
+    exports com.ispwproject.adoptme.engineering.connection;
+    opens com.ispwproject.adoptme.engineering.connection to javafx.fxml;
 }

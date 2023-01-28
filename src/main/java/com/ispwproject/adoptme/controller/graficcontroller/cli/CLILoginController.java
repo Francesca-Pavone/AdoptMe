@@ -2,12 +2,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
-import com.ispwproject.adoptme.utils.bean.LoginBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.session.Session;
-import com.ispwproject.adoptme.view.CLIView.CLILoginView;
-import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
+import com.ispwproject.adoptme.engineering.bean.LoginBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.view.cli.CLILoginView;
+import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterAppointmentsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterAppointmentsController">
    <HBox prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
          <AnchorPane style="-fx-background-color: #34665A;">
@@ -93,34 +93,6 @@
                      </HBox>
                   </graphic>
                </Button>
-               <Button fx:id="btnWishList" layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToWishlist" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                  <graphic>
-                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <Pane fx:id="wishlistSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <Image url="@image/wishlist.png" />
-                        </ImageView>
-                        <Label text="WISH LIST" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </HBox>
-                  </graphic>
-               </Button>
                <Button fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
                   <graphic>
                      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
@@ -163,7 +135,7 @@
                      <HBox fx:id="sentReqList" />
                   </content>
                   <VBox.margin>
-                     <Insets left="20.0" right="-10.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </ScrollPane>
                <Label text="Pending Requests">
@@ -179,7 +151,7 @@
                      <HBox fx:id="pendingReqList" />
                   </content>
                   <VBox.margin>
-                     <Insets left="20.0" right="-10.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </ScrollPane>
                <Label layoutX="10.0" layoutY="355.0" text="Confirmed Requests">
@@ -195,12 +167,12 @@
                      <HBox fx:id="confirmedReqList" />
                   </content>
                   <VBox.margin>
-                     <Insets left="20.0" right="-10.0" />
+                     <Insets left="20.0" />
                   </VBox.margin>
                </ScrollPane>
             </children>
             <HBox.margin>
-               <Insets left="20.0" right="20.0" top="20.0" />
+               <Insets left="20.0" top="20.0" />
             </HBox.margin>
          </VBox>
       </children>

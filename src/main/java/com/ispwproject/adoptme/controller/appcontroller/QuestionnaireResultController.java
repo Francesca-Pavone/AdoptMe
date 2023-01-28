@@ -1,10 +1,10 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-import com.ispwproject.adoptme.utils.dao.PetDAO;
-import com.ispwproject.adoptme.utils.decorator.*;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.QuestionnaireResultBean;
+import com.ispwproject.adoptme.engineering.dao.PetDAO;
+import com.ispwproject.adoptme.engineering.decorator.*;
 
 import java.util.ArrayList;
 import java.util.List;

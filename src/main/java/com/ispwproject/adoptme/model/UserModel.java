@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
 
 import java.io.File;
 

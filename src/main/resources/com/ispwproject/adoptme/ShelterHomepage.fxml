@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController">
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterHomepageController">
    <HBox prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <AnchorPane style="-fx-background-color: #34665A;">
          <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
@@ -87,34 +87,6 @@
                         <Image url="@image/schedule.png" />
                      </ImageView>
                      <Label text="APPOINTMENTES" textFill="WHITE">
-                        <font>
-                           <Font name="Arial" size="20.0" />
-                        </font>
-                     </Label>
-                  </HBox>
-               </graphic>
-            </Button>
-            <Button fx:id="btnWishList" layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToWishlist" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-               <graphic>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <Pane fx:id="wishlistSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                        <HBox.margin>
-                           <Insets right="35.0" />
-                        </HBox.margin>
-                        <padding>
-                           <Insets bottom="10.0" top="10.0" />
-                        </padding>
-                     </Pane>
-                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                        <HBox.margin>
-                           <Insets />
-                        </HBox.margin>
-                        <Image url="@image/wishlist.png" />
-                     </ImageView>
-                     <Label text="WISH LIST" textFill="WHITE">
                         <font>
                            <Font name="Arial" size="20.0" />
                         </font>
@@ -197,7 +169,7 @@
             <VBox.margin>
                <Insets left="20.0" right="20.0" />
             </VBox.margin>
-            <GridPane fx:id="grid" alignment="BOTTOM_CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
+            <GridPane fx:id="grid" alignment="TOP_CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" />
                </rowConstraints>
@@ -208,4 +180,5 @@
          </ScrollPane>
       </VBox>
    </HBox>
+   <Pane fx:id="blackPane" opacity="0.7" style="-fx-background-color: #000000;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 </AnchorPane>

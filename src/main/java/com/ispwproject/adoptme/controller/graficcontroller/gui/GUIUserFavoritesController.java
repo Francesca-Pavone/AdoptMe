@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
-import com.ispwproject.adoptme.utils.observer.Observer;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 
@@ -10,6 +10,11 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
 
     @Override
     public void update(Object object) {
+
+    }
+
+    @Override
+    public void update2(Object object1, Object object2) {
 
     }
 }

@@ -1,20 +1,18 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
-import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
-import com.ispwproject.adoptme.utils.ImageUtils;
-import com.ispwproject.adoptme.utils.bean.PetBean;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.builder.PetBeanBuilder;
-import com.ispwproject.adoptme.utils.enums.CoatLenght;
-import com.ispwproject.adoptme.utils.enums.Size;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.ImageUtils;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.builder.PetBeanBuilder;
+import com.ispwproject.adoptme.engineering.enums.CoatLenght;
+import com.ispwproject.adoptme.engineering.enums.Size;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -122,6 +120,11 @@ public class GUIAddPetController {
 
     private File file;
     private int petType; // 0 -> DOG  |  1 -> CAT
+    private Observer observer;
+
+    public void setObserver(Observer observer) {
+        this.observer = observer;
+    }
 
     public void initialize() {
 
@@ -142,7 +145,7 @@ public class GUIAddPetController {
         sizeVBox.getChildren().removeAll(txtSize, boxSize);
     }
 
-    public void close(ActionEvent event) {
+    public void close(ActionEvent event) throws IOException {
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
@@ -155,12 +158,12 @@ public class GUIAddPetController {
     }
 
     public void confirmAddPet(ActionEvent event) throws Exception {
-        ShelterBean shelterBean = Session.getSession().getShelterBean();
+        ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
         int year;
         int month;
         int day;
-        AddPetController addPetController = null;
-        PetBean petBean = null;
+        AddPetController addPetController;
+        PetBean petBean;
 
         // retrive data of birth information
         if (datePicker.getValue() != null) {
@@ -277,12 +280,7 @@ public class GUIAddPetController {
         }
 
         addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(shelterBean);
-
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Main.getStage().setScene(scene);
-
+        addPetController.addNewPet(shelterBean, observer);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

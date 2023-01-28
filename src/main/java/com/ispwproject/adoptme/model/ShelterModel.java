@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 import java.io.File;
 import java.net.URL;

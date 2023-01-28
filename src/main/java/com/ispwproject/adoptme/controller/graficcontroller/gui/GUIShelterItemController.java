@@ -1,12 +1,12 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,7 +30,11 @@ public class GUIShelterItemController {
     private Button btnShelter;
 
     private ShelterBean shelterBean;
+    private Parent pageContainer;
 
+    public void setPageContainer(Parent pageContainer) {
+        this.pageContainer = pageContainer;
+    }
     public void setShelter(ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
     }
@@ -54,9 +58,12 @@ public class GUIShelterItemController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
 
         GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setPreviousPage(pageContainer);
+        guiShelterInformationController.setCurrentPage(root);
         guiShelterInformationController.setData(shelterBean);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

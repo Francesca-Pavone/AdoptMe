@@ -3,9 +3,8 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController;
-import com.ispwproject.adoptme.utils.bean.QuestionnaireResultBean;
-import com.ispwproject.adoptme.utils.bean.UserBean;
-import com.ispwproject.adoptme.utils.builder.QuestionnaireResultBeanBuilder;
+import com.ispwproject.adoptme.engineering.bean.QuestionnaireResultBean;
+import com.ispwproject.adoptme.engineering.builder.QuestionnaireResultBeanBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 

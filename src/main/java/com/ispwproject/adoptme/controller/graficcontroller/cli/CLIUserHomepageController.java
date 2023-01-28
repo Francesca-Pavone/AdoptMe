@@ -1,11 +1,11 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
-import com.ispwproject.adoptme.view.CLIView.CLIQuestionnaireView;
-import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
+import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
+import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
-import com.ispwproject.adoptme.utils.bean.ShelterBean;
-import com.ispwproject.adoptme.utils.bean.UserResearchBean;
-import com.ispwproject.adoptme.utils.session.Session;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
+import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.util.List;
 
@@ -20,19 +20,15 @@ public class CLIUserHomepageController {
 
     public void executeCommand(String input) throws Exception {
         switch (input) {
-            case QUESTIONNAIRE:
-                CLIQuestionnaireView.main();
-                break;
-            case SEARCH_CITY:
-                CLIUserHomepageView.searchCity();
-                break;
-            case SEARCH_SHELTER:
-                CLIUserHomepageView.searchShelter();
-            default:
-                System.out.println(MSG_ERROR);
+            case QUESTIONNAIRE -> CLIQuestionnaireView.main();
+            case SEARCH_CITY -> CLIUserHomepageView.searchCity();
+
+            // vai a search shelter
+            case SEARCH_SHELTER -> System.out.println("Search TODO");
+            default -> System.out.println(MSG_ERROR);
         }
 
-        if (Session.getSession().getUserBean() != null) {
+        if (Session.getCurrentSession() != null) {
             switch (input) {
                 case FAVORITES:
                     //vai a favoriti
@@ -59,10 +55,5 @@ public class CLIUserHomepageController {
         UserResearchController userResearchController = new UserResearchController();
         List<ShelterBean> shelterList = userResearchController.searchCity(userResearchBean);
         CLIUserHomepageView.showShelterList(shelterList);
-    }
-
-    public void searchShelter(String shelter) throws Exception {
-        CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
-        cliShelterInfoController.setShelterData(shelter);
     }
 }
