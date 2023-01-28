@@ -9,20 +9,20 @@ import java.util.Scanner;
 
 public class CLIShelterInfoView {
     public static void showShelter(ShelterBean shelterBean, List<PetBean> petBeanList) {
-        System.out.println("\n\n----------------------------------------- " + shelterBean.getName() + " -----------------------------------------");
-        System.out.println("\n---------------------------------------- Shelter Information ----------------------------------------\n  Email: " + shelterBean.getEmail() + "\n  Phone number: " + shelterBean.getPhoneNumber() + "\n  Web site: " + shelterBean.getWebSite() + "\n  Address: " + shelterBean.getAddress() + ", " + shelterBean.getCity());
-        System.out.println("------------------------------------------- Shelter's pets -------------------------------------------");
+        System.out.println("\n\n-------------------------------------- " + shelterBean.getName().toUpperCase() + " --------------------------------------");
+        System.out.println("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterBean.getEmail() + "\n  Phone number: " + shelterBean.getPhoneNumber() + "\n  Web site: " + shelterBean.getWebSite() + "\n  Address: " + shelterBean.getAddress() + ", " + shelterBean.getCity());
+        System.out.println("--------------------------------------- Shelter's pets ---------------------------------------");
         int i = 1;
         String gender;
         for(PetBean petBean: petBeanList) {
-            System.out.println("|     " + i + ") " + petBean.getName() + "     |");
+            System.out.println("    " + i + ") Name: " + petBean.getName() + "     ");
             gender = (switch (petBean.getGender()) {
                 case 1 -> "Female";
                 default -> "Male";
             });
-            System.out.println("\n|        " + gender + "        |");
-            System.out.println("\n|      " + petBean.getAge() + "      |");
-            System.out.println("------------------------------------------------------------------------------------------------------");
+            System.out.println("\n       Gender: " + gender + "        ");
+            System.out.println("\n       Age: " + petBean.getAge() + "      ");
+            System.out.println("-----------------------------------------------------------------------------------------------");
             i++;
         }
         Scanner scanner = new Scanner(System.in);
