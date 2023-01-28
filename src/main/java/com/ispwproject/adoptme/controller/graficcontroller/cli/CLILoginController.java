@@ -38,6 +38,7 @@ public class CLILoginController {
                 System.out.println("Functionality not yet developed.");
                 CLILoginView.run();
             case SWITCH_TO_GUI:
+                //todo: togliere la possibilità di passare da qui all'interfaccia grafica perché da errore, lasciare la scelta solo come prima azione (nel main)
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
