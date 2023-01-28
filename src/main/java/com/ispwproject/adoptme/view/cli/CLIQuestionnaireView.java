@@ -68,8 +68,6 @@ public class CLIQuestionnaireView {
                         question--;
                         break;
                     }
-                    if(petType.equals("a"))
-                        question++;
                     question++;
                     break;
                 case 4:
@@ -80,10 +78,10 @@ public class CLIQuestionnaireView {
                             System.out.println(INVALID_INPUT + "a | b | c | d");
                             dogSize = scanner.nextLine();
                         }
-                    }
-                    if(dogSize.equals("back")) {
-                        question--;
-                        break;
+                        if (dogSize.equals("back")) {
+                            question--;
+                            break;
+                        }
                     }
                     question++;
                     break;
@@ -94,7 +92,12 @@ public class CLIQuestionnaireView {
                         System.out.println(INVALID_INPUT + "a | b");
                         alreadyHavePet = scanner.nextLine();
                     }
-                    if(alreadyHavePet.equals("back")) {
+                    if(alreadyHavePet.equals("back") && petType.equals("b")) {
+                        question--;
+                        break;
+                    }
+                    else if(alreadyHavePet.equals("back")) {
+                        question--;
                         question--;
                         break;
                     }
@@ -108,7 +111,7 @@ public class CLIQuestionnaireView {
                         System.out.println("\n\nIf yes, which of these?\n a) Male cat    b) Female cat    c) Male dog    d) Female dog\n [done -> go to next question] \n[back -> go to previous question]");
                         while (scanner.hasNext()) {
                             inputLine = scanner.nextLine();
-                            while (!(inputLine.equals("a")) && !(inputLine.equals("b")) && !(inputLine.equals("c")) && !(inputLine.equals("d")) && !(inputLine.equals("done")) && !(inputLine.equals("back"))) {
+                            if (!(inputLine.equals("a")) && !(inputLine.equals("b")) && !(inputLine.equals("c")) && !(inputLine.equals("d")) && !(inputLine.equals("done")) && !(inputLine.equals("back"))) {
                                 System.out.println(INVALID_INPUT + "a | b | c | d | done");
                             }
                             if (!petAlreadyHaveList.contains(inputLine))
@@ -119,10 +122,10 @@ public class CLIQuestionnaireView {
                                 //todo con un break esce dal while ma non dal case
                             }
                             if(inputLine.equals("done")) {
+                                question++;
                                 break;
                             }
                         }
-                        question++;
                     }
                     break;
                 case 7:
@@ -132,12 +135,13 @@ public class CLIQuestionnaireView {
                         System.out.println(INVALID_INPUT + "a | b");
                         garden = scanner.nextLine();
                     }
-                    if(garden.equals("back")) {
+                    if(garden.equals("back") && alreadyHavePet.equals("a")) {
                         question--;
                         break;
-                    }
-                    if(garden.equals("b")) {
-                        question++;
+                    } else if(garden.equals("back")) {
+                        question--;
+                        question--;
+                        break;
                     }
                     question++;
                     break;
@@ -149,10 +153,10 @@ public class CLIQuestionnaireView {
                             System.out.println(INVALID_INPUT + "a | b");
                             gardenSleepOutside = scanner.nextLine();
                         }
-                    }
-                    if(gardenSleepOutside.equals("back")) {
-                        question--;
-                        break;
+                        if (gardenSleepOutside.equals("back")) {
+                            question--;
+                            break;
+                        }
                     }
                     question++;
                     break;
@@ -163,12 +167,14 @@ public class CLIQuestionnaireView {
                         System.out.println(INVALID_INPUT + "a | b");
                         terrace = scanner.nextLine();
                     }
-                    if(terrace.equals("back")) {
+                    if(terrace.equals("back") && garden.equals("a")) {
                         question--;
                         break;
                     }
-                    if(terrace.equals("b")) {
-                        question++;
+                    if(terrace.equals("back")) {
+                        question--;
+                        question--;
+                        break;
                     }
                     question++;
                     break;
@@ -180,21 +186,26 @@ public class CLIQuestionnaireView {
                             System.out.println(INVALID_INPUT + "a | b");
                             terraceSleepOutside = scanner.nextLine();
                         }
-                    }
-                    if(terraceSleepOutside.equals("back")) {
-                        question--;
-                        break;
+                        if (terraceSleepOutside.equals("back")) {
+                            question--;
+                            break;
+                        }
                     }
                     question++;
                     break;
                 case 11:
-                    System.out.println("\n\nHow long will the petbe alone at home during the day?\n a) 1 - 3 hours    b) 4 - 6 hours    c) More than 6 hours");
+                    System.out.println("\n\nHow long will the pet be alone at home during the day?\n a) 1 - 3 hours    b) 4 - 6 hours    c) More than 6 hours");
                     hoursAlone = scanner.nextLine();
                     while (!(hoursAlone.equals("a")) && !(hoursAlone.equals("b")) && !(hoursAlone.equals("c")) && !(hoursAlone.equals("back"))) {
                         System.out.println(INVALID_INPUT + "a | b | c");
                         hoursAlone = scanner.nextLine();
                     }
-                    if(hoursAlone.equals("back")) {
+                    if(hoursAlone.equals("back") && terrace.equals("a")) {
+                        question--;
+                        break;
+                    }
+                    else if(hoursAlone.equals("back")) {
+                        question--;
                         question--;
                         break;
                     }
@@ -224,8 +235,6 @@ public class CLIQuestionnaireView {
                         question--;
                         break;
                     }
-                    if(petType == "a")
-                        question++;
                     question++;
                     break;
                 case 14:
@@ -236,10 +245,10 @@ public class CLIQuestionnaireView {
                             System.out.println(INVALID_INPUT + "a | b");
                             dogEducation = scanner.nextLine();
                         }
-                    }
-                    if(dogEducation.equals("back")) {
-                        question--;
-                        break;
+                        if (dogEducation.equals("back")) {
+                            question--;
+                            break;
+                        }
                     }
                     question++;
                     break;
@@ -250,7 +259,12 @@ public class CLIQuestionnaireView {
                         System.out.println(INVALID_INPUT + "a | b");
                         disabled = scanner.nextLine();
                     }
-                    if(disabled.equals("back")) {
+                    if(disabled.equals("back") && petType.equals("b")) {
+                        question--;
+                        break;
+                    }
+                    else if(disabled.equals("back")) {
+                        question--;
                         question--;
                         break;
                     }

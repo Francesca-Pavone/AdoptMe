@@ -126,7 +126,6 @@ public class GUIUserHomepageController extends UserSideBar {
                 backButton.setVisible(true);
                 scrollPane.setVisible(true);
                 labelCity.setText("Pets you can find in '" + userResearchBean.getCityShelter() + "':");
-                UserResearchController userResearchControllerA = new UserResearchController();
 
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
