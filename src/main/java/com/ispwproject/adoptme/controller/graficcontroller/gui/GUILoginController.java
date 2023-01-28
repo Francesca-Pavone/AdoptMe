@@ -6,8 +6,6 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
-import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,6 +88,7 @@ public class GUILoginController {
             UserBean userBean = loginController.getLoginInfoUser(loginBean);
             Session.getSessionInstance(userBean);
             scene = userLogin();
+            Main.getStage().setScene(scene);
         } else if (loginBean.getAccountType() == 2) {
             ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
             Session.getSessionInstance(shelterBean);
@@ -99,14 +98,13 @@ public class GUILoginController {
             scene = new Scene(root);
             GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
             guiShelterHomepageController.setCurrentPage(root);
+            Main.getStage().setScene(scene);
         }
         else
             System.out.println("Utente non trovato");
+
         //todo: popup email o password sbagliate
         //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
-
-        Main.getStage().setScene(scene);
-
     }
 
 
@@ -139,9 +137,5 @@ public class GUILoginController {
 
 
     public void switchInterface(ActionEvent actionEvent) throws Exception {
-        ((((Node)actionEvent.getSource()).getScene().getWindow())).hide();
-        //todo deve partire il CLI login
-        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-        cliUserHomepageView.run();
     }
 }

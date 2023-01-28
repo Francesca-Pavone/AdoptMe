@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -99,7 +100,14 @@ public class RequestDAO {
                 PetModel pet = PetDAO.retrievePetById(petId, shelterModel.getId());
 
                 int userId = resultSet.getInt("userId");
-                UserModel userModel = UserDAO.retrieveUserById(userId);
+
+                UserDAO userDAO;
+                if (LocalTime.now().getMinute()%2 == 0) {
+                    userDAO = new UserDAOJDBC();
+                } else {
+                    userDAO = new UserDAOCSV();
+                }
+                UserModel userModel = userDAO.retrieveUserById(userId);
 
                 Date date = resultSet.getDate("date");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

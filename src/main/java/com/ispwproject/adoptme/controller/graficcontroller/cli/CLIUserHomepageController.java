@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
-import com.ispwproject.adoptme.view.CLIView.CLIQuestionnaireView;
-import com.ispwproject.adoptme.view.CLIView.CLIUserHomepageView;
+import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
+import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
@@ -20,16 +20,12 @@ public class CLIUserHomepageController {
 
     public void executeCommand(String input) throws Exception {
         switch (input) {
-            case QUESTIONNAIRE:
-                CLIQuestionnaireView.main();
-                break;
-            case SEARCH_CITY:
-                CLIUserHomepageView.searchCity();
-                break;
-            case SEARCH_SHELTER:
-                // vai a search shelter
-            default:
-                System.out.println(MSG_ERROR);
+            case QUESTIONNAIRE -> CLIQuestionnaireView.main();
+            case SEARCH_CITY -> CLIUserHomepageView.searchCity();
+
+            // vai a search shelter
+            case SEARCH_SHELTER -> System.out.println("Search TODO");
+            default -> System.out.println(MSG_ERROR);
         }
 
         if (Session.getCurrentSession().getUserBean() != null) {
