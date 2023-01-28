@@ -50,10 +50,8 @@ public class CLIUserHomepageView {
     public static void searchShelter() throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the name of a shelter:");
-        String shelter = scanner.nextLine();
+        String shelterName = scanner.nextLine();
         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
-
-        // todo: l'ho commentato perché nel CLIUserHomepageController non ho trobato questo metodo (neanche nelle versioni precedenti viste su github)
-        //cliUserHomepageController.searchShelter(shelter);
+        cliUserHomepageController.searchShelter(shelterName);
     }
 }
