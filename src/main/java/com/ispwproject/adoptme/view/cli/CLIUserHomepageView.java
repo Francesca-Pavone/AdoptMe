@@ -31,6 +31,7 @@ public class CLIUserHomepageView {
             System.out.println(i + ") " + shelter.getName() );
             i++;
         }
+        System.out.println("\nInsert the number of the shelter you want to see:");
         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
         Scanner scanner = new Scanner(System.in);
         int inputLine = scanner.nextInt();

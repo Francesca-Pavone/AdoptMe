@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CLIShelterInfoView {
-    public static void showShelter(ShelterBean shelterBean, List<PetBean> petBeanList) {
+    public static void showShelter(ShelterBean shelterBean, List<PetBean> petBeanList) throws Exception {
         System.out.println("\n\n-------------------------------------- " + shelterBean.getName().toUpperCase() + " --------------------------------------");
         System.out.println("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterBean.getEmail() + "\n  Phone number: " + shelterBean.getPhoneNumber() + "\n  Web site: " + shelterBean.getWebSite() + "\n  Address: " + shelterBean.getAddress() + ", " + shelterBean.getCity());
         System.out.println("--------------------------------------- Shelter's pets ---------------------------------------");
@@ -25,12 +26,21 @@ public class CLIShelterInfoView {
             System.out.println("-----------------------------------------------------------------------------------------------");
             i++;
         }
+
+        System.out.println("\nInsert the number of the pet you want to see:");
+        System.out.println(  "********** or insert 0 to go back  **********");
         Scanner scanner = new Scanner(System.in);
 
         int input = scanner.nextInt();
-        PetBean petBean = petBeanList.get(input - 1);
 
-        CLIPetInformationController cliPetInformationController = new CLIPetInformationController();
-        cliPetInformationController.showPet(petBean);
+        if (input == 0) {
+            CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
+            cliShelterInfoController.goBack();
+        }
+        else {
+            PetBean petBean = petBeanList.get(input - 1);
+            CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
+            cliPetInformationController.setPetInfo();
+        }
     }
 }

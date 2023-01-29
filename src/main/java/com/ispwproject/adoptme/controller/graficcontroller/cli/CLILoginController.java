@@ -18,34 +18,20 @@ public class CLILoginController {
     private static final String LOGIN_WITH_GOOGLE = "3";
     private static final String NO_LOGIN = "4";
     private static final String SIGN_UP = "5";
-    private static final String SWITCH_TO_GUI = "6";
 
     public void executeCommand(String inputLine) throws Exception {
         switch (inputLine) {
-            case LOGIN:
-                CLILoginView.getCredentials();
-            case FORGOT_PASSWORD:
-                System.out.println("Functionality not yet developed.");
-                CLILoginView.run();
-            case LOGIN_WITH_GOOGLE:
-                System.out.println("Functionality not yet developed.");
-                CLILoginView.run();
-            case NO_LOGIN:
+            case LOGIN -> CLILoginView.getCredentials();
+            case NO_LOGIN -> {
                 Session.getSessionInstance(null);
                 CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
                 cliUserHomepageView.run();
-            case SIGN_UP:
+            }
+            case FORGOT_PASSWORD, SIGN_UP, LOGIN_WITH_GOOGLE -> {
                 System.out.println("Functionality not yet developed.");
                 CLILoginView.run();
-            case SWITCH_TO_GUI:
-                //todo: togliere la possibilità di passare da qui all'interfaccia grafica perché da errore, lasciare la scelta solo come prima azione (nel main)
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                Stage stage = new Stage();
-                Main.setStage(stage);
-                stage.setTitle("AdoptMe");
-                stage.setScene(scene);
-                stage.show();
+            }
+
         }
     }
 

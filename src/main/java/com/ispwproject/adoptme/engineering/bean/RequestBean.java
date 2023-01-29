@@ -21,6 +21,14 @@ public class RequestBean {
     private String minutes;
     private int status; // 0 -> send  |  1 -> pending  |  2 -> accepted  | 3 -> rejected
 
+    public RequestBean(String petName, int petId, int shelterId, String userName, int userId) {
+        this.petName = petName;
+        this.petId = petId;
+        this.shelterId = shelterId;
+        this.userName = userName;
+        this.userId = userId;
+    }
+
     public RequestBean(LocalDate date, String hour, String minutes) {
         this.date = date;
         this.hour = hour;

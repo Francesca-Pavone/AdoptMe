@@ -1,10 +1,18 @@
 package com.ispwproject.adoptme.view.cli;
 
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
+
 import java.util.Scanner;
 
 public class CLIPetInformationView {
 
-    public static void setData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) {
+    private CLIPetInformationController cliPetInformationController;
+
+    public CLIPetInformationView(CLIPetInformationController cliPetInformationController) {
+        this.cliPetInformationController = cliPetInformationController;
+    }
+
+    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) throws Exception {
         System.out.println("\n---------------------------------------- " + name + " ----------------------------------------");
         System.out.println("   Name: " + name);
         if(!dayOfBirth.equals("") && !monthOfBirth.equals(""))
@@ -27,8 +35,12 @@ public class CLIPetInformationView {
         else if(type.equals("Dog"))
             System.out.println("   General informations:\n   " + vaccinated + "\n            " + microchipped + "\n            " + dewormed + "\n            " + sterilized + "\n            " + dogEducation);
         System.out.println("   Compatibility:\n" + compatibility);
+        System.out.println("\n-----------------------------------------------------------------------------------------");
+
+        System.out.println("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go back\n\nInsert the number:");
 
         Scanner scanner = new Scanner(System.in);
-        String inputLine = scanner.nextLine();
+        String input = scanner.nextLine();
+        this.cliPetInformationController.executeCommand(input);
     }
 }

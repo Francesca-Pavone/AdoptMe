@@ -1,11 +1,52 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
+import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
+import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 public class CLIPetInformationController {
 
-    public void showPet(PetBean petBean) {
+    private PetBean petBean;
+    private static final String REQUEST = "1";
+    private static final String FAVORITE = "2";
+    private static final String BACK = "3";
+
+    public CLIPetInformationController(PetBean petBean) {
+        this.petBean = petBean;
+
+    }
+
+    public void executeCommand(String inputLine) throws Exception {
+        switch (inputLine) {
+            case REQUEST -> {
+                if (Session.getCurrentSession().getUserBean() != null){
+                    CLISendRequestController cliSendRequestController = new CLISendRequestController();
+                    cliSendRequestController.sendRequest(petBean);
+                }
+                else
+                    System.out.println("You need to login");
+            }
+
+            case FAVORITE -> System.out.println("Pet add to favorites -->> DA FARE");
+
+            case BACK -> {
+                if (Session.getCurrentSession().getShelterBean() == null) {
+                    //todo: tornare indietro alla pagina giusta
+                    CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+                    cliUserHomepageView.run();
+                }
+                //todo: fare shelter homepage
+            }
+        }
+    }
+    public void setPetInfo() throws Exception {
+
+        PetInfoController petInfoControllerA = new PetInfoController();
+        petInfoControllerA.getPetInfo(petBean);
+
         String dayOfBirth;
         String monthOfBirth;
         String yearOfBirth;
@@ -114,42 +155,45 @@ public class CLIPetInformationController {
         }
         String compatibility = "";
         if (petBean.isMaleDog()) {
-            compatibility = compatibility + "          Male dogs \n";
+            compatibility = compatibility.concat( "          Male dogs \n");
         }
         if (petBean.isFemaleDog()) {
-            compatibility = compatibility + "          Female dogs\n";
+            compatibility = compatibility.concat("          Female dogs\n");
         }
         if (petBean.isMaleCat()) {
-            compatibility = compatibility + "          Male cats\n";
+            compatibility = compatibility.concat("          Male cats\n");
         }
         if (petBean.isFemaleCat()) {
-            compatibility = compatibility + "          Female cats\n";
+            compatibility = compatibility.concat("          Female cats\n");
         }
         if (petBean.isChildren()) {
-            compatibility = compatibility + "          Children\n";
+            compatibility = compatibility.concat("          Children\n");
         }
         if (petBean.isElders()) {
-            compatibility = compatibility + "          Elders\n";
+            compatibility = compatibility.concat("          Elders\n");
         }
         if (petBean.isApartmentNoGarden()) {
-            compatibility = compatibility + "          Apartments without garden\n";
+            compatibility = compatibility.concat("          Apartments without garden\n");
         }
         if (petBean.isApartmentNoTerrace()) {
-            compatibility = compatibility + "          Apartments without terrace\n";
+            compatibility = compatibility.concat("          Apartments without terrace\n");
         }
         if (petBean.isSleepOutside()) {
-            compatibility = compatibility + "          Sleeping outside\n";
+            compatibility = compatibility.concat("          Sleeping outside\n");
         }
         if (petBean.isFirstExperience()) {
-            compatibility = compatibility + "          First experience\n";
+            compatibility = compatibility.concat("          First experience\n");
         }
 
-        compatibility = compatibility + (switch (petBean.getHoursAlone()) {
+        compatibility = compatibility.concat(switch (petBean.getHoursAlone()) {
                     case 0 -> "            Stay from 1 to 3 hours alone";
                     case 1 -> "            Stay from 4 to 6 hours alone";
                     default -> "            Stay more than 6 hours alone"; // case 2
                 }
         );
-        CLIPetInformationView.setData(petBean.getName(), dayOfBirth, monthOfBirth, yearOfBirth, type, gender, coatLenght, dogSize, dogEducation, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType, compatibility);
+        CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
+        cliPetInformationView.showData(petBean.getName(), dayOfBirth, monthOfBirth, yearOfBirth, type, gender, coatLenght, dogSize, dogEducation, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType, compatibility);
     }
+
+
 }
