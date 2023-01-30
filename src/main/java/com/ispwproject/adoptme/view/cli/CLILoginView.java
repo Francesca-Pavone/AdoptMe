@@ -9,7 +9,7 @@ public class CLILoginView {
         System.out.println("\n-------------------------------------------- LOGIN --------------------------------------------");
         System.out.println("------------------------------------------ commands -------------------------------------------");
         //todo: togliere la possibilità di passare da qui all'interfaccia grafica perché da errore, lasciare la scelta solo come prima azione (nel main)
-        System.out.println(" 1) Login. \n 2) Forgot password.\n 3) Login with Google.\n 4) Continue without login.\n 5) Don't have an account? Sign up.\n 6) Switch to GUI.");
+        System.out.println(" 1) Login. \n 2) Forgot password.\n 3) Login with Google.\n 4) Continue without login.\n 5) Don't have an account? Sign up.");
         Scanner scanner = new Scanner(System.in);
         String inputLine = scanner.nextLine();
         CLILoginController cliLoginController = new CLILoginController();

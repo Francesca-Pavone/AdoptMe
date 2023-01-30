@@ -15,4 +15,13 @@ public class CRUDQueries {
         stmt.executeUpdate(updateStatement);
     }
 
+    public static void insertFavorite(Statement stmt, int userId, int petId, int shelterId) throws SQLException {
+        String updateStatement = String.format("INSERT INTO Favorites set userId=%d, petId=%d, shelterId=%d", userId, petId, shelterId);
+        stmt.executeUpdate(updateStatement);
+    }
+
+    public static void removeFavorite(Statement stmt, int userId, int petId, int shelterId) throws SQLException {
+        String updateStatement = String.format("DELETE FROM Favorites WHERE (userId=%d AND petId=%d AND shelterId=%d)", userId, petId, shelterId);
+        stmt.executeUpdate(updateStatement);
+    }
 }
