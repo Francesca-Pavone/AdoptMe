@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
+import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
 import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
@@ -42,7 +43,8 @@ public class CLIUserHomepageController {
                     //vai a favoriti
                 }
                 case APPOINTMENTS -> {
-                    //vai a appointments
+                    CLIAppointmentsPageController cliAppointmentsPageController = new CLIAppointmentsPageController();
+                    cliAppointmentsPageController.start();
                 }
                 case SETTINGS -> CLIUserSettingsView.run();
                 default -> System.out.println(MSG_ERROR);

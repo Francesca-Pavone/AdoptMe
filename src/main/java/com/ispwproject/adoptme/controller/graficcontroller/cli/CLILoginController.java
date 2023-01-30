@@ -19,9 +19,16 @@ public class CLILoginController {
     private static final String NO_LOGIN = "4";
     private static final String SIGN_UP = "5";
 
-    public void executeCommand(String inputLine) throws Exception {
+    private CLILoginView cliLoginView;
+
+    public void start() {
+        this.cliLoginView = new CLILoginView(this);
+        this.cliLoginView.run();
+    }
+
+    public void executeCommand(String inputLine) {
         switch (inputLine) {
-            case LOGIN -> CLILoginView.getCredentials();
+            case LOGIN -> this.cliLoginView.getCredentials();
             case NO_LOGIN -> {
                 Session.getSessionInstance(null);
                 CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
@@ -29,7 +36,7 @@ public class CLILoginController {
             }
             case FORGOT_PASSWORD, SIGN_UP, LOGIN_WITH_GOOGLE -> {
                 System.out.println("Functionality not yet developed.");
-                CLILoginView.run();
+                this.cliLoginView.run();
             }
 
         }
@@ -53,7 +60,7 @@ public class CLILoginController {
         }
         else {
             System.out.println("User not found");
-            CLILoginView.run();
+            this.cliLoginView.run();
             //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
         }
 

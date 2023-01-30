@@ -1,9 +1,13 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
@@ -12,7 +16,7 @@ public class CLIPetInformationController {
     private PetBean petBean;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
-    private static final String BACK = "3";
+    private static final String HOMEPAGE = "3";
 
     public CLIPetInformationController(PetBean petBean) {
         this.petBean = petBean;
@@ -22,19 +26,26 @@ public class CLIPetInformationController {
     public void executeCommand(String inputLine) throws Exception {
         switch (inputLine) {
             case REQUEST -> {
-                if (Session.getCurrentSession().getUserBean() != null){
-                    CLISendRequestController cliSendRequestController = new CLISendRequestController();
-                    cliSendRequestController.sendRequest(petBean);
+                try {
+                    if (Session.getCurrentSession().getUserBean() == null)
+                        throw new NoAccoutException();
+                    else {
+                        CLISendRequestController cliSendRequestController = new CLISendRequestController();
+                        cliSendRequestController.sendRequest(petBean);
+                    }
                 }
-                else
-                    System.out.println("You need to login");
+                catch (NoAccoutException e) {
+                    PrintSupport.printError(e.getMessage()+ "\n\tPress ENTER to continue");
+                    ScannerSupport.waitEnter();
+                    CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
+                    cliNeedAccountView.showMessage();
+                }
             }
 
             case FAVORITE -> System.out.println("Pet add to favorites -->> DA FARE");
 
-            case BACK -> {
+            case HOMEPAGE -> {
                 if (Session.getCurrentSession().getShelterBean() == null) {
-                    //todo: tornare indietro alla pagina giusta
                     CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
                     cliUserHomepageView.run();
                 }
@@ -155,40 +166,40 @@ public class CLIPetInformationController {
         }
         String compatibility = "";
         if (petBean.isMaleDog()) {
-            compatibility = compatibility.concat( "          Male dogs \n");
+            compatibility = compatibility.concat( "\t\tMale dogs \n");
         }
         if (petBean.isFemaleDog()) {
-            compatibility = compatibility.concat("          Female dogs\n");
+            compatibility = compatibility.concat("\t\tFemale dogs\n");
         }
         if (petBean.isMaleCat()) {
-            compatibility = compatibility.concat("          Male cats\n");
+            compatibility = compatibility.concat("\t\tMale cats\n");
         }
         if (petBean.isFemaleCat()) {
-            compatibility = compatibility.concat("          Female cats\n");
+            compatibility = compatibility.concat("\t\tFemale cats\n");
         }
         if (petBean.isChildren()) {
-            compatibility = compatibility.concat("          Children\n");
+            compatibility = compatibility.concat("\t\tChildren\n");
         }
         if (petBean.isElders()) {
-            compatibility = compatibility.concat("          Elders\n");
+            compatibility = compatibility.concat("\t\tElders\n");
         }
         if (petBean.isApartmentNoGarden()) {
-            compatibility = compatibility.concat("          Apartments without garden\n");
+            compatibility = compatibility.concat("\t\tApartments without garden\n");
         }
         if (petBean.isApartmentNoTerrace()) {
-            compatibility = compatibility.concat("          Apartments without terrace\n");
+            compatibility = compatibility.concat("\t\tApartments without terrace\n");
         }
         if (petBean.isSleepOutside()) {
-            compatibility = compatibility.concat("          Sleeping outside\n");
+            compatibility = compatibility.concat("\t\tSleeping outside\n");
         }
         if (petBean.isFirstExperience()) {
-            compatibility = compatibility.concat("          First experience\n");
+            compatibility = compatibility.concat("\t\tFirst experience\n");
         }
 
         compatibility = compatibility.concat(switch (petBean.getHoursAlone()) {
-                    case 0 -> "            Stay from 1 to 3 hours alone";
-                    case 1 -> "            Stay from 4 to 6 hours alone";
-                    default -> "            Stay more than 6 hours alone"; // case 2
+                    case 0 -> "\t\tStay from 1 to 3 hours alone";
+                    case 1 -> "\t\tStay from 4 to 6 hours alone";
+                    default -> "\t\tStay more than 6 hours alone"; // case 2
                 }
         );
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);

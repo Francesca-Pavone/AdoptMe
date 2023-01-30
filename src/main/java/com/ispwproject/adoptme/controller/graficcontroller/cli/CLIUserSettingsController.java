@@ -19,7 +19,8 @@ public class CLIUserSettingsController {
             }
             case LOGOUT -> {
                 Session.getCurrentSession().closeSession();
-                CLILoginView.run();
+                CLILoginController cliLoginController = new CLILoginController();
+                cliLoginController.start();
             }
         }
     }

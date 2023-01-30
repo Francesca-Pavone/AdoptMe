@@ -99,17 +99,17 @@ public class GUIRequestItemController implements Observer {
     }
 
 
-    public void acceptRequest(ActionEvent event) throws Exception {
+    public void acceptRequest() throws Exception {
             ManageRequestController manageRequestController = new ManageRequestController();
             manageRequestController.acceptRequest(this.request, this.pane, this.observer, this);
     }
 
-    public void rejectRequest(ActionEvent event) throws Exception {
+    public void rejectRequest() throws Exception {
             ManageRequestController manageRequestController = new ManageRequestController();
             manageRequestController.deleteRequest(this.request, this.pane, this.observer);
     }
 
-    public void modifyRequest(ActionEvent event) throws Exception {
+    public void modifyRequest() throws Exception {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
@@ -125,7 +125,7 @@ public class GUIRequestItemController implements Observer {
 
     @Override
     public void update(Object object) {
-
+        //ignore
     }
 
     @Override

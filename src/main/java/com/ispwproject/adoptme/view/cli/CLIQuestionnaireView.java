@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIQuestionnaireController;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
 import java.util.ArrayList;
 import java.util.List;

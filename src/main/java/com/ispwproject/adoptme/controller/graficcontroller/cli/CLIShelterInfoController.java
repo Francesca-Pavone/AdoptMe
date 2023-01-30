@@ -24,7 +24,6 @@ public class CLIShelterInfoController implements Observer {
     }
 
     public void goBack() throws Exception {
-        //todo: tornare indietro alla pagina giusta
         CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
         cliUserHomepageView.run();
     }
