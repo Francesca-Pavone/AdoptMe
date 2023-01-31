@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.UserSideBar">
+   <children>
+      <HBox>
+         <children>
+            <AnchorPane style="-fx-background-color: #34665A;">
+               <children>
+                  <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/paws.png" />
+                           </image>
+                        </ImageView>
+                        <VBox>
+                           <children>
+                              <Label text="Adopt" textFill="#c89c32">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" opacity="0.6" text="Don't Shop" textFill="#c89c32">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" top="30.0" />
+                     </padding>
+                  </HBox>
+                  <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
+                     <children>
+                        <ToggleButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="300.0" selected="true" styleClass="sidebar-btn">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                                 <children>
+                                    <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="sidebar-btn-line">
+                                       <HBox.margin>
+                                          <Insets right="35.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </padding>
+                                    </Pane>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/home.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label text="HOME PAGE" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                           </graphic>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="shelterTogG" />
+                           </toggleGroup></ToggleButton>
+                        <ToggleButton layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToFavorites" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" toggleGroup="$shelterTogG">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                                 <children>
+                                    <Pane fx:id="favoritesSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
+                                       <HBox.margin>
+                                          <Insets right="35.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </padding>
+                                    </Pane>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/heart.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <Label text="FAVORITES" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" stylesheets="@style.css" toggleGroup="$shelterTogG">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                                 <children>
+                                    <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
+                                       <HBox.margin>
+                                          <Insets right="35.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </padding>
+                                    </Pane>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/schedule.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="APPOINTMENTES" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                           </graphic>
+                        </ToggleButton>
+                        <ToggleButton layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" stylesheets="@style.css" toggleGroup="$shelterTogG">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                                 <children>
+                                    <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
+                                       <HBox.margin>
+                                          <Insets right="35.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </padding>
+                                    </Pane>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/gear.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label text="SETTINGS" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </HBox>
+                           </graphic>
+                        </ToggleButton>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="201.0" fitWidth="213.0" layoutX="65.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.86">
+                     <image>
+                        <Image url="@image/girl_dog_cat.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Pane fx:id="userScreen" prefHeight="710.0" prefWidth="790.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

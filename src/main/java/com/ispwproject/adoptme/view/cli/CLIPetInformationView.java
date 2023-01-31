@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 public class CLIPetInformationView {
 
-    private CLIPetInformationController cliPetInformationController;
+    private final CLIPetInformationController cliPetInformationController;
 
     public CLIPetInformationView(CLIPetInformationController cliPetInformationController) {
         this.cliPetInformationController = cliPetInformationController;
     }
 
-    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) throws Exception {
+    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) {
         PrintSupport.printMessage("\n---------------------------------------- " + name + " ----------------------------------------");
         PrintSupport.printMessage("\tName: " + name);
         if(!dayOfBirth.equals("") && !monthOfBirth.equals(""))
@@ -37,13 +37,17 @@ public class CLIPetInformationView {
         else if(type.equals("Dog"))
             PrintSupport.printMessage("\tGeneral informations:\n\t\t" + vaccinated + "\n\t\t" + microchipped + "\n\t\t" + dewormed + "\n\t\t" + sterilized + "\n\t\t" + dogEducation);
         PrintSupport.printMessage("\tCompatibility:\n" + compatibility);
-        PrintSupport.printSeparatorLine();
+        showCommand();
+    }
 
+    public void showCommand() {
+        PrintSupport.printSeparatorLine();
         if (Session.getCurrentSession().getShelterBean() == null){
             System.out.println("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go to Homepage\n\nInsert the number:");
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
+            this.cliPetInformationController.setCliPetInformationView(this);
             this.cliPetInformationController.executeCommand(input);
         }
     }

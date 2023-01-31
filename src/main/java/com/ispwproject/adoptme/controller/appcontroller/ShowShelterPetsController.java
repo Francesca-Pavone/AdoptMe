@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowShelterPetsController {
-    //private List<PetModel> petList = new ArrayList<>();
     private ShelterPetsList shelterPetsList;
 
     public List<PetBean> getPetList(GUIShelterHomepageController observer) {
