@@ -12,24 +12,23 @@ import java.util.List;
 public class QuestionnaireResultController {
     public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) throws Exception {
         IQuestionnaireQuery questionnaireQuery;
-        switch (questionnaireResultBean.isType()) {
-            case 1 -> {
-                questionnaireQuery = new CatQuery();
-                if(questionnaireResultBean.isFemaleCat() || questionnaireResultBean.isMaleCat()) {
-                    questionnaireQuery = new CatTestFivFelv(questionnaireQuery);
-                    questionnaireQuery = new AndDecorator(questionnaireQuery);
-                }
-            }
-            default -> {
-                questionnaireQuery = new DogQuery();
-                if (questionnaireResultBean.getSize() != -1) {
-                    questionnaireQuery = new SizeDecorator(questionnaireQuery, questionnaireResultBean.getSize());
-                    questionnaireQuery = new AndDecorator(questionnaireQuery);
-                }
-                questionnaireQuery = new DogEducationDecorator(questionnaireQuery, questionnaireResultBean.isProgramEducation());
+        if (questionnaireResultBean.isType() == 1) {
+            questionnaireQuery = new CatQuery();
+            if (questionnaireResultBean.isFemaleCat() || questionnaireResultBean.isMaleCat()) {
+                questionnaireQuery = new CatTestFivFelv(questionnaireQuery);
                 questionnaireQuery = new AndDecorator(questionnaireQuery);
             }
         }
+        else {
+            questionnaireQuery = new DogQuery();
+            if (questionnaireResultBean.getSize() != -1) {
+                questionnaireQuery = new SizeDecorator(questionnaireQuery, questionnaireResultBean.getSize());
+                questionnaireQuery = new AndDecorator(questionnaireQuery);
+            }
+            questionnaireQuery = new DogEducationDecorator(questionnaireQuery, questionnaireResultBean.isProgramEducation());
+            questionnaireQuery = new AndDecorator(questionnaireQuery);
+        }
+
         if (questionnaireResultBean.isGender() != -1) {
             questionnaireQuery = new GenderDecorator(questionnaireQuery, questionnaireResultBean.isGender());
             questionnaireQuery = new AndDecorator(questionnaireQuery);

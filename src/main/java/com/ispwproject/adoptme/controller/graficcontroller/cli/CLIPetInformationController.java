@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
@@ -14,43 +15,53 @@ import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 public class CLIPetInformationController {
 
     private PetBean petBean;
+    private CLIPetInformationView cliPetInformationView;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
 
     public CLIPetInformationController(PetBean petBean) {
         this.petBean = petBean;
-
     }
 
-    public void executeCommand(String inputLine) throws Exception {
-        switch (inputLine) {
-            case REQUEST -> {
-                try {
-                    if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
-                    else {
-                        CLISendRequestController cliSendRequestController = new CLISendRequestController();
-                        cliSendRequestController.sendRequest(petBean);
+    public void setCliPetInformationView(CLIPetInformationView cliPetInformationView) {
+        this.cliPetInformationView = cliPetInformationView;
+    }
+
+    public void executeCommand(String inputLine) {
+        try {
+            switch (inputLine) {
+                case REQUEST -> {
+                    try {
+                        if (Session.getCurrentSession().getUserBean() == null)
+                            throw new NoAccoutException();
+                        else {
+                            CLISendRequestController cliSendRequestController = new CLISendRequestController();
+                            cliSendRequestController.sendRequest(petBean);
+                        }
+                    } catch (NoAccoutException e) {
+                        PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
+                        ScannerSupport.waitEnter();
+                        CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
+                        cliNeedAccountView.showMessage();
                     }
                 }
-                catch (NoAccoutException e) {
-                    PrintSupport.printError(e.getMessage()+ "\n\tPress ENTER to continue");
-                    ScannerSupport.waitEnter();
-                    CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
-                    cliNeedAccountView.showMessage();
-                }
-            }
 
-            case FAVORITE -> System.out.println("Pet add to favorites -->> DA FARE");
+                case FAVORITE -> PrintSupport.printMessage("Pet add to favorites -->> DA FARE");
 
-            case HOMEPAGE -> {
-                if (Session.getCurrentSession().getShelterBean() == null) {
-                    CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                    cliUserHomepageView.run();
+                case HOMEPAGE -> {
+                    if (Session.getCurrentSession().getShelterBean() == null) {
+                        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+                        cliUserHomepageView.run();
+                    }
+                    // todo: fare shelter homepage
                 }
-                //todo: fare shelter homepage
+                default -> throw new CommandNotFoundException();
             }
+        } catch (CommandNotFoundException e) {
+            PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
+            ScannerSupport.waitEnter();
+            this.cliPetInformationView.showCommand();
         }
     }
     public void setPetInfo() throws Exception {
@@ -58,21 +69,18 @@ public class CLIPetInformationController {
         PetInfoController petInfoControllerA = new PetInfoController();
         petInfoControllerA.getPetInfo(petBean);
 
-        String dayOfBirth;
-        String monthOfBirth;
-        String yearOfBirth;
-        if (petBean.getDayOfBirth() == 0)  // day of birth not known
-            dayOfBirth = "";
-        else
+        String dayOfBirth = "";
+        String monthOfBirth = "";
+        // year of birth is mandatory information on pet registration
+        String yearOfBirth = String.valueOf(petBean.getYearOfBirth());
+
+        if (petBean.getDayOfBirth() != 0)  // day of birth not known
             dayOfBirth = String.valueOf(petBean.getDayOfBirth());
 
-        if (petBean.getMonthOfBirth() == 0)  // month of birth not known
-            monthOfBirth = "";
-        else
+        if (petBean.getMonthOfBirth() != 0)  // month of birth not known
             monthOfBirth = String.valueOf(petBean.getMonthOfBirth());
 
-        // year of birth is mandatory information on pet registration
-        yearOfBirth = String.valueOf(petBean.getYearOfBirth());
+
 
         String type = String.valueOf(
                 switch (petBean.getType()) {
@@ -92,13 +100,10 @@ public class CLIPetInformationController {
                     default -> "Short";     // case 0
                 }
         );
-        String  dogSize, dogEducation;
-        // check if it isn't a dog
-        if (petBean.getType() != 0) {
-            dogSize = "";
-            dogEducation = "";
-        }
-        else {
+        String  dogSize = "";
+        String dogEducation = "";
+        // check if it's a dog
+        if (petBean.getType() == 0) {
             dogSize = String.valueOf(
                     switch (petBean.getSize()) {
                         case 1 -> "Medium";
@@ -107,63 +112,57 @@ public class CLIPetInformationController {
                         default -> "Small";   //case 0
                     }
             );
-
+            dogEducation = "Program of dog education: Not needed";
             if (petBean.isDogEducation())
                 dogEducation = "Program of dog education: Needed";
-            else
-                dogEducation = "Program of dog education: Not needed";
         }
 
         String vaccinated, microchipped, dewormed, sterilized;
         //General info
+        vaccinated = "Vaccinations not completed";
         if (petBean.isVaccinated())
             vaccinated = "Vaccinations completed";
-        else
-            vaccinated = "Vaccinations not completed";
 
+        microchipped = "Not microchipped";
         if (petBean.isMicrochipped())
             microchipped = "Microchipped";
-        else
-            microchipped = "Not microchipped";
 
+        dewormed = "Not dewormed";
         if (petBean.isDewormed())
             dewormed = "Dewormed";
-        else
-            dewormed = "Not dewormed";
 
+        sterilized = "Not sterilized";
         if (petBean.isSterilized())
             sterilized = "Sterilized";
-        else
-            sterilized = "Not sterilized";
 
-        String testFiv, testFelv;
-        // check if it isn't a cat
-        if (petBean.getType() != 1){
-            testFiv = "";
-            testFelv = "";
-        }
-        else {
+        String testFiv = "";
+        String testFelv = "";
+        // check if it's a cat
+        if (petBean.getType() == 1){
+            testFiv = "Test Fiv: Negative";
             if (petBean.isTestFiv())
                 testFiv = "Test Fiv: Positive";
-            else
-                testFiv = "Test Fiv: Negative";
 
+            testFelv = "Test Felv: Negative";
             if (petBean.isTestFelv())
                 testFelv = "Test Felv: Positive";
-            else
-                testFelv = "Test Felv: Negative";
+
         }
-        String disability;
+        String disability = "";
         String disabilityType = "";
-        if (!petBean.isDisability())
-            disability = "";
-        else {
+        if (petBean.isDisability()) {
             disability = "Disability";
-            if (petBean.getDisabilityType().equals(""))
-                disabilityType = "Not specified";
-            else
+            disabilityType = "Not specified";
+            if (!petBean.getDisabilityType().equals(""))
                 disabilityType= petBean.getDisabilityType();
         }
+        String compatibility = getCompatibility(petBean);
+
+        CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
+        cliPetInformationView.showData(petBean.getName(), dayOfBirth, monthOfBirth, yearOfBirth, type, gender, coatLenght, dogSize, dogEducation, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType, compatibility);
+    }
+
+    private String getCompatibility(PetBean petBean) {
         String compatibility = "";
         if (petBean.isMaleDog()) {
             compatibility = compatibility.concat( "\t\tMale dogs \n");
@@ -202,8 +201,7 @@ public class CLIPetInformationController {
                     default -> "\t\tStay more than 6 hours alone"; // case 2
                 }
         );
-        CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
-        cliPetInformationView.showData(petBean.getName(), dayOfBirth, monthOfBirth, yearOfBirth, type, gender, coatLenght, dogSize, dogEducation, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType, compatibility);
+        return compatibility;
     }
 
 

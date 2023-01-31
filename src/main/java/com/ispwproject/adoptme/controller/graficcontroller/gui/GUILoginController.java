@@ -86,12 +86,12 @@ public class GUILoginController {
 
         if (loginBean.getAccountType() == 1) {
             UserBean userBean = loginController.getLoginInfoUser(loginBean);
-            Session.getSessionInstance(userBean);
+            Session.setSessionInstance(userBean);
             scene = userLogin();
             Main.getStage().setScene(scene);
         } else if (loginBean.getAccountType() == 2) {
             ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
-            Session.getSessionInstance(shelterBean);
+            Session.setSessionInstance(shelterBean);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
             Parent root = fxmlLoader.load();
@@ -116,7 +116,7 @@ public class GUILoginController {
     }
 
     public void noLogin(ActionEvent event) throws IOException {
-        Session.getSessionInstance(null);
+        Session.setSessionInstance(null);
         //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = userLogin();
         Main.getStage().setScene(scene);

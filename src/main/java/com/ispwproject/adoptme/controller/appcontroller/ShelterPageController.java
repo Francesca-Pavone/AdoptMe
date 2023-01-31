@@ -1,7 +1,5 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoController;
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterInformationController;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -23,7 +21,6 @@ public class ShelterPageController {
     }
 
     public List<PetBean> getPetList(Observer observer) {
-        //List<PetModel> petList = new ArrayList<>();
         try {
             shelterPetsList = PetDAO.retrievePetByShelterId(shelterModel,observer);
 
