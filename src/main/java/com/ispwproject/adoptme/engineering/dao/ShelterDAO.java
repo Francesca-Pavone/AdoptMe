@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.ImageUtils;
+import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.ShelterModel;

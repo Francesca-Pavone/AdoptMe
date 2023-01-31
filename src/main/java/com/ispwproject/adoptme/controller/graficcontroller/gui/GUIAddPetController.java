@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
-import com.ispwproject.adoptme.engineering.ImageUtils;
+import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.builder.PetBeanBuilder;

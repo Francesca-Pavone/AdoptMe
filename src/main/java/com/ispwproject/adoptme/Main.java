@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme;
 
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLILoginController;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
@@ -57,7 +58,9 @@ public class Main extends Application {
                 launch();
                 break;
             } else if (selection == 2) {
-                CLILoginView.run();
+                CLILoginController cliLoginController = new CLILoginController();
+                cliLoginController.start();
+
             } else {
                 System.out.println("Number not valid, please insert 1 or 2");
             }
