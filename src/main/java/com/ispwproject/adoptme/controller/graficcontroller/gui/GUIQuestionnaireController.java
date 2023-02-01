@@ -596,7 +596,7 @@ public class GUIQuestionnaireController {
 
 
 //todo: non aprire dialog MA nello stesso stage
-    public void goBack(ActionEvent event) throws IOException {
+    public void goBack() throws IOException {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setResizable(false);
