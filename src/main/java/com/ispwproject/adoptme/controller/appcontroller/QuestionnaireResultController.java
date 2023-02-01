@@ -54,17 +54,15 @@ public class QuestionnaireResultController {
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if (questionnaireResultBean.isHaveAGarden() == 1) {
-            questionnaireQuery = new GardenDecorator(new AndDecorator(new SleepOutsideDecorator(questionnaireQuery, questionnaireResultBean.isSleepOutside())), questionnaireResultBean.isHaveAGarden());
-            questionnaireQuery = new AndDecorator(questionnaireQuery);
-        } else {
             questionnaireQuery = new GardenDecorator(questionnaireQuery, questionnaireResultBean.isHaveAGarden());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if (questionnaireResultBean.isHaveATerrace() == 1) {
-            questionnaireQuery = new TerraceDecorator(new AndDecorator(new SleepOutsideDecorator(questionnaireQuery, questionnaireResultBean.isSleepOutside())), questionnaireResultBean.isHaveATerrace());
-            questionnaireQuery = new AndDecorator(questionnaireQuery);
-        } else {
             questionnaireQuery = new TerraceDecorator(questionnaireQuery, questionnaireResultBean.isHaveATerrace());
+            questionnaireQuery = new AndDecorator(questionnaireQuery);
+        }
+        if(questionnaireResultBean.isHaveAGarden() == 1 || questionnaireResultBean.isHaveATerrace() == 1) {
+            questionnaireQuery = new SleepOutsideDecorator(questionnaireQuery, questionnaireResultBean.isSleepOutside());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         if(!questionnaireResultBean.isSterilizePet()) {

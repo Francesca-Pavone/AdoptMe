@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIQuestionnaireController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIQuestionnaireController">
    <children>
       <VBox prefHeight="710.0" prefWidth="1100.0">
          <children>
@@ -370,43 +370,6 @@
                               <Insets top="80.0" />
                            </VBox.margin>
                         </VBox>
-                        <VBox fx:id="vboxGardenSleepOutside" alignment="CENTER" prefWidth="1055.0">
-                           <children>
-                              <Label text="Do you live in an apartment with a garden?">
-                                 <font>
-                                    <Font name="Arial" size="25.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Will the pet be sleeping outside?">
-                                 <font>
-                                    <Font name="Arial Bold" size="35.0" />
-                                 </font>
-                              </Label>
-                              <HBox alignment="CENTER" spacing="40.0">
-                                 <children>
-                                    <ToggleButton fx:id="btnGardenSleepOutside" mnemonicParsing="false" onAction="#selectGardenSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="Yes" textFill="WHITE">
-                                       <font>
-                                          <Font name="Arial Bold" size="30.0" />
-                                       </font>
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="gardenSleepOutsideGroup" />
-                                       </toggleGroup>
-                                    </ToggleButton>
-                                    <ToggleButton fx:id="btnGardenDontSleepOutside" mnemonicParsing="false" onAction="#selectGardenDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$gardenSleepOutsideGroup">
-                                       <font>
-                                          <Font name="Arial Bold" size="30.0" />
-                                       </font>
-                                    </ToggleButton>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets top="15.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="80.0" />
-                           </VBox.margin>
-                        </VBox>
                         <VBox fx:id="vboxTerrace" alignment="CENTER" prefWidth="1055.0">
                            <children>
                               <Label text="Do you live in an apartment with a terrace?">
@@ -439,13 +402,8 @@
                               <Insets top="80.0" />
                            </VBox.margin>
                         </VBox>
-                        <VBox fx:id="vboxTerraceSleepOutside" alignment="CENTER" prefWidth="1055.0">
+                        <VBox fx:id="vboxSleepOutside" alignment="CENTER" prefWidth="1055.0">
                            <children>
-                              <Label text="Do you live in an apartment with a terrace?">
-                                 <font>
-                                    <Font name="Arial" size="25.0" />
-                                 </font>
-                              </Label>
                               <Label text="Will the pet be sleeping outside?">
                                  <font>
                                     <Font name="Arial Bold" size="35.0" />
@@ -453,15 +411,15 @@
                               </Label>
                               <HBox alignment="CENTER" spacing="40.0">
                                  <children>
-                                    <ToggleButton fx:id="btnTerraceSleepOutside" mnemonicParsing="false" onAction="#selectTerraceSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="Yes" textFill="WHITE">
+                                    <ToggleButton fx:id="btnSleepOutside" mnemonicParsing="false" onAction="#selectTerraceSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="Yes" textFill="WHITE">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
                                        <toggleGroup>
-                                          <ToggleGroup fx:id="terraceSleepOutsideGroup" />
+                                          <ToggleGroup fx:id="sleepOutsideGroup" />
                                        </toggleGroup>
                                     </ToggleButton>
-                                    <ToggleButton fx:id="btnTerraceDontSleepOutside" mnemonicParsing="false" onAction="#selectTerraceDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$terraceSleepOutsideGroup">
+                                    <ToggleButton fx:id="btnNoSleepOutside" mnemonicParsing="false" onAction="#selectTerraceDontSleepOutside" prefHeight="80.0" prefWidth="250.0" styleClass="button4" stylesheets="@style.css" text="No" textFill="WHITE" toggleGroup="$sleepOutsideGroup">
                                        <font>
                                           <Font name="Arial Bold" size="30.0" />
                                        </font>
