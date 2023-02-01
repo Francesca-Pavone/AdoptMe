@@ -38,7 +38,8 @@ public class CLIUserHomepageController {
                 // vai a search shelter
                 case SEARCH_SHELTER -> CLIUserHomepageView.searchShelter();
                 case FAVORITES -> {
-                    //vai a favoriti
+                    CLIUserFavoritesController cliUserFavoritesController = new CLIUserFavoritesController();
+                    cliUserFavoritesController.start();
                 }
                 case APPOINTMENTS -> {
                     //vai a appointments

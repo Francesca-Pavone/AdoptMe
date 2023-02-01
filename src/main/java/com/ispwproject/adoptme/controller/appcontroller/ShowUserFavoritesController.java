@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.dao.PetDAO;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.PetModel;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ShowUserFavoritesController {
     private UserFavoritesPetsList userFavoritesPetsList;
 
-    public List<PetBean> getPetList(GUIUserFavoritesController observer) {
+    public List<PetBean> getPetList(Observer observer) {
         try {
             userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(new UserModel(Session.getCurrentSession().getUserBean()), observer);
         } catch (SQLException se) {
