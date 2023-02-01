@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLISendRequestView;
 
 import java.time.LocalDate;
@@ -59,7 +60,7 @@ public class CLISendRequestController implements Observer {
                     sendRequestController.sendUserRequest(this.petBean, this.requestBean, this);
                 }
                 catch (PastDateException e) {
-                    this.cliSendRequestView.showUnsuccessful();
+                    ShowExceptionSupport.showExceptionCLI(e.getMessage());
                     sendRequest(petBean);
                 }
                 catch (Exception e){
