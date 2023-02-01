@@ -8,16 +8,13 @@ import java.util.Scanner;
 
 public class CLIPetInformationView {
 
-    private final static String SPACE = "\n\t\t";
-    private final static String GENERAL_INFORMATION = "\tGeneral informations:\n\t\t";
-
     private final CLIPetInformationController cliPetInformationController;
 
     public CLIPetInformationView(CLIPetInformationController cliPetInformationController) {
         this.cliPetInformationController = cliPetInformationController;
     }
 
-    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) {
+    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String generalInfo, String compatibility) {
         PrintSupport.printMessage("\n---------------------------------------- " + name + " ----------------------------------------");
         PrintSupport.printMessage("\tName: " + name);
         if(!dayOfBirth.equals("") && !monthOfBirth.equals(""))
@@ -27,11 +24,13 @@ public class CLIPetInformationView {
         else
             PrintSupport.printMessage("\tYear of birth: " + yearOfBirth);
 
-        PrintSupport.printMessage("\tType: " + type + "\n\tGender: " + gender + "\n\tCoat length: " + coatLenght);   //+ "\n\t
+        PrintSupport.printMessage("\tType: " + type + "\n\tGender: " + gender + "\n\tCoat length: " + coatLenght);
 
         if(!dogSize.equals(""))
             PrintSupport.printMessage("\tSize: " + dogSize);
-        if(type.equals("Cat") && disability.equals("Disability"))
+
+        PrintSupport.printMessage("\tGeneral informations:\n" + generalInfo);
+        /*if(type.equals("Cat") && disability.equals("Disability"))
             PrintSupport.printMessage(GENERAL_INFORMATION + vaccinated + SPACE + microchipped + SPACE + dewormed + SPACE + sterilized + SPACE + testFiv + SPACE + testFelv + SPACE + disability + "( " + disabilityType + " )");
         else if(type.equals("Cat"))
             PrintSupport.printMessage(GENERAL_INFORMATION + vaccinated + SPACE + microchipped + SPACE + dewormed + SPACE + sterilized + SPACE + testFiv + SPACE + testFelv );
@@ -39,6 +38,8 @@ public class CLIPetInformationView {
             PrintSupport.printMessage(GENERAL_INFORMATION + vaccinated + SPACE + microchipped + SPACE + dewormed + SPACE + sterilized + SPACE + disability + "( " + disabilityType + " )" + SPACE + dogEducation);
         else if(type.equals("Dog"))
             PrintSupport.printMessage(GENERAL_INFORMATION + vaccinated + SPACE + microchipped + SPACE + dewormed + SPACE + sterilized + SPACE + dogEducation);
+
+         */
         PrintSupport.printMessage("\tCompatibility:\n" + compatibility);
         showCommand();
     }

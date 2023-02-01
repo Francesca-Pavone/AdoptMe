@@ -15,15 +15,20 @@ public class CLIShelterInfoView {
         PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterBean.getEmail() + "\n  Phone number: " + shelterBean.getPhoneNumber() + "\n  Web site: " + shelterBean.getWebSite() + "\n  Address: " + shelterBean.getAddress() + ", " + shelterBean.getCity());
         PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");
         int i = 1;
-        String gender;
+        String gender, type;
         for(PetBean petBean: petBeanList) {
-            PrintSupport.printMessage("    " + i + ") Name: " + petBean.getName() + "     ");
+            PrintSupport.printMessage( i + ")  Name: " + petBean.getName());
             gender = (switch (petBean.getGender()) {
                 case 1 -> "Female";
                 default -> "Male";
             });
-            PrintSupport.printMessage("\n       Gender: " + gender + "        ");
-            PrintSupport.printMessage("\n       Age: " + petBean.getAge() + "      ");
+            type = (switch (petBean.getType()) {
+                case 1 -> "Cat";
+                default -> "Dog";
+            });
+            PrintSupport.printMessage("\n\tType: " + type);
+            PrintSupport.printMessage("\n\tGender: " + gender);
+            PrintSupport.printMessage("\n\tAge: " + petBean.getAge());
             PrintSupport.printSeparatorLine();
             i++;
         }
