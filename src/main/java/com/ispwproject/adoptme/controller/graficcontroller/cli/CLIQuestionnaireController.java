@@ -69,7 +69,7 @@ public class CLIQuestionnaireController {
             });
         }
 
-        addInformation(questionnaireResultBeanBuilder, petAlreadyHaveList);
+        setPetAlreadyHave(questionnaireResultBeanBuilder, petAlreadyHaveList);
 
         if(garden.equals("a") || terrace.equals("a"))
             questionnaireResultBeanBuilder.sleepOutside(switch(sleepOutside) {
@@ -86,40 +86,24 @@ public class CLIQuestionnaireController {
 
     }
 
-    private void addInformation(QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder, List<String> petAlreadyHaveList) {
-        int maleCat = 0;
-        int femaleCat = 0;
-        int maleDog = 0;
-        int femaleDog = 0;
+    private void setPetAlreadyHave(QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder, List<String> petAlreadyHaveList) {
+        boolean maleCat = false;
+        boolean femaleCat = false;
+        boolean maleDog = false;
+        boolean femaleDog = false;
         for (String pet : petAlreadyHaveList) {
             if(pet.equals("a"))
-                maleCat = 1;
+                maleCat = true;
             if(pet.equals("b"))
-                femaleCat = 1;
+                femaleCat = true;
             if(pet.equals("c"))
-                maleDog = 1;
+                maleDog = true;
             if(pet.equals("d"))
-                femaleDog = 1;
+                femaleDog = true;
         }
-        if(maleCat == 1) {
-            questionnaireResultBeanBuilder.maleCat(true);
-        } else {
-                questionnaireResultBeanBuilder.maleCat(false);
-        }
-        if(femaleCat == 1) {
-                questionnaireResultBeanBuilder.femaleCat(true);
-        } else {
-                questionnaireResultBeanBuilder.femaleCat(false);
-        }
-        if (maleDog == 1) {
-            questionnaireResultBeanBuilder.maleDog(true);
-        } else {
-                questionnaireResultBeanBuilder.maleDog(false);
-        }
-        if(femaleDog == 1) {
-            questionnaireResultBeanBuilder.femaleDog(true);
-        } else {
-                questionnaireResultBeanBuilder.femaleDog(false);
-        }
+        questionnaireResultBeanBuilder.maleCat(maleCat);
+        questionnaireResultBeanBuilder.femaleCat(femaleCat);
+        questionnaireResultBeanBuilder.maleDog(maleDog);
+        questionnaireResultBeanBuilder.femaleDog(femaleDog);
     }
 }

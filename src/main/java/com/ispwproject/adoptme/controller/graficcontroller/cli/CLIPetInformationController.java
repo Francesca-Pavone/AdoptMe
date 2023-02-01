@@ -34,7 +34,6 @@ public class CLIPetInformationController {
             switch (inputLine) {
                 case REQUEST -> this.executeRequest();
 
-
                 case FAVORITE -> PrintSupport.printMessage("Pet add to favorites -->> DA FARE");
 
                 case HOMEPAGE -> {
