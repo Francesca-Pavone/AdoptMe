@@ -40,7 +40,6 @@ public class UserSideBar {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-
             GUIUserFavoritesController guiUserFavoritesController = fxmlLoader.getController();
             guiUserFavoritesController.setCurrentPage(root);
             stage.setScene(scene);

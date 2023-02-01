@@ -13,7 +13,6 @@ import java.util.List;
 public class UserFavoritesPetsList extends Subject {
     private List<PetModel> petList = new ArrayList<>();
     private UserModel user;
-    private ShelterModel shelter;
 
     public UserFavoritesPetsList(Observer observer, List<PetModel> petList, UserModel user) throws Exception {
         super(observer);
@@ -46,13 +45,5 @@ public class UserFavoritesPetsList extends Subject {
 
     public void setPetList(List<PetModel> petList) {
         this.petList = petList;
-    }
-
-    public ShelterModel getShelter() {
-        return shelter;
-    }
-
-    public void setShelter(ShelterModel shelter) {
-        this.shelter = shelter;
     }
 }

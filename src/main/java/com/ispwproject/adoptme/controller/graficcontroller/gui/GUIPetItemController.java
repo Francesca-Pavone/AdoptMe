@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,11 @@ public class GUIPetItemController {
     private Label petName;
     private PetBean petBean;
     private Parent pageContainer;
+    private Observer favObserver;
+
+    public void setFavObserver(Observer favObserver) {
+        this.favObserver = favObserver;
+    }
 
     public void initialize() {
         //todo verifica se user ha messo mi piace a pet
@@ -64,6 +70,7 @@ public class GUIPetItemController {
         GUIPetInfoController petInformationControllerG = fxmlLoader.getController();
         petInformationControllerG.setPreviousPage(pageContainer);
         petInformationControllerG.setPetInfo(petBean);
+        petInformationControllerG.setFavObserver(this.favObserver);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

@@ -9,6 +9,7 @@ import java.io.File;
 
 public class PetBean {
 
+    public boolean getFav;
     private int petId;
     private int shelterId;
     protected File petImage;
@@ -190,7 +191,7 @@ public class PetBean {
         this.setSleepOutside(petCompatibility.isSleepOutside());
         this.setFirstExperience(petCompatibility.isFirstExperience());
         this.setHoursAlone(petCompatibility.getHoursAlone());
-
+        this.setFav(petModel.isFav());
     }
 
     public int getPetId() {
@@ -448,5 +449,13 @@ public class PetBean {
 
     public void setTestFelv(boolean testFelv) {
         this.testFelv = testFelv;
+    }
+
+    public boolean isFav() {
+        return getFav;
+    }
+
+    public void setFav(boolean getFav) {
+        this.getFav = getFav;
     }
 }

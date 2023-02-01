@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.engineering.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
@@ -79,7 +80,8 @@ public class PetDAO {
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
-
+                if(Session.getCurrentSession().getUserBean() != null)
+                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterModel.getId()));
                 shelterPetsList.addPet(pet);
             }
             while (resultSet.next()) ;
@@ -160,6 +162,9 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
                 pet.setAge(petAge);
+                if(Session.getCurrentSession().getUserBean() != null)
+                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
+
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
@@ -308,6 +313,9 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
                 pet.setAge(petAge);
+                if(Session.getCurrentSession().getUserBean() != null)
+                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), petShelter));
+
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);

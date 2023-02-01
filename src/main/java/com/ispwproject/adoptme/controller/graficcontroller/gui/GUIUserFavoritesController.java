@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -30,22 +31,29 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
 
     @Override
     public void update(Object object) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
-            Pane pane = fxmlLoader.load();
+        if(((PetBean) object).isFav()) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
+                Pane pane = fxmlLoader.load();
+                pane.setId(String.valueOf(((PetBean)object).getPetId()));
 
-            GUIPetItemController petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setPageContainer(currentPage);
-            petItemControllerG.setPetData((PetBean) object);
+                GUIPetItemController petItemControllerG = fxmlLoader.getController();
+                petItemControllerG.setPageContainer(currentPage);
+                petItemControllerG.setFavObserver(this);
+                petItemControllerG.setPetData((PetBean) object);
 
-            if (column == 3) {
-                column = 0;
-                row++;
+                if (column == 3) {
+                    column = 0;
+                    row++;
+                }
+                grid.add(pane, column++, row);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            grid.add(pane, column++, row);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            //todo non so come fare
+                grid.getChildren().removeIf(node -> node.getId().equals(String.valueOf(((PetBean) object).getPetId())));
         }
     }
 

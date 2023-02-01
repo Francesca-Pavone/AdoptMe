@@ -115,4 +115,9 @@ public class SimpleQueries {
         String sql = "SELECT dogId AS id, name, imgSrc, gender, age, shelter, 0 as type FROM Dogs WHERE (dogId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "') UNION SELECT catId AS id, name, imgSrc, gender, age, shelter, 1 as type FROM Cats WHERE (catId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "')";
         return stmt.executeQuery(sql);
     }
+
+    public static ResultSet checkFav(Statement stmt, int userId, int petId, int shelterId) throws SQLException {
+        String sql = "SELECT CASE WHEN EXISTS (SELECT userId, petId, shelterId FROM Favorites WHERE userId = '" + userId + "' AND petId = '" + petId + "' AND shelterId = '" + shelterId + "') THEN 1 ELSE 0 END;";
+        return stmt.executeQuery(sql);
+    }
 }

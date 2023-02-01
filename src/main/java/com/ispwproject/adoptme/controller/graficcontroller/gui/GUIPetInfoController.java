@@ -113,22 +113,25 @@ public class GUIPetInfoController implements Observer {
     private HBox nameFavHBox;
     @FXML
     private ImageView favImage;
-    private Parent previousPage;
     @FXML
     private Button btnFav;
-    @FXML
-    private Label labelFav;
 
-    @FXML
-    private VBox vboxReqFav;
+    private boolean fav = false;
 
     private PetBean petBean;
+
+    private Parent previousPage;
+
+    private Observer favObserver;
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
     }
 
-    private boolean fav = false;
+    public void setFavObserver(Observer favObserver) {
+        this.favObserver = favObserver;
+    }
+
     public void setPetInfo(PetBean petBean) throws Exception {
 
         nameFavHBox.getChildren().removeAll(favImage);
@@ -137,7 +140,7 @@ public class GUIPetInfoController implements Observer {
 
         ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean);
         this.petBean = petBean;
-        fav = petInfoControllerA.checkFavorite(petBean, this);
+        fav = this.petBean.isFav();
 
         if (Session.getCurrentSession().getUserBean() != null) { // sono uno Shelter
 
@@ -335,6 +338,7 @@ public class GUIPetInfoController implements Observer {
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
         if(fav) {
             addToFavoritesController.removePet(userBean, this);
+            addToFavoritesController.removePet(userBean, favObserver);
         } else {
             addToFavoritesController.addPet(userBean, this);
         }

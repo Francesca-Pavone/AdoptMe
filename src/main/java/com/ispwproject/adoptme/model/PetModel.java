@@ -24,6 +24,8 @@ public abstract class PetModel {
 
     protected ShelterModel shelter;
 
+    protected boolean fav;
+
     public PetModel() {
 
     }
@@ -237,5 +239,11 @@ public abstract class PetModel {
         this.petCompatibility = petCompatibility;
     }
 
+    public boolean isFav() {
+        return fav;
+    }
 
+    public void setFav(boolean fav) {
+        this.fav = fav;
+    }
 }
