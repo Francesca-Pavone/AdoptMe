@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.PastDateException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,17 +58,7 @@ public class GUISendRequestController implements Observer {
             sendRequestController.sendUserRequest(petBean, requestBean, this);
         }
         catch (PastDateException e) {
-            Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initStyle(StageStyle.UNDECORATED);
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AlertBox.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-
-            GUIAlertBox guiAlertBox = fxmlLoader.getController();
-            guiAlertBox.setMessage(e.getMessage());
-            dialog.setScene(scene);
-            dialog.show();
-
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
         datePicker.setValue(null);
         timeField.setText(null);

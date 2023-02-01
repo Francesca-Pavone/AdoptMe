@@ -5,9 +5,11 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
@@ -51,26 +53,30 @@ public class CLILoginController {
     }
 
     public void checkLogin(String email, String password) throws Exception {
-        LoginBean loginBean = new LoginBean(email, password);
-        LoginController loginController = new LoginController();
-        loginController.checkLogin(loginBean);
+        try {
+            LoginBean loginBean = new LoginBean(email, password);
+            LoginController loginController = new LoginController();
+            loginController.checkLogin(loginBean);
+            if (loginBean.getAccountType() == 1) {
+                UserBean userBean = loginController.getLoginInfoUser(loginBean);
+                Session.setSessionInstance(userBean);
+                CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+                cliUserHomepageView.run();
+            } else if (loginBean.getAccountType() == 2) {
+                ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
+                Session.setSessionInstance(shelterBean);
 
-        if (loginBean.getAccountType() == 1) {
-            UserBean userBean = loginController.getLoginInfoUser(loginBean);
-            Session.setSessionInstance(userBean);
-            CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-            cliUserHomepageView.run();
-        } else if (loginBean.getAccountType() == 2) {
-            ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
-            Session.setSessionInstance(shelterBean);
-
-            //todo set shelter homepage
+                //todo set shelter homepage
+            }
+            else {
+                PrintSupport.printError("User not found");
+                this.cliLoginView.run();
+                //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
+            }
         }
-        else {
-            PrintSupport.printError("User not found");
-            this.cliLoginView.run();
-            //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
+        catch (EmailFormatException e){
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            start();
         }
-
     }
 }

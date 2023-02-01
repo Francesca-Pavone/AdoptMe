@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
@@ -31,7 +32,21 @@ public class CLIPetInformationController {
     public void executeCommand(String inputLine) {
         try {
             switch (inputLine) {
-                case REQUEST -> this.executeRequest();
+                case REQUEST -> {
+                    try {
+                        if (Session.getCurrentSession().getUserBean() == null)
+                            throw new NoAccoutException();
+                        else {
+                            CLISendRequestController cliSendRequestController = new CLISendRequestController();
+                            cliSendRequestController.sendRequest(petBean);
+                        }
+                    } catch (NoAccoutException e) {
+                        ShowExceptionSupport.showExceptionCLI(e.getMessage());
+                        CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
+                        cliNeedAccountView.showMessage();
+                    }
+                }
+
                 case FAVORITE -> PrintSupport.printMessage("Pet add to favorites -->> DA FARE");
 
                 case HOMEPAGE -> {
