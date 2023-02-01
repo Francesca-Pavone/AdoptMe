@@ -13,16 +13,6 @@ public class ShelterModel extends ShelterUserModel{
     private String city;
     private URL webSite;
 
-
-    public ShelterModel(int shelterId, File profileImg, AccountInfo accountInfo, String shelterName, String phoneNumber, String address, String city, URL webSite) {
-        super(shelterId, profileImg, accountInfo);
-        setShelterName(shelterName);
-        setPhoneNumber(phoneNumber);
-        setAddress(address);
-        setCity(city);
-        setWebSite(webSite);
-    }
-
     public ShelterModel(File profileImg, AccountInfo accountInfo, String shelterName, String phoneNumber, String address, String city, URL webSite) {
         super(profileImg, accountInfo);
         setShelterName(shelterName);

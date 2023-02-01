@@ -8,7 +8,7 @@ public abstract class ShelterUserModel {
     private File profileImg;
     private AccountInfo accountInfo;
 
-    public ShelterUserModel(int id, File profileImg, String email, int accountType) {
+    protected ShelterUserModel(int id, File profileImg, String email, int accountType) {
         this.id = id;
         this.profileImg = profileImg;
         this.accountInfo = new AccountInfo(email, accountType);
@@ -23,8 +23,6 @@ public abstract class ShelterUserModel {
     protected ShelterUserModel(int id) {
         this.id = id;
     }
-    protected ShelterUserModel() {}
-
 
     protected ShelterUserModel(int id, File profileImg, AccountInfo accountInfo) {
         this.id = id;

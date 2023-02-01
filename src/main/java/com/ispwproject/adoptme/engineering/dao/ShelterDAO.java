@@ -31,7 +31,7 @@ public class ShelterDAO {
     private ShelterDAO() {}
 
     public static List<ShelterModel> retrieveShelterByCity(String city) throws Exception {
-        Statement stmt = null;
+        Statement stmt;
         List<ShelterModel> sheltersList = new ArrayList<>();
         try {
             stmt = ConnectionDB.getConnection();
@@ -78,7 +78,8 @@ public class ShelterDAO {
 
                 AccountInfo accountInfo = new AccountInfo(email, password, 1);
 
-                ShelterModel shelterModel = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                ShelterModel shelterModel = new ShelterModel(shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel.setId(shelterId);
                 sheltersList.add(shelterModel);
 
             }while(resultSet.next());
@@ -111,7 +112,7 @@ public class ShelterDAO {
     }
 
     public static int retrieveIdByShelterName(String shelterName) throws Exception {
-        Statement stmt = null;
+        Statement stmt ;
         int shelterId = 0;
         try {
             stmt = ConnectionDB.getConnection();
@@ -135,8 +136,8 @@ public class ShelterDAO {
     }
 
     public static ShelterModel retrieveShelterById(int shelterId) throws Exception {
-        Statement stmt = null;
-        ShelterModel shelter = null;
+        Statement stmt;
+        ShelterModel shelterModel = null;
         try {
             stmt = ConnectionDB.getConnection();
 
@@ -172,7 +173,8 @@ public class ShelterDAO {
                 }
 
                 AccountInfo accountInfo = new AccountInfo(email, 1);
-                shelter = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel = new ShelterModel(shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel.setId(shelterId);
 
             }while(resultSet.next());
 
@@ -182,12 +184,12 @@ public class ShelterDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return shelter;
+        return shelterModel;
     }
 
     public static ShelterModel retrieveShelterByEmail(String email) throws Exception {
-        Statement stmt = null;
-        ShelterModel shelter = null;
+        Statement stmt;
+        ShelterModel shelterModel = null;
         try {
             stmt = ConnectionDB.getConnection();
 
@@ -224,7 +226,8 @@ public class ShelterDAO {
                 }
 
                 AccountInfo accountInfo = new AccountInfo(email, 1);
-                shelter = new ShelterModel(shelterId, shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel = new ShelterModel(shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel.setId(shelterId);
 
             }while(resultSet.next());
 
@@ -235,6 +238,6 @@ public class ShelterDAO {
             e.printStackTrace();
         }
 
-        return shelter;
+        return shelterModel;
     }
 }

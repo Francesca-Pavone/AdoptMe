@@ -10,12 +10,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CLIShelterInfoView {
+    private CLIShelterInfoView() {
+        // metto il costruttore vuoto privato per evitare che venga utilizzato il costruttore di default, in questo modo impedisco di fare la new di questa classe che ha solo metodi statici e non necessita quindi di istanziazione
+    }
+
     public static void showShelter(ShelterBean shelterBean, List<PetBean> petBeanList) throws Exception {
         PrintSupport.printMessage("\n\n-------------------------------------- " + shelterBean.getName().toUpperCase() + " --------------------------------------");
         PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterBean.getEmail() + "\n  Phone number: " + shelterBean.getPhoneNumber() + "\n  Web site: " + shelterBean.getWebSite() + "\n  Address: " + shelterBean.getAddress() + ", " + shelterBean.getCity());
         PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");
         int i = 1;
-        String gender, type;
+        String gender;
+        String type;
         for(PetBean petBean: petBeanList) {
             PrintSupport.printMessage( i + ")  Name: " + petBean.getName());
             gender = (switch (petBean.getGender()) {

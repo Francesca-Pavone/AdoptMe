@@ -38,5 +38,4 @@ public class UserModel extends ShelterUserModel{
         this.surname = surname;
     }
 
-    //TODO : fare il model dell'utente  che estende ShelterUserModel
 }

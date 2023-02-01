@@ -72,17 +72,18 @@ public class CLIPetInformationController {
         PetInfoController petInfoControllerA = new PetInfoController();
         petInfoControllerA.getPetInfo(petBean);
 
-        String dayOfBirth = "";
-        String monthOfBirth = "";
-        // year of birth is mandatory information on pet registration
-        String yearOfBirth = String.valueOf(petBean.getYearOfBirth());
+        String dateOfBirth;
 
-        if (petBean.getDayOfBirth() != 0)  // day of birth not known
-            dayOfBirth = String.valueOf(petBean.getDayOfBirth());
-
-        if (petBean.getMonthOfBirth() != 0)  // month of birth not known
-            monthOfBirth = String.valueOf(petBean.getMonthOfBirth());
-
+        if (petBean.getMonthOfBirth() != 0) {  // month of birth not known
+            if (petBean.getDayOfBirth() != 0)  // day of birth not known
+                dateOfBirth = "\tDate of birth: " + petBean.getDayOfBirth() + " / " + petBean.getMonthOfBirth() + " / " + petBean.getYearOfBirth();
+            else
+                dateOfBirth = "\tDate of birth: " + petBean.getMonthOfBirth() + " / " + petBean.getYearOfBirth();
+        }
+        else {
+            // year of birth is mandatory information on pet registration
+            dateOfBirth = "\tYear of birth: " + petBean.getYearOfBirth();
+        }
 
 
         String type = String.valueOf(
@@ -134,7 +135,8 @@ public class CLIPetInformationController {
         String compatibility = getCompatibility(petBean);
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
-        cliPetInformationView.showData(petBean.getName(), dayOfBirth, monthOfBirth, yearOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
+        cliPetInformationView.showTitle(petBean.getName());
+        cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
     }
 
     private String getCommonGeneralInfo() {

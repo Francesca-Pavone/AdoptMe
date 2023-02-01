@@ -11,7 +11,6 @@ public class RequestModel extends Subject{
 
     private int id;
     private PetModel pet;
-    //private ShelterModel shelter;
     private UserModel user;
     private LocalDate date;
     private LocalTime time;
@@ -21,7 +20,6 @@ public class RequestModel extends Subject{
         super(observer);
         this.id = id;
         this.pet = pet;
-        //this.shelter = pet.getShelter();
         this.user = user;
         this.date = date;
         this.time = time;
@@ -31,10 +29,6 @@ public class RequestModel extends Subject{
     public RequestModel() {
     }
 
-    public RequestModel(Observer observer, int id) {
-        super(observer);
-        this.id = id;
-    }
 
     public int getId() {
         return id;
@@ -51,15 +45,6 @@ public class RequestModel extends Subject{
     public void setPet(PetModel pet) {
         this.pet = pet;
     }
-
-    /*
-    public ShelterModel getShelter() {
-        return shelter;
-    }
-    public void setShelter(ShelterModel shelter) {
-        this.shelter = shelter;
-    }
-     */
 
     public UserModel getUser() {
         return user;
