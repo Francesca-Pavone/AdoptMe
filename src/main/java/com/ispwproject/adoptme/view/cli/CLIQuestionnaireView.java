@@ -13,7 +13,7 @@ public class CLIQuestionnaireView {
     public static void main() {
         Scanner scanner = new Scanner(System.in);
 
-        String inputLine = "";
+        String inputLine;
         String petType = "";
         String petGender = "";
         String petAge = "";
@@ -280,6 +280,8 @@ public class CLIQuestionnaireView {
             }
         }
         CLIQuestionnaireController cliQuestionnaireController = new CLIQuestionnaireController();
-        cliQuestionnaireController.getResult(petType, petGender, petAge, dogSize, alreadyHavePet, petAlreadyHaveList, garden, terrace, sleepOutside, hoursAlone, firstPet, sterilize, dogEducation, disabled, specificArea, city );
+        cliQuestionnaireController.setPetAlreadyHave( alreadyHavePet, petAlreadyHaveList);
+        cliQuestionnaireController.setCompatibility(garden, terrace, sleepOutside, hoursAlone, firstPet, specificArea, city);
+        cliQuestionnaireController.getResult(petType, petGender, petAge, dogSize, sterilize, dogEducation, disabled);
     }
 }
