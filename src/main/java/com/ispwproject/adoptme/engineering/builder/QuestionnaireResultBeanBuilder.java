@@ -6,10 +6,6 @@ public final class QuestionnaireResultBeanBuilder {
     private int type;
     private int gender;
     private String age;
-    /*private boolean puppy;
-    private boolean young;
-    private boolean adult;
-    private boolean senior;*/
     private int size;
     private boolean maleCat;
     private boolean femaleCat;
@@ -18,7 +14,6 @@ public final class QuestionnaireResultBeanBuilder {
     private int haveAGarden;
     private int sleepOutside;
     private int haveATerrace;
-    private boolean terraceSleepOutside;
     private int hoursAlone;
     private int firstPet;
     private boolean sterilizePet;
@@ -43,26 +38,6 @@ public final class QuestionnaireResultBeanBuilder {
         this.gender = gender;
         return this;
     }
-
-    /*public QuestionnaireResultBeanBuilder puppy(boolean puppy) {
-        this.puppy = puppy;
-        return this;
-    }
-
-    public QuestionnaireResultBeanBuilder young(boolean young) {
-        this.young = young;
-        return this;
-    }
-
-    public QuestionnaireResultBeanBuilder adult(boolean adult) {
-        this.adult = adult;
-        return this;
-    }
-
-    public QuestionnaireResultBeanBuilder senior(boolean senior) {
-        this.senior = senior;
-        return this;
-    }*/
 
     public QuestionnaireResultBeanBuilder age(String age) {
         this.age = age;
@@ -148,10 +123,6 @@ public final class QuestionnaireResultBeanBuilder {
         QuestionnaireResultBean questionnaireResultBean = new QuestionnaireResultBean();
         questionnaireResultBean.setType(type);
         questionnaireResultBean.setGender(gender);
-        /*questionnaireResultBean.setPuppy(puppy);
-        questionnaireResultBean.setYoung(young);
-        questionnaireResultBean.setAdult(adult);
-        questionnaireResultBean.setSenior(senior);*/
         questionnaireResultBean.setAge(age);
         questionnaireResultBean.setSize(size);
         questionnaireResultBean.setMaleCat(maleCat);

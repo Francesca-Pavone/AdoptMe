@@ -1,16 +1,16 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
-import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+
 
 public class CLILoginController {
     private static final String LOGIN = "1";
@@ -18,24 +18,34 @@ public class CLILoginController {
     private static final String LOGIN_WITH_GOOGLE = "3";
     private static final String NO_LOGIN = "4";
     private static final String SIGN_UP = "5";
+    private CLILoginView cliLoginView;
 
-    public void executeCommand(String inputLine) throws Exception {
-        switch (inputLine) {
-            case LOGIN:
-                CLILoginView.getCredentials();
-            case FORGOT_PASSWORD:
-                System.out.println("Functionality not yet developed.");
-                CLILoginView.run();
-            case LOGIN_WITH_GOOGLE:
-                System.out.println("Functionality not yet developed.");
-                CLILoginView.run();
-            case NO_LOGIN:
-                Session.getSessionInstance(null);
-                CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                cliUserHomepageView.run();
-            case SIGN_UP:
-                System.out.println("Functionality not yet developed.");
-                CLILoginView.run();
+    public void start() {
+        this.cliLoginView = new CLILoginView(this);
+        this.cliLoginView.run();
+    }
+
+    public void executeCommand(String inputLine) {
+        try {
+            switch (inputLine) {
+                case LOGIN -> this.cliLoginView.getCredentials();
+                case NO_LOGIN -> {
+                    Session.setSessionInstance(null);
+                    CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+                    cliUserHomepageView.run();
+                }
+                case FORGOT_PASSWORD, SIGN_UP, LOGIN_WITH_GOOGLE -> {
+                    PrintSupport.printMessage("Functionality not yet developed.");
+                    this.cliLoginView.run();
+                }
+                default ->
+                    throw new CommandNotFoundException();
+            }
+        }
+        catch (CommandNotFoundException e) {
+            PrintSupport.printError(e.getMessage() + "1 | 2 | 3 | 4 | 5\n\tPress ENTER to continue");
+            ScannerSupport.waitEnter();
+            this.cliLoginView.run();
         }
     }
 
@@ -46,18 +56,18 @@ public class CLILoginController {
 
         if (loginBean.getAccountType() == 1) {
             UserBean userBean = loginController.getLoginInfoUser(loginBean);
-            Session.getSessionInstance(userBean);
+            Session.setSessionInstance(userBean);
             CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
             cliUserHomepageView.run();
         } else if (loginBean.getAccountType() == 2) {
             ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
-            Session.getSessionInstance(shelterBean);
+            Session.setSessionInstance(shelterBean);
 
             //todo set shelter homepage
         }
         else {
-            System.out.println("User not found");
-            CLILoginView.run();
+            PrintSupport.printError("User not found");
+            this.cliLoginView.run();
             //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
         }
 

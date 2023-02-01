@@ -21,9 +21,9 @@ public class UserDAOCSV implements UserDAO{
 
         while ((row = bufferedReader.readLine()) != null) {
             record = row.split(",");
-            if (record[UserAttributesOrder.getIndex_userId()].equals(String.valueOf(userId))) {
+            if (record[UserAttributesOrder.getIndexUserId()].equals(String.valueOf(userId))) {
 
-                String email = record[UserAttributesOrder.getIndex_userId()];
+                String email = record[UserAttributesOrder.getIndexUserId()];
                 user = getUserModule(email, record, userId);
             }
         }
@@ -41,9 +41,9 @@ public class UserDAOCSV implements UserDAO{
 
         while ((row = bufferedReader.readLine()) != null) {
             record = row.split(",");
-            if (record[UserAttributesOrder.getIndex_email()].equals(email)) {
+            if (record[UserAttributesOrder.getIndexEmail()].equals(email)) {
 
-                int userId = Integer.parseInt(record[UserAttributesOrder.getIndex_userId()]);
+                int userId = Integer.parseInt(record[UserAttributesOrder.getIndexUserId()]);
                 user = getUserModule(email, record, userId);
             }
         }
@@ -53,12 +53,12 @@ public class UserDAOCSV implements UserDAO{
 
     private UserModel getUserModule(String email, String[] record, int userId) {
         UserModel user;
-        String name = record[UserAttributesOrder.getIndex_name()];
-        String surname = record[UserAttributesOrder.getIndex_surname()];
+        String name = record[UserAttributesOrder.getIndexName()];
+        String surname = record[UserAttributesOrder.getIndexSurname()];
 
         File profileImg;
         try {
-            profileImg = new File(Main.class.getResource(record[UserAttributesOrder.getIndex_image()]).getPath());
+            profileImg = new File(Main.class.getResource(record[UserAttributesOrder.getIndexImage()]).getPath());
         }
         catch (ArrayIndexOutOfBoundsException e) {
             profileImg = new File(Main.class.getResource("image/default_photo.png").getPath());
@@ -71,27 +71,27 @@ public class UserDAOCSV implements UserDAO{
 
 
     private static class UserAttributesOrder {
-        public static int getIndex_userId() {
+        public static int getIndexUserId() {
             return 0;
         }
 
-        public static int getIndex_name() {
+        public static int getIndexName() {
             return 1;
         }
 
-        public static int getIndex_surname() {
+        public static int getIndexSurname() {
             return 2;
         }
 
-        public static int getIndex_email() {
+        public static int getIndexEmail() {
             return 3;
         }
 
-        public static int getIndex_password() {
+        public static int getIndexPassword() {
             return 4;
         }
 
-        public static int getIndex_image() {
+        public static int getIndexImage() {
             return 5;
         }
 

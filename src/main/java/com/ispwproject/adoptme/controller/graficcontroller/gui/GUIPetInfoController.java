@@ -222,52 +222,49 @@ public class GUIPetInfoController implements Observer {
 
 
         //General info
+        vaccinated.setText("Vaccinations not completed");
         if (petBean.isVaccinated())
             vaccinated.setText("Vaccinations complete");
-        else
-            vaccinated.setText("Vaccinations not completed");
 
+        microchipped.setText("Not microchipped");
         if (petBean.isMicrochipped())
             microchipped.setText("Microchipped");
-        else
-            microchipped.setText("Not microchipped");
 
+        dewormed.setText("Not dewormed");
         if (petBean.isDewormed())
             dewormed.setText("Dewormed");
-        else
-            dewormed.setText("Not dewormed");
 
+        sterilized.setText("Not sterilized");
         if (petBean.isSterilized())
             sterilized.setText("Sterilized");
-        else
-            sterilized.setText("Not sterilized");
 
         // check if it isn't a cat
         if (petBean.getType() != 1){
             petInfoVBox.getChildren().removeAll(testFiv, testFelv);
         }
         else {
+            testFiv.setText("Test Fiv: Negative");
             if (petBean.isTestFiv())
                 testFiv.setText("Test Fiv: Positive");
-            else
-                testFiv.setText("Test Fiv: Negative");
 
+            testFelv.setText("Test Felv: Negative");
             if (petBean.isTestFelv())
                 testFelv.setText("Test Felv: Positive");
-            else
-                testFelv.setText("Test Felv: Negative");
         }
 
         if (!petBean.isDisability())
             petInfoVBox.getChildren().remove(disabilityBox);
         else {
             disability.setText("Disability");
-            if (petBean.getDisabilityType().equals(""))
-                disabilityType.setText("Not specified");
-            else
+            disabilityType.setText("Not specified");
+            if (!petBean.getDisabilityType().equals(""))
                 disabilityType.setText(petBean.getDisabilityType());
         }
 
+        setCompatibility(petBean);
+    }
+
+    private void setCompatibility(PetBean petBean) {
         if (petBean.isMaleDog()) {
             setCompatibilityLabel("Male dogs");
         }
@@ -318,18 +315,6 @@ public class GUIPetInfoController implements Observer {
     public void goBack(ActionEvent event) {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = this.previousPage.getScene();
-
-        /*
-        if (Session.getSession().getUserBean() == null) {
-            fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-            scene = new Scene(fxmlLoader.load());
-        }
-        else {
-            fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-            scene = new Scene(fxmlLoader.load());
-        }
-
-         */
         stage.setScene(scene);
     }
 

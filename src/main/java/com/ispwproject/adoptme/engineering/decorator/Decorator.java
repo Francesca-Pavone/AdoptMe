@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.engineering.decorator;
 public abstract class Decorator implements IQuestionnaireQuery {
     private IQuestionnaireQuery questionnaireQuery;
 
-    public Decorator(IQuestionnaireQuery questionnaireQuery) {
+    protected Decorator(IQuestionnaireQuery questionnaireQuery) {
         this.questionnaireQuery = questionnaireQuery;
     }
 

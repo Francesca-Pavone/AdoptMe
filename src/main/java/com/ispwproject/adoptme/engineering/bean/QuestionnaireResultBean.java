@@ -4,10 +4,6 @@ public class QuestionnaireResultBean {
     protected int type; // 0 -> Dog | 1 -> Cat
     protected int gender; // 0 -> male | 1 -> female | 2 -> not important
     protected String age; // 0 -> puppy | 1 -> young | 2 -> adult | 3 -> senior
-    /*protected boolean puppy;
-    protected boolean young;
-    protected boolean adult;
-    protected boolean senior;*/
     protected int size; //0 -> small | 1 -> medium | 2 -> large | 3 -> extra large
     protected boolean maleCat;
     protected boolean femaleCat;
@@ -26,8 +22,10 @@ public class QuestionnaireResultBean {
 
 
 
-    //Costruttore vuoto
-    public QuestionnaireResultBean() {}
+
+    public QuestionnaireResultBean() {
+        //Costruttore vuoto
+    }
 
     public void setSize(int size) {
         this.size = size;
@@ -52,38 +50,6 @@ public class QuestionnaireResultBean {
     public void setGender(int gender) {
         this.gender = gender;
     }
-
-    /*public boolean isPuppy() {
-        return puppy;
-    }
-
-    public void setPuppy(boolean puppy) {
-        this.puppy = puppy;
-    }
-
-    public boolean isYoung() {
-        return young;
-    }
-
-    public void setYoung(boolean young) {
-        this.young = young;
-    }
-
-    public boolean isAdult() {
-        return adult;
-    }
-
-    public void setAdult(boolean adult) {
-        this.adult = adult;
-    }
-
-    public boolean isSenior() {
-        return senior;
-    }
-
-    public void setSenior(boolean senior) {
-        this.senior = senior;
-    }*/
 
     public String getAge() {
         return age;

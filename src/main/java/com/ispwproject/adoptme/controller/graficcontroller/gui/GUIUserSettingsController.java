@@ -44,7 +44,7 @@ public class GUIUserSettingsController extends UserSideBar {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagine Files","*.png","*.jpg"));
         File image = fileChooser.showOpenDialog(stage).getAbsoluteFile();
 
-        BufferedImage bfImage = null;
+        BufferedImage bfImage;
         bfImage = ImageIO.read(image);
         WritableImage wr = null;
         if (bfImage != null) {
@@ -70,7 +70,7 @@ public class GUIUserSettingsController extends UserSideBar {
         stage.setScene(scene);
     }
 
-    public void initialize() throws IOException {
+    public void initialize() {
         UserBean userBean = Session.getCurrentSession().getUserBean();
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());

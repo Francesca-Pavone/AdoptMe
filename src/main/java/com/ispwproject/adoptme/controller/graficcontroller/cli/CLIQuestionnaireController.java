@@ -7,7 +7,7 @@ import com.ispwproject.adoptme.engineering.builder.QuestionnaireResultBeanBuilde
 import java.util.List;
 
 public class CLIQuestionnaireController {
-    public void getResult(String petType, String petGender, String petAge, String dogSize, String alreadyHavePet, List<String>petAlreadyHaveList, String garden, String gardenSleepOutside, String terrace, String terraceSleepOutside, String hoursAlone, String firstPet, String sterilize, String dogEducation, String disabled, String specificArea, String city) {
+    public void getResult(String petType, String petGender, String petAge, String dogSize, String alreadyHavePet, List<String>petAlreadyHaveList, String garden, String terrace, String sleepOutside, String hoursAlone, String firstPet, String sterilize, String dogEducation, String disabled, String specificArea, String city) {
         QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder = QuestionnaireResultBeanBuilder.newQuestionnaireResultBean()
                 .type(switch (petType) {
                     case "a" -> 1;
@@ -59,7 +59,7 @@ public class CLIQuestionnaireController {
                 });
             }
         }
-        if(!petAge.equals("e")) { //todo inserisci e in age
+        if(!petAge.equals("e")) {
             questionnaireResultBeanBuilder.age(switch (petAge) {
                 case "a" -> "puppy";
                 case "b" -> "young";
@@ -69,6 +69,24 @@ public class CLIQuestionnaireController {
             });
         }
 
+        addInformation(questionnaireResultBeanBuilder, petAlreadyHaveList);
+
+        if(garden.equals("a") || terrace.equals("a"))
+            questionnaireResultBeanBuilder.sleepOutside(switch(sleepOutside) {
+                case "a" -> 1;
+                default -> 0;
+            });
+        if(specificArea.equals("a"))
+            questionnaireResultBeanBuilder.city(city);
+
+        QuestionnaireResultBean questionnaireResultBean = questionnaireResultBeanBuilder.build();
+        QuestionnaireResultController questionnaireResultController = new QuestionnaireResultController();
+
+        //inizializza pagina result e passagli i risultati di questionnaireResultController.searchPets(questionnaireResultBean)
+
+    }
+
+    private void addInformation(QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder, List<String> petAlreadyHaveList) {
         int maleCat = 0;
         int femaleCat = 0;
         int maleDog = 0;
@@ -83,63 +101,25 @@ public class CLIQuestionnaireController {
             if(pet.equals("d"))
                 femaleDog = 1;
         }
-        switch(maleCat) {
-            case 1:
-                questionnaireResultBeanBuilder.maleCat(true);
-            default:
+        if(maleCat == 1) {
+            questionnaireResultBeanBuilder.maleCat(true);
+        } else {
                 questionnaireResultBeanBuilder.maleCat(false);
         }
-        switch(femaleCat) {
-            case 1:
+        if(femaleCat == 1) {
                 questionnaireResultBeanBuilder.femaleCat(true);
-            default:
+        } else {
                 questionnaireResultBeanBuilder.femaleCat(false);
         }
-        switch(maleDog) {
-            case 1:
-                questionnaireResultBeanBuilder.maleDog(true);
-            default:
+        if (maleDog == 1) {
+            questionnaireResultBeanBuilder.maleDog(true);
+        } else {
                 questionnaireResultBeanBuilder.maleDog(false);
         }
-        switch(femaleDog) {
-            case 1:
-                questionnaireResultBeanBuilder.femaleDog(true);
-            default:
+        if(femaleDog == 1) {
+            questionnaireResultBeanBuilder.femaleDog(true);
+        } else {
                 questionnaireResultBeanBuilder.femaleDog(false);
         }
-
-        if(garden.equals("a") && terrace.equals("b"))
-            questionnaireResultBeanBuilder.sleepOutside(switch(gardenSleepOutside) {
-                case "a" -> 1;
-                default -> 0;
-            });
-        else if(terrace.equals("a") && garden.equals("b"))
-            questionnaireResultBeanBuilder.sleepOutside(switch(terraceSleepOutside) {
-                case "a" -> 1;
-                default -> 0;
-            });
-        else if(garden.equals("a") && terrace.equals("a")) {
-            questionnaireResultBeanBuilder.sleepOutside(switch(gardenSleepOutside) {
-                case "a" -> 1;
-                default -> 0;
-            });
-        }
-        if(specificArea.equals("a"))
-            questionnaireResultBeanBuilder.city(city);
-
-        QuestionnaireResultBean questionnaireResultBean = questionnaireResultBeanBuilder.build();
-        QuestionnaireResultController questionnaireResultController = new QuestionnaireResultController();
-
-        //inizializza pagina result e passagli i risultati di questionnaireResultController.searchPets(questionnaireResultBean)
-
-
     }
-
-
-
-
-
-
-
-
 }
