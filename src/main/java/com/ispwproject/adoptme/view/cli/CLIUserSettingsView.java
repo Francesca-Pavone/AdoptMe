@@ -8,17 +8,21 @@ import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import java.util.Scanner;
 
 public class CLIUserSettingsView {
-    public static void run() throws Exception {
+    private CLIUserSettingsController cliUserSettingsController;
+
+    public CLIUserSettingsView(CLIUserSettingsController cliUserSettingsController) {
+        this.cliUserSettingsController = cliUserSettingsController;
+    }
+    public void run() {
         UserBean user = Session.getCurrentSession().getUserBean();
 
         PrintSupport.printMessage("------------------------------------------- SETTINGS ------------------------------------------");
         PrintSupport.printMessage("\tName: " + user.getName() + "\n\tSurname: " + user.getSurname() + "\n\tEmail: " + user.getEmail());
 
-        System.out.println("------------------------------------------- commands ------------------------------------------");
-        System.out.println(" 1) Modify name.\n 2) Modify surname.\n 3) Modify email.\n 4) Modify password.\n 5) Logout.");
+        PrintSupport.printMessage("------------------------------------------- commands ------------------------------------------");
+        PrintSupport.printMessage(" 1) Modify name.\n 2) Modify surname.\n 3) Modify email.\n 4) Modify password.\n 5) Logout.");
         Scanner scanner = new Scanner(System.in);
         String inputLine = scanner.nextLine();
-        CLIUserSettingsController userSettingsController = new CLIUserSettingsController();
-        userSettingsController.executeCommand(inputLine);
+        this.cliUserSettingsController.executeCommand(inputLine);
     }
 }

@@ -15,7 +15,7 @@ import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 public class CLIPetInformationController {
 
     private PetBean petBean;
-    private CLIPetInformationView cliPetInformationView;
+    private CLIPetInformationView cliPetInformationViewCurrent;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
@@ -24,29 +24,14 @@ public class CLIPetInformationController {
         this.petBean = petBean;
     }
 
-    public void setCliPetInformationView(CLIPetInformationView cliPetInformationView) {
-        this.cliPetInformationView = cliPetInformationView;
+    public void setCliPetInformationViewCurrent(CLIPetInformationView cliPetInformationViewCurrent) {
+        this.cliPetInformationViewCurrent = cliPetInformationViewCurrent;
     }
 
     public void executeCommand(String inputLine) {
         try {
             switch (inputLine) {
-                case REQUEST -> {
-                    try {
-                        if (Session.getCurrentSession().getUserBean() == null)
-                            throw new NoAccoutException();
-                        else {
-                            CLISendRequestController cliSendRequestController = new CLISendRequestController();
-                            cliSendRequestController.sendRequest(petBean);
-                        }
-                    } catch (NoAccoutException e) {
-                        PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
-                        ScannerSupport.waitEnter();
-                        CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
-                        cliNeedAccountView.showMessage();
-                    }
-                }
-
+                case REQUEST -> this.executeRequest();
                 case FAVORITE -> PrintSupport.printMessage("Pet add to favorites -->> DA FARE");
 
                 case HOMEPAGE -> {
@@ -61,9 +46,26 @@ public class CLIPetInformationController {
         } catch (CommandNotFoundException e) {
             PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
             ScannerSupport.waitEnter();
-            this.cliPetInformationView.showCommand();
+            this.cliPetInformationViewCurrent.showCommand();
         }
     }
+
+    private void executeRequest() {
+        try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccoutException();
+            else {
+                CLISendRequestController cliSendRequestController = new CLISendRequestController();
+                cliSendRequestController.sendRequest(petBean);
+            }
+        } catch (NoAccoutException e) {
+            PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
+            ScannerSupport.waitEnter();
+            CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
+            cliNeedAccountView.showMessage();
+        }
+    }
+
     public void setPetInfo() throws Exception {
 
         PetInfoController petInfoControllerA = new PetInfoController();
@@ -102,6 +104,8 @@ public class CLIPetInformationController {
         );
         String  dogSize = "";
         String dogEducation = "";
+        String testFiv = "";
+        String testFelv = "";
         // check if it's a dog
         if (petBean.getType() == 0) {
             dogSize = String.valueOf(
@@ -115,9 +119,20 @@ public class CLIPetInformationController {
             dogEducation = "Program of dog education: Not needed";
             if (petBean.isDogEducation())
                 dogEducation = "Program of dog education: Needed";
+        } else {
+            testFiv = "Test Fiv: Negative";
+            if (petBean.isTestFiv())
+                testFiv = "Test Fiv: Positive";
+
+            testFelv = "Test Felv: Negative";
+            if (petBean.isTestFelv())
+                testFelv = "Test Felv: Positive";
         }
 
-        String vaccinated, microchipped, dewormed, sterilized;
+        String vaccinated;
+        String microchipped;
+        String dewormed;
+        String sterilized;
         //General info
         vaccinated = "Vaccinations not completed";
         if (petBean.isVaccinated())
@@ -134,20 +149,6 @@ public class CLIPetInformationController {
         sterilized = "Not sterilized";
         if (petBean.isSterilized())
             sterilized = "Sterilized";
-
-        String testFiv = "";
-        String testFelv = "";
-        // check if it's a cat
-        if (petBean.getType() == 1){
-            testFiv = "Test Fiv: Negative";
-            if (petBean.isTestFiv())
-                testFiv = "Test Fiv: Positive";
-
-            testFelv = "Test Felv: Negative";
-            if (petBean.isTestFelv())
-                testFelv = "Test Felv: Positive";
-
-        }
         String disability = "";
         String disabilityType = "";
         if (petBean.isDisability()) {

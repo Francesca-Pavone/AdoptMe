@@ -279,18 +279,6 @@ public class GUIPetInfoController {
     public void goBack(ActionEvent event) {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = this.previousPage.getScene();
-
-        /*
-        if (Session.getSession().getUserBean() == null) {
-            fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-            scene = new Scene(fxmlLoader.load());
-        }
-        else {
-            fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-            scene = new Scene(fxmlLoader.load());
-        }
-
-         */
         stage.setScene(scene);
     }
 

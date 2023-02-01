@@ -7,8 +7,6 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.view.cli.requests.CLIAppointmentsPageView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
-import com.ispwproject.adoptme.view.cli.requests.CLIManageRejectedRequestView;
-import com.ispwproject.adoptme.view.cli.requests.CLIManageSendRequestView;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

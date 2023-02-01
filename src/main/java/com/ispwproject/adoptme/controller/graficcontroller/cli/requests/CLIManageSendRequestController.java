@@ -4,9 +4,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
-import com.ispwproject.adoptme.view.cli.requests.CLIAppointmentsPageView;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageSendRequestView;
-import com.ispwproject.adoptme.view.cli.requests.CLIRequestItemView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -119,7 +119,6 @@ public class GUIUserHomepageController extends UserSideBar {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //todo: se effettu ricerca per shelter e poi per città -> devo rimuovere i dati caricati nello scroll pane e viceversa
             }
             if (radioBtnShelter.isSelected()) {
                 labelCity.setVisible(true);

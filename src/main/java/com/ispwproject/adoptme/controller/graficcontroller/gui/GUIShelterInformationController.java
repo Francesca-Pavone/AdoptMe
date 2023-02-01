@@ -107,9 +107,6 @@ public class GUIShelterInformationController implements Observer {
 
     public void goBack() throws IOException {
         Stage stage = Main.getStage();
-        //FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load());
-        //stage.setScene(scene);
         Scene scene = this.previousPage.getScene();
         stage.setScene(scene);
     }

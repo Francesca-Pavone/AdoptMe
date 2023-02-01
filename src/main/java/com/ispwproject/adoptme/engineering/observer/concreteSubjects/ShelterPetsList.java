@@ -26,7 +26,7 @@ public class ShelterPetsList extends Subject {
         this.shelter = shelter;
     }
 
-    public void addPet(PetModel petModel) throws Exception {
+    public void addPet(PetModel petModel) {
         this.petList.add(petModel);
         PetBean petBean = new PetBean(petModel);
         this.notifyObservers(petBean);
