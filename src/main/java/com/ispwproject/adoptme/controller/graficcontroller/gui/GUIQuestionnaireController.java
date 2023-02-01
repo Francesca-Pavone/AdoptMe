@@ -105,8 +105,6 @@ public class GUIQuestionnaireController {
     @FXML
     private TextField cityTextField;
     @FXML
-    private ToggleGroup alreadyHaveAPetGroup;
-    @FXML
     private ToggleGroup disabledPetGroup;
     @FXML
     private ToggleGroup firstPetGroup;
@@ -116,8 +114,6 @@ public class GUIQuestionnaireController {
     private ToggleGroup hoursAloneGroup1;
     @FXML
     private ToggleGroup petSizeGroup;
-    @FXML
-    private ToggleGroup petTypeGroup;
     @FXML
     private ToggleGroup programEducationGroup;
     @FXML
@@ -195,11 +191,14 @@ public class GUIQuestionnaireController {
     }
 
     public void removeNextNodes(int i) {
-        int j;
-        for(j = i + 1; j < vboxParent.getChildren().size(); j++) {
+        int j = i + 1;
+        int size = vboxList.size();
+        while (j < size) {
             if(vboxParent.getChildren().contains(vboxList.get(j)))
                 vboxParent.getChildren().remove(vboxList.get(j));
-
+            if(vboxParent.getChildren().contains(btnEndQuestionnaire))
+                vboxParent.getChildren().remove(btnEndQuestionnaire);
+            j++;
         }
     }
 
@@ -238,11 +237,6 @@ public class GUIQuestionnaireController {
             btnMale.setSelected(true);
         }
     }
-
-    @FXML
-    private Label firstPetText1;
-    @FXML
-    private Label firstPetText2;
 
     public void selectGenderNotImportant() {
         if(!vboxParent.getChildren().contains(vboxPetAge) && btnGenderNotImportant.isSelected())
@@ -410,7 +404,11 @@ public class GUIQuestionnaireController {
     }
 
     public void selectGarden() {
-        if(!vboxParent.getChildren().contains(vboxTerrace) && btnGarden.isSelected())
+        if(!vboxParent.getChildren().contains(vboxSleepOutside) && vboxParent.getChildren().contains(vboxTerrace) && btnGarden.isSelected() && !btnTerrace.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxTerrace));
+            vboxParent.getChildren().add(vboxSleepOutside);
+        }
+        else if(!vboxParent.getChildren().contains(vboxTerrace) && btnGarden.isSelected())
             vboxParent.getChildren().add(vboxTerrace);
         else if(!btnGarden.isSelected()) {
             btnGarden.setSelected(true);
@@ -418,7 +416,11 @@ public class GUIQuestionnaireController {
     }
 
     public void selectNoGarden() {
-        if(!vboxParent.getChildren().contains(vboxTerrace) && btnNoGarden.isSelected())
+        if(vboxParent.getChildren().contains(vboxSleepOutside) && !btnGarden.isSelected() && !btnTerrace.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxTerrace));
+            vboxParent.getChildren().add(vboxHoursAlone);
+        }
+        else if(!vboxParent.getChildren().contains(vboxTerrace) && btnNoGarden.isSelected())
             vboxParent.getChildren().add(vboxTerrace);
         else if(!btnNoGarden.isSelected()) {
             btnNoGarden.setSelected(true);
@@ -426,23 +428,30 @@ public class GUIQuestionnaireController {
     }
 
     public void selectTerrace() {
-        if(vboxParent.getChildren().contains(vboxHoursAlone) && btnTerrace.isSelected()) {
+        if(vboxParent.getChildren().contains(vboxHoursAlone) && btnTerrace.isSelected() && !btnGarden.isSelected()) {
             removeNextNodes(vboxList.indexOf(vboxTerrace));
             vboxParent.getChildren().add(vboxSleepOutside);
         }
-        else if(!vboxParent.getChildren().contains(vboxSleepOutside) && btnTerrace.isSelected())
+        else if(!vboxParent.getChildren().contains(vboxHoursAlone) && !vboxParent.getChildren().contains(vboxSleepOutside) && btnTerrace.isSelected()) {
+
             vboxParent.getChildren().add(vboxSleepOutside);
+        }
         else if(!btnTerrace.isSelected()) {
             btnTerrace.setSelected(true);
         }
     }
 
     public void selectNoTerrace() {
-        if(vboxParent.getChildren().contains(vboxSleepOutside) && btnNoTerrace.isSelected()) {
+        if(vboxParent.getChildren().contains(vboxSleepOutside) && !btnTerrace.isSelected() && !btnGarden.isSelected()) {
             removeNextNodes(vboxList.indexOf(vboxTerrace));
-            vboxParent.getChildren().add(vboxHoursAlone);
+            if(!vboxParent.getChildren().contains(vboxHoursAlone))
+                vboxParent.getChildren().add(vboxHoursAlone);
         }
-        if(!vboxParent.getChildren().contains(vboxHoursAlone) && btnNoTerrace.isSelected())
+        else if(!vboxParent.getChildren().contains(vboxSleepOutside) && !btnTerrace.isSelected() && btnGarden.isSelected()) {
+            removeNextNodes(vboxList.indexOf(vboxTerrace));
+            vboxParent.getChildren().add(vboxSleepOutside);
+        }
+        else if(!vboxParent.getChildren().contains(vboxHoursAlone) && !btnTerrace.isSelected() && !btnGarden.isSelected())
             vboxParent.getChildren().add(vboxHoursAlone);
         if(!btnNoTerrace.isSelected()) {
             btnNoTerrace.setSelected(true);
@@ -656,35 +665,15 @@ public class GUIQuestionnaireController {
                 });
             }
         }
-        if(!btnAgeNotImportant.isSelected()) {
-            questionnaireResultBeanBuilder.age(switch (((ToggleButton) petAgeGroup.getSelectedToggle()).getText()) {
-                case "Puppy (0-12 months)" -> "puppy";
-                case "Young (13 months - 3 years)" -> "young";
-                case "Adult (4years - 10 years)" -> "adult";
-                case "Senior (more than 11 years)" -> "senior";
-                default -> "";
-            });
-        }
-        if(btnHaveAPet.isSelected()) {
-            questionnaireResultBeanBuilder.maleCat(btnMaleCat.isSelected())
-                    .femaleCat(btnFemaleCat.isSelected())
-                    .maleDog(btnMaleDog.isSelected())
-                    .femaleDog(btnFemaleDog.isSelected());
-        }
+
         if(haveAGarden || haveATerrace) {
             questionnaireResultBeanBuilder.sleepOutside(switch (((ToggleButton) sleepOutsideGroup.getSelectedToggle()).getText()) {
                 case "Yes" -> 1;
                 default -> 0;
             });
         }
-        questionnaireResultBeanBuilder.specificArea(switch (((ToggleButton) specificAreaGroup.getSelectedToggle()).getText()) {
-            case "Yes" -> true;
-            default -> false;
-        });
-        if(btnSpecificArea.isSelected()) {
-            questionnaireResultBeanBuilder.city(cityTextField.getText());
-        }
 
+        addInformation(questionnaireResultBeanBuilder);
         QuestionnaireResultBean questionnaireResultBean = questionnaireResultBeanBuilder.build();
         QuestionnaireResultController questionnaireResultController = new QuestionnaireResultController();
 
@@ -696,4 +685,30 @@ public class GUIQuestionnaireController {
         guiQuestionnaireResultController.setData(questionnaireResultController.searchPets(questionnaireResultBean));
         stage.setScene(scene);
         }
+
+        public void addInformation(QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder) {
+            if(!btnAgeNotImportant.isSelected()) {
+                questionnaireResultBeanBuilder.age(switch (((ToggleButton) petAgeGroup.getSelectedToggle()).getText()) {
+                    case "Puppy (0-12 months)" -> "puppy";
+                    case "Young (13 months - 3 years)" -> "young";
+                    case "Adult (4years - 10 years)" -> "adult";
+                    case "Senior (more than 11 years)" -> "senior";
+                    default -> "";
+                });
+            }
+            if(btnHaveAPet.isSelected()) {
+                questionnaireResultBeanBuilder.maleCat(btnMaleCat.isSelected())
+                        .femaleCat(btnFemaleCat.isSelected())
+                        .maleDog(btnMaleDog.isSelected())
+                        .femaleDog(btnFemaleDog.isSelected());
+            }
+        questionnaireResultBeanBuilder.specificArea(switch (((ToggleButton) specificAreaGroup.getSelectedToggle()).getText()) {
+                case "Yes" -> true;
+                default -> false;
+            });
+            if(btnSpecificArea.isSelected()) {
+                questionnaireResultBeanBuilder.city(cityTextField.getText());
+            }
+        }
+
 }
