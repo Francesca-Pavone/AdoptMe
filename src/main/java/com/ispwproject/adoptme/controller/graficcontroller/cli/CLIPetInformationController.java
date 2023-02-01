@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
@@ -40,8 +41,7 @@ public class CLIPetInformationController {
                             cliSendRequestController.sendRequest(petBean);
                         }
                     } catch (NoAccoutException e) {
-                        PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
-                        ScannerSupport.waitEnter();
+                        ShowExceptionSupport.showExceptionCLI(e.getMessage());
                         CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
                         cliNeedAccountView.showMessage();
                     }
