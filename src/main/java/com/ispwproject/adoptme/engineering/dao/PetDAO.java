@@ -49,7 +49,7 @@ public class PetDAO {
                 int petId = resultSet.getInt("id");
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob("imgSrc");
+                Blob blob = resultSet.getBlob(IMG_SRC);
                 File petImage = null;
                 try {
                     if (blob != null) {
