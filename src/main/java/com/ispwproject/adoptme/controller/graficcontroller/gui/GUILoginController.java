@@ -144,7 +144,4 @@ public class GUILoginController {
         }
     }
 
-
-    public void switchInterface(ActionEvent actionEvent){
-    }
 }

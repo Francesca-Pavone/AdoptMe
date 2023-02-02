@@ -19,12 +19,15 @@ import java.util.List;
 public class PetDAO {
 
     private static final String DEFAULT_PHOTO = "image/default_photo.png";
+    public static final String IMG_SRC = "imgSrc";
+    public static final String PHOTO = "Photo";
+
     private PetDAO() {
         //costruttore privato
     }
 
     public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws Exception {
-        Statement stmt = null;
+        Statement stmt;
         List<PetModel> petList = new ArrayList<>();
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, petList, shelterModel);
         PetModel pet;
@@ -50,7 +53,7 @@ public class PetDAO {
                 File petImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = petName + "Photo" + ".png";
+                        String filePath = petName + PHOTO + ".png";
                         petImage = ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
@@ -201,7 +204,7 @@ public class PetDAO {
 
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob("imgSrc");
+                Blob blob = resultSet.getBlob(IMG_SRC);
                 File petImage = null;
                 try {
                     if (blob != null) {

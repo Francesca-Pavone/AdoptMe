@@ -53,29 +53,28 @@ public class CLISendRequestController implements Observer {
     }
 
     public void executeCommand(String command) {
-        switch (command) {
-            case SEND -> {
-                SendRequestController sendRequestController = new SendRequestController();
-                try {
-                    sendRequestController.sendUserRequest(this.petBean, this.requestBean, this);
-                }
-                catch (PastDateException e) {
-                    ShowExceptionSupport.showExceptionCLI(e.getMessage());
-                    sendRequest(petBean);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
+        if (command.equals(SEND)){
+            SendRequestController sendRequestController = new SendRequestController();
+            try {
+                sendRequestController.sendUserRequest(this.petBean, this.requestBean, this);
             }
-            case BACK -> {
-                CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
-                try {
-                    cliPetInformationController.setPetInfo();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            catch (PastDateException e) {
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
+                sendRequest(petBean);
+            }
+            catch (Exception e){
+                e.printStackTrace();
             }
         }
+        else if (command.equals(BACK)){
+            CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
+            try {
+                cliPetInformationController.setPetInfo();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @Override
@@ -92,7 +91,7 @@ public class CLISendRequestController implements Observer {
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 }
 

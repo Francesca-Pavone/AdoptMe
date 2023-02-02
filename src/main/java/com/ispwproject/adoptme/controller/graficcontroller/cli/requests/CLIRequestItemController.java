@@ -8,6 +8,8 @@ import com.ispwproject.adoptme.view.cli.requests.CLIRequestItemView;
 import java.time.format.DateTimeFormatter;
 
 public class CLIRequestItemController implements Observer {
+    public static final String PENDING = "PENDING";
+    public static final String SENDED = "SENDED";
     private RequestBean request;
     private Observer observer;
     private CLIRequestItemView cliRequestItemView;
@@ -23,16 +25,16 @@ public class CLIRequestItemController implements Observer {
         switch (requestBean.getStatus()) {
             case 0 -> {
                 if (Session.getCurrentSession().getShelterBean() != null)
-                    status = "PENDING";
+                    status = PENDING;
                 else if (Session.getCurrentSession().getUserBean() != null)
-                    status = "SENDED";
+                    status = SENDED;
             }
             
             case 1 ->  {
                 if (Session.getCurrentSession().getShelterBean() != null)
-                    status = "SENDED";
+                    status = SENDED;
                 else if (Session.getCurrentSession().getUserBean() != null)
-                    status = "PENDING";
+                    status = PENDING;
             }
             case 2 -> status = "ACCEPTED";
             case 3 -> status = "REJECTED";
@@ -63,10 +65,10 @@ public class CLIRequestItemController implements Observer {
             this.cliRequestItemView.showStatus("ACCEPTED");
        }
         else if ((((RequestBean)object1).getStatus() == 1 && Session.getCurrentSession().getShelterBean() != null) || ((RequestBean)object1).getStatus() == 0 && Session.getCurrentSession().getUserBean() != null) {
-            this.cliRequestItemView.showStatus("SENDED");
+            this.cliRequestItemView.showStatus(SENDED);
         }
         else
-            this.cliRequestItemView.showStatus("PENDING");
+            this.cliRequestItemView.showStatus(PENDING);
 
     }
 }

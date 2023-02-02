@@ -37,51 +37,88 @@ public class CLIAppointmentsPageController implements Observer {
 
     public void executeCommand(String input) throws NotExistingRequestException {
         Session session = Session.getCurrentSession();
-        switch (input) {
-            case "0" -> {
-                if (session.getUserBean() != null) {
-                    CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                    cliUserHomepageView.run();
-                }
-                //todo: fare parte shelter
+        if (input.equals("0"))
+            goToHomepage(session);
+        else
+            goToRequest(input, session);
+    }
+
+    private void goToRequest(String input, Session session) throws NotExistingRequestException {
+        //verifico se all'interno della lista di RequestBean trovo un RequestBean con id uguale al valore inserito dall'utente
+        RequestBean requestBean = null;
+        for (int i=0; i<requestList.size(); i++) {
+            if (Integer.parseInt(input) == requestList.get(i).getId())
+                requestBean = requestList.get(i);
+        }
+        if (requestBean == null)
+            throw new NotExistingRequestException(input);
+
+        /*
+        while (true) {
+            try {
+                if (Integer.parseInt(input) == requestList.get(i).getId()) {
+                    requestBean = requestList.get(i);
+                    break;
+                } else
+                    i++;
             }
-            default -> {
-                //verifico se all'interno della lista di RequestBean trovo un RequestBean con id uguale al valore inserito dall'utente
-                RequestBean requestBean;
-                int i = 0;
-                while (true) {
-                    try {
-                        if (Integer.parseInt(input) == requestList.get(i).getId()) {
-                            requestBean = requestList.get(i);
-                            break;
-                        } else
-                            i++;
-                    }
-                    catch (ArrayIndexOutOfBoundsException e) {
-                        throw new NotExistingRequestException(input);
-                    }
-                }
-
-                if ((session.getUserBean() != null && requestBean.getStatus() == 0) || (session.getShelterBean() != null && requestBean.getStatus() == 1)) {
-                    CLIManageSendRequestController cliManageSendRequestController = new CLIManageSendRequestController(requestBean);
-                    cliManageSendRequestController.setPreviousPage(this);
-                    cliManageSendRequestController.start();
-                }
-                else if ((session.getShelterBean() != null && requestBean.getStatus() == 0) || (session.getUserBean() != null && requestBean.getStatus() == 1)) {
-                    CLIManagePendingRequestController cliManagePendingRequestController = new CLIManagePendingRequestController(requestBean);
-
-                } else if (requestBean.getStatus() == 3) {
-                    CLIManageRejectedRequestController cliManageRejectedRequestController = new CLIManageRejectedRequestController(requestBean);
-
-                }
-                else {
-                    this.cliAppointmentsPageView.showConfirmedApp(
-                            requestBean.getId(),
-                            requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                            requestBean.getHour() + ":" + requestBean.getMinutes());
-                }
+            catch (ArrayIndexOutOfBoundsException e) {
+                throw new NotExistingRequestException(input);
             }
         }
+         */
+
+        boolean sent = (session.getUserBean() != null && requestBean.getStatus() == 0) || (session.getShelterBean() != null && requestBean.getStatus() == 1);
+        boolean pending = (session.getShelterBean() != null && requestBean.getStatus() == 0) || (session.getUserBean() != null && requestBean.getStatus() == 1);
+        boolean rejected = requestBean.getStatus() == 3;
+
+        if (sent){
+            CLIManageSendRequestController cliManageSendRequestController = new CLIManageSendRequestController(requestBean);
+            cliManageSendRequestController.setPreviousPage(this);
+            cliManageSendRequestController.start();
+        }
+        else if (pending) {
+            CLIManagePendingRequestController cliManagePendingRequestController = new CLIManagePendingRequestController(requestBean);
+        }
+        else if (rejected) {
+            CLIManageRejectedRequestController cliManageRejectedRequestController = new CLIManageRejectedRequestController(requestBean);
+        }
+        else {
+            this.cliAppointmentsPageView.showConfirmedApp(
+                    requestBean.getId(),
+                    requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                    requestBean.getHour() + ":" + requestBean.getMinutes());
+        }
+
+        /*
+        if ((session.getUserBean() != null && requestBean.getStatus() == 0) || (session.getShelterBean() != null && requestBean.getStatus() == 1)) {
+            CLIManageSendRequestController cliManageSendRequestController = new CLIManageSendRequestController(requestBean);
+            cliManageSendRequestController.setPreviousPage(this);
+            cliManageSendRequestController.start();
+        }
+        else if ((session.getShelterBean() != null && requestBean.getStatus() == 0) || (session.getUserBean() != null && requestBean.getStatus() == 1)) {
+            CLIManagePendingRequestController cliManagePendingRequestController = new CLIManagePendingRequestController(requestBean);
+
+        } else if (requestBean.getStatus() == 3) {
+            CLIManageRejectedRequestController cliManageRejectedRequestController = new CLIManageRejectedRequestController(requestBean);
+
+        }
+        else {
+            this.cliAppointmentsPageView.showConfirmedApp(
+                    requestBean.getId(),
+                    requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+                    requestBean.getHour() + ":" + requestBean.getMinutes());
+        }
+
+         */
+    }
+
+    private static void goToHomepage(Session session) {
+        if (session.getUserBean() != null) {
+            CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+            cliUserHomepageView.run();
+        }
+        //todo: fare parte shelter
     }
 
     public List<RequestBean> getRequestList() {

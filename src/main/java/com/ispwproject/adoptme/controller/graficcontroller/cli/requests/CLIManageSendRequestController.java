@@ -32,45 +32,49 @@ public class CLIManageSendRequestController {
 
     public void executeCommand(String command) throws DateFormatException, TimeFormatException {
         switch(command) {
-            case ANNUL -> {
-                if (this.cliManageSendRequestView.askConfirmation().equals("1")) {
-                    ManageRequestController manageRequestController = new ManageRequestController();
-                    try {
-                        manageRequestController.deleteRequest(this.requestBean, this.previousPage.getRequestList(), this.previousPage);
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-                this.previousPage.start();
+            case ANNUL -> annulRequest();
 
-            }
-            case MODIFY -> {
-                String date = this.cliManageSendRequestView.askDate();
-                String time = this.cliManageSendRequestView.askTime();
-                if (cliManageSendRequestView.askConfirmation().equals("1")){
+            case MODIFY -> modifyRequest();
 
-                    String[] dateValues = date.split("-");
-                    if (dateValues.length < 3)
-                        throw new DateFormatException(date);
-                    this.requestBean.setDate(LocalDate.of(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0])));
-
-                    String[] timeValues = time.split(":");
-                    if (timeValues.length < 2)
-                        throw new TimeFormatException(time);
-                    this.requestBean.setHour(timeValues[0]);
-                    this.requestBean.setMinutes(timeValues[1]);
-
-                    ManageRequestController manageRequestController = new ManageRequestController();
-                    try {
-                        manageRequestController.modifyRequest(requestBean, this.previousPage.getRequestList(), this.previousPage, this.previousPage);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    this.previousPage.start();
-                }
-            }
             default -> this.previousPage.start();
-
         }
+    }
+
+    private void modifyRequest() throws DateFormatException, TimeFormatException {
+        String date = this.cliManageSendRequestView.askDate();
+        String time = this.cliManageSendRequestView.askTime();
+        if (cliManageSendRequestView.askConfirmation().equals("1")){
+
+            String[] dateValues = date.split("-");
+            if (dateValues.length < 3)
+                throw new DateFormatException(date);
+            this.requestBean.setDate(LocalDate.of(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0])));
+
+            String[] timeValues = time.split(":");
+            if (timeValues.length < 2)
+                throw new TimeFormatException(time);
+            this.requestBean.setHour(timeValues[0]);
+            this.requestBean.setMinutes(timeValues[1]);
+
+            ManageRequestController manageRequestController = new ManageRequestController();
+            try {
+                manageRequestController.modifyRequest(requestBean, this.previousPage.getRequestList(), this.previousPage, this.previousPage);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            this.previousPage.start();
+        }
+    }
+
+    private void annulRequest() {
+        if (this.cliManageSendRequestView.askConfirmation().equals("1")) {
+            ManageRequestController manageRequestController = new ManageRequestController();
+            try {
+                manageRequestController.deleteRequest(this.requestBean, this.previousPage.getRequestList(), this.previousPage);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        this.previousPage.start();
     }
 }
