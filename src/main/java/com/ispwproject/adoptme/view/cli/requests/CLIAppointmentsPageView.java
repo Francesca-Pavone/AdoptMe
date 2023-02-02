@@ -35,6 +35,8 @@ public class CLIAppointmentsPageView {
 
     public void showConfirmedApp(int id, String date, String time) {
         PrintSupport.printSeparatorLine();
-        PrintSupport.printMessage("The appointment with ID '" + id +"' is already confirmed (on " + date + "at " + time +")\n\tGood luck!");
+        PrintSupport.printMessage("The appointment with ID '" + id +"' is already confirmed (on " + date + " at " + time +")\n\tGood luck!");
+        PrintSupport.printMessage("\nPress ENTER to continue");
+        ScannerSupport.waitEnter();
     }
 }

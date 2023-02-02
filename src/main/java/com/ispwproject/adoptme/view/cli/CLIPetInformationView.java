@@ -22,7 +22,7 @@ public class CLIPetInformationView {
         if(!dogSize.equals(""))
             PrintSupport.printMessage("\tSize: " + dogSize);
 
-        PrintSupport.printMessage("\tGeneral informations:\n" + generalInfo);
+        PrintSupport.printMessage("\n\tGeneral informations:\n" + generalInfo);
         PrintSupport.printMessage("\tCompatibility:\n" + compatibility);
         showCommand();
     }

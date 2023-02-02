@@ -88,29 +88,9 @@ public class CLIAppointmentsPageController implements Observer {
                     requestBean.getId(),
                     requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
                     requestBean.getHour() + ":" + requestBean.getMinutes());
+            start();
         }
 
-        /*
-        if ((session.getUserBean() != null && requestBean.getStatus() == 0) || (session.getShelterBean() != null && requestBean.getStatus() == 1)) {
-            CLIManageSendRequestController cliManageSendRequestController = new CLIManageSendRequestController(requestBean);
-            cliManageSendRequestController.setPreviousPage(this);
-            cliManageSendRequestController.start();
-        }
-        else if ((session.getShelterBean() != null && requestBean.getStatus() == 0) || (session.getUserBean() != null && requestBean.getStatus() == 1)) {
-            CLIManagePendingRequestController cliManagePendingRequestController = new CLIManagePendingRequestController(requestBean);
-
-        } else if (requestBean.getStatus() == 3) {
-            CLIManageRejectedRequestController cliManageRejectedRequestController = new CLIManageRejectedRequestController(requestBean);
-
-        }
-        else {
-            this.cliAppointmentsPageView.showConfirmedApp(
-                    requestBean.getId(),
-                    requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                    requestBean.getHour() + ":" + requestBean.getMinutes());
-        }
-
-         */
     }
 
     private static void goToHomepage(Session session) {

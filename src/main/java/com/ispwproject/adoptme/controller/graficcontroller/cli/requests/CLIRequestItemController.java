@@ -37,7 +37,7 @@ public class CLIRequestItemController implements Observer {
                     status = PENDING;
             }
             case 2 -> status = "ACCEPTED";
-            case 3 -> status = "REJECTED";
+            default -> status = "REJECTED";
         }
         this.cliRequestItemView = new CLIRequestItemView();
         this.cliRequestItemView.showRequestInfo(

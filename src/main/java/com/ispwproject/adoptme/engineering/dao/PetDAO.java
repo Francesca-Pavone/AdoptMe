@@ -120,13 +120,13 @@ public class PetDAO {
                 int petId = resultSet.getInt("id");
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob("imgSrc");
+                Blob blob = resultSet.getBlob(IMG_SRC);
                 File petImage = null;
                 try {
                     if (blob != null) {
                         InputStream in = blob.getBinaryStream();
                         //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                        String filePath = petName + "Photo" + ".png";
+                        String filePath = petName + PHOTO + ".png";
                         petImage = new File(filePath);
                         FileOutputStream outputStream = new FileOutputStream(petImage);
                         int read;
@@ -208,7 +208,7 @@ public class PetDAO {
                 File petImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = petName + "Photo" + ".png";
+                        String filePath = petName + PHOTO + ".png";
                         petImage = ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
