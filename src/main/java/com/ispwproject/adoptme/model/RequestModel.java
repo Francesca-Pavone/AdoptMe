@@ -84,9 +84,9 @@ public class RequestModel extends Subject{
         RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getProfileImg(), getPet().getName(), getPet().getPetId(), getPet().getShelter().getId(), getUser().getName(), getUser().getId());
         requestBean.setId(getId());
         requestBean.setDate(getDate());
-        requestBean.setHour(getTime().format(DateTimeFormatter.ofPattern("hh")));
+        requestBean.setHour(String.valueOf(getTime().getHour()));
         requestBean.setMinutes(getTime().format(DateTimeFormatter.ofPattern("mm")));
-        requestBean.setStatus(getStatus());
+        requestBean.setStatus(status);
 
         notifyObservers(requestBean, object);
     }

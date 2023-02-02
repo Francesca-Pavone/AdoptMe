@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageSendRequestView;
@@ -13,7 +14,8 @@ public class CLIManageSendRequestController {
 
     private static final String ANNUL = "1";
     private static final String MODIFY = "2";
-    private CLIManageSendRequestView cliManageSendRequestView;
+    private static final String BACK = "3";
+    private CLIManageSendRequestView view;
     private final RequestBean requestBean;
     private CLIAppointmentsPageController previousPage;
     public CLIManageSendRequestController(RequestBean requestBean) {
@@ -25,25 +27,30 @@ public class CLIManageSendRequestController {
     }
 
     public void start(){
-        this.cliManageSendRequestView = new CLIManageSendRequestView(this);
-        this.cliManageSendRequestView.showForm(this.requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
+        this.view = new CLIManageSendRequestView(this);
+        this.view.showRequestNow(this.requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
                 this.requestBean.getHour() + ":" + this.requestBean.getMinutes());
+        this.view.showForm();
     }
 
-    public void executeCommand(String command) throws DateFormatException, TimeFormatException {
-        switch(command) {
+    public void executeCommand(String command) throws DateFormatException, TimeFormatException, Exception {
+        switch (command) {
             case ANNUL -> annulRequest();
 
             case MODIFY -> modifyRequest();
 
-            default -> this.previousPage.start();
+            case BACK -> this.previousPage.showAppointments(this.requestBean.getUserName());
+
+            default -> throw new CommandNotFoundException();
         }
+
+
     }
 
-    private void modifyRequest() throws DateFormatException, TimeFormatException {
-        String date = this.cliManageSendRequestView.askDate();
-        String time = this.cliManageSendRequestView.askTime();
-        if (cliManageSendRequestView.askConfirmation().equals("1")){
+    private void modifyRequest() throws Exception {
+        String date = this.view.askDate();
+        String time = this.view.askTime();
+        if (view.askConfirmation() == 1){
 
             String[] dateValues = date.split("-");
             if (dateValues.length < 3)
@@ -58,23 +65,24 @@ public class CLIManageSendRequestController {
 
             ManageRequestController manageRequestController = new ManageRequestController();
             try {
-                manageRequestController.modifyRequest(requestBean, this.previousPage.getRequestList(), this.previousPage, this.previousPage);
+                manageRequestController.modifyRequest(requestBean, requestBean, null, this.previousPage);
             }catch (Exception e){
                 e.printStackTrace();
             }
-            this.previousPage.start();
+            this.previousPage.showAppointments(this.requestBean.getUserName());
         }
+        // todo verifica caso == 2 e solleva eccezione altrimenti
     }
 
     private void annulRequest() {
-        if (this.cliManageSendRequestView.askConfirmation().equals("1")) {
+        if (this.view.askConfirmation() == 1) {
             ManageRequestController manageRequestController = new ManageRequestController();
             try {
-                manageRequestController.deleteRequest(this.requestBean, this.previousPage.getRequestList(), this.previousPage);
+                manageRequestController.deleteRequest(this.requestBean, this.requestBean, this.previousPage);
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
-        this.previousPage.start();
+        this.previousPage.showAppointments(this.requestBean.getUserName());
     }
 }

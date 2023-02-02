@@ -59,7 +59,7 @@ public class ShelterDAO {
                 try {
                     if (blob != null) {
                         String filePath = shelterName + PHOTO + ".png";
-                        ImageUtils.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageUtils.fromBlobToFile(blob, filePath);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
