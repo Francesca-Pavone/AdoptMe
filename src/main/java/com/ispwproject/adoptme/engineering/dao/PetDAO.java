@@ -22,7 +22,7 @@ public class PetDAO {
 
     public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws Exception {
         Statement stmt = null;
-        List<PetModel> petList = new ArrayList<PetModel>();
+        List<PetModel> petList = new ArrayList<>();
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, petList, shelterModel);
         PetModel pet;
         try {
@@ -76,8 +76,7 @@ public class PetDAO {
                 pet.setGender(petGender);
                 pet.setAge(petAge);
 
-                PetCompatibility petCompatibility = new PetCompatibility();
-                pet.setPetCompatibility(petCompatibility);
+                pet.setPetCompatibility(new PetCompatibility());
 
                 shelterPetsList.addPet(pet);
             }
@@ -94,8 +93,8 @@ public class PetDAO {
     }
 
     public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
-        Statement stmt = null;
-        List<PetModel> petList = new ArrayList<PetModel>();
+        Statement stmt;
+        List<PetModel> petList = new ArrayList<>();
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -179,8 +178,7 @@ public class PetDAO {
     }
 
     public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
-        // STEP 1: dichiarazioni
-        Statement stmt = null;
+        Statement stmt;
         PetModel pet = null;
         try {
             stmt = ConnectionDB.getConnection();

@@ -12,11 +12,6 @@ public class AccountInfo {
         this.accountType = accountType;
     }
 
-    public AccountInfo(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
     public AccountInfo(String email, int accountType) {
         this.email = email;
         this.accountType = accountType;

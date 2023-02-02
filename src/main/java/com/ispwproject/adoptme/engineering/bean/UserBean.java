@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme.engineering.bean;
 
-import com.ispwproject.adoptme.model.UserModel;
 
 import java.io.File;
 
@@ -13,16 +12,13 @@ public class UserBean {
     protected String password;
     protected File profileImg;
 
-    public UserBean(UserModel userModel) {
-        this.userId = userModel.getId();
-        this.name = userModel.getName();
-        this.surname = userModel.getSurname();
-        this.email = userModel.getAccountInfo().getEmail();
-        this.password = userModel.getAccountInfo().getPassword();
-        this.profileImg = userModel.getProfileImg();
-    }
-
-    public UserBean() {
+    public UserBean(int userId, String name, String surname, String email, String password, File profileImg) {
+        this.userId = userId;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.profileImg = profileImg;
     }
 
     public int getUserId() {

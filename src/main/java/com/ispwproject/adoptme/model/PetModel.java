@@ -28,36 +28,19 @@ public abstract class PetModel {
 
     }
 
-    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility, int shelterId) {
+    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
         this.coatLenght = coatLenght;
-        this.vaccinated = vaccinated;
-        this.microchipped = microchipped;
-        this.dewormed = dewormed;
-        this.sterilized = sterilized;
-        this.disability = disability;
-        this.disabilityType = disabilityType;
         this.petCompatibility = petCompatibility;
         this.shelter = new ShelterModel(shelterId);
     }
 
-    protected PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility, ShelterModel shelter) {
+    protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility, ShelterModel shelter) {
         this.type = type;
         this.name = name;
         this.petImage = petImage;
-        this.yearOfBirth = yearOfBirth;
-        this.monthOfBirth = monthOfBirth;
-        this.dayOfBirth = dayOfBirth;
-        this.gender = gender;
-        this.coatLenght = coatLenght;
-        this.vaccinated = vaccinated;
-        this.microchipped = microchipped;
-        this.dewormed = dewormed;
-        this.sterilized = sterilized;
-        this.disability = disability;
-        this.disabilityType = disabilityType;
         this.petCompatibility = petCompatibility;
         this.shelter = shelter;
     }

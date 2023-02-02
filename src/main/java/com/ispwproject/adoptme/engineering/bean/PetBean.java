@@ -1,10 +1,5 @@
 package com.ispwproject.adoptme.engineering.bean;
 
-import com.ispwproject.adoptme.model.CatModel;
-import com.ispwproject.adoptme.model.DogModel;
-import com.ispwproject.adoptme.model.PetCompatibility;
-import com.ispwproject.adoptme.model.PetModel;
-
 import java.io.File;
 
 public class PetBean {
@@ -54,143 +49,14 @@ public class PetBean {
 
     }
 
-    public PetBean(int petId, int shelterId, File petImage, String name, int type, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, boolean dogEducation, int size, boolean testFiv, boolean testFelv) {
-        this.petId = petId;
-        this.shelterId = shelterId;
-        this.petImage = petImage;
-        this.name = name;
-        this.type = type;
-        this.yearOfBirth = yearOfBirth;
-        this.monthOfBirth = monthOfBirth;
-        this.dayOfBirth = dayOfBirth;
-        this.gender = gender;
-        this.coatLenght = coatLenght;
-        this.vaccinated = vaccinated;
-        this.microchipped = microchipped;
-        this.dewormed = dewormed;
-        this.sterilized = sterilized;
-        this.disability = disability;
-        this.disabilityType = disabilityType;
-        this.maleDog = maleDog;
-        this.femaleDog = femaleDog;
-        this.maleCat = maleCat;
-        this.femaleCat = femaleCat;
-        this.children = children;
-        this.elders = elders;
-        this.apartmentNoGarden = apartmentNoGarden;
-        this.apartmentNoTerrace = apartmentNoTerrace;
-        this.sleepOutside = sleepOutside;
-        this.firstExperience = firstExperience;
-        this.hoursAlone = hoursAlone;
-        this.dogEducation = dogEducation;
-        this.size = size;
-        this.testFiv = testFiv;
-        this.testFelv = testFelv;
-    }
-
-    public PetBean(CatModel catModel) {
-        this.setShelterId(catModel.getShelter().getId());
-        this.setPetImage(catModel.getPetImage());
-        this.setName(catModel.getName());
-        this.setType(catModel.getType());
-        this.setYearOfBirth(catModel.getYearOfBirth());
-        this.setMonthOfBirth(catModel.getMonthOfBirth());
-        this.setDayOfBirth(catModel.getDayOfBirth());
-        this.setAge(catModel.getAge());
-        this.setGender(catModel.getGender());
-        this.setCoatLenght(catModel.getCoatLenght());
-        this.setVaccinated(catModel.isVaccinated());
-        this.setMicrochipped(catModel.isMicrochipped());
-        this.setDewormed(catModel.isDewormed());
-        this.setSterilized(catModel.isSterilized());
-        this.setDisability(catModel.isDisability());
-        this.setDisabilityType(catModel.getDisabilityType());
-
-        this.setMaleDog(catModel.getPetCompatibility().isMaleDog());
-        this.setFemaleDog(catModel.getPetCompatibility().isFemaleDog());
-        this.setMaleCat(catModel.getPetCompatibility().isMaleCat());
-        this.setFemaleCat(catModel.getPetCompatibility().isFemaleCat());
-        this.setChildren(catModel.getPetCompatibility().isChildren());
-        this.setElders(catModel.getPetCompatibility().isElders());
-        this.setApartmentNoGarden(catModel.getPetCompatibility().isApartmentNoGarden());
-        this.setApartmentNoTerrace(catModel.getPetCompatibility().isApartmentNoTerrace());
-        this.setSleepOutside(catModel.getPetCompatibility().isSleepOutside());
-        this.setFirstExperience(catModel.getPetCompatibility().isFirstExperience());
-        this.setHoursAlone(catModel.getPetCompatibility().getHoursAlone());
-
-        this.setTestFiv(catModel.isTestFiv());
-        this.setTestFelv(catModel.isTestFelv());
-
-    }
-
-    public PetBean(DogModel dogModel) {
-        this.setShelterId(dogModel.getShelter().getId());
-        this.setPetImage(dogModel.getPetImage());
-        this.setName(dogModel.getName());
-        this.setType(dogModel.getType());
-        this.setYearOfBirth(dogModel.getYearOfBirth());
-        this.setMonthOfBirth(dogModel.getMonthOfBirth());
-        this.setDayOfBirth(dogModel.getDayOfBirth());
-        this.setAge(dogModel.getAge());
-        this.setGender(dogModel.getGender());
-        this.setCoatLenght(dogModel.getCoatLenght());
-        this.setVaccinated(dogModel.isVaccinated());
-        this.setMicrochipped(dogModel.isMicrochipped());
-        this.setDewormed(dogModel.isDewormed());
-        this.setSterilized(dogModel.isSterilized());
-        this.setDisability(dogModel.isDisability());
-        this.setDisabilityType(dogModel.getDisabilityType());
-
-        this.setMaleDog(dogModel.getPetCompatibility().isMaleDog());
-        this.setFemaleDog(dogModel.getPetCompatibility().isFemaleDog());
-        this.setMaleCat(dogModel.getPetCompatibility().isMaleCat());
-        this.setFemaleCat(dogModel.getPetCompatibility().isFemaleCat());
-        this.setChildren(dogModel.getPetCompatibility().isChildren());
-        this.setElders(dogModel.getPetCompatibility().isElders());
-        this.setApartmentNoGarden(dogModel.getPetCompatibility().isApartmentNoGarden());
-        this.setApartmentNoTerrace(dogModel.getPetCompatibility().isApartmentNoTerrace());
-        this.setSleepOutside(dogModel.getPetCompatibility().isSleepOutside());
-        this.setFirstExperience(dogModel.getPetCompatibility().isFirstExperience());
-        this.setHoursAlone(dogModel.getPetCompatibility().getHoursAlone());
-
-        this.setDogEducation(dogModel.isProgramEducation());
-        this.setSize(dogModel.getSize());
-
-
-    }
-
-    public PetBean(PetModel petModel) {
-        this.setPetId(petModel.getPetId());
-        this.setShelterId(petModel.getShelter().getId());
-        this.setPetImage(petModel.getPetImage());
-        this.setName(petModel.getName());
-        this.setType(petModel.getType());
-        this.setYearOfBirth(petModel.getYearOfBirth());
-        this.setMonthOfBirth(petModel.getMonthOfBirth());
-        this.setDayOfBirth(petModel.getDayOfBirth());
-        this.setAge(petModel.getAge());
-        this.setGender(petModel.getGender());
-        this.setCoatLenght(petModel.getCoatLenght());
-        this.setVaccinated(petModel.isVaccinated());
-        this.setMicrochipped(petModel.isMicrochipped());
-        this.setDewormed(petModel.isDewormed());
-        this.setSterilized(petModel.isSterilized());
-        this.setDisability(petModel.isDisability());
-        this.setDisabilityType(petModel.getDisabilityType());
-
-        PetCompatibility petCompatibility = petModel.getPetCompatibility();
-        this.setMaleDog(petCompatibility.isMaleDog());
-        this.setFemaleDog(petCompatibility.isFemaleDog());
-        this.setMaleCat(petCompatibility.isMaleCat());
-        this.setFemaleCat(petCompatibility.isFemaleCat());
-        this.setChildren(petCompatibility.isChildren());
-        this.setElders(petCompatibility.isElders());
-        this.setApartmentNoGarden(petCompatibility.isApartmentNoGarden());
-        this.setApartmentNoTerrace(petCompatibility.isApartmentNoTerrace());
-        this.setSleepOutside(petCompatibility.isSleepOutside());
-        this.setFirstExperience(petCompatibility.isFirstExperience());
-        this.setHoursAlone(petCompatibility.getHoursAlone());
-
+    public PetBean(int petId, int shelterId, File petImage, String name, int type, String age, int gender) {
+        setPetId(petId);
+        setShelterId(shelterId);
+        setPetImage(petImage);
+        setName(name);
+        setType(type);
+        setAge(age);
+        setGender(gender);
     }
 
     public int getPetId() {

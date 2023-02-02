@@ -11,15 +11,13 @@ public class CatModel extends PetModel{
     public CatModel() {
     }
 
-    public CatModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility, boolean testFiv, boolean testFelv, int shelterId) {
-        super(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, petCompatibility, shelterId);
-        setTestFiv(testFiv);
-        setTestFelv(testFelv);
+    public CatModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
+        super(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility, shelterId);
     }
 
 
-    public CatModel(String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean testFiv, boolean testFelv, PetCompatibility petCompatibility, ShelterModel shelter) {
-        super(1, name, petImage, yearOfBirth, monthOfBirth, dayOfBirth, gender, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, petCompatibility, shelter);
+    public CatModel(String name, File petImage, boolean testFiv, boolean testFelv, PetCompatibility petCompatibility, ShelterModel shelter) {
+        super(1, name, petImage, petCompatibility, shelter);
         setTestFiv(testFiv);
         setTestFelv(testFelv);
     }

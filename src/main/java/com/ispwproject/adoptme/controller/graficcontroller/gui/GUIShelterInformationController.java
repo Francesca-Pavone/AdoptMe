@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -95,9 +94,10 @@ public class GUIShelterInformationController implements Observer {
         }
     }
 
-    public void setShelterData(String shelterName) throws Exception {
-        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
-        setData(shelterBean);
+    public void setShelterData(String shelterName)  {
+        // TODO NON PUOI CHIAMARE IL DAO NEL CONTROLLER GRAFICO
+        //  ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
+        //  setData(shelterBean);
     }
 
     public void selectInformations() {

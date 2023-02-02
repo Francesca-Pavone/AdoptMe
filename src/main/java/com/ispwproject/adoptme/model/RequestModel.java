@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.engineering.observer.Subject;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class RequestModel extends Subject{
 
@@ -77,9 +78,16 @@ public class RequestModel extends Subject{
     public void setStatus(int status) {
         this.status = status;
     }
+
     public void updateStatus(int status, Object object) {
         this.status = status;
-        RequestBean requestBean = new RequestBean(this);
+        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getProfileImg(), getPet().getName(), getPet().getPetId(), getPet().getShelter().getId(), getUser().getName(), getUser().getId());
+        requestBean.setId(getId());
+        requestBean.setDate(getDate());
+        requestBean.setHour(getTime().format(DateTimeFormatter.ofPattern("hh")));
+        requestBean.setMinutes(getTime().format(DateTimeFormatter.ofPattern("mm")));
+        requestBean.setStatus(getStatus());
+
         notifyObservers(requestBean, object);
     }
 

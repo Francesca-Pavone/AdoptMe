@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
-import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.view.cli.CLIShelterInfoView;
 import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
@@ -19,8 +18,9 @@ public class CLIShelterInfoController implements Observer {
     }
 
     public void setShelterData(String shelterName) throws Exception {
-        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
-        setData(shelterBean);
+        // TODO NON PUOI CHIAMARE IL DAO NEL CONTROLLER GRAFICO
+        //  ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
+        //  setData(shelterBean);
     }
 
     public void goBack() throws Exception {
