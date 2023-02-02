@@ -7,8 +7,15 @@ import com.ispwproject.adoptme.engineering.builder.QuestionnaireResultBeanBuilde
 import java.util.List;
 
 public class CLIQuestionnaireController {
-    public void getResult(String petType, String petGender, String petAge, String dogSize, String alreadyHavePet, List<String>petAlreadyHaveList, String garden, String gardenSleepOutside, String terrace, String terraceSleepOutside, String hoursAlone, String firstPet, String sterilize, String dogEducation, String disabled, String specificArea, String city) {
-        QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder = QuestionnaireResultBeanBuilder.newQuestionnaireResultBean()
+    private final QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder;
+
+    public CLIQuestionnaireController() {
+        this.questionnaireResultBeanBuilder = QuestionnaireResultBeanBuilder.newQuestionnaireResultBean();
+    }
+
+    public void getResult(String petType, String petGender, String petAge, String dogSize, String sterilize, String dogEducation, String disabled) {
+
+        this.questionnaireResultBeanBuilder
                 .type(switch (petType) {
                     case "a" -> 1;
                     case "b" -> 0;
@@ -19,23 +26,7 @@ public class CLIQuestionnaireController {
                     case "b" -> 0;
                     default -> -1;
                 })
-                .haveAGarden(switch (garden) {
-                    case "b" -> 0;
-                    default -> 1;
-                })
-                .haveATerrace(switch (terrace) {
-                    case "b" -> 0;
-                    default -> 1;
-                })
-                .hoursAlone(switch (hoursAlone) {
-                    case "b" -> 1;
-                    case "c" -> 2;
-                    default -> 0;
-                })
-                .firstPet(switch (firstPet) {
-                    case "b" -> 0;
-                    default -> 1;
-                })
+
                 .sterilizePet(switch (sterilize) {
                     case "1" -> true;
                     default -> false;
@@ -45,12 +36,12 @@ public class CLIQuestionnaireController {
                     default -> false;
                 });
         if(petType.equals("b")) {
-            questionnaireResultBeanBuilder.programEducation(switch (dogEducation) {
+            this.questionnaireResultBeanBuilder.programEducation(switch (dogEducation) {
                 case "b" -> 0;
                 default -> 1;
             });
             if(!dogSize.equals("e")) {
-                questionnaireResultBeanBuilder.size(switch (dogSize) {
+                this.questionnaireResultBeanBuilder.size(switch (dogSize) {
                     case "a" -> 0;
                     case "b" -> 1;
                     case "c" -> 2;
@@ -59,8 +50,8 @@ public class CLIQuestionnaireController {
                 });
             }
         }
-        if(!petAge.equals("e")) { //todo inserisci e in age
-            questionnaireResultBeanBuilder.age(switch (petAge) {
+        if(!petAge.equals("e")) {
+            this.questionnaireResultBeanBuilder.age(switch (petAge) {
                 case "a" -> "puppy";
                 case "b" -> "young";
                 case "c" -> "adult";
@@ -69,77 +60,59 @@ public class CLIQuestionnaireController {
             });
         }
 
-        int maleCat = 0;
-        int femaleCat = 0;
-        int maleDog = 0;
-        int femaleDog = 0;
-        for (String pet : petAlreadyHaveList) {
-            if(pet.equals("a"))
-                maleCat = 1;
-            if(pet.equals("b"))
-                femaleCat = 1;
-            if(pet.equals("c"))
-                maleDog = 1;
-            if(pet.equals("d"))
-                femaleDog = 1;
-        }
-        switch(maleCat) {
-            case 1:
-                questionnaireResultBeanBuilder.maleCat(true);
-            default:
-                questionnaireResultBeanBuilder.maleCat(false);
-        }
-        switch(femaleCat) {
-            case 1:
-                questionnaireResultBeanBuilder.femaleCat(true);
-            default:
-                questionnaireResultBeanBuilder.femaleCat(false);
-        }
-        switch(maleDog) {
-            case 1:
-                questionnaireResultBeanBuilder.maleDog(true);
-            default:
-                questionnaireResultBeanBuilder.maleDog(false);
-        }
-        switch(femaleDog) {
-            case 1:
-                questionnaireResultBeanBuilder.femaleDog(true);
-            default:
-                questionnaireResultBeanBuilder.femaleDog(false);
-        }
-
-        if(garden.equals("a") && terrace.equals("b"))
-            questionnaireResultBeanBuilder.sleepOutside(switch(gardenSleepOutside) {
-                case "a" -> 1;
-                default -> 0;
-            });
-        else if(terrace.equals("a") && garden.equals("b"))
-            questionnaireResultBeanBuilder.sleepOutside(switch(terraceSleepOutside) {
-                case "a" -> 1;
-                default -> 0;
-            });
-        else if(garden.equals("a") && terrace.equals("a")) {
-            questionnaireResultBeanBuilder.sleepOutside(switch(gardenSleepOutside) {
-                case "a" -> 1;
-                default -> 0;
-            });
-        }
-        if(specificArea.equals("a"))
-            questionnaireResultBeanBuilder.city(city);
-
-        QuestionnaireResultBean questionnaireResultBean = questionnaireResultBeanBuilder.build();
+        QuestionnaireResultBean questionnaireResultBean = this.questionnaireResultBeanBuilder.build();
         QuestionnaireResultController questionnaireResultController = new QuestionnaireResultController();
 
         //inizializza pagina result e passagli i risultati di questionnaireResultController.searchPets(questionnaireResultBean)
 
-
     }
 
+    public void setCompatibility(String garden, String terrace, String sleepOutside, String hoursAlone, String firstPet, String specificArea, String city) {
+        this.questionnaireResultBeanBuilder.haveAGarden(switch (garden) {
+            case "b" -> 0;
+            default -> 1;
+        })
+                .haveATerrace(switch (terrace) {
+                    case "b" -> 0;
+                    default -> 1;
+                })
 
+                .hoursAlone(switch (hoursAlone) {
+                    case "b" -> 1;
+                    case "c" -> 2;
+                    default -> 0;
+                })
+                .firstPet(switch (firstPet) {
+                    case "b" -> 0;
+                    default -> 1;
+                });
+        if(garden.equals("a") || terrace.equals("a"))
+            this.questionnaireResultBeanBuilder.sleepOutside(switch(sleepOutside) {
+                case "a" -> 1;
+                default -> 0;
+            });
+        if(specificArea.equals("a"))
+            this.questionnaireResultBeanBuilder.city(city);
+    }
 
-
-
-
-
-
+    public void setPetAlreadyHave(String alreadyHavePet, List<String> petAlreadyHaveList) {
+        boolean maleCat = false;
+        boolean femaleCat = false;
+        boolean maleDog = false;
+        boolean femaleDog = false;
+        for (String pet : petAlreadyHaveList) {
+            if(pet.equals("a"))
+                maleCat = true;
+            if(pet.equals("b"))
+                femaleCat = true;
+            if(pet.equals("c"))
+                maleDog = true;
+            if(pet.equals("d"))
+                femaleDog = true;
+        }
+        this.questionnaireResultBeanBuilder.maleCat(maleCat);
+        this.questionnaireResultBeanBuilder.femaleCat(femaleCat);
+        this.questionnaireResultBeanBuilder.maleDog(maleDog);
+        this.questionnaireResultBeanBuilder.femaleDog(femaleDog);
+    }
 }

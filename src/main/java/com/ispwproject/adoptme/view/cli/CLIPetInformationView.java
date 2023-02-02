@@ -14,28 +14,15 @@ public class CLIPetInformationView {
         this.cliPetInformationController = cliPetInformationController;
     }
 
-    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) {
+    public void showTitle(String name) {
         PrintSupport.printMessage("\n---------------------------------------- " + name + " ----------------------------------------");
-        PrintSupport.printMessage("\tName: " + name);
-        if(!dayOfBirth.equals("") && !monthOfBirth.equals(""))
-            PrintSupport.printMessage("\tDate of birth: " + dayOfBirth + " / " + monthOfBirth + " / " + yearOfBirth);
-        else if(!dayOfBirth.equals(""))
-            PrintSupport.printMessage("\tDate of birth: " + monthOfBirth + " / " + yearOfBirth);
-        else
-            PrintSupport.printMessage("\tYear of birth: " + yearOfBirth);
-
-        PrintSupport.printMessage("\tType: " + type + "\n\tGender: " + gender + "\n\tCoat length: " + coatLenght);   //+ "\n\t
-
+    }
+    public void showData(String dateOfBirth, String type, String gender, String coatLenght, String dogSize, String generalInfo, String compatibility) {
+        PrintSupport.printMessage("\tType: " + type + "\n\tDate of birth: " + dateOfBirth + "\n\tGender: " + gender + "\n\tCoat length: " + coatLenght);
         if(!dogSize.equals(""))
             PrintSupport.printMessage("\tSize: " + dogSize);
-        if(type.equals("Cat") && disability.equals("Disability"))
-            PrintSupport.printMessage("\tGeneral informations:\n\t\t" + vaccinated + "\n\t\t" + microchipped + "\n\t\t" + dewormed + "\n\t\t" + sterilized + "\n\t\t" + testFiv + "\n\t\t" + testFelv + "\n\t\t" + disability + "( " + disabilityType + " )");
-        else if(type.equals("Cat"))
-            PrintSupport.printMessage("\tGeneral informations:\n\t\t" + vaccinated + "\n\t\t" + microchipped + "\n\t\t" + dewormed + "\n\t\t" + sterilized + "\n\t\t" + testFiv + "\n\t\t" + testFelv );
-        else if(type.equals("Dog") && disability.equals("Disability"))
-            PrintSupport.printMessage("\tGeneral informations:\n\t\t" + vaccinated + "\n\t\t" + microchipped + "\n\t\t" + dewormed + "\n\t\t" + sterilized + "\n\t\t" + disability + "( " + disabilityType + " )" + "\n\t\t" + dogEducation);
-        else if(type.equals("Dog"))
-            PrintSupport.printMessage("\tGeneral informations:\n\t\t" + vaccinated + "\n\t\t" + microchipped + "\n\t\t" + dewormed + "\n\t\t" + sterilized + "\n\t\t" + dogEducation);
+
+        PrintSupport.printMessage("\n\tGeneral informations:\n" + generalInfo);
         PrintSupport.printMessage("\tCompatibility:\n" + compatibility);
         showCommand();
     }
@@ -43,11 +30,11 @@ public class CLIPetInformationView {
     public void showCommand() {
         PrintSupport.printSeparatorLine();
         if (Session.getCurrentSession().getShelterBean() == null){
-            System.out.println("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go to Homepage\n\nInsert the number:");
+            PrintSupport.printMessage("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go to Homepage\n\nInsert the number:");
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            this.cliPetInformationController.setCliPetInformationView(this);
+            this.cliPetInformationController.setCliPetInformationViewCurrent(this);
             this.cliPetInformationController.executeCommand(input);
         }
     }

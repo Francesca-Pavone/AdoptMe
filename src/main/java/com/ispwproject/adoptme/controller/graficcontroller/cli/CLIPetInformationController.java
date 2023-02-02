@@ -15,8 +15,8 @@ import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 public class CLIPetInformationController {
 
-    private PetBean petBean;
-    private CLIPetInformationView cliPetInformationView;
+    private final PetBean petBean;
+    private CLIPetInformationView cliPetInformationViewCurrent;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
@@ -25,27 +25,14 @@ public class CLIPetInformationController {
         this.petBean = petBean;
     }
 
-    public void setCliPetInformationView(CLIPetInformationView cliPetInformationView) {
-        this.cliPetInformationView = cliPetInformationView;
+    public void setCliPetInformationViewCurrent(CLIPetInformationView cliPetInformationViewCurrent) {
+        this.cliPetInformationViewCurrent = cliPetInformationViewCurrent;
     }
 
     public void executeCommand(String inputLine) {
         try {
             switch (inputLine) {
-                case REQUEST -> {
-                    try {
-                        if (Session.getCurrentSession().getUserBean() == null)
-                            throw new NoAccoutException();
-                        else {
-                            CLISendRequestController cliSendRequestController = new CLISendRequestController();
-                            cliSendRequestController.sendRequest(petBean);
-                        }
-                    } catch (NoAccoutException e) {
-                        ShowExceptionSupport.showExceptionCLI(e.getMessage());
-                        CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
-                        cliNeedAccountView.showMessage();
-                    }
-                }
+                case REQUEST -> this.executeRequest();
 
                 case FAVORITE -> PrintSupport.printMessage("Pet add to favorites -->> DA FARE");
 
@@ -61,25 +48,42 @@ public class CLIPetInformationController {
         } catch (CommandNotFoundException e) {
             PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
             ScannerSupport.waitEnter();
-            this.cliPetInformationView.showCommand();
+            this.cliPetInformationViewCurrent.showCommand();
         }
     }
+
+    private void executeRequest() {
+        try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccoutException();
+            else {
+                CLISendRequestController cliSendRequestController = new CLISendRequestController();
+                cliSendRequestController.sendRequest(petBean);
+            }
+        } catch (NoAccoutException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
+            cliNeedAccountView.showMessage();
+        }
+    }
+
     public void setPetInfo() throws Exception {
 
         PetInfoController petInfoControllerA = new PetInfoController();
         petInfoControllerA.getPetInfo(petBean);
 
-        String dayOfBirth = "";
-        String monthOfBirth = "";
-        // year of birth is mandatory information on pet registration
-        String yearOfBirth = String.valueOf(petBean.getYearOfBirth());
+        String dateOfBirth;
 
-        if (petBean.getDayOfBirth() != 0)  // day of birth not known
-            dayOfBirth = String.valueOf(petBean.getDayOfBirth());
-
-        if (petBean.getMonthOfBirth() != 0)  // month of birth not known
-            monthOfBirth = String.valueOf(petBean.getMonthOfBirth());
-
+        if (petBean.getMonthOfBirth() != 0) {  // month of birth not known
+            if (petBean.getDayOfBirth() != 0)  // day of birth not known
+                dateOfBirth = "\tDate of birth: " + petBean.getDayOfBirth() + " / " + petBean.getMonthOfBirth() + " / " + petBean.getYearOfBirth();
+            else
+                dateOfBirth = "\tDate of birth: " + petBean.getMonthOfBirth() + " / " + petBean.getYearOfBirth();
+        }
+        else {
+            // year of birth is mandatory information on pet registration
+            dateOfBirth = "\tYear of birth: " + petBean.getYearOfBirth();
+        }
 
 
         String type = String.valueOf(
@@ -102,6 +106,8 @@ public class CLIPetInformationController {
         );
         String  dogSize = "";
         String dogEducation = "";
+        String testFiv = "";
+        String testFelv = "";
         // check if it's a dog
         if (petBean.getType() == 0) {
             dogSize = String.valueOf(
@@ -112,60 +118,59 @@ public class CLIPetInformationController {
                         default -> "Small";   //case 0
                     }
             );
-            dogEducation = "Program of dog education: Not needed";
+            dogEducation = "\t\tProgram of dog education: Not needed\n";
             if (petBean.isDogEducation())
-                dogEducation = "Program of dog education: Needed";
-        }
-
-        String vaccinated, microchipped, dewormed, sterilized;
-        //General info
-        vaccinated = "Vaccinations not completed";
-        if (petBean.isVaccinated())
-            vaccinated = "Vaccinations completed";
-
-        microchipped = "Not microchipped";
-        if (petBean.isMicrochipped())
-            microchipped = "Microchipped";
-
-        dewormed = "Not dewormed";
-        if (petBean.isDewormed())
-            dewormed = "Dewormed";
-
-        sterilized = "Not sterilized";
-        if (petBean.isSterilized())
-            sterilized = "Sterilized";
-
-        String testFiv = "";
-        String testFelv = "";
-        // check if it's a cat
-        if (petBean.getType() == 1){
-            testFiv = "Test Fiv: Negative";
+                dogEducation = "\t\tProgram of dog education: Needed\n";
+        } else {
+            testFiv = "\t\tTest Fiv: Negative\n";
             if (petBean.isTestFiv())
-                testFiv = "Test Fiv: Positive";
+                testFiv = "\t\tTest Fiv: Positive\n";
 
-            testFelv = "Test Felv: Negative";
+            testFelv = "\t\tTest Felv: Negative\n";
             if (petBean.isTestFelv())
-                testFelv = "Test Felv: Positive";
+                testFelv = "\t\tTest Felv: Positive\n";
+        }
+        String generalInfo = getCommonGeneralInfo() + testFiv + testFelv + dogEducation;
 
-        }
-        String disability = "";
-        String disabilityType = "";
-        if (petBean.isDisability()) {
-            disability = "Disability";
-            disabilityType = "Not specified";
-            if (!petBean.getDisabilityType().equals(""))
-                disabilityType= petBean.getDisabilityType();
-        }
         String compatibility = getCompatibility(petBean);
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
-        cliPetInformationView.showData(petBean.getName(), dayOfBirth, monthOfBirth, yearOfBirth, type, gender, coatLenght, dogSize, dogEducation, vaccinated, microchipped, dewormed, sterilized, testFiv, testFelv, disability, disabilityType, compatibility);
+        cliPetInformationView.showTitle(petBean.getName());
+        cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
+    }
+
+    private String getCommonGeneralInfo() {
+        String vaccinated = "\t\tVaccinations not completed\n";
+        if (petBean.isVaccinated())
+            vaccinated = "\t\tVaccinations completed\n";
+
+        String microchipped = "\t\tNot microchipped\n";
+        if (petBean.isMicrochipped())
+            microchipped = "\t\tMicrochipped\n";
+
+        String dewormed = "\t\tNot dewormed\n";
+        if (petBean.isDewormed())
+            dewormed = "\t\tDewormed\n";
+
+        String sterilized = "\t\tNot sterilized\n";
+        if (petBean.isSterilized())
+            sterilized = "\t\tSterilized\n";
+
+        String disability = "";
+        String disabilityType = "";
+        if (petBean.isDisability()) {
+            disability = "\t\tDisability";
+            disabilityType = "(Not specified)\n";
+            if (!petBean.getDisabilityType().equals(""))
+                disabilityType= "(" + petBean.getDisabilityType() + ")\n";
+        }
+        return vaccinated + microchipped + dewormed + sterilized + disability + disabilityType;
     }
 
     private String getCompatibility(PetBean petBean) {
         String compatibility = "";
         if (petBean.isMaleDog()) {
-            compatibility = compatibility.concat( "\t\tMale dogs \n");
+            compatibility = compatibility.concat( "\t\tMale dogs\n");
         }
         if (petBean.isFemaleDog()) {
             compatibility = compatibility.concat("\t\tFemale dogs\n");

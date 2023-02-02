@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CLIAppointmentsPageView {
 
-    private CLIAppointmentsPageController cliAppointmentsPageController;
+    private final CLIAppointmentsPageController cliAppointmentsPageController;
 
     public CLIAppointmentsPageView(CLIAppointmentsPageController cliAppointmentsPageController) {
         this.cliAppointmentsPageController = cliAppointmentsPageController;
@@ -17,6 +17,10 @@ public class CLIAppointmentsPageView {
 
     public void showTitle(String owner) {
         PrintSupport.printMessage("\n----------------------------------   " + owner + "'s APPOINTMENTS   ----------------------------------\n");
+    }
+    public void showRequestInfo(int id, String status, String userName, String petName, String date, String time) {
+        PrintSupport.printMessage("ID -> " + id + "\n\t*****  " + status + "  *****\n\tUser name: " + userName + "\n\tPet name: " + petName + "\n\tDate: " + date + "\n\tTime: " + time + "\n");
+        PrintSupport.printSeparatorLine();
     }
 
     public void showCommands() {
@@ -30,11 +34,14 @@ public class CLIAppointmentsPageView {
         catch (NotExistingRequestException e) {
             PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
             ScannerSupport.waitEnter();
+            showCommands();
         }
     }
 
     public void showConfirmedApp(int id, String date, String time) {
         PrintSupport.printSeparatorLine();
-        PrintSupport.printMessage("The appointment with ID '" + id +"' is already confirmed (on " + date + "at " + time +")\n\tGood luck!");
+        PrintSupport.printMessage("The appointment with ID '" + id +"' is already confirmed (on " + date + " at " + time +")\n\tGood luck!");
+        PrintSupport.printMessage("\nPress ENTER to continue");
+        ScannerSupport.waitEnter();
     }
 }

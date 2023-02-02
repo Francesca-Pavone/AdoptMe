@@ -19,9 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -87,6 +85,6 @@ public class GUISendRequestController implements Observer {
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 }

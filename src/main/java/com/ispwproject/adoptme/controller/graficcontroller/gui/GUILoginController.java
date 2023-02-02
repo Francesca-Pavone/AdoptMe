@@ -125,7 +125,6 @@ public class GUILoginController {
 
     public void noLogin(ActionEvent event) throws IOException {
         Session.setSessionInstance(null);
-        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = userLogin();
         Main.getStage().setScene(scene);
     }
@@ -145,7 +144,4 @@ public class GUILoginController {
         }
     }
 
-
-    public void switchInterface(ActionEvent actionEvent) throws Exception {
-    }
 }

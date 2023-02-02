@@ -78,6 +78,6 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 }

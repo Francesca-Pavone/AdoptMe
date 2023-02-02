@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.engineering.bean.UserBean;
 
 public class Session {
     private static Session sessionInstance = null;
-    //private int type; // 0 -> user; 1 -> shelter
     private UserBean userBean;
     private ShelterBean shelterBean;
 
@@ -26,23 +25,13 @@ public class Session {
 
 
 
-    public void closeSession() {
+    public static void closeSession() {
            sessionInstance = null;
     }
-
-
 
     public static Session getCurrentSession() {
         return sessionInstance;
     }
-
-
-/*
-    public int getType() {
-        return type;
-    }
-
- */
 
     public UserBean getUserBean() {
         return userBean;

@@ -15,34 +15,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class UserSideBar {
-/*    @FXML
-    private Pane appointmentsSelect;
-
-    @FXML
-    private Button btnAppointments;
-
-    @FXML
-    private Button btnFavorites;
-
-    @FXML
-    private Button btnHomePage;
-
-    @FXML
-    private Button btnSettings;
-
-    @FXML
-    private Pane favoritesSelect;
-
-    @FXML
-    private Pane homepageSelect;
-
-    @FXML
-    private Pane settingsSelect;
-
-    @FXML
-    private Pane userScreen;
-
- */
 
     public void goToHomePage() throws IOException {
         Stage stage = Main.getStage();

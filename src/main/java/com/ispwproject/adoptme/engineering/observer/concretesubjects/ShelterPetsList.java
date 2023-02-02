@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.observer.concreteSubjects;
+package com.ispwproject.adoptme.engineering.observer.concretesubjects;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -13,7 +13,7 @@ public class ShelterPetsList extends Subject {
     private List<PetModel> petList = new ArrayList<>();
     private ShelterModel shelter;
 
-    public ShelterPetsList(Observer observer, List<PetModel> petList, ShelterModel shelter) throws Exception {
+    public ShelterPetsList(Observer observer, List<PetModel> petList, ShelterModel shelter) {
         super(observer);
         this.shelter = shelter;
         for (PetModel petModel : petList) {
@@ -26,9 +26,12 @@ public class ShelterPetsList extends Subject {
         this.shelter = shelter;
     }
 
-    public void addPet(PetModel petModel) throws Exception {
+    public void addPet(PetModel petModel) {
         this.petList.add(petModel);
-        PetBean petBean = new PetBean(petModel);
+        PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+        // implementazione dummy che setta di default l'età a 'puppy', TODO: verifica data di nascita 1
+        //  inserita per scelta dell'eta
+        petBean.setAge("Puppy");
         this.notifyObservers(petBean);
     }
 

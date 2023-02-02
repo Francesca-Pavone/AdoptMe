@@ -4,6 +4,10 @@ import java.sql.*;
 
 public class CRUDQueries {
 
+    private CRUDQueries() {
+        //costruttore privato
+    }
+
     // la utilizzo nel caso in cui viene modificato solo lo stato (richiesta rifiutata / accettata)
     public static void updateReqState(Statement stmt, int reqId, int reqStatus) throws SQLException  {
         String updateStatement = String.format("UPDATE Requests set status=%d WHERE requestId = %d", reqStatus, reqId);

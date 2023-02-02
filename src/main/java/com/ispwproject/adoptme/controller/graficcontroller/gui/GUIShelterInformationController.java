@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -95,9 +94,10 @@ public class GUIShelterInformationController implements Observer {
         }
     }
 
-    public void setShelterData(String shelterName) throws Exception {
-        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
-        setData(shelterBean);
+    public void setShelterData(String shelterName)  {
+        // TODO NON PUOI CHIAMARE IL DAO NEL CONTROLLER GRAFICO
+        //  ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
+        //  setData(shelterBean);
     }
 
     public void selectInformations() {
@@ -107,20 +107,17 @@ public class GUIShelterInformationController implements Observer {
 
     public void goBack() throws IOException {
         Stage stage = Main.getStage();
-        //FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load());
-        //stage.setScene(scene);
         Scene scene = this.previousPage.getScene();
         stage.setScene(scene);
     }
 
     @Override
     public void update(Object object) {
-
+        //ignore
     }
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 }

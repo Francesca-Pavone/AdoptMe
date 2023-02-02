@@ -10,11 +10,11 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
 
     @Override
     public void update(Object object) {
-
+        //ignore
     }
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 }

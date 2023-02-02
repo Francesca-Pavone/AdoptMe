@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 import java.io.File;
 import java.net.URL;
@@ -12,16 +11,6 @@ public class ShelterModel extends ShelterUserModel{
     private String address;
     private String city;
     private URL webSite;
-
-
-    public ShelterModel(int shelterId, File profileImg, AccountInfo accountInfo, String shelterName, String phoneNumber, String address, String city, URL webSite) {
-        super(shelterId, profileImg, accountInfo);
-        setShelterName(shelterName);
-        setPhoneNumber(phoneNumber);
-        setAddress(address);
-        setCity(city);
-        setWebSite(webSite);
-    }
 
     public ShelterModel(File profileImg, AccountInfo accountInfo, String shelterName, String phoneNumber, String address, String city, URL webSite) {
         super(profileImg, accountInfo);
@@ -50,7 +39,7 @@ public class ShelterModel extends ShelterUserModel{
         super(profileImg, accountInfo);
     }
 
-    public ShelterModel(ShelterBean shelterBean) {
+/*    public ShelterModel(ShelterBean shelterBean) {
         super(shelterBean.getShelterId(), shelterBean.getShelterImg(), shelterBean.getEmail(), 1);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
@@ -58,7 +47,7 @@ public class ShelterModel extends ShelterUserModel{
         setCity(city);
         setWebSite(webSite);
     }
-
+ */
     public ShelterModel(int id) {
         super(id);
     }

@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
@@ -29,7 +30,7 @@ public class CLIUserHomepageController {
 
                 // vai a search shelter
                 case SEARCH_SHELTER -> CLIUserHomepageView.searchShelter();
-                default -> System.out.println(MSG_ERROR);
+                default -> PrintSupport.printError(MSG_ERROR);
             }
         }
 
@@ -46,8 +47,11 @@ public class CLIUserHomepageController {
                     CLIAppointmentsPageController cliAppointmentsPageController = new CLIAppointmentsPageController();
                     cliAppointmentsPageController.start();
                 }
-                case SETTINGS -> CLIUserSettingsView.run();
-                default -> System.out.println(MSG_ERROR);
+                case SETTINGS -> {
+                    CLIUserSettingsController cliUserSettingsController = new CLIUserSettingsController();
+                    cliUserSettingsController.start();
+                }
+                default -> PrintSupport.printError(MSG_ERROR);
             }
         }
     }

@@ -36,8 +36,9 @@ public class PetInfoController {
             petBean.setTestFiv(catModel.isTestFiv());
             petBean.setTestFelv(catModel.isTestFelv());
         }
-        return new ShelterBean(shelterModel);
-
+        ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        shelterBean.setShelterImg(shelterModel.getProfileImg());
+        return  shelterBean;
     }
 
     private void setGeneralInfo(PetBean petBean, int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght) {

@@ -13,11 +13,10 @@ public class CLIUserHomepageView {
         PrintSupport.printMessage("---------------------------------------- USER HOMEPAGE ----------------------------------------");
         PrintSupport.printMessage("------------------------------------------- commands ------------------------------------------");
         PrintSupport.printMessage(" 1) Search shelters in a specific city. \n 2) Search pets of a specific shelter.\n 3) Compile the questionnaire.");
-        //if(Session.getCurrentSession().getUserBean() != null)
-        if(Session.getCurrentSession() != null) {
-            if(Session.getCurrentSession().getUserBean() != null)
-                PrintSupport.printMessage(" 4) Go to favorites.\n 5) Go to appointments.\n 6) Go to settings.");
-        }
+
+        if(Session.getCurrentSession().getUserBean() != null)
+            PrintSupport.printMessage(" 4) Go to favorites.\n 5) Go to appointments.\n 6) Go to settings.");
+
         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
 
         Scanner scanner = new Scanner(System.in);
