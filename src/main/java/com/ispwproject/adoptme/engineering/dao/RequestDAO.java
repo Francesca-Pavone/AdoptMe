@@ -8,7 +8,7 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.RequestList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.RequestList;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDAO {
+    private RequestDAO() {
+    }
 
     public static void saveRequest(RequestModel requestModel) {
 

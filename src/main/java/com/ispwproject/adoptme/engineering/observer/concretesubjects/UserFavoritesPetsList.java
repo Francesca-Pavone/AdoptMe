@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.observer.concreteSubjects;
+package com.ispwproject.adoptme.engineering.observer.concretesubjects;
 
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;

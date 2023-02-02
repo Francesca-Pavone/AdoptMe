@@ -13,7 +13,9 @@ import java.sql.SQLException;
 
 public class ImageUtils {
     //Costruttore privato
-    private ImageUtils() {}
+    private ImageUtils() {
+        //Costruttore privato perché ho tutti i metodi statici
+    }
 
     public static Image fromFileToImage(File file) throws IOException {
         BufferedImage bfImage = null;

@@ -11,6 +11,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class ShowExceptionSupport {
+    private ShowExceptionSupport() {
+        //Costruttore privato perché ho tutti i metodi statici
+    }
 
     public static void showExceptionCLI(String message) {
         PrintSupport.printError( "\n**************************************\n" + message + "\n\tPress ENTER to continue");

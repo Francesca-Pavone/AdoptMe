@@ -9,7 +9,7 @@ import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.ShelterPetsList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 
 import java.io.*;
 import java.sql.*;
@@ -17,8 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetDAO {
-    //costruttore privato
-    private PetDAO() {}
+
+    private static final String DEFAULT_PHOTO = "image/default_photo.png";
+    private PetDAO() {
+        //costruttore privato
+    }
 
     public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws Exception {
         Statement stmt = null;
@@ -56,7 +59,7 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
                 String petAge = resultSet.getString("age");
@@ -135,7 +138,7 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
                 String petAge = resultSet.getString("age");
@@ -211,7 +214,7 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
                 int petType = resultSet.getInt("type");

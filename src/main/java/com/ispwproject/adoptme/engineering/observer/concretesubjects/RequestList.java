@@ -1,5 +1,6 @@
-package com.ispwproject.adoptme.engineering.observer.concreteSubjects;
+package com.ispwproject.adoptme.engineering.observer.concretesubjects;
 
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
@@ -10,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestList extends Subject {
-    private final List<RequestModel> requestList = new ArrayList<>();
+    private final List<RequestModel> requestModelList = new ArrayList<>();
     private final ShelterUserModel receiver;
 
-    public RequestList(Observer observer, List<RequestModel> requestList, ShelterUserModel receiver) {
+    public RequestList(Observer observer, List<RequestModel> requestModelList, ShelterUserModel receiver) {
         super(observer);
-        for (RequestModel request : requestList) {
+        for (RequestModel request : requestModelList) {
             this.addRequest(request);
         }
         this.receiver = receiver;
@@ -27,12 +28,12 @@ public class RequestList extends Subject {
     }
 
     public void addRequest(RequestModel request) {
-        this.requestList.add(request);
+        this.requestModelList.add(request);
         setRequestBean(request);
     }
 
     public void removeRequest (RequestModel request){
-        System.out.println("RIMOSSA DALLA LISTA LA RICHIESTA: " + request.getId());
+        PrintSupport.printMessage("RIMOSSA DALLA LISTA LA RICHIESTA: " + request.getId());
         setRequestBean(request);
     }
 
@@ -46,8 +47,8 @@ public class RequestList extends Subject {
         notifyObservers(requestBean);
     }
 
-    public List<RequestModel> getRequestList() {
-        return requestList;
+    public List<RequestModel> getRequestModelList() {
+        return requestModelList;
     }
 
     public ShelterUserModel getReceiver() {

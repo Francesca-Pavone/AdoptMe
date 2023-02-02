@@ -10,8 +10,6 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,6 +25,8 @@ public class ShelterDAO {
     private static final String NAME = "name";
     private static final String CITY = "city";
     private static final String EMAIL = "email";
+    private static final String DEFAULT_PHOTO = "image/default_photo.png";
+
 
     private ShelterDAO() {}
 
@@ -58,22 +58,15 @@ public class ShelterDAO {
                 File shelterImage = null;
                 try {
                     if (blob != null) {
-                        InputStream in = blob.getBinaryStream();
                         String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = new File(filePath);
-                        FileOutputStream outputStream = new FileOutputStream(shelterImage);
-                        int read;
-                        byte[] bytes = new byte[4096];
-                        while ((read = in.read(bytes)) != -1) {
-                            outputStream.write(bytes, 0, read);
-                        }
+                        ImageUtils.fromBlobToFile(blob, filePath);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    shelterImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
                 AccountInfo accountInfo = new AccountInfo(email, password, 1);
@@ -90,23 +83,6 @@ public class ShelterDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-        /*
-        finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-         */
 
         return sheltersList;
     }
@@ -169,7 +145,7 @@ public class ShelterDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    shelterImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
                 AccountInfo accountInfo = new AccountInfo(email, 1);
@@ -222,7 +198,7 @@ public class ShelterDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    shelterImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
                 AccountInfo accountInfo = new AccountInfo(email, 1);

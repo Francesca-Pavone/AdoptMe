@@ -8,7 +8,7 @@ import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.RequestList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.RequestList;
 import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.time.LocalDate;

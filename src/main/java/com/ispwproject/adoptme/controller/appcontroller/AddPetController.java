@@ -6,7 +6,7 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.dao.CatDAO;
 import com.ispwproject.adoptme.engineering.dao.DogDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.ShelterPetsList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 
 public class AddPetController {
 
