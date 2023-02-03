@@ -1,14 +1,15 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.view.cli.CLIUserSettingsView;
 
 import java.util.List;
 
@@ -41,7 +42,15 @@ public class CLIUserHomepageController {
                 // vai a search shelter
                 case SEARCH_SHELTER -> CLIUserHomepageView.searchShelter();
                 case FAVORITES -> {
-                    //vai a favoriti
+                    try {
+                        CLIUserFavoritesController cliUserFavoritesController = new CLIUserFavoritesController();
+                        cliUserFavoritesController.start();
+                    } catch (FavoriteListEmptyException e) {
+                        PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
+                        ScannerSupport.waitEnter();
+                        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+                        cliUserHomepageView.run();
+                    }
                 }
                 case APPOINTMENTS -> {
                     CLIAppointmentsPageController cliAppointmentsPageController = new CLIAppointmentsPageController();
@@ -58,7 +67,7 @@ public class CLIUserHomepageController {
 
     public void showShelter(ShelterBean shelterBean) throws Exception {
         CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
-        cliShelterInfoController.setData(shelterBean);
+        cliShelterInfoController.setShelter(shelterBean.getName());
     }
 
     public void searchCity(String city) throws Exception {
@@ -71,6 +80,6 @@ public class CLIUserHomepageController {
 
     public void searchShelter(String shelterName) throws Exception {
         CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
-        cliShelterInfoController.setShelterData(shelterName);
+        cliShelterInfoController.setShelter(shelterName);
     }
 }

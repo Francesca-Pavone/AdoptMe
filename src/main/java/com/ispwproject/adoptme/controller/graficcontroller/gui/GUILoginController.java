@@ -8,6 +8,8 @@ import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
+import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -102,19 +104,24 @@ public class GUILoginController {
                 GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
                 guiShelterHomepageController.setCurrentPage(root);
                 Main.getStage().setScene(scene);
-            }
-            else
-                System.out.println("Utente non trovato");
+            } else
+                throw new UserNotFoundException();
             //todo: popup email o password sbagliate
             //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
 
             Main.getStage().setScene(scene);
+        } catch (UserNotFoundException e) {
+            PrintSupport.printError(e.getMessage());
+            //todo fai dialog per dire che utente non è stato trovato
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
         }
         catch (EmailFormatException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
-
-
     }
 
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="requestVBox" alignment="TOP_CENTER" maxHeight="-Infinity" spacing="12.0" styleClass="request-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUISendRequestController">
+<VBox fx:id="requestVBox" alignment="TOP_CENTER" maxHeight="-Infinity" spacing="12.0" styleClass="request-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUISendRequestController">
    <children>
       <HBox alignment="CENTER">
          <children>

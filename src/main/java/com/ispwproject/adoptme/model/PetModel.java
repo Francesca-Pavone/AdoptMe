@@ -21,11 +21,11 @@ public abstract class PetModel {
     protected boolean disability;
     protected String disabilityType;
     protected PetCompatibility petCompatibility;
+    protected boolean fav;
 
     protected ShelterModel shelter;
 
-    protected PetModel() {
-
+    public PetModel() {
     }
 
     protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
@@ -196,5 +196,11 @@ public abstract class PetModel {
         this.petCompatibility = petCompatibility;
     }
 
+    public boolean isFav() {
+        return fav;
+    }
 
+    public void setFav(boolean fav) {
+        this.fav = fav;
+    }
 }

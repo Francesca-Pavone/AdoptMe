@@ -4,6 +4,7 @@ import java.io.File;
 
 public class PetBean {
 
+    public boolean getFav;
     private int petId;
     private int shelterId;
     protected File petImage;
@@ -314,5 +315,13 @@ public class PetBean {
 
     public void setTestFelv(boolean testFelv) {
         this.testFelv = testFelv;
+    }
+
+    public boolean isFav() {
+        return getFav;
+    }
+
+    public void setFav(boolean getFav) {
+        this.getFav = getFav;
     }
 }

@@ -101,10 +101,6 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
-    public static ResultSet selectSheltersByName(Statement stmt, String shelterName) throws SQLException {
-        String sql = "SELECT * FROM Shelters WHERE name = '" + shelterName + "'";
-        return stmt.executeQuery(sql);
-    }
     public static ResultSet checkLogin(Statement stmt, String email, String password) throws SQLException {
         String sql = "SELECT CASE WHEN EXISTS (SELECT name, password FROM Users WHERE email = '" + email + "' AND password = '" + password + "') THEN 1 WHEN EXISTS (SELECT name, password FROM Shelters WHERE email = '" + email + "' AND password = '" + password + "') THEN 2 END;";
         return stmt.executeQuery(sql);
@@ -115,4 +111,13 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet selectPetFromFavorites(Statement stmt, int userId) throws SQLException {
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, age, shelter, 0 as type FROM Dogs WHERE (dogId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "') UNION SELECT catId AS id, name, imgSrc, gender, age, shelter, 1 as type FROM Cats WHERE (catId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "')";
+        return stmt.executeQuery(sql);
+    }
+
+    public static ResultSet checkFav(Statement stmt, int userId, int petId, int shelterId) throws SQLException {
+        String sql = "SELECT CASE WHEN EXISTS (SELECT userId, petId, shelterId FROM Favorites WHERE userId = '" + userId + "' AND petId = '" + petId + "' AND shelterId = '" + shelterId + "') THEN 1 ELSE 0 END;";
+        return stmt.executeQuery(sql);
+    }
 }

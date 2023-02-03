@@ -219,7 +219,7 @@ public class CLIQuestionnaireView {
                     break;
                 case 13:
                     if (petType.equals("b")) {
-                        PrintSupport.printMessage("\n\nIf needed, would you start a program of dog education?\n a) Yes    b) No");
+                        PrintSupport.printMessage("\n\nIf needed, would you setShelter a program of dog education?\n a) Yes    b) No");
                         dogEducation = scanner.nextLine();
                         while (!(dogEducation.equals("a")) && !(dogEducation.equals("b")) && !(dogEducation.equals("back"))) {
                             PrintSupport.printError(INVALID_INPUT + "a | b");

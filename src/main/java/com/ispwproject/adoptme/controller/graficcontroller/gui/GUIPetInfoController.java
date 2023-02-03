@@ -1,16 +1,23 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.controller.appcontroller.AddToFavoritesController;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.model.PetModel;
+import com.ispwproject.adoptme.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,8 +29,9 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
-public class GUIPetInfoController {
+public class GUIPetInfoController implements Observer {
     @FXML
     private Label coatLenght;
 
@@ -101,27 +109,56 @@ public class GUIPetInfoController {
     private HBox dateBox;
     @FXML
     private HBox infoHBox;
+    @FXML
+    private HBox nameFavHBox;
+    @FXML
+    private ImageView favImage;
+    @FXML
+    private Button btnFav;
+
+    private boolean fav = false;
+
+    private PetBean petBean;
 
     private Parent previousPage;
+
+    private Observer favObserver;
+    private Pane pane;
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
     }
 
+    public void setFavObserver(Observer favObserver) {
+        this.favObserver = favObserver;
+    }
+
     public void setPetInfo(PetBean petBean) throws Exception {
+
+        nameFavHBox.getChildren().removeAll(favImage);
 
         PetInfoController petInfoControllerA = new PetInfoController();
 
         ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean);
+        this.petBean = petBean;
+        fav = this.petBean.isFav();
 
         if (Session.getCurrentSession().getUserBean() != null) { // sono uno Shelter
+
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestBox.fxml"));
             Pane pane = fxmlLoader.load();
             GUISendRequestController guiSendRequestController = fxmlLoader.getController();
             guiSendRequestController.setData(petBean, shelterBean);
             infoHBox.getChildren().add(pane);
-        }
+            btnFav.setVisible(true);
 
+            if(!fav) {
+                btnFav.setText("Add to favorites");
+                nameFavHBox.getChildren().add(favImage);
+            }
+            else
+                btnFav.setText("Remove from favorites");
+        }
         InputStream inputStream = new FileInputStream(petBean.getPetImage());
         Image image = new Image(inputStream);
         petImg.setImage(image);
@@ -296,4 +333,32 @@ public class GUIPetInfoController {
         stage.setScene(scene);
     }
 
+    public void addPetToFavorites() throws Exception {
+        UserBean userBean = Session.getCurrentSession().getUserBean();
+        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+        if(fav) {
+            addToFavoritesController.removePet(userBean, this, this.pane);
+            addToFavoritesController.removePet(userBean, favObserver, this.pane);
+        } else {
+            addToFavoritesController.addPet(userBean, this, this.pane);
+        }
+    }
+
+    @Override
+    public void update(Object object) {
+        if(!fav) {
+            btnFav.setText("Remove from favorites");
+        } else {
+            btnFav.setText("Add to favorites");
+        }
+    }
+
+    @Override
+    public void update2(Object object1, Object object2) {
+        // ignore
+    }
+
+    public void setPane(Pane pane) {
+        this.pane = pane;
+    }
 }

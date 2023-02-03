@@ -1,56 +1,38 @@
 package com.ispwproject.adoptme.view.cli;
 
-import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoController;
-import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
-import java.util.List;
+import java.net.URL;
 import java.util.Scanner;
 
 public class CLIShelterInfoView {
-    private CLIShelterInfoView() {
-        // metto il costruttore vuoto privato per evitare che venga utilizzato il costruttore di default, in questo modo impedisco di fare la new di questa classe che ha solo metodi statici e non necessita quindi di istanziazione
+    
+    private CLIShelterInfoController cliShelterInfoControllerCurrent;
+
+    public CLIShelterInfoView(CLIShelterInfoController cliShelterInfoController) {
+        this.cliShelterInfoControllerCurrent = cliShelterInfoController;
     }
 
-    public static void showShelter(ShelterBean shelterBean, List<PetBean> petBeanList) throws Exception {
-        PrintSupport.printMessage("\n\n-------------------------------------- " + shelterBean.getName().toUpperCase() + " --------------------------------------");
-        PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterBean.getEmail() + "\n  Phone number: " + shelterBean.getPhoneNumber() + "\n  Web site: " + shelterBean.getWebSite() + "\n  Address: " + shelterBean.getAddress() + ", " + shelterBean.getCity());
-        PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");
-        int i = 1;
-        String gender;
-        String type;
-        for(PetBean petBean: petBeanList) {
-            PrintSupport.printMessage( i + ")  Name: " + petBean.getName());
-            gender = (switch (petBean.getGender()) {
-                case 1 -> "Female";
-                default -> "Male";
-            });
-            type = (switch (petBean.getType()) {
-                case 1 -> "Cat";
-                default -> "Dog";
-            });
-            PrintSupport.printMessage("\n\tType: " + type);
-            PrintSupport.printMessage("\n\tGender: " + gender);
-            PrintSupport.printMessage("\n\tAge: " + petBean.getAge());
-            PrintSupport.printSeparatorLine();
-            i++;
-        }
+    public void printPet(String name, String gender, String age, int i ) throws Exception {
+        PrintSupport.printMessage("    " + i + ") Name: " + name + "     ");
+        PrintSupport.printMessage("\n       Gender: " + gender + "        ");
+        PrintSupport.printMessage("\n       Age: " + age + "      ");
+        PrintSupport.printSeparatorLine();
+    }
 
+    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, URL shelterWebSite, String shelterAddress, String shelterCity) throws Exception {
+        PrintSupport.printMessage("\n\n-------------------------------------- " + shelterName.toUpperCase() + " --------------------------------------");
+        PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterEmail + "\n  Phone number: " + shelterPhoneNumber + "\n  Web site: " + shelterWebSite + "\n  Address: " + shelterAddress + ", " + shelterCity);
+        PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");
+        this.cliShelterInfoControllerCurrent.getPet();
+    }
+
+    public void printCommands() throws Exception {
         PrintSupport.printMessage("\nInsert the number of the pet you want to see\n----- or\nInsert 0 to go back to Homepage");
         Scanner scanner = new Scanner(System.in);
-
-        int input = scanner.nextInt();
-
-        if (input == 0) {
-            CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
-            cliShelterInfoController.goBack();
-        }
-        else {
-            PetBean petBean = petBeanList.get(input - 1);
-            CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
-            cliPetInformationController.setPetInfo();
-        }
+        int inputLine;
+        inputLine = scanner.nextInt();
+        this.cliShelterInfoControllerCurrent.executeCommand(inputLine);
     }
 }

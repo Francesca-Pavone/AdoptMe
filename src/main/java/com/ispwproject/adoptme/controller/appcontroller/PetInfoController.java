@@ -1,14 +1,19 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.model.CatModel;
-import com.ispwproject.adoptme.model.DogModel;
-import com.ispwproject.adoptme.model.PetCompatibility;
-import com.ispwproject.adoptme.model.ShelterModel;
+import com.ispwproject.adoptme.engineering.dao.PetDAO;
+import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.dao.CatDAO;
 import com.ispwproject.adoptme.engineering.dao.DogDAO;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PetInfoController {
 
@@ -39,6 +44,28 @@ public class PetInfoController {
         ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
         shelterBean.setShelterImg(shelterModel.getProfileImg());
         return  shelterBean;
+    }
+
+    public boolean checkFavorite(PetBean petBean, Observer observer) {
+        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, new UserModel(Session.getCurrentSession().getUserBean()));
+        try {
+            userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(new UserModel(Session.getCurrentSession().getUserBean()), observer);
+        } catch (SQLException se) {
+            // Errore durante l'apertura della connessione
+            se.printStackTrace();
+        } catch (ClassNotFoundException driverEx) {
+            // Errore nel loading del driver
+            driverEx.printStackTrace();
+        } catch (Exception e) {
+            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
+            e.printStackTrace();
+        }
+
+        for (PetModel petModel : userFavoritesPetsList.getPetList()) {
+            if (petModel.getPetId() == petBean.getPetId() && petModel.getShelter().getId() == petBean.getShelterId())
+                return true;
+        }
+        return false;
     }
 
     private void setGeneralInfo(PetBean petBean, int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght) {

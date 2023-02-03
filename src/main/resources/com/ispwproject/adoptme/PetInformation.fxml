@@ -12,8 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController">
-   <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController">
+   <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   <Label fx:id="labelFav" alignment="CENTER" layoutX="712.0" layoutY="48.0" prefHeight="36.0" prefWidth="369.0" textAlignment="CENTER" textFill="#34665a">
+      <font>
+         <Font name="Arial Bold" size="18.0" />
+      </font>
+   </Label>
    <VBox alignment="TOP_CENTER" prefHeight="710.0" prefWidth="1100.0">
       <children>
          <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
@@ -26,6 +31,14 @@
                         </image>
                      </ImageView>
                   </graphic>
+               </Button>
+               <Button fx:id="btnFav" mnemonicParsing="false" onAction="#addPetToFavorites" prefHeight="42.0" prefWidth="287.0" style="-fx-effect: dropshadow(two-pass-box, grey, 10, 0, 3, 3);" styleClass="button1" stylesheets="@style.css" text="Add to favorites" textFill="WHITE">
+                  <font>
+                     <Font name="Arial Bold" size="18.0" />
+                  </font>
+                  <HBox.margin>
+                     <Insets left="700.0" />
+                  </HBox.margin>
                </Button>
             </children>
          </HBox>
@@ -41,14 +54,23 @@
                </ImageView>
             </children>
          </Pane>
-         <Label fx:id="nameTitle" text="Aron">
-            <font>
-               <Font name="Arial Black" size="24.0" />
-            </font>
+         <HBox fx:id="nameFavHBox" alignment="CENTER" spacing="15.0">
             <VBox.margin>
                <Insets bottom="20.0" top="10.0" />
             </VBox.margin>
-         </Label>
+            <children>
+               <Label fx:id="nameTitle" text="Aron">
+                  <font>
+                     <Font name="Arial Black" size="24.0" />
+                  </font>
+               </Label>
+               <ImageView fx:id="favImage" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@image/fullHeart.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </HBox>
          <HBox fx:id="infoHBox" alignment="TOP_CENTER" spacing="150.0">
             <VBox.margin>
                <Insets />

@@ -94,10 +94,10 @@ public class GUIShelterInformationController implements Observer {
         }
     }
 
-    public void setShelterData(String shelterName)  {
-        // TODO NON PUOI CHIAMARE IL DAO NEL CONTROLLER GRAFICO
-        //  ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
-        //  setData(shelterBean);
+    public void setShelterData(String shelterName) throws Exception {
+        ShelterPageController shelterPageController = new ShelterPageController();
+        ShelterBean shelterBean = shelterPageController.getShelter(shelterName);
+        setData(shelterBean);
     }
 
     public void selectInformations() {
