@@ -5,15 +5,15 @@ import java.io.File;
 import java.net.URL;
 
 public class ShelterBean {
-    protected int shelterId;
-    protected String name;
-    protected String phoneNumber;
-    protected String address;
-    protected String city;
-    protected URL webSite;
-    protected String email;
-    protected String password; //todo: vedere se lasciarla nel bean
-    protected File shelterImg;
+    private int shelterId;
+    private String name;
+    private String phoneNumber;
+    private String address;
+    private String city;
+    private URL webSite;
+    private String email;
+    private String password; //todo: vedere se lasciarla nel bean
+    private File shelterImg;
 
     public ShelterBean() {}
 
