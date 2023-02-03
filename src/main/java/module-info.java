@@ -8,6 +8,8 @@ module com.ispwproject.adoptme {
     requires com.opencsv;
     requires java.sql;
     requires java.desktop;
+    requires junit;
+
 
     opens com.ispwproject.adoptme to javafx.fxml;
     exports com.ispwproject.adoptme;
@@ -19,4 +21,9 @@ module com.ispwproject.adoptme {
     opens com.ispwproject.adoptme.engineering.connection to javafx.fxml;
     exports com.ispwproject.adoptme.engineering.utils;
     opens com.ispwproject.adoptme.engineering.utils to javafx.fxml;
+    exports com.ispwproject.adoptme.controller.appcontroller;
+    exports com.ispwproject.adoptme.engineering.bean;
+    exports com.ispwproject.adoptme.engineering.dao;
+    exports com.ispwproject.adoptme.engineering.exception;
+    exports com.ispwproject.adoptme.engineering.session;
 }

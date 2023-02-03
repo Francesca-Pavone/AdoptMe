@@ -76,10 +76,11 @@ public class RequestDAO {
         }
     }
 
-    public static void retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
+    public static int retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
         RequestList requestList = new RequestList(observer, requestModelList, shelterModel);
+        int i = 0;
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -122,6 +123,7 @@ public class RequestDAO {
 
                 RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
                 requestList.addRequest(requestModel);
+                i++;
 
             } while (resultSet.next());
 
@@ -130,6 +132,7 @@ public class RequestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return i;
     }
 
     public static void retrieveReqByUser(UserModel userModel, Observer observer) throws Exception {

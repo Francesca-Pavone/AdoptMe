@@ -1,6 +1,5 @@
 package com.ispwproject.adoptme.engineering.observer.concretesubjects;
 
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
@@ -29,11 +28,6 @@ public class RequestList extends Subject {
 
     public void addRequest(RequestModel request) {
         this.requestModelList.add(request);
-        setRequestBean(request);
-    }
-
-    public void removeRequest (RequestModel request){
-        PrintSupport.printMessage("RIMOSSA DALLA LISTA LA RICHIESTA: " + request.getId());
         setRequestBean(request);
     }
 
