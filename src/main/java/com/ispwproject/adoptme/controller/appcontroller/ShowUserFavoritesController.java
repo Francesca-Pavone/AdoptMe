@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.dao.PetDAO;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ShowUserFavoritesController {
     private UserFavoritesPetsList userFavoritesPetsList;
 
-    public List<PetBean> getPetList(Observer observer) {
+    public List<PetBean> getPetList(Observer observer) throws FavoriteListEmptyException {
         try {
             userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(new UserModel(Session.getCurrentSession().getUserBean()), observer);
         } catch (SQLException se) {
@@ -28,7 +29,7 @@ public class ShowUserFavoritesController {
             driverEx.printStackTrace();
         } catch (Exception e) {
             // Errore nel loading del driver o possibilmente nell'accesso al filesystem
-            e.printStackTrace();
+            throw new FavoriteListEmptyException();
         }
 
         List<PetBean> petBeanList = new ArrayList<>();

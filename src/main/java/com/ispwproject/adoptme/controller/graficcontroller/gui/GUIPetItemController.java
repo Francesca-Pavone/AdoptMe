@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -35,6 +36,7 @@ public class GUIPetItemController {
     private PetBean petBean;
     private Parent pageContainer;
     private Observer favObserver;
+    private Pane pane;
 
     public void setFavObserver(Observer favObserver) {
         this.favObserver = favObserver;
@@ -70,10 +72,14 @@ public class GUIPetItemController {
         GUIPetInfoController petInformationControllerG = fxmlLoader.getController();
         petInformationControllerG.setPreviousPage(pageContainer);
         petInformationControllerG.setPetInfo(petBean);
+        petInformationControllerG.setPane(pane);
         petInformationControllerG.setFavObserver(this.favObserver);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
 
+    public void setPane(Pane pane) {
+        this.pane = pane;
+    }
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController">
    <children>
       <AnchorPane style="-fx-background-color: #34665A;">
          <children>
@@ -190,6 +190,14 @@
                   <Insets left="40.0" top="20.0" />
                </VBox.margin>
             </Label>
+            <Label fx:id="emptyLabel" text="Your list of favorite pets is empty." textFill="#bfbfbf">
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="220.0" top="10.0" />
+               </VBox.margin>
+            </Label>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="550.0" prefWidth="750.0" styleClass="transparent" stylesheets="@style.css" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
                <content>
                   <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
@@ -199,7 +207,7 @@
                   </GridPane>
                </content>
                <VBox.margin>
-                  <Insets left="20.0" right="20.0" top="20.0" />
+                  <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </ScrollPane>
          </children>

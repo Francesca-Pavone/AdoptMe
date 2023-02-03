@@ -22,7 +22,7 @@ public class AddToFavoritesController {
         this.petBean = petBean;
     }
 
-    public void addPet(UserBean userBean, Observer observer) throws Exception {
+    public void addPet(UserBean userBean, Observer observer, Object object) throws Exception {
         UserModel userModel = new UserModel(userBean);
         UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
@@ -31,14 +31,14 @@ public class AddToFavoritesController {
 
         if (petBean.getType() == 0) {
             DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isDogEducation(), petBean.getSize(), shelter);
-            userFavoritesPetsList.addPet(dogModel);
+            userFavoritesPetsList.updateAdd(dogModel, object);
         } else if (petBean.getType() == 1) {
             CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isTestFiv(), petBean.isTestFelv(), shelter);
-            userFavoritesPetsList.addPet(catModel);
+            userFavoritesPetsList.updateRemove(catModel, object);
         }
     }
 
-    public void removePet(UserBean userBean, Observer observer) throws Exception {
+    public void removePet(UserBean userBean, Observer observer, Object object) throws Exception {
         UserModel userModel = new UserModel(userBean);
         UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
@@ -47,10 +47,10 @@ public class AddToFavoritesController {
 
         if (petBean.getType() == 0) {
             DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isDogEducation(), petBean.getSize(), shelter);
-            userFavoritesPetsList.removePet(dogModel);
+            userFavoritesPetsList.updateAdd(dogModel, object);
         } else if (petBean.getType() == 1) {
             CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isTestFiv(), petBean.isTestFelv(), shelter);
-            userFavoritesPetsList.removePet(catModel);
+            userFavoritesPetsList.updateRemove(catModel, object);
         }
     }
 }

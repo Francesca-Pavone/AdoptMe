@@ -92,7 +92,7 @@ public class RequestModel extends Subject{
     public void setStatus(int status) {
         this.status = status;
     }
-    public void updateStatus(int status, Object object) {
+    public void updateStatus(int status, Object object) throws Exception {
         this.status = status;
         RequestBean requestBean = new RequestBean(this);
         notifyObservers(requestBean, object);

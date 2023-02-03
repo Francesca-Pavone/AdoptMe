@@ -4,11 +4,13 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.controller.appcontroller.ShowUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -17,13 +19,18 @@ import java.io.IOException;
 public class GUIUserFavoritesController extends UserSideBar implements Observer {
     @FXML
     private GridPane grid;
+    @FXML
+    private Label emptyLabel;
+
     int column = 0;
     int row = 1;
 
     private Parent currentPage;
 
-    public void setCurrentPage(Parent currentPage) {
+    public void setCurrentPage(Parent currentPage) throws FavoriteListEmptyException {
         this.currentPage = currentPage;
+        if(emptyLabel.isVisible())
+            emptyLabel.setVisible(false);
         ShowUserFavoritesController showUserFavoritesController = new ShowUserFavoritesController();
         showUserFavoritesController.getPetList(this);
     }
@@ -35,10 +42,12 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
-                pane.setId(String.valueOf(((PetBean)object).getPetId()));
+
+                System.out.println("1 " + pane.getId());
 
                 GUIPetItemController petItemControllerG = fxmlLoader.getController();
                 petItemControllerG.setPageContainer(currentPage);
+                petItemControllerG.setPane(pane);
                 petItemControllerG.setFavObserver(this);
                 petItemControllerG.setPetData((PetBean) object);
 
@@ -51,14 +60,17 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            //todo non so come fare
-                grid.getChildren().removeIf(node -> node.getId().equals(String.valueOf(((PetBean) object).getPetId())));
         }
     }
 
     @Override
     public void update2(Object object1, Object object2) {
+        if(grid.getChildren().contains((Pane)object2))
+            grid.getChildren().remove((Pane)object2);
 
+    }
+
+    public void listIsEmpty() {
+        emptyLabel.setVisible(true);
     }
 }

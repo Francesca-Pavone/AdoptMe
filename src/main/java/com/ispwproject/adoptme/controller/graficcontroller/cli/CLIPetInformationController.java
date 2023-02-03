@@ -1,10 +1,13 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
+import com.ispwproject.adoptme.controller.appcontroller.AddToFavoritesController;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
@@ -12,13 +15,19 @@ import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
-public class CLIPetInformationController {
+public class CLIPetInformationController implements Observer {
 
     private PetBean petBean;
+    private boolean fav = false;
+
+    private Observer favObserver;
+
     private CLIPetInformationView cliPetInformationViewCurrent;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
+    private int index;
+    private Object object = null;
 
     public CLIPetInformationController(PetBean petBean) {
         this.petBean = petBean;
@@ -28,14 +37,25 @@ public class CLIPetInformationController {
         this.cliPetInformationViewCurrent = cliPetInformationViewCurrent;
     }
 
-    public void executeCommand(String inputLine) {
+    public void setFavObserver(Observer favObserver) {
+        this.favObserver = favObserver;
+
+    }
+
+    public void executeCommand(String inputLine) throws Exception {
         try {
             switch (inputLine) {
                 case REQUEST -> this.executeRequest();
-                case FAVORITE -> PrintSupport.printMessage("Pet add to favorites -->> DA FARE");
+                case FAVORITE -> this.addToFavorite();
 
                 case HOMEPAGE -> {
-                    if (Session.getCurrentSession().getShelterBean() == null) {
+                    if(object instanceof CLIUserFavoritesController) {
+                        ((CLIUserFavoritesController)object).start(); //todo non funziona
+                    }
+                    else if(object instanceof CLIShelterInfoController) {
+                        ((CLIShelterInfoController)object).start();
+                    }
+                    else if (Session.getCurrentSession().getShelterBean() == null) {
                         CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
                         cliUserHomepageView.run();
                     }
@@ -48,6 +68,19 @@ public class CLIPetInformationController {
             ScannerSupport.waitEnter();
             this.cliPetInformationViewCurrent.showCommand();
         }
+    }
+
+    private void addToFavorite() throws Exception {
+        UserBean userBean = Session.getCurrentSession().getUserBean();
+        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+        fav = petBean.getFav;
+        if(fav) {//todo add object
+            addToFavoritesController.removePet(userBean, this, index);
+            addToFavoritesController.removePet(userBean, favObserver, index);
+        } else {
+            addToFavoritesController.addPet(userBean, this, index);
+        }
+        this.cliPetInformationViewCurrent.showCommand();
     }
 
     private void executeRequest() {
@@ -206,4 +239,24 @@ public class CLIPetInformationController {
     }
 
 
+    @Override
+    public void update(Object object) throws Exception {
+        if(!fav)
+            PrintSupport.printMessage(petBean.getName() + " has been added to your favorite pets!");
+        else
+            PrintSupport.printMessage(petBean.getName() + " has been removed from your favorite pets");
+    }
+
+    @Override
+    public void update2(Object object1, Object object2) {
+
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public void setPreviousPage(Object object) {
+        this.object = object;
+    }
 }

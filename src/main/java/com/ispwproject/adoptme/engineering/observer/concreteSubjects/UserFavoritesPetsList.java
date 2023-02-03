@@ -39,6 +39,16 @@ public class UserFavoritesPetsList extends Subject {
         this.notifyObservers(petBean);
     }
 
+    public void updateRemove(PetModel petModel, Object object) throws Exception {
+        this.removePet(petModel);
+        notifyObservers(new PetBean(petModel), object);
+    }
+
+    public void updateAdd(PetModel petModel, Object object) throws Exception {
+        this.addPet(petModel);
+        notifyObservers(new PetBean(petModel), object);
+    }
+
     public List<PetModel> getPetList() {
         return petList;
     }

@@ -17,7 +17,7 @@ public class CLIPetInformationView {
         this.cliPetInformationController = cliPetInformationController;
     }
 
-    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) {
+    public void showData(String name, String dayOfBirth, String monthOfBirth, String yearOfBirth, String type, String gender, String coatLenght, String dogSize, String dogEducation, String vaccinated, String microchipped, String dewormed, String sterilized, String testFiv, String testFelv, String disability, String disabilityType, String compatibility) throws Exception {
         PrintSupport.printMessage("\n---------------------------------------- " + name + " ----------------------------------------");
         PrintSupport.printMessage("\tName: " + name);
         if(!dayOfBirth.equals("") && !monthOfBirth.equals(""))
@@ -43,7 +43,7 @@ public class CLIPetInformationView {
         showCommand();
     }
 
-    public void showCommand() {
+    public void showCommand() throws Exception {
         PrintSupport.printSeparatorLine();
         if (Session.getCurrentSession().getShelterBean() == null){
             PrintSupport.printMessage("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go to Homepage\n\nInsert the number:");

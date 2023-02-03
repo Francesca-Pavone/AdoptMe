@@ -5,7 +5,9 @@ import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,35 +80,42 @@ public class GUILoginController {
     }
 
     public void login() throws Exception {
-        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = null;
-        LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
-        LoginController loginController = new LoginController();
-        loginController.checkLogin(loginBean);
+        try {
+            Scene scene = null;
+            LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
+            LoginController loginController = new LoginController();
+            loginController.checkLogin(loginBean);
 
-        if (loginBean.getAccountType() == 1) {
-            UserBean userBean = loginController.getLoginInfoUser(loginBean);
-            Session.setSessionInstance(userBean);
-            scene = userLogin();
-            Main.getStage().setScene(scene);
-        } else if (loginBean.getAccountType() == 2) {
-            ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
-            Session.setSessionInstance(shelterBean);
+            if (loginBean.getAccountType() == 1) {
+                UserBean userBean = loginController.getLoginInfoUser(loginBean);
+                Session.setSessionInstance(userBean);
+                scene = userLogin();
+                Main.getStage().setScene(scene);
+            } else if (loginBean.getAccountType() == 2) {
+                ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
+                Session.setSessionInstance(shelterBean);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
-            Parent root = fxmlLoader.load();
-            scene = new Scene(root);
-            GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-            guiShelterHomepageController.setCurrentPage(root);
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+                Parent root = fxmlLoader.load();
+                scene = new Scene(root);
+                GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
+                guiShelterHomepageController.setCurrentPage(root);
+                Main.getStage().setScene(scene);
+            } else
+                throw new UserNotFoundException();
+            //todo: popup email o password sbagliate
+            //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
+
             Main.getStage().setScene(scene);
+        } catch (UserNotFoundException e) {
+            PrintSupport.printError(e.getMessage());
+            //todo fai dialog per dire che utente non è stato trovato
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
         }
-        else
-            System.out.println("Utente non trovato");
-        //todo: popup email o password sbagliate
-        //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
-
-        Main.getStage().setScene(scene);
-
     }
 
 

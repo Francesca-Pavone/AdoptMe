@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.Subject;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class ShelterPetsList extends Subject {
         this.shelter = shelter;
     }
 
-    public void addPet(PetModel petModel) {
+    public void addPet(PetModel petModel) throws Exception {
         this.petList.add(petModel);
         PetBean petBean = new PetBean(petModel);
         this.notifyObservers(petBean);

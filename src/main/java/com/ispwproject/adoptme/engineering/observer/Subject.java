@@ -30,12 +30,12 @@ public abstract class Subject {
         observerList.remove(observer);
     }
 
-    public void notifyObservers(Object object) throws FileNotFoundException {
+    public void notifyObservers(Object object) throws Exception {
         for (Observer observer : observerList) {
             observer.update(object);
         }
     }
-    public void notifyObservers(Object object1, Object object2)  {
+    public void notifyObservers(Object object1, Object object2) throws Exception {
         for (Observer observer : observerList) {
             observer.update2(object1, object2);
         }

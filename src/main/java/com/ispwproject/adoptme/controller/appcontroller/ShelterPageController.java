@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -18,6 +19,12 @@ public class ShelterPageController {
 
     public ShelterPageController(ShelterBean shelterBean) {
         this.shelterModel = new ShelterModel(shelterBean);
+    }
+    public ShelterPageController(){}
+
+    public ShelterBean getShelter(String shelterName) throws Exception {
+        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
+        return shelterBean;
     }
 
     public List<PetBean> getPetList(Observer observer) {

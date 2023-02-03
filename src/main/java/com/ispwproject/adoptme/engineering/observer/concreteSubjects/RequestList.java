@@ -13,7 +13,7 @@ public class RequestList extends Subject {
     private final List<RequestModel> requestList = new ArrayList<>();
     private final ShelterUserModel receiver;
 
-    public RequestList(Observer observer, List<RequestModel> requestList, ShelterUserModel receiver) throws FileNotFoundException {
+    public RequestList(Observer observer, List<RequestModel> requestList, ShelterUserModel receiver) throws Exception {
         super(observer);
         for (RequestModel request : requestList) {
             this.addRequest(request);
@@ -26,13 +26,13 @@ public class RequestList extends Subject {
         this.receiver = receiver;
     }
 
-    public void addRequest(RequestModel request) throws FileNotFoundException {
+    public void addRequest(RequestModel request) throws Exception {
         this.requestList.add(request);
         RequestBean requestBean = new RequestBean(request);
         notifyObservers(requestBean);
     }
 
-    public void removeRequest (RequestModel request) throws FileNotFoundException {
+    public void removeRequest (RequestModel request) throws Exception {
         System.out.println("RIMOSSA DALLA LISTA LA RICHIESTA: " + request.getId());
         RequestBean requestBean = new RequestBean(request);
         notifyObservers(requestBean);

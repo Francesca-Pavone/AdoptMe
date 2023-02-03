@@ -1,10 +1,8 @@
 package com.ispwproject.adoptme.view.cli;
 
-import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserFavoritesController;
-import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class CLIUserFavoritesView {
@@ -14,7 +12,23 @@ public class CLIUserFavoritesView {
         this.cliUserFavoritesControllerCurrent = cliUserFavoritesController;
     }
 
-    public void run() {
-       System.out.println("------------------------------------------ FAVORITES ------------------------------------------");
+    public void printPet(String name, String gender, String age, int i ) throws Exception {
+        PrintSupport.printMessage("    " + i + ") Name: " + name + "     ");
+        PrintSupport.printMessage("\n       Gender: " + gender + "        ");
+        PrintSupport.printMessage("\n       Age: " + age + "      ");
+        PrintSupport.printSeparatorLine();
+    }
+
+    public void run() throws Exception {
+        PrintSupport.printMessage("------------------------------------------ FAVORITES ------------------------------------------");
+        this.cliUserFavoritesControllerCurrent.getPet();
+    }
+
+    public void printCommands() throws Exception {
+        PrintSupport.printMessage("\nInsert the number of the pet you want to see\n----- or\nInsert 0 to go back to Homepage");
+        Scanner scanner = new Scanner(System.in);
+        int inputLine;
+        inputLine = scanner.nextInt();
+        this.cliUserFavoritesControllerCurrent.executeCommand(inputLine);
     }
 }
