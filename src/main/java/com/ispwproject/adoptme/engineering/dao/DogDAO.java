@@ -9,6 +9,7 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -93,8 +94,8 @@ public class DogDAO {
 
 
 
-    public static int saveDog(DogModel dogModel) throws Exception {
-        Statement stmt = null;
+    public static int saveDog(DogModel dogModel) {
+        Statement stmt;
         int dogId = 1;
 
         try {
@@ -126,7 +127,7 @@ public class DogDAO {
                 InputStream inputStream = new FileInputStream(dogModel.getPetImage());
                 preparedStatement.setBlob(4, inputStream);
             }
-            catch (ImageNotFoundException e){
+            catch (ImageNotFoundException | FileNotFoundException e){
                 preparedStatement.setNull(4, Types.BLOB);
             }
 

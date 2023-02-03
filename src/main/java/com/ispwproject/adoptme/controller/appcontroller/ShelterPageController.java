@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterPageController {
-    private final ShelterModel shelterModel;
+    private ShelterModel shelterModel;
     private ShelterPetsList shelterPetsList;
 
     public ShelterPageController(ShelterBean shelterBean) {

@@ -16,8 +16,8 @@ public class AddPetController {
         this.petBean = petBean;
     }
 
-    public void addNewPet(ShelterBean shelterBean, Observer observer) throws Exception {
-        int petId;
+    public int addNewPet(ShelterBean shelterBean, Observer observer) {
+        int petId = -1;
 
         ShelterModel shelter = new ShelterModel(shelterBean.getShelterId());
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, shelter);
@@ -42,6 +42,7 @@ public class AddPetController {
             catModel.setPetId(petId);
             shelterPetsList.addPet(catModel);
         }
+        return petId;
     }
 
     private PetCompatibility setCompatibility() {

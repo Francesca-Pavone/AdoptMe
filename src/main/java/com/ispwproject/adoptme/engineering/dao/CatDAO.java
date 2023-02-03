@@ -9,6 +9,7 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -100,7 +101,7 @@ public class CatDAO {
     }
 
 
-    public static int saveCat(CatModel catModel) throws Exception {
+    public static int saveCat(CatModel catModel)  {
         Statement stmt;
 
         int catId = 1;
@@ -133,7 +134,7 @@ public class CatDAO {
                 InputStream inputStream = new FileInputStream(catModel.getPetImage());
                 preparedStatement.setBlob(4, inputStream);
             }
-            catch (ImageNotFoundException e){
+            catch (ImageNotFoundException | FileNotFoundException e){
                 preparedStatement.setNull(4, Types.BLOB);
             }
 
