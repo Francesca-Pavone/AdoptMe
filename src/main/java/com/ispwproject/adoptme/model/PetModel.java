@@ -21,32 +21,64 @@ public abstract class PetModel {
     protected boolean disability;
     protected String disabilityType;
     protected PetCompatibility petCompatibility;
-    protected boolean fav;
 
     protected ShelterModel shelter;
 
+    protected boolean fav;
+
     public PetModel() {
+
     }
 
-    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
+    public PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, PetCompatibility petCompatibility, int shelterId) {
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
         this.coatLenght = coatLenght;
+        this.vaccinated = vaccinated;
+        this.microchipped = microchipped;
+        this.dewormed = dewormed;
+        this.sterilized = sterilized;
+        this.disability = disability;
+        this.disabilityType = disabilityType;
         this.petCompatibility = petCompatibility;
         this.shelter = new ShelterModel(shelterId);
     }
 
-    protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility, ShelterModel shelter) {
+    public PetModel(int type, String name, File petImage, int yearOfBirth, int monthOfBirth, int dayOfBirth, int gender, int coatLenght, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone, ShelterModel shelter) {
         this.type = type;
         this.name = name;
         this.petImage = petImage;
-        this.petCompatibility = petCompatibility;
+        this.yearOfBirth = yearOfBirth;
+        this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
+        this.gender = gender;
+        this.coatLenght = coatLenght;
+        this.vaccinated = vaccinated;
+        this.microchipped = microchipped;
+        this.dewormed = dewormed;
+        this.sterilized = sterilized;
+        this.disability = disability;
+        this.disabilityType = disabilityType;
+        this.petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone);
         this.shelter = shelter;
     }
 
 
-    protected PetModel(int type, String name, File petImg, int yearOfBirth, int gender) {
+    public PetModel(int petId, ShelterModel shelter, int petType, String name, File petImg, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth) {
+        setPetId(petId);
+        setType(petType);
+        setName(name);
+        setPetImage(petImg);
+        setGender(gender);
+        setDayOfBirth(dayOfBirth);
+        setMonthOfBirth(monthOfBirth);
+        setYearOfBirth(yearOfBirth);
+        this.petCompatibility = new PetCompatibility();
+        this.shelter = shelter;
+    }
+
+    public PetModel(int type, String name, File petImg, int yearOfBirth, int gender, PetCompatibility petCompatibility) {
         setType(type);
         setName(name);
         setPetImage(petImg);
@@ -55,6 +87,17 @@ public abstract class PetModel {
         this.petCompatibility = new PetCompatibility();
     }
 
+    public PetModel(int petId, int type, String petName, File petImage, int petGender, int petDayOfBirth, int petMonthOfBirth, int petYearOfBirth) {
+        setPetId(petId);
+        setType(type);
+        setName(petName);
+        setPetImage(petImage);
+        setGender(petGender);
+        setDayOfBirth(petDayOfBirth);
+        setMonthOfBirth(petMonthOfBirth);
+        setYearOfBirth(petYearOfBirth);
+        this.petCompatibility = new PetCompatibility();
+    }
 
     public ShelterModel getShelter() {
         return shelter;

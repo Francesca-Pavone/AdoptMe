@@ -16,14 +16,18 @@ public class PetCompatibility {
     public PetCompatibility() {
     }
 
-    public PetCompatibility(boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean firstExperience) {
+    public PetCompatibility(boolean maleDog, boolean femaleDog, boolean maleCat, boolean femaleCat, boolean children, boolean elders, boolean apartmentNoGarden, boolean apartmentNoTerrace, boolean sleepOutside, boolean firstExperience, int hoursAlone) {
         setMaleDog(maleDog);
         setFemaleDog(femaleDog);
         setMaleCat(maleCat);
         setFemaleCat(femaleCat);
         setChildren(children);
         setElders(elders);
+        setApartmentNoGarden(apartmentNoGarden);
+        setApartmentNoTerrace(apartmentNoTerrace);
+        setSleepOutside(sleepOutside);
         setFirstExperience(firstExperience);
+        setHoursAlone(hoursAlone);
     }
 
     public boolean isMaleDog() {

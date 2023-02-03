@@ -11,7 +11,7 @@ import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
+import com.ispwproject.adoptme.engineering.observer.concreteSubjects.ShelterPetsList;
 
 import java.io.*;
 import java.sql.*;
@@ -19,18 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetDAO {
-
-    private static final String DEFAULT_PHOTO = "image/default_photo.png";
-    public static final String IMG_SRC = "imgSrc";
-    public static final String PHOTO = "Photo";
-
-    private PetDAO() {
-        //costruttore privato
-    }
+    //costruttore privato
+    private PetDAO() {}
 
     public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws Exception {
-        Statement stmt;
-        List<PetModel> petList = new ArrayList<>();
+        Statement stmt = null;
+        List<PetModel> petList = new ArrayList<PetModel>();
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, petList, shelterModel);
         PetModel pet;
         try {
@@ -51,11 +45,11 @@ public class PetDAO {
                 int petId = resultSet.getInt("id");
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob(IMG_SRC);
+                Blob blob = resultSet.getBlob("imgSrc");
                 File petImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = petName + PHOTO + ".png";
+                        String filePath = petName + "Photo" + ".png";
                         petImage = ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
@@ -64,7 +58,7 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
                 }
 
                 String petAge = resultSet.getString("age");
@@ -83,7 +77,9 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
                 pet.setAge(petAge);
-                pet.setPetCompatibility(new PetCompatibility());
+
+                PetCompatibility petCompatibility = new PetCompatibility();
+                pet.setPetCompatibility(petCompatibility);
                 if(Session.getCurrentSession().getUserBean() != null)
                     pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterModel.getId()));
                 shelterPetsList.addPet(pet);
@@ -101,8 +97,8 @@ public class PetDAO {
     }
 
     public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
-        Statement stmt;
-        List<PetModel> petList = new ArrayList<>();
+        Statement stmt = null;
+        List<PetModel> petList = new ArrayList<PetModel>();
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -122,13 +118,13 @@ public class PetDAO {
                 int petId = resultSet.getInt("id");
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob(IMG_SRC);
+                Blob blob = resultSet.getBlob("imgSrc");
                 File petImage = null;
                 try {
                     if (blob != null) {
                         InputStream in = blob.getBinaryStream();
                         //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                        String filePath = petName + PHOTO + ".png";
+                        String filePath = petName + "Photo" + ".png";
                         petImage = new File(filePath);
                         FileOutputStream outputStream = new FileOutputStream(petImage);
                         int read;
@@ -143,7 +139,7 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
                 }
 
                 String petAge = resultSet.getString("age");
@@ -189,7 +185,8 @@ public class PetDAO {
     }
 
     public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
-        Statement stmt;
+        // STEP 1: dichiarazioni
+        Statement stmt = null;
         PetModel pet = null;
         try {
             stmt = ConnectionDB.getConnection();
@@ -209,11 +206,11 @@ public class PetDAO {
 
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob(IMG_SRC);
+                Blob blob = resultSet.getBlob("imgSrc");
                 File petImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = petName + PHOTO + ".png";
+                        String filePath = petName + "Photo" + ".png";
                         petImage = ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
@@ -222,7 +219,7 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
                 }
 
                 int petType = resultSet.getInt("type");

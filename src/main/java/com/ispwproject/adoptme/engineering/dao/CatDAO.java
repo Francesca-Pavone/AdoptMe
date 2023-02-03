@@ -16,7 +16,7 @@ public class CatDAO {
     private CatDAO() {}
 
     public static CatModel retrieveCatById(int catId, int shelterId)  throws Exception {
-        Statement stmt;
+        Statement stmt = null;
         CatModel cat = null;
 
         try {
@@ -59,28 +59,8 @@ public class CatDAO {
                 boolean testFiv = resultSet.getBoolean("testFiv");
                 boolean testFelv = resultSet.getBoolean("testFelv");
 
-                PetCompatibility petCompatibility = new PetCompatibility();
-                petCompatibility.setMaleDog(maleDog);
-                petCompatibility.setFemaleDog(femaleDog);
-                petCompatibility.setMaleCat(maleCat);
-                petCompatibility.setFemaleCat(femaleCat);
-                petCompatibility.setChildren(children);
-                petCompatibility.setElders(elders);
-                petCompatibility.setApartmentNoGarden(apartmentNoGarden);
-                petCompatibility.setApartmentNoTerrace(apartmentNoTerrace);
-                petCompatibility.setSleepOutside(sleepOutside);
-                petCompatibility.setFirstExperience(firstExperience);
-                petCompatibility.setHoursAlone(hoursAlone);
-
-                cat = new CatModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility, shelterId);
-                cat.setVaccinated(vaccinated);
-                cat.setMicrochipped(microchipped);
-                cat.setDewormed(dewormed);
-                cat.setSterilized(sterilized);
-                cat.setDisability(disability);
-                cat.setDisabilityType(disabilityType);
-                cat.setTestFiv(testFiv);
-                cat.setTestFelv(testFelv);
+                PetCompatibility petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone);
+                cat = new CatModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, petCompatibility, testFiv, testFelv, shelterId);
 
             }while(resultSet.next());
 
@@ -96,7 +76,7 @@ public class CatDAO {
 
 
     public static int saveCat(CatModel catModel) throws Exception {
-        Statement stmt;
+        Statement stmt = null;
 
         int catId = 1;
 

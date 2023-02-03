@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 
 import java.util.Scanner;
 
@@ -24,7 +23,8 @@ public class CLISendRequestView {
                 break;
             }
             catch (DateFormatException e) {
-                ShowExceptionSupport.showExceptionCLI(e.getMessage());
+                PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
+                ScannerSupport.waitEnter();
             }
         }
 
@@ -52,4 +52,8 @@ public class CLISendRequestView {
         ScannerSupport.waitEnter();
     }
 
+    public void showUnsuccessful(){
+        PrintSupport.printError("Date not valid, please retry with a future date\n\tPress ENTER to continue");
+        ScannerSupport.waitEnter();
+    }
 }

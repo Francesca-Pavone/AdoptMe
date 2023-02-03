@@ -1,7 +1,10 @@
 package com.ispwproject.adoptme.engineering.bean;
 
+import com.ispwproject.adoptme.model.RequestModel;
+
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RequestBean {
 
@@ -26,20 +29,25 @@ public class RequestBean {
         this.userId = userId;
     }
 
-    public RequestBean(File petImg, File userImg, String petName, int petId, int shelterId, String userName, int userId) {
-        this.petImg = petImg;
-        this.userImg = userImg;
-        this.petName = petName;
-        this.petId = petId;
-        this.shelterId = shelterId;
-        this.userName = userName;
-        this.userId = userId;
-    }
-
     public RequestBean(LocalDate date, String hour, String minutes) {
         this.date = date;
         this.hour = hour;
         this.minutes = minutes;
+    }
+
+    public RequestBean(RequestModel requestModel) {
+        this.id = requestModel.getId();
+        this.petImg = requestModel.getPet().getPetImage();
+        this.petName = requestModel.getPet().getName();
+        this.petId = requestModel.getPet().getPetId();
+        this.shelterId = requestModel.getPet().getShelter().getId();
+        this.userImg = requestModel.getUser().getProfileImg();
+        this.userName = requestModel.getUser().getName();
+        this.userId = requestModel.getUser().getId();
+        this.date = requestModel.getDate();
+        this.hour = String.valueOf(requestModel.getTime().getHour());
+        this.minutes = requestModel.getTime().format(DateTimeFormatter.ofPattern("mm"));
+        this.status = requestModel.getStatus();
     }
 
     public int getId() {

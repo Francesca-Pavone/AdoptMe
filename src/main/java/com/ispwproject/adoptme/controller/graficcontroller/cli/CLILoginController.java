@@ -5,12 +5,10 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
@@ -76,10 +74,6 @@ public class CLILoginController {
                PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
                ScannerSupport.waitEnter();
                this.start();
-           }
-           catch (EmailFormatException e){
-               ShowExceptionSupport.showExceptionCLI(e.getMessage());
-               start();
            }
     }
 }

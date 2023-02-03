@@ -2,7 +2,8 @@ package com.ispwproject.adoptme;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLILoginController;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.view.cli.CLILoginView;
+import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 
 public class Main extends Application {
     private static Stage stage;
+    //private static Stage stage1;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -24,6 +26,18 @@ public class Main extends Application {
         stage.setTitle("AdoptMe");
         stage.setScene(scene);
         stage.show();
+/*
+        Stage stage1 = new Stage();
+
+        /*Stage stage1 = new Stage();
+        FXMLLoader fxmlLoader1 = new FXMLLoader(Main.class.getResource("Login.fxml"));
+        Scene scene1 = new Scene(fxmlLoader1.load());
+        setStage1(stage1);
+        stage1.setTitle("AdoptMe");
+        stage1.setScene(scene1);
+        stage1.show();
+
+ */
     }
 
     @Override
@@ -35,7 +49,7 @@ public class Main extends Application {
         ConnectionDB.getConnection();
         Scanner reader = new Scanner(System.in);
         int selection;
-        PrintSupport.printMessage("Which type of view do you want to use?\n\n1) Graphic interface\n2) Command Line interface\n\nInsert the number: ");
+        System.out.println("Which type of view do you want to use?\n\n1) Graphic interface\n2) Command Line interface\n\nInsert the number: ");
 
 
         while (true) {
@@ -48,7 +62,7 @@ public class Main extends Application {
                 cliLoginController.start();
 
             } else {
-                PrintSupport.printError("Number not valid, please insert 1 or 2");
+                System.out.println("Number not valid, please insert 1 or 2");
             }
         }
     }
@@ -59,4 +73,14 @@ public class Main extends Application {
     public static void setStage(Stage stage) {
         Main.stage = stage;
     }
+/*
+    public static Stage getStage1() {
+        return stage1;
+    }
+
+    public static void setStage1(Stage stage1) {
+        Main.stage1 = stage1;
+    }
+
+ */
 }

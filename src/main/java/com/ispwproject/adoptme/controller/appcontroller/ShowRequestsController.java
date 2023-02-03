@@ -1,8 +1,5 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.model.AccountInfo;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
@@ -17,17 +14,10 @@ public class ShowRequestsController {
     private UserModel userModel;
 
     public ShowRequestsController() {
-        if (Session.getCurrentSession().getShelterBean() != null){
-            ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
-            AccountInfo accountInfo = new AccountInfo(shelterBean.getEmail(), 1);
-            this.shelterModel = new ShelterModel(shelterBean.getShelterImg(), accountInfo, shelterBean.getName(), shelterBean.getPhoneNumber(), shelterBean.getAddress(), shelterBean.getCity(), shelterBean.getWebSite());
-            this.shelterModel.setId(shelterBean.getShelterId());
-            //this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean());
-        }
+        if (Session.getCurrentSession().getShelterBean() != null)
+            this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean());
         else if (Session.getCurrentSession().getUserBean() != null) {
-            UserBean userBean = Session.getCurrentSession().getUserBean();
-            this.userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
-            //this.userModel = new UserModel(Session.getCurrentSession().getUserBean());
+            this.userModel = new UserModel(Session.getCurrentSession().getUserBean());
         }
     }
 

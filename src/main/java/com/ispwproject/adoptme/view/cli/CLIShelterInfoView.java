@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class CLIShelterInfoView {
-    
     private CLIShelterInfoController cliShelterInfoControllerCurrent;
 
     public CLIShelterInfoView(CLIShelterInfoController cliShelterInfoController) {
