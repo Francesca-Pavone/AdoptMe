@@ -4,6 +4,8 @@ import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -100,31 +102,35 @@ public class GUIUserHomepageController extends UserSideBar {
                 labelCity.setText("Shelters you can find in '" + userResearchBean.getCityShelter() + "':");
                 UserResearchController userResearchControllerA = new UserResearchController();
                 int row = 1;
-                List<ShelterBean> shelterList = new ArrayList<>(userResearchControllerA.searchCity(userResearchBean));
+                List<ShelterBean> shelterList = null;
                 try {
-                    for (ShelterBean shelterBean : shelterList) {
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
-                        Pane pane = fxmlLoader.load();
+                    shelterList = new ArrayList<>(userResearchControllerA.searchCity(userResearchBean));
+                } catch (Exception e) {
+                    ShowExceptionSupport.showExceptionGUI(e.getMessage());
+                }
+                if(shelterList != null) {
+                    try {
+                        for (ShelterBean shelterBean : shelterList) {
+                            FXMLLoader fxmlLoader = new FXMLLoader();
+                            fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
+                            Pane pane = fxmlLoader.load();
 
-                        GUIShelterItemController shelterItemControllerG = fxmlLoader.getController();
-                        shelterItemControllerG.setPageContainer(currentPage);
-                        shelterItemControllerG.setShelter(shelterBean);
-                        shelterItemControllerG.setData();
+                            GUIShelterItemController shelterItemControllerG = fxmlLoader.getController();
+                            shelterItemControllerG.setPageContainer(currentPage);
+                            shelterItemControllerG.setShelter(shelterBean);
+                            shelterItemControllerG.setData();
 
-
-                        grid.add(pane, 1, row);
-                        row++;
+                            grid.add(pane, 1, row);
+                            row++;
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
             if (radioBtnShelter.isSelected()) {
                 labelCity.setVisible(true);
                 backButton.setVisible(true);
-                scrollPane.setVisible(true);
-                labelCity.setText("Pets you can find in '" + userResearchBean.getCityShelter() + "':");
 
                 Stage dialog = new Stage();
                 dialog.initModality(Modality.APPLICATION_MODAL);
@@ -136,12 +142,14 @@ public class GUIUserHomepageController extends UserSideBar {
                 GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
                 guiShelterInformationController.setPreviousPage(currentPage);
                 guiShelterInformationController.setCurrentPage(root);
-                guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
+                boolean check = guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
+                if (check) {
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
 
-                stage.show();
+                    stage.show();
+                }
             }
         }
     }

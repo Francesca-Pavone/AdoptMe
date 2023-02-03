@@ -34,8 +34,8 @@ public class CLILoginController {
                 case LOGIN -> this.cliLoginView.getCredentials();
                 case NO_LOGIN -> {
                     Session.setSessionInstance(null);
-                    CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                    cliUserHomepageView.run();
+                    CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+                    cliUserHomepageController.start();
                 }
                 case FORGOT_PASSWORD, SIGN_UP, LOGIN_WITH_GOOGLE -> {
                     PrintSupport.printMessage("Functionality not yet developed.");
@@ -61,8 +61,8 @@ public class CLILoginController {
                if (loginBean.getAccountType() == 1) {
                    UserBean userBean = loginController.getLoginInfoUser(loginBean);
                    Session.setSessionInstance(userBean);
-                   CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                   cliUserHomepageView.run();
+                   CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+                   cliUserHomepageController.start();
                } else if (loginBean.getAccountType() == 2) {
                    ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
                    Session.setSessionInstance(shelterBean);
