@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
@@ -7,7 +8,7 @@ import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.RequestList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.RequestList;
 import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.time.LocalDate;
@@ -34,7 +35,8 @@ public class SendRequestController {
         petModel.setShelter(shelterModel);
 
         requestModel.setPet(petModel);
-        requestModel.setUser(new UserModel(Session.getCurrentSession().getUserBean()));
+        UserBean userBean = Session.getCurrentSession().getUserBean();
+        requestModel.setUser(new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname()));
 
         //non permetto di prendere appuntamenti nei giorni già passati
         if (requestBean.getDate().isBefore(LocalDate.now())){

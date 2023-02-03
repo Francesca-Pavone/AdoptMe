@@ -5,8 +5,10 @@ import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
+import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -80,8 +82,9 @@ public class GUILoginController {
     }
 
     public void login() throws Exception {
+        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = null;
         try {
-            Scene scene = null;
             LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
             LoginController loginController = new LoginController();
             loginController.checkLogin(loginBean);
@@ -116,6 +119,9 @@ public class GUILoginController {
             stage.setScene(scene);
             stage.show();
         }
+        catch (EmailFormatException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
 
@@ -145,7 +151,4 @@ public class GUILoginController {
         }
     }
 
-
-    public void switchInterface(ActionEvent actionEvent){
-    }
 }

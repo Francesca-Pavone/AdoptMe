@@ -41,7 +41,7 @@ public class GUIUserAppointmentsController extends UserSideBar implements Observ
                 case 0 -> sentReqList.getChildren().add(pane);
                 case 1 -> pendingReqList.getChildren().add(pane);
                 case 2 -> confirmedReqList.getChildren().add(pane);
-                case 3 -> rejectedReqList.getChildren().add(pane);
+                default -> rejectedReqList.getChildren().add(pane);
             }
 
         } catch (IOException e) {

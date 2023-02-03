@@ -6,12 +6,12 @@ import com.ispwproject.adoptme.engineering.observer.Subject;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class RequestModel extends Subject{
 
     private int id;
     private PetModel pet;
-    //private ShelterModel shelter;
     private UserModel user;
     private LocalDate date;
     private LocalTime time;
@@ -21,7 +21,6 @@ public class RequestModel extends Subject{
         super(observer);
         this.id = id;
         this.pet = pet;
-        //this.shelter = pet.getShelter();
         this.user = user;
         this.date = date;
         this.time = time;
@@ -31,10 +30,6 @@ public class RequestModel extends Subject{
     public RequestModel() {
     }
 
-    public RequestModel(Observer observer, int id) {
-        super(observer);
-        this.id = id;
-    }
 
     public int getId() {
         return id;
@@ -51,15 +46,6 @@ public class RequestModel extends Subject{
     public void setPet(PetModel pet) {
         this.pet = pet;
     }
-
-    /*
-    public ShelterModel getShelter() {
-        return shelter;
-    }
-    public void setShelter(ShelterModel shelter) {
-        this.shelter = shelter;
-    }
-     */
 
     public UserModel getUser() {
         return user;
@@ -92,9 +78,16 @@ public class RequestModel extends Subject{
     public void setStatus(int status) {
         this.status = status;
     }
+
     public void updateStatus(int status, Object object) throws Exception {
         this.status = status;
-        RequestBean requestBean = new RequestBean(this);
+        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getProfileImg(), getPet().getName(), getPet().getPetId(), getPet().getShelter().getId(), getUser().getName(), getUser().getId());
+        requestBean.setId(getId());
+        requestBean.setDate(getDate());
+        requestBean.setHour(String.valueOf(getTime().getHour()));
+        requestBean.setMinutes(getTime().format(DateTimeFormatter.ofPattern("mm")));
+        requestBean.setStatus(status);
+
         notifyObservers(requestBean, object);
     }
 

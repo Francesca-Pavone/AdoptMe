@@ -50,11 +50,12 @@ public class CLIShelterInfoController implements Observer {
     }
     @Override
     public void update(Object object) {
+        //ignore
     }
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 
     public void executeCommand(int i) throws Exception {

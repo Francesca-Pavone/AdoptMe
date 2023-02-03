@@ -58,8 +58,21 @@ public class DogDAO {
                 boolean programEducation = resultSet.getBoolean("education");
                 int size = resultSet.getInt("size");
 
-                PetCompatibility petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone);
-                dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, petCompatibility, programEducation, size, shelterId);
+                PetCompatibility petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, firstExperience);
+                petCompatibility.setApartmentNoGarden(apartmentNoGarden);
+                petCompatibility.setApartmentNoTerrace(apartmentNoTerrace);
+                petCompatibility.setSleepOutside(sleepOutside);
+                petCompatibility.setHoursAlone(hoursAlone);
+
+                dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility, shelterId);
+                dog.setVaccinated(vaccinated);
+                dog.setMicrochipped(microchipped);
+                dog.setDewormed(dewormed);
+                dog.setSterilized(sterilized);
+                dog.setDisability(disability);
+                dog.setDisabilityType(disabilityType);
+                dog.setProgramEducation(programEducation);
+                dog.setSize(size);
 
             }while(resultSet.next());
 

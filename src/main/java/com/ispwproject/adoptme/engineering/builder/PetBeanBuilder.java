@@ -52,10 +52,7 @@ public final class PetBeanBuilder {
         this.shelterId = shelterId;
         return this;
     }
-    public PetBeanBuilder petImage(File petImage) {
-        this.petImage = petImage;
-        return this;
-    }
+
 
     public PetBeanBuilder name(String name) {
         this.name = name;
@@ -79,6 +76,11 @@ public final class PetBeanBuilder {
 
     public PetBeanBuilder dayOfBirth(int dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
+        return this;
+    }
+
+    public PetBeanBuilder petImage(File petImage) {
+        this.petImage = petImage;
         return this;
     }
 
@@ -198,6 +200,33 @@ public final class PetBeanBuilder {
     }
 
     public PetBean build() {
-        return new PetBean(petId, shelterId, petImage, name, type, yearOfBirth, monthOfBirth, dayOfBirth, gender, coatLenght, vaccinated, microchipped, dewormed, sterilized, disability, disabilityType, maleDog, femaleDog, maleCat, femaleCat, children, elders, apartmentNoGarden, apartmentNoTerrace, sleepOutside, firstExperience, hoursAlone, dogEducation, size, testFiv, testFelv);
+        PetBean petBean =  new PetBean(petId, shelterId, petImage, name, type, null, gender);
+        petBean.setYearOfBirth(yearOfBirth);
+        petBean.setMonthOfBirth(monthOfBirth);
+        petBean.setDayOfBirth(dayOfBirth);
+        petBean.setCoatLenght(coatLenght);
+        petBean.setVaccinated(vaccinated);
+        petBean.setMicrochipped(microchipped);
+        petBean.setDewormed(dewormed);
+        petBean.setSterilized(sterilized);
+        petBean.setDisability(disability);
+        petBean.setDisabilityType(disabilityType);
+        petBean.setMaleDog(maleDog);
+        petBean.setFemaleDog(femaleDog);
+        petBean.setMaleCat(maleCat);
+        petBean.setFemaleCat(femaleCat);
+        petBean.setChildren(children);
+        petBean.setElders(elders);
+        petBean.setApartmentNoGarden(apartmentNoGarden);
+        petBean.setApartmentNoTerrace(apartmentNoTerrace);
+        petBean.setSleepOutside(sleepOutside);
+        petBean.setFirstExperience(firstExperience);
+        petBean.setHoursAlone(hoursAlone);
+        petBean.setDogEducation(dogEducation);
+        petBean.setSize(size);
+        petBean.setTestFiv(testFiv);
+        petBean.setTestFelv(testFelv);
+
+        return petBean;
     }
 }

@@ -167,19 +167,7 @@ public class GUIPetInfoController implements Observer {
         nameTitle.setText(petBean.getName());
 
 
-        // check date value
-        if (petBean.getDayOfBirth() == 0)  // day of birth not known
-            dateBox.getChildren().removeAll(dayOfBirth, slash1);
-        else
-            dayOfBirth.setText(String.valueOf(petBean.getDayOfBirth()));
-
-        if (petBean.getMonthOfBirth() == 0)  // month of birth not known
-            dateBox.getChildren().removeAll(monthOfBirth, slash2);
-        else
-            monthOfBirth.setText(String.valueOf(petBean.getMonthOfBirth()));
-
-        // year of birth is mandatory information on pet registration
-        yearOfBirth.setText(String.valueOf(petBean.getYearOfBirth()));
+        setDateOfBirth(petBean);
 
         type.setText(
                 switch (petBean.getType()) {
@@ -202,6 +190,45 @@ public class GUIPetInfoController implements Observer {
         );
 
         // check if it isn't a dog
+        verifyNoDog(petBean);
+
+        // check if it isn't a cat
+        verifyNoCat(petBean);
+
+        setGeneralInfo(petBean);
+
+        setCompatibility(petBean);
+    }
+
+    private void setGeneralInfo(PetBean petBean) {
+        vaccinated.setText("Vaccinations not completed");
+        if (petBean.isVaccinated())
+            vaccinated.setText("Vaccinations complete");
+
+        microchipped.setText("Not microchipped");
+        if (petBean.isMicrochipped())
+            microchipped.setText("Microchipped");
+
+        dewormed.setText("Not dewormed");
+        if (petBean.isDewormed())
+            dewormed.setText("Dewormed");
+
+        sterilized.setText("Not sterilized");
+        if (petBean.isSterilized())
+            sterilized.setText("Sterilized");
+
+
+        if (!petBean.isDisability())
+            petInfoVBox.getChildren().remove(disabilityBox);
+        else {
+            disability.setText("Disability");
+            disabilityType.setText("Not specified");
+            if (!petBean.getDisabilityType().equals(""))
+                disabilityType.setText(petBean.getDisabilityType());
+        }
+    }
+
+    private void verifyNoDog(PetBean petBean) {
         if (petBean.getType() != 0) {
             petInfoVBox.getChildren().removeAll(sizeBox, dogEducation);
         }
@@ -220,26 +247,9 @@ public class GUIPetInfoController implements Observer {
             else
                 dogEducation.setText("Program of dog education: Not needed");
         }
+    }
 
-
-        //General info
-        vaccinated.setText("Vaccinations not completed");
-        if (petBean.isVaccinated())
-            vaccinated.setText("Vaccinations complete");
-
-        microchipped.setText("Not microchipped");
-        if (petBean.isMicrochipped())
-            microchipped.setText("Microchipped");
-
-        dewormed.setText("Not dewormed");
-        if (petBean.isDewormed())
-            dewormed.setText("Dewormed");
-
-        sterilized.setText("Not sterilized");
-        if (petBean.isSterilized())
-            sterilized.setText("Sterilized");
-
-        // check if it isn't a cat
+    private void verifyNoCat(PetBean petBean) {
         if (petBean.getType() != 1){
             petInfoVBox.getChildren().removeAll(testFiv, testFelv);
         }
@@ -252,17 +262,21 @@ public class GUIPetInfoController implements Observer {
             if (petBean.isTestFelv())
                 testFelv.setText("Test Felv: Positive");
         }
+    }
 
-        if (!petBean.isDisability())
-            petInfoVBox.getChildren().remove(disabilityBox);
-        else {
-            disability.setText("Disability");
-            disabilityType.setText("Not specified");
-            if (!petBean.getDisabilityType().equals(""))
-                disabilityType.setText(petBean.getDisabilityType());
-        }
+    private void setDateOfBirth(PetBean petBean) {
+        if (petBean.getDayOfBirth() == 0)  // day of birth not known
+            dateBox.getChildren().removeAll(dayOfBirth, slash1);
+        else
+            dayOfBirth.setText(String.valueOf(petBean.getDayOfBirth()));
 
-        setCompatibility(petBean);
+        if (petBean.getMonthOfBirth() == 0)  // month of birth not known
+            dateBox.getChildren().removeAll(monthOfBirth, slash2);
+        else
+            monthOfBirth.setText(String.valueOf(petBean.getMonthOfBirth()));
+
+        // year of birth is mandatory information on pet registration
+        yearOfBirth.setText(String.valueOf(petBean.getYearOfBirth()));
     }
 
     private void setCompatibility(PetBean petBean) {

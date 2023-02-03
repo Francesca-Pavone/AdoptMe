@@ -29,7 +29,7 @@
                               <ToggleGroup fx:id="SwitchInterfaceGroup" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="cliInterface" mnemonicParsing="false" onAction="#switchInterface" styleClass="radio-button2" text="CLI" textFill="WHITE" toggleGroup="$SwitchInterfaceGroup">
+                        <RadioButton fx:id="cliInterface" mnemonicParsing="false" styleClass="radio-button2" text="CLI" textFill="WHITE" toggleGroup="$SwitchInterfaceGroup">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>

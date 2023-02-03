@@ -2,8 +2,8 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
@@ -33,9 +33,8 @@ public class CLINeedAccountController {
                 default -> throw new CommandNotFoundException();
             }
         } catch (CommandNotFoundException e) {
-            PrintSupport.printError(e.getMessage() + "1 | 2\n\tPress ENTER to continue");
-            ScannerSupport.waitEnter();
-            cliNeedAccountView.showMessage();
+            ShowExceptionSupport.showExceptionCLI("e.getMessage() + \"1 | 2");
+            this.cliNeedAccountView.showMessage();
         }
     }
 }

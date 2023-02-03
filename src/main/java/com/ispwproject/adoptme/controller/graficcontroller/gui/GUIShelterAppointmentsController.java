@@ -42,6 +42,9 @@ public class GUIShelterAppointmentsController extends ShelterSideBar implements 
                     case 0 -> pendingReqList.getChildren().add(pane);
                     case 1 -> sentReqList.getChildren().add(pane);
                     case 2 -> confirmedReqList.getChildren().add(pane);
+                    default -> {
+                        // nothing to do
+                    }
                 }
 
             } catch (IOException e) {

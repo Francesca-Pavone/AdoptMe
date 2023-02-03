@@ -1,13 +1,15 @@
 package com.ispwproject.adoptme.engineering.bean;
 
+import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
+
 public class LoginBean {
     private String password;
     private String email;
     private int accountType; // 0 -> USER  |  1 -> SHELTER
 
-    public LoginBean(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public LoginBean(String email, String password) throws EmailFormatException {
+        this.setEmail(email);
+        this.setPassword(password);
     }
 
     public String getPassword() {
@@ -22,7 +24,10 @@ public class LoginBean {
         return email;
     }
 
-    public void setEmail(String email) {
+    //controllo sintattico sulla correttezza dell'email
+    public void setEmail(String email) throws EmailFormatException {
+        if (email == null || email.isEmpty() || email.replaceAll("[^@]", "").length() != 1 || email.contains(".@"))
+            throw new EmailFormatException(email);
         this.email = email;
     }
 
