@@ -4,7 +4,9 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -94,15 +96,24 @@ public class GUIShelterInformationController implements Observer {
         }
     }
 
-    public void setShelterData(String shelterName) throws Exception {
-        ShelterPageController shelterPageController = new ShelterPageController();
-        ShelterBean shelterBean = shelterPageController.getShelter(shelterName);
-        setData(shelterBean);
+    public boolean setShelterData(String shelterName) throws IOException {
+        boolean check = false;
+        try {
+            ShelterPageController shelterPageController = new ShelterPageController();
+            ShelterBean shelterBean = shelterPageController.getShelter(shelterName);
+            if (shelterBean != null)
+                setData(shelterBean);
+            check = true;
+        } catch (NoSheltersWithThatNameException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
     }
 
     public void selectInformations() {
         paneInformations.setVisible(btnInformations.isSelected());
-
     }
 
     public void goBack() throws IOException {

@@ -15,7 +15,6 @@ import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
-import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 public class CLIPetInformationController implements Observer {
 
@@ -47,24 +46,30 @@ public class CLIPetInformationController implements Observer {
     public void executeCommand(String inputLine){
         try {
             switch (inputLine) {
-                case REQUEST -> this.executeRequest();
-                case FAVORITE -> this.addToFavorite();
+                case REQUEST -> {
+                    if (Session.getCurrentSession().getUserBean() == null)
+                        throw new NoAccoutException();
+                    this.executeRequest(); }
+                case FAVORITE -> {
+                    if (Session.getCurrentSession().getUserBean() == null)
+                        throw new NoAccoutException();
+                    this.addToFavorite();}
                 case HOMEPAGE -> {
                     if(object instanceof CLIUserFavoritesController) {
                         try {((CLIUserFavoritesController)object).start(); }
                         catch (FavoriteListEmptyException e) {
                             PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
                             ScannerSupport.waitEnter();
-                            CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                            cliUserHomepageView.run();
+                            CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+                            cliUserHomepageController.start();
                         }
                     }
                     else if(object instanceof CLIShelterInfoController) {
                         ((CLIShelterInfoController)object).start();
                     }
                     else if (Session.getCurrentSession().getShelterBean() == null) {
-                        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                        cliUserHomepageView.run();
+                        CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+                        cliUserHomepageController.start();
                     }
                     // todo: fare shelter homepage
                 }
@@ -74,6 +79,10 @@ public class CLIPetInformationController implements Observer {
             PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
             ScannerSupport.waitEnter();
             this.cliPetInformationViewCurrent.showCommand();
+        } catch(NoAccoutException e) {
+            PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
+            ScannerSupport.waitEnter();
+            this.cliPetInformationViewCurrent.showCommand();
         }
     }
 
@@ -81,7 +90,7 @@ public class CLIPetInformationController implements Observer {
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
         fav = petBean.getFav;
-        if(fav) {//todo add object
+        if (fav) {//todo add object
             addToFavoritesController.removePet(userBean, this, index);
             addToFavoritesController.removePet(userBean, favObserver, index);
         } else {

@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -24,8 +25,11 @@ public class ShelterPageController {
     public ShelterPageController(){}
 
     public ShelterBean getShelter(String shelterName) throws Exception {
-        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName));
-        return new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        ShelterBean shelterBean = null;
+        int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
+        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
+        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        return shelterBean;
     }
 
     public List<PetBean> getPetList(Observer observer) {

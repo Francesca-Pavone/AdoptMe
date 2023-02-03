@@ -27,8 +27,8 @@ public class CLINeedAccountController {
                     cliLoginController.start();
                 }
                 case HOMEPAGE -> {
-                    CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-                    cliUserHomepageView.run();
+                    CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+                    cliUserHomepageController.start();
                 }
                 default -> throw new CommandNotFoundException();
             }

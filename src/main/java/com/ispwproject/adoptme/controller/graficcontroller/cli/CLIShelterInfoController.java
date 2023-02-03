@@ -1,11 +1,12 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
+import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterInfoView;
 import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 import java.util.List;
 
@@ -14,11 +15,18 @@ public class CLIShelterInfoController implements Observer {
     private CLIShelterInfoView cliShelterInfoView;
     private ShelterBean shelterBean;
     private List<PetBean> petBeanList;
+    private CLIUserHomepageController previousPage;
 
-    public void setShelter(String shelterName) throws Exception {
-        ShelterPageController shelterPageController = new ShelterPageController();
+    public void setShelter(String shelterName) {
+        try {
+            ShelterPageController shelterPageController = new ShelterPageController();
         this.shelterBean = shelterPageController.getShelter(shelterName);
         this.start();
+        } catch (Exception e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            ScannerSupport.waitEnter();
+            previousPage.start();
+        }
     }
     
     public void start(){
@@ -45,8 +53,7 @@ public class CLIShelterInfoController implements Observer {
 
 
     public void goBack(){
-        CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-        cliUserHomepageView.run();
+        previousPage.start();
     }
     @Override
     public void update(Object object) {
@@ -70,5 +77,9 @@ public class CLIShelterInfoController implements Observer {
             cliPetInformationController.setPreviousPage(this);
             cliPetInformationController.setPetInfo();
         }
+    }
+
+    public void setPreviousPage(CLIUserHomepageController cliUserHomepageController) {
+        this.previousPage = cliUserHomepageController;
     }
 }
