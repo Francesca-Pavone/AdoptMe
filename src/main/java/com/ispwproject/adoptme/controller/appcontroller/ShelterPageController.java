@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterPageController {
-    ShelterModel shelterModel;
-    ShelterPetsList shelterPetsList;
+    private final ShelterModel shelterModel;
+    private ShelterPetsList shelterPetsList;
 
     public ShelterPageController(ShelterBean shelterBean) {
         this.shelterModel = new ShelterModel(shelterBean.getShelterId());
@@ -28,9 +28,6 @@ public class ShelterPageController {
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();
-        } catch (ClassNotFoundException driverEx) {
-            // Errore nel loading del driver
-            driverEx.printStackTrace();
         } catch (Exception e) {
             // Errore nel loading del driver o possibilmente nell'accesso al filesystem
             e.printStackTrace();

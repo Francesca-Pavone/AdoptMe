@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.engineering.dao;
 
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
@@ -26,7 +27,7 @@ public class PetDAO {
         //costruttore privato
     }
 
-    public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws Exception {
+    public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws SQLException, NoPetsFoundException {
         Statement stmt;
         List<PetModel> petList = new ArrayList<>();
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, petList, shelterModel);
@@ -39,7 +40,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No pets found for the shelter with id: "+shelterModel.getId());
+                throw new NoPetsFoundException();
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -63,6 +64,8 @@ public class PetDAO {
                 }
                 catch (ImageNotFoundException e) {
                     petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
 
                 String petAge = resultSet.getString("age");
@@ -92,8 +95,8 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
-            e.printStackTrace();
+        catch (NoPetsFoundException e) {
+            throw new NoPetsFoundException();
         }
         return shelterPetsList;
     }

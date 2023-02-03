@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestEmailFormat {
-
+    /**
+     * FRANCESCA PAVONE SALAFIA
+     * Il seguente test va a testare la verifica sulla correttezza sintattica dell'email inserita per effettuare il login
+     */
     @Test
     public void testEmailFormat(){
         int validFormat;

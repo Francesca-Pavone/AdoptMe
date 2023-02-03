@@ -26,4 +26,5 @@ module com.ispwproject.adoptme {
     exports com.ispwproject.adoptme.engineering.dao;
     exports com.ispwproject.adoptme.engineering.exception;
     exports com.ispwproject.adoptme.engineering.session;
+    exports com.ispwproject.adoptme.engineering.observer.concretesubjects;
 }

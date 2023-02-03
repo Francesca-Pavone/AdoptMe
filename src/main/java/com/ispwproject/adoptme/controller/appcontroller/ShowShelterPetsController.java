@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
@@ -16,7 +17,7 @@ import java.util.List;
 public class ShowShelterPetsController {
     private ShelterPetsList shelterPetsList;
 
-    public void getPetList(Observer observer) {
+    public void getPetList(Observer observer) throws NoPetsFoundException {
         ShelterModel shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean().getShelterId());
 
         try {
@@ -24,12 +25,6 @@ public class ShowShelterPetsController {
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();
-        } catch (ClassNotFoundException driverEx) {
-            // Errore nel loading del driver
-            driverEx.printStackTrace();
-        } catch (Exception e) {
-            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
-            e.printStackTrace();
         }
 
         List<PetBean> petBeanList = new ArrayList<>();

@@ -45,7 +45,7 @@ public class TestSendRequest {
             sendRequestController.sendUserRequest(petBean, requestBean, null);
         }
         catch (PastDateException e) {
-            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+            e.printStackTrace();
         }
 
         int requestAfter = RequestDAO.retrieveReqByShelter(new ShelterModel(1), null);

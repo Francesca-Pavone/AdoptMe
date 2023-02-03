@@ -3,7 +3,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,11 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
     public void setCurrentPage(Parent currentPage) {
         this.currentPage = currentPage;
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
-        showShelterPetsController.getPetList(this);
+        try {
+            showShelterPetsController.getPetList(this);
+        }catch (NoPetsFoundException e){
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
     public void addPet(ActionEvent event) throws IOException {
@@ -52,6 +58,9 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
         dialog.show();
     }
 
+    public GridPane getGrid() {
+        return grid;
+    }
 
     @Override
     public void update(Object object) {
@@ -67,7 +76,7 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
                 column = 0;
                 row++;
             }
-            grid.add(pane, column++, row);
+            getGrid().add(pane, column++, row);
 
         } catch (IOException e) {
             e.printStackTrace();
