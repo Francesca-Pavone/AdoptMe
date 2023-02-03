@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class UserSideBar {
 
-    public void goToHomepage() throws IOException {
+    public void goToHomePage() throws IOException {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Parent root = fxmlLoader.load();

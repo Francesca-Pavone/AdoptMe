@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
@@ -73,6 +74,9 @@ public class DogDAO {
                 dog.setDisabilityType(disabilityType);
                 dog.setProgramEducation(programEducation);
                 dog.setSize(size);
+                if(Session.getCurrentSession().getUserBean() != null)
+                    dog.setFav(FavoritesDAO.checkFav(dogId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
+
 
             }while(resultSet.next());
 

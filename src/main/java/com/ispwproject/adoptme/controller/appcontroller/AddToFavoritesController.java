@@ -1,18 +1,12 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.dao.DogDAO;
 import com.ispwproject.adoptme.engineering.dao.FavoritesDAO;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
-import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.model.CatModel;
-import com.ispwproject.adoptme.model.DogModel;
-import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.model.UserModel;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.model.*;
 
 public class AddToFavoritesController {
 
@@ -22,35 +16,81 @@ public class AddToFavoritesController {
         this.petBean = petBean;
     }
 
-    public void addPet(UserBean userBean, Observer observer, Object object) throws Exception {
-        UserModel userModel = new UserModel(userBean);
-        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
+    public void addPet(UserBean userBean, Observer observer, Object object) {
+        try {
+            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname()); //todo userbean.get ..
+            UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
-        FavoritesDAO.addFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
-        ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+            FavoritesDAO.addFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
+            ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
-        if (petBean.getType() == 0) {
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isDogEducation(), petBean.getSize(), shelter);
-            userFavoritesPetsList.updateAdd(dogModel, object);
-        } else if (petBean.getType() == 1) {
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isTestFiv(), petBean.isTestFelv(), shelter);
-            userFavoritesPetsList.updateRemove(catModel, object);
+            if (petBean.getType() == 0) {
+                PetCompatibility petCompatibility = setCompatibility();
+                DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize(), shelter);
+                dogModel.setPetId(petBean.getPetId());
+                setCommonInfo(dogModel);
+                userFavoritesPetsList.updateAdd(dogModel, object);
+            } else if (petBean.getType() == 1) {
+                PetCompatibility petCompatibility = setCompatibility();
+                CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility, shelter);
+                catModel.setPetId(petBean.getPetId());
+                setCommonInfo(catModel);
+                userFavoritesPetsList.updateAdd(catModel, object);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //todo fare exception
         }
     }
 
-    public void removePet(UserBean userBean, Observer observer, Object object) throws Exception {
-        UserModel userModel = new UserModel(userBean);
-        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
+    private PetCompatibility setCompatibility() {
+        PetCompatibility petCompatibility = new PetCompatibility(petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isFirstExperience());
+        petCompatibility.setApartmentNoGarden(petBean.isApartmentNoGarden());
+        petCompatibility.setApartmentNoTerrace(petBean.isApartmentNoTerrace());
+        petCompatibility.setSleepOutside(petBean.isSleepOutside());
+        petCompatibility.setHoursAlone(petBean.getHoursAlone());
+        return petCompatibility;
+    }
 
-        FavoritesDAO.removeFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
-        ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+    private void setCommonInfo(PetModel petModel) {
+        petModel.setYearOfBirth(petBean.getYearOfBirth());
+        petModel.setMonthOfBirth(petBean.getMonthOfBirth());
+        petModel.setDayOfBirth(petBean.getDayOfBirth());
+        petModel.setGender(petBean.getGender());
+        petModel.setCoatLenght(petBean.getCoatLenght());
+        petModel.setVaccinated(petBean.isVaccinated());
+        petModel.setMicrochipped(petBean.isMicrochipped());
+        petModel.setDewormed(petBean.isDewormed());
+        petModel.setSterilized(petBean.isSterilized());
+        petModel.setDisability(petBean.isDisability());
+        petModel.setDisabilityType(petBean.getDisabilityType());
+    }
 
-        if (petBean.getType() == 0) {
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isDogEducation(), petBean.getSize(), shelter);
-            userFavoritesPetsList.updateAdd(dogModel, object);
-        } else if (petBean.getType() == 1) {
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth(), petBean.getGender(), petBean.getCoatLenght(), petBean.isVaccinated(), petBean.isMicrochipped(), petBean.isDewormed(), petBean.isSterilized(), petBean.isDisability(), petBean.getDisabilityType(), petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isApartmentNoGarden(), petBean.isApartmentNoTerrace(), petBean.isSleepOutside(), petBean.isFirstExperience(), petBean.getHoursAlone(), petBean.isTestFiv(), petBean.isTestFelv(), shelter);
-            userFavoritesPetsList.updateRemove(catModel, object);
+    public void removePet(UserBean userBean, Observer observer, Object object){
+        try {
+            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
+            UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
+
+            FavoritesDAO.removeFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
+            ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+
+            if (petBean.getType() == 0) {
+                PetCompatibility petCompatibility = setCompatibility();
+                DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize(), shelter);
+                dogModel.setPetId(petBean.getPetId());
+                setCommonInfo(dogModel);
+                userFavoritesPetsList.updateRemove(dogModel, object);
+            } else if (petBean.getType() == 1) {
+                PetCompatibility petCompatibility = setCompatibility();
+                CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility, shelter);
+                catModel.setPetId(petBean.getPetId());
+                setCommonInfo(catModel);
+                userFavoritesPetsList.updateRemove(catModel, object);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            //todo fare exception
         }
     }
+
 }

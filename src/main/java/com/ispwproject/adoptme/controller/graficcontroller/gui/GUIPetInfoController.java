@@ -7,10 +7,7 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +26,6 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.List;
 
 public class GUIPetInfoController implements Observer {
     @FXML
@@ -154,7 +150,6 @@ public class GUIPetInfoController implements Observer {
 
             if(!fav) {
                 btnFav.setText("Add to favorites");
-                nameFavHBox.getChildren().add(favImage);
             }
             else
                 btnFav.setText("Remove from favorites");
@@ -333,7 +328,7 @@ public class GUIPetInfoController implements Observer {
         stage.setScene(scene);
     }
 
-    public void addPetToFavorites() throws Exception {
+    public void addPetToFavorites() {
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
         if(fav) {

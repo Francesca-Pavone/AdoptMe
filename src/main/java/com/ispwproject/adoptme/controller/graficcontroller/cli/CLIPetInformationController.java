@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendR
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
@@ -19,7 +20,6 @@ import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 public class CLIPetInformationController implements Observer {
 
     private final PetBean petBean;
-    private PetBean petBean;
     private boolean fav = false;
 
     private Observer favObserver;
@@ -44,14 +44,20 @@ public class CLIPetInformationController implements Observer {
 
     }
 
-    public void executeCommand(String inputLine) throws Exception {
+    public void executeCommand(String inputLine){
         try {
             switch (inputLine) {
                 case REQUEST -> this.executeRequest();
                 case FAVORITE -> this.addToFavorite();
                 case HOMEPAGE -> {
                     if(object instanceof CLIUserFavoritesController) {
-                        ((CLIUserFavoritesController)object).start(); //todo non funziona
+                        try {((CLIUserFavoritesController)object).start(); }
+                        catch (FavoriteListEmptyException e) {
+                            PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
+                            ScannerSupport.waitEnter();
+                            CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
+                            cliUserHomepageView.run();
+                        }
                     }
                     else if(object instanceof CLIShelterInfoController) {
                         ((CLIShelterInfoController)object).start();
@@ -71,7 +77,7 @@ public class CLIPetInformationController implements Observer {
         }
     }
 
-    private void addToFavorite() throws Exception {
+    private void addToFavorite(){
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
         fav = petBean.getFav;
@@ -99,7 +105,7 @@ public class CLIPetInformationController implements Observer {
         }
     }
 
-    public void setPetInfo() throws Exception {
+    public void setPetInfo(){
 
         PetInfoController petInfoControllerA = new PetInfoController();
         petInfoControllerA.getPetInfo(petBean);
@@ -243,7 +249,7 @@ public class CLIPetInformationController implements Observer {
 
 
     @Override
-    public void update(Object object) throws Exception {
+    public void update(Object object){
         if(!fav)
             PrintSupport.printMessage(petBean.getName() + " has been added to your favorite pets!");
         else

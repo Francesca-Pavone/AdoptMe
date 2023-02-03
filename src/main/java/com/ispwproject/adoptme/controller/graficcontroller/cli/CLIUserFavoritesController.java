@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIUserFavoritesView;
@@ -13,7 +14,7 @@ public class CLIUserFavoritesController implements Observer {
     private CLIUserFavoritesView cliUserFavoritesView;
     private List<PetBean> petBeanList;
 
-    public void start() throws Exception {
+    public void start() throws FavoriteListEmptyException {
         this.cliUserFavoritesView = new CLIUserFavoritesView(this);
 
         ShowUserFavoritesController showUserFavoritesController = new ShowUserFavoritesController();
@@ -23,18 +24,18 @@ public class CLIUserFavoritesController implements Observer {
     }
 
     @Override
-    public void update(Object object) throws Exception {
+    public void update(Object object){
        // ignore
     }
 
     @Override
-    public void update2(Object object1, Object object2) throws Exception {
+    public void update2(Object object1, Object object2){
         this.petBeanList.remove((int)object2 - 1);
         PrintSupport.printMessage("\n");
         this.cliUserFavoritesView.run();
     }
 
-    public void getPet() throws Exception {
+    public void getPet(){
         int i = 1;
         String gender;
         for (PetBean petBean: petBeanList) {
@@ -48,7 +49,7 @@ public class CLIUserFavoritesController implements Observer {
         this.cliUserFavoritesView.printCommands();
     }
 
-    public void executeCommand(int i) throws Exception {
+    public void executeCommand(int i) {
         if (i == 0) {
             CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
             cliShelterInfoController.goBack();

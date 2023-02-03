@@ -27,7 +27,7 @@ public class ShelterPetsList extends Subject {
         this.shelter = shelter;
     }
 
-    public void addPet(PetModel petModel) throws Exception {
+    public void addPet(PetModel petModel){
         this.petList.add(petModel);
         PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
         // implementazione dummy che setta di default l'età a 'puppy', TODO: verifica data di nascita 1

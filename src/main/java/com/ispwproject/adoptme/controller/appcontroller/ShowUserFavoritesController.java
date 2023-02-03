@@ -1,11 +1,11 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.dao.PetDAO;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.UserModel;
@@ -20,7 +20,9 @@ public class ShowUserFavoritesController {
 
     public List<PetBean> getPetList(Observer observer) throws FavoriteListEmptyException {
         try {
-            userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(new UserModel(Session.getCurrentSession().getUserBean()), observer);
+            UserBean userBean = Session.getCurrentSession().getUserBean();
+            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
+            userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(userModel, observer);
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();
@@ -35,7 +37,8 @@ public class ShowUserFavoritesController {
         List<PetBean> petBeanList = new ArrayList<>();
 
         for (PetModel petModel : userFavoritesPetsList.getPetList()) {
-            PetBean petBean = new PetBean(petModel);
+            PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+            petBean.setFav(petModel.isFav());
             petBeanList.add(petBean);
         }
         return petBeanList;

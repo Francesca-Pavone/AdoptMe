@@ -14,21 +14,21 @@ public class CLIShelterInfoView {
         this.cliShelterInfoControllerCurrent = cliShelterInfoController;
     }
 
-    public void printPet(String name, String gender, String age, int i ) throws Exception {
+    public void printPet(String name, String gender, String age, int i ) {
         PrintSupport.printMessage("    " + i + ") Name: " + name + "     ");
         PrintSupport.printMessage("\n       Gender: " + gender + "        ");
         PrintSupport.printMessage("\n       Age: " + age + "      ");
         PrintSupport.printSeparatorLine();
     }
 
-    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, URL shelterWebSite, String shelterAddress, String shelterCity) throws Exception {
+    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, URL shelterWebSite, String shelterAddress, String shelterCity) {
         PrintSupport.printMessage("\n\n-------------------------------------- " + shelterName.toUpperCase() + " --------------------------------------");
         PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterEmail + "\n  Phone number: " + shelterPhoneNumber + "\n  Web site: " + shelterWebSite + "\n  Address: " + shelterAddress + ", " + shelterCity);
         PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");
         this.cliShelterInfoControllerCurrent.getPet();
     }
 
-    public void printCommands() throws Exception {
+    public void printCommands() {
         PrintSupport.printMessage("\nInsert the number of the pet you want to see\n----- or\nInsert 0 to go back to Homepage");
         Scanner scanner = new Scanner(System.in);
         int inputLine;

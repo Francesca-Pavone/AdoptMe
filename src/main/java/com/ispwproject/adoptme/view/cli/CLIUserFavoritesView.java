@@ -12,19 +12,19 @@ public class CLIUserFavoritesView {
         this.cliUserFavoritesControllerCurrent = cliUserFavoritesController;
     }
 
-    public void printPet(String name, String gender, String age, int i ) throws Exception {
+    public void printPet(String name, String gender, String age, int i ){
         PrintSupport.printMessage("    " + i + ") Name: " + name + "     ");
         PrintSupport.printMessage("\n       Gender: " + gender + "        ");
         PrintSupport.printMessage("\n       Age: " + age + "      ");
         PrintSupport.printSeparatorLine();
     }
 
-    public void run() throws Exception {
+    public void run(){
         PrintSupport.printMessage("------------------------------------------ FAVORITES ------------------------------------------");
         this.cliUserFavoritesControllerCurrent.getPet();
     }
 
-    public void printCommands() throws Exception {
+    public void printCommands(){
         PrintSupport.printMessage("\nInsert the number of the pet you want to see\n----- or\nInsert 0 to go back to Homepage");
         Scanner scanner = new Scanner(System.in);
         int inputLine;

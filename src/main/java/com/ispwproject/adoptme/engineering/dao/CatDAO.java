@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
@@ -59,6 +60,7 @@ public class CatDAO {
                 boolean testFiv = resultSet.getBoolean("testFiv");
                 boolean testFelv = resultSet.getBoolean("testFelv");
 
+
                 PetCompatibility petCompatibility = new PetCompatibility();
                 petCompatibility.setMaleDog(maleDog);
                 petCompatibility.setFemaleDog(femaleDog);
@@ -81,6 +83,9 @@ public class CatDAO {
                 cat.setDisabilityType(disabilityType);
                 cat.setTestFiv(testFiv);
                 cat.setTestFelv(testFelv);
+                if(Session.getCurrentSession().getUserBean() != null)
+                    cat.setFav(FavoritesDAO.checkFav(catId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
+
 
             }while(resultSet.next());
 

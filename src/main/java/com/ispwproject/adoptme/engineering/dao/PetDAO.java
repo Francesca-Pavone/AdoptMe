@@ -5,7 +5,7 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
-import com.ispwproject.adoptme.engineering.observer.concreteSubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;

@@ -21,12 +21,12 @@ public class CLIShelterInfoController implements Observer {
         this.start();
     }
     
-    public void start() throws Exception {
+    public void start(){
         this.cliShelterInfoView = new CLIShelterInfoView(this);
         this.cliShelterInfoView.run(this.shelterBean.getName(), this.shelterBean.getEmail(), this.shelterBean.getPhoneNumber(), this.shelterBean.getWebSite(), this.shelterBean.getAddress(), this.shelterBean.getCity());
     }
 
-    public void getPet() throws Exception {
+    public void getPet() {
         ShelterPageController shelterPageController = new ShelterPageController(this.shelterBean);
         this.petBeanList = shelterPageController.getPetList(this);
         int i = 1;
@@ -44,7 +44,7 @@ public class CLIShelterInfoController implements Observer {
 
 
 
-    public void goBack() throws Exception {
+    public void goBack(){
         CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
         cliUserHomepageView.run();
     }
@@ -58,7 +58,7 @@ public class CLIShelterInfoController implements Observer {
         //ignore
     }
 
-    public void executeCommand(int i) throws Exception {
+    public void executeCommand(int i) {
         if (i == 0) {
             this.goBack();
         }

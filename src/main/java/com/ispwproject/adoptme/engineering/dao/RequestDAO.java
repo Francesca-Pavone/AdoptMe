@@ -8,7 +8,7 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.RequestList;
+import com.ispwproject.adoptme.engineering.observer.concretesubjects.*;
 
 import java.sql.*;
 import java.text.DateFormat;

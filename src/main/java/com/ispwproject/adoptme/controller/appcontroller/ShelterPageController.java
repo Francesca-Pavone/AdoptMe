@@ -24,8 +24,8 @@ public class ShelterPageController {
     public ShelterPageController(){}
 
     public ShelterBean getShelter(String shelterName) throws Exception {
-        ShelterBean shelterBean = new ShelterBean(ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName)));
-        return shelterBean;
+        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(ShelterDAO.retrieveIdByShelterName(shelterName));
+        return new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
     }
 
     public List<PetBean> getPetList(Observer observer) {
@@ -78,6 +78,8 @@ public class ShelterPageController {
             petBean.setFirstExperience(petCompatibility.isFirstExperience());
             petBean.setHoursAlone(petCompatibility.getHoursAlone());
             petBeanList.add(petBean);
+
+            petBean.setFav(petModel.isFav());
         }
         return petBeanList;
     }

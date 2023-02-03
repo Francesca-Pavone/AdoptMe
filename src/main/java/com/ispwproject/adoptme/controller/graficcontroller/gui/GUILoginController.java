@@ -111,13 +111,9 @@ public class GUILoginController {
 
             Main.getStage().setScene(scene);
         } catch (UserNotFoundException e) {
-            PrintSupport.printError(e.getMessage());
-            //todo fai dialog per dire che utente non è stato trovato
-            Stage stage = Main.getStage();
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
-            stage.show();
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+            txtFieldEmail.clear();
+            txtFieldPass.clear();
         }
         catch (EmailFormatException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());

@@ -1,26 +1,26 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.controller.appcontroller.ShowUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GUIUserFavoritesController extends UserSideBar implements Observer {
     @FXML
     private GridPane grid;
     @FXML
     private Label emptyLabel;
+    private List<PetBean> petBeanList;
 
     int column = 0;
     int row = 1;
@@ -32,7 +32,10 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
         if(emptyLabel.isVisible())
             emptyLabel.setVisible(false);
         ShowUserFavoritesController showUserFavoritesController = new ShowUserFavoritesController();
-        showUserFavoritesController.getPetList(this);
+        this.petBeanList = showUserFavoritesController.getPetList(this);
+        for(PetBean petBean: petBeanList) {
+            this.update(petBean);
+        }
     }
 
 
@@ -42,8 +45,6 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();
-
-                System.out.println("1 " + pane.getId());
 
                 GUIPetItemController petItemControllerG = fxmlLoader.getController();
                 petItemControllerG.setPageContainer(currentPage);
