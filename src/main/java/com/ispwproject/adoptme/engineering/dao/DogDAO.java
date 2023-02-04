@@ -2,12 +2,14 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -73,6 +75,9 @@ public class DogDAO {
                 dog.setDisabilityType(disabilityType);
                 dog.setProgramEducation(programEducation);
                 dog.setSize(size);
+                if(Session.getCurrentSession().getUserBean() != null)
+                    dog.setFav(FavoritesDAO.checkFav(dogId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
+
 
             }while(resultSet.next());
 
@@ -89,8 +94,8 @@ public class DogDAO {
 
 
 
-    public static int saveDog(DogModel dogModel) throws Exception {
-        Statement stmt = null;
+    public static int saveDog(DogModel dogModel) {
+        Statement stmt;
         int dogId = 1;
 
         try {
@@ -122,7 +127,7 @@ public class DogDAO {
                 InputStream inputStream = new FileInputStream(dogModel.getPetImage());
                 preparedStatement.setBlob(4, inputStream);
             }
-            catch (ImageNotFoundException e){
+            catch (ImageNotFoundException | FileNotFoundException e){
                 preparedStatement.setNull(4, Types.BLOB);
             }
 

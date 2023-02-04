@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
@@ -39,7 +41,7 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.searchSheltersByCity(stmt, city);
 
             if (!resultSet.first()){
-                throw new Exception("No cities found that begin with that input: "+city);
+                throw new NoCityFoundException(city);
             }
 
             resultSet.first();
@@ -96,7 +98,7 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.selectShelterByName(stmt, shelterName);
 
             if (!resultSet.first()){
-                throw new Exception("No shelters found with the name: "+shelterName);
+                throw new NoSheltersWithThatNameException(shelterName);
             }
 
             resultSet.first();

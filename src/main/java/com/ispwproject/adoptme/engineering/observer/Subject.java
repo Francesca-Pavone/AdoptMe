@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.engineering.observer;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,12 +30,12 @@ public abstract class Subject {
         observerList.remove(observer);
     }
 
-    public void notifyObservers(Object object)  {
+    public void notifyObservers(Object object){
         for (Observer observer : observerList) {
             observer.update(object);
         }
     }
-    public void notifyObservers(Object object1, Object object2)  {
+    public void notifyObservers(Object object1, Object object2){
         for (Observer observer : observerList) {
             observer.update2(object1, object2);
         }

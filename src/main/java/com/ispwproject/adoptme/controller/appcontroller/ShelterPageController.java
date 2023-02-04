@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
@@ -14,11 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterPageController {
-    private final ShelterModel shelterModel;
+    private ShelterModel shelterModel;
     private ShelterPetsList shelterPetsList;
 
     public ShelterPageController(ShelterBean shelterBean) {
         this.shelterModel = new ShelterModel(shelterBean.getShelterId());
+    }
+    public ShelterPageController(){}
+
+    public ShelterBean getShelter(String shelterName) throws Exception {
+        ShelterBean shelterBean = null;
+        int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
+        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
+        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        return shelterBean;
     }
 
     public List<PetBean> getPetList(Observer observer) {
@@ -68,6 +78,8 @@ public class ShelterPageController {
             petBean.setFirstExperience(petCompatibility.isFirstExperience());
             petBean.setHoursAlone(petCompatibility.getHoursAlone());
             petBeanList.add(petBean);
+
+            petBean.setFav(petModel.isFav());
         }
         return petBeanList;
     }

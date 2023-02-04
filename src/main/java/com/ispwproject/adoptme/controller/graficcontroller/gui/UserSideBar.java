@@ -1,8 +1,10 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -33,11 +35,22 @@ public class UserSideBar {
                 throw new NoAccoutException();
             Stage stage = Main.getStage();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            GUIUserFavoritesController guiUserFavoritesController = fxmlLoader.getController();
+            guiUserFavoritesController.setCurrentPage(root);
             stage.setScene(scene);
-
         } catch (NoAccoutException e) {
             showAccountAlert();
+        } catch (FavoriteListEmptyException e) {
+            PrintSupport.printError(e.getMessage());
+            Stage stage = Main.getStage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            GUIUserFavoritesController guiUserFavoritesController = fxmlLoader.getController();
+            guiUserFavoritesController.listIsEmpty();
+            stage.setScene(scene);
         }
     }
 

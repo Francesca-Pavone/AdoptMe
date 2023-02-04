@@ -27,7 +27,7 @@ public class CLIPetInformationView {
         showCommand();
     }
 
-    public void showCommand() {
+    public void showCommand(){
         PrintSupport.printSeparatorLine();
         if (Session.getCurrentSession().getShelterBean() == null){
             PrintSupport.printMessage("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go to Homepage\n\nInsert the number:");

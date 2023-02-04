@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.NotExistingRequestException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
@@ -112,8 +113,8 @@ public class CLIAppointmentsPageController implements Observer {
 
     private static void goToHomepage(Session session) {
         if (session.getUserBean() != null) {
-            CLIUserHomepageView cliUserHomepageView = new CLIUserHomepageView();
-            cliUserHomepageView.run();
+            CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+            cliUserHomepageController.start();
         }
         //todo: fare parte shelter
     }

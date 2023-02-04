@@ -2,12 +2,14 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 
@@ -59,6 +61,7 @@ public class CatDAO {
                 boolean testFiv = resultSet.getBoolean("testFiv");
                 boolean testFelv = resultSet.getBoolean("testFelv");
 
+
                 PetCompatibility petCompatibility = new PetCompatibility();
                 petCompatibility.setMaleDog(maleDog);
                 petCompatibility.setFemaleDog(femaleDog);
@@ -81,6 +84,9 @@ public class CatDAO {
                 cat.setDisabilityType(disabilityType);
                 cat.setTestFiv(testFiv);
                 cat.setTestFelv(testFelv);
+                if(Session.getCurrentSession().getUserBean() != null)
+                    cat.setFav(FavoritesDAO.checkFav(catId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
+
 
             }while(resultSet.next());
 
@@ -95,7 +101,7 @@ public class CatDAO {
     }
 
 
-    public static int saveCat(CatModel catModel) throws Exception {
+    public static int saveCat(CatModel catModel)  {
         Statement stmt;
 
         int catId = 1;
@@ -128,7 +134,7 @@ public class CatDAO {
                 InputStream inputStream = new FileInputStream(catModel.getPetImage());
                 preparedStatement.setBlob(4, inputStream);
             }
-            catch (ImageNotFoundException e){
+            catch (ImageNotFoundException | FileNotFoundException e){
                 preparedStatement.setNull(4, Types.BLOB);
             }
 

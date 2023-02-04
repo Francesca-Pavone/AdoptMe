@@ -162,7 +162,6 @@ public class GUIAddPetController {
         int year;
         int month;
         int day;
-        AddPetController addPetController;
         PetBean petBean;
 
         // retrive data of birth information
@@ -279,7 +278,7 @@ public class GUIAddPetController {
                     .build();
         }
 
-        addPetController = new AddPetController(petBean);
+        AddPetController addPetController = new AddPetController(petBean);
         addPetController.addNewPet(shelterBean, observer);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }

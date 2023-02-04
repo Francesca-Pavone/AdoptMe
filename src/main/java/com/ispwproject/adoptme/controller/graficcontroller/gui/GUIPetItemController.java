@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -32,6 +34,12 @@ public class GUIPetItemController {
     private Label petName;
     private PetBean petBean;
     private Parent pageContainer;
+    private Observer favObserver;
+    private Pane pane;
+
+    public void setFavObserver(Observer favObserver) {
+        this.favObserver = favObserver;
+    }
 
     public void setPageContainer(Parent pageContainer) {
         this.pageContainer = pageContainer;
@@ -60,9 +68,14 @@ public class GUIPetItemController {
         GUIPetInfoController petInformationControllerG = fxmlLoader.getController();
         petInformationControllerG.setPreviousPage(pageContainer);
         petInformationControllerG.setPetInfo(petBean);
+        petInformationControllerG.setPane(pane);
+        petInformationControllerG.setFavObserver(this.favObserver);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
 
+    public void setPane(Pane pane) {
+        this.pane = pane;
+    }
 }
