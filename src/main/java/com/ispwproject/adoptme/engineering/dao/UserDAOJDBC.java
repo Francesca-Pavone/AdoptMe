@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.UserModel;
-import com.ispwproject.adoptme.model.AccountInfo;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
@@ -106,8 +105,7 @@ public class UserDAOJDBC implements UserDAO{
         String name = resultSet.getString("name");
         String surname = resultSet.getString("surname");
 
-        AccountInfo accountInfo = new AccountInfo(email, 0);
-        return new UserModel(userId, profileImg, accountInfo, name, surname);
+        return new UserModel(userId, profileImg, name, surname, email);
     }
 
 }

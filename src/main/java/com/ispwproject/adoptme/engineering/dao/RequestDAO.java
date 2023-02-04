@@ -7,8 +7,6 @@ import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
-import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.*;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -76,11 +74,9 @@ public class RequestDAO {
         }
     }
 
-    public static int retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
+    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws Exception {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
-        RequestList requestList = new RequestList(observer, requestModelList, shelterModel);
-        int i = 0;
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -121,9 +117,8 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
-                requestList.addRequest(requestModel);
-                i++;
+                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date.toLocalDate(), time, status);
+                requestModelList.add(requestModel);
 
             } while (resultSet.next());
 
@@ -132,13 +127,12 @@ public class RequestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return i;
+        return requestModelList;
     }
 
-    public static void retrieveReqByUser(UserModel userModel, Observer observer) throws Exception {
+    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws Exception {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
-        RequestList requestList = new RequestList(observer, requestModelList, userModel);
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -170,8 +164,8 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
-                requestList.addRequest(requestModel);
+                RequestModel requestModel = new RequestModel(reqId, pet, userModel, date.toLocalDate(), time, status);
+                requestModelList.add(requestModel);
 
             } while (resultSet.next());
 
@@ -181,7 +175,7 @@ public class RequestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return requestModelList;
     }
-
 }
 

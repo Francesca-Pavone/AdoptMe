@@ -18,7 +18,7 @@ public class AddToFavoritesController {
 
     public void addPet(UserBean userBean, Observer observer, Object object) {
         try {
-            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname()); //todo userbean.get ..
+            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
             UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
             FavoritesDAO.addFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
@@ -68,7 +68,7 @@ public class AddToFavoritesController {
 
     public void removePet(UserBean userBean, Observer observer, Object object){
         try {
-            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
+            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
             UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
             FavoritesDAO.removeFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());

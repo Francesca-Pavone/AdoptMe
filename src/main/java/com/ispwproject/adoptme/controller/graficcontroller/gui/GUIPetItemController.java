@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Year;
 
 public class GUIPetItemController {
 
@@ -47,14 +48,26 @@ public class GUIPetItemController {
 
     public void setPetData(PetBean pet) throws IOException {
         this.petBean = pet;
-
+        petName.setText(petBean.getName());
         petGender.setText(
                 switch (petBean.getGender()) {
                     case 0 -> "Male";
                     default -> "Female";
                 });
-        petName.setText(petBean.getName());
-        petAge.setText((petBean.getAge()));
+
+        String age;
+        int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
+
+        if (yearDiff <= 1)
+            age = "Puppy";
+        else if (yearDiff <= 3)
+            age = "Young";
+        else if (yearDiff <= 10)
+            age = "Adult";
+        else
+            age = "Senior";
+
+        petAge.setText(age);
 
         InputStream inputStream = new FileInputStream(petBean.getPetImage());
         Image image = new Image(inputStream);

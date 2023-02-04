@@ -7,6 +7,7 @@ public abstract class PetModel {
     protected File petImage;
     protected String name;
     protected int type; // 0 -> DOG  |  1 -> CAT
+
     protected int yearOfBirth;
     protected int monthOfBirth;
     protected int dayOfBirth;
@@ -20,8 +21,9 @@ public abstract class PetModel {
     protected boolean sterilized;
     protected boolean disability;
     protected String disabilityType;
+
     protected PetCompatibility petCompatibility;
-    protected boolean fav;
+    protected boolean fav; //TODO vedere se lasciarlo qua
 
     protected ShelterModel shelter;
 
@@ -203,4 +205,5 @@ public abstract class PetModel {
     public void setFav(boolean fav) {
         this.fav = fav;
     }
+
 }

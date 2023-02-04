@@ -26,13 +26,13 @@ public class LoginController {
             userDAO = new UserDAOCSV();
         }
         UserModel userModel = userDAO.retrieveUserByEmail(loginBean.getEmail());
-        return new UserBean(userModel.getId(), userModel.getName(), userModel.getSurname(), userModel.getAccountInfo().getEmail(), userModel.getAccountInfo().getPassword(), userModel.getProfileImg());
+        return new UserBean(userModel.getId(), userModel.getName(), userModel.getSurname(), userModel.getEmail(), userModel.getImage());
     }
     public ShelterBean getLoginInfoShelter(LoginBean loginBean) throws Exception {
             ShelterModel shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
 
-            ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
-            shelterBean.setShelterImg(shelterModel.getProfileImg());
+            ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
+            shelterBean.setShelterImg(shelterModel.getImage());
             return  shelterBean;
     }
 }

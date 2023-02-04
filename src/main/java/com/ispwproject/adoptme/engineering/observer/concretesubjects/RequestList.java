@@ -10,20 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestList extends Subject {
-    private final List<RequestModel> requestModelList = new ArrayList<>();
-    private final ShelterUserModel receiver;
+    private List<RequestModel> requestModelList = new ArrayList<>();
+    private final ShelterUserModel owner;
 
-    public RequestList(Observer observer, List<RequestModel> requestModelList, ShelterUserModel receiver) {
+    public RequestList(Observer observer, List<RequestModel> requestModelList, ShelterUserModel owner) {
         super(observer);
         for (RequestModel request : requestModelList) {
+            request.register(observer);
             this.addRequest(request);
         }
-        this.receiver = receiver;
+        this.owner = owner;
     }
 
-    public RequestList(Observer observer, ShelterUserModel receiver) {
+    public RequestList(Observer observer, UserModel owner) {
         super(observer);
-        this.receiver = receiver;
+        this.owner = owner;
     }
 
     public void addRequest(RequestModel request) {
@@ -32,7 +33,7 @@ public class RequestList extends Subject {
     }
 
     private void setRequestBean(RequestModel request) {
-        RequestBean requestBean = new RequestBean(request.getPet().getPetImage(), request.getUser().getProfileImg(), request.getPet().getName(), request.getPet().getPetId(), request.getPet().getShelter().getId(), request.getUser().getName(), request.getUser().getId());
+        RequestBean requestBean = new RequestBean(request.getPet().getPetImage(), request.getUser().getImage(), request.getPet().getName(), request.getPet().getPetId(), request.getPet().getShelter().getId(), request.getUser().getName(), request.getUser().getId());
         requestBean.setId(request.getId());
         requestBean.setDate(request.getDate());
         requestBean.setHour(String.valueOf(request.getTime().getHour()));
@@ -41,11 +42,15 @@ public class RequestList extends Subject {
         notifyObservers(requestBean);
     }
 
+    public void setRequestModelList(List<RequestModel> requestModelList) {
+        this.requestModelList = requestModelList;
+    }
+
     public List<RequestModel> getRequestModelList() {
         return requestModelList;
     }
 
-    public ShelterUserModel getReceiver() {
-        return receiver;
+    public ShelterUserModel getOwner() {
+        return owner;
     }
 }

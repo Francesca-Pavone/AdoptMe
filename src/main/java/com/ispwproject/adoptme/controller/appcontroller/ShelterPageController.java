@@ -27,13 +27,13 @@ public class ShelterPageController {
         ShelterBean shelterBean = null;
         int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
-        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
         return shelterBean;
     }
 
     public List<PetBean> getPetList(Observer observer) {
         try {
-            shelterPetsList = PetDAO.retrievePetByShelterId(shelterModel,observer);
+            shelterPetsList = new ShelterPetsList(observer, PetDAO.retrievePetByShelterId(shelterModel), shelterModel);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

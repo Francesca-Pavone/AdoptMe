@@ -53,7 +53,7 @@ public class SimpleQueries {
     }
 
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
-        String sql = "SELECT dogId AS id, name, imgSrc, gender, age, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, age, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
         return stmt.executeQuery(sql);
     }
 

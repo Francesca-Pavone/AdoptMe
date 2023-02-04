@@ -7,7 +7,6 @@ import com.ispwproject.adoptme.engineering.utils.ImageUtils;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.model.AccountInfo;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
@@ -71,9 +70,8 @@ public class ShelterDAO {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
-                AccountInfo accountInfo = new AccountInfo(email, password, 1);
 
-                ShelterModel shelterModel = new ShelterModel(shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                ShelterModel shelterModel = new ShelterModel(shelterImage, shelterName, email, phoneNumber, address, city, webSiteURL);
                 shelterModel.setId(shelterId);
                 sheltersList.add(shelterModel);
 
@@ -150,8 +148,7 @@ public class ShelterDAO {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
-                AccountInfo accountInfo = new AccountInfo(email, 1);
-                shelterModel = new ShelterModel(shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel = new ShelterModel(shelterImage, shelterName, email, phoneNumber, address, city, webSiteURL);
                 shelterModel.setId(shelterId);
 
             }while(resultSet.next());
@@ -203,8 +200,7 @@ public class ShelterDAO {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
-                AccountInfo accountInfo = new AccountInfo(email, 1);
-                shelterModel = new ShelterModel(shelterImage, accountInfo, shelterName, phoneNumber, address, city, webSiteURL);
+                shelterModel = new ShelterModel(shelterImage, shelterName, email, phoneNumber, address, city, webSiteURL);
                 shelterModel.setId(shelterId);
 
             }while(resultSet.next());

@@ -27,6 +27,15 @@ public class RequestModel extends Subject{
         this.status = status;
     }
 
+    public RequestModel(int id, PetModel pet, UserModel user, LocalDate date, LocalTime time, int status) {
+        this.id = id;
+        this.pet = pet;
+        this.user = user;
+        this.date = date;
+        this.time = time;
+        this.status = status;
+    }
+
     public RequestModel() {
     }
 
@@ -81,7 +90,7 @@ public class RequestModel extends Subject{
 
     public void updateStatus(int status, Object object) throws Exception {
         this.status = status;
-        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getProfileImg(), getPet().getName(), getPet().getPetId(), getPet().getShelter().getId(), getUser().getName(), getUser().getId());
+        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getImage(), getPet().getName(), getPet().getPetId(), getPet().getShelter().getId(), getUser().getName(), getUser().getId());
         requestBean.setId(getId());
         requestBean.setDate(getDate());
         requestBean.setHour(String.valueOf(getTime().getHour()));

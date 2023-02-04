@@ -63,7 +63,7 @@ public class GUIUserSettingsController extends UserSideBar {
     }
 
     public void signOut(ActionEvent event) throws IOException {
-        Session.getCurrentSession().closeSession();
+        Session.closeSession();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -77,6 +77,6 @@ public class GUIUserSettingsController extends UserSideBar {
         textFieldName.setPromptText(userBean.getName());
         textFieldSurname.setPromptText(userBean.getSurname());
         textFieldEmail.setPromptText(userBean.getEmail());
-        textFieldPsw.setPromptText(userBean.getPassword());
+        textFieldPsw.setPromptText("******");
     }
 }

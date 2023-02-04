@@ -20,7 +20,11 @@ public class SendRequestController {
     public void sendUserRequest(PetBean petBean, RequestBean requestBean, Observer observer) throws Exception {
         PetModel petModel;
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
-        RequestList requestList = new RequestList(observer, shelterModel);
+        UserBean userBean = Session.getCurrentSession().getUserBean();
+        UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
+
+        RequestList requestList = new RequestList(observer, userModel);
+        requestList.setRequestModelList(RequestDAO.retrieveReqByShelter(shelterModel));
         RequestModel requestModel = new RequestModel();
 
         if (petBean.getType() == 0){
@@ -35,8 +39,8 @@ public class SendRequestController {
         petModel.setShelter(shelterModel);
 
         requestModel.setPet(petModel);
-        UserBean userBean = Session.getCurrentSession().getUserBean();
-        requestModel.setUser(new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname()));
+
+        requestModel.setUser(userModel);
 
         //non permetto di prendere appuntamenti nei giorni già passati
         if (requestBean.getDate().isBefore(LocalDate.now())){

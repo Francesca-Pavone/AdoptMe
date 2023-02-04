@@ -26,8 +26,6 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
     @FXML
     private Label petsNumber;
 
-    @FXML
-    private Pane blackPane;
     private Parent currentPage;
 
 
@@ -45,7 +43,6 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
     }
 
     public void addPet(ActionEvent event) throws IOException {
-        //blackPane.setVisible(true);
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);
@@ -58,9 +55,6 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
         dialog.show();
     }
 
-    public GridPane getGrid() {
-        return grid;
-    }
 
     @Override
     public void update(Object object) {
@@ -76,7 +70,7 @@ public class GUIShelterHomepageController extends ShelterSideBar implements Obse
                 column = 0;
                 row++;
             }
-            getGrid().add(pane, column++, row);
+            grid.add(pane, column++, row);
 
         } catch (IOException e) {
             e.printStackTrace();

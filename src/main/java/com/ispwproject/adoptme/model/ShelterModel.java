@@ -12,8 +12,16 @@ public class ShelterModel extends ShelterUserModel{
     private String city;
     private URL webSite;
 
-    public ShelterModel(File profileImg, AccountInfo accountInfo, String shelterName, String phoneNumber, String address, String city, URL webSite) {
-        super(profileImg, accountInfo);
+    public ShelterModel(File profileImg, String shelterName, String phoneNumber, String address, String city, URL webSite) {
+        super(profileImg, 1);
+        setShelterName(shelterName);
+        setPhoneNumber(phoneNumber);
+        setAddress(address);
+        setCity(city);
+        setWebSite(webSite);
+    }
+    public ShelterModel(File profileImg, String shelterName, String email, String phoneNumber, String address, String city, URL webSite) {
+        super(profileImg, 1, email);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
         setAddress(address);
@@ -35,19 +43,6 @@ public class ShelterModel extends ShelterUserModel{
         setShelterName(shelterName);
     }
 
-    public ShelterModel(File profileImg, AccountInfo accountInfo) {
-        super(profileImg, accountInfo);
-    }
-
-/*    public ShelterModel(ShelterBean shelterBean) {
-        super(shelterBean.getShelterId(), shelterBean.getShelterImg(), shelterBean.getEmail(), 1);
-        setShelterName(shelterName);
-        setPhoneNumber(phoneNumber);
-        setAddress(address);
-        setCity(city);
-        setWebSite(webSite);
-    }
- */
     public ShelterModel(int id) {
         super(id);
     }

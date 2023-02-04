@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.model.AccountInfo;
 import com.ispwproject.adoptme.model.UserModel;
 
 import java.io.BufferedReader;
@@ -70,8 +69,7 @@ public class UserDAOCSV implements UserDAO{
             profileImg = new File(Main.class.getResource("image/default_photo.png").getPath());
         }
 
-        AccountInfo accountInfo = new AccountInfo(email, 0);
-        user = new  UserModel(userId, profileImg, accountInfo, name, surname);
+        user = new  UserModel(userId, profileImg, name, surname, email);
         return user;
     }
 

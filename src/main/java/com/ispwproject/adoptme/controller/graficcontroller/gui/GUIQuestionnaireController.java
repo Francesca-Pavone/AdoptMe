@@ -691,7 +691,7 @@ public class GUIQuestionnaireController {
                 questionnaireResultBeanBuilder.age(switch (((ToggleButton) petAgeGroup.getSelectedToggle()).getText()) {
                     case "Puppy (0-12 months)" -> "puppy";
                     case "Young (13 months - 3 years)" -> "young";
-                    case "Adult (4years - 10 years)" -> "adult";
+                    case "Adult (4 years - 10 years)" -> "adult";
                     case "Senior (more than 11 years)" -> "senior";
                     default -> "";
                 });

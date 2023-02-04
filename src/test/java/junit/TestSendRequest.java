@@ -9,7 +9,6 @@ import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
 import com.ispwproject.adoptme.engineering.exception.PastDateException;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.model.ShelterModel;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +25,7 @@ public class TestSendRequest {
 
     @Test
     public void testSendRequest() throws Exception {
-        int requestBefore = RequestDAO.retrieveReqByShelter(new ShelterModel(1), null);
+        int requestBefore = RequestDAO.retrieveReqByShelter(new ShelterModel(1)).size();
 
         LoginBean loginBean = new LoginBean("francesca@gmail.com", "123");
         LoginController loginController = new LoginController();
@@ -48,7 +47,7 @@ public class TestSendRequest {
             e.printStackTrace();
         }
 
-        int requestAfter = RequestDAO.retrieveReqByShelter(new ShelterModel(1), null);
+        int requestAfter = RequestDAO.retrieveReqByShelter(new ShelterModel(1)).size();
 
         assertEquals(requestBefore+1, requestAfter, 0);  // supera il test
 

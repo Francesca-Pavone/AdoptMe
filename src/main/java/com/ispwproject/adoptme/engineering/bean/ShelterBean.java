@@ -12,7 +12,6 @@ public class ShelterBean {
     private String city;
     private URL webSite;
     private String email;
-    private String password; //todo: vedere se lasciarla nel bean
     private File shelterImg;
 
     public ShelterBean() {}
@@ -27,11 +26,6 @@ public class ShelterBean {
         this.email = email;
     }
 
-
-
-    public ShelterBean(String name){
-        this.name = name;
-    }
 
 
     public String getName() {
@@ -98,11 +92,4 @@ public class ShelterBean {
         this.shelterId = shelterId;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

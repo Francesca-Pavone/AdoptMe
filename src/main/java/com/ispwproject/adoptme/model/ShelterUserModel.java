@@ -5,33 +5,39 @@ import java.io.File;
 
 public abstract class ShelterUserModel {
     private int id ;
-    private File profileImg;
-    private AccountInfo accountInfo;
+    private int type; // 0 -> USER  |  1 -> SHELTER
+    private File image;
+    private String email;
 
-    protected ShelterUserModel(int id, File profileImg, String email, int accountType) {
-        this.id = id;
-        this.profileImg = profileImg;
-        this.accountInfo = new AccountInfo(email, accountType);
+
+    protected ShelterUserModel(int id, File image, int type) {
+        setId(id);
+        setImage(image);
+        setType(type);
     }
-
-    protected ShelterUserModel(File profileImg, AccountInfo accountInfo) {
-        setProfileImg(profileImg);
-        setAccountInfo(accountInfo);
+    protected ShelterUserModel(int id, File image, int type, String email) {
+        setId(id);
+        setImage(image);
+        setType(type);
+        setEmail(email);
     }
-
+    protected ShelterUserModel(File image, int type) {
+        setImage(image);
+        setType(type);
+    }
+    protected ShelterUserModel(File image, int type, String email) {
+        setImage(image);
+        setType(type);
+        setEmail(email);
+    }
 
     protected ShelterUserModel(int id) {
         this.id = id;
     }
 
-    protected ShelterUserModel(int id, File profileImg, AccountInfo accountInfo) {
-        this.id = id;
-        this.profileImg = profileImg;
-        this.accountInfo = accountInfo;
-    }
 
-    protected ShelterUserModel(File profileImg) {
-        this.profileImg = profileImg;
+    protected ShelterUserModel(File image) {
+        this.image = image;
     }
 
     public int getId() {
@@ -42,19 +48,27 @@ public abstract class ShelterUserModel {
         this.id = id;
     }
 
-    public File getProfileImg() {
-        return profileImg;
+    public File getImage() {
+        return image;
     }
 
-    public void setProfileImg(File profileImg) {
-        this.profileImg = profileImg;
+    public void setImage(File image) {
+        this.image = image;
     }
 
-    public AccountInfo getAccountInfo() {
-        return accountInfo;
+    public int getType() {
+        return type;
     }
 
-    public void setAccountInfo(AccountInfo accountInfo) {
-        this.accountInfo = accountInfo;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
