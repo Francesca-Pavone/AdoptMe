@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoController;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
 import java.net.URL;
@@ -21,7 +22,7 @@ public class CLIShelterInfoView {
         PrintSupport.printSeparatorLine();
     }
 
-    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, URL shelterWebSite, String shelterAddress, String shelterCity) {
+    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, URL shelterWebSite, String shelterAddress, String shelterCity) throws NoPetsFoundException {
         PrintSupport.printMessage("\n\n-------------------------------------- " + shelterName.toUpperCase() + " --------------------------------------");
         PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterEmail + "\n  Phone number: " + shelterPhoneNumber + "\n  Web site: " + shelterWebSite + "\n  Address: " + shelterAddress + ", " + shelterCity);
         PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");

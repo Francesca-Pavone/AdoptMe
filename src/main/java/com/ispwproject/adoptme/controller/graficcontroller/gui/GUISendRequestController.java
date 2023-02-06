@@ -70,7 +70,7 @@ public class GUISendRequestController implements Observer {
 
 
 
-    public void goToShelterPage(ActionEvent event) throws IOException {
+    public void goToShelterPage(ActionEvent event) throws IOException, NoPetsFoundException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
