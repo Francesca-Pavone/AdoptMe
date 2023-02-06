@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.exception.PastDateException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
@@ -54,8 +53,7 @@ public class GUISendRequestController implements Observer {
         SendRequestController sendRequestController = new SendRequestController();
         try {
             sendRequestController.sendUserRequest(petBean, requestBean, this);
-        }
-        catch (PastDateException e) {
+        } catch (Exception e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
         datePicker.setValue(null);

@@ -7,6 +7,7 @@ public abstract class PetModel {
     protected File petImage;
     protected String name;
     protected int type; // 0 -> DOG  |  1 -> CAT
+
     protected int yearOfBirth;
     protected int monthOfBirth;
     protected int dayOfBirth;
@@ -20,10 +21,11 @@ public abstract class PetModel {
     protected boolean sterilized;
     protected boolean disability;
     protected String disabilityType;
-    protected PetCompatibility petCompatibility;
-    protected boolean fav;
 
-    protected ShelterModel shelter;
+    protected PetCompatibility petCompatibility;
+    protected boolean fav; //TODO vedere se lasciarlo qua
+
+    //protected ShelterModel shelter;
 
     public PetModel() {
     }
@@ -34,7 +36,7 @@ public abstract class PetModel {
         this.dayOfBirth = dayOfBirth;
         this.coatLenght = coatLenght;
         this.petCompatibility = petCompatibility;
-        this.shelter = new ShelterModel(shelterId);
+        //this.shelter = new ShelterModel(shelterId);
     }
 
     protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility, ShelterModel shelter) {
@@ -42,7 +44,7 @@ public abstract class PetModel {
         this.name = name;
         this.petImage = petImage;
         this.petCompatibility = petCompatibility;
-        this.shelter = shelter;
+        //this.shelter = shelter;
     }
 
 
@@ -57,12 +59,9 @@ public abstract class PetModel {
 
 
     public ShelterModel getShelter() {
-        return shelter;
+        return null;
     }
 
-    public void setShelter(ShelterModel shelter) {
-        this.shelter = shelter;
-    }
 
     public int getPetId() {
         return petId;
@@ -203,4 +202,5 @@ public abstract class PetModel {
     public void setFav(boolean fav) {
         this.fav = fav;
     }
+
 }

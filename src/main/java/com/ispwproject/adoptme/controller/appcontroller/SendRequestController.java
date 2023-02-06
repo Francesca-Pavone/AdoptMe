@@ -1,14 +1,13 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.exception.PastDateException;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.RequestList;
 import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.time.LocalDate;
@@ -20,8 +19,12 @@ public class SendRequestController {
     public void sendUserRequest(PetBean petBean, RequestBean requestBean, Observer observer) throws Exception {
         PetModel petModel;
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
-        RequestList requestList = new RequestList(observer, shelterModel);
+
+        UserBean userBean = Session.getCurrentSession().getUserBean();
+        UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
+
         RequestModel requestModel = new RequestModel();
+        requestModel.register(observer);
 
         if (petBean.getType() == 0){
             //DOG
@@ -32,23 +35,21 @@ public class SendRequestController {
         }
         petModel.setPetId(petBean.getPetId());
         petModel.setName(petBean.getName());
-        petModel.setShelter(shelterModel);
 
         requestModel.setPet(petModel);
-        UserBean userBean = Session.getCurrentSession().getUserBean();
-        requestModel.setUser(new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname()));
+        requestModel.setShelter(shelterModel);
+        requestModel.setUser(userModel);
 
         //non permetto di prendere appuntamenti nei giorni già passati
         if (requestBean.getDate().isBefore(LocalDate.now())){
-            Trigger trigger = new Trigger();
-            trigger.pastDate(requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            throw new PastDateException(requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         }
         requestModel.setDate(requestBean.getDate());
 
         requestModel.setTime(LocalTime.of(Integer.parseInt(requestBean.getHour()), Integer.parseInt(requestBean.getMinutes())));
         requestModel.setStatus(0);
 
-        RequestDAO.saveRequest(requestModel);
-        requestList.addRequest(requestModel);
+        RequestDAO.saveRequest(requestModel, shelterModel);
+        requestModel.notifyObservers(null);
     }
 }

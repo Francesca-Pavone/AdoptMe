@@ -9,15 +9,13 @@ public class UserBean {
     protected String name;
     protected String surname;
     protected String email;
-    protected String password;
     protected File profileImg;
 
-    public UserBean(int userId, String name, String surname, String email, String password, File profileImg) {
+    public UserBean(int userId, String name, String surname, String email, File profileImg) {
         this.userId = userId;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.password = password;
         this.profileImg = profileImg;
     }
 
@@ -43,14 +41,6 @@ public class UserBean {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public File getProfileImg() {

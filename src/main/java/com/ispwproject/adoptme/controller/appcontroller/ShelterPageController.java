@@ -27,13 +27,13 @@ public class ShelterPageController {
         ShelterBean shelterBean = null;
         int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
-        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
         return shelterBean;
     }
 
     public List<PetBean> getPetList(Observer observer) {
         try {
-            shelterPetsList = PetDAO.retrievePetByShelterId(shelterModel,observer);
+            shelterPetsList = new ShelterPetsList(observer, PetDAO.retrievePetByShelterId(shelterModel), shelterModel);
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
@@ -48,7 +48,7 @@ public class ShelterPageController {
         for (PetModel petModel : shelterPetsList.getPetList()) {
             PetBean petBean = new PetBean();
             petBean.setPetId(petModel.getPetId());
-            petBean.setShelterId(petModel.getShelter().getId());
+            petBean.setShelterId(shelterPetsList.getShelter().getId());
             petBean.setPetImage(petModel.getPetImage());
             petBean.setName(petModel.getName());
             petBean.setType(petModel.getType());

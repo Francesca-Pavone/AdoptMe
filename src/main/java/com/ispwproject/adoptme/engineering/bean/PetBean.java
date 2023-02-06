@@ -59,6 +59,14 @@ public class PetBean {
         setAge(age);
         setGender(gender);
     }
+    public PetBean(int petId, int shelterId, File petImage, String name, int type, int gender) {
+        setPetId(petId);
+        setShelterId(shelterId);
+        setPetImage(petImage);
+        setName(name);
+        setType(type);
+        setGender(gender);
+    }
 
     public int getPetId() {
         return petId;

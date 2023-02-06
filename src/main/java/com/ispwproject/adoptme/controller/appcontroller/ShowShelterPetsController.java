@@ -2,31 +2,25 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.model.PetCompatibility;
-import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.ShelterModel;
-import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.dao.PetDAO;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShowShelterPetsController {
-    private ShelterPetsList shelterPetsList;
 
     public void getPetList(Observer observer) throws NoPetsFoundException {
         ShelterModel shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean().getShelterId());
-
         try {
-            shelterPetsList = PetDAO.retrievePetByShelterId(shelterModel, observer);
+            new ShelterPetsList(observer, PetDAO.retrievePetByShelterId(shelterModel), shelterModel);
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione
             se.printStackTrace();
         }
 
+        /*
         List<PetBean> petBeanList = new ArrayList<>();
 
         for (PetModel petModel : shelterPetsList.getPetList()) {
@@ -63,5 +57,7 @@ public class ShowShelterPetsController {
             petBean.setHoursAlone(petCompatibility.getHoursAlone());
             petBeanList.add(petBean);
         }
+
+         */
     }
 }

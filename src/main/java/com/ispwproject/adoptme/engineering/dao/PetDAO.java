@@ -12,7 +12,6 @@ import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 
 import java.io.*;
 import java.sql.*;
@@ -24,15 +23,15 @@ public class PetDAO {
     private static final String DEFAULT_PHOTO = "image/default_photo.png";
     public static final String IMG_SRC = "imgSrc";
     public static final String PHOTO = "Photo";
+    public static final String GENDER = "gender";
 
     private PetDAO() {
         //costruttore privato
     }
 
-    public static ShelterPetsList retrievePetByShelterId(ShelterModel shelterModel, Observer observer) throws SQLException, NoPetsFoundException {
+    public static List<PetModel> retrievePetByShelterId(ShelterModel shelterModel) throws SQLException, NoPetsFoundException {
         Statement stmt;
         List<PetModel> petList = new ArrayList<>();
-        ShelterPetsList shelterPetsList = new ShelterPetsList(observer, petList, shelterModel);
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -70,8 +69,11 @@ public class PetDAO {
                     throw new RuntimeException(e);
                 }
 
-                String petAge = resultSet.getString("age");
-                int petGender = resultSet.getInt("gender");
+                //TODO String petAge = resultSet.getString("age");
+                int dayOfBirth = resultSet.getInt("dayOfBirth");
+                int monthOfBirth = resultSet.getInt("monthOfBirth");
+                int yearOfBirth = resultSet.getInt("yearOfBirth");
+                int petGender = resultSet.getInt(GENDER);
                 int petType = resultSet.getInt("type");
 
                 if (petType == 0)
@@ -80,16 +82,20 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setShelter(shelterModel);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
-                pet.setAge(petAge);
+                //TODO pet.setAge(petAge);
+                pet.setYearOfBirth(yearOfBirth);
+                pet.setMonthOfBirth(monthOfBirth);
+                pet.setDayOfBirth(dayOfBirth);
+
                 pet.setPetCompatibility(new PetCompatibility());
                 if(Session.getCurrentSession().getUserBean() != null)
                     pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterModel.getId()));
-                shelterPetsList.addPet(pet);
+
+                petList.add(pet);
             }
             while (resultSet.next()) ;
 
@@ -100,7 +106,7 @@ public class PetDAO {
         catch (NoPetsFoundException e) {
             throw new NoPetsFoundException();
         }
-        return shelterPetsList;
+        return petList;
     }
 
     public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
@@ -150,12 +156,9 @@ public class PetDAO {
                 }
 
                 String petAge = resultSet.getString("age");
-                int petGender = resultSet.getInt("gender");
+                int petGender = resultSet.getInt(GENDER);
                 int petType = resultSet.getInt("type");
                 int shelterId = resultSet.getInt("shelter");
-
-                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
-
 
                 if (petType == 0)
                     pet = new DogModel();
@@ -163,7 +166,6 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setShelter(shelterModel);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
@@ -229,9 +231,7 @@ public class PetDAO {
                 }
 
                 int petType = resultSet.getInt("type");
-                String petAge = resultSet.getString("age");
 
-                ShelterModel shelter = ShelterDAO.retrieveShelterById(shelterId);
 
                 if (petType == 0)
                     pet = new DogModel();
@@ -239,11 +239,10 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setShelter(shelter);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
-                pet.setAge(petAge);
+                //pet.setAge(petAge);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
@@ -285,11 +284,11 @@ public class PetDAO {
                 int petId = resultSet.getInt("id");
                 String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob("imgSrc");
+                Blob blob = resultSet.getBlob(IMG_SRC);
                 File petImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = petName + "Photo" + ".png";
+                        String filePath = petName + PHOTO + ".png";
                         petImage = ImageUtils.fromBlobToFile(blob, filePath);
                     }
                     else {
@@ -298,11 +297,10 @@ public class PetDAO {
                     }
                 }
                 catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource("image/default_photo.png").getPath());
+                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
-                String petAge = resultSet.getString("age");
-                int petGender = resultSet.getInt("gender");
+                int petGender = resultSet.getInt(GENDER);
                 int petType = resultSet.getInt("type");
                 int petShelter = resultSet.getInt("shelter");
 
@@ -312,13 +310,11 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petShelter);
-                pet.setShelter(shelterModel);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
-                pet.setAge(petAge);
+
                 if(Session.getCurrentSession().getUserBean() != null)
                     pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), petShelter));
 

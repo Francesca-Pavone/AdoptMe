@@ -20,9 +20,7 @@
  */
 package com.ispwproject.adoptme.engineering.dao.queries;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SimpleQueries {
     //costruttore privato
@@ -53,10 +51,14 @@ public class SimpleQueries {
     }
 
     public static ResultSet selectPetByShelterId(Statement stmt, int shelterId) throws SQLException {
-        String sql = "SELECT dogId AS id, name, imgSrc, gender, age, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, age, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE shelter ='" + shelterId + "' UNION SELECT catId AS id, name, imgSrc, gender, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE shelter ='" + shelterId + "'ORDER BY id;";
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet selectDistinctReq(Statement stmt, int shelterId, int petId, int userId, Date date, Time time) throws SQLException {
+        String sql = "SELECT shelterId, petId, userId, date, time FROM Requests WHERE shelterId = '" + shelterId + "' and petId = '" + petId + "' and userId = '" + userId + "' and date = '" + date + "' and time = '" + time +"';";
+        return stmt.executeQuery(sql);
+    }
     public static ResultSet selectReqByShelterId(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Requests WHERE shelterId = '" + shelterId + "';";
         return stmt.executeQuery(sql);

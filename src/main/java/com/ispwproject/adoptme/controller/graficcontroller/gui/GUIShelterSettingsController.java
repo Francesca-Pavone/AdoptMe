@@ -44,7 +44,7 @@ public class GUIShelterSettingsController extends ShelterSideBar {
     private ImageView userImg;
 
     public void signOut(ActionEvent event) throws IOException {
-        Session.getCurrentSession().closeSession();
+        Session.closeSession();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

@@ -16,17 +16,17 @@ public class UserModel extends ShelterUserModel{
     }
      */
 
-    public UserModel(int id, File profileImg, String email, int accountType, String name, String surname) {
-        super(id, profileImg, email, accountType);
+    public UserModel(int id, File profileImg, String name, String surname, String email) {
+        super(id, profileImg,0, email);
+        this.name = name;
+        this.surname = surname;
+    }
+    public UserModel(int id, File profileImg, String name, String surname) {
+        super(id, profileImg,0);
         this.name = name;
         this.surname = surname;
     }
 
-    public UserModel(int userId, File profileImg, AccountInfo accountInfo, String name, String surname) {
-        super(userId, profileImg, accountInfo);
-        this.name = name;
-        this.surname = surname;
-    }
 
     public String getName() {
         return name;

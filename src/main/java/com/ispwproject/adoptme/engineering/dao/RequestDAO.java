@@ -7,8 +7,6 @@ import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
-import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.*;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -17,17 +15,30 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static com.ispwproject.adoptme.engineering.connection.ConnectionDB.insertRequest;
 
 public class RequestDAO {
     private RequestDAO() {
     }
 
-    public static void saveRequest(RequestModel requestModel) {
-
+    public static void saveRequest(RequestModel requestModel, ShelterModel shelterModel) throws Exception {
+        Statement stmt;
         try {
-            //CRUDQueries.insertRequest(stmt, requestModel);
-            try (PreparedStatement preparedStatement = ConnectionDB.insertRequest()) {
-                preparedStatement.setInt(1, requestModel.getPet().getShelter().getId());
+            stmt = ConnectionDB.getConnection();
+            ResultSet resultSet = SimpleQueries.selectDistinctReq(stmt, requestModel.getShelter().getId(), requestModel.getPet().getPetId(), requestModel.getUser().getId(), Date.valueOf(requestModel.getDate()), Time.valueOf(requestModel.getTime()));
+
+            while (resultSet.next()){
+                if (resultSet.getInt("shelterId") == requestModel.getShelter().getId() &&
+                resultSet.getInt("petId") == requestModel.getPet().getPetId() &&
+                resultSet.getInt("userId") == requestModel.getUser().getId() &&
+                        Objects.equals(resultSet.getDate("date"), Date.valueOf(requestModel.getDate())) &&
+                        Objects.equals(resultSet.getTime("time"), Time.valueOf(requestModel.getTime())))
+                    throw new Exception("Identical request already sent");
+            }
+            try (PreparedStatement preparedStatement = insertRequest()) {
+                preparedStatement.setInt(1, shelterModel.getId());
                 preparedStatement.setInt(2, requestModel.getPet().getPetId());
                 preparedStatement.setInt(3, requestModel.getUser().getId());
                 preparedStatement.setDate(4, Date.valueOf(requestModel.getDate()));
@@ -36,12 +47,14 @@ public class RequestDAO {
                 preparedStatement.executeUpdate();
             }
 
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void modifyRequest(RequestModel requestModel) {
+
         try {
             try (PreparedStatement preparedStatement = ConnectionDB.modifyReq()) {
                 preparedStatement.setDate(1, Date.valueOf(requestModel.getDate()));
@@ -76,11 +89,9 @@ public class RequestDAO {
         }
     }
 
-    public static int retrieveReqByShelter(ShelterModel shelterModel, Observer observer) throws Exception {
+    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws Exception {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
-        RequestList requestList = new RequestList(observer, requestModelList, shelterModel);
-        int i = 0;
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -89,8 +100,7 @@ public class RequestDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                Exception e = new Exception("No requests found for the shelter with id: " + shelterModel.getId());
-                throw e;
+                throw new Exception("No requests found for the shelter with id: " + shelterModel.getId());
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -121,9 +131,8 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
-                requestList.addRequest(requestModel);
-                i++;
+                RequestModel requestModel = new RequestModel(reqId, pet, shelterModel, userModel, date.toLocalDate(), time, status);
+                requestModelList.add(requestModel);
 
             } while (resultSet.next());
 
@@ -132,13 +141,12 @@ public class RequestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return i;
+        return requestModelList;
     }
 
-    public static void retrieveReqByUser(UserModel userModel, Observer observer) throws Exception {
+    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws Exception {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
-        RequestList requestList = new RequestList(observer, requestModelList, userModel);
 
         try {
             stmt = ConnectionDB.getConnection();
@@ -159,6 +167,7 @@ public class RequestDAO {
                 int petId = resultSet.getInt("petId");
                 int shelterId = resultSet.getInt("shelterId");
                 PetModel pet = PetDAO.retrievePetById(petId, shelterId);
+                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
 
                 Date date = resultSet.getDate("date");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -170,8 +179,8 @@ public class RequestDAO {
 
                 int status = resultSet.getInt("status");
 
-                RequestModel requestModel = new RequestModel(observer, reqId, pet, userModel, date.toLocalDate(), time, status);
-                requestList.addRequest(requestModel);
+                RequestModel requestModel = new RequestModel(reqId, pet, shelterModel, userModel, date.toLocalDate(), time, status);
+                requestModelList.add(requestModel);
 
             } while (resultSet.next());
 
@@ -181,7 +190,7 @@ public class RequestDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return requestModelList;
     }
-
 }
 

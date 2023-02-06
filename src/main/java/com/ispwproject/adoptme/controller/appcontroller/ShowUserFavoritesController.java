@@ -21,7 +21,7 @@ public class ShowUserFavoritesController {
     public List<PetBean> getPetList(Observer observer) throws FavoriteListEmptyException {
         try {
             UserBean userBean = Session.getCurrentSession().getUserBean();
-            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
+            UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
             userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(userModel, observer);
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

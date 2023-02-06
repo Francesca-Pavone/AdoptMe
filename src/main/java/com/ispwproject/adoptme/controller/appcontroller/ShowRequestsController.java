@@ -1,8 +1,9 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.model.AccountInfo;
+import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
@@ -10,34 +11,48 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShowRequestsController {
-
     private ShelterModel shelterModel;
     private UserModel userModel;
 
     public ShowRequestsController() {
         if (Session.getCurrentSession().getShelterBean() != null){
             ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
-            AccountInfo accountInfo = new AccountInfo(shelterBean.getEmail(), 1);
-            this.shelterModel = new ShelterModel(shelterBean.getShelterImg(), accountInfo, shelterBean.getName(), shelterBean.getPhoneNumber(), shelterBean.getAddress(), shelterBean.getCity(), shelterBean.getWebSite());
+            this.shelterModel = new ShelterModel(shelterBean.getShelterImg(), shelterBean.getName(), shelterBean.getEmail(), shelterBean.getPhoneNumber(), shelterBean.getAddress(), shelterBean.getCity(), shelterBean.getWebSite());
             this.shelterModel.setId(shelterBean.getShelterId());
-            //this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean());
         }
         else if (Session.getCurrentSession().getUserBean() != null) {
             UserBean userBean = Session.getCurrentSession().getUserBean();
-            this.userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
-            //this.userModel = new UserModel(Session.getCurrentSession().getUserBean());
+            this.userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname(), userBean.getEmail());
         }
     }
 
     public void getRequestList(Observer observer){
 
+        List<RequestModel> requestModelList = new ArrayList<>();
         try {
-            if (this.shelterModel != null)
-                RequestDAO.retrieveReqByShelter(this.shelterModel, observer);
-            else if (this.userModel != null)
-                RequestDAO.retrieveReqByUser(this.userModel, observer);
+            if (this.shelterModel != null) {
+                requestModelList = RequestDAO.retrieveReqByShelter(this.shelterModel);
+            }
+            else if (this.userModel != null) {
+                requestModelList = RequestDAO.retrieveReqByUser(this.userModel);
+            }
+            for (RequestModel request : requestModelList) {
+                RequestBean requestBean = new RequestBean(request.getPet().getPetImage(), request.getUser().getImage(), request.getPet().getName(), request.getPet().getPetId(), request.getShelter().getId(), request.getUser().getName(), request.getUser().getId());
+                requestBean.setId(request.getId());
+                requestBean.setDate(request.getDate());
+                requestBean.setHour(String.valueOf(request.getTime().getHour()));
+                requestBean.setMinutes(request.getTime().format(DateTimeFormatter.ofPattern("mm")));
+                requestBean.setStatus(request.getStatus());
+
+                request.register(observer);
+                request.notifyObservers(requestBean);
+                request.unregister(observer);
+            }
 
         } catch (SQLException se) {
             // Errore durante l'apertura della connessione

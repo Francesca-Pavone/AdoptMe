@@ -44,8 +44,8 @@ public class PetInfoController {
                 petBean.setTestFelv(catModel.isTestFelv());
                 petBean.setFav(catModel.isFav());
             }
-            shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
-            shelterBean.setShelterImg(shelterModel.getProfileImg());
+            shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
+            shelterBean.setShelterImg(shelterModel.getImage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class PetInfoController {
 
     public boolean checkFavorite(PetBean petBean, Observer observer) {
         UserBean userBean = Session.getCurrentSession().getUserBean();
-        UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0, userBean.getName(), userBean.getSurname());
+        UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
         UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
         try {
             userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(userModel, observer);
