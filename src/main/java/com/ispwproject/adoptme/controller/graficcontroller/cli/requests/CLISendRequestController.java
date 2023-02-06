@@ -11,7 +11,6 @@ import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLISendRequestView;
 
-import java.time.LocalDate;
 
 public class CLISendRequestController implements Observer {
 
@@ -32,24 +31,11 @@ public class CLISendRequestController implements Observer {
     }
 
     public void setRequestDate(String date) throws DateFormatException {
-        String[] dateValues = date.split("-");
-        LocalDate localDate;
-
-        if (dateValues.length < 3)
-            throw new DateFormatException(date);
-        localDate = LocalDate.of(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0]));
-
-        this.requestBean.setDate(localDate);
+        this.requestBean.setDate(date);
     }
 
     public void setRequestTime(String time) throws TimeFormatException {
-        String[] timeValues = time.split(":");
-
-        if (timeValues.length < 2)
-            throw new TimeFormatException(time);
-
-        this.requestBean.setHour(timeValues[0]);
-        this.requestBean.setMinutes(timeValues[1]);
+        this.requestBean.setTime(time);
     }
 
     public void executeCommand(String command) {

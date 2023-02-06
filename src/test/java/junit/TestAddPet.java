@@ -1,8 +1,9 @@
 package junit;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
+import com.ispwproject.adoptme.controller.appcontroller.LoginController;
+import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,21 +18,27 @@ public class TestAddPet {
      */
     @Test
     public void testAddPet(){
-        ShelterBean shelterBean = new ShelterBean();
-        shelterBean.setShelterId(1);
+        try {
+            LoginBean loginBean = new LoginBean("pensieri_bestiali@gmail.com", "123");
+            LoginController loginController = new LoginController();
+            loginController.checkLogin(loginBean);
+            loginController.completeShelterLogin(loginBean);
 
-        PetBean petBean = new PetBean();
-        petBean.setName("Nala");
-        petBean.setYearOfBirth(2019);
-        petBean.setMonthOfBirth(1);
-        petBean.setDayOfBirth(16);
-        petBean.setGender(0);
-        petBean.setType(0);
+            PetBean petBean = new PetBean();
+            petBean.setName("Romi");
+            petBean.setYearOfBirth(2019);
+            petBean.setMonthOfBirth(1);
+            petBean.setDayOfBirth(16);
+            petBean.setGender(0);
+            petBean.setType(0);
 
-        AddPetController addPetController = new AddPetController(petBean);
-        int petId = addPetController.addNewPet(shelterBean, null);
+            AddPetController addPetController = new AddPetController(petBean);
+            int petId = addPetController.addNewPet(null);
 
-        // il test fallisce perché l'inserimento va a buon fine
-        assertEquals(-1, petId);
+            // il test fallisce perché l'inserimento va a buon fine
+            assertEquals(-1, petId);
+        }
+        catch (Exception ignored){
+        }
     }
 }

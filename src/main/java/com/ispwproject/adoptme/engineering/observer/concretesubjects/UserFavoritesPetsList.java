@@ -2,9 +2,7 @@ package com.ispwproject.adoptme.engineering.observer.concretesubjects;
 
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
-import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.observer.Subject;
 
@@ -28,6 +26,7 @@ public class UserFavoritesPetsList extends Subject {
         this.user = user;
     }
 
+
     public void addPet(PetModel petModel){
         this.petList.add(petModel);
         PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
@@ -40,15 +39,8 @@ public class UserFavoritesPetsList extends Subject {
         this.notifyObservers(petBean);
     }
 
-    public void updateRemove(PetModel petModel, Object object){
-        this.removePet(petModel);
-        notifyObservers(new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender()), object);
-    }
 
-    public void updateAdd(PetModel petModel, Object object){
-        this.addPet(petModel);
-        notifyObservers(new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender()), object);
-    }
+
 
     public List<PetModel> getPetList() {
         return petList;

@@ -5,12 +5,14 @@ import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -21,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class GUISendRequestController implements Observer {
     @FXML
@@ -36,7 +39,11 @@ public class GUISendRequestController implements Observer {
 
     private ShelterBean shelterBean;
     private PetBean petBean;
+    private Parent containerPage;
 
+    public void setContainerPage(Parent currentPage) {
+        this.containerPage = currentPage;
+    }
 
     public void setData(PetBean pet, ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
@@ -45,17 +52,22 @@ public class GUISendRequestController implements Observer {
         shelterBtn.setText(shelterBean.getName());
     }
 
-    public void sendRequest(ActionEvent event) throws Exception {
-
-        String[] time = timeField.getText().split(":");
-        RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
-
-        SendRequestController sendRequestController = new SendRequestController();
+    public void sendRequest()  {
+        RequestBean requestBean = null;
         try {
+            if (datePicker.getValue() == null)
+                throw new NoInputException("Date");
+            if (timeField.getText() == null || timeField.getText().equals(""))
+                throw new NoInputException("Time");
+
+            requestBean = new RequestBean(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), timeField.getText());
+
+            SendRequestController sendRequestController = new SendRequestController();
             sendRequestController.sendUserRequest(petBean, requestBean, this);
-        } catch (Exception e) {
+        } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
+
         datePicker.setValue(null);
         timeField.setText(null);
 
@@ -63,12 +75,15 @@ public class GUISendRequestController implements Observer {
 
 
 
-    public void goToShelterPage(ActionEvent event) throws IOException {
+    public void goToShelterPage(ActionEvent event) throws IOException, NoPetsFoundException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
 
         GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setCurrentPage(root);
+        guiShelterInformationController.setPreviousPage(containerPage);
         guiShelterInformationController.setData(shelterBean);
         stage.setScene(scene);
     }

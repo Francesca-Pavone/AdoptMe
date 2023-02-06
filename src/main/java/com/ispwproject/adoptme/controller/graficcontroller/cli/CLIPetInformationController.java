@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
@@ -83,6 +84,8 @@ public class CLIPetInformationController implements Observer {
             PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
             ScannerSupport.waitEnter();
             this.cliPetInformationViewCurrent.showCommand();
+        } catch (NoPetsFoundException e) {
+            e.printStackTrace();
         }
     }
 

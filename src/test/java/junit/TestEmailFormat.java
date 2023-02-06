@@ -21,6 +21,8 @@ public class TestEmailFormat {
             validFormat = 0;
         }
 
+        //il test ha successo perché ho inserito come input un'email non valida e quindi mi aspetto
+        //che venga sollevata l'eccezione e di conseguenza assegnato il valore 0 a "validFormat"
         assertEquals(0, validFormat);
     }
 }

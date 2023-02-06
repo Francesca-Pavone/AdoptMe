@@ -66,7 +66,7 @@ public class DogDAO {
                 petCompatibility.setSleepOutside(sleepOutside);
                 petCompatibility.setHoursAlone(hoursAlone);
 
-                dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility, shelterId);
+                dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
                 dog.setVaccinated(vaccinated);
                 dog.setMicrochipped(microchipped);
                 dog.setDewormed(dewormed);
@@ -97,12 +97,13 @@ public class DogDAO {
     public static int saveDog(DogModel dogModel) {
         Statement stmt;
         int dogId = 1;
+        int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
         try {
             stmt = ConnectionDB.getConnection();
 
             // In pratica i risultati delle query possono essere visti come un Array Associativo o un Map
-            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, dogModel.getShelter().getId());
+            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, shelterId);
             while (rs.next()) {
                 // lettura delle colonne "by name"
                 dogId = rs.getInt("petId");
@@ -116,7 +117,7 @@ public class DogDAO {
             //utilizzo i prepared statement per poter passare alla query il tipo di dato blob usato per le immagini
             PreparedStatement preparedStatement = ConnectionDB.insertDog();
             preparedStatement.setInt(1, dogId);
-            preparedStatement.setInt(2, dogModel.getShelter().getId());
+            preparedStatement.setInt(2, shelterId);
             preparedStatement.setString(3, dogModel.getName());
 
             try {
@@ -148,7 +149,7 @@ public class DogDAO {
 
             PreparedStatement preparedStatement1 = ConnectionDB.insertPetCompatibility();
             preparedStatement1.setInt(1, dogId);
-            preparedStatement1.setInt(2, dogModel.getShelter().getId());
+            preparedStatement1.setInt(2, shelterId);
             preparedStatement1.setBoolean(3, dogModel.getPetCompatibility().isMaleDog());
             preparedStatement1.setBoolean(4, dogModel.getPetCompatibility().isFemaleDog());
             preparedStatement1.setBoolean(5, dogModel.getPetCompatibility().isMaleCat());

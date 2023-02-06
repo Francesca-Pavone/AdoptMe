@@ -25,39 +25,28 @@ public abstract class PetModel {
     protected PetCompatibility petCompatibility;
     protected boolean fav; //TODO vedere se lasciarlo qua
 
-    //protected ShelterModel shelter;
 
     public PetModel() {
     }
 
-    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
+    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility) {
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
         this.coatLenght = coatLenght;
         this.petCompatibility = petCompatibility;
-        //this.shelter = new ShelterModel(shelterId);
     }
 
-    protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility, ShelterModel shelter) {
+
+    protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility) {
         this.type = type;
         this.name = name;
         this.petImage = petImage;
         this.petCompatibility = petCompatibility;
-        //this.shelter = shelter;
     }
 
 
-    protected PetModel(int type, String name, File petImg, int yearOfBirth, int gender) {
-        setType(type);
-        setName(name);
-        setPetImage(petImg);
-        setGender(gender);
-        setYearOfBirth(yearOfBirth);
-        this.petCompatibility = new PetCompatibility();
-    }
-
-
+    //TODO vedere dove uso questo metodo e trovare un altro modo per ricavare lo shelter
     public ShelterModel getShelter() {
         return null;
     }

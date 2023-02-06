@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
-import com.ispwproject.adoptme.engineering.utils.ImageUtils;
+import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.builder.PetBeanBuilder;
@@ -279,7 +279,7 @@ public class GUIAddPetController {
         }
 
         AddPetController addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(shelterBean, observer);
+        addPetController.addNewPet(observer);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 
@@ -288,7 +288,7 @@ public class GUIAddPetController {
         FileChooser fileChooser=new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagine Files","*.png","*.jpg"));
         file = fileChooser.showOpenDialog(stage).getAbsoluteFile();
-        petImg.setImage(ImageUtils.fromFileToImage(file));
+        petImg.setImage(ImageConverterSupport.fromFileToImage(file));
     }
 
     public void hideShowYearMonthHBox(ActionEvent event) {

@@ -11,9 +11,9 @@ import java.io.*;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-public class ImageUtils {
+public class ImageConverterSupport {
     //Costruttore privato
-    private ImageUtils() {
+    private ImageConverterSupport() {
         //Costruttore privato perché ho tutti i metodi statici
     }
 

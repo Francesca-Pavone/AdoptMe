@@ -3,13 +3,10 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,14 +87,11 @@ public class GUILoginController {
             loginController.checkLogin(loginBean);
 
             if (loginBean.getAccountType() == 1) {
-                UserBean userBean = loginController.getLoginInfoUser(loginBean);
-                Session.setSessionInstance(userBean);
+                loginController.completeUserLogin(loginBean);
                 scene = userLogin();
                 Main.getStage().setScene(scene);
             } else if (loginBean.getAccountType() == 2) {
-                ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
-                Session.setSessionInstance(shelterBean);
-
+                loginController.completeShelterLogin(loginBean);
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
                 Parent root = fxmlLoader.load();
                 scene = new Scene(root);

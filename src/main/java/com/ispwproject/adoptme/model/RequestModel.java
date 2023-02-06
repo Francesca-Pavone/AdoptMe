@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.model;
 
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.exception.DateFormatException;
+import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.Subject;
 
@@ -98,13 +100,12 @@ public class RequestModel extends Subject{
         this.status = status;
     }
 
-    public void updateStatus(int status, Object object)  {
+    public void updateStatus(int status, Object object) throws DateFormatException, TimeFormatException {
         this.status = status;
         RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getImage(), getPet().getName(), getPet().getPetId(), getShelter().getId(), getUser().getName(), getUser().getId());
         requestBean.setId(getId());
-        requestBean.setDate(getDate());
-        requestBean.setHour(String.valueOf(getTime().getHour()));
-        requestBean.setMinutes(getTime().format(DateTimeFormatter.ofPattern("mm")));
+        requestBean.setDate(getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        requestBean.setTime(getTime().toString());
         requestBean.setStatus(status);
 
         notifyObservers(requestBean, object);

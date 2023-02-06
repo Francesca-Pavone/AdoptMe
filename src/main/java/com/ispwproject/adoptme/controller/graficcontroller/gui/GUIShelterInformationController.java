@@ -1,14 +1,17 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.ShelterPageController;
+import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -23,7 +26,6 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class GUIShelterInformationController implements Observer {
 
@@ -49,6 +51,9 @@ public class GUIShelterInformationController implements Observer {
     private Parent previousPage;
     private Parent currentPage;
 
+    int column = 0;
+    int row = 1;
+
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
 
@@ -59,7 +64,7 @@ public class GUIShelterInformationController implements Observer {
 
     }
 
-    public void setData(ShelterBean shelterBean) throws IOException {
+    public void setData(ShelterBean shelterBean) throws IOException, NoPetsFoundException {
         shelterName.setText(shelterBean.getName());
         Image image;
         if (shelterBean.getShelterImg() != null) {
@@ -74,33 +79,15 @@ public class GUIShelterInformationController implements Observer {
         labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
         shelterImage.setImage(image);
 
-        ShelterPageController shelterPageController = new ShelterPageController(shelterBean);
-        List<PetBean> petBeanList = shelterPageController.getPetList(this);
-
-        int column = 0;
-        int row = 1;
-        for (PetBean petBean : petBeanList) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
-            Pane pane = fxmlLoader.load();
-
-            GUIPetItemController petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setPageContainer(currentPage);
-            petItemControllerG.setPetData(petBean);
-
-            if (column == 4) {
-                column = 0;
-                row++;
-            }
-            grid.add(pane, column++, row);
-        }
+        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);
+        showShelterPetsController.getPetList(this);
     }
 
-    public boolean setShelterData(String shelterName) throws IOException {
+    public boolean setShelterData(String shelterName) {
         boolean check = false;
         try {
-            ShelterPageController shelterPageController = new ShelterPageController();
-            ShelterBean shelterBean = shelterPageController.getShelter(shelterName);
+            ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
+            ShelterBean shelterBean = showShelterPetsController.getShelter(shelterName);
             if (shelterBean != null)
                 setData(shelterBean);
             check = true;
@@ -116,15 +103,31 @@ public class GUIShelterInformationController implements Observer {
         paneInformations.setVisible(btnInformations.isSelected());
     }
 
-    public void goBack() throws IOException {
-        Stage stage = Main.getStage();
+    public void goBack(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = this.previousPage.getScene();
         stage.setScene(scene);
     }
 
     @Override
     public void update(Object object) {
-        //ignore
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
+            Pane pane = fxmlLoader.load();
+
+            GUIPetItemController petItemControllerG = fxmlLoader.getController();
+            petItemControllerG.setPageContainer(currentPage);
+            petItemControllerG.setPetData((PetBean) object);
+
+            if (column == 4) {
+                column = 0;
+                row++;
+            }
+            grid.add(pane, column++, row);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -18,7 +18,7 @@ public class CLIPetInformationView {
         PrintSupport.printMessage("\n---------------------------------------- " + name + " ----------------------------------------");
     }
     public void showData(String dateOfBirth, String type, String gender, String coatLenght, String dogSize, String generalInfo, String compatibility) {
-        PrintSupport.printMessage("\tType: " + type + "\n\tDate of birth: " + dateOfBirth + "\n\tGender: " + gender + "\n\tCoat length: " + coatLenght);
+        PrintSupport.printMessage("\tType: " + type + "\n" + dateOfBirth + "\n\tGender: " + gender + "\n\tCoat length: " + coatLenght);
         if(!dogSize.equals(""))
             PrintSupport.printMessage("\tSize: " + dogSize);
 

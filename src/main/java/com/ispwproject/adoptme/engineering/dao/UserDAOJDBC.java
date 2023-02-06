@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.utils.ImageUtils;
+import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.UserModel;
@@ -92,7 +92,7 @@ public class UserDAOJDBC implements UserDAO{
         try {
             if (blob != null) {
                 String filePath = userId + "Photo" + ".png";
-                profileImg = ImageUtils.fromBlobToFile(blob, filePath);
+                profileImg = ImageConverterSupport.fromBlobToFile(blob, filePath);
             } else {
                 Trigger trigger = new Trigger();
                 trigger.imageNotFound();

@@ -11,7 +11,7 @@
 
    <children>
       <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Pane fx:id="paneInformations" focusTraversable="true" style="-fx-background-color: #e6e6e6; -fx-background-radius: 20;" visible="false" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="180.0">
+      <Pane fx:id="paneInformations" focusTraversable="true" style="-fx-background-color: #e6e6e6; -fx-background-radius: 20;" visible="false" AnchorPane.leftAnchor="690.0" AnchorPane.topAnchor="150.0">
          <children>
             <VBox alignment="CENTER_LEFT" fillWidth="false" layoutX="0.03662109375" spacing="4.0">
                <children>

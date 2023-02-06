@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.view.cli.requests;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
-import com.ispwproject.adoptme.engineering.exception.NotExistingRequestException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 
@@ -31,7 +31,7 @@ public class CLIAppointmentsPageView {
         try {
             cliAppointmentsPageController.executeCommand(input);
         }
-        catch (NotExistingRequestException e) {
+        catch (NotFoundException e) {
             PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
             ScannerSupport.waitEnter();
             showCommands();

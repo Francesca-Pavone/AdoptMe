@@ -7,8 +7,6 @@ import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageSendRequestView;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class CLIManageSendRequestController {
 
@@ -28,8 +26,8 @@ public class CLIManageSendRequestController {
 
     public void start(){
         this.view = new CLIManageSendRequestView(this);
-        this.view.showRequestNow(this.requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                this.requestBean.getHour() + ":" + this.requestBean.getMinutes());
+        this.view.showRequestNow(this.requestBean.getDate(),
+                this.requestBean.getTime());
         this.view.showForm();
     }
 
@@ -52,16 +50,8 @@ public class CLIManageSendRequestController {
         String time = this.view.askTime();
         if (view.askConfirmation() == 1){
 
-            String[] dateValues = date.split("-");
-            if (dateValues.length < 3)
-                throw new DateFormatException(date);
-            this.requestBean.setDate(LocalDate.of(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0])));
-
-            String[] timeValues = time.split(":");
-            if (timeValues.length < 2)
-                throw new TimeFormatException(time);
-            this.requestBean.setHour(timeValues[0]);
-            this.requestBean.setMinutes(timeValues[1]);
+            this.requestBean.setDate(date);
+            this.requestBean.setTime(time);
 
             ManageRequestController manageRequestController = new ManageRequestController();
             try {

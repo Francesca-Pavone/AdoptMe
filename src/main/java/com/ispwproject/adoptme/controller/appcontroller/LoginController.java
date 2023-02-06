@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.dao.*;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
@@ -17,7 +18,7 @@ public class LoginController {
         loginBean.setAccountType(type);
     }
 
-    public UserBean getLoginInfoUser(LoginBean loginBean) throws Exception {
+    public void completeUserLogin(LoginBean loginBean) throws Exception {
 
         UserDAO userDAO;
         if (LocalTime.now().getMinute()%2 == 0) {
@@ -26,13 +27,16 @@ public class LoginController {
             userDAO = new UserDAOCSV();
         }
         UserModel userModel = userDAO.retrieveUserByEmail(loginBean.getEmail());
-        return new UserBean(userModel.getId(), userModel.getName(), userModel.getSurname(), userModel.getEmail(), userModel.getImage());
-    }
-    public ShelterBean getLoginInfoShelter(LoginBean loginBean) throws Exception {
-            ShelterModel shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
+        UserBean userBean = new UserBean(userModel.getId(), userModel.getName(), userModel.getSurname(), userModel.getEmail(), userModel.getImage());
+        Session.setSessionInstance(userBean);
 
-            ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
-            shelterBean.setShelterImg(shelterModel.getImage());
-            return  shelterBean;
+    }
+    public void completeShelterLogin(LoginBean loginBean) throws Exception {
+        ShelterModel shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
+
+        ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
+        shelterBean.setShelterImg(shelterModel.getImage());
+        Session.setSessionInstance(shelterBean);
+
     }
 }

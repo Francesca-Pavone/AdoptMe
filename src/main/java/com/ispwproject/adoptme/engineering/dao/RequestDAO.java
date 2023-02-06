@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
+import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -23,7 +24,7 @@ public class RequestDAO {
     private RequestDAO() {
     }
 
-    public static void saveRequest(RequestModel requestModel, ShelterModel shelterModel) throws Exception {
+    public static void saveRequest(RequestModel requestModel, ShelterModel shelterModel) throws  DuplicateRequestException{
         Statement stmt;
         try {
             stmt = ConnectionDB.getConnection();
@@ -35,7 +36,7 @@ public class RequestDAO {
                 resultSet.getInt("userId") == requestModel.getUser().getId() &&
                         Objects.equals(resultSet.getDate("date"), Date.valueOf(requestModel.getDate())) &&
                         Objects.equals(resultSet.getTime("time"), Time.valueOf(requestModel.getTime())))
-                    throw new Exception("Identical request already sent");
+                    throw new DuplicateRequestException();
             }
             try (PreparedStatement preparedStatement = insertRequest()) {
                 preparedStatement.setInt(1, shelterModel.getId());
@@ -49,7 +50,7 @@ public class RequestDAO {
 
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

@@ -2,8 +2,6 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import com.ispwproject.adoptme.engineering.exception.UserNotFoundException;
@@ -12,7 +10,6 @@ import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
-import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 
 public class CLILoginController {
@@ -59,13 +56,11 @@ public class CLILoginController {
                loginController.checkLogin(loginBean);
 
                if (loginBean.getAccountType() == 1) {
-                   UserBean userBean = loginController.getLoginInfoUser(loginBean);
-                   Session.setSessionInstance(userBean);
+                   loginController.completeUserLogin(loginBean);
                    CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
                    cliUserHomepageController.start();
                } else if (loginBean.getAccountType() == 2) {
-                   ShelterBean shelterBean = loginController.getLoginInfoShelter(loginBean);
-                   Session.setSessionInstance(shelterBean);
+                   loginController.completeShelterLogin(loginBean);
 
                    //todo set shelter homepage
                } else {
