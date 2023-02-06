@@ -48,7 +48,7 @@ public class ShelterPageController {
         for (PetModel petModel : shelterPetsList.getPetList()) {
             PetBean petBean = new PetBean();
             petBean.setPetId(petModel.getPetId());
-            petBean.setShelterId(petModel.getShelter().getId());
+            petBean.setShelterId(shelterPetsList.getShelter().getId());
             petBean.setPetImage(petModel.getPetImage());
             petBean.setName(petModel.getName());
             petBean.setType(petModel.getType());

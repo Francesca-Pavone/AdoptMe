@@ -12,6 +12,7 @@ public class RequestModel extends Subject{
 
     private int id;
     private PetModel pet;
+    private ShelterModel shelter;
     private UserModel user;
     private LocalDate date;
     private LocalTime time;
@@ -27,9 +28,10 @@ public class RequestModel extends Subject{
         this.status = status;
     }
 
-    public RequestModel(int id, PetModel pet, UserModel user, LocalDate date, LocalTime time, int status) {
+    public RequestModel(int id, PetModel pet, ShelterModel shelter, UserModel user, LocalDate date, LocalTime time, int status) {
         this.id = id;
         this.pet = pet;
+        this.shelter = shelter;
         this.user = user;
         this.date = date;
         this.time = time;
@@ -54,6 +56,14 @@ public class RequestModel extends Subject{
 
     public void setPet(PetModel pet) {
         this.pet = pet;
+    }
+
+    public ShelterModel getShelter() {
+        return shelter;
+    }
+
+    public void setShelter(ShelterModel shelter) {
+        this.shelter = shelter;
     }
 
     public UserModel getUser() {
@@ -88,9 +98,9 @@ public class RequestModel extends Subject{
         this.status = status;
     }
 
-    public void updateStatus(int status, Object object) throws Exception {
+    public void updateStatus(int status, Object object)  {
         this.status = status;
-        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getImage(), getPet().getName(), getPet().getPetId(), getPet().getShelter().getId(), getUser().getName(), getUser().getId());
+        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getImage(), getPet().getName(), getPet().getPetId(), getShelter().getId(), getUser().getName(), getUser().getId());
         requestBean.setId(getId());
         requestBean.setDate(getDate());
         requestBean.setHour(String.valueOf(getTime().getHour()));

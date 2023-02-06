@@ -20,9 +20,7 @@
  */
 package com.ispwproject.adoptme.engineering.dao.queries;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SimpleQueries {
     //costruttore privato
@@ -57,6 +55,10 @@ public class SimpleQueries {
         return stmt.executeQuery(sql);
     }
 
+    public static ResultSet selectDistinctReq(Statement stmt, int shelterId, int petId, int userId, Date date, Time time) throws SQLException {
+        String sql = "SELECT shelterId, petId, userId, date, time FROM Requests WHERE shelterId = '" + shelterId + "' and petId = '" + petId + "' and userId = '" + userId + "' and date = '" + date + "' and time = '" + time +"';";
+        return stmt.executeQuery(sql);
+    }
     public static ResultSet selectReqByShelterId(Statement stmt, int shelterId) throws SQLException {
         String sql = "SELECT * FROM Requests WHERE shelterId = '" + shelterId + "';";
         return stmt.executeQuery(sql);

@@ -7,7 +7,6 @@ import com.ispwproject.adoptme.engineering.exception.NotExistingRequestException
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.view.cli.requests.CLIAppointmentsPageView;
-import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -123,7 +122,7 @@ public class CLIAppointmentsPageController implements Observer {
     public void update(Object object) {
         /*
             a questo metodo viene passato un requestBean al momento in cui viene prelevato dal db
-            poiché viene aggiornato lo stato della concreate subject RequestList (aggiungendo la nuova richiesta)
+            poiché viene aggiornato lo stato della concreate subject RequestModel (aggiungendo la nuova richiesta)
             e tale classe è osservata da questo controller grafico
         */
         this.requestList.add((RequestBean) object);

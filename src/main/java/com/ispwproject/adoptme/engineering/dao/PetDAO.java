@@ -82,7 +82,6 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setShelter(shelterModel);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
@@ -161,16 +160,12 @@ public class PetDAO {
                 int petType = resultSet.getInt("type");
                 int shelterId = resultSet.getInt("shelter");
 
-                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
-
-
                 if (petType == 0)
                     pet = new DogModel();
                 else
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setShelter(shelterModel);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
@@ -236,9 +231,7 @@ public class PetDAO {
                 }
 
                 int petType = resultSet.getInt("type");
-                String petAge = resultSet.getString("age");
 
-                ShelterModel shelter = ShelterDAO.retrieveShelterById(shelterId);
 
                 if (petType == 0)
                     pet = new DogModel();
@@ -246,7 +239,6 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setShelter(shelter);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
@@ -308,7 +300,6 @@ public class PetDAO {
                     petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
-                String petAge = resultSet.getString("age");
                 int petGender = resultSet.getInt(GENDER);
                 int petType = resultSet.getInt("type");
                 int petShelter = resultSet.getInt("shelter");
@@ -319,13 +310,10 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petShelter);
-                pet.setShelter(shelterModel);
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
-                //pet.setAge(petAge);
 
                 if(Session.getCurrentSession().getUserBean() != null)
                     pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), petShelter));

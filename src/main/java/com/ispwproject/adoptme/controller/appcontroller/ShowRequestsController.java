@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.RequestList;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
@@ -11,6 +11,8 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowRequestsController {
@@ -31,15 +33,25 @@ public class ShowRequestsController {
 
     public void getRequestList(Observer observer){
 
-        List<RequestModel> requestModelList;
+        List<RequestModel> requestModelList = new ArrayList<>();
         try {
             if (this.shelterModel != null) {
                 requestModelList = RequestDAO.retrieveReqByShelter(this.shelterModel);
-                new RequestList(observer, requestModelList, shelterModel);
             }
             else if (this.userModel != null) {
                 requestModelList = RequestDAO.retrieveReqByUser(this.userModel);
-                new RequestList(observer, requestModelList, userModel);
+            }
+            for (RequestModel request : requestModelList) {
+                RequestBean requestBean = new RequestBean(request.getPet().getPetImage(), request.getUser().getImage(), request.getPet().getName(), request.getPet().getPetId(), request.getShelter().getId(), request.getUser().getName(), request.getUser().getId());
+                requestBean.setId(request.getId());
+                requestBean.setDate(request.getDate());
+                requestBean.setHour(String.valueOf(request.getTime().getHour()));
+                requestBean.setMinutes(request.getTime().format(DateTimeFormatter.ofPattern("mm")));
+                requestBean.setStatus(request.getStatus());
+
+                request.register(observer);
+                request.notifyObservers(requestBean);
+                request.unregister(observer);
             }
 
         } catch (SQLException se) {
