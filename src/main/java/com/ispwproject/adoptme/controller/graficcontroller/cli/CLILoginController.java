@@ -12,7 +12,7 @@ import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
 
 
-public class CLILoginController {
+public class CLILoginController implements CLIGraficController{
     private static final String LOGIN = "1";
     private static final String FORGOT_PASSWORD = "2";
     private static final String LOGIN_WITH_GOOGLE = "3";
@@ -20,6 +20,7 @@ public class CLILoginController {
     private static final String SIGN_UP = "5";
     private CLILoginView cliLoginView;
 
+    @Override
     public void start() {
         this.cliLoginView = new CLILoginView(this);
         this.cliLoginView.run();
@@ -59,11 +60,13 @@ public class CLILoginController {
                    loginController.completeUserLogin(loginBean);
                    CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
                    cliUserHomepageController.start();
-               } else if (loginBean.getAccountType() == 2) {
+               }
+               else if (loginBean.getAccountType() == 2) {
                    loginController.completeShelterLogin(loginBean);
-
-                   //todo set shelter homepage
-               } else {
+                   CLIShelterHomepageController cliShelterHomepageController = new CLIShelterHomepageController();
+                   cliShelterHomepageController.start();
+               }
+               else {
                    throw new UserNotFoundException();
                }
                //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw

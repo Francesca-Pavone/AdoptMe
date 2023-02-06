@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class CLIAppointmentsPageView {
 
-    private final CLIAppointmentsPageController cliAppointmentsPageController;
+    private final CLIAppointmentsPageController controller;
 
-    public CLIAppointmentsPageView(CLIAppointmentsPageController cliAppointmentsPageController) {
-        this.cliAppointmentsPageController = cliAppointmentsPageController;
+    public CLIAppointmentsPageView(CLIAppointmentsPageController controller) {
+        this.controller = controller;
     }
 
     public void showTitle(String owner) {
@@ -29,7 +29,7 @@ public class CLIAppointmentsPageView {
         String input = scanner.nextLine();
 
         try {
-            cliAppointmentsPageController.executeCommand(input);
+            controller.executeCommand(input);
         }
         catch (NotFoundException e) {
             PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");

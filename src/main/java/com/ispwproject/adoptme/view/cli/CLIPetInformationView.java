@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class CLIPetInformationView {
 
-    private final CLIPetInformationController cliPetInformationController;
+    private final CLIPetInformationController controller;
 
-    public CLIPetInformationView(CLIPetInformationController cliPetInformationController) {
-        this.cliPetInformationController = cliPetInformationController;
+    public CLIPetInformationView(CLIPetInformationController controller) {
+        this.controller = controller;
     }
 
     public void showTitle(String name) {
@@ -34,8 +34,7 @@ public class CLIPetInformationView {
 
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            this.cliPetInformationController.setCliPetInformationViewCurrent(this);
-            this.cliPetInformationController.executeCommand(input);
+            this.controller.executeCommand(input);
         }
     }
 }
