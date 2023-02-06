@@ -25,7 +25,6 @@ public abstract class PetModel {
     protected PetCompatibility petCompatibility;
     protected boolean fav; //TODO vedere se lasciarlo qua
 
-    //protected ShelterModel shelter;
 
     public PetModel() {
     }
@@ -38,14 +37,7 @@ public abstract class PetModel {
         this.petCompatibility = petCompatibility;
     }
 
-    //TODO togliere
-    protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility, ShelterModel shelter) {
-        this.type = type;
-        this.name = name;
-        this.petImage = petImage;
-        this.petCompatibility = petCompatibility;
-        //this.shelter = shelter;
-    }
+
     protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility) {
         this.type = type;
         this.name = name;

@@ -15,12 +15,7 @@ public class CatModel extends PetModel{
     }
 
 
-    //TODO togliere
-    public CatModel(String name, File petImage, boolean testFiv, boolean testFelv, PetCompatibility petCompatibility, ShelterModel shelter) {
-        super(1, name, petImage, petCompatibility, shelter);
-        setTestFiv(testFiv);
-        setTestFelv(testFelv);
-    }
+
 
     public CatModel(String name, File petImage, boolean testFiv, boolean testFelv, PetCompatibility petCompatibility) {
         super(1, name, petImage, petCompatibility);
