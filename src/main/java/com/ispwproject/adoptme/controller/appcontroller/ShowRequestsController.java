@@ -44,9 +44,10 @@ public class ShowRequestsController {
             for (RequestModel request : requestModelList) {
                 RequestBean requestBean = new RequestBean(request.getPet().getPetImage(), request.getUser().getImage(), request.getPet().getName(), request.getPet().getPetId(), request.getShelter().getId(), request.getUser().getName(), request.getUser().getId());
                 requestBean.setId(request.getId());
-                requestBean.setDate(request.getDate());
-                requestBean.setHour(String.valueOf(request.getTime().getHour()));
-                requestBean.setMinutes(request.getTime().format(DateTimeFormatter.ofPattern("mm")));
+                requestBean.setDate(request.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                requestBean.setTime(request.getTime().toString());
+                //requestBean.setHour(String.valueOf(request.getTime().getHour()));
+                //requestBean.setMinutes(request.getTime().format(DateTimeFormatter.ofPattern("mm")));
                 requestBean.setStatus(request.getStatus());
 
                 request.register(observer);

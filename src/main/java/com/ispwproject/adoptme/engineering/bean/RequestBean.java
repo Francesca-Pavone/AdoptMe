@@ -1,7 +1,10 @@
 package com.ispwproject.adoptme.engineering.bean;
 
+import com.ispwproject.adoptme.engineering.exception.DateFormatException;
+import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
+
 import java.io.File;
-import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 public class RequestBean {
 
@@ -13,9 +16,8 @@ public class RequestBean {
     private int shelterId;
     private String userName;
     private int userId;
-    private LocalDate date;
-    private String hour;
-    private String minutes;
+    private String date;
+    private String time;
     private int status; // 0 -> send  |  1 -> pending  |  2 -> accepted  | 3 -> rejected
 
     public RequestBean(String petName, int petId, int shelterId, String userName, int userId) {
@@ -36,10 +38,9 @@ public class RequestBean {
         this.userId = userId;
     }
 
-    public RequestBean(LocalDate date, String hour, String minutes) {
-        this.date = date;
-        this.hour = hour;
-        this.minutes = minutes;
+    public RequestBean(String date, String time) throws DateFormatException, TimeFormatException {
+        setDate(date);
+        setTime(time);
     }
 
     public int getId() {
@@ -106,29 +107,28 @@ public class RequestBean {
         this.userId = userId;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) throws DateFormatException {
+        String date_regex = "^(((0[1-9]|[12][0-9]|3[01])-(0[13578]|1[02])|(0[1-9]|[12][0-9]|30)-(0[469]|11)|(0[1-9]|1\\d|2[0-8])-02)-\\d{4}|29-02-(\\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[13579][26])00))$";
+        if (!Pattern.compile(date_regex).matcher(date).matches())
+            throw new DateFormatException(date);
         this.date = date;
     }
 
-    public String getHour() {
-        return hour;
+    public String getTime() {
+        return time;
     }
 
-    public void setHour(String hour) {
-        this.hour = hour;
+    public void setTime(String time) throws TimeFormatException {
+        String time_regex = "\\b([01]?[0-9]|2[0-3]):[0-5][0-9]";
+        if (!Pattern.compile(time_regex).matcher(time).matches())
+            throw new TimeFormatException(time);
+        this.time = time;
     }
 
-    public String getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(String minutes) {
-        this.minutes = minutes;
-    }
 
     public int getStatus() {
         return status;

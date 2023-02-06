@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.dao.*;
+import com.ispwproject.adoptme.engineering.utils.DateTimeSupport;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -24,9 +25,9 @@ public class ManageRequestController {
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(request.getShelterId());
         UserModel userModel = userDAO.retrieveUserById(request.getUserId());
-        LocalTime time = LocalTime.of(Integer.parseInt(request.getHour()), Integer.parseInt(request.getMinutes()));
+//        LocalTime time = LocalTime.of(Integer.parseInt(request.getHour()), Integer.parseInt(request.getMinutes()));
 
-        RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
+        RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
         requestModel.setShelter(shelterModel);
         requestModel.updateStatus(3, object);
 
@@ -49,9 +50,9 @@ public class ManageRequestController {
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(request.getShelterId());
         UserModel userModel = userDAO.retrieveUserById(request.getUserId());
-        LocalTime time = LocalTime.of(Integer.parseInt(request.getHour()), Integer.parseInt(request.getMinutes()));
+//        LocalTime time = LocalTime.of(Integer.parseInt(request.getHour()), Integer.parseInt(request.getMinutes()));
 
-        RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
+        RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
         requestModel.setShelter(shelterModel);
         requestModel.register(itemObserver);
         requestModel.updateStatus(2, object);
@@ -70,9 +71,9 @@ public class ManageRequestController {
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(request.getShelterId());
         UserModel userModel = userDAO.retrieveUserById(request.getUserId());
-        LocalTime time = LocalTime.of(Integer.parseInt(request.getHour()), Integer.parseInt(request.getMinutes()));
+//        LocalTime time = LocalTime.of(Integer.parseInt(request.getHour()), Integer.parseInt(request.getMinutes()));
 
-        RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, request.getDate(), time, request.getStatus());
+        RequestModel requestModel = new RequestModel(observer, request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
         requestModel.setShelter(shelterModel);
         requestModel.register(itemObserver);
 

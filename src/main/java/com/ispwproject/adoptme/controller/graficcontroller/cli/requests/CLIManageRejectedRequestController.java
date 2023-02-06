@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageRejectedRequestView;
 
-import java.time.format.DateTimeFormatter;
 
 public class CLIManageRejectedRequestController {
     private CLIManageRejectedRequestView view;
@@ -24,8 +23,8 @@ public class CLIManageRejectedRequestController {
 
     public void start() {
         this.view = new CLIManageRejectedRequestView(this);
-        this.view.showRequestNow(this.requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                this.requestBean.getHour() + ":" + this.requestBean.getMinutes());
+        this.view.showRequestNow(this.requestBean.getDate(),
+                this.requestBean.getTime());
         this.view.showForm();
     }
 

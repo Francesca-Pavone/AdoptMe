@@ -3,12 +3,11 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.NotExistingRequestException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.view.cli.requests.CLIAppointmentsPageView;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,13 +56,13 @@ public class CLIAppointmentsPageController implements Observer {
                 case 2 -> status = "ACCEPTED";
                 default -> status = "REJECTED";
             }
-            this.cliAppointmentsPageView.showRequestInfo(requestBean.getId(), status, requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), requestBean.getHour() + ":" + requestBean.getMinutes());
+            this.cliAppointmentsPageView.showRequestInfo(requestBean.getId(), status, requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate(), requestBean.getTime());
 
         }
         this.cliAppointmentsPageView.showCommands();
 
     }
-    public void executeCommand(String input) throws NotExistingRequestException {
+    public void executeCommand(String input) throws NotFoundException {
         Session session = Session.getCurrentSession();
         if (input.equals("0"))
             goToHomepage(session);
@@ -71,7 +70,7 @@ public class CLIAppointmentsPageController implements Observer {
             goToRequest(input, session);
     }
 
-    private void goToRequest(String input, Session session) throws NotExistingRequestException {
+    private void goToRequest(String input, Session session) throws NotFoundException {
         // verifico se all'interno della lista di RequestBean trovo un RequestBean con id uguale al valore inserito dall'utente
         RequestBean requestBean = null;
         for (RequestBean bean : requestList) {
@@ -79,7 +78,7 @@ public class CLIAppointmentsPageController implements Observer {
                 requestBean = bean;
         }
         if (requestBean == null)
-            throw new NotExistingRequestException(input);
+            throw new NotFoundException("The request with id '" + input + "' does not exist");
 
 
         boolean sent = (session.getUserBean() != null && requestBean.getStatus() == 0) || (session.getShelterBean() != null && requestBean.getStatus() == 1);
@@ -103,8 +102,8 @@ public class CLIAppointmentsPageController implements Observer {
         else {
             this.cliAppointmentsPageView.showConfirmedApp(
                     requestBean.getId(),
-                    requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
-                    requestBean.getHour() + ":" + requestBean.getMinutes());
+                    requestBean.getDate(),
+                    requestBean.getTime());
             start();
         }
 

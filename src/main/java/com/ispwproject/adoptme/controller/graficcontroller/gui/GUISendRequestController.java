@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 public class GUISendRequestController implements Observer {
     @FXML
@@ -45,17 +47,22 @@ public class GUISendRequestController implements Observer {
         shelterBtn.setText(shelterBean.getName());
     }
 
-    public void sendRequest(ActionEvent event) throws Exception {
-
-        String[] time = timeField.getText().split(":");
-        RequestBean requestBean = new RequestBean(datePicker.getValue(), time[0], time[1]);
-
-        SendRequestController sendRequestController = new SendRequestController();
+    public void sendRequest(ActionEvent event)  {
+        RequestBean requestBean = null;
         try {
+            if (datePicker.getValue() == null)
+                throw new NoInputException("Date");
+            if (timeField.getText() == null || timeField.getText().equals(""))
+                throw new NoInputException("Time");
+
+            requestBean = new RequestBean(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), timeField.getText());
+
+            SendRequestController sendRequestController = new SendRequestController();
             sendRequestController.sendUserRequest(petBean, requestBean, this);
-        } catch (Exception e) {
+        } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
+
         datePicker.setValue(null);
         timeField.setText(null);
 

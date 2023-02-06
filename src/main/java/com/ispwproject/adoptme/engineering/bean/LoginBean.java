@@ -2,6 +2,8 @@ package com.ispwproject.adoptme.engineering.bean;
 
 import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 
+import java.util.regex.Pattern;
+
 public class LoginBean {
     private String password;
     private String email;
@@ -26,7 +28,13 @@ public class LoginBean {
 
     //controllo sintattico sulla correttezza dell'email
     public void setEmail(String email) throws EmailFormatException {
+        /*
         if (email == null || email.isEmpty() || email.replaceAll("[^@]", "").length() != 1 || email.contains(".@"))
+            throw new EmailFormatException(email);
+
+         */
+        String email_regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
+        if (!Pattern.compile(email_regex).matcher(email).matches())
             throw new EmailFormatException(email);
         this.email = email;
     }

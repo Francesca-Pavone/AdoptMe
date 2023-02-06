@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
-import com.ispwproject.adoptme.engineering.utils.ImageUtils;
+import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
@@ -56,7 +56,7 @@ public class PetDAO {
                 try {
                     if (blob != null) {
                         String filePath = petName + PHOTO + ".png";
-                        petImage = ImageUtils.fromBlobToFile(blob, filePath);
+                        petImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
                     }
                     else {
                         Trigger trigger = new Trigger();
@@ -219,7 +219,7 @@ public class PetDAO {
                 try {
                     if (blob != null) {
                         String filePath = petName + PHOTO + ".png";
-                        petImage = ImageUtils.fromBlobToFile(blob, filePath);
+                        petImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
                     }
                     else {
                         Trigger trigger = new Trigger();
@@ -289,7 +289,7 @@ public class PetDAO {
                 try {
                     if (blob != null) {
                         String filePath = petName + PHOTO + ".png";
-                        petImage = ImageUtils.fromBlobToFile(blob, filePath);
+                        petImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
                     }
                     else {
                         Trigger trigger = new Trigger();

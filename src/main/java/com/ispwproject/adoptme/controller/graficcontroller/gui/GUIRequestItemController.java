@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +22,6 @@ import javafx.stage.StageStyle;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.format.DateTimeFormatter;
 
 public class GUIRequestItemController implements Observer {
     @FXML
@@ -82,8 +80,8 @@ public class GUIRequestItemController implements Observer {
         petImg.setImage(image);
         petName.setText(requestBean.getPetName());
 
-        date.setText(requestBean.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        time.setText(requestBean.getHour() + ":"+ requestBean.getMinutes());
+        date.setText(requestBean.getDate());
+        time.setText(requestBean.getTime());
 
         if (requestBean.getStatus() == 2) { // confirmed request
             vBox.getChildren().remove(manageReqBox);
@@ -140,8 +138,8 @@ public class GUIRequestItemController implements Observer {
         }
         else if ((((RequestBean)object1).getStatus() == 1 && Session.getCurrentSession().getShelterBean() != null) || ((RequestBean)object1).getStatus() == 0 && Session.getCurrentSession().getUserBean() != null) {
             manageReqBox.getChildren().remove(acceptBtn);
-            date.setText(((RequestBean)object1).getDate().toString());
-            time.setText(((RequestBean)object1).getHour() + ":"+ ((RequestBean)object1).getMinutes());
+            date.setText(((RequestBean)object1).getDate());
+            time.setText(((RequestBean)object1).getTime());
         }
     }
 

@@ -1,16 +1,15 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
-import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
-import com.ispwproject.adoptme.engineering.utils.ImageUtils;
-import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.exception.*;
+import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class ShelterDAO {
                 try {
                     if (blob != null) {
                         String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = ImageUtils.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
@@ -111,7 +110,7 @@ public class ShelterDAO {
         return shelterId;
     }
 
-    public static ShelterModel retrieveShelterById(int shelterId) throws Exception {
+    public static ShelterModel retrieveShelterById(int shelterId) throws NotFoundException {
         Statement stmt;
         ShelterModel shelterModel = null;
         try {
@@ -120,7 +119,7 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.selectShelterById(stmt, shelterId);
 
             if (!resultSet.first()){
-                throw new Exception("No shelters found with the id: "+shelterId);
+                throw new NotFoundException("No shelters found with the id: "+shelterId);
             }
 
             resultSet.first();
@@ -138,13 +137,13 @@ public class ShelterDAO {
                 try {
                     if (blob != null) {
                         String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = ImageUtils.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
                     }
                 }
-                catch (ImageNotFoundException e) {
+                catch (ImageNotFoundException | IOException e) {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
@@ -156,7 +155,7 @@ public class ShelterDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | MalformedURLException e) {
             e.printStackTrace();
         }
         return shelterModel;
@@ -190,7 +189,7 @@ public class ShelterDAO {
                 try {
                     if (blob != null) {
                         String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = ImageUtils.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
