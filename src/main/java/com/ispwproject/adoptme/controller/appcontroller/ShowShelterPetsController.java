@@ -1,5 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -11,8 +13,25 @@ import java.sql.SQLException;
 
 public class ShowShelterPetsController {
 
+    private ShelterModel shelterModel;
+    private ShelterPetsList shelterPetsList;
+
+    public ShowShelterPetsController(ShelterBean shelterBean) {
+        this.shelterModel = new ShelterModel(shelterBean.getShelterId());
+    }
+    public ShowShelterPetsController(){}
+
+    public ShelterBean getShelter(String shelterName) throws Exception {
+        ShelterBean shelterBean = null;
+        int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
+        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
+        shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getAccountInfo().getEmail());
+        return shelterBean;
+    }
+
     public void getPetList(Observer observer) throws NoPetsFoundException {
-        ShelterModel shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean().getShelterId());
+        if(Session.getCurrentSession().getShelterBean() != null)
+            this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean().getShelterId());
         try {
             new ShelterPetsList(observer, PetDAO.retrievePetByShelterId(shelterModel), shelterModel);
         } catch (SQLException se) {
@@ -20,7 +39,6 @@ public class ShowShelterPetsController {
             se.printStackTrace();
         }
 
-        /*
         List<PetBean> petBeanList = new ArrayList<>();
 
         for (PetModel petModel : shelterPetsList.getPetList()) {
@@ -58,6 +76,5 @@ public class ShowShelterPetsController {
             petBeanList.add(petBean);
         }
 
-         */
     }
 }
