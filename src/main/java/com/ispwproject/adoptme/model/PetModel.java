@@ -46,16 +46,7 @@ public abstract class PetModel {
     }
 
 
-    protected PetModel(int type, String name, File petImg, int yearOfBirth, int gender) {
-        setType(type);
-        setName(name);
-        setPetImage(petImg);
-        setGender(gender);
-        setYearOfBirth(yearOfBirth);
-        this.petCompatibility = new PetCompatibility();
-    }
-
-
+    //TODO vedere dove uso questo metodo e trovare un altro modo per ricavare lo shelter
     public ShelterModel getShelter() {
         return null;
     }
