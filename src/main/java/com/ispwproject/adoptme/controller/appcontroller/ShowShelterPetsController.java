@@ -14,7 +14,6 @@ import java.sql.SQLException;
 public class ShowShelterPetsController {
 
     private ShelterModel shelterModel;
-    private ShelterPetsList shelterPetsList;
 
     public ShowShelterPetsController(ShelterBean shelterBean) {
         this.shelterModel = new ShelterModel(shelterBean.getShelterId());

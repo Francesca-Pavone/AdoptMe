@@ -17,8 +17,9 @@ public class TestAddToFavorite {
         LoginBean loginBean = new LoginBean("francesca@gmail.com", "123");
         LoginController loginController = new LoginController();
         loginController.checkLogin(loginBean);
-        UserBean userBean = loginController.getLoginInfoUser(loginBean);
-        Session.setSessionInstance(userBean);
+        loginController.completeUserLogin(loginBean);
+
+        UserBean userBean = Session.getCurrentSession().getUserBean();
 
         PetBean petBean = new PetBean();
         petBean.setPetId(1);

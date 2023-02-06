@@ -279,7 +279,7 @@ public class GUIAddPetController {
         }
 
         AddPetController addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(shelterBean, observer);
+        addPetController.addNewPet(observer);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

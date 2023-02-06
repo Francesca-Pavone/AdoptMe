@@ -57,6 +57,7 @@ public class SendRequestController {
         requestModel.setStatus(0);
 
         RequestDAO.saveRequest(requestModel, shelterModel);
+
         requestModel.notifyObservers(null);
     }
 }

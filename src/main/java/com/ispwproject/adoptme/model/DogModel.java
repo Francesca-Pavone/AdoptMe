@@ -10,12 +10,18 @@ public class DogModel extends PetModel{
     public DogModel() {
     }
 
-    public DogModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
-        super(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility, shelterId);
+    public DogModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility) {
+        super(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
     }
 
+    //TODO togliere
     public DogModel(String name, File petImage, PetCompatibility petCompatibility, boolean programEducation, int size, ShelterModel shelter) {
         super(0, name, petImage, petCompatibility, shelter);
+        setProgramEducation(programEducation);
+        setSize(size);
+    }
+    public DogModel(String name, File petImage, PetCompatibility petCompatibility, boolean programEducation, int size) {
+        super(0, name, petImage, petCompatibility);
         setProgramEducation(programEducation);
         setSize(size);
     }

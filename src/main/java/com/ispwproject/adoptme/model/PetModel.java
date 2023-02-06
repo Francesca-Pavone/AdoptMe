@@ -30,21 +30,27 @@ public abstract class PetModel {
     public PetModel() {
     }
 
-    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility, int shelterId) {
+    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility) {
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
         this.coatLenght = coatLenght;
         this.petCompatibility = petCompatibility;
-        //this.shelter = new ShelterModel(shelterId);
     }
 
+    //TODO togliere
     protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility, ShelterModel shelter) {
         this.type = type;
         this.name = name;
         this.petImage = petImage;
         this.petCompatibility = petCompatibility;
         //this.shelter = shelter;
+    }
+    protected PetModel(int type, String name, File petImage, PetCompatibility petCompatibility) {
+        this.type = type;
+        this.name = name;
+        this.petImage = petImage;
+        this.petCompatibility = petCompatibility;
     }
 
 

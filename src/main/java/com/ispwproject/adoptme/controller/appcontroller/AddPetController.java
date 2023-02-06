@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.dao.CatDAO;
 import com.ispwproject.adoptme.engineering.dao.DogDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
@@ -16,16 +15,16 @@ public class AddPetController {
         this.petBean = petBean;
     }
 
-    public int addNewPet(ShelterBean shelterBean, Observer observer) {
+    public int addNewPet(Observer observer) {
         int petId = -1;
 
-        ShelterModel shelter = new ShelterModel(shelterBean.getShelterId());
+        ShelterModel shelter = new ShelterModel(petBean.getShelterId());
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, shelter);
 
         if (petBean.getType() == 0) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize(), shelter);
+            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize());
             setCommonInfo(dogModel);
 
             petId = DogDAO.saveDog(dogModel);
@@ -35,7 +34,7 @@ public class AddPetController {
         } else if (petBean.getType() == 1) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility, shelter);
+            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility);
             setCommonInfo(catModel);
 
             petId = CatDAO.saveCat(catModel);

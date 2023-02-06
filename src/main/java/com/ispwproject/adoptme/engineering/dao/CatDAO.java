@@ -75,7 +75,7 @@ public class CatDAO {
                 petCompatibility.setFirstExperience(firstExperience);
                 petCompatibility.setHoursAlone(hoursAlone);
 
-                cat = new CatModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility, shelterId);
+                cat = new CatModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
                 cat.setVaccinated(vaccinated);
                 cat.setMicrochipped(microchipped);
                 cat.setDewormed(dewormed);
@@ -103,6 +103,7 @@ public class CatDAO {
 
     public static int saveCat(CatModel catModel)  {
         Statement stmt;
+        int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
         int catId = 1;
 
@@ -110,7 +111,7 @@ public class CatDAO {
             stmt = ConnectionDB.getConnection();
 
             // In pratica i risultati delle query possono essere visti come un Array Associativo o un Map
-            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, catModel.getShelter().getId());
+            ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, shelterId);
             while (rs.next()) {
                 // lettura delle colonne "by name"
                 catId = rs.getInt("petId");
@@ -123,7 +124,7 @@ public class CatDAO {
 
             PreparedStatement preparedStatement = ConnectionDB.insertCat();
             preparedStatement.setInt(1, catId);
-            preparedStatement.setInt(2, catModel.getShelter().getId());
+            preparedStatement.setInt(2, shelterId);
             preparedStatement.setString(3, catModel.getName());
 
             try {
@@ -155,7 +156,7 @@ public class CatDAO {
 
             PreparedStatement preparedStatement1 = ConnectionDB.insertPetCompatibility();
             preparedStatement1.setInt(1, catId);
-            preparedStatement1.setInt(2, catModel.getShelter().getId());
+            preparedStatement1.setInt(2, shelterId);
             preparedStatement1.setBoolean(3, catModel.getPetCompatibility().isMaleDog());
             preparedStatement1.setBoolean(4, catModel.getPetCompatibility().isFemaleDog());
             preparedStatement1.setBoolean(5, catModel.getPetCompatibility().isMaleCat());
