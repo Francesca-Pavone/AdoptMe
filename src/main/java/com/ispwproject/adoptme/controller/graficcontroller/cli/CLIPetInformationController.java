@@ -6,25 +6,22 @@ import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendR
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
-import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 
-public class CLIPetInformationController implements Observer {
+public class CLIPetInformationController implements CLIGraficController, Observer {
 
     private final PetBean petBean;
     private boolean fav = false;
 
     private Observer favObserver;
 
-    private CLIPetInformationView cliPetInformationViewCurrent;
+    private CLIPetInformationView view;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
@@ -33,92 +30,15 @@ public class CLIPetInformationController implements Observer {
 
     public CLIPetInformationController(PetBean petBean) {
         this.petBean = petBean;
-    }
-
-    public void setCliPetInformationViewCurrent(CLIPetInformationView cliPetInformationViewCurrent) {
-        this.cliPetInformationViewCurrent = cliPetInformationViewCurrent;
+        this.view = new CLIPetInformationView(this);
     }
 
     public void setFavObserver(Observer favObserver) {
         this.favObserver = favObserver;
-
     }
 
-    public void executeCommand(String inputLine){
-        try {
-            switch (inputLine) {
-                case REQUEST -> {
-                    if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
-                    this.executeRequest(); }
-                case FAVORITE -> {
-                    if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
-                    this.addToFavorite();}
-                case HOMEPAGE -> {
-                    if(object instanceof CLIUserFavoritesController) {
-                        try {((CLIUserFavoritesController)object).start(); }
-                        catch (FavoriteListEmptyException e) {
-                            PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
-                            ScannerSupport.waitEnter();
-                            CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
-                            cliUserHomepageController.start();
-                        }
-                    }
-                    else if(object instanceof CLIShelterInfoController) {
-                        ((CLIShelterInfoController)object).start();
-                    }
-                    else if (Session.getCurrentSession().getShelterBean() == null) {
-                        CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
-                        cliUserHomepageController.start();
-                    }
-                    // todo: fare shelter homepage
-                }
-                default -> throw new CommandNotFoundException();
-            }
-        } catch (CommandNotFoundException e) {
-            PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
-            ScannerSupport.waitEnter();
-            this.cliPetInformationViewCurrent.showCommand();
-        } catch(NoAccoutException e) {
-            PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
-            ScannerSupport.waitEnter();
-            this.cliPetInformationViewCurrent.showCommand();
-        } catch (NoPetsFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void addToFavorite(){
-        UserBean userBean = Session.getCurrentSession().getUserBean();
-        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
-        fav = petBean.getFav;
-        if (fav) {//todo add object
-            addToFavoritesController.removePet(userBean, this, index);
-            addToFavoritesController.removePet(userBean, favObserver, index);
-        } else {
-            addToFavoritesController.addPet(userBean, this, index);
-        }
-        this.cliPetInformationViewCurrent.showCommand();
-    }
-
-    private void executeRequest() {
-        try {
-            if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
-            else {
-                CLISendRequestController cliSendRequestController = new CLISendRequestController();
-                cliSendRequestController.sendRequest(petBean);
-            }
-        } catch (NoAccoutException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage());
-            CLINeedAccountView cliNeedAccountView = new CLINeedAccountView();
-            cliNeedAccountView.showMessage();
-        }
-    }
-
-    public void setPetInfo(){
-
+    @Override
+    public void start(){
         PetInfoController petInfoControllerA = new PetInfoController();
         petInfoControllerA.getPetInfo(petBean);
 
@@ -187,6 +107,72 @@ public class CLIPetInformationController implements Observer {
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
         cliPetInformationView.showTitle(petBean.getName());
         cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
+    }
+
+
+    public void executeCommand(String inputLine){
+        try {
+            switch (inputLine) {
+                case REQUEST -> {
+                    if (Session.getCurrentSession().getUserBean() == null)
+                        throw new NoAccoutException();
+                    this.executeRequest(); }
+                case FAVORITE -> {
+                    if (Session.getCurrentSession().getUserBean() == null)
+                        throw new NoAccoutException();
+                    this.addToFavorite();}
+                case HOMEPAGE -> {
+                    if(object instanceof CLIUserFavoritesController) {
+                        ((CLIUserFavoritesController)object).start();
+                    }
+                    else if(object instanceof CLIShelterInfoController) {
+                        ((CLIShelterInfoController)object).start();
+                    }
+                    else if (Session.getCurrentSession().getShelterBean() == null) {
+                        CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
+                        cliUserHomepageController.start();
+                    }
+                    // todo: fare shelter homepage
+                }
+                default -> throw new CommandNotFoundException();
+            }
+        } catch (CommandNotFoundException e) {
+            PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
+            ScannerSupport.waitEnter();
+            this.view.showCommand();
+        } catch(NoAccoutException e) {
+            PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
+            ScannerSupport.waitEnter();
+            this.view.showCommand();
+        }
+    }
+
+    private void addToFavorite(){
+        UserBean userBean = Session.getCurrentSession().getUserBean();
+        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+        fav = petBean.getFav;
+        if (fav) {//todo add object
+            addToFavoritesController.removePet(userBean, this, index);
+            addToFavoritesController.removePet(userBean, favObserver, index);
+        } else {
+            addToFavoritesController.addPet(userBean, this, index);
+        }
+        this.view.showCommand();
+    }
+
+    private void executeRequest() {
+        try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccoutException();
+            else {
+                CLISendRequestController cliSendRequestController = new CLISendRequestController(petBean);
+                cliSendRequestController.start();
+            }
+        } catch (NoAccoutException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            CLINeedAccountController cliNeedAccountController = new CLINeedAccountController();
+            cliNeedAccountController.start();
+        }
     }
 
     private String getCommonGeneralInfo() {
@@ -280,4 +266,6 @@ public class CLIPetInformationController implements Observer {
     public void setPreviousPage(Object object) {
         this.object = object;
     }
+
+
 }

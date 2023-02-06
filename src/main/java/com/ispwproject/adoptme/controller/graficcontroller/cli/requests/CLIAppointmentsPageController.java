@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterHomepageController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
@@ -11,13 +13,17 @@ import com.ispwproject.adoptme.view.cli.requests.CLIAppointmentsPageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CLIAppointmentsPageController implements Observer {
+public class CLIAppointmentsPageController implements CLIGraficController, Observer {
     public static final String PENDING = "PENDING";
     public static final String SENDED = "SENDED";
     private final List<RequestBean> requestList = new ArrayList<>();
-    private CLIAppointmentsPageView cliAppointmentsPageView;
+    private final CLIAppointmentsPageView view;
 
+    public CLIAppointmentsPageController() {
+        this.view = new CLIAppointmentsPageView(this);
+    }
 
+    @Override
     public void start(){
         String ownerName = null;
         Session session = Session.getCurrentSession();
@@ -25,18 +31,17 @@ public class CLIAppointmentsPageController implements Observer {
             ownerName = session.getUserBean().getName();
         else if (session.getShelterBean() != null )
             ownerName = session.getShelterBean().getName();
-        this.cliAppointmentsPageView = new CLIAppointmentsPageView(this);
 
         ShowRequestsController showRequestsController = new ShowRequestsController();
         showRequestsController.getRequestList(this);
         showAppointments(ownerName);
 
-        this.cliAppointmentsPageView.showCommands();
+        this.view.showCommands();
 
     }
 
     public void showAppointments(String owner){
-        this.cliAppointmentsPageView.showTitle(owner);
+        this.view.showTitle(owner);
         for (RequestBean requestBean : this.requestList) {
             String status = null;
             switch (requestBean.getStatus()) {
@@ -45,6 +50,7 @@ public class CLIAppointmentsPageController implements Observer {
                         status = PENDING;
                     else if (Session.getCurrentSession().getUserBean() != null)
                         status = SENDED;
+                    this.view.showRequestInfo(requestBean.getId(), status, requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate(), requestBean.getTime());
                 }
 
                 case 1 ->  {
@@ -52,14 +58,18 @@ public class CLIAppointmentsPageController implements Observer {
                         status = SENDED;
                     else if (Session.getCurrentSession().getUserBean() != null)
                         status = PENDING;
-                }
-                case 2 -> status = "ACCEPTED";
-                default -> status = "REJECTED";
-            }
-            this.cliAppointmentsPageView.showRequestInfo(requestBean.getId(), status, requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate(), requestBean.getTime());
+                    this.view.showRequestInfo(requestBean.getId(), status, requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate(), requestBean.getTime());
 
+                }
+                case 2 -> this.view.showRequestInfo(requestBean.getId(), "ACCEPTED", requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate(), requestBean.getTime());
+
+                default -> {
+                    if (Session.getCurrentSession().getUserBean() != null)
+                        this.view.showRequestInfo(requestBean.getId(), "REJECTED", requestBean.getUserName(), requestBean.getPetName(), requestBean.getDate(), requestBean.getTime());
+                }
+            }
         }
-        this.cliAppointmentsPageView.showCommands();
+        this.view.showCommands();
 
     }
     public void executeCommand(String input) throws NotFoundException {
@@ -92,6 +102,8 @@ public class CLIAppointmentsPageController implements Observer {
         }
         else if (pending) {
             CLIManagePendingRequestController cliManagePendingRequestController = new CLIManagePendingRequestController(requestBean);
+            cliManagePendingRequestController.setPreviousPage(this);
+            cliManagePendingRequestController.start();
         }
         else if (rejected) {
             CLIManageRejectedRequestController cliManageRejectedRequestController = new CLIManageRejectedRequestController(requestBean);
@@ -100,7 +112,7 @@ public class CLIAppointmentsPageController implements Observer {
 
         }
         else {
-            this.cliAppointmentsPageView.showConfirmedApp(
+            this.view.showConfirmedApp(
                     requestBean.getId(),
                     requestBean.getDate(),
                     requestBean.getTime());
@@ -114,7 +126,10 @@ public class CLIAppointmentsPageController implements Observer {
             CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
             cliUserHomepageController.start();
         }
-        //todo: fare parte shelter
+        if (session.getShelterBean() != null) {
+            CLIShelterHomepageController cliShelterHomepageController= new CLIShelterHomepageController();
+            cliShelterHomepageController.start();
+        }
     }
 
     @Override

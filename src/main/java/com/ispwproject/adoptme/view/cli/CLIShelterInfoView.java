@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CLIShelterInfoView {
     
-    private CLIShelterInfoController cliShelterInfoControllerCurrent;
+    private final CLIShelterInfoController cliShelterInfoControllerCurrent;
 
     public CLIShelterInfoView(CLIShelterInfoController cliShelterInfoController) {
         this.cliShelterInfoControllerCurrent = cliShelterInfoController;

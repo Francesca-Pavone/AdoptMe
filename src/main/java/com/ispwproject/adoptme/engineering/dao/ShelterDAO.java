@@ -86,7 +86,7 @@ public class ShelterDAO {
         return sheltersList;
     }
 
-    public static int retrieveIdByShelterName(String shelterName) throws Exception {
+    public static int retrieveIdByShelterName(String shelterName) throws NoSheltersWithThatNameException{
         Statement stmt ;
         int shelterId = 0;
         try {
