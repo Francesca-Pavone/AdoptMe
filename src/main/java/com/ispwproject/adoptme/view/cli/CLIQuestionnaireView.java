@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class CLIQuestionnaireView {
     private static final String INVALID_INPUT = "Invalid input. Your choices are:";
+    private static final String DOUBLE_CHOICE = "a | b";
     private Scanner scanner = new Scanner(System.in);
     private String inputLine;
     private String petType = "";
@@ -35,7 +36,7 @@ public class CLIQuestionnaireView {
     }
 
     public void run() {
-        System.out.println("---------------------------------------- QUESTIONNAIRE ----------------------------------------");
+        PrintSupport.printMessage("---------------------------------------- QUESTIONNAIRE ----------------------------------------");
         while(question < 17) {
             switch (question) {
                 case 1:
@@ -200,6 +201,7 @@ public class CLIQuestionnaireView {
                     }
                     question++;
                     break;
+                default:
             }
         }
         this.cliQuestionnaireControllerCurrent.setPetAlreadyHave( alreadyHavePet, petAlreadyHaveList);
@@ -217,7 +219,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nAre you looking for a pet in a specific are?\n a) Yes    b) No (*remember that you'll pay for all the transfer costs)\n [back -> go to previous question]");
         specificArea = scanner.nextLine();
         while (!(specificArea.equals("a")) && !(specificArea.equals("b")) && !(specificArea.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             specificArea = scanner.nextLine();
         }
     }
@@ -226,7 +228,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nAre you willing to adopt a disabled pet?\n a) Yes    b) No\n [back -> go to previous question]");
         disabled = scanner.nextLine();
         while (!(disabled.equals("a")) && !(disabled.equals("b")) && !(disabled.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             disabled = scanner.nextLine();
         }
     }
@@ -235,7 +237,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nIf needed, would you setShelter a program of dog education?\n a) Yes    b) No\n [back -> go to previous question]");
         dogEducation = scanner.nextLine();
         while (!(dogEducation.equals("a")) && !(dogEducation.equals("b")) && !(dogEducation.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             dogEducation = scanner.nextLine();
         }
     }
@@ -244,7 +246,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nAre you willing to sterilize your pet when it will be necessary?\n a) Yes    b) No\n [back -> go to previous question]");
         sterilize = scanner.nextLine();
         while (!(sterilize.equals("a")) && !(sterilize.equals("b")) && !(sterilize.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             sterilize = scanner.nextLine();
         }
     }
@@ -253,7 +255,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nHave you ever had a pet?\n a) Yes    b) No, this is my first time\n [back -> go to previous question]");
         firstPet = scanner.nextLine();
         while (!(firstPet.equals("a")) && !(firstPet.equals("b")) && !(firstPet.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             firstPet = scanner.nextLine();
         }
     }
@@ -271,7 +273,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nWill the pet be sleeping outside?\n a) Yes    b) No\n [back -> go to previous question]");
         sleepOutside = scanner.nextLine();
         while (!(sleepOutside.equals("a")) && !(sleepOutside.equals("b")) && !(sleepOutside.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             sleepOutside = scanner.nextLine();
         }
     }
@@ -280,7 +282,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nDo you live in an apartment with a terrace?\n a) Yes    b) No\n [back -> go to previous question]");
         terrace = scanner.nextLine();
         while (!(terrace.equals("a")) && !(terrace.equals("b")) && !(terrace.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             terrace = scanner.nextLine();
         }
     }
@@ -289,7 +291,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nDo you live in an apartment with a garden?\n a) Yes    b) No\n [back -> go to previous question]");
         garden = scanner.nextLine();
         while (!(garden.equals("a")) && !(garden.equals("b")) && !(garden.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             garden = scanner.nextLine();
         }
     }
@@ -306,7 +308,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nDo you already have a pet?\n a) Yes    b) No\n [back -> go to previous question]");
         alreadyHavePet = scanner.nextLine();
         while (!(alreadyHavePet.equals("a")) && !(alreadyHavePet.equals("b")) && !(alreadyHavePet.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             alreadyHavePet = scanner.nextLine();
         }
     }
@@ -342,7 +344,7 @@ public class CLIQuestionnaireView {
         PrintSupport.printMessage("\n\nWhich type of pet are you lookin for?\n a) Cat    b) Dog");
         petType = scanner.nextLine();
         while (!(petType.equals("a")) && !(petType.equals("b"))) {
-            PrintSupport.printError(INVALID_INPUT + "a | b");
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             petType = scanner.nextLine();
         }
         question ++;
