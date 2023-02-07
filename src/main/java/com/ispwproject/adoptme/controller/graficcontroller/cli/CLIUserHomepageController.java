@@ -6,7 +6,6 @@ import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
@@ -92,7 +91,7 @@ public class CLIUserHomepageController {
         cliShelterInfoController.setShelter(shelterBean.getName());
     }
 
-    public void searchCity(String city) throws Exception {
+    public void searchCity(String city) {
         try {
             UserResearchBean userResearchBean = new UserResearchBean();
             userResearchBean.setCityShelter(city);
