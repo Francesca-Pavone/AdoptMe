@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendR
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
@@ -144,6 +145,8 @@ public class CLIPetInformationController implements CLIGraficController, Observe
             PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
             ScannerSupport.waitEnter();
             this.view.showCommand();
+        } catch (FavoriteListEmptyException e) {
+            e.printStackTrace();
         }
     }
 

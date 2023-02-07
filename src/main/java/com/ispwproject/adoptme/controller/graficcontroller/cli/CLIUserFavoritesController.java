@@ -60,7 +60,7 @@ public class CLIUserFavoritesController implements Observer {
             cliPetInformationController.setIndex(i);
             cliPetInformationController.setFavObserver(this);
             cliPetInformationController.setPreviousPage(this);
-            cliPetInformationController.setPetInfo();
+            cliPetInformationController.start();
         }
     }
 
