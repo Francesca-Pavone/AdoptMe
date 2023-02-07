@@ -34,7 +34,10 @@ public class CLIUserHomepageController {
     public void executeCommand(String input) throws Exception {
         if(Session.getCurrentSession().getUserBean() == null) {
             switch (input) {
-                case QUESTIONNAIRE -> CLIQuestionnaireView.main();
+                case QUESTIONNAIRE -> {
+                    CLIQuestionnaireController cliQuestionnaireController = new CLIQuestionnaireController();
+                    cliQuestionnaireController.start();
+                }
                 case SEARCH_CITY -> this.cliUserHomepageView.searchCity();
 
                 // vai a search shelter
@@ -52,7 +55,10 @@ public class CLIUserHomepageController {
 
         if (Session.getCurrentSession().getUserBean() != null) {
             switch (input) {
-                case QUESTIONNAIRE -> CLIQuestionnaireView.main();
+                case QUESTIONNAIRE -> {
+                    CLIQuestionnaireController cliQuestionnaireController = new CLIQuestionnaireController();
+                    cliQuestionnaireController.start();
+                }
                 case SEARCH_CITY -> this.cliUserHomepageView.searchCity();
                 // vai a search shelter
                 case SEARCH_SHELTER -> this.cliUserHomepageView.searchShelter();

@@ -24,7 +24,7 @@ public abstract class PetModel {
 
     protected PetCompatibility petCompatibility;
 
-    public PetModel() {
+    protected PetModel() {
     }
 
     protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility) {

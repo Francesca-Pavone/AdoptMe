@@ -3,14 +3,21 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController;
 import com.ispwproject.adoptme.engineering.bean.QuestionnaireResultBean;
 import com.ispwproject.adoptme.engineering.builder.QuestionnaireResultBeanBuilder;
+import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 
 import java.util.List;
 
 public class CLIQuestionnaireController {
     private final QuestionnaireResultBeanBuilder questionnaireResultBeanBuilder;
 
+    private CLIQuestionnaireView cliQuestionnaireView;
     public CLIQuestionnaireController() {
         this.questionnaireResultBeanBuilder = QuestionnaireResultBeanBuilder.newQuestionnaireResultBean();
+    }
+
+    public void start() {
+        this.cliQuestionnaireView = new CLIQuestionnaireView(this);
+        this.cliQuestionnaireView.run();
     }
 
     public void getResult(String petType, String petGender, String petAge, String dogSize, String sterilize, String dogEducation, String disabled) {

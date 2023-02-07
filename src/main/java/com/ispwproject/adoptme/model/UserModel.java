@@ -8,14 +8,6 @@ public class UserModel extends ShelterUserModel{
     private String name;
     private String surname;
 
-    /*
-    public UserModel(UserBean userBean) {
-        super(userBean.getUserId(), userBean.getProfileImg(), userBean.getEmail(), 0);
-        setName(userBean.getName());
-        setSurname(userBean.getSurname());
-    }
-     */
-
     public UserModel(int id, File profileImg, String name, String surname, String email) {
         super(id, profileImg,0, email);
         this.name = name;
