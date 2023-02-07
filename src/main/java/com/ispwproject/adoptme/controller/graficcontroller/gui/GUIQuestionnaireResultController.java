@@ -33,12 +33,10 @@ public class GUIQuestionnaireResultController {
         dialog.show();
     }
     public void setData(List<PetBean> petList) {
-
         int column = 0;
         int row = 1;
 
-        try
-        {
+        try {
             for (PetBean pet : petList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
@@ -55,13 +53,9 @@ public class GUIQuestionnaireResultController {
 
                 grid.add(pane, column++, row);
             }
-        } catch(
-        IOException e)
-
-        {
+        } catch(IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void setPreviousPage(Parent previousPage) {

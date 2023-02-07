@@ -1,5 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
@@ -58,7 +60,10 @@ public class QuestionnaireResultController {
         questionnaireQuery = addInformation(questionnaireQuery, questionnaireResultBean);
 
         List<PetBean> petList = new ArrayList<>();
-        HashMap<PetModel, Integer> hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery());
+        HashMap<PetModel, Integer> hashMap = new HashMap<>();
+        try { hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery()); } catch (NoPetsFoundQuestionnaireException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
         for (PetModel petModel : hashMap.keySet()) {
             PetBean petBean = new PetBean();
             petBean.setPetId(petModel.getPetId());

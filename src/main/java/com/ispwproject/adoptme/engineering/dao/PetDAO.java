@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundQuestionnaireException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
@@ -121,7 +122,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No pets found for that questionnaire results");
+                throw new NoPetsFoundQuestionnaireException();
             }
 
             // Riposiziono il cursore sul primo record del result set
