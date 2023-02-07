@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.DogModel;
@@ -17,7 +18,7 @@ public class DogDAO {
     //costruttore Privato
     private DogDAO() {}
 
-    public static DogModel retrieveDogById(int dogId, int shelterId)  throws Exception {
+    public static DogModel retrieveDogById(int dogId, int shelterId) {
         Statement stmt = null;
         DogModel dog = null;
 
@@ -29,7 +30,7 @@ public class DogDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
+                throw new NotFoundException("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -82,7 +83,7 @@ public class DogDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | NotFoundException e) {
             e.printStackTrace();
         }
 

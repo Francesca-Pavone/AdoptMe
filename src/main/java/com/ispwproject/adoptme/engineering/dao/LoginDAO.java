@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 
 import java.sql.*;
 
@@ -21,7 +22,7 @@ public class LoginDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No user founds with "+ email);
+                throw new NotFoundException("No user found with "+ email);
             }
 
             resultSet.next();
@@ -33,7 +34,7 @@ public class LoginDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (Exception e) {
+        } catch (NotFoundException | SQLException e) {
             e.printStackTrace();
         }
 

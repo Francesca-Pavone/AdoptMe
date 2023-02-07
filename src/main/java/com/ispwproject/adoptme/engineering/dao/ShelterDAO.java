@@ -30,7 +30,7 @@ public class ShelterDAO {
 
     private ShelterDAO() {}
 
-    public static List<ShelterModel> retrieveShelterByCity(String city) throws Exception {
+    public static List<ShelterModel> retrieveShelterByCity(String city) throws NoCityFoundException {
         Statement stmt;
         List<ShelterModel> sheltersList = new ArrayList<>();
         try {
@@ -50,7 +50,6 @@ public class ShelterDAO {
                 String phoneNumber = resultSet.getString(PHONE_NUMBER);
                 String address = resultSet.getString(ADDRESS);
                 String email = resultSet.getString(EMAIL);
-                String password = resultSet.getString("password");
                 String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
@@ -65,7 +64,7 @@ public class ShelterDAO {
                         trigger.imageNotFound();
                     }
                 }
-                catch (ImageNotFoundException e) {
+                catch (ImageNotFoundException | IOException e) {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
@@ -79,7 +78,7 @@ public class ShelterDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | MalformedURLException e) {
             e.printStackTrace();
         }
 
@@ -161,7 +160,7 @@ public class ShelterDAO {
         return shelterModel;
     }
 
-    public static ShelterModel retrieveShelterByEmail(String email) throws Exception {
+    public static ShelterModel retrieveShelterByEmail(String email) throws NotFoundException {
         Statement stmt;
         ShelterModel shelterModel = null;
         try {
@@ -170,7 +169,7 @@ public class ShelterDAO {
             ResultSet resultSet = SimpleQueries.selectShelterByEmail(stmt, email);
 
             if (!resultSet.first()){
-                throw new Exception("No shelters found with the email: "+email);
+                throw new NotFoundException("No shelters found with the email: "+email);
             }
 
             resultSet.first();
@@ -195,7 +194,7 @@ public class ShelterDAO {
                         trigger.imageNotFound();
                     }
                 }
-                catch (ImageNotFoundException e) {
+                catch (ImageNotFoundException | IOException e) {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
@@ -207,7 +206,7 @@ public class ShelterDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | MalformedURLException e) {
             e.printStackTrace();
         }
 

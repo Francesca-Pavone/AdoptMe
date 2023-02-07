@@ -152,7 +152,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     private void addToFavorite(){
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
-        fav = petBean.getFav;
+        fav = petBean.isFav();
         if (fav) {
             addToFavoritesController.removePet(userBean, this, index);
             addToFavoritesController.removePet(userBean, favObserver, index);

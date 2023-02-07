@@ -4,10 +4,15 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.engineering.exception.PetIsNoFavoriteException;
 
 import java.sql.*;
 
 public class FavoritesDAO {
+
+    private FavoritesDAO() {
+        //private constructor
+    }
     public static void addFavorite(int userId, int petId, int shelterId) {
         Statement stmt;
         try {
@@ -43,7 +48,7 @@ public class FavoritesDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No tuple in favorites found");
+                throw new PetIsNoFavoriteException(petId, userId);
             }
 
             resultSet.next();
@@ -57,7 +62,7 @@ public class FavoritesDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (Exception e) {
+        } catch (PetIsNoFavoriteException | SQLException e) {
             e.printStackTrace();
         }
 

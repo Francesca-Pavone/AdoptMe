@@ -10,13 +10,14 @@ import java.util.*;
 
 public class UserFavoritesPetsList extends Subject {
     private UserModel user;
-    private HashMap<PetModel, Integer> hashMap;
+    private Map<PetModel, Integer> hashMap;
 
-    public UserFavoritesPetsList(Observer observer, UserModel user, HashMap<PetModel, Integer> hashmap) {
+    public UserFavoritesPetsList(Observer observer, UserModel user, Map<PetModel, Integer> hashmap) {
         super(observer);
         this.user = user;
         this.hashMap = hashmap;
-        for(PetModel petModel: hashmap.keySet()) {
+        for(Map.Entry entry: hashmap.entrySet()) {
+            PetModel petModel = (PetModel) entry.getKey();
             this.addPet(petModel, hashmap.get(petModel));
         }
     }
@@ -41,11 +42,11 @@ public class UserFavoritesPetsList extends Subject {
         this.notifyObservers(petBean);
     }
 
-    public HashMap<PetModel, Integer> getHashMap() {
+    public Map<PetModel, Integer> getHashMap() {
         return hashMap;
     }
 
-    public void setHashMap(HashMap<PetModel, Integer> hashMap) {
+    public void setHashMap(Map<PetModel, Integer> hashMap) {
         this.hashMap = hashMap;
     }
 }

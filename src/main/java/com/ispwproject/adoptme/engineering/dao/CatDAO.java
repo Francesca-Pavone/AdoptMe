@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
@@ -17,7 +18,7 @@ public class CatDAO {
     //Costruttore privato
     private CatDAO() {}
 
-    public static CatModel retrieveCatById(int catId, int shelterId)  throws Exception {
+    public static CatModel retrieveCatById(int catId, int shelterId) {
         Statement stmt;
         CatModel cat = null;
 
@@ -29,7 +30,7 @@ public class CatDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("Cat with the id " + catId + " NOT found for the shelter with id: "+shelterId);
+                throw new NotFoundException("Cat with the id " + catId + " NOT found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -91,7 +92,7 @@ public class CatDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | NotFoundException e) {
             e.printStackTrace();
         }
         return cat;

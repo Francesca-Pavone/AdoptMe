@@ -33,8 +33,8 @@ public class LoginBean {
             throw new EmailFormatException(email);
 
          */
-        String email_regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
-        if (!Pattern.compile(email_regex).matcher(email).matches())
+        String emailRegex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
+        if (!Pattern.compile(emailRegex).matcher(email).matches())
             throw new EmailFormatException(email);
         this.email = email;
     }
