@@ -83,7 +83,9 @@ public class GUIUserHomepageController extends UserSideBar {
 
     }
 
-    public void searchUserHomepage(ActionEvent event) throws Exception {
+    public void searchUserHomepage(ActionEvent event) throws IOException {
+        labelCity.setText("");
+        grid.getChildren().clear();
         UserResearchBean userResearchBean = new UserResearchBean();
         if (!textFieldUserHomepage.getText().equals("")) {
             userResearchBean.setCityShelter(textFieldUserHomepage.getText());
@@ -96,61 +98,68 @@ public class GUIUserHomepageController extends UserSideBar {
             btnSearchUserHomepage.setDisable(true);
 
             if (radioBtnCity.isSelected()) {
-                labelCity.setVisible(true);
-                backButton.setVisible(true);
-                scrollPane.setVisible(true);
-                labelCity.setText("Shelters you can find in '" + userResearchBean.getCityShelter() + "':");
-                UserResearchController userResearchControllerA = new UserResearchController();
-                int row = 1;
-                List<ShelterBean> shelterList = null;
-                try {
-                    shelterList = new ArrayList<>(userResearchControllerA.searchCity(userResearchBean));
-                } catch (Exception e) {
-                    ShowExceptionSupport.showExceptionGUI(e.getMessage());
-                }
-                if(shelterList != null) {
-                    try {
-                        for (ShelterBean shelterBean : shelterList) {
-                            FXMLLoader fxmlLoader = new FXMLLoader();
-                            fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
-                            Pane pane = fxmlLoader.load();
-
-                            GUIShelterItemController shelterItemControllerG = fxmlLoader.getController();
-                            shelterItemControllerG.setPageContainer(currentPage);
-                            shelterItemControllerG.setShelter(shelterBean);
-                            shelterItemControllerG.setData();
-
-                            grid.add(pane, 1, row);
-                            row++;
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                this.searchCity(userResearchBean);
             }
             if (radioBtnShelter.isSelected()) {
-                labelCity.setVisible(true);
-                backButton.setVisible(true);
-
-                Stage dialog = new Stage();
-                dialog.initModality(Modality.APPLICATION_MODAL);
-                dialog.initStyle(StageStyle.UNDECORATED);
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-                Parent root = fxmlLoader.load();
-                Scene scene = new Scene(root);
-
-                GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
-                guiShelterInformationController.setPreviousPage(currentPage);
-                guiShelterInformationController.setCurrentPage(root);
-                boolean check = guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
-
-                if (check) {
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(scene);
-
-                    stage.show();
-                }
+                this.searchShelter(event, userResearchBean);
             }
+        }
+    }
+
+    private void searchCity(UserResearchBean userResearchBean) {
+        labelCity.setVisible(true);
+        backButton.setVisible(true);
+        scrollPane.setVisible(true);
+        labelCity.setText("Shelters you can find in '" + userResearchBean.getCityShelter() + "':");
+        UserResearchController userResearchControllerA = new UserResearchController();
+        int row = 1;
+        List<ShelterBean> shelterList = null;
+        try {
+            shelterList = new ArrayList<>(userResearchControllerA.searchCity(userResearchBean));
+        } catch (Exception e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
+        if(shelterList != null) {
+            try {
+                for (ShelterBean shelterBean : shelterList) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(Main.class.getResource("ShelterItem.fxml"));
+                    Pane pane = fxmlLoader.load();
+
+                    GUIShelterItemController shelterItemControllerG = fxmlLoader.getController();
+                    shelterItemControllerG.setPageContainer(currentPage);
+                    shelterItemControllerG.setShelter(shelterBean);
+                    shelterItemControllerG.setData();
+
+                    grid.add(pane, 1, row);
+                    row++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void searchShelter(ActionEvent event, UserResearchBean userResearchBean) throws IOException {
+        labelCity.setVisible(true);
+        backButton.setVisible(true);
+
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.UNDECORATED);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+        GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setPreviousPage(currentPage);
+        guiShelterInformationController.setCurrentPage(root);
+        boolean check = guiShelterInformationController.setShelterData(userResearchBean.getCityShelter());
+
+        if (check) {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         }
     }
 

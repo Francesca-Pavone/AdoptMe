@@ -31,7 +31,9 @@ public class ShowShelterPetsController {
     public ShelterBean getShelter(String shelterName) throws NotFoundException, NoSheltersWithThatNameException {
         int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
         ShelterModel shelterModelCurrent = ShelterDAO.retrieveShelterById(shelterId);
-        return new ShelterBean(shelterModelCurrent.getId(), shelterModelCurrent.getShelterName(), shelterModelCurrent.getPhoneNumber(), shelterModelCurrent.getAddress(), shelterModelCurrent.getCity(), shelterModelCurrent.getWebSite(), shelterModelCurrent.getEmail());
+        ShelterBean shelterBean = new ShelterBean(shelterModelCurrent.getId(), shelterModelCurrent.getShelterName(), shelterModelCurrent.getPhoneNumber(), shelterModelCurrent.getAddress(), shelterModelCurrent.getCity(), shelterModelCurrent.getWebSite(), shelterModelCurrent.getEmail());
+        shelterBean.setShelterImg(shelterModelCurrent.getImage());
+        return shelterBean;
     }
 
     public void getPetList(Observer observer) throws NoPetsFoundException {
