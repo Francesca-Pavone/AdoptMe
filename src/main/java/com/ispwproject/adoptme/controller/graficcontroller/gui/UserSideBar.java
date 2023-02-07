@@ -43,7 +43,6 @@ public class UserSideBar {
         } catch (NoAccoutException e) {
             showAccountAlert();
         } catch (FavoriteListEmptyException e) {
-            PrintSupport.printError(e.getMessage());
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
             Parent root = fxmlLoader.load();

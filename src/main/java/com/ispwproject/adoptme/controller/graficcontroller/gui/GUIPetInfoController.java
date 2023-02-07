@@ -106,10 +106,6 @@ public class GUIPetInfoController implements Observer {
     @FXML
     private HBox infoHBox;
     @FXML
-    private HBox nameFavHBox;
-    @FXML
-    private ImageView favImage;
-    @FXML
     private Button btnFav;
 
     private boolean fav = false;
@@ -135,8 +131,6 @@ public class GUIPetInfoController implements Observer {
     }
 
     public void setPetInfo(PetBean petBean) throws Exception {
-
-        nameFavHBox.getChildren().removeAll(favImage);
 
         PetInfoController petInfoControllerA = new PetInfoController();
 
