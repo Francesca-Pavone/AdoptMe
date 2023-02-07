@@ -12,6 +12,7 @@ import com.ispwproject.adoptme.engineering.decorator.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuestionnaireResultController {
     public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) throws Exception {
@@ -64,7 +65,8 @@ public class QuestionnaireResultController {
         try { hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery()); } catch (NoPetsFoundQuestionnaireException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
-        for (PetModel petModel : hashMap.keySet()) {
+        for (Map.Entry entry : hashMap.entrySet()) {
+            PetModel petModel = (PetModel) entry.getKey();
             PetBean petBean = new PetBean();
             petBean.setPetId(petModel.getPetId());
             petBean.setShelterId(hashMap.get(petModel));

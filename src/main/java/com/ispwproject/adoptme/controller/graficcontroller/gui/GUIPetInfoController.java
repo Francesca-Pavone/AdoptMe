@@ -116,7 +116,7 @@ public class GUIPetInfoController implements Observer {
     private Parent currentPage;
 
     private Observer favObserver;
-    private Pane pane;
+    private Pane panePetItem;
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
@@ -147,7 +147,6 @@ public class GUIPetInfoController implements Observer {
             guiSendRequestController.setContainerPage(currentPage);
             infoHBox.getChildren().add(pane);
             btnFav.setVisible(true);
-
             if(!fav) {
                 btnFav.setText("Add to favorites");
             }
@@ -332,10 +331,10 @@ public class GUIPetInfoController implements Observer {
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
         if(fav) {
-            addToFavoritesController.removePet(userBean, this, this.pane);
-            addToFavoritesController.removePet(userBean, favObserver, this.pane);
+            addToFavoritesController.removePet(userBean, this, this.panePetItem);
+            addToFavoritesController.removePet(userBean, favObserver, this.panePetItem);
         } else {
-            addToFavoritesController.addPet(userBean, this, this.pane);
+            addToFavoritesController.addPet(userBean, this, this.panePetItem);
         }
     }
 
@@ -353,7 +352,7 @@ public class GUIPetInfoController implements Observer {
         // ignore
     }
 
-    public void setPane(Pane pane) {
-        this.pane = pane;
+    public void setPanePetItem(Pane panePetItem) {
+        this.panePetItem = panePetItem;
     }
 }

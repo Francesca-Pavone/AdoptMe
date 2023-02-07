@@ -110,7 +110,6 @@ public class PetDAO {
     }
 
     public static HashMap<PetModel, Integer> retrievePetByQuestionnaire(String query) throws Exception {
-        System.out.println(query);
         Statement stmt;
         HashMap<PetModel, Integer> hashMap = new HashMap<>();
         PetModel pet;

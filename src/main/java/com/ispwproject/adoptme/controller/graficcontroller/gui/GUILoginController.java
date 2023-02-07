@@ -79,7 +79,6 @@ public class GUILoginController {
     }
 
     public void login() throws Exception {
-        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = null;
         try {
             LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
@@ -100,7 +99,6 @@ public class GUILoginController {
                 Main.getStage().setScene(scene);
             } else
                 throw new UserNotFoundException();
-            //todo: popup email o password sbagliate
             //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
 
             Main.getStage().setScene(scene);

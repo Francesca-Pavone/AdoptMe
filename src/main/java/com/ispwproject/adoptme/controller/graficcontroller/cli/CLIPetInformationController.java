@@ -133,7 +133,6 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
                         cliUserHomepageController.start();
                     }
-                    // todo: fare shelter homepage
                 }
                 default -> throw new CommandNotFoundException();
             }
@@ -154,7 +153,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
         fav = petBean.getFav;
-        if (fav) {//todo add object
+        if (fav) {
             addToFavoritesController.removePet(userBean, this, index);
             addToFavoritesController.removePet(userBean, favObserver, index);
         } else {
@@ -259,7 +258,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 
     public void setIndex(int index) {

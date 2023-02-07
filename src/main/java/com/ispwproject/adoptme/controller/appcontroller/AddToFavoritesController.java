@@ -41,7 +41,6 @@ public class AddToFavoritesController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //todo fare exception
         }
     }
 
@@ -94,7 +93,6 @@ public class AddToFavoritesController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //todo fare exception
         }
     }
 

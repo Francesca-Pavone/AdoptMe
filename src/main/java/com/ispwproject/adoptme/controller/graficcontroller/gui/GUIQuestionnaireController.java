@@ -597,8 +597,6 @@ public class GUIQuestionnaireController {
             vboxParent.getChildren().add(btnEndQuestionnaire);
     }
 
-
-//todo: non aprire dialog MA nello stesso stage
     public void goBack() throws IOException {
             Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
