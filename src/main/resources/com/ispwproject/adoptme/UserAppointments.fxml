@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserAppointmentsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserAppointmentsController">
    <children>
       <HBox alignment="CENTER" prefHeight="710.0" prefWidth="1100.0">
          <children>
@@ -82,7 +82,7 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
+                        <Button layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToFavorites" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                                  <children>

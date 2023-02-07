@@ -18,8 +18,8 @@ import java.io.IOException;
 
 public class UserSideBar {
 
-    public void goToHomePage() throws IOException {
-        Stage stage = Main.getStage();
+    public void goToHomePage(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -29,11 +29,11 @@ public class UserSideBar {
     }
 
 
-    public void goToFavorites() throws IOException {
+    public void goToFavorites(ActionEvent event) throws IOException {
         try {
             if(Session.getCurrentSession().getUserBean() == null)
                 throw new NoAccoutException();
-            Stage stage = Main.getStage();
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -44,7 +44,7 @@ public class UserSideBar {
             showAccountAlert();
         } catch (FavoriteListEmptyException e) {
             PrintSupport.printError(e.getMessage());
-            Stage stage = Main.getStage();
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -67,11 +67,11 @@ public class UserSideBar {
         }
     }
 
-    public void goToSettings() throws IOException {
+    public void goToSettings(ActionEvent event) throws IOException {
         try {
             if(Session.getCurrentSession().getUserBean() == null)
                 throw new NoAccoutException();
-            Stage stage = Main.getStage();
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
