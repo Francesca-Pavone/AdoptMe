@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestAddPet {
+class TestAddPet {
     /**
      * FRANCESCA PAVONE SALAFIA
      * Il seguente test va a testare il corretto funzionamento del metodo addNewPet
@@ -17,7 +17,7 @@ public class TestAddPet {
      * L'id viene calcolato prelevando l'id dell'ultimo animale registrato dallo Shelter e sommando 1
      */
     @Test
-    public void testAddPet(){
+    void testAddPet(){
         try {
             LoginBean loginBean = new LoginBean("pensieri_bestiali@gmail.com", "123");
             LoginController loginController = new LoginController();

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestSendRequest {
+class TestSendRequest {
     /**
      * FRANCESCA PAVONE SALAFIA
      * Il seguente test va a testare che andando a prelevare il numero di richieste di uno shelter
@@ -22,7 +22,7 @@ public class TestSendRequest {
      */
 
     @Test
-    public void testSendRequest() throws PastDateException, DuplicateRequestException, DateFormatException {
+    void testSendRequest() throws PastDateException, DuplicateRequestException, DateFormatException {
         try {
             int requestBefore = RequestDAO.retrieveReqByShelter(new ShelterModel(1)).size();
 

@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Trigger;
@@ -27,7 +28,7 @@ public class UserDAOJDBC implements UserDAO{
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                throw new Exception("No user find with the id: " + userId);
+                throw new NotFoundException("No user find with the id: " + userId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -61,7 +62,7 @@ public class UserDAOJDBC implements UserDAO{
             ResultSet resultSet = SimpleQueries.selectUserByEmail(stmt, email);
 
             if (!resultSet.first()) {
-                throw new Exception("No user found with email: " + email);
+                throw new NotFoundException("No user found with email: " + email);
             }
 
             resultSet.first();

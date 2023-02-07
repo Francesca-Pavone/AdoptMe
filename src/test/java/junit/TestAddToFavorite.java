@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestAddToFavorite {
+class TestAddToFavorite {
     @Test
-    public void testAddToFavorite() throws Exception {
+    void testAddToFavorite() throws Exception {
         LoginBean loginBean = new LoginBean("francesca@gmail.com", "123");
         LoginController loginController = new LoginController();
         loginController.checkLogin(loginBean);

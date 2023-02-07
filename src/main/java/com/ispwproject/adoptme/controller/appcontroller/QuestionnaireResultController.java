@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class QuestionnaireResultController {
-    public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) throws Exception {
+    public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) {
         IQuestionnaireQuery questionnaireQuery;
         if (questionnaireResultBean.isType() == 1) {
             questionnaireQuery = new CatQuery();
