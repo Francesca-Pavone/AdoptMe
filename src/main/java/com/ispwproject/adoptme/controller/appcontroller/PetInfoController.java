@@ -1,18 +1,11 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.dao.PetDAO;
-import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.engineering.dao.*;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.dao.CatDAO;
-import com.ispwproject.adoptme.engineering.dao.DogDAO;
-import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 
-import java.sql.SQLException;
 
 public class PetInfoController {
 
@@ -32,7 +25,7 @@ public class PetInfoController {
                 setCompatibility(petBean, dogModel.getPetCompatibility());
                 petBean.setDogEducation(dogModel.isProgramEducation());
                 petBean.setSize(dogModel.getSize());
-                petBean.setFav(dogModel.isFav());
+                petBean.setFav(this.checkFavorite(petBean));
 
             }
             else {
@@ -43,7 +36,7 @@ public class PetInfoController {
                 setCompatibility(petBean, catModel.getPetCompatibility());
                 petBean.setTestFiv(catModel.isTestFiv());
                 petBean.setTestFelv(catModel.isTestFelv());
-                petBean.setFav(catModel.isFav());
+                petBean.setFav(this.checkFavorite(petBean));
             }
             shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
             shelterBean.setShelterImg(shelterModel.getImage());
@@ -53,28 +46,10 @@ public class PetInfoController {
         return shelterBean;
     }
 
-    public boolean checkFavorite(PetBean petBean, Observer observer) {
-        UserBean userBean = Session.getCurrentSession().getUserBean();
-        UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
-        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
-        try {
-            userFavoritesPetsList = PetDAO.retrieveUserFavoritesPets(userModel, observer);
-        } catch (SQLException se) {
-            // Errore durante l'apertura della connessione
-            se.printStackTrace();
-        } catch (ClassNotFoundException driverEx) {
-            // Errore nel loading del driver
-            driverEx.printStackTrace();
-        } catch (Exception e) {
-            // Errore nel loading del driver o possibilmente nell'accesso al filesystem
-            e.printStackTrace();
-        }
-
-        for (PetModel petModel : userFavoritesPetsList.getPetList()) {
-            if (petModel.getPetId() == petBean.getPetId() && petModel.getShelter().getId() == petBean.getShelterId())
-                return true;
-        }
-        return false;
+    public boolean checkFavorite(PetBean petBean) {
+        boolean fav;
+        fav = FavoritesDAO.checkFav(petBean.getPetId(), petBean.getShelterId(), Session.getCurrentSession().getUserBean().getUserId());
+        return fav;
     }
 
     private void setGeneralInfo(PetBean petBean, int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght) {

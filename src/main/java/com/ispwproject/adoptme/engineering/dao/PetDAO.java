@@ -16,6 +16,7 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PetDAO {
@@ -92,8 +93,6 @@ public class PetDAO {
                 pet.setDayOfBirth(dayOfBirth);
 
                 pet.setPetCompatibility(new PetCompatibility());
-                if(Session.getCurrentSession().getUserBean() != null)
-                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterModel.getId()));
 
                 petList.add(pet);
             }
@@ -110,6 +109,7 @@ public class PetDAO {
     }
 
     public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
+        System.out.println(query);
         Statement stmt;
         List<PetModel> petList = new ArrayList<>();
         PetModel pet;
@@ -171,9 +171,6 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
                 pet.setAge(petAge);
-                if(Session.getCurrentSession().getUserBean() != null)
-                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
-
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
@@ -263,8 +260,8 @@ public class PetDAO {
 
     public static UserFavoritesPetsList retrieveUserFavoritesPets(UserModel userModel, Observer observer) throws Exception {
         Statement stmt = null;
-        List<PetModel> petList = new ArrayList<PetModel>();
-        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, petList, userModel);
+        HashMap<PetModel, Integer> hashmap = new HashMap<>();
+        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel, hashmap);
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -315,14 +312,10 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
 
-                if(Session.getCurrentSession().getUserBean() != null)
-                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), petShelter));
-
-
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
-                userFavoritesPetsList.addPet(pet);
+                userFavoritesPetsList.addPet(pet, petShelter);
             }
             while (resultSet.next()) ;
 

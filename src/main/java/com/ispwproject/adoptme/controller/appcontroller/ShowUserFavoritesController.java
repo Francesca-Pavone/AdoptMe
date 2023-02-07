@@ -11,8 +11,7 @@ import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.UserModel;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class ShowUserFavoritesController {
@@ -36,11 +35,15 @@ public class ShowUserFavoritesController {
 
         List<PetBean> petBeanList = new ArrayList<>();
 
-        for (PetModel petModel : userFavoritesPetsList.getPetList()) {
-            PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
-            petBean.setFav(petModel.isFav());
+        HashMap<PetModel, Integer> hashMap = userFavoritesPetsList.getHashMap();
+        int shelterId;
+        for(PetModel petModel: hashMap.keySet()) {
+            shelterId = hashMap.get(petModel);
+            PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+            petBean.setFav(true);
             petBeanList.add(petBean);
         }
+
         return petBeanList;
     }
 }

@@ -59,6 +59,7 @@ public class CLIUserHomepageController {
                 case FAVORITES -> {
                     try {
                         CLIUserFavoritesController cliUserFavoritesController = new CLIUserFavoritesController();
+                        cliUserFavoritesController.setPreviousPage(this);
                         cliUserFavoritesController.start();
                     } catch (FavoriteListEmptyException e) {
                         PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");

@@ -75,9 +75,6 @@ public class DogDAO {
                 dog.setDisabilityType(disabilityType);
                 dog.setProgramEducation(programEducation);
                 dog.setSize(size);
-                if(Session.getCurrentSession().getUserBean() != null)
-                    dog.setFav(FavoritesDAO.checkFav(dogId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
-
 
             }while(resultSet.next());
 

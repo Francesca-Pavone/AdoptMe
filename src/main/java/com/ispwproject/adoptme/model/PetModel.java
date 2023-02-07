@@ -23,8 +23,6 @@ public abstract class PetModel {
     protected String disabilityType;
 
     protected PetCompatibility petCompatibility;
-    protected boolean fav; //TODO vedere se lasciarlo qua
-
 
     public PetModel() {
     }
@@ -182,14 +180,6 @@ public abstract class PetModel {
 
     public void setPetCompatibility(PetCompatibility petCompatibility) {
         this.petCompatibility = petCompatibility;
-    }
-
-    public boolean isFav() {
-        return fav;
-    }
-
-    public void setFav(boolean fav) {
-        this.fav = fav;
     }
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public class CLIUserFavoritesController implements Observer {
     private CLIUserFavoritesView cliUserFavoritesView;
     private List<PetBean> petBeanList;
+    private CLIUserHomepageController previousPage;
 
     public void start() throws FavoriteListEmptyException {
         this.cliUserFavoritesView = new CLIUserFavoritesView(this);
@@ -51,8 +52,7 @@ public class CLIUserFavoritesController implements Observer {
 
     public void executeCommand(int i) {
         if (i == 0) {
-            CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
-            cliShelterInfoController.goBack();
+            this.previousPage.start();
         }
         else {
             PetBean petBean = this.petBeanList.get(i-1);
@@ -62,5 +62,9 @@ public class CLIUserFavoritesController implements Observer {
             cliPetInformationController.setPreviousPage(this);
             cliPetInformationController.setPetInfo();
         }
+    }
+
+    public void setPreviousPage(CLIUserHomepageController cliUserHomepageController) {
+        this.previousPage = cliUserHomepageController;
     }
 }

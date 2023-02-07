@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class GUIUserFavoritesController extends UserSideBar implements Observer {

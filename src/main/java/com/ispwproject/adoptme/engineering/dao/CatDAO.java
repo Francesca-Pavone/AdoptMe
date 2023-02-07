@@ -84,9 +84,6 @@ public class CatDAO {
                 cat.setDisabilityType(disabilityType);
                 cat.setTestFiv(testFiv);
                 cat.setTestFelv(testFelv);
-                if(Session.getCurrentSession().getUserBean() != null)
-                    cat.setFav(FavoritesDAO.checkFav(catId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
-
 
             }while(resultSet.next());
 

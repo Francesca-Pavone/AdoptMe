@@ -29,14 +29,14 @@ public class AddToFavoritesController {
                 DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize());
                 dogModel.setPetId(petBean.getPetId());
                 setCommonInfo(dogModel);
-                userFavoritesPetsList.addPet(dogModel);
+                userFavoritesPetsList.addPet(dogModel, shelter.getId());
                 userFavoritesPetsList.notifyObservers(dogModel, object);
             } else if (petBean.getType() == 1) {
                 PetCompatibility petCompatibility = setCompatibility();
                 CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility);
                 catModel.setPetId(petBean.getPetId());
                 setCommonInfo(catModel);
-                userFavoritesPetsList.addPet(catModel);
+                userFavoritesPetsList.addPet(catModel, shelter.getId());
                 userFavoritesPetsList.notifyObservers(catModel, object);
             }
         } catch (Exception e) {
@@ -74,20 +74,22 @@ public class AddToFavoritesController {
             UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
             FavoritesDAO.removeFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
+            ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+
 
             if (petBean.getType() == 0) {
                 PetCompatibility petCompatibility = setCompatibility();
                 DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize());
                 dogModel.setPetId(petBean.getPetId());
                 setCommonInfo(dogModel);
-                userFavoritesPetsList.removePet(dogModel);
+                userFavoritesPetsList.removePet(dogModel, shelter.getId());
                 userFavoritesPetsList.notifyObservers(dogModel,object);
             } else if (petBean.getType() == 1) {
                 PetCompatibility petCompatibility = setCompatibility();
                 CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility);
                 catModel.setPetId(petBean.getPetId());
                 setCommonInfo(catModel);
-                userFavoritesPetsList.removePet(catModel);
+                userFavoritesPetsList.removePet(catModel, shelter.getId());
                 userFavoritesPetsList.notifyObservers(catModel,object);
             }
         } catch (Exception e) {
