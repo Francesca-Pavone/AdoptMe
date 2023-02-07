@@ -77,9 +77,11 @@ public class GUIPetItemController {
 
     public void openPetInfoPage(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetInformation.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
         GUIPetInfoController petInformationControllerG = fxmlLoader.getController();
         petInformationControllerG.setPreviousPage(pageContainer);
+        petInformationControllerG.setCurrentPage(root);
         petInformationControllerG.setPetInfo(petBean);
         petInformationControllerG.setPane(pane);
         petInformationControllerG.setFavObserver(this.favObserver);

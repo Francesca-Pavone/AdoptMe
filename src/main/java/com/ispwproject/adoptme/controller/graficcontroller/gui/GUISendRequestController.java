@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -38,7 +39,11 @@ public class GUISendRequestController implements Observer {
 
     private ShelterBean shelterBean;
     private PetBean petBean;
+    private Parent containerPage;
 
+    public void setContainerPage(Parent currentPage) {
+        this.containerPage = currentPage;
+    }
 
     public void setData(PetBean pet, ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
@@ -47,7 +52,7 @@ public class GUISendRequestController implements Observer {
         shelterBtn.setText(shelterBean.getName());
     }
 
-    public void sendRequest(ActionEvent event)  {
+    public void sendRequest()  {
         RequestBean requestBean = null;
         try {
             if (datePicker.getValue() == null)
@@ -73,9 +78,12 @@ public class GUISendRequestController implements Observer {
     public void goToShelterPage(ActionEvent event) throws IOException, NoPetsFoundException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
 
         GUIShelterInformationController guiShelterInformationController = fxmlLoader.getController();
+        guiShelterInformationController.setCurrentPage(root);
+        guiShelterInformationController.setPreviousPage(containerPage);
         guiShelterInformationController.setData(shelterBean);
         stage.setScene(scene);
     }

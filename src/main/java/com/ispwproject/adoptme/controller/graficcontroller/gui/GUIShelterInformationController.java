@@ -8,8 +8,10 @@ import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -101,8 +103,8 @@ public class GUIShelterInformationController implements Observer {
         paneInformations.setVisible(btnInformations.isSelected());
     }
 
-    public void goBack() throws IOException {
-        Stage stage = Main.getStage();
+    public void goBack(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         Scene scene = this.previousPage.getScene();
         stage.setScene(scene);
     }

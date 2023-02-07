@@ -117,12 +117,17 @@ public class GUIPetInfoController implements Observer {
     private PetBean petBean;
 
     private Parent previousPage;
+    private Parent currentPage;
 
     private Observer favObserver;
     private Pane pane;
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
+    }
+
+    public void setCurrentPage(Parent currentPage) {
+        this.currentPage = currentPage;
     }
 
     public void setFavObserver(Observer favObserver) {
@@ -145,6 +150,7 @@ public class GUIPetInfoController implements Observer {
             Pane pane = fxmlLoader.load();
             GUISendRequestController guiSendRequestController = fxmlLoader.getController();
             guiSendRequestController.setData(petBean, shelterBean);
+            guiSendRequestController.setContainerPage(currentPage);
             infoHBox.getChildren().add(pane);
             btnFav.setVisible(true);
 

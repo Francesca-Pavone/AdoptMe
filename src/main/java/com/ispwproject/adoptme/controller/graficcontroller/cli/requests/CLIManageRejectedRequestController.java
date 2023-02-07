@@ -1,28 +1,29 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageRejectedRequestView;
 
 
-public class CLIManageRejectedRequestController {
-    private CLIManageRejectedRequestView view;
-    private RequestBean requestBean;
+public class CLIManageRejectedRequestController implements CLIGraficController {
+    private final CLIManageRejectedRequestView view;
+    private final RequestBean requestBean;
     private CLIAppointmentsPageController previousPage;
     private static final String DELETE = "1";
     private static final String BACK = "2";
 
     public CLIManageRejectedRequestController(RequestBean requestBean) {
         this.requestBean = requestBean;
+        this.view = new CLIManageRejectedRequestView(this);
     }
     public void setPreviousPage(CLIAppointmentsPageController previousPage) {
         this.previousPage = previousPage;
     }
 
-
+    @Override
     public void start() {
-        this.view = new CLIManageRejectedRequestView(this);
         this.view.showRequestNow(this.requestBean.getDate(),
                 this.requestBean.getTime());
         this.view.showForm();

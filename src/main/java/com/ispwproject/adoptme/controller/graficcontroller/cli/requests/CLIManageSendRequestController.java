@@ -1,41 +1,48 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageSendRequestView;
 
 
-public class CLIManageSendRequestController {
+public class CLIManageSendRequestController implements CLIGraficController {
 
-    private static final String ANNUL = "1";
+    private static final String DELETE = "1";
     private static final String MODIFY = "2";
     private static final String BACK = "3";
-    private CLIManageSendRequestView view;
+    private final CLIManageSendRequestView view;
     private final RequestBean requestBean;
     private CLIAppointmentsPageController previousPage;
     public CLIManageSendRequestController(RequestBean requestBean) {
         this.requestBean = requestBean;
+        this.view = new CLIManageSendRequestView(this);
+
     }
 
     public void setPreviousPage(CLIAppointmentsPageController previousPage) {
         this.previousPage = previousPage;
     }
 
+    @Override
     public void start(){
-        this.view = new CLIManageSendRequestView(this);
-        this.view.showRequestNow(this.requestBean.getDate(),
-                this.requestBean.getTime());
+        this.view.showRequestNow(this.requestBean.getDate(), this.requestBean.getTime());
         this.view.showForm();
     }
 
-    public void executeCommand(String command) throws DateFormatException, TimeFormatException, Exception {
+    public void executeCommand(String command) throws CommandNotFoundException {
         switch (command) {
-            case ANNUL -> annulRequest();
+            case DELETE -> annulRequest();
 
-            case MODIFY -> modifyRequest();
+            case MODIFY -> {
+                setNewDate();
+                setNewTime();
+                modifyRequest();
+            }
 
             case BACK -> this.previousPage.showAppointments(this.requestBean.getUserName());
 
@@ -45,23 +52,40 @@ public class CLIManageSendRequestController {
 
     }
 
-    private void modifyRequest() throws Exception {
-        String date = this.view.askDate();
-        String time = this.view.askTime();
+    private void modifyRequest() {
+
         if (view.askConfirmation() == 1){
-
-            this.requestBean.setDate(date);
-            this.requestBean.setTime(time);
-
             ManageRequestController manageRequestController = new ManageRequestController();
             try {
                 manageRequestController.modifyRequest(requestBean, requestBean, null, this.previousPage);
             }catch (Exception e){
                 e.printStackTrace();
             }
-            this.previousPage.showAppointments(this.requestBean.getUserName());
         }
-        // todo verifica caso == 2 e solleva eccezione altrimenti
+        this.previousPage.showAppointments(this.requestBean.getUserName());
+    }
+    private void setNewTime() {
+        while (true) {
+            try {
+                this.requestBean.setTime(this.view.askTime());
+                return;
+            }
+            catch (TimeFormatException e) {
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            }
+        }
+    }
+
+    private void setNewDate() {
+        while (true) {
+            try {
+                this.requestBean.setDate(this.view.askDate());
+                return;
+            }
+            catch (DateFormatException e) {
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            }
+        }
     }
 
     private void annulRequest() {

@@ -2,6 +2,8 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterInfoView;
@@ -12,29 +14,41 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CLIShelterInfoController implements Observer {
+public class CLIShelterInfoController implements CLIGraficController, Observer {
 
-    private CLIShelterInfoView cliShelterInfoView;
+    private final CLIShelterInfoView view;
     private ShelterBean shelterBean;
     private List<PetBean> petBeanList;
     private CLIUserHomepageController previousPage;
 
+    public CLIShelterInfoController() {
+        this.view = new CLIShelterInfoView(this);
+    }
+
     public void setShelter(String shelterName) {
         this.petBeanList = new ArrayList<>();
+        ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
         try {
-            ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
-        this.shelterBean = showShelterPetsController.getShelter(shelterName);
-        this.start();
-        } catch (Exception e) {
+            this.shelterBean = showShelterPetsController.getShelter(shelterName);
+        } catch (NotFoundException | NoSheltersWithThatNameException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             ScannerSupport.waitEnter();
             previousPage.start();
         }
+        this.start();
+
     }
-    
-    public void start() throws NoPetsFoundException {
-        this.cliShelterInfoView = new CLIShelterInfoView(this);
-        this.cliShelterInfoView.run(this.shelterBean.getName(), this.shelterBean.getEmail(), this.shelterBean.getPhoneNumber(), this.shelterBean.getWebSite(), this.shelterBean.getAddress(), this.shelterBean.getCity());
+    @Override
+    public void start() {
+
+        try {
+            this.view.run(this.shelterBean.getName(), this.shelterBean.getEmail(), this.shelterBean.getPhoneNumber(), this.shelterBean.getWebSite(), this.shelterBean.getAddress(), this.shelterBean.getCity());
+        }
+        catch (NoPetsFoundException e){
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            ScannerSupport.waitEnter();
+            previousPage.start();
+        }
     }
 
     public void getPet() throws NoPetsFoundException {
@@ -62,13 +76,13 @@ public class CLIShelterInfoController implements Observer {
                     case 1 -> "Female";
                     default -> "Male";
                 });
-                this.cliShelterInfoView.printPet((petBean).getName(), gender, (petBean).getAge(), i);
+                this.view.printPet((petBean).getName(), gender, (petBean).getAge(), i);
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        this.cliShelterInfoView.printCommands();
+        this.view.printCommands();
     }
 
     @Override
@@ -87,7 +101,7 @@ public class CLIShelterInfoController implements Observer {
             cliPetInformationController.setIndex(i);
             cliPetInformationController.setFavObserver(this);
             cliPetInformationController.setPreviousPage(this);
-            cliPetInformationController.setPetInfo();
+            cliPetInformationController.start();
         }
     }
 

@@ -5,24 +5,28 @@ import com.ispwproject.adoptme.engineering.session.Session;
 
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLINeedAccountView;
-import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
-public class CLINeedAccountController {
+public class CLINeedAccountController implements CLIGraficController{
 
     private static final String LOGIN = "1";
     private static final String HOMEPAGE = "2";
 
     private final CLINeedAccountView cliNeedAccountView;
 
-    public CLINeedAccountController(CLINeedAccountView cliNeedAccountView) {
-        this.cliNeedAccountView = cliNeedAccountView;
+    public CLINeedAccountController() {
+        this.cliNeedAccountView = new CLINeedAccountView(this);
+    }
+
+    @Override
+    public void start() {
+        cliNeedAccountView.showMessage();
     }
 
     public void executeCommand(String command) {
         try {
             switch (command) {
                 case LOGIN -> {
-                    Session.getCurrentSession().closeSession();
+                    Session.closeSession();
                     CLILoginController cliLoginController = new CLILoginController();
                     cliLoginController.start();
                 }
@@ -34,7 +38,7 @@ public class CLINeedAccountController {
             }
         } catch (CommandNotFoundException e) {
             ShowExceptionSupport.showExceptionCLI("e.getMessage() + \"1 | 2");
-            this.cliNeedAccountView.showMessage();
+            start();
         }
     }
 }

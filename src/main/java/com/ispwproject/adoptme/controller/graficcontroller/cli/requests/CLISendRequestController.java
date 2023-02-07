@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
 import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
+import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
@@ -12,22 +13,25 @@ import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLISendRequestView;
 
 
-public class CLISendRequestController implements Observer {
+public class CLISendRequestController implements CLIGraficController, Observer {
 
     private static final String SEND = "";
     private static final String BACK = "1";
 
-    private CLISendRequestView cliSendRequestView;
+    private final CLISendRequestView view;
     private RequestBean requestBean;
-    private PetBean petBean;
+    private final PetBean petBean;
 
-    public void sendRequest(PetBean petBean) {
+    public CLISendRequestController(PetBean petBean) {
+        this.view = new CLISendRequestView();
         this.petBean = petBean;
+    }
+
+    @Override
+    public void start() {
         UserBean user = Session.getCurrentSession().getUserBean();
         this.requestBean = new RequestBean(petBean.getName(), petBean.getPetId(), petBean.getShelterId(), user.getName(), user.getUserId());
-
-        this.cliSendRequestView = new CLISendRequestView();
-        this.cliSendRequestView.showSendRequestForm(requestBean.getUserName(), requestBean.getPetName(), this);
+        this.view.showSendRequestForm(requestBean.getUserName(), requestBean.getPetName(), this);
     }
 
     public void setRequestDate(String date) throws DateFormatException {
@@ -46,7 +50,7 @@ public class CLISendRequestController implements Observer {
             }
             catch (PastDateException e) {
                 ShowExceptionSupport.showExceptionCLI(e.getMessage());
-                sendRequest(petBean);
+                start();
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -55,7 +59,7 @@ public class CLISendRequestController implements Observer {
         else if (command.equals(BACK)){
             CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
             try {
-                cliPetInformationController.setPetInfo();
+                cliPetInformationController.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -65,10 +69,10 @@ public class CLISendRequestController implements Observer {
 
     @Override
     public void update(Object object) {
-        cliSendRequestView.showSuccessful();
+        view.showSuccessful();
         CLIPetInformationController cliPetInformationController = new CLIPetInformationController(this.petBean);
         try{
-            cliPetInformationController.setPetInfo();
+            cliPetInformationController.start();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -79,6 +83,7 @@ public class CLISendRequestController implements Observer {
     public void update2(Object object1, Object object2) {
         //ignore
     }
+
 }
 
 
