@@ -69,6 +69,9 @@ public class CLIQuestionnaireController {
 
         QuestionnaireResultBean questionnaireResultBean = this.questionnaireResultBeanBuilder.build();
         QuestionnaireResultController questionnaireResultController = new QuestionnaireResultController();
+        CLIQuestionnaireResultController cliQuestionnaireResultController = new CLIQuestionnaireResultController();
+        cliQuestionnaireResultController.setData(questionnaireResultController.searchPets(questionnaireResultBean));
+
 
         //inizializza pagina result e passagli i risultati di questionnaireResultController.searchPets(questionnaireResultBean)
 
