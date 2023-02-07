@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -18,6 +19,8 @@ public class GUIQuestionnaireResultController {
 
     @FXML
     private GridPane grid;
+    private Parent currentPage;
+    private Parent previousPage;
 
     public void exitQuestionnaire(ActionEvent event) throws IOException {
         Stage dialog = new Stage();
@@ -42,6 +45,7 @@ public class GUIQuestionnaireResultController {
                 Pane pane = fxmlLoader.load();
 
                 GUIPetItemController petItemControllerG = fxmlLoader.getController();
+                petItemControllerG.setPageContainer(currentPage);
                 petItemControllerG.setPetData(pet);
 
                 if (column == 3) {
@@ -58,5 +62,13 @@ public class GUIQuestionnaireResultController {
             e.printStackTrace();
         }
 
+    }
+
+    public void setPreviousPage(Parent previousPage) {
+        this.previousPage = previousPage;
+    }
+
+    public void setCurrentPage(Parent root) {
+        this.currentPage = root;
     }
 }

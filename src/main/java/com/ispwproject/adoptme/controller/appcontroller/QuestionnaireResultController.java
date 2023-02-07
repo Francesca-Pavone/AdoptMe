@@ -8,6 +8,7 @@ import com.ispwproject.adoptme.engineering.dao.PetDAO;
 import com.ispwproject.adoptme.engineering.decorator.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class QuestionnaireResultController {
@@ -57,10 +58,11 @@ public class QuestionnaireResultController {
         questionnaireQuery = addInformation(questionnaireQuery, questionnaireResultBean);
 
         List<PetBean> petList = new ArrayList<>();
-        for (PetModel petModel : PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery())) {
+        HashMap<PetModel, Integer> hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery());
+        for (PetModel petModel : hashMap.keySet()) {
             PetBean petBean = new PetBean();
             petBean.setPetId(petModel.getPetId());
-            petBean.setShelterId(petModel.getShelter().getId());
+            petBean.setShelterId(hashMap.get(petModel));
             petBean.setPetImage(petModel.getPetImage());
             petBean.setName(petModel.getName());
             petBean.setType(petModel.getType());

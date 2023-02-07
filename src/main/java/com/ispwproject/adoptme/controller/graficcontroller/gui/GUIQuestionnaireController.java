@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -168,6 +169,8 @@ public class GUIQuestionnaireController {
 
     @FXML
     private ToggleButton btnSizeNotImportant;
+    private Parent currentPage;
+    private Parent previousPage;
 
     public void initialize() {
         vboxList.add(vboxSelectPetType);
@@ -679,9 +682,12 @@ public class GUIQuestionnaireController {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("QuestionnaireResultPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
 
         GUIQuestionnaireResultController guiQuestionnaireResultController = fxmlLoader.getController();
+        guiQuestionnaireResultController.setPreviousPage(currentPage);
+        guiQuestionnaireResultController.setCurrentPage(root);
         guiQuestionnaireResultController.setData(questionnaireResultController.searchPets(questionnaireResultBean));
         stage.setScene(scene);
         }
@@ -711,4 +717,11 @@ public class GUIQuestionnaireController {
             }
         }
 
+    public void setPreviousPage(Parent previousPage) {
+        this.previousPage = previousPage;
+    }
+
+    public void setCurrentPage(Parent currentPage) {
+        this.currentPage = currentPage;
+    }
 }

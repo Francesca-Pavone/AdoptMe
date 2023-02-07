@@ -108,10 +108,10 @@ public class PetDAO {
         return petList;
     }
 
-    public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
+    public static HashMap<PetModel, Integer> retrievePetByQuestionnaire(String query) throws Exception {
         System.out.println(query);
         Statement stmt;
-        List<PetModel> petList = new ArrayList<>();
+        HashMap<PetModel, Integer> hashMap = new HashMap<>();
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -175,7 +175,7 @@ public class PetDAO {
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
-                petList.add(pet);
+                hashMap.put(pet, shelterId);
 
             }
             while (resultSet.next()) ;
@@ -187,7 +187,7 @@ public class PetDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return petList;
+        return hashMap;
     }
 
     public static PetModel retrievePetById(int petId, int shelterId) throws Exception {

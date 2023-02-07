@@ -157,7 +157,13 @@ public class GUIUserHomepageController extends UserSideBar {
     public void startQuestionnaire(ActionEvent event) throws IOException {
         Stage stage = Main.getStage();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserQuestionnairePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+
+        GUIQuestionnaireController guiQuestionnaireController = new GUIQuestionnaireController();
+        guiQuestionnaireController.setPreviousPage(currentPage);
+        guiQuestionnaireController.setCurrentPage(root);
+
         stage.setScene(scene);
     }
 }
