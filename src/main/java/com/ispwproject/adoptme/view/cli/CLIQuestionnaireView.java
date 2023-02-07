@@ -78,9 +78,7 @@ public class CLIQuestionnaireView {
                         question--;
                         break;
                     }
-                    if(alreadyHavePet.equals("b")) {
-                        question++;
-                    }
+                    goToNext(alreadyHavePet);
                     question++;
                     break;
                 case 6:
@@ -92,7 +90,6 @@ public class CLIQuestionnaireView {
                             if(inputLine.equals("back")) {
                                 question--;
                                 break;
-                                //todo con un break esce dal while ma non dal case
                             }
                             if(inputLine.equals("done")) {
                                 question++;
@@ -189,14 +186,12 @@ public class CLIQuestionnaireView {
                         question--;
                         break;
                     }
-                    if(specificArea.equals("b")) {
-                        question++;
-                    }
+                    goToNext(specificArea);
                     question++;
                     break;
                 case 16:
                     if (specificArea.equals("a")) {
-                        PrintSupport.printMessage("\n\nInsert your city:");
+                        PrintSupport.printMessage("\n\nInsert your city:\n [back -> go to previous question]");
                         city = scanner.nextLine();
                     }
                     if(city.equals("back")) {
@@ -212,8 +207,14 @@ public class CLIQuestionnaireView {
         this.cliQuestionnaireControllerCurrent.getResult(petType, petGender, petAge, dogSize, sterilize, dogEducation, disabled);
     }
 
+    private void goToNext(String label) {
+        if(label.equals("b")) {
+            question++;
+        }
+    }
+
     private void setSpecificArea() {
-        PrintSupport.printMessage("\n\nAre you looking for a pet in a specific are?\n a) Yes    b) No (*remember that you'll pay for all the transfer costs)");
+        PrintSupport.printMessage("\n\nAre you looking for a pet in a specific are?\n a) Yes    b) No (*remember that you'll pay for all the transfer costs)\n [back -> go to previous question]");
         specificArea = scanner.nextLine();
         while (!(specificArea.equals("a")) && !(specificArea.equals("b")) && !(specificArea.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -222,7 +223,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setDisabled() {
-        PrintSupport.printMessage("\n\nAre you willing to adopt a disabled pet?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nAre you willing to adopt a disabled pet?\n a) Yes    b) No\n [back -> go to previous question]");
         disabled = scanner.nextLine();
         while (!(disabled.equals("a")) && !(disabled.equals("b")) && !(disabled.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -231,7 +232,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setDogEducation() {
-        PrintSupport.printMessage("\n\nIf needed, would you setShelter a program of dog education?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nIf needed, would you setShelter a program of dog education?\n a) Yes    b) No\n [back -> go to previous question]");
         dogEducation = scanner.nextLine();
         while (!(dogEducation.equals("a")) && !(dogEducation.equals("b")) && !(dogEducation.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -240,7 +241,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setSterilize() {
-        PrintSupport.printMessage("\n\nAre you willing to sterilize your pet when it will be necessary?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nAre you willing to sterilize your pet when it will be necessary?\n a) Yes    b) No\n [back -> go to previous question]");
         sterilize = scanner.nextLine();
         while (!(sterilize.equals("a")) && !(sterilize.equals("b")) && !(sterilize.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -249,7 +250,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setFirstPet() {
-        PrintSupport.printMessage("\n\nHave you ever had a pet?\n a) Yes    b) No, this is my first time");
+        PrintSupport.printMessage("\n\nHave you ever had a pet?\n a) Yes    b) No, this is my first time\n [back -> go to previous question]");
         firstPet = scanner.nextLine();
         while (!(firstPet.equals("a")) && !(firstPet.equals("b")) && !(firstPet.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -258,7 +259,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setHoursAlone() {
-        PrintSupport.printMessage("\n\nHow long will the pet be alone at home during the day?\n a) 1 - 3 hours    b) 4 - 6 hours    c) More than 6 hours");
+        PrintSupport.printMessage("\n\nHow long will the pet be alone at home during the day?\n a) 1 - 3 hours    b) 4 - 6 hours    c) More than 6 hours\n [back -> go to previous question]");
         hoursAlone = scanner.nextLine();
         while (!(hoursAlone.equals("a")) && !(hoursAlone.equals("b")) && !(hoursAlone.equals("c")) && !(hoursAlone.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b | c");
@@ -267,7 +268,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setSleepOutside() {
-        PrintSupport.printMessage("\n\nWill the pet be sleeping outside?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nWill the pet be sleeping outside?\n a) Yes    b) No\n [back -> go to previous question]");
         sleepOutside = scanner.nextLine();
         while (!(sleepOutside.equals("a")) && !(sleepOutside.equals("b")) && !(sleepOutside.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -276,7 +277,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setTerrace() {
-        PrintSupport.printMessage("\n\nDo you live in an apartment with a terrace?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nDo you live in an apartment with a terrace?\n a) Yes    b) No\n [back -> go to previous question]");
         terrace = scanner.nextLine();
         while (!(terrace.equals("a")) && !(terrace.equals("b")) && !(terrace.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
@@ -285,7 +286,7 @@ public class CLIQuestionnaireView {
     }
 
     private void setGarden() {
-        PrintSupport.printMessage("\n\nDo you live in an apartment with a garden?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nDo you live in an apartment with a garden?\n a) Yes    b) No\n [back -> go to previous question]");
         garden = scanner.nextLine();
         while (!(garden.equals("a")) && !(garden.equals("b")) && !(garden.equals("back"))) {
             PrintSupport.printError(INVALID_INPUT + "a | b");
