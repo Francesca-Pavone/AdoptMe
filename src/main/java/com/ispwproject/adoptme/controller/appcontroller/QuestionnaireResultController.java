@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.dao.FavoritesDAO;
 import com.ispwproject.adoptme.engineering.exception.federica.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
@@ -75,47 +77,19 @@ public class QuestionnaireResultController {
             petBean.setPetImage(petModel.getPetImage());
             petBean.setName(petModel.getName());
             petBean.setType(petModel.getType());
-            petBean.setYearOfBirth(petModel.getYearOfBirth());
-            petBean.setMonthOfBirth(petModel.getMonthOfBirth());
-            petBean.setDayOfBirth(petModel.getDayOfBirth());
             petBean.setAge(petModel.getAge());
             petBean.setGender(petModel.getGender());
-            petBean.setCoatLenght(petModel.getCoatLenght());
-            petBean.setVaccinated(petModel.isVaccinated());
-            petBean.setMicrochipped(petModel.isMicrochipped());
-            petBean.setDewormed(petModel.isDewormed());
-            petBean.setSterilized(petModel.isSterilized());
-            petBean.setDisability(petModel.isDisability());
-            petBean.setDisabilityType(petModel.getDisabilityType());
 
-            PetCompatibility petCompatibility = petModel.getPetCompatibility();
-            petBean.setMaleDog(petCompatibility.isMaleDog());
-            petBean.setFemaleDog(petCompatibility.isFemaleDog());
-            petBean.setMaleCat(petCompatibility.isMaleCat());
-            petBean.setFemaleCat(petCompatibility.isFemaleCat());
-            petBean.setChildren(petCompatibility.isChildren());
-            petBean.setElders(petCompatibility.isElders());
-            petBean.setNoGarden(petCompatibility.isApartmentNoGarden());
-            petBean.setNoTerrace(petCompatibility.isApartmentNoTerrace());
-            petBean.setSleepOutside(petCompatibility.isSleepOutside());
-            petBean.setFirstExperience(petCompatibility.isFirstExperience());
-            petBean.setHoursAlone(petCompatibility.getHoursAlone());
             petList.add(petBean);
+
 
         }
         return petList;
     }
 
     private IQuestionnaireQuery addInformation(IQuestionnaireQuery questionnaireQuery, QuestionnaireResultBean questionnaireResultBean) {
-        if (questionnaireResultBean.isHaveAGarden() == 1) {
-            questionnaireQuery = new GardenDecorator(questionnaireQuery, questionnaireResultBean.isHaveAGarden());
-            questionnaireQuery = new AndDecorator(questionnaireQuery);
-        }
-        if (questionnaireResultBean.isHaveATerrace() == 1) {
-            questionnaireQuery = new TerraceDecorator(questionnaireQuery, questionnaireResultBean.isHaveATerrace());
-            questionnaireQuery = new AndDecorator(questionnaireQuery);
-        }
-        if(questionnaireResultBean.isHaveAGarden() == 1 || questionnaireResultBean.isHaveATerrace() == 1) {
+
+        if(questionnaireResultBean.isSleepOutside() == 1) {
             questionnaireQuery = new SleepOutsideDecorator(questionnaireQuery, questionnaireResultBean.isSleepOutside());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
