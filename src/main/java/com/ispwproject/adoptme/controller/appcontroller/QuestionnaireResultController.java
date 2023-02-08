@@ -20,7 +20,7 @@ public class QuestionnaireResultController {
         if (questionnaireResultBean.isType() == 1) {
             questionnaireQuery = new CatQuery();
             if (questionnaireResultBean.isFemaleCat() || questionnaireResultBean.isMaleCat()) {
-                questionnaireQuery = new CatTestFivFelv(questionnaireQuery);
+                questionnaireQuery = new CatTestFivFelvDecorator(questionnaireQuery);
                 questionnaireQuery = new AndDecorator(questionnaireQuery);
             }
         }

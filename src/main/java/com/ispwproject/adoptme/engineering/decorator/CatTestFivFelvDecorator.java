@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.engineering.decorator;
 
-public class CatTestFivFelv extends Decorator{
-    public CatTestFivFelv(IQuestionnaireQuery questionnaireQuery) {
+public class CatTestFivFelvDecorator extends Decorator{
+    public CatTestFivFelvDecorator(IQuestionnaireQuery questionnaireQuery) {
         super(questionnaireQuery);
     }
 
