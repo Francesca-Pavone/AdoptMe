@@ -9,7 +9,7 @@ public class CRUDQueries {
     }
 
     // la utilizzo nel caso in cui viene modificato solo lo stato (richiesta rifiutata / accettata)
-    public static void updateReqState(Statement stmt, int reqId, int reqStatus) throws SQLException  {
+    public static void updateReqStatus(Statement stmt, int reqId, int reqStatus) throws SQLException  {
         String updateStatement = String.format("UPDATE Requests set status=%d WHERE requestId = %d", reqStatus, reqId);
         stmt.executeUpdate(updateStatement);
     }

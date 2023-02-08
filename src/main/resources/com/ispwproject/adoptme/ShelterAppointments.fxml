@@ -1,180 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterAppointmentsController">
-   <HBox prefHeight="710.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
-         <AnchorPane style="-fx-background-color: #34665A;">
-            <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
-               <padding>
-                  <Insets bottom="30.0" top="30.0" />
-               </padding>
-               <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@image/paws.png" />
-               </ImageView>
-               <VBox>
-                  <padding>
-                     <Insets left="10.0" />
-                  </padding>
-                  <Label text="Adopt" textFill="#c89c32">
-                     <font>
-                        <Font name="Times New Roman Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="10.0" opacity="0.6" text="Don't Shop" textFill="#c89c32">
-                     <font>
-                        <Font name="Times New Roman Bold" size="30.0" />
-                     </font>
-                  </Label>
-               </VBox>
-            </HBox>
-            <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
-               <Button fx:id="btnHomePage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                  <graphic>
-                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <Image url="@image/home.png" />
-                        </ImageView>
-                        <Label text="HOME PAGE" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </HBox>
-                  </graphic>
-               </Button>
-               <Button fx:id="btnAppointments" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="300.0" styleClass="open-screen" stylesheets="@style.css">
-                  <graphic>
-                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@image/schedule.png" />
-                        </ImageView>
-                        <Label text="APPOINTMENTES" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </HBox>
-                  </graphic>
-               </Button>
-               <Button fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                  <graphic>
-                     <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                        <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                           <HBox.margin>
-                              <Insets right="35.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="10.0" top="10.0" />
-                           </padding>
-                        </Pane>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <Image url="@image/gear.png" />
-                        </ImageView>
-                        <Label text="SETTINGS" textFill="WHITE">
-                           <font>
-                              <Font name="Arial" size="20.0" />
-                           </font>
-                        </Label>
-                     </HBox>
-                  </graphic>
-               </Button>
-            </VBox>
-            <ImageView fitHeight="201.0" fitWidth="213.0" layoutX="65.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0">
-               <Image url="@image/dog_cat.png" />
-            </ImageView>
-         </AnchorPane>
-         <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-            <children>
-               <Label text="Sent Requests">
-                  <font>
-                     <Font name="Arial Bold" size="18.0" />
-                  </font>
-               </Label>
-               <ScrollPane fitToHeight="true" hbarPolicy="NEVER" minHeight="-Infinity" prefHeight="202.0" styleClass="transparent" vbarPolicy="NEVER" VBox.vgrow="NEVER">
-                  <content>
-                     <HBox fx:id="sentReqList" />
-                  </content>
-                  <VBox.margin>
-                     <Insets left="20.0" />
-                  </VBox.margin>
-               </ScrollPane>
-               <Label text="Pending Requests">
-                  <font>
-                     <Font name="Arial Bold" size="18.0" />
-                  </font>
-                  <VBox.margin>
-                     <Insets top="10.0" />
-                  </VBox.margin>
-               </Label>
-               <ScrollPane fitToHeight="true" hbarPolicy="NEVER" layoutX="30.0" layoutY="31.0" minHeight="-Infinity" prefHeight="202.0" styleClass="transparent" vbarPolicy="NEVER" VBox.vgrow="NEVER">
-                  <content>
-                     <HBox fx:id="pendingReqList" />
-                  </content>
-                  <VBox.margin>
-                     <Insets left="20.0" />
-                  </VBox.margin>
-               </ScrollPane>
-               <Label layoutX="10.0" layoutY="355.0" text="Confirmed Requests">
-                  <font>
-                     <Font name="Arial Bold" size="18.0" />
-                  </font>
-                  <VBox.margin>
-                     <Insets top="10.0" />
-                  </VBox.margin>
-               </Label>
-               <ScrollPane fitToHeight="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="480.0" minHeight="-Infinity" prefHeight="202.0" styleClass="transparent" vbarPolicy="NEVER" VBox.vgrow="NEVER">
-                  <content>
-                     <HBox fx:id="confirmedReqList" />
-                  </content>
-                  <VBox.margin>
-                     <Insets left="20.0" />
-                  </VBox.margin>
-               </ScrollPane>
-            </children>
-            <HBox.margin>
-               <Insets left="20.0" top="20.0" />
-            </HBox.margin>
-         </VBox>
-      </children>
-   </HBox>
-</AnchorPane>
+<VBox alignment="CENTER_LEFT" prefHeight="710.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterAppointmentsController">
+   <children>
+      <Label text="Sent Requests">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <ScrollPane fitToHeight="true" hbarPolicy="NEVER" minHeight="-Infinity" prefHeight="202.0" styleClass="transparent" vbarPolicy="NEVER" VBox.vgrow="NEVER">
+         <content>
+            <HBox fx:id="sentReqList" />
+         </content>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </ScrollPane>
+      <Label text="Pending Requests">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <ScrollPane fitToHeight="true" hbarPolicy="NEVER" layoutX="30.0" layoutY="31.0" minHeight="-Infinity" prefHeight="202.0" styleClass="transparent" vbarPolicy="NEVER" VBox.vgrow="NEVER">
+         <content>
+            <HBox fx:id="pendingReqList" />
+         </content>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </ScrollPane>
+      <Label layoutX="10.0" layoutY="355.0" text="Confirmed Requests">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <ScrollPane fitToHeight="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="480.0" minHeight="-Infinity" prefHeight="202.0" styleClass="transparent" vbarPolicy="NEVER" VBox.vgrow="NEVER">
+         <content>
+            <HBox fx:id="confirmedReqList" />
+         </content>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets left="20.0" top="20.0" />
+   </padding>
+</VBox>

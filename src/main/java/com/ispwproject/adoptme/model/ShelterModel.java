@@ -4,7 +4,7 @@ package com.ispwproject.adoptme.model;
 import java.io.File;
 import java.net.URL;
 
-public class ShelterModel extends ShelterUserModel{
+public class ShelterModel extends GenericUserModel {
 
     private String shelterName;
     private String phoneNumber;

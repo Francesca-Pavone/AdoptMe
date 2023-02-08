@@ -18,7 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class GUIShelterSettingsController extends ShelterSideBar {
+public class GUIShelterSettingsController {
     @FXML
     private TextField address;
 

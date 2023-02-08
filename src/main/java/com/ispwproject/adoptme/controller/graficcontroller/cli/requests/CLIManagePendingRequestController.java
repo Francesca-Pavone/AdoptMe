@@ -56,8 +56,9 @@ public class CLIManagePendingRequestController implements CLIGraficController {
     private void acceptRequest() {
         if (this.view.askConfirmation() == 1) {
             ManageRequestController manageRequestController = new ManageRequestController();
+            this.requestBean.register(this.previousPage);
             try {
-                manageRequestController.acceptRequest(this.requestBean, this.requestBean, null, this.previousPage);
+                manageRequestController.acceptRequest(this.requestBean, this.requestBean);
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -70,8 +71,9 @@ public class CLIManagePendingRequestController implements CLIGraficController {
 
         if (view.askConfirmation() == 1){
             ManageRequestController manageRequestController = new ManageRequestController();
+            this.requestBean.register(this.previousPage);
             try {
-                manageRequestController.modifyRequest(requestBean, requestBean, null, this.previousPage);
+                manageRequestController.updateRequest(requestBean, requestBean);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -106,8 +108,9 @@ public class CLIManagePendingRequestController implements CLIGraficController {
     private void annulRequest() {
         if (this.view.askConfirmation() == 1) {
             ManageRequestController manageRequestController = new ManageRequestController();
+            this.requestBean.register(this.previousPage);
             try {
-                manageRequestController.deleteRequest(this.requestBean, this.requestBean, this.previousPage);
+                manageRequestController.deleteRequest(this.requestBean, this.requestBean);
             } catch (Exception e){
                 e.printStackTrace();
             }

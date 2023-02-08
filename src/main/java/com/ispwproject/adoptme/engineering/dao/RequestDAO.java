@@ -24,7 +24,7 @@ public class RequestDAO {
     private RequestDAO() {
     }
 
-    public static void saveRequest(RequestModel requestModel, ShelterModel shelterModel) throws  DuplicateRequestException{
+    public static void saveRequest(RequestModel requestModel) throws  DuplicateRequestException{
         Statement stmt;
         try {
             stmt = ConnectionDB.getConnection();
@@ -39,7 +39,7 @@ public class RequestDAO {
                     throw new DuplicateRequestException();
             }
             try (PreparedStatement preparedStatement = insertRequest()) {
-                preparedStatement.setInt(1, shelterModel.getId());
+                preparedStatement.setInt(1, requestModel.getShelter().getId());
                 preparedStatement.setInt(2, requestModel.getPet().getPetId());
                 preparedStatement.setInt(3, requestModel.getUser().getId());
                 preparedStatement.setDate(4, Date.valueOf(requestModel.getDate()));
@@ -69,11 +69,11 @@ public class RequestDAO {
         }
     }
 
-    public static void updateRequestState(RequestModel requestModel) {
+    public static void updateRequestStatus(RequestModel requestModel) {
         Statement stmt;
         try {
             stmt = ConnectionDB.getConnection();
-            CRUDQueries.updateReqState(stmt, requestModel.getId(), requestModel.getStatus());
+            CRUDQueries.updateReqStatus(stmt, requestModel.getId(), requestModel.getStatus());
 
         } catch (SQLException e) {
             e.printStackTrace();

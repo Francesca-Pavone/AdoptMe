@@ -1,16 +1,9 @@
 package com.ispwproject.adoptme.model;
 
-import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.DateFormatException;
-import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
-import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.observer.Subject;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-public class RequestModel extends Subject{
+public class RequestModel {
 
     private int id;
     private PetModel pet;
@@ -20,8 +13,7 @@ public class RequestModel extends Subject{
     private LocalTime time;
     private int status; // 0 -> send  |  1 -> pending  |  2 -> accepted  | 3 -> rejected
 
-    public RequestModel(Observer observer, int id, PetModel pet, UserModel user, LocalDate date, LocalTime time, int status) {
-        super(observer);
+    public RequestModel(int id, PetModel pet, UserModel user, LocalDate date, LocalTime time, int status) {
         this.id = id;
         this.pet = pet;
         this.user = user;
@@ -98,17 +90,6 @@ public class RequestModel extends Subject{
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public void updateStatus(int status, Object object) throws DateFormatException, TimeFormatException {
-        this.status = status;
-        RequestBean requestBean = new RequestBean(getPet().getPetImage(), getUser().getImage(), getPet().getName(), getPet().getPetId(), getShelter().getId(), getUser().getName(), getUser().getId());
-        requestBean.setId(getId());
-        requestBean.setDate(getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        requestBean.setTime(getTime().toString());
-        requestBean.setStatus(status);
-
-        notifyObservers(requestBean, object);
     }
 
 }

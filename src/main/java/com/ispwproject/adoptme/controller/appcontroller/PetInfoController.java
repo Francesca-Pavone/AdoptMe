@@ -9,12 +9,10 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 public class PetInfoController {
 
-    private ShelterModel shelterModel;
-
     public ShelterBean getPetInfo(PetBean petBean){
         ShelterBean shelterBean = null;
         try {
-            this.shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+            ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
             if (petBean.getType() == 0) {
                 DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());
@@ -76,8 +74,8 @@ public class PetInfoController {
         petBean.setFemaleCat(petCompatibility.isFemaleCat());
         petBean.setChildren(petCompatibility.isChildren());
         petBean.setElders(petCompatibility.isElders());
-        petBean.setApartmentNoGarden(petCompatibility.isApartmentNoGarden());
-        petBean.setApartmentNoTerrace(petCompatibility.isApartmentNoTerrace());
+        petBean.setNoGarden(petCompatibility.isApartmentNoGarden());
+        petBean.setNoTerrace(petCompatibility.isApartmentNoTerrace());
         petBean.setSleepOutside(petCompatibility.isSleepOutside());
         petBean.setFirstExperience(petCompatibility.isFirstExperience());
         petBean.setHoursAlone(petCompatibility.getHoursAlone());

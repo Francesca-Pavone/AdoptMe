@@ -17,7 +17,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        //todo: vedere se va bene aprire qui la connessione
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         setStage(stage);

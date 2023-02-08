@@ -217,8 +217,8 @@ public final class PetBeanBuilder {
         petBean.setFemaleCat(femaleCat);
         petBean.setChildren(children);
         petBean.setElders(elders);
-        petBean.setApartmentNoGarden(apartmentNoGarden);
-        petBean.setApartmentNoTerrace(apartmentNoTerrace);
+        petBean.setNoGarden(apartmentNoGarden);
+        petBean.setNoTerrace(apartmentNoTerrace);
         petBean.setSleepOutside(sleepOutside);
         petBean.setFirstExperience(firstExperience);
         petBean.setHoursAlone(hoursAlone);

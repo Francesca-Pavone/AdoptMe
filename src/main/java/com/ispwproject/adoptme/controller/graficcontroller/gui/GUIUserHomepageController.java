@@ -4,7 +4,6 @@ import com.ispwproject.adoptme.Main;
 
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +26,7 @@ import java.util.List;
 import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
 import javafx.stage.StageStyle;
 
-public class GUIUserHomepageController extends UserSideBar {
+public class GUIUserHomepageController {
     @FXML
     private TextField textFieldUserHomepage;
     @FXML

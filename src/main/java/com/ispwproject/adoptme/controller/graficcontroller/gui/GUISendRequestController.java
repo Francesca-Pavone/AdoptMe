@@ -1,12 +1,13 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
+import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,11 +51,17 @@ public class GUISendRequestController implements Observer {
         this.petBean = pet;
         nameReq.setText(petBean.getName());
         shelterBtn.setText(shelterBean.getName());
+        if (Session.getCurrentSession().getUserBean() == null) { // accesso effettuato senza autenticazione
+            datePicker.setDisable(true);
+            timeField.setDisable(true);
+        }
     }
 
     public void sendRequest()  {
-        RequestBean requestBean = null;
+        RequestBean requestBean;
         try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccoutException();
             if (datePicker.getValue() == null)
                 throw new NoInputException("Date");
             if (timeField.getText() == null || timeField.getText().equals(""))
@@ -62,10 +69,13 @@ public class GUISendRequestController implements Observer {
 
             requestBean = new RequestBean(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), timeField.getText());
 
-            SendRequestController sendRequestController = new SendRequestController();
-            sendRequestController.sendUserRequest(petBean, requestBean, this);
+            ManageRequestController manageRequestController = new ManageRequestController();
+            requestBean.register(this);
+            manageRequestController.sendRequest(petBean, requestBean);
         } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        } catch (NoAccoutException e) {
+            ShowExceptionSupport.showNeedAccountGUI();
         }
 
         datePicker.setValue(null);

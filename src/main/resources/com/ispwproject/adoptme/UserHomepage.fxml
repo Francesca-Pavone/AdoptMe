@@ -14,179 +14,14 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserHomepageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIUserHomepageController">
    <children>
-      <AnchorPane style="-fx-background-color: #34665A;">
-         <children>
-            <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="76.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/paws.png" />
-                     </image>
-                  </ImageView>
-                  <VBox>
-                     <children>
-                        <Label text="Adopt" textFill="#c89c32">
-                           <font>
-                              <Font name="Times New Roman Bold" size="36.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="10.0" layoutY="10.0" opacity="0.6" text="Don't Shop" textFill="#c89c32">
-                           <font>
-                              <Font name="Times New Roman Bold" size="30.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </VBox>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" top="30.0" />
-               </padding>
-            </HBox>
-            <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
-               <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="300.0" styleClass="open-screen" stylesheets="@style.css">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                           <children>
-                              <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css">
-                                 <HBox.margin>
-                                    <Insets right="35.0" />
-                                 </HBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </Pane>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/home.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label text="HOME PAGE" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </HBox>
-                     </graphic>
-                  </Button>
-                  <Button layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToFavorites" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                           <children>
-                              <Pane fx:id="favoritesSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                                 <HBox.margin>
-                                    <Insets right="35.0" />
-                                 </HBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </Pane>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/heart.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Label text="FAVORITES" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </HBox>
-                     </graphic>
-                  </Button>
-                  <Button layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                           <children>
-                              <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                                 <HBox.margin>
-                                    <Insets right="35.0" />
-                                 </HBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </Pane>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/schedule.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="APPOINTMENTES" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </HBox>
-                     </graphic>
-                  </Button>
-                  <Button layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="other-screen" stylesheets="@style.css">
-                     <graphic>
-                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-                           <children>
-                              <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
-                                 <HBox.margin>
-                                    <Insets right="35.0" />
-                                 </HBox.margin>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </Pane>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@image/gear.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="SETTINGS" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </HBox>
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-            <ImageView fitHeight="201.0" fitWidth="213.0" layoutX="65.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.86">
-               <image>
-                  <Image url="@image/girl_dog_cat.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <HBox alignment="CENTER_LEFT" layoutX="384.0" layoutY="195.0" spacing="30.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="180.0">
+      <HBox alignment="CENTER_LEFT" layoutY="195.0" spacing="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="180.0">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" stylesheets="@style.css" visible="false">
                <graphic>
@@ -208,7 +43,7 @@
             </Label>
          </children>
       </HBox>
-      <VBox alignment="CENTER" layoutX="358.0" layoutY="27.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="10.0">
+      <VBox alignment="CENTER" layoutY="27.0" prefWidth="790.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
          <children>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
@@ -253,7 +88,7 @@
                   </RadioButton>
                </children>
                <VBox.margin>
-                  <Insets left="30.0" top="10.0" />
+                  <Insets left="60.0" top="10.0" />
                </VBox.margin>
             </HBox>
             <Line endX="700.8" stroke="#00000086" strokeWidth="0.6" VBox.vgrow="ALWAYS">
@@ -263,7 +98,7 @@
             </Line>
          </children>
       </VBox>
-      <ScrollPane fx:id="scrollPane" styleClass="transparent" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0">
+      <ScrollPane fx:id="scrollPane" styleClass="transparent" stylesheets="@style.css" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="250.0">
          <content>
             <GridPane fx:id="grid" alignment="CENTER" hgap="45.0" prefHeight="0.0" prefWidth="0.0" vgap="33.0">
                <columnConstraints>
@@ -272,7 +107,7 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <VBox fx:id="vBox" alignment="CENTER" layoutX="377.0" layoutY="299.0" prefWidth="790.0" spacing="20.0" AnchorPane.leftAnchor="310.0">
+      <VBox fx:id="vBox" alignment="CENTER" layoutY="299.0" prefWidth="790.0" spacing="20.0">
          <children>
             <Text fx:id="label1" strokeType="OUTSIDE" strokeWidth="0.0" text="Pets change our lives, let’s save theirs">
                <font>

@@ -21,7 +21,6 @@ public class PetDAO {
 
     private static final String DEFAULT_PHOTO = "image/default_photo.png";
     public static final String IMG_SRC = "imgSrc";
-    public static final String PHOTO = "Photo";
     public static final String GENDER = "gender";
 
     private PetDAO() {
@@ -51,24 +50,8 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
-                File petImage = null;
-                try {
-                    if (blob != null) {
-                        String filePath = petName + PHOTO + ".png";
-                        petImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
-                    }
-                    else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
-                    }
-                }
-                catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                File petImage = getPetImage(petName, blob);
 
-                //TODO String petAge = resultSet.getString("age");
                 int dayOfBirth = resultSet.getInt("dayOfBirth");
                 int monthOfBirth = resultSet.getInt("monthOfBirth");
                 int yearOfBirth = resultSet.getInt("yearOfBirth");
@@ -85,7 +68,6 @@ public class PetDAO {
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
-                //TODO pet.setAge(petAge);
                 pet.setYearOfBirth(yearOfBirth);
                 pet.setMonthOfBirth(monthOfBirth);
                 pet.setDayOfBirth(dayOfBirth);
@@ -129,28 +111,8 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
-                File petImage = null;
-                try {
-                    if (blob != null) {
-                        InputStream in = blob.getBinaryStream();
-                        //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-                        String filePath = petName + PHOTO + ".png";
-                        petImage = new File(filePath);
-                        FileOutputStream outputStream = new FileOutputStream(petImage);
-                        int read;
-                        byte[] bytes = new byte[4096];
-                        while ((read = in.read(bytes)) != -1) {
-                            outputStream.write(bytes, 0, read);
-                        }
-                    }
-                    else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
-                    }
-                }
-                catch (ImageNotFoundException | IOException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                }
+
+                File petImage = getPetImage(petName, blob);
 
                 String petAge = resultSet.getString("age");
                 int petGender = resultSet.getInt(GENDER);
@@ -187,7 +149,8 @@ public class PetDAO {
         return hashMap;
     }
 
-    public static PetModel retrievePetById(int petId, int shelterId) throws NotFoundException {
+
+    public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
         Statement stmt;
         PetModel pet = null;
         try {
@@ -209,22 +172,8 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
-                File petImage = null;
-                try {
-                    if (blob != null) {
-                        String filePath = petName + PHOTO + ".png";
-                        petImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
-                    }
-                    else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
-                    }
-                }
-                catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                File petImage = getPetImage(petName, blob);
 
                 int petType = resultSet.getInt("type");
 
@@ -281,22 +230,8 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
-                File petImage = null;
-                try {
-                    if (blob != null) {
-                        String filePath = petName + PHOTO + ".png";
-                        petImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
-                    }
-                    else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
-                    }
-                }
-                catch (ImageNotFoundException e) {
-                    petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+                File petImage = getPetImage(petName, blob);
 
                 int petGender = resultSet.getInt(GENDER);
                 int petType = resultSet.getInt("type");
@@ -328,5 +263,22 @@ public class PetDAO {
             e.printStackTrace();
         }
         return userFavoritesPetsList;
+    }
+
+    private static File getPetImage(String petName, Blob blob) {
+        File petImage = null;
+        try {
+            if (blob != null) {
+                petImage = ImageConverterSupport.fromBlobToFile(blob, petName);
+            }
+            else {
+                Trigger trigger = new Trigger();
+                trigger.imageNotFound();
+            }
+        }
+        catch (ImageNotFoundException e) {
+            petImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+        }
+        return petImage;
     }
 }

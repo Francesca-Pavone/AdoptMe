@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class GUIUserAppointmentsController extends UserSideBar implements Observer {
+public class GUIUserAppointmentsController implements Observer {
     @FXML
     private HBox sentReqList;
     @FXML
@@ -33,7 +33,6 @@ public class GUIUserAppointmentsController extends UserSideBar implements Observ
             Pane pane = fxmlLoader.load();
 
             GUIRequestItemController requestItemController = fxmlLoader.getController();
-            requestItemController.setObserver(this);
             requestItemController.setPane(pane);
             requestItemController.setRequestData((RequestBean) object);
 
