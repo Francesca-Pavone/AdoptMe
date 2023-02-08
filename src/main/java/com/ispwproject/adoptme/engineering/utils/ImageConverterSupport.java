@@ -35,7 +35,7 @@ public class ImageConverterSupport {
     }
 
     public static File fromBlobToFile(Blob blob, String name) {
-        InputStream inputStream = null;
+        InputStream inputStream;
         String filePath = "x/" + name + ".png";
         File file = new File(filePath);
         try {

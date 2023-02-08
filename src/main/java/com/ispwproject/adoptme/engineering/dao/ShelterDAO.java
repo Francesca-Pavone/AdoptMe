@@ -131,10 +131,10 @@ public class ShelterDAO {
                 URL webSiteURL = new URL(webSite);
 
                 Blob blob = resultSet.getBlob(PROFILE_IMG);
-                File shelterImage = null;
+                File shelterImage;
                 try {
                     if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, "shelter" + shelterId);
                     } else {
                         throw new ImageNotFoundException();
                     }
@@ -181,10 +181,10 @@ public class ShelterDAO {
                 URL webSiteURL = new URL(webSite);
 
                 Blob blob = resultSet.getBlob(PROFILE_IMG);
-                File shelterImage = null;
+                File shelterImage;
                 try {
                     if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, "shelter" + shelterId);
                     } else {
                         throw new ImageNotFoundException();
                     }
