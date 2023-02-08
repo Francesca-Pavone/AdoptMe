@@ -144,7 +144,7 @@ public class GUIPetInfoController implements Observer {
         this.petBean = petBean;
         fav = this.petBean.isFav();
 
-        if (Session.getCurrentSession().getUserBean() != null) { // sono uno Shelter
+        if (Session.getCurrentSession().getShelterBean() == null) { // non sono uno Shelter
 
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestForm.fxml"));
             Pane pane = fxmlLoader.load();

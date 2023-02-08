@@ -16,12 +16,10 @@ import java.sql.SQLException;
 
 public class PetInfoController {
 
-    private ShelterModel shelterModel;
-
     public ShelterBean getPetInfo(PetBean petBean){
         ShelterBean shelterBean = null;
         try {
-            this.shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+            ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
             if (petBean.getType() == 0) {
                 DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());

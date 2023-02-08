@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -41,7 +42,7 @@ public class UserSideBar {
             guiUserFavoritesController.setCurrentPage(root);
             stage.setScene(scene);
         } catch (NoAccoutException e) {
-            showAccountAlert();
+            ShowExceptionSupport.showNeedAccountGUI();
         } catch (FavoriteListEmptyException e) {
             PrintSupport.printError(e.getMessage());
             Stage stage = Main.getStage();
@@ -63,7 +64,7 @@ public class UserSideBar {
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
         } catch (NoAccoutException e) {
-            showAccountAlert();
+            ShowExceptionSupport.showNeedAccountGUI();
         }
     }
 
@@ -77,20 +78,9 @@ public class UserSideBar {
             stage.setScene(scene);
         }
         catch (NoAccoutException e) {
-            showAccountAlert();
+            ShowExceptionSupport.showNeedAccountGUI();
         }
 
-    }
-
-    private void showAccountAlert() throws IOException {
-        Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.setResizable(false);
-        dialog.initStyle(StageStyle.UNDECORATED);
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("NeedAccountToContinue.fxml"));
-        Scene scene1 = new Scene(fxmlLoader.load());
-        dialog.setScene(scene1);
-        dialog.show();
     }
 
 }

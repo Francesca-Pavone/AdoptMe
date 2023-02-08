@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,11 +51,17 @@ public class GUISendRequestController implements Observer {
         this.petBean = pet;
         nameReq.setText(petBean.getName());
         shelterBtn.setText(shelterBean.getName());
+        if (Session.getCurrentSession().getUserBean() == null) { // accesso effettuato senza autenticazione
+            datePicker.setDisable(true);
+            timeField.setDisable(true);
+        }
     }
 
     public void sendRequest()  {
         RequestBean requestBean;
         try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccoutException();
             if (datePicker.getValue() == null)
                 throw new NoInputException("Date");
             if (timeField.getText() == null || timeField.getText().equals(""))
@@ -67,6 +74,8 @@ public class GUISendRequestController implements Observer {
             manageRequestController.sendRequest(petBean, requestBean);
         } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        } catch (NoAccoutException e) {
+            ShowExceptionSupport.showNeedAccountGUI();
         }
 
         datePicker.setValue(null);
