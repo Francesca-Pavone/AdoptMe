@@ -46,13 +46,10 @@ public class ShowRequestsController {
                 requestBean.setId(request.getId());
                 requestBean.setDate(request.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 requestBean.setTime(request.getTime().toString());
-                //requestBean.setHour(String.valueOf(request.getTime().getHour()));
-                //requestBean.setMinutes(request.getTime().format(DateTimeFormatter.ofPattern("mm")));
                 requestBean.setStatus(request.getStatus());
 
-                request.register(observer);
-                request.notifyObservers(requestBean);
-                request.unregister(observer);
+                requestBean.register(observer);
+                requestBean.notifyObservers(requestBean);
             }
 
         } catch (SQLException se) {

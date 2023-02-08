@@ -3,40 +3,40 @@ package com.ispwproject.adoptme.model;
 import java.io.File;
 
 
-public abstract class ShelterUserModel {
+public abstract class GenericUserModel {
     private int id ;
     private int type; // 0 -> USER  |  1 -> SHELTER
     private File image;
     private String email;
 
 
-    protected ShelterUserModel(int id, File image, int type) {
+    protected GenericUserModel(int id, File image, int type) {
         setId(id);
         setImage(image);
         setType(type);
     }
-    protected ShelterUserModel(int id, File image, int type, String email) {
+    protected GenericUserModel(int id, File image, int type, String email) {
         setId(id);
         setImage(image);
         setType(type);
         setEmail(email);
     }
-    protected ShelterUserModel(File image, int type) {
+    protected GenericUserModel(File image, int type) {
         setImage(image);
         setType(type);
     }
-    protected ShelterUserModel(File image, int type, String email) {
+    protected GenericUserModel(File image, int type, String email) {
         setImage(image);
         setType(type);
         setEmail(email);
     }
 
-    protected ShelterUserModel(int id) {
+    protected GenericUserModel(int id) {
         this.id = id;
     }
 
 
-    protected ShelterUserModel(File image) {
+    protected GenericUserModel(File image) {
         this.image = image;
     }
 

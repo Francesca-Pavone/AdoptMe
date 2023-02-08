@@ -47,12 +47,8 @@ public class GUIRequestItemController implements Observer {
     private VBox vBox;
 
     private RequestBean request;
-    private Observer observer;
     private Pane pane;
 
-    public void setObserver(Observer observer) {
-        this.observer = observer;
-    }
 
     public void setPane(Pane pane) {
         this.pane = pane;
@@ -99,12 +95,13 @@ public class GUIRequestItemController implements Observer {
 
     public void acceptRequest() throws Exception {
             ManageRequestController manageRequestController = new ManageRequestController();
-            manageRequestController.acceptRequest(this.request, this.pane, this.observer, this);
+            this.request.register(this);
+            manageRequestController.acceptRequest(this.request, this.pane);
     }
 
-    public void rejectRequest() throws Exception {
+    public void deleteRequest() throws Exception {
             ManageRequestController manageRequestController = new ManageRequestController();
-            manageRequestController.deleteRequest(this.request, this.pane, this.observer);
+            manageRequestController.deleteRequest(this.request, this.pane);
     }
 
     public void modifyRequest() throws Exception {
@@ -115,7 +112,8 @@ public class GUIRequestItemController implements Observer {
         Scene scene = new Scene(fxmlLoader.load());
 
         GUIModifyRequestController guiModifyRequestController = fxmlLoader.getController();
-        guiModifyRequestController.setRequestData(this.request, this.pane, this.observer, this);
+        this.request.register(this);
+        guiModifyRequestController.setData(this.request, this.pane);
 
         dialog.setScene(scene);
         dialog.show();

@@ -47,8 +47,8 @@ public class AddToFavoritesController {
 
     private PetCompatibility setCompatibility() {
         PetCompatibility petCompatibility = new PetCompatibility(petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isFirstExperience());
-        petCompatibility.setApartmentNoGarden(petBean.isApartmentNoGarden());
-        petCompatibility.setApartmentNoTerrace(petBean.isApartmentNoTerrace());
+        petCompatibility.setApartmentNoGarden(petBean.isNoGarden());
+        petCompatibility.setApartmentNoTerrace(petBean.isNoTerrace());
         petCompatibility.setSleepOutside(petBean.isSleepOutside());
         petCompatibility.setHoursAlone(petBean.getHoursAlone());
         return petCompatibility;

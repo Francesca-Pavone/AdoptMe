@@ -1,7 +1,7 @@
 package junit;
 
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
-import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
+import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
@@ -37,8 +37,8 @@ public class TestSendRequest {
 
             RequestBean requestBean = new RequestBean("16-03-2023", "16:00");
 
-            SendRequestController sendRequestController = new SendRequestController();
-            sendRequestController.sendUserRequest(petBean, requestBean, null);
+            ManageRequestController manageRequestController = new ManageRequestController();
+            manageRequestController.sendRequest(petBean, requestBean);
 
             int requestAfter = RequestDAO.retrieveReqByShelter(new ShelterModel(1)).size();
 

@@ -4,7 +4,6 @@ import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
-import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.DateTimeSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
@@ -27,14 +26,11 @@ public class GUIModifyRequestController {
 
     private RequestBean requestBean;
     private Pane pane;
-    private Observer observer;
-    private Observer itemObserver;
 
-    public void setRequestData(RequestBean requestBean, Pane pane, Observer observer, Observer itemObserver) {
+
+    public void setData(RequestBean requestBean, Pane pane) {
         this.requestBean = requestBean;
         this.pane = pane;
-        this.observer = observer;
-        this.itemObserver = itemObserver;
 
         datePicker.setValue(DateTimeSupport.fromStringToLocalDate(requestBean.getDate()));
         timeField.setText(requestBean.getTime());
@@ -46,7 +42,7 @@ public class GUIModifyRequestController {
             requestBean.setTime(timeField.getText());
 
             ManageRequestController manageRequestController = new ManageRequestController();
-            manageRequestController.modifyRequest(requestBean, this.pane, this.observer, this.itemObserver);
+            manageRequestController.updateRequest(requestBean, this.pane);
         }
         catch (DateFormatException | TimeFormatException e){
             ShowExceptionSupport.showExceptionGUI(e.getMessage());

@@ -146,7 +146,7 @@ public class GUIPetInfoController implements Observer {
 
         if (Session.getCurrentSession().getUserBean() != null) { // sono uno Shelter
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestForm.fxml"));
             Pane pane = fxmlLoader.load();
             GUISendRequestController guiSendRequestController = fxmlLoader.getController();
             guiSendRequestController.setData(petBean, shelterBean);
@@ -299,10 +299,10 @@ public class GUIPetInfoController implements Observer {
         if (petBean.isElders()) {
             setCompatibilityLabel("Elders");
         }
-        if (petBean.isApartmentNoGarden()) {
+        if (petBean.isNoGarden()) {
             setCompatibilityLabel("Apartments without garden");
         }
-        if (petBean.isApartmentNoTerrace()) {
+        if (petBean.isNoTerrace()) {
             setCompatibilityLabel("Apartments without terrace");
         }
         if (petBean.isSleepOutside()) {

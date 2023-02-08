@@ -33,7 +33,6 @@ public class GUIUserAppointmentsController extends UserSideBar implements Observ
             Pane pane = fxmlLoader.load();
 
             GUIRequestItemController requestItemController = fxmlLoader.getController();
-            requestItemController.setObserver(this);
             requestItemController.setPane(pane);
             requestItemController.setRequestData((RequestBean) object);
 

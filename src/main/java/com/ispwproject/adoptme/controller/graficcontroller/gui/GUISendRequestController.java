@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
+import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
@@ -53,7 +53,7 @@ public class GUISendRequestController implements Observer {
     }
 
     public void sendRequest()  {
-        RequestBean requestBean = null;
+        RequestBean requestBean;
         try {
             if (datePicker.getValue() == null)
                 throw new NoInputException("Date");
@@ -62,8 +62,9 @@ public class GUISendRequestController implements Observer {
 
             requestBean = new RequestBean(datePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), timeField.getText());
 
-            SendRequestController sendRequestController = new SendRequestController();
-            sendRequestController.sendUserRequest(petBean, requestBean, this);
+            ManageRequestController manageRequestController = new ManageRequestController();
+            requestBean.register(this);
+            manageRequestController.sendRequest(petBean, requestBean);
         } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }

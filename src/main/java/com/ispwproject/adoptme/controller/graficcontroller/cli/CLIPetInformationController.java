@@ -223,10 +223,10 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         if (petBean.isElders()) {
             compatibility = compatibility.concat("\t\tElders\n");
         }
-        if (petBean.isApartmentNoGarden()) {
+        if (petBean.isNoGarden()) {
             compatibility = compatibility.concat("\t\tApartments without garden\n");
         }
-        if (petBean.isApartmentNoTerrace()) {
+        if (petBean.isNoTerrace()) {
             compatibility = compatibility.concat("\t\tApartments without terrace\n");
         }
         if (petBean.isSleepOutside()) {

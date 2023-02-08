@@ -1,12 +1,11 @@
 package com.ispwproject.adoptme.engineering.observer;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Vector;
 
 //definisco la classe astratta anche se tutti i metodi che fornisce sono concreti per impedire l'istanziazione di essa
 public abstract class Subject {
-    private List<Observer> observerList;
+    private final List<Observer> observersList;
     protected Subject() {
         this((Observer) null);
     }
@@ -18,25 +17,25 @@ public abstract class Subject {
         }
     }
 
-    protected Subject(List<Observer> observerList) {
-        this.observerList = observerList;
+    protected Subject(List<Observer> observersList) {
+        this.observersList = observersList;
     }
 
     public void register(Observer observer) {
-        observerList.add(observer);
+        observersList.add(observer);
     }
 
     public void unregister(Observer observer) {
-        observerList.remove(observer);
+        observersList.remove(observer);
     }
 
     public void notifyObservers(Object object){
-        for (Observer observer : observerList) {
+        for (Observer observer : observersList) {
             observer.update(object);
         }
     }
     public void notifyObservers(Object object1, Object object2){
-        for (Observer observer : observerList) {
+        for (Observer observer : observersList) {
             observer.update2(object1, object2);
         }
     }
