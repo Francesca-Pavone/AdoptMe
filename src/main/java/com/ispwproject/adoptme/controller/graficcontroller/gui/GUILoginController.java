@@ -3,12 +3,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
-import com.ispwproject.adoptme.engineering.exception.Fra.EmailFormatException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.EmailFormatException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotDevelopedException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-import com.ispwproject.adoptme.engineering.exception.Fede.UserNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.federica.UserNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +34,7 @@ public class GUILoginController {
     public void close(ActionEvent event) {
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
-    public void goToSignUp(ActionEvent event) throws IOException {
+    public void goToSignUp() throws IOException {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);

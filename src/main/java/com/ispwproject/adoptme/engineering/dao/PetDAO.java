@@ -2,10 +2,10 @@ package com.ispwproject.adoptme.engineering.dao;
 
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.Fede.NoPetsFoundQuestionnaireException;
-import com.ispwproject.adoptme.engineering.exception.Fra.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.federica.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.model.*;

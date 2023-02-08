@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.Fede;
+package com.ispwproject.adoptme.engineering.exception.federica;
 
 public class NoPetsFoundQuestionnaireException extends Exception{
     public NoPetsFoundQuestionnaireException() {

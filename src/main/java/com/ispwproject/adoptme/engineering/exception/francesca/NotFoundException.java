@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.Fra;
+package com.ispwproject.adoptme.engineering.exception.francesca;
 
 public class NotFoundException extends Exception{
     public NotFoundException(String message) {

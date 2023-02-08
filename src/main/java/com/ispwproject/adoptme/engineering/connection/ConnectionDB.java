@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.engineering.connection;
 
-import com.ispwproject.adoptme.engineering.exception.Fra.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
 
 import java.io.FileInputStream;
 import java.io.IOException;

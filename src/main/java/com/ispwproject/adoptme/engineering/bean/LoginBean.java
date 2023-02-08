@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.engineering.bean;
 
-import com.ispwproject.adoptme.engineering.exception.Fra.EmailFormatException;
+import com.ispwproject.adoptme.engineering.exception.francesca.EmailFormatException;
 
 import java.util.regex.Pattern;
 
