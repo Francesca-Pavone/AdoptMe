@@ -63,7 +63,7 @@ public class QuestionnaireResultController {
         questionnaireQuery = addInformation(questionnaireQuery, questionnaireResultBean);
 
         List<PetBean> petList = new ArrayList<>();
-        HashMap<PetModel, Integer> hashMap = new HashMap<>();
+        Map<PetModel, Integer> hashMap = new HashMap<>();
         try { hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery()); } catch (NoPetsFoundQuestionnaireException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
