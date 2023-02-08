@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class GUIShelterAppointmentsController extends ShelterSideBar implements Observer {
+public class GUIShelterAppointmentsController implements Observer {
 
     @FXML
     private HBox sentReqList;
@@ -23,9 +23,7 @@ public class GUIShelterAppointmentsController extends ShelterSideBar implements 
     public void initialize() {
         ShowRequestsController showRequestsController = new ShowRequestsController();
         showRequestsController.getRequestList(this);
-
     }
-
 
     @Override
     public void update(Object object) {
@@ -34,7 +32,6 @@ public class GUIShelterAppointmentsController extends ShelterSideBar implements 
                 Pane pane = fxmlLoader.load();
 
                 GUIRequestItemController requestItemController = fxmlLoader.getController();
-                requestItemController.setObserver(this);
                 requestItemController.setPane(pane);
                 requestItemController.setRequestData((RequestBean) object);
 

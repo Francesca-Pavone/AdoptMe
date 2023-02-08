@@ -91,15 +91,14 @@ public class GUILoginController {
                 Main.getStage().setScene(scene);
             } else if (loginBean.getAccountType() == 2) {
                 loginController.completeShelterLogin(loginBean);
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterSideBar.fxml"));
                 Parent root = fxmlLoader.load();
                 scene = new Scene(root);
-                GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
-                guiShelterHomepageController.setCurrentPage(root);
+                GUIShelterSideBarController guiShelterSideBarController = fxmlLoader.getController();
+                guiShelterSideBarController.goToHomePage();
                 Main.getStage().setScene(scene);
             } else
                 throw new UserNotFoundException();
-            //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
 
             Main.getStage().setScene(scene);
         } catch (UserNotFoundException e) {
@@ -115,7 +114,7 @@ public class GUILoginController {
 
 
     public void loginGoogle(ActionEvent event) {
-        // mostrare il messaggio "funzionalità non implementata"
+        // todo mostrare il messaggio "funzionalità non implementata"
     }
 
     public void noLogin(ActionEvent event) throws IOException {
@@ -125,11 +124,11 @@ public class GUILoginController {
     }
 
     private static Scene userLogin() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSideBar.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
-        guiUserHomepageController.setCurrentPage(root);
+        GUIUserSideBarController guiUserSideBarController = fxmlLoader.getController();
+        guiUserSideBarController.goToHomePage();
         return scene;
     }
 

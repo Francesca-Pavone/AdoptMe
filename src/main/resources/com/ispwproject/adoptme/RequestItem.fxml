@@ -69,7 +69,7 @@
             </Label>
             <HBox fx:id="manageReqBox" alignment="CENTER">
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#rejectRequest" styleClass="button-refuse">
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deleteRequest" styleClass="button-refuse">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>

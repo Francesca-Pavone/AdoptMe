@@ -38,4 +38,22 @@ public class ShowExceptionSupport {
         dialog.setScene(scene);
         dialog.show();
     }
+
+    public static void showNeedAccountGUI(){
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setResizable(false);
+        dialog.initStyle(StageStyle.UNDECORATED);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("NeedAccountToContinue.fxml"));
+        Scene scene1 = null;
+
+        try {
+            scene1 = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setScene(scene1);
+        dialog.show();
+    }
 }

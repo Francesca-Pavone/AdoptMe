@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="710.0" prefWidth="1100.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.ShelterSideBar">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterSideBarController">
    <children>
-      <HBox>
+      <HBox fx:id="hBox">
          <children>
             <AnchorPane prefHeight="710.0" style="-fx-background-color: #34665A;">
                <HBox alignment="CENTER" layoutX="38.0" layoutY="-7.0" style="-fx-background-color: #34665A;" AnchorPane.topAnchor="0.0">
@@ -47,7 +47,7 @@
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="sidebar-btn-line" stylesheets="@style.css">
+                           <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css">
                               <HBox.margin>
                                  <Insets right="35.0" />
                               </HBox.margin>
@@ -69,16 +69,16 @@
                         </HBox>
                      </graphic>
                      <toggleGroup>
-                        <ToggleGroup fx:id="userTogG" />
+                        <ToggleGroup fx:id="shelterTogG" />
                      </toggleGroup>
                   </ToggleButton>
-                  <ToggleButton fx:id="btnAppointments" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" toggleGroup="$userTogG">
+                  <ToggleButton fx:id="btnAppointments" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" toggleGroup="$shelterTogG">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="sidebar-btn-line" stylesheets="@style.css" visible="false">
+                           <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                               <HBox.margin>
                                  <Insets right="35.0" />
                               </HBox.margin>
@@ -97,13 +97,13 @@
                         </HBox>
                      </graphic>
                   </ToggleButton>
-                  <ToggleButton fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" toggleGroup="$userTogG">
+                  <ToggleButton fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="sidebar-btn" toggleGroup="$shelterTogG">
                      <graphic>
                         <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                           <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="sidebar-btn-line" stylesheets="@style.css" visible="false">
+                           <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                               <HBox.margin>
                                  <Insets right="35.0" />
                               </HBox.margin>
@@ -127,7 +127,6 @@
                   <Image url="@image/dog_cat.png" />
                </ImageView>
             </AnchorPane>
-            <Pane fx:id="shelterScreen" prefHeight="710.0" prefWidth="790.0" />
          </children>
       </HBox>
    </children>

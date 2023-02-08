@@ -17,7 +17,7 @@ public class UserDAOJDBC implements UserDAO{
 
 
     public UserModel retrieveUserById(int userId) throws Exception {
-        Statement stmt = null;
+        Statement stmt ;
         UserModel user = null;
 
         try {
@@ -92,8 +92,7 @@ public class UserDAOJDBC implements UserDAO{
         File profileImg = null;
         try {
             if (blob != null) {
-                String filePath = userId + "Photo" + ".png";
-                profileImg = ImageConverterSupport.fromBlobToFile(blob, filePath);
+                profileImg = ImageConverterSupport.fromBlobToFile(blob, "user" + userId);
             } else {
                 Trigger trigger = new Trigger();
                 trigger.imageNotFound();

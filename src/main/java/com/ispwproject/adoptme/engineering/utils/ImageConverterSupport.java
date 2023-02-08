@@ -18,7 +18,7 @@ public class ImageConverterSupport {
     }
 
     public static Image fromFileToImage(File file) throws IOException {
-        BufferedImage bfImage = null;
+        BufferedImage bfImage;
         bfImage = ImageIO.read(file);
 
         WritableImage writableImage = null;
@@ -34,15 +34,20 @@ public class ImageConverterSupport {
         return new ImageView(writableImage).getImage();
     }
 
-    public static File fromBlobToFile(Blob blob, String filePath) throws IOException, SQLException {
-        //TODO: vedere se trovo un altro modo invece di mantenere un nuovo file per ogni immagine
-        InputStream inputStream = blob.getBinaryStream();
+    public static File fromBlobToFile(Blob blob, String name) {
+        InputStream inputStream = null;
+        String filePath = "x/" + name + ".png";
         File file = new File(filePath);
-        FileOutputStream outputStream = new FileOutputStream(file);
-        int read;
-        byte[] bytes = new byte[4096];
-        while ((read = inputStream.read(bytes)) != -1) {
-            outputStream.write(bytes, 0, read);
+        try {
+            inputStream = blob.getBinaryStream();
+            FileOutputStream outputStream = new FileOutputStream(file);
+            int read;
+            byte[] bytes = new byte[4096];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
         }
         return file;
     }

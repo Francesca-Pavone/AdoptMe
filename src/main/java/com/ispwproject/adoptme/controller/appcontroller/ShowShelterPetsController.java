@@ -75,8 +75,8 @@ public class ShowShelterPetsController {
             petBean.setFemaleCat(petCompatibility.isFemaleCat());
             petBean.setChildren(petCompatibility.isChildren());
             petBean.setElders(petCompatibility.isElders());
-            petBean.setApartmentNoGarden(petCompatibility.isApartmentNoGarden());
-            petBean.setApartmentNoTerrace(petCompatibility.isApartmentNoTerrace());
+            petBean.setNoGarden(petCompatibility.isApartmentNoGarden());
+            petBean.setNoTerrace(petCompatibility.isApartmentNoTerrace());
             petBean.setSleepOutside(petCompatibility.isSleepOutside());
             petBean.setFirstExperience(petCompatibility.isFirstExperience());
             petBean.setHoursAlone(petCompatibility.getHoursAlone());

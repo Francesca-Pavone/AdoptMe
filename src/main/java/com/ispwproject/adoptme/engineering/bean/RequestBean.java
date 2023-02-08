@@ -2,11 +2,12 @@ package com.ispwproject.adoptme.engineering.bean;
 
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
+import com.ispwproject.adoptme.engineering.observer.Subject;
 
 import java.io.File;
 import java.util.regex.Pattern;
 
-public class RequestBean {
+public class RequestBean extends Subject {
 
     private int id;
     private File petImg;
@@ -137,4 +138,5 @@ public class RequestBean {
     public void setStatus(int status) {
         this.status = status;
     }
+
 }

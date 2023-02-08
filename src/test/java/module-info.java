@@ -5,4 +5,5 @@ module AdoptMe {
     requires javafx.fxml;
     requires javafx.graphics;
     exports junit;
+    opens junit;
 }

@@ -42,8 +42,9 @@ public class CLIManageRejectedRequestController implements CLIGraficController {
     private void deleteRejectedRequest() throws Exception {
         if (this.view.askConfirmDelete() == 1) {
             ManageRequestController manageRequestController = new ManageRequestController();
+            this.requestBean.register(this.previousPage);
             try {
-                manageRequestController.deleteRequest(requestBean, requestBean, this.previousPage);
+                manageRequestController.deleteRequest(requestBean, requestBean);
             } catch (Exception e){
                 e.printStackTrace();
             }

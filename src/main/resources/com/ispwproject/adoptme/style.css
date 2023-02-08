@@ -80,9 +80,12 @@
 .other-screen{
     -fx-background-color: rgba(0,0,0,0);
 }
+.sidebar-btn{
+    -fx-background-color: rgba(0,0,0,0);
+}
 .sidebar-btn:selected{
     -fx-background-color: #295147;
-    -fx-background-radius: 10 0 0 10;
+    -fx-background-radius: 5 0 0 5;
 }
 
 .other-screen:hover{

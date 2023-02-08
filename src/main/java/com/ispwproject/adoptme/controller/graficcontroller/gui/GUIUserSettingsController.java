@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-public class GUIUserSettingsController extends UserSideBar {
+public class GUIUserSettingsController {
     @FXML
     private ImageView userImg;
     @FXML

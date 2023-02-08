@@ -6,8 +6,10 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -138,9 +140,9 @@ public class GUIPetInfoController implements Observer {
         this.petBean = petBean;
         fav = this.petBean.isFav();
 
-        if (Session.getCurrentSession().getUserBean() != null) { // sono uno Shelter
+        if (Session.getCurrentSession().getShelterBean() == null) { // non sono uno Shelter
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SendRequestForm.fxml"));
             Pane pane = fxmlLoader.load();
             GUISendRequestController guiSendRequestController = fxmlLoader.getController();
             guiSendRequestController.setData(petBean, shelterBean);
@@ -292,10 +294,10 @@ public class GUIPetInfoController implements Observer {
         if (petBean.isElders()) {
             setCompatibilityLabel("Elders");
         }
-        if (petBean.isApartmentNoGarden()) {
+        if (petBean.isNoGarden()) {
             setCompatibilityLabel("Apartments without garden");
         }
-        if (petBean.isApartmentNoTerrace()) {
+        if (petBean.isNoTerrace()) {
             setCompatibilityLabel("Apartments without terrace");
         }
         if (petBean.isSleepOutside()) {
@@ -328,14 +330,24 @@ public class GUIPetInfoController implements Observer {
     }
 
     public void addPetToFavorites() {
-        UserBean userBean = Session.getCurrentSession().getUserBean();
-        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
-        if(fav) {
-            addToFavoritesController.removePet(userBean, this, this.panePetItem);
-            addToFavoritesController.removePet(userBean, favObserver, this.panePetItem);
-        } else {
-            addToFavoritesController.addPet(userBean, this, this.panePetItem);
+
+        try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccoutException();
+            else {
+                UserBean userBean = Session.getCurrentSession().getUserBean();
+                AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+                if (fav) {
+                    addToFavoritesController.removePet(userBean, this, this.panePetItem);
+                    addToFavoritesController.removePet(userBean, favObserver, this.panePetItem);
+                } else {
+                    addToFavoritesController.addPet(userBean, this, this.panePetItem);
+                }
+            }
+        }catch (NoAccoutException e){
+            ShowExceptionSupport.showNeedAccountGUI();
         }
+
     }
 
     @Override

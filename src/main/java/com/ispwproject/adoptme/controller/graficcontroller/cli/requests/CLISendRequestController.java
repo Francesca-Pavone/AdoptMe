@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 
-import com.ispwproject.adoptme.controller.appcontroller.SendRequestController;
+import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
@@ -44,9 +44,10 @@ public class CLISendRequestController implements CLIGraficController, Observer {
 
     public void executeCommand(String command) {
         if (command.equals(SEND)){
-            SendRequestController sendRequestController = new SendRequestController();
+            ManageRequestController manageRequestController = new ManageRequestController();
+            this.requestBean.register(this);
             try {
-                sendRequestController.sendUserRequest(this.petBean, this.requestBean, this);
+                manageRequestController.sendRequest(this.petBean, this.requestBean);
             }
             catch (PastDateException e) {
                 ShowExceptionSupport.showExceptionCLI(e.getMessage());
