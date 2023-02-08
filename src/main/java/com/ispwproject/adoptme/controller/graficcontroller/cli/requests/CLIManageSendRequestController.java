@@ -37,34 +37,35 @@ public class CLIManageSendRequestController implements CLIGraficController {
             case DELETE -> annulRequest();
 
             case MODIFY -> {
+                String date = requestBean.getDate();
+                String time = requestBean.getTime();
                 setNewDate();
                 setNewTime();
-                modifyRequest();
+                modifyRequest(date, time);
             }
 
             case BACK -> this.previousPage.showAppointments(this.requestBean.getUserName());
 
             default -> throw new CommandNotFoundException();
         }
-
-
     }
 
-    private void modifyRequest() {
-
-        if (view.askConfirmation() == 1){
-            ManageRequestController manageRequestController = new ManageRequestController();
-            this.requestBean.register(this.previousPage);
-            try {
+    private void modifyRequest(String date, String time) {
+        try {
+            if (requestBean.getDate().equals(date) && requestBean.getTime().equals(time))
+                throw new DuplicateRequestException();
+            if (view.askConfirmation() == 1){
+                ManageRequestController manageRequestController = new ManageRequestController();
+                this.requestBean.register(this.previousPage);
                 manageRequestController.updateRequest(requestBean, requestBean);
             }
-            catch (PastDateException | NotFoundException e){
-                ShowExceptionSupport.showExceptionGUI(e.getMessage());
-            }
-
+        }
+        catch (PastDateException | NotFoundException | DuplicateRequestException e){
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());
     }
+
     private void setNewTime() {
         while (true) {
             try {
