@@ -1,7 +1,10 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.*;
+import com.ispwproject.adoptme.engineering.exception.Fede.NoCityFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fede.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
@@ -57,8 +60,7 @@ public class ShelterDAO {
                     if (blob != null) {
                         shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
                     } else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
+                        throw new ImageNotFoundException();
                     }
                 }
                 catch (ImageNotFoundException e) {
@@ -82,7 +84,7 @@ public class ShelterDAO {
         return sheltersList;
     }
 
-    public static int retrieveIdByShelterName(String shelterName) throws NoSheltersWithThatNameException{
+    public static int retrieveIdByShelterName(String shelterName) throws NoSheltersWithThatNameException {
         Statement stmt ;
         int shelterId = 0;
         try {
@@ -134,8 +136,7 @@ public class ShelterDAO {
                     if (blob != null) {
                         shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
                     } else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
+                        throw new ImageNotFoundException();
                     }
                 }
                 catch (ImageNotFoundException e) {
@@ -185,8 +186,7 @@ public class ShelterDAO {
                     if (blob != null) {
                         shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
                     } else {
-                        Trigger trigger = new Trigger();
-                        trigger.imageNotFound();
+                        throw new ImageNotFoundException();
                     }
                 }
                 catch (ImageNotFoundException e) {

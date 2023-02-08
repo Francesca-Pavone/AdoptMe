@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception;
+package com.ispwproject.adoptme.engineering.exception.Fede;
 
 public class NoSheltersWithThatNameException extends  Exception{
     public NoSheltersWithThatNameException(String shelterName) {

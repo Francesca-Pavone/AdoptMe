@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
-import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
+import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NoAccountException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;
@@ -59,7 +59,7 @@ public class GUIUserSideBarController {
             settingsSelect.setVisible(false);
             btnFav.setSelected(true);
             if(Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
             Pane screen = fxmlLoader.load();
             hBox.getChildren().remove(1);
@@ -67,7 +67,7 @@ public class GUIUserSideBarController {
             guiUserFavoritesController = fxmlLoader.getController();
             guiUserFavoritesController.setCurrentPage(screen);
 
-        } catch (NoAccoutException e) {
+        } catch (NoAccountException e) {
             ShowExceptionSupport.showNeedAccountGUI();
         } catch (FavoriteListEmptyException e) {
             guiUserFavoritesController.listIsEmpty();
@@ -82,13 +82,13 @@ public class GUIUserSideBarController {
             settingsSelect.setVisible(false);
             btnApp.setSelected(true);
             if(Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserAppointments.fxml"));
             Pane screen = fxmlLoader.load();
             hBox.getChildren().remove(1);
             hBox.getChildren().add(screen);
 
-        } catch (NoAccoutException e) {
+        } catch (NoAccountException e) {
             ShowExceptionSupport.showNeedAccountGUI();
         }
     }
@@ -101,14 +101,14 @@ public class GUIUserSideBarController {
             settingsSelect.setVisible(true);
             btnSettings.setSelected(true);
             if(Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));
             Pane screen = fxmlLoader.load();
             hBox.getChildren().remove(1);
             hBox.getChildren().add(screen);
 
         }
-        catch (NoAccoutException e) {
+        catch (NoAccountException e) {
             ShowExceptionSupport.showNeedAccountGUI();
         }
 

@@ -3,7 +3,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageRejectedRequestView;
 
 
@@ -29,7 +31,7 @@ public class CLIManageRejectedRequestController implements CLIGraficController {
         this.view.showForm();
     }
 
-    public void executeCommand(String command) throws Exception {
+    public void executeCommand(String command) throws CommandNotFoundException {
         switch (command) {
             case DELETE -> deleteRejectedRequest();
 
@@ -39,14 +41,14 @@ public class CLIManageRejectedRequestController implements CLIGraficController {
         }
     }
 
-    private void deleteRejectedRequest() throws Exception {
+    private void deleteRejectedRequest() {
         if (this.view.askConfirmDelete() == 1) {
             ManageRequestController manageRequestController = new ManageRequestController();
             this.requestBean.register(this.previousPage);
             try {
                 manageRequestController.deleteRequest(requestBean, requestBean);
-            } catch (Exception e){
-                e.printStackTrace();
+            }  catch (NotFoundException e) {
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
             }
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());

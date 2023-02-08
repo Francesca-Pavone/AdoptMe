@@ -3,8 +3,10 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -93,15 +95,23 @@ public class GUIRequestItemController implements Observer {
     }
 
 
-    public void acceptRequest() throws Exception {
+    public void acceptRequest() {
             ManageRequestController manageRequestController = new ManageRequestController();
             this.request.register(this);
+        try {
             manageRequestController.acceptRequest(this.request, this.pane);
+        } catch (NotFoundException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
-    public void deleteRequest() throws Exception {
+    public void deleteRequest()  {
             ManageRequestController manageRequestController = new ManageRequestController();
+        try {
             manageRequestController.deleteRequest(this.request, this.pane);
+        } catch (NotFoundException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
     public void modifyRequest() throws Exception {

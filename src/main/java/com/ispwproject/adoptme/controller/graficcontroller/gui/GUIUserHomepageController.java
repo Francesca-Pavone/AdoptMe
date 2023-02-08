@@ -163,7 +163,7 @@ public class GUIUserHomepageController {
     }
 
     public void startQuestionnaire(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
+        Stage stage = ((Stage) ((Node)event.getSource()).getScene().getWindow());
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserQuestionnairePage.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);

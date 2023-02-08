@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.view.cli.requests;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIManageRejectedRequestController;
+import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 
@@ -21,12 +22,9 @@ public class CLIManageRejectedRequestView extends CLIManageRequestForm {
         try {
             controller.executeCommand(command);
         }
-        catch (ClassNotFoundException e) {
+        catch (CommandNotFoundException e) {
             PrintSupport.printError(e.getMessage() + "1 | 2\n\tPress ENTER to continue");
             ScannerSupport.waitEnter();
-        }
-        catch (Exception e){
-            e.printStackTrace();
         }
     }
 

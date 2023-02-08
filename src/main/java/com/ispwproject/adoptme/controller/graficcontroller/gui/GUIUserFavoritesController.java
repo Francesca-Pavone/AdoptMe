@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class GUIUserFavoritesController implements Observer {

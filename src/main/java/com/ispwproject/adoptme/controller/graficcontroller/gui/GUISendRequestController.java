@@ -5,7 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.exception.*;
+import com.ispwproject.adoptme.engineering.exception.Fra.*;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
@@ -61,7 +61,7 @@ public class GUISendRequestController implements Observer {
         RequestBean requestBean;
         try {
             if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             if (datePicker.getValue() == null)
                 throw new NoInputException("Date");
             if (timeField.getText() == null || timeField.getText().equals(""))
@@ -72,9 +72,10 @@ public class GUISendRequestController implements Observer {
             ManageRequestController manageRequestController = new ManageRequestController();
             requestBean.register(this);
             manageRequestController.sendRequest(petBean, requestBean);
-        } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
+        } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException |
+                 DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
-        } catch (NoAccoutException e) {
+        } catch (NoAccountException e) {
             ShowExceptionSupport.showNeedAccountGUI();
         }
 

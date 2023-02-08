@@ -6,9 +6,9 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
-import com.ispwproject.adoptme.engineering.exception.DateFormatException;
-import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
-import com.ispwproject.adoptme.engineering.exception.PastDateException;
+import com.ispwproject.adoptme.engineering.exception.Fra.DateFormatException;
+import com.ispwproject.adoptme.engineering.exception.Fra.DuplicateRequestException;
+import com.ispwproject.adoptme.engineering.exception.Fra.PastDateException;
 import com.ispwproject.adoptme.model.ShelterModel;
 import org.junit.jupiter.api.Test;
 

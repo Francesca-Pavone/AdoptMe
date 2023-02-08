@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
-import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
+import com.ispwproject.adoptme.engineering.exception.Fra.DuplicateRequestException;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;

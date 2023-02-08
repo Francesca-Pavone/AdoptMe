@@ -3,9 +3,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.DateFormatException;
-import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
+import com.ispwproject.adoptme.engineering.exception.Fra.*;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLIManageSendRequestView;
 
@@ -59,9 +57,11 @@ public class CLIManageSendRequestController implements CLIGraficController {
             this.requestBean.register(this.previousPage);
             try {
                 manageRequestController.updateRequest(requestBean, requestBean);
-            }catch (Exception e){
-                e.printStackTrace();
             }
+            catch (PastDateException | NotFoundException e){
+                ShowExceptionSupport.showExceptionGUI(e.getMessage());
+            }
+
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());
     }
@@ -95,8 +95,8 @@ public class CLIManageSendRequestController implements CLIGraficController {
             this.requestBean.register(this.previousPage);
             try {
                 manageRequestController.deleteRequest(this.requestBean, this.requestBean);
-            } catch (Exception e){
-                e.printStackTrace();
+            } catch (NotFoundException e) {
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
             }
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());

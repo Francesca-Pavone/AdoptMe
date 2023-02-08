@@ -1,12 +1,15 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLILoginController;
+import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 
 import java.util.Scanner;
 
 public class CLILoginView {
-    private CLILoginController cliLoginControllerCurrent;
+    private final CLILoginController cliLoginControllerCurrent;
 
     public CLILoginView(CLILoginController cliLoginControllerCurrent) {
         this.cliLoginControllerCurrent = cliLoginControllerCurrent;
@@ -18,7 +21,16 @@ public class CLILoginView {
         PrintSupport.printMessage(" 1) Login. \n 2) Forgot password.\n 3) Login with Google.\n 4) Continue without login.\n 5) Don't have an account? Sign up.");
         Scanner scanner = new Scanner(System.in);
         String inputLine = scanner.nextLine();
-        this.cliLoginControllerCurrent.executeCommand(inputLine);
+        try {
+            this.cliLoginControllerCurrent.executeCommand(inputLine);
+        } catch (CommandNotFoundException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage() + "1 | 2 | 3 | 4 | 5");
+            run();
+        }
+        catch (NotDevelopedException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            run();
+        }
     }
 
 

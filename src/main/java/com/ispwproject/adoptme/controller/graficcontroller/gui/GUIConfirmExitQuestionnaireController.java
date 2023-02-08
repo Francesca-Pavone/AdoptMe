@@ -6,18 +6,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class GUIConfirmExitQuestionnaireController {
 
     public void closeQuestionnaire(ActionEvent event) throws IOException {
-        Stage stage = Main.getStage();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSideBar.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        GUIUserSideBarController guiUserSideBarController = fxmlLoader.getController();
+        guiUserSideBarController.goToHomePage();
+        Main.getStage().setScene(scene);
 
-        stage.setScene(scene);
         ((Node)event.getSource()).getScene().getWindow().hide();
     }
 

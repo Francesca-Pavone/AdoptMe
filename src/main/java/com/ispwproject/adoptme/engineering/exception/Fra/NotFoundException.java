@@ -1,7 +1,7 @@
-package com.ispwproject.adoptme.engineering.exception;
+package com.ispwproject.adoptme.engineering.exception.Fra;
 
 public class NotFoundException extends Exception{
     public NotFoundException(String message) {
-        super(message);
+        super("Element not found " + message);
     }
 }

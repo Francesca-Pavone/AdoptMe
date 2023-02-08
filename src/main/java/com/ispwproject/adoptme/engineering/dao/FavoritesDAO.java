@@ -4,7 +4,7 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
-import com.ispwproject.adoptme.engineering.exception.PetIsNoFavoriteException;
+import com.ispwproject.adoptme.engineering.exception.Fede.PetIsNoFavoriteException;
 
 import java.sql.*;
 
@@ -36,7 +36,7 @@ public class FavoritesDAO {
     }
 
     public static boolean checkFav(int petId, int userId, int shelterId) {
-        Statement stmt = null;
+        Statement stmt;
 
         boolean fav = false;
 

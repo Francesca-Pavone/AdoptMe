@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
-import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
-import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.Fede.NoCityFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;

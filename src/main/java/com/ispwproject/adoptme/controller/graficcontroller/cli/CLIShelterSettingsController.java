@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterSettingsView;
 
 public class CLIShelterSettingsController implements CLIGraficController{
@@ -24,11 +24,10 @@ public class CLIShelterSettingsController implements CLIGraficController{
         view.run();
     }
 
-    public void executeCommand(String inputLine) throws CommandNotFoundException {
+    public void executeCommand(String inputLine) throws CommandNotFoundException, NotDevelopedException {
         switch (inputLine) {
             case MODIFY_NAME, MODIFY_PHONE, MODIFY_ADDRESS, MODIFY_SITE, MODIFY_EMAIL, MODIFY_PASSWORD -> {
-                PrintSupport.printMessage("Functionality not developed yet.");
-                start();
+                throw new NotDevelopedException();
             }
             case LOGOUT -> {
                 Session.closeSession();

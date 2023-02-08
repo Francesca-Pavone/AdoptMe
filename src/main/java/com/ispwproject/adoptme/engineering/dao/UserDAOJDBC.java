@@ -1,22 +1,20 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
-import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 
 public class UserDAOJDBC implements UserDAO{
 
 
-    public UserModel retrieveUserById(int userId) throws Exception {
+    public UserModel retrieveUserById(int userId) throws NotFoundException {
         Statement stmt ;
         UserModel user = null;
 
@@ -52,7 +50,7 @@ public class UserDAOJDBC implements UserDAO{
         return user;
     }
 
-    public UserModel retrieveUserByEmail(String email) throws Exception {
+    public UserModel retrieveUserByEmail(String email) throws NotFoundException {
         Statement stmt = null;
         UserModel user = null;
 
@@ -87,15 +85,14 @@ public class UserDAOJDBC implements UserDAO{
     }
 
 
-    private UserModel getUserInfo(int userId, ResultSet resultSet, String email) throws SQLException, IOException {
+    private UserModel getUserInfo(int userId, ResultSet resultSet, String email) throws SQLException {
         Blob blob = resultSet.getBlob("profileImg");
         File profileImg = null;
         try {
             if (blob != null) {
                 profileImg = ImageConverterSupport.fromBlobToFile(blob, "user" + userId);
             } else {
-                Trigger trigger = new Trigger();
-                trigger.imageNotFound();
+                throw new ImageNotFoundException();
             }
         }
         catch (ImageNotFoundException e) {

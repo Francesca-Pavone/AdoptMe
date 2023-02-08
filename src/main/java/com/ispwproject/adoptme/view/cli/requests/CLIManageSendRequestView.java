@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.view.cli.requests;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIManageSendRequestController;
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 

@@ -3,9 +3,7 @@ package com.ispwproject.adoptme.engineering.dao;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.model.UserModel;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class UserDAOCSV implements UserDAO{
     private static final String CSV_FILE_NAME = "src/main/res/Users.csv";
@@ -16,42 +14,53 @@ public class UserDAOCSV implements UserDAO{
     private static final int IMAGE = 5;
 
     @Override
-    public UserModel retrieveUserById(int userId) throws Exception {
-        File file = new File(CSV_FILE_NAME);
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        String row;
-        String[] data;
+    public UserModel retrieveUserById(int userId) {
         UserModel user = null;
 
-        while ((row = bufferedReader.readLine()) != null) {
-            data = row.split(",");
-            if (data[USER_ID].equals(String.valueOf(userId))) {
+        try {
+            File file = new File(CSV_FILE_NAME);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String row;
+            String[] data;
 
-                String email = data[USER_ID];
-                user = getUserModule(email, data, userId);
+            while ((row = bufferedReader.readLine()) != null) {
+                data = row.split(",");
+                if (data[USER_ID].equals(String.valueOf(userId))) {
+
+                    String email = data[USER_ID];
+                    user = getUserModule(email, data, userId);
+                }
             }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        bufferedReader.close();
+
         return user;
     }
 
     @Override
-    public UserModel retrieveUserByEmail(String email) throws Exception {
-        File file = new File(CSV_FILE_NAME);
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        String row;
-        String[] data;
+    public UserModel retrieveUserByEmail(String email) {
         UserModel user = null;
+        try {
+            File file = new File(CSV_FILE_NAME);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String row;
+            String[] data;
 
-        while ((row = bufferedReader.readLine()) != null) {
-            data = row.split(",");
-            if (data[EMAIL].equals(email)) {
+            while ((row = bufferedReader.readLine()) != null) {
+                data = row.split(",");
+                if (data[EMAIL].equals(email)) {
 
-                int userId = Integer.parseInt(data[USER_ID]);
-                user = getUserModule(email, data, userId);
+                    int userId = Integer.parseInt(data[USER_ID]);
+                    user = getUserModule(email, data, userId);
+                }
             }
+            bufferedReader.close();
         }
-        bufferedReader.close();
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         return user;
     }
 

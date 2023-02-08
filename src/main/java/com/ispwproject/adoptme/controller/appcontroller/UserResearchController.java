@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 
-import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fede.NoCityFoundException;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.engineering.bean.UserResearchBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;

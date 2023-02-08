@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        setStage(stage);
+        Main.stage = stage;
         stage.setTitle("AdoptMe");
         stage.setScene(scene);
         stage.show();
@@ -55,7 +55,4 @@ public class Main extends Application {
         return stage;
     }
 
-    public static void setStage(Stage stage) {
-        Main.stage = stage;
-    }
 }

@@ -2,7 +2,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +40,14 @@ public class GUIUserSettingsController {
     @FXML
     private PasswordField textFieldPsw;
 
+    public void notDeveloped() {
+        try {
+            throw new NotDevelopedException();
+        }
+        catch (NotDevelopedException e){
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
+    }
     public void loadImage(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser=new FileChooser();

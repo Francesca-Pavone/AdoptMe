@@ -2,7 +2,10 @@ package com.ispwproject.adoptme.engineering.dao;
 
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.*;
+import com.ispwproject.adoptme.engineering.exception.Fede.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NoPetsFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.model.*;
@@ -88,7 +91,7 @@ public class PetDAO {
         return petList;
     }
 
-    public static HashMap<PetModel, Integer> retrievePetByQuestionnaire(String query) throws NoPetsFoundQuestionnaireException{
+    public static HashMap<PetModel, Integer> retrievePetByQuestionnaire(String query) throws NoPetsFoundQuestionnaireException {
         Statement stmt;
         HashMap<PetModel, Integer> hashMap = new HashMap<>();
         PetModel pet;
@@ -150,7 +153,7 @@ public class PetDAO {
     }
 
 
-    public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
+    public static PetModel retrievePetById(int petId, int shelterId) throws NotFoundException {
         Statement stmt;
         PetModel pet = null;
         try {
@@ -272,8 +275,7 @@ public class PetDAO {
                 petImage = ImageConverterSupport.fromBlobToFile(blob, petName);
             }
             else {
-                Trigger trigger = new Trigger();
-                trigger.imageNotFound();
+                throw new ImageNotFoundException();
             }
         }
         catch (ImageNotFoundException e) {

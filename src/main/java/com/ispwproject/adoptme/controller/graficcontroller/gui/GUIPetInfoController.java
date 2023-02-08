@@ -6,7 +6,7 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
@@ -333,7 +333,7 @@ public class GUIPetInfoController implements Observer {
 
         try {
             if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             else {
                 UserBean userBean = Session.getCurrentSession().getUserBean();
                 AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
@@ -344,7 +344,7 @@ public class GUIPetInfoController implements Observer {
                     addToFavoritesController.addPet(userBean, this, this.panePetItem);
                 }
             }
-        }catch (NoAccoutException e){
+        }catch (NoAccountException e){
             ShowExceptionSupport.showNeedAccountGUI();
         }
 

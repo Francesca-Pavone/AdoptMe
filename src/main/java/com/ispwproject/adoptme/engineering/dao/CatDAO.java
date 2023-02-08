@@ -1,8 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
-import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.NotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
@@ -127,8 +126,7 @@ public class CatDAO {
 
             try {
                 if (catModel.getPetImage() == null) {
-                    Trigger trigger = new Trigger();
-                    trigger.imageNotFound();
+                    throw new ImageNotFoundException();
                 }
                 InputStream inputStream = new FileInputStream(catModel.getPetImage());
                 preparedStatement.setBlob(4, inputStream);

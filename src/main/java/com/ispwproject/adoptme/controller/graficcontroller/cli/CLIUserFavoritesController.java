@@ -2,7 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowUserFavoritesController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIUserFavoritesView;

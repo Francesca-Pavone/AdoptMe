@@ -5,9 +5,9 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
-import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
+import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
@@ -116,11 +116,11 @@ public class CLIPetInformationController implements CLIGraficController, Observe
             switch (inputLine) {
                 case REQUEST -> {
                     if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
+                        throw new NoAccountException();
                     this.executeRequest(); }
                 case FAVORITE -> {
                     if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
+                        throw new NoAccountException();
                     this.addToFavorite();}
                 case HOMEPAGE -> {
                     if(object instanceof CLIUserFavoritesController) {
@@ -140,7 +140,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
             PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
             ScannerSupport.waitEnter();
             this.view.showCommand();
-        } catch(NoAccoutException e) {
+        } catch(NoAccountException e) {
             PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
             ScannerSupport.waitEnter();
             this.view.showCommand();
@@ -165,12 +165,12 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     private void executeRequest() {
         try {
             if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             else {
                 CLISendRequestController cliSendRequestController = new CLISendRequestController(petBean);
                 cliSendRequestController.start();
             }
-        } catch (NoAccoutException e) {
+        } catch (NoAccountException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             CLINeedAccountController cliNeedAccountController = new CLINeedAccountController();
             cliNeedAccountController.start();

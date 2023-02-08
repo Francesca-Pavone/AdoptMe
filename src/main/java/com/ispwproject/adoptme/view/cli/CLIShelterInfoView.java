@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoController;
-import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
 import java.net.URL;
