@@ -107,7 +107,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
         cliPetInformationView.showTitle(petBean.getName());
-        cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
+        cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility, petBean.isFav());
     }
 
 
@@ -139,11 +139,11 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         } catch (CommandNotFoundException e) {
             PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
             ScannerSupport.waitEnter();
-            this.view.showCommand();
+            this.view.showCommand(petBean.isFav());
         } catch(NoAccountException e) {
             PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
             ScannerSupport.waitEnter();
-            this.view.showCommand();
+            this.view.showCommand(petBean.isFav());
         } catch (FavoriteListEmptyException e) {
             e.printStackTrace();
         }
@@ -152,14 +152,15 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     private void addToFavorite(){
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
-        fav = petBean.isFav();
+        PetInfoController petInfoController = new PetInfoController();
+        fav = petInfoController.checkFavorite(petBean);
         if (fav) {
             addToFavoritesController.removePet(userBean, this, index);
             addToFavoritesController.removePet(userBean, favObserver, index);
         } else {
             addToFavoritesController.addPet(userBean, this, index);
         }
-        this.view.showCommand();
+        this.view.showCommand(!fav);
     }
 
     private void executeRequest() {

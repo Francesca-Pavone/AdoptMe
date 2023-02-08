@@ -330,7 +330,8 @@ public class GUIPetInfoController implements Observer {
     }
 
     public void addPetToFavorites() {
-
+        PetInfoController petInfoController = new PetInfoController();
+        fav = petInfoController.checkFavorite(petBean);
         try {
             if (Session.getCurrentSession().getUserBean() == null)
                 throw new NoAccountException();
