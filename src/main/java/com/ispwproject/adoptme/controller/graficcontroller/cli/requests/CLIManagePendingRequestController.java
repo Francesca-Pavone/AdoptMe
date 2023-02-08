@@ -19,7 +19,6 @@ public class CLIManagePendingRequestController implements CLIGraficController {
     public CLIManagePendingRequestController(RequestBean requestBean) {
         this.requestBean = requestBean;
         this.view = new CLIManagePendingRequestView(this);
-
     }
 
     @Override
@@ -39,15 +38,16 @@ public class CLIManagePendingRequestController implements CLIGraficController {
             case DELETE -> annulRequest();
 
             case MODIFY -> {
+                String date = requestBean.getDate();
+                String time = requestBean.getTime();
                 setNewDate();
                 setNewTime();
-                modifyRequest();
+                modifyRequest(date, time);
             }
 
             case BACK -> this.previousPage.showAppointments(this.requestBean.getUserName());
 
             default -> throw new CommandNotFoundException();
-
         }
     }
 
@@ -65,16 +65,18 @@ public class CLIManagePendingRequestController implements CLIGraficController {
 
     }
 
-    public void modifyRequest()  {
-
-        if (view.askConfirmation() == 1){
-            ManageRequestController manageRequestController = new ManageRequestController();
-            this.requestBean.register(this.previousPage);
-            try {
+    private void modifyRequest(String date, String time) {
+        try {
+            if (requestBean.getDate().equals(date) && requestBean.getTime().equals(time))
+                throw new DuplicateRequestException();
+            if (view.askConfirmation() == 1){
+                ManageRequestController manageRequestController = new ManageRequestController();
+                this.requestBean.register(this.previousPage);
                 manageRequestController.updateRequest(requestBean, requestBean);
-            } catch (NotFoundException | PastDateException e) {
-                ShowExceptionSupport.showExceptionCLI(e.getMessage());
             }
+        }
+        catch (PastDateException | NotFoundException | DuplicateRequestException e){
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());
     }

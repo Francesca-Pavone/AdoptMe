@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CLIManagePendingRequestView extends CLIManageRequestForm {
 
-    private CLIManagePendingRequestController controller;
+    private final CLIManagePendingRequestController controller;
 
     public CLIManagePendingRequestView(CLIManagePendingRequestController controller) {
         this.controller = controller;
