@@ -61,7 +61,7 @@ public class ShelterDAO {
                         trigger.imageNotFound();
                     }
                 }
-                catch (ImageNotFoundException | IOException e) {
+                catch (ImageNotFoundException e) {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
@@ -189,7 +189,7 @@ public class ShelterDAO {
                         trigger.imageNotFound();
                     }
                 }
-                catch (ImageNotFoundException | IOException e) {
+                catch (ImageNotFoundException e) {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 

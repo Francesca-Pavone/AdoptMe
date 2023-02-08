@@ -8,12 +8,11 @@ import java.io.File;
 import java.io.FileReader;
 
 public class UserDAOCSV implements UserDAO{
-    private static final String CSV_FILE_NAME = "src/run/res/Users.csv";
+    private static final String CSV_FILE_NAME = "src/main/res/Users.csv";
     private static final int USER_ID = 0;
     private static final int NAME = 1;
     private static final int SURNAME = 2;
     private static final int EMAIL = 3;
-    private static final int PASSWORD = 4;
     private static final int IMAGE = 5;
 
     @Override
