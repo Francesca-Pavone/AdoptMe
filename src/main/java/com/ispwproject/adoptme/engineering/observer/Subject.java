@@ -3,7 +3,9 @@ package com.ispwproject.adoptme.engineering.observer;
 import java.util.List;
 import java.util.Vector;
 
-//definisco la classe astratta anche se tutti i metodi che fornisce sono concreti per impedire l'istanziazione di essa
+/** definisco la classe astratta anche se tutti i metodi che
+ *  fornisce sono concreti per impedire l'istanziazione di essa
+ */
 public abstract class Subject {
     private final List<Observer> observersList;
     protected Subject() {

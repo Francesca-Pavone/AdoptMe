@@ -21,6 +21,9 @@ import java.util.Objects;
 import static com.ispwproject.adoptme.engineering.connection.ConnectionDB.insertRequest;
 
 public class RequestDAO {
+
+    public static final String PET_ID = "petId";
+
     private RequestDAO() {
     }
 
@@ -32,7 +35,7 @@ public class RequestDAO {
 
             while (resultSet.next()){
                 if (resultSet.getInt("shelterId") == requestModel.getShelter().getId() &&
-                resultSet.getInt("petId") == requestModel.getPet().getPetId() &&
+                resultSet.getInt(PET_ID) == requestModel.getPet().getPetId() &&
                 resultSet.getInt("userId") == requestModel.getUser().getId() &&
                         Objects.equals(resultSet.getDate("date"), Date.valueOf(requestModel.getDate())) &&
                         Objects.equals(resultSet.getTime("time"), Time.valueOf(requestModel.getTime())))
@@ -109,7 +112,7 @@ public class RequestDAO {
             do {
                 // Leggo le colonne "by name"
                 int reqId = resultSet.getInt("requestId");
-                int petId = resultSet.getInt("petId");
+                int petId = resultSet.getInt(PET_ID);
                 PetModel pet = PetDAO.retrievePetById(petId, shelterModel.getId());
 
                 int userId = resultSet.getInt("userId");
@@ -165,7 +168,7 @@ public class RequestDAO {
             do {
                 // Leggo le colonne "by name"
                 int reqId = resultSet.getInt("requestId");
-                int petId = resultSet.getInt("petId");
+                int petId = resultSet.getInt(PET_ID);
                 int shelterId = resultSet.getInt("shelterId");
                 PetModel pet = PetDAO.retrievePetById(petId, shelterId);
                 ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);

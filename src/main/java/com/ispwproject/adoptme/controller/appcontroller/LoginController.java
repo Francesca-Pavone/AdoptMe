@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.dao.*;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.model.UserModel;
@@ -18,7 +19,7 @@ public class LoginController {
         loginBean.setAccountType(type);
     }
 
-    public void completeUserLogin(LoginBean loginBean) throws Exception {
+    public void completeUserLogin(LoginBean loginBean) throws NotFoundException {
 
         UserDAO userDAO;
         if (LocalTime.now().getMinute()%2 == 0) {
@@ -31,7 +32,7 @@ public class LoginController {
         Session.setSessionInstance(userBean);
 
     }
-    public void completeShelterLogin(LoginBean loginBean) throws Exception {
+    public void completeShelterLogin(LoginBean loginBean) throws NotFoundException {
         ShelterModel shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
 
         ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());

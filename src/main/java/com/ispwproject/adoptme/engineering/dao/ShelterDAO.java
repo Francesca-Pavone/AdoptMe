@@ -27,6 +27,7 @@ public class ShelterDAO {
     private static final String CITY = "city";
     private static final String EMAIL = "email";
     private static final String DEFAULT_PHOTO = "image/default_photo.png";
+    public static final String SHELTER = "shelter";
 
 
     private ShelterDAO() {}
@@ -58,7 +59,7 @@ public class ShelterDAO {
                 File shelterImage = null;
                 try {
                     if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, "shelter" + shelterId);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
                     } else {
                         throw new ImageNotFoundException();
                     }
@@ -134,7 +135,7 @@ public class ShelterDAO {
                 File shelterImage;
                 try {
                     if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, "shelter" + shelterId);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
                     } else {
                         throw new ImageNotFoundException();
                     }
@@ -184,7 +185,7 @@ public class ShelterDAO {
                 File shelterImage;
                 try {
                     if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, "shelter" + shelterId);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
                     } else {
                         throw new ImageNotFoundException();
                     }

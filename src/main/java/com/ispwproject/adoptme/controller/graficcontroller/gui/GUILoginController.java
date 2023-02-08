@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.exception.Fra.EmailFormatException;
 import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.engineering.exception.Fede.UserNotFoundException;
@@ -71,8 +72,8 @@ public class GUILoginController {
         }
     }
 
-    public void login() throws Exception {
-        Scene scene = null;
+    public void login() {
+        Scene scene;
         try {
             LoginBean loginBean = new LoginBean(txtFieldEmail.getText(), txtFieldPass.getText());
             LoginController loginController = new LoginController();
@@ -94,13 +95,11 @@ public class GUILoginController {
                 throw new UserNotFoundException();
 
             Main.getStage().setScene(scene);
-        } catch (UserNotFoundException e) {
-            ShowExceptionSupport.showExceptionGUI(e.getMessage());
-            txtFieldEmail.clear();
-            txtFieldPass.clear();
         }
-        catch (EmailFormatException e) {
+        catch (EmailFormatException | NotFoundException | UserNotFoundException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -131,7 +130,7 @@ public class GUILoginController {
         return scene;
     }
 
-    public void enterLogin(KeyEvent keyEvent) throws Exception {
+    public void enterLogin(KeyEvent keyEvent) {
         if( keyEvent.getCode() == KeyCode.ENTER ) {
             login();
         }

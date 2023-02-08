@@ -38,10 +38,12 @@ public class QuestionnaireResultController {
             questionnaireQuery = new GenderDecorator(questionnaireQuery, questionnaireResultBean.isGender());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
+        /*
         if (!questionnaireResultBean.getAge().equals("")) {
             questionnaireQuery = new AgeDecorator(questionnaireQuery, questionnaireResultBean.getAge());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
+         */
         if (questionnaireResultBean.isMaleCat()) {
             questionnaireQuery = new MaleCatDecorator(questionnaireQuery);
             questionnaireQuery = new AndDecorator(questionnaireQuery);
@@ -65,8 +67,8 @@ public class QuestionnaireResultController {
         try { hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery()); } catch (NoPetsFoundQuestionnaireException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
-        for (Map.Entry entry : hashMap.entrySet()) {
-            PetModel petModel = (PetModel) entry.getKey();
+        for (Map.Entry<PetModel, Integer> entry : hashMap.entrySet()) {
+            PetModel petModel = entry.getKey();
             PetBean petBean = new PetBean();
             petBean.setPetId(petModel.getPetId());
             petBean.setShelterId(hashMap.get(petModel));
