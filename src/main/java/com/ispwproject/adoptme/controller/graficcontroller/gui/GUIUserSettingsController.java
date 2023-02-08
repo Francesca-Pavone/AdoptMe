@@ -70,7 +70,7 @@ public class GUIUserSettingsController extends UserSideBar {
         stage.setScene(scene);
     }
 
-    public void initialize() {
+    public void initialize() throws FileNotFoundException {
         UserBean userBean = Session.getCurrentSession().getUserBean();
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());
@@ -78,5 +78,8 @@ public class GUIUserSettingsController extends UserSideBar {
         textFieldSurname.setPromptText(userBean.getSurname());
         textFieldEmail.setPromptText(userBean.getEmail());
         textFieldPsw.setPromptText("******");
+        InputStream inputStream = new FileInputStream(Session.getCurrentSession().getUserBean().getProfileImg());
+        Image image = new Image(inputStream);
+        userImg.setImage(image);
     }
 }
