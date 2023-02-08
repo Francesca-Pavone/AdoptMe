@@ -44,12 +44,6 @@ public abstract class PetModel {
     }
 
 
-    //TODO vedere dove uso questo metodo e trovare un altro modo per ricavare lo shelter
-    public ShelterModel getShelter() {
-        return null;
-    }
-
-
     public int getPetId() {
         return petId;
     }

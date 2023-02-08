@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.Fede;
+package com.ispwproject.adoptme.engineering.exception.federica;
 
 public class PetIsNoFavoriteException extends Exception{
     public PetIsNoFavoriteException(int petId, int userId) {

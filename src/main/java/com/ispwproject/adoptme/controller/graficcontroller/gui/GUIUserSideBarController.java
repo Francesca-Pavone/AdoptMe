@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NoAccountException;
+import com.ispwproject.adoptme.engineering.exception.federica.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NoAccountException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;

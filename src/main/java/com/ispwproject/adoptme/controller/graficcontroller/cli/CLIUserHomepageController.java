@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
-import com.ispwproject.adoptme.engineering.exception.Fede.FavoriteListEmptyException;
-import com.ispwproject.adoptme.engineering.exception.Fede.NoCityFoundException;
+import com.ispwproject.adoptme.engineering.exception.federica.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.federica.NoCityFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
@@ -30,7 +30,7 @@ public class CLIUserHomepageController {
         this.cliUserHomepageView = new CLIUserHomepageView(this);
         this.cliUserHomepageView.run();
     }
-    public void executeCommand(String input) throws Exception {
+    public void executeCommand(String input) {
         if(Session.getCurrentSession().getUserBean() == null) {
             switch (input) {
                 case QUESTIONNAIRE -> {

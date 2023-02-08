@@ -29,6 +29,16 @@ public class ShelterModel extends GenericUserModel {
         setWebSite(webSite);
     }
 
+    public ShelterModel(int id, String shelterName, String email, String phoneNumber, String address, String city, URL webSite) {
+        super(1, email);
+        setId(id);
+        setShelterName(shelterName);
+        setPhoneNumber(phoneNumber);
+        setAddress(address);
+        setCity(city);
+        setWebSite(webSite);
+    }
+
     public ShelterModel(String shelterName, String phoneNumber, String address, String city, File profileImg, URL webSite) {
         super(profileImg);
         setShelterName(shelterName);

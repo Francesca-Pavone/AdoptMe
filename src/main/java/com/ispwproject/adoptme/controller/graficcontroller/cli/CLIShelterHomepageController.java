@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
-import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterHomepageView;
 

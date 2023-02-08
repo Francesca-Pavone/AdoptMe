@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
-import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
+import com.ispwproject.adoptme.engineering.exception.francesca.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.view.cli.CLIShelterSettingsView;
 

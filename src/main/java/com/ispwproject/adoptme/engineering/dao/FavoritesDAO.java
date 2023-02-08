@@ -4,7 +4,8 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
-import com.ispwproject.adoptme.engineering.exception.Fede.PetIsNoFavoriteException;
+import com.ispwproject.adoptme.engineering.exception.federica.PetIsNoFavoriteException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
 
 import java.sql.*;
 
@@ -19,7 +20,7 @@ public class FavoritesDAO {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.insertFavorite(stmt, userId, petId, shelterId);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -30,7 +31,7 @@ public class FavoritesDAO {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.removeFavorite(stmt, userId, petId, shelterId);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -62,7 +63,7 @@ public class FavoritesDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (PetIsNoFavoriteException | SQLException e) {
+        } catch (PetIsNoFavoriteException | SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 

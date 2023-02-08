@@ -2,10 +2,10 @@ package com.ispwproject.adoptme.engineering.dao;
 
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.Fede.NoPetsFoundQuestionnaireException;
-import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NoPetsFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.federica.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
 import com.ispwproject.adoptme.model.*;
@@ -30,7 +30,7 @@ public class PetDAO {
         //costruttore privato
     }
 
-    public static List<PetModel> retrievePetByShelterId(ShelterModel shelterModel) throws SQLException, NoPetsFoundException {
+    public static List<PetModel> retrievePetByShelterId(ShelterModel shelterModel) throws SQLException, NotFoundException {
         Statement stmt;
         List<PetModel> petList = new ArrayList<>();
         PetModel pet;
@@ -42,7 +42,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new NoPetsFoundException();
+                throw new NotFoundException("pets for this shelter");
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -85,8 +85,8 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (NoPetsFoundException e) {
-            throw new NoPetsFoundException();
+        catch (ConnectionDbException e){
+            e.printStackTrace();
         }
         return petList;
     }
@@ -146,7 +146,7 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return hashMap;
@@ -190,7 +190,6 @@ public class PetDAO {
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
-                //pet.setAge(petAge);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
@@ -202,7 +201,7 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
@@ -210,7 +209,7 @@ public class PetDAO {
     }
 
     public static UserFavoritesPetsList retrieveUserFavoritesPets(UserModel userModel, Observer observer) throws NotFoundException {
-        Statement stmt = null;
+        Statement stmt;
         Map<PetModel, Integer> map = new HashMap<>();
         UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel, map);
         PetModel pet;
@@ -262,14 +261,14 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return userFavoritesPetsList;
     }
 
     private static File getPetImage(String petName, Blob blob) {
-        File petImage = null;
+        File petImage;
         try {
             if (blob != null) {
                 petImage = ImageConverterSupport.fromBlobToFile(blob, petName);

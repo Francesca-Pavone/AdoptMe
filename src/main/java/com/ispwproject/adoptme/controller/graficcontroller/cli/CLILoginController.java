@@ -2,13 +2,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
-import com.ispwproject.adoptme.engineering.exception.Fra.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.EmailFormatException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotDevelopedException;
-import com.ispwproject.adoptme.engineering.exception.Fede.UserNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.EmailFormatException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotDevelopedException;
+import com.ispwproject.adoptme.engineering.exception.federica.UserNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLILoginView;
 
@@ -43,7 +42,7 @@ public class CLILoginController implements CLIGraficController{
         }
     }
 
-    public void checkLogin(String email, String password) throws Exception {
+    public void checkLogin(String email, String password)  {
            try {
                LoginBean loginBean = new LoginBean(email, password);
                LoginController loginController = new LoginController();
@@ -62,13 +61,8 @@ public class CLILoginController implements CLIGraficController{
                else {
                    throw new UserNotFoundException();
                }
-               //todo vedere se riconoscere che email c'è ma è sbagliata solo la psw
-           } catch (UserNotFoundException e) {
-               PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
-               ScannerSupport.waitEnter();
-               this.start();
            }
-           catch (EmailFormatException e){
+           catch (EmailFormatException | NotFoundException | UserNotFoundException e){
                ShowExceptionSupport.showExceptionCLI(e.getMessage());
                start();
            }

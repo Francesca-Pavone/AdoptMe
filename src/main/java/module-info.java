@@ -26,6 +26,6 @@ module com.ispwproject.adoptme {
     exports com.ispwproject.adoptme.engineering.dao;
     exports com.ispwproject.adoptme.engineering.session;
     exports com.ispwproject.adoptme.engineering.observer.concretesubjects;
-    exports com.ispwproject.adoptme.engineering.exception.Fra;
-    exports com.ispwproject.adoptme.engineering.exception.Fede;
+    exports com.ispwproject.adoptme.engineering.exception.francesca;
+    exports com.ispwproject.adoptme.engineering.exception.federica;
 }

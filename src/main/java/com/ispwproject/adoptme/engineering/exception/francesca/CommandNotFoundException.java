@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.Fra;
+package com.ispwproject.adoptme.engineering.exception.francesca;
 
 public class CommandNotFoundException extends Exception{
     public CommandNotFoundException() {

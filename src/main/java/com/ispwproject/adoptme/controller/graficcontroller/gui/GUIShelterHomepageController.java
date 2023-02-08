@@ -3,10 +3,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.exception.Fra.NoPetsFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,12 +36,12 @@ public class GUIShelterHomepageController  implements Observer {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
         try {
             showShelterPetsController.getPetList(this);
-        }catch (NoPetsFoundException e){
+        }catch (NotFoundException e){
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
     }
 
-    public void addPet(ActionEvent event) throws IOException {
+    public void addPet() throws IOException {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initStyle(StageStyle.UNDECORATED);

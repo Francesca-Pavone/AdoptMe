@@ -1,7 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
-import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
@@ -91,15 +92,16 @@ public class CatDAO {
             resultSet.close();
 
         }
-        catch (SQLException | NotFoundException e) {
+        catch (SQLException | NotFoundException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return cat;
     }
 
 
-    public static int saveCat(CatModel catModel)  {
+    public static int saveCat(CatModel catModel) throws SQLException {
         Statement stmt;
+        PreparedStatement preparedStatement = null;
         int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
         int catId = 1;
@@ -119,21 +121,17 @@ public class CatDAO {
 
             // STEP 4.2: creazione ed esecuzione della query
 
-            PreparedStatement preparedStatement = ConnectionDB.insertCat();
+            preparedStatement = ConnectionDB.insertCat();
             preparedStatement.setInt(1, catId);
             preparedStatement.setInt(2, shelterId);
             preparedStatement.setString(3, catModel.getName());
 
-            try {
-                if (catModel.getPetImage() == null) {
-                    throw new ImageNotFoundException();
-                }
-                InputStream inputStream = new FileInputStream(catModel.getPetImage());
-                preparedStatement.setBlob(4, inputStream);
+            if (catModel.getPetImage() == null) {
+                throw new ImageNotFoundException();
             }
-            catch (ImageNotFoundException | FileNotFoundException e){
-                preparedStatement.setNull(4, Types.BLOB);
-            }
+            InputStream inputStream = new FileInputStream(catModel.getPetImage());
+            preparedStatement.setBlob(4, inputStream);
+
 
             preparedStatement.setInt(5, catModel.getGender());
             preparedStatement.setInt(6, catModel.getDayOfBirth());
@@ -167,7 +165,10 @@ public class CatDAO {
             preparedStatement1.executeUpdate();
 
         }
-        catch (SQLException e) {
+        catch (ImageNotFoundException | FileNotFoundException e){
+            preparedStatement.setNull(4, Types.BLOB);
+        }
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return catId;

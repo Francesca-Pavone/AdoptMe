@@ -1,7 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
-import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.francesca.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
@@ -18,7 +19,7 @@ public class DogDAO {
     private DogDAO() {}
 
     public static DogModel retrieveDogById(int dogId, int shelterId) {
-        Statement stmt = null;
+        Statement stmt;
         DogModel dog = null;
 
         try {
@@ -82,7 +83,7 @@ public class DogDAO {
             resultSet.close();
 
         }
-        catch (SQLException | NotFoundException e) {
+        catch (SQLException | NotFoundException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
@@ -91,8 +92,9 @@ public class DogDAO {
 
 
 
-    public static int saveDog(DogModel dogModel) {
+    public static int saveDog(DogModel dogModel) throws SQLException {
         Statement stmt;
+        PreparedStatement preparedStatement = null;
         int dogId = 1;
         int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
@@ -112,22 +114,16 @@ public class DogDAO {
             // STEP 4.2: creazione ed esecuzione della query
 
             //utilizzo i prepared statement per poter passare alla query il tipo di dato blob usato per le immagini
-            PreparedStatement preparedStatement = ConnectionDB.insertDog();
+            preparedStatement = ConnectionDB.insertDog();
             preparedStatement.setInt(1, dogId);
             preparedStatement.setInt(2, shelterId);
             preparedStatement.setString(3, dogModel.getName());
 
-            try {
-                if (dogModel.getPetImage() == null) {
-                    throw new ImageNotFoundException();
-                }
-                InputStream inputStream = new FileInputStream(dogModel.getPetImage());
-                preparedStatement.setBlob(4, inputStream);
+            if (dogModel.getPetImage() == null) {
+                throw new ImageNotFoundException();
             }
-            catch (ImageNotFoundException | FileNotFoundException e){
-                preparedStatement.setNull(4, Types.BLOB);
-            }
-
+            InputStream inputStream = new FileInputStream(dogModel.getPetImage());
+            preparedStatement.setBlob(4, inputStream);
             preparedStatement.setInt(5, dogModel.getGender());
             preparedStatement.setInt(6, dogModel.getDayOfBirth());
             preparedStatement.setInt(7, dogModel.getMonthOfBirth());
@@ -160,7 +156,10 @@ public class DogDAO {
             preparedStatement1.executeUpdate();
 
         }
-        catch (SQLException e) {
+        catch (ImageNotFoundException | FileNotFoundException e){
+            preparedStatement.setNull(4, Types.BLOB);
+        }
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return dogId;

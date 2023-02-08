@@ -2,13 +2,12 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.Fra.*;
+import com.ispwproject.adoptme.engineering.exception.francesca.*;
 import com.ispwproject.adoptme.engineering.utils.DateTimeSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -16,8 +15,6 @@ import javafx.scene.layout.Pane;
 import java.time.format.DateTimeFormatter;
 
 public class GUIModifyRequestController {
-    @FXML
-    private Button btnClose;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -44,11 +41,10 @@ public class GUIModifyRequestController {
             requestBean.setTime(timeField.getText());
 
             ManageRequestController manageRequestController = new ManageRequestController();
-            try {
-                manageRequestController.updateRequest(requestBean, this.pane);
-            }catch (PastDateException | NotFoundException e) {
-                ShowExceptionSupport.showExceptionGUI(e.getMessage());
-            }
+            manageRequestController.updateRequest(requestBean, this.pane);
+
+        }catch (PastDateException | NotFoundException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
         catch (DateFormatException | TimeFormatException | DuplicateRequestException e){
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
