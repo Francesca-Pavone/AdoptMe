@@ -8,7 +8,6 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterDAO {
-    private static final String PHOTO = "Photo";
     private static final String ADDRESS = "address";
     private static final String WEB_SITE = "webSite";
     private static final String PHONE_NUMBER = "phoneNumber";
@@ -50,7 +48,6 @@ public class ShelterDAO {
                 String phoneNumber = resultSet.getString(PHONE_NUMBER);
                 String address = resultSet.getString(ADDRESS);
                 String email = resultSet.getString(EMAIL);
-                String password = resultSet.getString("password");
                 String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
@@ -58,8 +55,7 @@ public class ShelterDAO {
                 File shelterImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
@@ -136,14 +132,13 @@ public class ShelterDAO {
                 File shelterImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
                     }
                 }
-                catch (ImageNotFoundException | IOException e) {
+                catch (ImageNotFoundException e) {
                     shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
                 }
 
@@ -188,8 +183,7 @@ public class ShelterDAO {
                 File shelterImage = null;
                 try {
                     if (blob != null) {
-                        String filePath = shelterName + PHOTO + ".png";
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, filePath);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
                     } else {
                         Trigger trigger = new Trigger();
                         trigger.imageNotFound();
@@ -205,12 +199,10 @@ public class ShelterDAO {
             }while(resultSet.next());
 
             resultSet.close();
-
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-
         return shelterModel;
     }
 }

@@ -20,7 +20,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class GUIShelterHomepageController extends ShelterSideBar implements Observer {
+public class GUIShelterHomepageController  implements Observer {
     @FXML
     private GridPane grid;
     @FXML

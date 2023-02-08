@@ -15,12 +15,11 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.List;
 
-public class GUIUserFavoritesController extends UserSideBar implements Observer {
+public class GUIUserFavoritesController implements Observer {
     @FXML
     private GridPane grid;
     @FXML
     private Label emptyLabel;
-    private List<PetBean> petBeanList;
 
     int column = 0;
     int row = 1;
@@ -32,7 +31,7 @@ public class GUIUserFavoritesController extends UserSideBar implements Observer 
         if(emptyLabel.isVisible())
             emptyLabel.setVisible(false);
         ShowUserFavoritesController showUserFavoritesController = new ShowUserFavoritesController();
-        this.petBeanList = showUserFavoritesController.getPetList(this);
+        List<PetBean> petBeanList = showUserFavoritesController.getPetList(this);
         for(PetBean petBean: petBeanList) {
             this.update(petBean);
         }

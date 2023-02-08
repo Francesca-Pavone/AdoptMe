@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class GUIUserAppointmentsController extends UserSideBar implements Observer {
+public class GUIUserAppointmentsController implements Observer {
     @FXML
     private HBox sentReqList;
     @FXML

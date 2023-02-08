@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class GUIShelterAppointmentsController extends ShelterSideBar implements Observer {
+public class GUIShelterAppointmentsController implements Observer {
 
     @FXML
     private HBox sentReqList;
