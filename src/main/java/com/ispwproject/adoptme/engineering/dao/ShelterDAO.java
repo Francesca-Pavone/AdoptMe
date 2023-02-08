@@ -58,7 +58,7 @@ public class ShelterDAO {
                 File shelterImage = null;
                 try {
                     if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, shelterName);
+                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, "shelter" + shelterId);
                     } else {
                         throw new ImageNotFoundException();
                     }
