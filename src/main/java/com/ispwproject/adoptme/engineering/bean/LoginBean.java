@@ -28,11 +28,6 @@ public class LoginBean {
 
     //controllo sintattico sulla correttezza dell'email
     public void setEmail(String email) throws EmailFormatException {
-        /*
-        if (email == null || email.isEmpty() || email.replaceAll("[^@]", "").length() != 1 || email.contains(".@"))
-            throw new EmailFormatException(email);
-
-         */
         String emailRegex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
         if (!Pattern.compile(emailRegex).matcher(email).matches())
             throw new EmailFormatException(email);

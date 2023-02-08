@@ -30,7 +30,7 @@ public class CLIUserHomepageController {
         this.cliUserHomepageView = new CLIUserHomepageView(this);
         this.cliUserHomepageView.run();
     }
-    public void executeCommand(String input) throws Exception {
+    public void executeCommand(String input) {
         if(Session.getCurrentSession().getUserBean() == null) {
             switch (input) {
                 case QUESTIONNAIRE -> {

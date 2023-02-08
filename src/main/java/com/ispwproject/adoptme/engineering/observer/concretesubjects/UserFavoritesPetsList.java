@@ -9,15 +9,17 @@ import com.ispwproject.adoptme.engineering.observer.Subject;
 import java.util.*;
 
 public class UserFavoritesPetsList extends Subject {
-    private UserModel user;
+
+    // TODO vedere se ha senso tenersi questa lista con "User" visto che non viene mai utilizzato
+    private final UserModel user;
     private Map<PetModel, Integer> hashMap;
 
     public UserFavoritesPetsList(Observer observer, UserModel user, Map<PetModel, Integer> hashmap) {
         super(observer);
         this.user = user;
         this.hashMap = hashmap;
-        for(Map.Entry entry: hashmap.entrySet()) {
-            PetModel petModel = (PetModel) entry.getKey();
+        for(Map.Entry<PetModel, Integer> entry: hashmap.entrySet()) {
+            PetModel petModel = entry.getKey();
             this.addPet(petModel, hashmap.get(petModel));
         }
     }

@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.exception.Fra.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
@@ -43,7 +44,7 @@ public class UserDAOJDBC implements UserDAO{
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
@@ -51,7 +52,7 @@ public class UserDAOJDBC implements UserDAO{
     }
 
     public UserModel retrieveUserByEmail(String email) throws NotFoundException {
-        Statement stmt = null;
+        Statement stmt;
         UserModel user = null;
 
         try {
@@ -77,7 +78,7 @@ public class UserDAOJDBC implements UserDAO{
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
@@ -87,7 +88,7 @@ public class UserDAOJDBC implements UserDAO{
 
     private UserModel getUserInfo(int userId, ResultSet resultSet, String email) throws SQLException {
         Blob blob = resultSet.getBlob("profileImg");
-        File profileImg = null;
+        File profileImg;
         try {
             if (blob != null) {
                 profileImg = ImageConverterSupport.fromBlobToFile(blob, "user" + userId);

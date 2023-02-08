@@ -17,8 +17,6 @@ import java.time.format.DateTimeFormatter;
 
 public class GUIModifyRequestController {
     @FXML
-    private Button btnClose;
-    @FXML
     private DatePicker datePicker;
     @FXML
     private TextField timeField;
@@ -44,11 +42,10 @@ public class GUIModifyRequestController {
             requestBean.setTime(timeField.getText());
 
             ManageRequestController manageRequestController = new ManageRequestController();
-            try {
-                manageRequestController.updateRequest(requestBean, this.pane);
-            }catch (PastDateException | NotFoundException e) {
-                ShowExceptionSupport.showExceptionGUI(e.getMessage());
-            }
+            manageRequestController.updateRequest(requestBean, this.pane);
+
+        }catch (PastDateException | NotFoundException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
         }
         catch (DateFormatException | TimeFormatException | DuplicateRequestException e){
             ShowExceptionSupport.showExceptionGUI(e.getMessage());

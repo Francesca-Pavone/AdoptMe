@@ -3,7 +3,11 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.exception.Fra.DateFormatException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.Fra.TimeFormatException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
@@ -23,7 +27,11 @@ public class GUIUserAppointmentsController implements Observer {
 
     public void initialize() {
         ShowRequestsController showRequestsController = new ShowRequestsController();
-        showRequestsController.getRequestList(this);
+        try {
+            showRequestsController.getRequestList(this);
+        } catch (NotFoundException | DateFormatException | TimeFormatException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
     @Override

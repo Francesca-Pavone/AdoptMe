@@ -1,5 +1,7 @@
 package com.ispwproject.adoptme.engineering.connection;
 
+import com.ispwproject.adoptme.engineering.exception.Fra.ConnectionDbException;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -17,16 +19,14 @@ public class ConnectionDB {
 
 
     // se fosse stata un'applicazione multi thread avrei dovuto mettere "synchronized"
-    public static Statement getConnection() throws SQLException {
-        Statement stmt = null;
-
+    public static Statement getConnection() throws ConnectionDbException {
+        Statement stmt ;
         try {
             conn();
             stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ConnectionDbException();
         }
-
         return stmt;
     }
 
@@ -51,8 +51,9 @@ public class ConnectionDB {
                 Class.forName(driverClassName);
 
                 connection=DriverManager.getConnection(url,user,password);
-                } catch (SQLException | IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+
+            } catch (SQLException | IOException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }

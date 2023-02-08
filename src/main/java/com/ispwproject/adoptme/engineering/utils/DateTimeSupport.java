@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class DateTimeSupport {
+    private DateTimeSupport() {
+    }
 
     public static LocalDate fromStringToLocalDate(String date) {
         String[] dateValues = date.split("-");

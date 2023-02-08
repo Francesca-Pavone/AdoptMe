@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.engineering.dao;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.exception.Fede.NoCityFoundException;
 import com.ispwproject.adoptme.engineering.exception.Fede.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.Fra.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.Fra.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
@@ -35,6 +36,8 @@ public class ShelterDAO {
     public static List<ShelterModel> retrieveShelterByCity(String city) throws NoCityFoundException {
         Statement stmt;
         List<ShelterModel> sheltersList = new ArrayList<>();
+        File shelterImage;
+        ShelterModel shelterModel = null;
         try {
             stmt = ConnectionDB.getConnection();
 
@@ -54,23 +57,15 @@ public class ShelterDAO {
                 String email = resultSet.getString(EMAIL);
                 String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
+                shelterModel = new ShelterModel(shelterId, shelterName, email, phoneNumber, address, city, webSiteURL);
 
                 Blob blob = resultSet.getBlob(PROFILE_IMG);
-                File shelterImage = null;
-                try {
-                    if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
-                    } else {
-                        throw new ImageNotFoundException();
-                    }
+                if (blob != null) {
+                    shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
+                } else {
+                    throw new ImageNotFoundException();
                 }
-                catch (ImageNotFoundException e) {
-                    shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                }
-
-
-                ShelterModel shelterModel = new ShelterModel(shelterImage, shelterName, email, phoneNumber, address, city, webSiteURL);
-                shelterModel.setId(shelterId);
+                shelterModel.setImage(shelterImage);
                 sheltersList.add(shelterModel);
 
             }while(resultSet.next());
@@ -78,9 +73,15 @@ public class ShelterDAO {
             resultSet.close();
 
         }
-        catch (SQLException | MalformedURLException e) {
+        catch (ImageNotFoundException e) {
+            shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+            shelterModel.setImage(shelterImage);
+            sheltersList.add(shelterModel);
+        }
+        catch (SQLException | MalformedURLException | ConnectionDbException e) {
             e.printStackTrace();
         }
+
 
         return sheltersList;
     }
@@ -103,7 +104,7 @@ public class ShelterDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return shelterId;
@@ -112,6 +113,7 @@ public class ShelterDAO {
     public static ShelterModel retrieveShelterById(int shelterId) throws NotFoundException {
         Statement stmt;
         ShelterModel shelterModel = null;
+        File shelterImage;
         try {
             stmt = ConnectionDB.getConnection();
 
@@ -131,28 +133,26 @@ public class ShelterDAO {
                 String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
 
-                Blob blob = resultSet.getBlob(PROFILE_IMG);
-                File shelterImage;
-                try {
-                    if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
-                    } else {
-                        throw new ImageNotFoundException();
-                    }
-                }
-                catch (ImageNotFoundException e) {
-                    shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                }
+                shelterModel = new ShelterModel(shelterId, shelterName, email, phoneNumber, address, city, webSiteURL);
 
-                shelterModel = new ShelterModel(shelterImage, shelterName, email, phoneNumber, address, city, webSiteURL);
-                shelterModel.setId(shelterId);
+                Blob blob = resultSet.getBlob(PROFILE_IMG);
+                if (blob != null) {
+                    shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
+                } else {
+                    throw new ImageNotFoundException();
+                }
+                shelterModel.setImage(shelterImage);
 
             }while(resultSet.next());
 
             resultSet.close();
 
         }
-        catch (SQLException | MalformedURLException e) {
+        catch (ImageNotFoundException e) {
+            shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+            shelterModel.setImage(shelterImage);
+        }
+        catch (SQLException | MalformedURLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return shelterModel;
@@ -160,6 +160,7 @@ public class ShelterDAO {
 
     public static ShelterModel retrieveShelterByEmail(String email) throws NotFoundException {
         Statement stmt;
+        File shelterImage;
         ShelterModel shelterModel = null;
         try {
             stmt = ConnectionDB.getConnection();
@@ -180,28 +181,26 @@ public class ShelterDAO {
                 String city = resultSet.getString(CITY);
                 String webSite = resultSet.getString(WEB_SITE);
                 URL webSiteURL = new URL(webSite);
+                shelterModel = new ShelterModel(shelterId, shelterName, email, phoneNumber, address, city, webSiteURL);
 
                 Blob blob = resultSet.getBlob(PROFILE_IMG);
-                File shelterImage;
-                try {
-                    if (blob != null) {
-                        shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
-                    } else {
-                        throw new ImageNotFoundException();
-                    }
+                if (blob != null) {
+                    shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
+                } else {
+                    throw new ImageNotFoundException();
                 }
-                catch (ImageNotFoundException e) {
-                    shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-                }
-
-                shelterModel = new ShelterModel(shelterImage, shelterName, email, phoneNumber, address, city, webSiteURL);
-                shelterModel.setId(shelterId);
+                shelterModel.setImage(shelterImage);
 
             }while(resultSet.next());
 
             resultSet.close();
+
         }
-        catch (SQLException | MalformedURLException e) {
+        catch (ImageNotFoundException e) {
+            shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
+            shelterModel.setImage(shelterImage);
+        }
+        catch (SQLException | MalformedURLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return shelterModel;

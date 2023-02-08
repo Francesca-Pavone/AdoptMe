@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
+import com.ispwproject.adoptme.engineering.exception.Fra.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.Fra.DuplicateRequestException;
+import com.ispwproject.adoptme.engineering.exception.Fra.NotFoundException;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -52,7 +54,7 @@ public class RequestDAO {
             }
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -68,7 +70,7 @@ public class RequestDAO {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -78,7 +80,7 @@ public class RequestDAO {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.updateReqStatus(stmt, requestModel.getId(), requestModel.getStatus());
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -88,12 +90,12 @@ public class RequestDAO {
         try {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.deleteReq(stmt, requestId);
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws Exception {
+    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws NotFoundException {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
 
@@ -104,7 +106,7 @@ public class RequestDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                throw new Exception("No requests found for the shelter with id: " + shelterModel.getId());
+                throw new NotFoundException("requests for the shelter: " + shelterModel.getShelterName());
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -142,13 +144,13 @@ public class RequestDAO {
 
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return requestModelList;
     }
 
-    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws Exception {
+    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws NotFoundException {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
 
@@ -159,8 +161,7 @@ public class RequestDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                Exception e = new Exception("No requests found for the user with id: " + userModel.getId());
-                throw e;
+                throw new NotFoundException("requests for the user: " + userModel.getName());
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -191,7 +192,7 @@ public class RequestDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return requestModelList;

@@ -15,9 +15,9 @@ import java.util.*;
 
 
 public class ShowUserFavoritesController {
-    private UserFavoritesPetsList userFavoritesPetsList;
 
     public List<PetBean> getPetList(Observer observer) throws FavoriteListEmptyException {
+        UserFavoritesPetsList userFavoritesPetsList;
         try {
             UserBean userBean = Session.getCurrentSession().getUserBean();
             UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
@@ -30,8 +30,8 @@ public class ShowUserFavoritesController {
 
         Map<PetModel, Integer> hashMap = userFavoritesPetsList.getHashMap();
         int shelterId;
-        for(Map.Entry entry: hashMap.entrySet()) {
-            PetModel petModel = (PetModel)entry.getKey();
+        for(Map.Entry<PetModel, Integer> entry: hashMap.entrySet()) {
+            PetModel petModel = entry.getKey();
             shelterId = hashMap.get(petModel);
             PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
             petBean.setFav(true);

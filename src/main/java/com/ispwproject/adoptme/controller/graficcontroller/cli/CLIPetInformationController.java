@@ -22,7 +22,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     private Observer favObserver;
 
-    private CLIPetInformationView view;
+    private final CLIPetInformationView view;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
@@ -107,7 +107,8 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
         cliPetInformationView.showTitle(petBean.getName());
-        cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility, petBean.isFav());
+        cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
+        cliPetInformationView.showCommand(petBean.isFav());
     }
 
 
