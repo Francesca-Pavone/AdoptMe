@@ -77,17 +77,8 @@ public class CLIQuestionnaireController {
 
     }
 
-    public void setCompatibility(String garden, String terrace, String sleepOutside, String hoursAlone, String firstPet, String specificArea, String city) {
-        this.questionnaireResultBeanBuilder.haveAGarden(switch (garden) {
-            case "b" -> 0;
-            default -> 1;
-        })
-                .haveATerrace(switch (terrace) {
-                    case "b" -> 0;
-                    default -> 1;
-                })
-
-                .hoursAlone(switch (hoursAlone) {
+    public void setCompatibility(String sleepOutside, String hoursAlone, String firstPet, String specificArea, String city) {
+        this.questionnaireResultBeanBuilder.hoursAlone(switch (hoursAlone) {
                     case "b" -> 1;
                     case "c" -> 2;
                     default -> 0;
@@ -95,9 +86,8 @@ public class CLIQuestionnaireController {
                 .firstPet(switch (firstPet) {
                     case "b" -> 0;
                     default -> 1;
-                });
-        if(garden.equals("a") || terrace.equals("a"))
-            this.questionnaireResultBeanBuilder.sleepOutside(switch(sleepOutside) {
+                })
+                .sleepOutside(switch(sleepOutside) {
                 case "a" -> 1;
                 default -> 0;
             });
@@ -105,7 +95,7 @@ public class CLIQuestionnaireController {
             this.questionnaireResultBeanBuilder.city(city);
     }
 
-    public void setPetAlreadyHave(String alreadyHavePet, List<String> petAlreadyHaveList) {
+    public void setPetAlreadyHave(List<String> petAlreadyHaveList) {
         boolean maleCat = false;
         boolean femaleCat = false;
         boolean maleDog = false;

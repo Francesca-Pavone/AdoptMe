@@ -27,8 +27,6 @@ public final class PetBeanBuilder {
     private boolean femaleCat;
     private boolean children;
     private boolean elders;
-    private boolean apartmentNoGarden;
-    private boolean apartmentNoTerrace;
     private boolean sleepOutside;
     private boolean firstExperience;
     private int hoursAlone;
@@ -154,16 +152,6 @@ public final class PetBeanBuilder {
         return this;
     }
 
-    public PetBeanBuilder apartmentNoGarden(boolean apartmentNoGarden) {
-        this.apartmentNoGarden = apartmentNoGarden;
-        return this;
-    }
-
-    public PetBeanBuilder apartmentNoTerrace(boolean apartmentNoTerrace) {
-        this.apartmentNoTerrace = apartmentNoTerrace;
-        return this;
-    }
-
     public PetBeanBuilder sleepOutside(boolean sleepOutside) {
         this.sleepOutside = sleepOutside;
         return this;
@@ -217,8 +205,6 @@ public final class PetBeanBuilder {
         petBean.setFemaleCat(femaleCat);
         petBean.setChildren(children);
         petBean.setElders(elders);
-        petBean.setNoGarden(apartmentNoGarden);
-        petBean.setNoTerrace(apartmentNoTerrace);
         petBean.setSleepOutside(sleepOutside);
         petBean.setFirstExperience(firstExperience);
         petBean.setHoursAlone(hoursAlone);

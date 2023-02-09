@@ -294,12 +294,6 @@ public class GUIPetInfoController implements Observer {
         if (petBean.isElders()) {
             setCompatibilityLabel("Elders");
         }
-        if (petBean.isNoGarden()) {
-            setCompatibilityLabel("Apartments without garden");
-        }
-        if (petBean.isNoTerrace()) {
-            setCompatibilityLabel("Apartments without terrace");
-        }
         if (petBean.isSleepOutside()) {
             setCompatibilityLabel("Sleeping outside");
         }
