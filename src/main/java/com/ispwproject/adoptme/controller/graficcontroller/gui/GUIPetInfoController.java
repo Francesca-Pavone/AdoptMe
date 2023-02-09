@@ -6,6 +6,7 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
@@ -155,8 +156,15 @@ public class GUIPetInfoController implements Observer {
             else
                 btnFav.setText("Remove from favorites");
         }
-        InputStream inputStream = new FileInputStream(petBean.getPetImage());
-        Image image = new Image(inputStream);
+        Image image;
+        try {
+            if (petBean.getPetImage() == null)
+                throw new ImageNotFoundException();
+            InputStream inputStream = new FileInputStream(petBean.getPetImage());
+            image = new Image(inputStream);
+        }catch (ImageNotFoundException e){
+            image = new Image(Main.class.getResource("image/default_photo.png").openStream());
+        }
         petImg.setImage(image);
 
         name.setText(petBean.getName());

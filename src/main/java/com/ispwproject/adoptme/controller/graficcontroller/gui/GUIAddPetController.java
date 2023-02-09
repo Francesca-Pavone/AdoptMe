@@ -104,10 +104,6 @@ public class GUIAddPetController {
     @FXML
     private CheckBox cbMaleDog;
     @FXML
-    private CheckBox cbApartNoGarden;
-    @FXML
-    private CheckBox cbApartNoTerrace;
-    @FXML
     private CheckBox cbChildren;
     @FXML
     private CheckBox cbElders;
@@ -118,7 +114,7 @@ public class GUIAddPetController {
     @FXML
     private ToggleGroup hoursAlone;
 
-    private File file;
+    private File file = null;
     private int petType; // 0 -> DOG  |  1 -> CAT
     private Observer observer;
 
@@ -157,7 +153,7 @@ public class GUIAddPetController {
         txtDisabilityType.setVisible(false);
     }
 
-    public void confirmAddPet(ActionEvent event) throws Exception {
+    public void confirmAddPet(ActionEvent event) {
         ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
         int year;
         int month;
