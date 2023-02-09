@@ -31,8 +31,6 @@ public class PetBean {
     protected boolean femaleCat;
     protected boolean children;
     protected boolean elders;
-    protected boolean noGarden;
-    protected boolean noTerrace;
     protected boolean sleepOutside;
     protected boolean firstExperience;
     protected int hoursAlone;
@@ -251,22 +249,6 @@ public class PetBean {
 
     public void setElders(boolean elders) {
         this.elders = elders;
-    }
-
-    public boolean isNoGarden() {
-        return noGarden;
-    }
-
-    public void setNoGarden(boolean noGarden) {
-        this.noGarden = noGarden;
-    }
-
-    public boolean isNoTerrace() {
-        return noTerrace;
-    }
-
-    public void setNoTerrace(boolean noTerrace) {
-        this.noTerrace = noTerrace;
     }
 
     public boolean isSleepOutside() {

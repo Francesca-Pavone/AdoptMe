@@ -231,8 +231,6 @@ public class GUIAddPetController {
                 .femaleCat(cbFemaleCat.isSelected())
                 .children(cbChildren.isSelected())
                 .elders(cbElders.isSelected())
-                .apartmentNoGarden(cbApartNoGarden.isSelected())
-                .apartmentNoTerrace(cbApartNoTerrace.isSelected())
                 .sleepOutside(cbSleepOut.isSelected())
                 .firstExperience(cbFirstExp.isSelected())
                 

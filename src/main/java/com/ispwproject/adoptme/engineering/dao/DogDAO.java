@@ -53,8 +53,6 @@ public class DogDAO {
                 boolean femaleCat = resultSet.getBoolean("femaleCat");
                 boolean children = resultSet.getBoolean("children");
                 boolean elders = resultSet.getBoolean("elders");
-                boolean apartmentNoGarden = resultSet.getBoolean("apartmentNoGarden");
-                boolean apartmentNoTerrace = resultSet.getBoolean("apartmentNoTerrace");
                 boolean sleepOutside = resultSet.getBoolean("sleepOutside");
                 boolean firstExperience = resultSet.getBoolean("firstExperience");
                 int hoursAlone = resultSet.getInt("hoursAlone");
@@ -62,8 +60,6 @@ public class DogDAO {
                 int size = resultSet.getInt("size");
 
                 PetCompatibility petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, firstExperience);
-                petCompatibility.setApartmentNoGarden(apartmentNoGarden);
-                petCompatibility.setApartmentNoTerrace(apartmentNoTerrace);
                 petCompatibility.setSleepOutside(sleepOutside);
                 petCompatibility.setHoursAlone(hoursAlone);
 
@@ -148,11 +144,9 @@ public class DogDAO {
             preparedStatement1.setBoolean(6, dogModel.getPetCompatibility().isFemaleCat());
             preparedStatement1.setBoolean(7, dogModel.getPetCompatibility().isChildren());
             preparedStatement1.setBoolean(8, dogModel.getPetCompatibility().isElders());
-            preparedStatement1.setBoolean(9, dogModel.getPetCompatibility().isApartmentNoGarden());
-            preparedStatement1.setBoolean(10, dogModel.getPetCompatibility().isApartmentNoTerrace());
-            preparedStatement1.setBoolean(11, dogModel.getPetCompatibility().isSleepOutside());
-            preparedStatement1.setBoolean(12, dogModel.getPetCompatibility().isFirstExperience());
-            preparedStatement1.setInt(13, dogModel.getPetCompatibility().getHoursAlone());
+            preparedStatement1.setBoolean(9, dogModel.getPetCompatibility().isSleepOutside());
+            preparedStatement1.setBoolean(10, dogModel.getPetCompatibility().isFirstExperience());
+            preparedStatement1.setInt(11, dogModel.getPetCompatibility().getHoursAlone());
             preparedStatement1.executeUpdate();
 
         }

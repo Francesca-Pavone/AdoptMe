@@ -54,8 +54,6 @@ public class CatDAO {
                 boolean femaleCat = resultSet.getBoolean("femaleCat");
                 boolean children = resultSet.getBoolean("children");
                 boolean elders = resultSet.getBoolean("elders");
-                boolean apartmentNoGarden = resultSet.getBoolean("apartmentNoGarden");
-                boolean apartmentNoTerrace = resultSet.getBoolean("apartmentNoTerrace");
                 boolean sleepOutside = resultSet.getBoolean("sleepOutside");
                 boolean firstExperience = resultSet.getBoolean("firstExperience");
                 int hoursAlone = resultSet.getInt("hoursAlone");
@@ -70,8 +68,6 @@ public class CatDAO {
                 petCompatibility.setFemaleCat(femaleCat);
                 petCompatibility.setChildren(children);
                 petCompatibility.setElders(elders);
-                petCompatibility.setApartmentNoGarden(apartmentNoGarden);
-                petCompatibility.setApartmentNoTerrace(apartmentNoTerrace);
                 petCompatibility.setSleepOutside(sleepOutside);
                 petCompatibility.setFirstExperience(firstExperience);
                 petCompatibility.setHoursAlone(hoursAlone);
@@ -157,11 +153,9 @@ public class CatDAO {
             preparedStatement1.setBoolean(6, catModel.getPetCompatibility().isFemaleCat());
             preparedStatement1.setBoolean(7, catModel.getPetCompatibility().isChildren());
             preparedStatement1.setBoolean(8, catModel.getPetCompatibility().isElders());
-            preparedStatement1.setBoolean(9, catModel.getPetCompatibility().isApartmentNoGarden());
-            preparedStatement1.setBoolean(10, catModel.getPetCompatibility().isApartmentNoTerrace());
-            preparedStatement1.setBoolean(11, catModel.getPetCompatibility().isSleepOutside());
-            preparedStatement1.setBoolean(12, catModel.getPetCompatibility().isFirstExperience());
-            preparedStatement1.setInt(13, catModel.getPetCompatibility().getHoursAlone());
+            preparedStatement1.setBoolean(9, catModel.getPetCompatibility().isSleepOutside());
+            preparedStatement1.setBoolean(10, catModel.getPetCompatibility().isFirstExperience());
+            preparedStatement1.setInt(11, catModel.getPetCompatibility().getHoursAlone());
             preparedStatement1.executeUpdate();
 
         }
