@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestSendRequest {
+class TestManageRequestController {
     /**
      * FRANCESCA PAVONE SALAFIA
      * Il seguente test va a testare che andando a prelevare il numero di richieste di uno shelter

@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestEmailFormat {
+class TestLoginBean {
     /**
      * FRANCESCA PAVONE SALAFIA
      * Il seguente test va a testare la verifica sulla correttezza sintattica dell'email inserita per effettuare il login
      */
     @Test
-    void testEmailFormat(){
+    void testSetEmail(){
         int validFormat;
         try {
             new LoginBean("francesca", "123");
