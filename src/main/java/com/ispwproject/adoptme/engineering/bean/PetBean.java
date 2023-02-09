@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.engineering.bean;
 
+
 import java.io.File;
 
 public class PetBean {

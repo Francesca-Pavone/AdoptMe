@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
@@ -97,7 +96,7 @@ public class CatDAO {
 
     public static int saveCat(CatModel catModel) throws SQLException {
         Statement stmt;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
         int catId = 1;
@@ -123,10 +122,12 @@ public class CatDAO {
             preparedStatement.setString(3, catModel.getName());
 
             if (catModel.getPetImage() == null) {
-                throw new ImageNotFoundException();
+                preparedStatement.setNull(4, Types.BLOB);
+
+            }else {
+                InputStream inputStream = new FileInputStream(catModel.getPetImage());
+                preparedStatement.setBlob(4, inputStream);
             }
-            InputStream inputStream = new FileInputStream(catModel.getPetImage());
-            preparedStatement.setBlob(4, inputStream);
 
 
             preparedStatement.setInt(5, catModel.getGender());
@@ -159,10 +160,8 @@ public class CatDAO {
             preparedStatement1.executeUpdate();
 
         }
-        catch (ImageNotFoundException | FileNotFoundException e){
-            preparedStatement.setNull(4, Types.BLOB);
-        }
-        catch (SQLException | ConnectionDbException e) {
+
+        catch (SQLException | ConnectionDbException | FileNotFoundException e) {
             e.printStackTrace();
         }
         return catId;

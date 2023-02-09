@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
+import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
@@ -9,6 +10,7 @@ import com.ispwproject.adoptme.engineering.enums.CoatLenght;
 import com.ispwproject.adoptme.engineering.enums.Size;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -273,8 +275,13 @@ public class GUIAddPetController {
         }
 
         AddPetController addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(observer);
-        ((Node)event.getSource()).getScene().getWindow().hide();
+        try {
+            addPetController.addNewPet(observer);
+            ((Node)event.getSource()).getScene().getWindow().hide();
+
+        } catch (PetDateOfBirthException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
     public void loadImage(ActionEvent event) throws IOException {
