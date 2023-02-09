@@ -36,7 +36,7 @@ public class FavoritesDAO {
         }
     }
 
-    public static boolean checkFav(int petId, int userId, int shelterId) {
+    public static boolean checkFav(int petId, int shelterId, int userId) {
         Statement stmt;
 
         boolean fav = false;
