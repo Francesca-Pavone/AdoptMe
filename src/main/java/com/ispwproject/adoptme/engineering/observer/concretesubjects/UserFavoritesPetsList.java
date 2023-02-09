@@ -10,7 +10,6 @@ import java.util.*;
 
 public class UserFavoritesPetsList extends Subject {
 
-    // TODO vedere se ha senso tenersi questa lista con "User" visto che non viene mai utilizzato
     private final UserModel user;
     private Map<PetModel, Integer> hashMap;
 

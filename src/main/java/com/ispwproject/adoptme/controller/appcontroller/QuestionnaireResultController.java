@@ -38,12 +38,6 @@ public class QuestionnaireResultController {
             questionnaireQuery = new GenderDecorator(questionnaireQuery, questionnaireResultBean.isGender());
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
-        /* TODO vedere se serve, mi da errore se lo lascio
-        if (!questionnaireResultBean.getAge().equals("")) {
-            questionnaireQuery = new AgeDecorator(questionnaireQuery, questionnaireResultBean.getAge());
-            questionnaireQuery = new AndDecorator(questionnaireQuery);
-        }
-         */
         if (questionnaireResultBean.isMaleCat()) {
             questionnaireQuery = new MaleCatDecorator(questionnaireQuery);
             questionnaireQuery = new AndDecorator(questionnaireQuery);
