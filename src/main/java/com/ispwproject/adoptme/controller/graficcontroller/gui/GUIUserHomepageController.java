@@ -169,6 +169,7 @@ public class GUIUserHomepageController {
         Scene scene = new Scene(root);
 
         GUIQuestionnaireController guiQuestionnaireController = new GUIQuestionnaireController();
+        guiQuestionnaireController.setPreviousPage(currentPage);
         guiQuestionnaireController.setCurrentPage(root);
 
         stage.setScene(scene);

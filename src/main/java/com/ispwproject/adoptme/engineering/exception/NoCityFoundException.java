@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.federica;
+package com.ispwproject.adoptme.engineering.exception;
 
 public class NoCityFoundException extends Exception{
     public NoCityFoundException(String city) {

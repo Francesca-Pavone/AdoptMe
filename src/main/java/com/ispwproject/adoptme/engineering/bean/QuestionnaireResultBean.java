@@ -9,7 +9,9 @@ public class QuestionnaireResultBean {
     protected boolean femaleCat;
     protected boolean maleDog;
     protected boolean femaleDog;
+    protected int haveAGarden; // 0 -> no | 1 -> yes
     protected int sleepOutside; // 0 -> no | 1 -> yes
+    protected int haveATerrace; // 0 -> no | 1 -> yes
     protected int hoursAlone; // 0 -> 0-3 hours | 1 -> 4-6 hours | 2 -> more than 6 hours
     protected int firstPet; // 0 -> no | 1 -> yes
     protected boolean sterilizePet; // 0 -> no | 1 -> yes
@@ -89,12 +91,28 @@ public class QuestionnaireResultBean {
         this.femaleDog = femaleDog;
     }
 
+    public int isHaveAGarden() {
+        return haveAGarden;
+    }
+
+    public void setHaveAGarden(int haveAGarden) {
+        this.haveAGarden = haveAGarden;
+    }
+
     public int isSleepOutside() {
         return sleepOutside;
     }
 
     public void setSleepOutside(int sleepOutside) {
         this.sleepOutside = sleepOutside;
+    }
+
+    public int isHaveATerrace() {
+        return haveATerrace;
+    }
+
+    public void setHaveATerrace(int haveATerrace) {
+        this.haveATerrace = haveATerrace;
     }
 
     public int getHoursAlone() {

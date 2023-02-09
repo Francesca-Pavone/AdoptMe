@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
-import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.francesca.DuplicateRequestException;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;

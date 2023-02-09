@@ -2,8 +2,8 @@ package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
-import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 
 import java.sql.*;
 

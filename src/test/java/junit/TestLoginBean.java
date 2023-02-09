@@ -1,18 +1,18 @@
 package junit;
 
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
-import com.ispwproject.adoptme.engineering.exception.francesca.EmailFormatException;
+import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestEmailFormat {
+class TestLoginBean {
     /**
      * FRANCESCA PAVONE SALAFIA
      * Il seguente test va a testare la verifica sulla correttezza sintattica dell'email inserita per effettuare il login
      */
     @Test
-    void testEmailFormat(){
+    void testSetEmail(){
         int validFormat;
         try {
             new LoginBean("francesca", "123");

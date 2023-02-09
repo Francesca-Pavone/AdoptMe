@@ -6,15 +6,15 @@ import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.dao.RequestDAO;
-import com.ispwproject.adoptme.engineering.exception.francesca.DateFormatException;
-import com.ispwproject.adoptme.engineering.exception.francesca.DuplicateRequestException;
-import com.ispwproject.adoptme.engineering.exception.francesca.PastDateException;
+import com.ispwproject.adoptme.engineering.exception.DateFormatException;
+import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
+import com.ispwproject.adoptme.engineering.exception.PastDateException;
 import com.ispwproject.adoptme.model.ShelterModel;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestSendRequest {
+class TestManageRequestController {
     /**
      * FRANCESCA PAVONE SALAFIA
      * Il seguente test va a testare che andando a prelevare il numero di richieste di uno shelter

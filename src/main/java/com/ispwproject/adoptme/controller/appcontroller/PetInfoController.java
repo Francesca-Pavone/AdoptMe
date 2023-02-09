@@ -47,7 +47,7 @@ public class PetInfoController {
     public boolean checkFavorite(PetBean petBean) {
         boolean fav = false;
         if(Session.getCurrentSession().getUserBean() != null)
-            fav = FavoritesDAO.checkFav(petBean.getPetId(), Session.getCurrentSession().getUserBean().getUserId(), petBean.getShelterId());
+            fav = FavoritesDAO.checkFav(petBean.getPetId(), petBean.getShelterId(), Session.getCurrentSession().getUserBean().getUserId());
         return fav;
     }
 

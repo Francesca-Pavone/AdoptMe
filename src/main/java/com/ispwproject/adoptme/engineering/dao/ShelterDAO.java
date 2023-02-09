@@ -1,11 +1,11 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.federica.NoCityFoundException;
-import com.ispwproject.adoptme.engineering.exception.federica.NoSheltersWithThatNameException;
-import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.francesca.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
