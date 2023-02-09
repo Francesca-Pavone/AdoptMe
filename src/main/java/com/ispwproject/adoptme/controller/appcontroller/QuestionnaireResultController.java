@@ -1,10 +1,7 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.engineering.dao.FavoritesDAO;
 import com.ispwproject.adoptme.engineering.exception.federica.NoPetsFoundQuestionnaireException;
-import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.QuestionnaireResultBean;
@@ -18,6 +15,30 @@ import java.util.Map;
 
 public class QuestionnaireResultController {
     public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) {
+        this.generateQuery(questionnaireResultBean);
+
+        List<PetBean> petList = new ArrayList<>();
+        Map<PetModel, Integer> hashMap = new HashMap<>();
+        try { hashMap = PetDAO.retrievePetByQuestionnaire(generateQuery(questionnaireResultBean)); } catch (NoPetsFoundQuestionnaireException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
+        for (Map.Entry<PetModel, Integer> entry : hashMap.entrySet()) {
+            PetModel petModel = entry.getKey();
+            PetBean petBean = new PetBean();
+            petBean.setPetId(petModel.getPetId());
+            petBean.setShelterId(hashMap.get(petModel));
+            petBean.setPetImage(petModel.getPetImage());
+            petBean.setName(petModel.getName());
+            petBean.setType(petModel.getType());
+            petBean.setAge(petModel.getAge());
+            petBean.setGender(petModel.getGender());
+
+            petList.add(petBean);
+        }
+        return petList;
+    }
+
+    public String generateQuery(QuestionnaireResultBean questionnaireResultBean) {
         IQuestionnaireQuery questionnaireQuery;
         if (questionnaireResultBean.isType() == 1) {
             questionnaireQuery = new CatQuery();
@@ -63,28 +84,7 @@ public class QuestionnaireResultController {
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
         questionnaireQuery = addInformation(questionnaireQuery, questionnaireResultBean);
-
-        List<PetBean> petList = new ArrayList<>();
-        Map<PetModel, Integer> hashMap = new HashMap<>();
-        try { hashMap = PetDAO.retrievePetByQuestionnaire(questionnaireQuery.getQuery()); } catch (NoPetsFoundQuestionnaireException e) {
-            ShowExceptionSupport.showExceptionGUI(e.getMessage());
-        }
-        for (Map.Entry<PetModel, Integer> entry : hashMap.entrySet()) {
-            PetModel petModel = entry.getKey();
-            PetBean petBean = new PetBean();
-            petBean.setPetId(petModel.getPetId());
-            petBean.setShelterId(hashMap.get(petModel));
-            petBean.setPetImage(petModel.getPetImage());
-            petBean.setName(petModel.getName());
-            petBean.setType(petModel.getType());
-            petBean.setAge(petModel.getAge());
-            petBean.setGender(petModel.getGender());
-
-            petList.add(petBean);
-
-
-        }
-        return petList;
+        return questionnaireQuery.getQuery();
     }
 
     private IQuestionnaireQuery addInformation(IQuestionnaireQuery questionnaireQuery, QuestionnaireResultBean questionnaireResultBean) {
@@ -111,4 +111,5 @@ public class QuestionnaireResultController {
         questionnaireQuery = new EndDecorator(questionnaireQuery);
         return questionnaireQuery;
     }
+
 }

@@ -120,7 +120,6 @@ public class SimpleQueries {
 
     public static ResultSet checkFav(Statement stmt, int userId, int petId, int shelterId) throws SQLException {
         String sql = "SELECT CASE WHEN EXISTS (SELECT userId, petId, shelterId FROM Favorites WHERE userId = '" + userId + "' AND petId = '" + petId + "' AND shelterId = '" + shelterId + "') THEN 1 ELSE 0 END;";
-        System.out.println(sql);
         return stmt.executeQuery(sql);
     }
 }
