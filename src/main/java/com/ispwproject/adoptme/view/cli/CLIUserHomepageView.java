@@ -48,7 +48,7 @@ public class CLIUserHomepageView {
 
         this.cliUserHomepageControllerCurrent.showShelter(shelter);
     }
-    public void searchCity() throws Exception {
+    public void searchCity() {
         Scanner scanner = new Scanner(System.in);
         PrintSupport.printMessage("\n---------------------------------------- Insert a city ----------------------------------------");
 
@@ -56,7 +56,7 @@ public class CLIUserHomepageView {
         this.cliUserHomepageControllerCurrent.searchCity(city);
     }
 
-    public void searchShelter() throws Exception {
+    public void searchShelter() {
         Scanner scanner = new Scanner(System.in);
         PrintSupport.printMessage("Insert the name of a shelter:");
         String shelterName = scanner.nextLine();

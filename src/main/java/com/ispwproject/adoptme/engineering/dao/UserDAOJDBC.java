@@ -1,21 +1,21 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 
 public class UserDAOJDBC implements UserDAO{
 
 
-    public UserModel retrieveUserById(int userId) throws Exception {
+    public UserModel retrieveUserById(int userId) throws NotFoundException {
         Statement stmt ;
         UserModel user = null;
 
@@ -27,7 +27,7 @@ public class UserDAOJDBC implements UserDAO{
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                throw new Exception("No user find with the id: " + userId);
+                throw new NotFoundException("No user find with the id: " + userId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -44,15 +44,15 @@ public class UserDAOJDBC implements UserDAO{
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
         return user;
     }
 
-    public UserModel retrieveUserByEmail(String email) throws Exception {
-        Statement stmt = null;
+    public UserModel retrieveUserByEmail(String email) throws NotFoundException {
+        Statement stmt;
         UserModel user = null;
 
         try {
@@ -61,7 +61,7 @@ public class UserDAOJDBC implements UserDAO{
             ResultSet resultSet = SimpleQueries.selectUserByEmail(stmt, email);
 
             if (!resultSet.first()) {
-                throw new Exception("No user found with email: " + email);
+                throw new NotFoundException("No user found with email: " + email);
             }
 
             resultSet.first();
@@ -78,7 +78,7 @@ public class UserDAOJDBC implements UserDAO{
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
@@ -86,15 +86,14 @@ public class UserDAOJDBC implements UserDAO{
     }
 
 
-    private UserModel getUserInfo(int userId, ResultSet resultSet, String email) throws SQLException, IOException {
+    private UserModel getUserInfo(int userId, ResultSet resultSet, String email) throws SQLException {
         Blob blob = resultSet.getBlob("profileImg");
-        File profileImg = null;
+        File profileImg;
         try {
             if (blob != null) {
                 profileImg = ImageConverterSupport.fromBlobToFile(blob, "user" + userId);
             } else {
-                Trigger trigger = new Trigger();
-                trigger.imageNotFound();
+                throw new ImageNotFoundException();
             }
         }
         catch (ImageNotFoundException e) {

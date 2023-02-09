@@ -1,11 +1,11 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 import com.ispwproject.adoptme.controller.appcontroller.UserResearchController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
@@ -14,8 +14,8 @@ import com.ispwproject.adoptme.engineering.session.Session;
 
 import java.util.List;
 
-public class CLIUserHomepageController implements CLIGraficController{
-    private final CLIUserHomepageView view;
+public class CLIUserHomepageController {
+    private CLIUserHomepageView cliUserHomepageView;
 
     private static final String SEARCH_CITY = "1";
     private static final String SEARCH_SHELTER = "2";
@@ -26,43 +26,51 @@ public class CLIUserHomepageController implements CLIGraficController{
 
     private static final String MSG_ERROR = "Input not valid. Try with: 1 | 2 | 3";
 
-    public CLIUserHomepageController() {
-        this.view = new CLIUserHomepageView(this);
-    }
-
-    @Override
     public void start() {
-        this.view.run();
+        this.cliUserHomepageView = new CLIUserHomepageView(this);
+        this.cliUserHomepageView.run();
     }
-    public void executeCommand(String input) throws Exception {
+    public void executeCommand(String input) {
         if(Session.getCurrentSession().getUserBean() == null) {
             switch (input) {
-                case QUESTIONNAIRE -> CLIQuestionnaireView.main();
-                case SEARCH_CITY -> this.view.searchCity();
+                case QUESTIONNAIRE -> {
+                    CLIQuestionnaireController cliQuestionnaireController = new CLIQuestionnaireController();
+                    cliQuestionnaireController.start();
+                }
+                case SEARCH_CITY -> this.cliUserHomepageView.searchCity();
 
                 // vai a search shelter
-                case SEARCH_SHELTER -> this.view.searchShelter();
+                case SEARCH_SHELTER -> this.cliUserHomepageView.searchShelter();
                 default ->  {
                     PrintSupport.printError(MSG_ERROR);
                     if (Session.getCurrentSession().getUserBean() != null)
                         PrintSupport.printError(" 4 | 5 | 6");
                     PrintSupport.printError("\n\tPress ENTER to continue");
                     ScannerSupport.waitEnter();
-                    start();
+                    this.start();
                 }
             }
         }
 
         if (Session.getCurrentSession().getUserBean() != null) {
             switch (input) {
-                case QUESTIONNAIRE -> CLIQuestionnaireView.main();
-                case SEARCH_CITY -> this.view.searchCity();
+                case QUESTIONNAIRE -> {
+                    CLIQuestionnaireController cliQuestionnaireController = new CLIQuestionnaireController();
+                    cliQuestionnaireController.start();
+                }
+                case SEARCH_CITY -> this.cliUserHomepageView.searchCity();
                 // vai a search shelter
-                case SEARCH_SHELTER -> this.view.searchShelter();
+                case SEARCH_SHELTER -> this.cliUserHomepageView.searchShelter();
                 case FAVORITES -> {
-                    CLIUserFavoritesController cliUserFavoritesController = new CLIUserFavoritesController();
-                    cliUserFavoritesController.start();
-                    cliUserFavoritesController.setPreviousPage(this.view);
+                    try {
+                        CLIUserFavoritesController cliUserFavoritesController = new CLIUserFavoritesController();
+                        cliUserFavoritesController.setPreviousPage(this);
+                        cliUserFavoritesController.start();
+                    } catch (FavoriteListEmptyException e) {
+                        PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
+                        ScannerSupport.waitEnter();
+                        this.cliUserHomepageView.run();
+                    }
                 }
                 case APPOINTMENTS -> {
                     CLIAppointmentsPageController cliAppointmentsPageController = new CLIAppointmentsPageController();
@@ -83,17 +91,17 @@ public class CLIUserHomepageController implements CLIGraficController{
         cliShelterInfoController.setShelter(shelterBean.getName());
     }
 
-    public void searchCity(String city) throws Exception {
+    public void searchCity(String city) {
         try {
             UserResearchBean userResearchBean = new UserResearchBean();
             userResearchBean.setCityShelter(city);
             UserResearchController userResearchController = new UserResearchController();
             List<ShelterBean> shelterList = userResearchController.searchCity(userResearchBean);
-            this.view.showShelterList(shelterList);
+            this.cliUserHomepageView.showShelterList(shelterList);
         } catch(NoCityFoundException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             ScannerSupport.waitEnter();
-            this.view.run();
+            this.cliUserHomepageView.run();
         }
     }
 

@@ -4,8 +4,8 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
@@ -64,7 +64,7 @@ public class GUIShelterInformationController implements Observer {
 
     }
 
-    public void setData(ShelterBean shelterBean) throws IOException, NoPetsFoundException {
+    public void setData(ShelterBean shelterBean) throws IOException, NotFoundException {
         shelterName.setText(shelterBean.getName());
         Image image;
         if (shelterBean.getShelterImg() != null) {

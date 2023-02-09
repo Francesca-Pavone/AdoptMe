@@ -61,7 +61,7 @@ public class GUISendRequestController implements Observer {
         RequestBean requestBean;
         try {
             if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             if (datePicker.getValue() == null)
                 throw new NoInputException("Date");
             if (timeField.getText() == null || timeField.getText().equals(""))
@@ -72,9 +72,10 @@ public class GUISendRequestController implements Observer {
             ManageRequestController manageRequestController = new ManageRequestController();
             requestBean.register(this);
             manageRequestController.sendRequest(petBean, requestBean);
-        } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException | DuplicateRequestException e) {
+        } catch (NoInputException | DateFormatException | TimeFormatException | NotFoundException | PastDateException |
+                 DuplicateRequestException e) {
             ShowExceptionSupport.showExceptionGUI(e.getMessage());
-        } catch (NoAccoutException e) {
+        } catch (NoAccountException e) {
             ShowExceptionSupport.showNeedAccountGUI();
         }
 
@@ -85,7 +86,7 @@ public class GUISendRequestController implements Observer {
 
 
 
-    public void goToShelterPage(ActionEvent event) throws IOException, NoPetsFoundException {
+    public void goToShelterPage(ActionEvent event) throws IOException, NotFoundException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("ShelterInformation.fxml"));
         Parent root = fxmlLoader.load();

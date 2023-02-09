@@ -2,12 +2,12 @@ package com.ispwproject.adoptme.engineering.dao;
 
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
-import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
+import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
-import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
@@ -16,7 +16,9 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PetDAO {
 
@@ -28,7 +30,7 @@ public class PetDAO {
         //costruttore privato
     }
 
-    public static List<PetModel> retrievePetByShelterId(ShelterModel shelterModel) throws SQLException, NoPetsFoundException {
+    public static List<PetModel> retrievePetByShelterId(ShelterModel shelterModel) throws SQLException, NotFoundException {
         Statement stmt;
         List<PetModel> petList = new ArrayList<>();
         PetModel pet;
@@ -40,7 +42,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new NoPetsFoundException();
+                throw new NotFoundException("pets for this shelter");
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -74,8 +76,6 @@ public class PetDAO {
                 pet.setDayOfBirth(dayOfBirth);
 
                 pet.setPetCompatibility(new PetCompatibility());
-                if(Session.getCurrentSession().getUserBean() != null)
-                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterModel.getId()));
 
                 petList.add(pet);
             }
@@ -85,15 +85,15 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (NoPetsFoundException e) {
-            throw new NoPetsFoundException();
+        catch (ConnectionDbException e){
+            e.printStackTrace();
         }
         return petList;
     }
 
-    public static List<PetModel> retrievePetByQuestionnaire(String query) throws Exception {
+    public static HashMap<PetModel, Integer> retrievePetByQuestionnaire(String query) throws NoPetsFoundQuestionnaireException {
         Statement stmt;
-        List<PetModel> petList = new ArrayList<>();
+        HashMap<PetModel, Integer> hashMap = new HashMap<>();
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -103,7 +103,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No pets found for that questionnaire results");
+                throw new NoPetsFoundQuestionnaireException();
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -114,6 +114,7 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
+
                 File petImage = getPetImage(petName, blob);
 
                 String petAge = resultSet.getString("age");
@@ -132,14 +133,11 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
                 pet.setAge(petAge);
-                if(Session.getCurrentSession().getUserBean() != null)
-                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
-
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
-                petList.add(pet);
+                hashMap.put(pet, shelterId);
 
             }
             while (resultSet.next()) ;
@@ -148,15 +146,14 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
-        return petList;
+        return hashMap;
     }
 
 
-
-    public static PetModel retrievePetById(int petId, int shelterId) throws Exception {
+    public static PetModel retrievePetById(int petId, int shelterId) throws NotFoundException {
         Statement stmt;
         PetModel pet = null;
         try {
@@ -167,7 +164,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No pets found for the shelter with id: "+shelterId);
+                throw new NotFoundException("No pets found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -178,6 +175,7 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
+
                 File petImage = getPetImage(petName, blob);
 
                 int petType = resultSet.getInt("type");
@@ -192,7 +190,6 @@ public class PetDAO {
                 pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
-                //pet.setAge(petAge);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
@@ -204,17 +201,17 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
         return pet;
     }
 
-    public static UserFavoritesPetsList retrieveUserFavoritesPets(UserModel userModel, Observer observer) throws Exception {
-        Statement stmt = null;
-        List<PetModel> petList = new ArrayList<PetModel>();
-        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, petList, userModel);
+    public static UserFavoritesPetsList retrieveUserFavoritesPets(UserModel userModel, Observer observer) throws NotFoundException {
+        Statement stmt;
+        Map<PetModel, Integer> map = new HashMap<>();
+        UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel, map);
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
@@ -224,7 +221,7 @@ public class PetDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No favorites pets found for the user with id: "+userModel.getId());
+                throw new NotFoundException("No favorites pets found for the user with id: "+userModel.getId());
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -235,6 +232,7 @@ public class PetDAO {
                 String petName = resultSet.getString("name");
 
                 Blob blob = resultSet.getBlob(IMG_SRC);
+
                 File petImage = getPetImage(petName, blob);
 
                 int petGender = resultSet.getInt(GENDER);
@@ -252,14 +250,10 @@ public class PetDAO {
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
 
-                if(Session.getCurrentSession().getUserBean() != null)
-                    pet.setFav(FavoritesDAO.checkFav(petId, Session.getCurrentSession().getUserBean().getUserId(), petShelter));
-
-
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
-                userFavoritesPetsList.addPet(pet);
+                userFavoritesPetsList.addPet(pet, petShelter);
             }
             while (resultSet.next()) ;
 
@@ -267,21 +261,20 @@ public class PetDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return userFavoritesPetsList;
     }
 
     private static File getPetImage(String petName, Blob blob) {
-        File petImage = null;
+        File petImage;
         try {
             if (blob != null) {
                 petImage = ImageConverterSupport.fromBlobToFile(blob, petName);
             }
             else {
-                Trigger trigger = new Trigger();
-                trigger.imageNotFound();
+                throw new ImageNotFoundException();
             }
         }
         catch (ImageNotFoundException e) {

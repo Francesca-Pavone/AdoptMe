@@ -24,14 +24,18 @@ public class CLIPetInformationView {
 
         PrintSupport.printMessage("\n\tGeneral informations:\n" + generalInfo);
         PrintSupport.printMessage("\tCompatibility:\n" + compatibility);
-        showCommand();
     }
 
-    public void showCommand(){
+    public void showCommand(boolean petIsFav){
         PrintSupport.printSeparatorLine();
         if (Session.getCurrentSession().getShelterBean() == null){
-            PrintSupport.printMessage("1) Request to meet this pet\n2) Add this pet to favorites\n3) Go to Homepage\n\nInsert the number:");
+            PrintSupport.printMessage("1) Request to meet this pet");
+            if(petIsFav)
+                PrintSupport.printMessage("\n2) Remove this pet from favorites");
+            else
+                PrintSupport.printMessage("\n2) Add this pet to favorites");
 
+            PrintSupport.printMessage("\n3) Go to Homepage\n\nInsert the number:");
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             this.controller.executeCommand(input);

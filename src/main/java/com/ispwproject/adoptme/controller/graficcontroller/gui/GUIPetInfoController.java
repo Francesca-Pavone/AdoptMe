@@ -6,8 +6,10 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -106,10 +108,6 @@ public class GUIPetInfoController implements Observer {
     @FXML
     private HBox infoHBox;
     @FXML
-    private HBox nameFavHBox;
-    @FXML
-    private ImageView favImage;
-    @FXML
     private Button btnFav;
 
     private boolean fav = false;
@@ -120,7 +118,7 @@ public class GUIPetInfoController implements Observer {
     private Parent currentPage;
 
     private Observer favObserver;
-    private Pane pane;
+    private Pane panePetItem;
 
     public void setPreviousPage(Parent previousPage) {
         this.previousPage = previousPage;
@@ -135,8 +133,6 @@ public class GUIPetInfoController implements Observer {
     }
 
     public void setPetInfo(PetBean petBean) throws Exception {
-
-        nameFavHBox.getChildren().removeAll(favImage);
 
         PetInfoController petInfoControllerA = new PetInfoController();
 
@@ -153,7 +149,6 @@ public class GUIPetInfoController implements Observer {
             guiSendRequestController.setContainerPage(currentPage);
             infoHBox.getChildren().add(pane);
             btnFav.setVisible(true);
-
             if(!fav) {
                 btnFav.setText("Add to favorites");
             }
@@ -335,14 +330,25 @@ public class GUIPetInfoController implements Observer {
     }
 
     public void addPetToFavorites() {
-        UserBean userBean = Session.getCurrentSession().getUserBean();
-        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
-        if(fav) {
-            addToFavoritesController.removePet(userBean, this, this.pane);
-            addToFavoritesController.removePet(userBean, favObserver, this.pane);
-        } else {
-            addToFavoritesController.addPet(userBean, this, this.pane);
+        PetInfoController petInfoController = new PetInfoController();
+        fav = petInfoController.checkFavorite(petBean);
+        try {
+            if (Session.getCurrentSession().getUserBean() == null)
+                throw new NoAccountException();
+            else {
+                UserBean userBean = Session.getCurrentSession().getUserBean();
+                AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+                if (fav) {
+                    addToFavoritesController.removePet(userBean, this, this.panePetItem);
+                    addToFavoritesController.removePet(userBean, favObserver, this.panePetItem);
+                } else {
+                    addToFavoritesController.addPet(userBean, this, this.panePetItem);
+                }
+            }
+        }catch (NoAccountException e){
+            ShowExceptionSupport.showNeedAccountGUI();
         }
+
     }
 
     @Override
@@ -359,7 +365,7 @@ public class GUIPetInfoController implements Observer {
         // ignore
     }
 
-    public void setPane(Pane pane) {
-        this.pane = pane;
+    public void setPanePetItem(Pane panePetItem) {
+        this.panePetItem = panePetItem;
     }
 }

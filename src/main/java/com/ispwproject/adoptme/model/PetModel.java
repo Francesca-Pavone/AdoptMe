@@ -23,10 +23,8 @@ public abstract class PetModel {
     protected String disabilityType;
 
     protected PetCompatibility petCompatibility;
-    protected boolean fav; //TODO vedere se lasciarlo qua
 
-
-    public PetModel() {
+    protected PetModel() {
     }
 
     protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility) {
@@ -43,12 +41,6 @@ public abstract class PetModel {
         this.name = name;
         this.petImage = petImage;
         this.petCompatibility = petCompatibility;
-    }
-
-
-    //TODO vedere dove uso questo metodo e trovare un altro modo per ricavare lo shelter
-    public ShelterModel getShelter() {
-        return null;
     }
 
 
@@ -182,14 +174,6 @@ public abstract class PetModel {
 
     public void setPetCompatibility(PetCompatibility petCompatibility) {
         this.petCompatibility = petCompatibility;
-    }
-
-    public boolean isFav() {
-        return fav;
-    }
-
-    public void setFav(boolean fav) {
-        this.fav = fav;
     }
 
 }

@@ -5,38 +5,22 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIUserFavoritesView;
-import com.ispwproject.adoptme.view.cli.CLIUserHomepageView;
 
 import java.util.List;
 
 
-public class CLIUserFavoritesController implements CLIGraficController, Observer {
-    private final CLIUserFavoritesView view;
+public class CLIUserFavoritesController implements Observer {
+    private CLIUserFavoritesView cliUserFavoritesView;
     private List<PetBean> petBeanList;
-    private CLIUserHomepageView previousPage;
+    private CLIUserHomepageController previousPage;
 
-    public CLIUserFavoritesController() {
-        this.view = new CLIUserFavoritesView(this);
-    }
-    public void setPreviousPage(CLIUserHomepageView previousPage) {
-        this.previousPage = previousPage;
-    }
-    @Override
-    public void start() {
+    public void start() throws FavoriteListEmptyException {
+        this.cliUserFavoritesView = new CLIUserFavoritesView(this);
 
         ShowUserFavoritesController showUserFavoritesController = new ShowUserFavoritesController();
-        try {
-            this.petBeanList = showUserFavoritesController.getPetList(this);
-            this.view.run();
-
-        } catch (FavoriteListEmptyException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage());
-            ScannerSupport.waitEnter();
-            this.previousPage.run();
-        }
+        this.petBeanList = showUserFavoritesController.getPetList(this);
+        this.cliUserFavoritesView.run();
 
     }
 
@@ -49,7 +33,7 @@ public class CLIUserFavoritesController implements CLIGraficController, Observer
     public void update2(Object object1, Object object2){
         this.petBeanList.remove((int)object2 - 1);
         PrintSupport.printMessage("\n");
-        this.view.run();
+        this.cliUserFavoritesView.run();
     }
 
     public void getPet(){
@@ -60,16 +44,15 @@ public class CLIUserFavoritesController implements CLIGraficController, Observer
                 case 1 -> "Female";
                 default -> "Male";
             });
-            this.view.printPet(petBean.getName(), gender, petBean.getAge(), i);
+            this.cliUserFavoritesView.printPet(petBean.getName(), gender, petBean.getAge(), i);
             i++;
         }
-        this.view.printCommands();
+        this.cliUserFavoritesView.printCommands();
     }
 
     public void executeCommand(int i) {
         if (i == 0) {
-            CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
-            cliShelterInfoController.goBack();
+            this.previousPage.start();
         }
         else {
             PetBean petBean = this.petBeanList.get(i-1);
@@ -81,5 +64,7 @@ public class CLIUserFavoritesController implements CLIGraficController, Observer
         }
     }
 
-
+    public void setPreviousPage(CLIUserHomepageController cliUserHomepageController) {
+        this.previousPage = cliUserHomepageController;
+    }
 }

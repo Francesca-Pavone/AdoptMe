@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterPetsList extends Subject {
-    private List<PetModel> petList = new ArrayList<>();
+    private final List<PetModel> petList = new ArrayList<>();
     private ShelterModel shelter;
 
     public ShelterPetsList(Observer observer, List<PetModel> petList, ShelterModel shelter) {
@@ -34,14 +34,6 @@ public class ShelterPetsList extends Subject {
         petBean.setYearOfBirth(petModel.getYearOfBirth());
 
         this.notifyObservers(petBean);
-    }
-
-    public List<PetModel> getPetList() {
-        return petList;
-    }
-
-    public void setPetList(List<PetModel> petList) {
-        this.petList = petList;
     }
 
     public ShelterModel getShelter() {

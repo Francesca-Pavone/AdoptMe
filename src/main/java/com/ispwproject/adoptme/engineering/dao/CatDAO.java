@@ -1,7 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.Trigger;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
@@ -17,7 +18,7 @@ public class CatDAO {
     //Costruttore privato
     private CatDAO() {}
 
-    public static CatModel retrieveCatById(int catId, int shelterId)  throws Exception {
+    public static CatModel retrieveCatById(int catId, int shelterId) {
         Statement stmt;
         CatModel cat = null;
 
@@ -29,7 +30,7 @@ public class CatDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("Cat with the id " + catId + " NOT found for the shelter with id: "+shelterId);
+                throw new NotFoundException("Cat with the id " + catId + " NOT found for the shelter with id: "+shelterId);
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -84,9 +85,6 @@ public class CatDAO {
                 cat.setDisabilityType(disabilityType);
                 cat.setTestFiv(testFiv);
                 cat.setTestFelv(testFelv);
-                if(Session.getCurrentSession().getUserBean() != null)
-                    cat.setFav(FavoritesDAO.checkFav(catId, Session.getCurrentSession().getUserBean().getUserId(), shelterId));
-
 
             }while(resultSet.next());
 
@@ -94,15 +92,16 @@ public class CatDAO {
             resultSet.close();
 
         }
-        catch (SQLException e) {
+        catch (SQLException | NotFoundException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return cat;
     }
 
 
-    public static int saveCat(CatModel catModel)  {
+    public static int saveCat(CatModel catModel) throws SQLException {
         Statement stmt;
+        PreparedStatement preparedStatement = null;
         int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
         int catId = 1;
@@ -122,22 +121,17 @@ public class CatDAO {
 
             // STEP 4.2: creazione ed esecuzione della query
 
-            PreparedStatement preparedStatement = ConnectionDB.insertCat();
+            preparedStatement = ConnectionDB.insertCat();
             preparedStatement.setInt(1, catId);
             preparedStatement.setInt(2, shelterId);
             preparedStatement.setString(3, catModel.getName());
 
-            try {
-                if (catModel.getPetImage() == null) {
-                    Trigger trigger = new Trigger();
-                    trigger.imageNotFound();
-                }
-                InputStream inputStream = new FileInputStream(catModel.getPetImage());
-                preparedStatement.setBlob(4, inputStream);
+            if (catModel.getPetImage() == null) {
+                throw new ImageNotFoundException();
             }
-            catch (ImageNotFoundException | FileNotFoundException e){
-                preparedStatement.setNull(4, Types.BLOB);
-            }
+            InputStream inputStream = new FileInputStream(catModel.getPetImage());
+            preparedStatement.setBlob(4, inputStream);
+
 
             preparedStatement.setInt(5, catModel.getGender());
             preparedStatement.setInt(6, catModel.getDayOfBirth());
@@ -171,7 +165,10 @@ public class CatDAO {
             preparedStatement1.executeUpdate();
 
         }
-        catch (SQLException e) {
+        catch (ImageNotFoundException | FileNotFoundException e){
+            preparedStatement.setNull(4, Types.BLOB);
+        }
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return catId;

@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
-import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
@@ -24,18 +23,20 @@ public class ShowShelterPetsController {
 
     public ShelterBean getShelter(String shelterName) throws NotFoundException, NoSheltersWithThatNameException {
         int shelterId = ShelterDAO.retrieveIdByShelterName(shelterName);
-        ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
-        return new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
+        ShelterModel shelterModelCurrent = ShelterDAO.retrieveShelterById(shelterId);
+        ShelterBean shelterBean = new ShelterBean(shelterModelCurrent.getId(), shelterModelCurrent.getShelterName(), shelterModelCurrent.getPhoneNumber(), shelterModelCurrent.getAddress(), shelterModelCurrent.getCity(), shelterModelCurrent.getWebSite(), shelterModelCurrent.getEmail());
+        shelterBean.setShelterImg(shelterModelCurrent.getImage());
+        return shelterBean;
     }
 
-    public void getPetList(Observer observer) throws NoPetsFoundException {
+    public void getPetList(Observer observer) throws NotFoundException {
         if(Session.getCurrentSession().getShelterBean() != null)
             this.shelterModel = new ShelterModel(Session.getCurrentSession().getShelterBean().getShelterId());
         try {
             new ShelterPetsList(observer, PetDAO.retrievePetByShelterId(shelterModel), shelterModel);
         } catch (SQLException se) {
-            // Errore durante l'apertura della connessione
             se.printStackTrace();
         }
+
     }
 }

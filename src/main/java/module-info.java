@@ -24,7 +24,7 @@ module com.ispwproject.adoptme {
     exports com.ispwproject.adoptme.controller.appcontroller;
     exports com.ispwproject.adoptme.engineering.bean;
     exports com.ispwproject.adoptme.engineering.dao;
-    exports com.ispwproject.adoptme.engineering.exception;
     exports com.ispwproject.adoptme.engineering.session;
     exports com.ispwproject.adoptme.engineering.observer.concretesubjects;
+    exports com.ispwproject.adoptme.engineering.exception;
 }

@@ -7,6 +7,8 @@ import com.ispwproject.adoptme.engineering.dao.DogDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 
+import java.sql.SQLException;
+
 public class AddPetController {
 
     private final PetBean petBean;
@@ -27,7 +29,11 @@ public class AddPetController {
             DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize());
             setCommonInfo(dogModel);
 
-            petId = DogDAO.saveDog(dogModel);
+            try {
+                petId = DogDAO.saveDog(dogModel);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             dogModel.setPetId(petId);
             shelterPetsList.addPet(dogModel);
 
@@ -37,7 +43,11 @@ public class AddPetController {
             CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility);
             setCommonInfo(catModel);
 
-            petId = CatDAO.saveCat(catModel);
+            try {
+                petId = CatDAO.saveCat(catModel);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             catModel.setPetId(petId);
             shelterPetsList.addPet(catModel);
         }

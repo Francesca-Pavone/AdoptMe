@@ -16,7 +16,7 @@ public class GUINeedAccountToContinueController {
     }
 
     public void goToLogin(ActionEvent event) throws IOException {
-        Session.getCurrentSession().closeSession();
+        Session.closeSession();
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Main.getStage().setScene(scene);
@@ -24,8 +24,8 @@ public class GUINeedAccountToContinueController {
     }
 
     public void goToRegistration(ActionEvent event) throws IOException {
-        Session.getCurrentSession().closeSession();
-        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSIgnUpPage.fxml"));
+        Session.closeSession();
+        FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserSignUpPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Main.getStage().setScene(scene);
         ((Node)event.getSource()).getScene().getWindow().hide();

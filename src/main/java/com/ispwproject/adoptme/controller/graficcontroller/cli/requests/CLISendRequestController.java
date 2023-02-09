@@ -49,21 +49,14 @@ public class CLISendRequestController implements CLIGraficController, Observer {
             try {
                 manageRequestController.sendRequest(this.petBean, this.requestBean);
             }
-            catch (PastDateException e) {
+            catch (PastDateException | DuplicateRequestException | NotFoundException e) {
                 ShowExceptionSupport.showExceptionCLI(e.getMessage());
                 start();
-            }
-            catch (Exception e){
-                e.printStackTrace();
             }
         }
         else if (command.equals(BACK)){
             CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
-            try {
-                cliPetInformationController.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            cliPetInformationController.start();
         }
 
     }
@@ -72,12 +65,7 @@ public class CLISendRequestController implements CLIGraficController, Observer {
     public void update(Object object) {
         view.showSuccessful();
         CLIPetInformationController cliPetInformationController = new CLIPetInformationController(this.petBean);
-        try{
-            cliPetInformationController.start();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        cliPetInformationController.start();
     }
 
     @Override

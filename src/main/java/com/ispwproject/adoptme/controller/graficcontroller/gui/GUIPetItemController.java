@@ -83,7 +83,7 @@ public class GUIPetItemController {
         petInformationControllerG.setPreviousPage(pageContainer);
         petInformationControllerG.setCurrentPage(root);
         petInformationControllerG.setPetInfo(petBean);
-        petInformationControllerG.setPane(pane);
+        petInformationControllerG.setPanePetItem(pane);
         petInformationControllerG.setFavObserver(this.favObserver);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

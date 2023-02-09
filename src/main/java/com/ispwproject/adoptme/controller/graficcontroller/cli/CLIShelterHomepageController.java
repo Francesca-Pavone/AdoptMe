@@ -24,7 +24,7 @@ public class CLIShelterHomepageController implements CLIGraficController{
     public void executeCommand(String input) throws CommandNotFoundException {
         switch (input){
             case ADD_PET, VIEW_PETS, SETTINGS -> {
-                PrintSupport.printMessage("Funzionalità realizzata solo con la prima interfaccia\n\n");
+                PrintSupport.printMessage("Functionality realized just with the first interface\n\n");
                 view.run();
             }
             case APPOINTMENTS -> {

@@ -22,7 +22,7 @@ public class ManageRequestController {
         try {
             shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
         }catch (NotFoundException e) {
-            throw new NotFoundException("Error during sending request process");
+            throw new NotFoundException("during sending request process");
         }
 
         UserBean userBean = Session.getCurrentSession().getUserBean();
@@ -56,11 +56,10 @@ public class ManageRequestController {
 
         RequestDAO.saveRequest(requestModel);
 
-        //requestModel.notifyObservers(null);
         requestBean.notifyObservers(null);
     }
 
-    public void deleteRequest(RequestBean request, Object object) throws Exception {
+    public void deleteRequest(RequestBean request, Object object) throws NotFoundException {
         UserDAO userDAO;
         if (LocalTime.now().getMinute()%2 == 0) {
             userDAO = new UserDAOJDBC();
@@ -85,7 +84,7 @@ public class ManageRequestController {
             RequestDAO.updateRequestStatus(requestModel);
     }
 
-    public void acceptRequest(RequestBean request, Object object) throws Exception {
+    public void acceptRequest(RequestBean request, Object object) throws NotFoundException {
         UserDAO userDAO;
         if (LocalTime.now().getMinute()%2 == 0) {
             userDAO = new UserDAOJDBC();
@@ -106,12 +105,17 @@ public class ManageRequestController {
         RequestDAO.updateRequestStatus(requestModel);
     }
 
-    public void updateRequest(RequestBean request, Object object) throws Exception {
+    public void updateRequest(RequestBean request, Object object) throws NotFoundException, PastDateException {
         UserDAO userDAO;
         if (LocalTime.now().getMinute()%2 == 0) {
             userDAO = new UserDAOJDBC();
         } else {
             userDAO = new UserDAOCSV();
+        }
+
+        LocalDate date = DateTimeSupport.fromStringToLocalDate(request.getDate());
+        if (date.isBefore(LocalDate.now())){
+            throw new PastDateException(request.getDate());
         }
 
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
@@ -128,8 +132,6 @@ public class ManageRequestController {
 
         RequestModel requestModel = new RequestModel(request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
         requestModel.setShelter(shelterModel);
-        //requestModel.register(itemObserver);
-
 
         RequestDAO.modifyRequest(requestModel);
     }

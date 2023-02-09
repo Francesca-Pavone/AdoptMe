@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIShelterSettingsController">
-   <Pane layoutY="10.0" prefHeight="114.0" prefWidth="1109.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.topAnchor="0.0" />
+   <Pane layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32; -fx-opacity: 0.79;" AnchorPane.topAnchor="0.0" />
    <VBox alignment="TOP_CENTER" prefHeight="710.0" prefWidth="790.0">
       <children>
          <Button mnemonicParsing="false" onAction="#signOut" stylesheets="@style.css">
@@ -151,7 +151,7 @@
                      </TextField>
                   </children>
                </HBox>
-               <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="button1" stylesheets="@style.css" text="Confirm" textFill="WHITE">
+               <Button mnemonicParsing="false" onAction="#notDeveloped" prefHeight="30.0" prefWidth="150.0" styleClass="button1" stylesheets="@style.css" text="Confirm" textFill="WHITE">
                   <font>
                      <Font name="Arial Bold" size="16.0" />
                   </font>
@@ -212,12 +212,12 @@
                </HBox>
                <HBox alignment="BOTTOM_LEFT">
                   <children>
-                     <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" styleClass="button1" stylesheets="@style.css" text="Confirm" textFill="WHITE">
+                     <Button mnemonicParsing="false" onAction="#notDeveloped" prefHeight="30.0" prefWidth="150.0" styleClass="button1" stylesheets="@style.css" text="Confirm" textFill="WHITE">
                         <font>
                            <Font name="Arial Bold" size="16.0" />
                         </font>
                      </Button>
-                     <Button mnemonicParsing="false" stylesheets="@style.css" text="Forgot password?" underline="true">
+                     <Button mnemonicParsing="false" onAction="#notDeveloped" stylesheets="@style.css" text="Forgot password?" underline="true">
                         <font>
                            <Font name="Arial Bold" size="14.0" />
                         </font>

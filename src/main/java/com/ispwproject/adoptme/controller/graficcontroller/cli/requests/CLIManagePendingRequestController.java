@@ -3,9 +3,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli.requests;
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.DateFormatException;
-import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
+import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLIManagePendingRequestView;
 
@@ -21,7 +19,6 @@ public class CLIManagePendingRequestController implements CLIGraficController {
     public CLIManagePendingRequestController(RequestBean requestBean) {
         this.requestBean = requestBean;
         this.view = new CLIManagePendingRequestView(this);
-
     }
 
     @Override
@@ -41,15 +38,16 @@ public class CLIManagePendingRequestController implements CLIGraficController {
             case DELETE -> annulRequest();
 
             case MODIFY -> {
+                String date = requestBean.getDate();
+                String time = requestBean.getTime();
                 setNewDate();
                 setNewTime();
-                modifyRequest();
+                modifyRequest(date, time);
             }
 
             case BACK -> this.previousPage.showAppointments(this.requestBean.getUserName());
 
             default -> throw new CommandNotFoundException();
-
         }
     }
 
@@ -59,24 +57,26 @@ public class CLIManagePendingRequestController implements CLIGraficController {
             this.requestBean.register(this.previousPage);
             try {
                 manageRequestController.acceptRequest(this.requestBean, this.requestBean);
-            } catch (Exception e){
-                e.printStackTrace();
+            } catch (NotFoundException e) {
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
             }
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());
 
     }
 
-    public void modifyRequest()  {
-
-        if (view.askConfirmation() == 1){
-            ManageRequestController manageRequestController = new ManageRequestController();
-            this.requestBean.register(this.previousPage);
-            try {
+    private void modifyRequest(String date, String time) {
+        try {
+            if (requestBean.getDate().equals(date) && requestBean.getTime().equals(time))
+                throw new DuplicateRequestException();
+            if (view.askConfirmation() == 1){
+                ManageRequestController manageRequestController = new ManageRequestController();
+                this.requestBean.register(this.previousPage);
                 manageRequestController.updateRequest(requestBean, requestBean);
-            }catch (Exception e){
-                e.printStackTrace();
             }
+        }
+        catch (PastDateException | NotFoundException | DuplicateRequestException e){
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());
     }
@@ -111,8 +111,8 @@ public class CLIManagePendingRequestController implements CLIGraficController {
             this.requestBean.register(this.previousPage);
             try {
                 manageRequestController.deleteRequest(this.requestBean, this.requestBean);
-            } catch (Exception e){
-                e.printStackTrace();
+            } catch (NotFoundException e){
+                ShowExceptionSupport.showExceptionCLI(e.getMessage());
             }
         }
         this.previousPage.showAppointments(this.requestBean.getUserName());

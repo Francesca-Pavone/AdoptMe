@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.view.cli;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterSettingsController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
@@ -31,6 +32,9 @@ public class CLIShelterSettingsView {
         }
         catch (CommandNotFoundException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage() + "1 | 2 | 3 | 4 | 5 | 6 | 7\n\tPress ENTER to continue");
+        } catch (NotDevelopedException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            run();
         }
     }
 }

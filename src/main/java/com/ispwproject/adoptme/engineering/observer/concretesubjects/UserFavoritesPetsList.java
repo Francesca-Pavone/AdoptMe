@@ -6,18 +6,20 @@ import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.UserModel;
 import com.ispwproject.adoptme.engineering.observer.Subject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserFavoritesPetsList extends Subject {
-    private List<PetModel> petList = new ArrayList<>();
-    private UserModel user;
 
-    public UserFavoritesPetsList(Observer observer, List<PetModel> petList, UserModel user) throws Exception {
+    private final UserModel user;
+    private Map<PetModel, Integer> hashMap;
+
+    public UserFavoritesPetsList(Observer observer, UserModel user, Map<PetModel, Integer> hashmap) {
         super(observer);
         this.user = user;
-        for(PetModel petModel: petList) {
-            this.addPet(petModel);
+        this.hashMap = hashmap;
+        for(Map.Entry<PetModel, Integer> entry: hashmap.entrySet()) {
+            PetModel petModel = entry.getKey();
+            this.addPet(petModel, hashmap.get(petModel));
         }
     }
 
@@ -27,26 +29,25 @@ public class UserFavoritesPetsList extends Subject {
     }
 
 
-    public void addPet(PetModel petModel){
-        this.petList.add(petModel);
-        PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+    public void addPet(PetModel petModel, int shelterId){
+        if(this.hashMap!= null)
+            this.hashMap.put(petModel, shelterId);
+        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
         this.notifyObservers(petBean);
     }
 
-    public void removePet(PetModel petModel){
-        this.petList.remove(petModel);
-        PetBean petBean = new PetBean(petModel.getPetId(), petModel.getShelter().getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+    public void removePet(PetModel petModel, int shelterId){
+        if(this.hashMap!= null)
+            this.hashMap.remove(petModel, shelterId);
+        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
         this.notifyObservers(petBean);
     }
 
-
-
-
-    public List<PetModel> getPetList() {
-        return petList;
+    public Map<PetModel, Integer> getHashMap() {
+        return hashMap;
     }
 
-    public void setPetList(List<PetModel> petList) {
-        this.petList = petList;
+    public void setHashMap(Map<PetModel, Integer> hashMap) {
+        this.hashMap = hashMap;
     }
 }

@@ -2,7 +2,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
+import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +40,14 @@ public class GUIUserSettingsController {
     @FXML
     private PasswordField textFieldPsw;
 
+    public void notDeveloped() {
+        try {
+            throw new NotDevelopedException();
+        }
+        catch (NotDevelopedException e){
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
+    }
     public void loadImage(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser=new FileChooser();
@@ -70,7 +80,7 @@ public class GUIUserSettingsController {
         stage.setScene(scene);
     }
 
-    public void initialize() {
+    public void initialize() throws FileNotFoundException {
         UserBean userBean = Session.getCurrentSession().getUserBean();
         labelNameSurname.setText(userBean.getName() + " " + userBean.getSurname());
         labelEmail.setText(userBean.getEmail());
@@ -78,5 +88,8 @@ public class GUIUserSettingsController {
         textFieldSurname.setPromptText(userBean.getSurname());
         textFieldEmail.setPromptText(userBean.getEmail());
         textFieldPsw.setPromptText("******");
+        InputStream inputStream = new FileInputStream(Session.getCurrentSession().getUserBean().getProfileImg());
+        Image image = new Image(inputStream);
+        userImg.setImage(image);
     }
 }

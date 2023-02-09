@@ -113,8 +113,8 @@ public class RequestBean extends Subject {
     }
 
     public void setDate(String date) throws DateFormatException {
-        String date_regex = "^(((0[1-9]|[12][0-9]|3[01])-(0[13578]|1[02])|(0[1-9]|[12][0-9]|30)-(0[469]|11)|(0[1-9]|1\\d|2[0-8])-02)-\\d{4}|29-02-(\\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[13579][26])00))$";
-        if (!Pattern.compile(date_regex).matcher(date).matches())
+        String dateRegex = "^(((0[1-9]|[12]\\d|3[01])-(0[13578]|1[02])|(0[1-9]|[12]\\d|30)-(0[469]|11)|(0[1-9]|1\\d|2[0-8])-02)-\\d{4}|29-02-(\\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[13579][26])00))$";
+        if (!Pattern.compile(dateRegex).matcher(date).matches())
             throw new DateFormatException(date);
         this.date = date;
     }
@@ -124,8 +124,8 @@ public class RequestBean extends Subject {
     }
 
     public void setTime(String time) throws TimeFormatException {
-        String time_regex = "\\b([01]?[0-9]|2[0-3]):[0-5][0-9]";
-        if (!Pattern.compile(time_regex).matcher(time).matches())
+        String timeRegex = "\\b([01]?\\d|2[0-3]):[0-5]\\d";
+        if (!Pattern.compile(timeRegex).matcher(time).matches())
             throw new TimeFormatException(time);
         this.time = time;
     }

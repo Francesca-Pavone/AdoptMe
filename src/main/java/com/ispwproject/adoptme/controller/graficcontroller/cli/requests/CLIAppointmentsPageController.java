@@ -5,9 +5,12 @@ import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIGraficControll
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterHomepageController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
+import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.requests.CLIAppointmentsPageView;
 
 import java.util.ArrayList;
@@ -33,7 +36,11 @@ public class CLIAppointmentsPageController implements CLIGraficController, Obser
             ownerName = session.getShelterBean().getName();
 
         ShowRequestsController showRequestsController = new ShowRequestsController();
-        showRequestsController.getRequestList(this);
+        try {
+            showRequestsController.getRequestList(this);
+        } catch (NotFoundException | DateFormatException | TimeFormatException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+        }
         showAppointments(ownerName);
 
         this.view.showCommands();

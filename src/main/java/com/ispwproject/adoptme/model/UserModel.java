@@ -7,9 +7,7 @@ public class UserModel extends GenericUserModel {
 
     private String name;
     private String surname;
-
-
-
+    
     public UserModel(int id, File profileImg, String name, String surname, String email) {
         super(id, profileImg,0, email);
         this.name = name;

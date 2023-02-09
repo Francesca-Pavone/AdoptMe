@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.view.cli;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserSettingsController;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
@@ -27,8 +28,13 @@ public class CLIUserSettingsView {
         String inputLine = scanner.nextLine();
         try {
             this.controller.executeCommand(inputLine);
-        } catch (CommandNotFoundException e) {
+        }
+        catch (CommandNotFoundException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage() + "1 | 2 | 3 | 4 | 5\n\tPress ENTER to continue");
+        }
+        catch (NotDevelopedException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            run();
         }
     }
 }

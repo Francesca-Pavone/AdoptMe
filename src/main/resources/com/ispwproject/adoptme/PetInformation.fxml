@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController">
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetInfoController">
    <Pane layoutX="319.0" layoutY="10.0" prefHeight="114.0" prefWidth="790.0" style="-fx-background-color: #C89C32;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <Label fx:id="labelFav" alignment="CENTER" layoutX="712.0" layoutY="48.0" prefHeight="36.0" prefWidth="369.0" textAlignment="CENTER" textFill="#34665a">
       <font>
@@ -48,18 +54,11 @@
                </ImageView>
             </children>
          </Pane>
-         <HBox fx:id="nameFavHBox" alignment="CENTER" spacing="15.0">
-            <VBox.margin>
-               <Insets bottom="20.0" top="10.0" />
-            </VBox.margin>
-            <children>
-               <Label fx:id="nameTitle" text="Aron">
-                  <font>
-                     <Font name="Arial Black" size="24.0" />
-                  </font>
-               </Label>
-            </children>
-         </HBox>
+         <Label fx:id="nameTitle" text="Aron">
+            <font>
+               <Font name="Arial Black" size="24.0" />
+            </font>
+         </Label>
          <HBox fx:id="infoHBox" alignment="TOP_CENTER" spacing="150.0">
             <VBox.margin>
                <Insets />

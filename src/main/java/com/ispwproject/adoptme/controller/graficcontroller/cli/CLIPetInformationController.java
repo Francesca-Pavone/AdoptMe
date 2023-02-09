@@ -6,7 +6,8 @@ import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendR
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.NoAccoutException;
+import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
+import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
@@ -21,7 +22,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     private Observer favObserver;
 
-    private CLIPetInformationView view;
+    private final CLIPetInformationView view;
     private static final String REQUEST = "1";
     private static final String FAVORITE = "2";
     private static final String HOMEPAGE = "3";
@@ -107,6 +108,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
         cliPetInformationView.showTitle(petBean.getName());
         cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
+        cliPetInformationView.showCommand(petBean.isFav());
     }
 
 
@@ -115,11 +117,11 @@ public class CLIPetInformationController implements CLIGraficController, Observe
             switch (inputLine) {
                 case REQUEST -> {
                     if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
+                        throw new NoAccountException();
                     this.executeRequest(); }
                 case FAVORITE -> {
                     if (Session.getCurrentSession().getUserBean() == null)
-                        throw new NoAccoutException();
+                        throw new NoAccountException();
                     this.addToFavorite();}
                 case HOMEPAGE -> {
                     if(object instanceof CLIUserFavoritesController) {
@@ -132,43 +134,45 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                         CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
                         cliUserHomepageController.start();
                     }
-                    // todo: fare shelter homepage
                 }
                 default -> throw new CommandNotFoundException();
             }
         } catch (CommandNotFoundException e) {
             PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
             ScannerSupport.waitEnter();
-            this.view.showCommand();
-        } catch(NoAccoutException e) {
+            this.view.showCommand(petBean.isFav());
+        } catch(NoAccountException e) {
             PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
             ScannerSupport.waitEnter();
-            this.view.showCommand();
+            this.view.showCommand(petBean.isFav());
+        } catch (FavoriteListEmptyException e) {
+            e.printStackTrace();
         }
     }
 
     private void addToFavorite(){
         UserBean userBean = Session.getCurrentSession().getUserBean();
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
-        fav = petBean.getFav;
-        if (fav) {//todo add object
+        PetInfoController petInfoController = new PetInfoController();
+        fav = petInfoController.checkFavorite(petBean);
+        if (fav) {
             addToFavoritesController.removePet(userBean, this, index);
             addToFavoritesController.removePet(userBean, favObserver, index);
         } else {
             addToFavoritesController.addPet(userBean, this, index);
         }
-        this.view.showCommand();
+        this.view.showCommand(!fav);
     }
 
     private void executeRequest() {
         try {
             if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccoutException();
+                throw new NoAccountException();
             else {
                 CLISendRequestController cliSendRequestController = new CLISendRequestController(petBean);
                 cliSendRequestController.start();
             }
-        } catch (NoAccoutException e) {
+        } catch (NoAccountException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             CLINeedAccountController cliNeedAccountController = new CLINeedAccountController();
             cliNeedAccountController.start();
@@ -256,7 +260,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     @Override
     public void update2(Object object1, Object object2) {
-
+        //ignore
     }
 
     public void setIndex(int index) {

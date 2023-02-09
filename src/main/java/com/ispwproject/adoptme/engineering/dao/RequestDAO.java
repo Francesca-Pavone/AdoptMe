@@ -1,6 +1,8 @@
 package com.ispwproject.adoptme.engineering.dao;
 
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.model.PetModel;
 import com.ispwproject.adoptme.model.RequestModel;
 import com.ispwproject.adoptme.model.ShelterModel;
@@ -21,6 +23,9 @@ import java.util.Objects;
 import static com.ispwproject.adoptme.engineering.connection.ConnectionDB.insertRequest;
 
 public class RequestDAO {
+
+    public static final String PET_ID = "petId";
+
     private RequestDAO() {
     }
 
@@ -32,7 +37,7 @@ public class RequestDAO {
 
             while (resultSet.next()){
                 if (resultSet.getInt("shelterId") == requestModel.getShelter().getId() &&
-                resultSet.getInt("petId") == requestModel.getPet().getPetId() &&
+                resultSet.getInt(PET_ID) == requestModel.getPet().getPetId() &&
                 resultSet.getInt("userId") == requestModel.getUser().getId() &&
                         Objects.equals(resultSet.getDate("date"), Date.valueOf(requestModel.getDate())) &&
                         Objects.equals(resultSet.getTime("time"), Time.valueOf(requestModel.getTime())))
@@ -49,7 +54,7 @@ public class RequestDAO {
             }
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -65,7 +70,7 @@ public class RequestDAO {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -75,7 +80,7 @@ public class RequestDAO {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.updateReqStatus(stmt, requestModel.getId(), requestModel.getStatus());
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -85,12 +90,12 @@ public class RequestDAO {
         try {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.deleteReq(stmt, requestId);
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws Exception {
+    public static List<RequestModel> retrieveReqByShelter(ShelterModel shelterModel) throws NotFoundException {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
 
@@ -101,7 +106,7 @@ public class RequestDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                throw new Exception("No requests found for the shelter with id: " + shelterModel.getId());
+                throw new NotFoundException("requests for the shelter: " + shelterModel.getShelterName());
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -109,7 +114,7 @@ public class RequestDAO {
             do {
                 // Leggo le colonne "by name"
                 int reqId = resultSet.getInt("requestId");
-                int petId = resultSet.getInt("petId");
+                int petId = resultSet.getInt(PET_ID);
                 PetModel pet = PetDAO.retrievePetById(petId, shelterModel.getId());
 
                 int userId = resultSet.getInt("userId");
@@ -139,13 +144,13 @@ public class RequestDAO {
 
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return requestModelList;
     }
 
-    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws Exception {
+    public static List<RequestModel> retrieveReqByUser(UserModel userModel) throws NotFoundException {
         Statement stmt;
         List<RequestModel> requestModelList = new ArrayList<>();
 
@@ -156,8 +161,7 @@ public class RequestDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()) {
-                Exception e = new Exception("No requests found for the user with id: " + userModel.getId());
-                throw e;
+                throw new NotFoundException("requests for the user: " + userModel.getName());
             }
 
             // Riposiziono il cursore sul primo record del result set
@@ -165,7 +169,7 @@ public class RequestDAO {
             do {
                 // Leggo le colonne "by name"
                 int reqId = resultSet.getInt("requestId");
-                int petId = resultSet.getInt("petId");
+                int petId = resultSet.getInt(PET_ID);
                 int shelterId = resultSet.getInt("shelterId");
                 PetModel pet = PetDAO.retrievePetById(petId, shelterId);
                 ShelterModel shelterModel = ShelterDAO.retrieveShelterById(shelterId);
@@ -188,7 +192,7 @@ public class RequestDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return requestModelList;

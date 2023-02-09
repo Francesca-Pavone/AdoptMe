@@ -2,7 +2,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +44,15 @@ public class GUIShelterSettingsController {
 
     @FXML
     private ImageView userImg;
+
+    public void notDeveloped() {
+        try {
+            throw new NotDevelopedException();
+        }
+        catch (NotDevelopedException e){
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
+    }
 
     public void signOut(ActionEvent event) throws IOException {
         Session.closeSession();

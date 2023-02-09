@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
-import com.ispwproject.adoptme.engineering.exception.NoPetsFoundException;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
@@ -44,14 +43,14 @@ public class CLIShelterInfoController implements CLIGraficController, Observer {
         try {
             this.view.run(this.shelterBean.getName(), this.shelterBean.getEmail(), this.shelterBean.getPhoneNumber(), this.shelterBean.getWebSite(), this.shelterBean.getAddress(), this.shelterBean.getCity());
         }
-        catch (NoPetsFoundException e){
+        catch (NotFoundException e){
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             ScannerSupport.waitEnter();
             previousPage.start();
         }
     }
 
-    public void getPet() throws NoPetsFoundException {
+    public void getPet() throws NotFoundException {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(this.shelterBean);
         showShelterPetsController.getPetList(this);
         this.printPet();

@@ -30,6 +30,10 @@ public abstract class GenericUserModel {
         setType(type);
         setEmail(email);
     }
+    protected GenericUserModel(int type, String email) {
+        setType(type);
+        setEmail(email);
+    }
 
     protected GenericUserModel(int id) {
         this.id = id;

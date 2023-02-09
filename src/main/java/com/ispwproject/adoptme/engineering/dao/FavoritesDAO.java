@@ -4,17 +4,23 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
+import com.ispwproject.adoptme.engineering.exception.PetIsNoFavoriteException;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 
 import java.sql.*;
 
 public class FavoritesDAO {
+
+    private FavoritesDAO() {
+        //private constructor
+    }
     public static void addFavorite(int userId, int petId, int shelterId) {
         Statement stmt;
         try {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.insertFavorite(stmt, userId, petId, shelterId);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
@@ -25,13 +31,13 @@ public class FavoritesDAO {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.removeFavorite(stmt, userId, petId, shelterId);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean checkFav(int petId, int userId, int shelterId) {
-        Statement stmt = null;
+    public static boolean checkFav(int petId, int shelterId, int userId) {
+        Statement stmt;
 
         boolean fav = false;
 
@@ -43,7 +49,7 @@ public class FavoritesDAO {
 
             // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
-                throw new Exception("No tuple in favorites found");
+                throw new PetIsNoFavoriteException(petId, userId);
             }
 
             resultSet.next();
@@ -57,7 +63,7 @@ public class FavoritesDAO {
             // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
-        } catch (Exception e) {
+        } catch (PetIsNoFavoriteException | SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
