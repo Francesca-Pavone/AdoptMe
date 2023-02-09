@@ -1,8 +1,8 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
-import com.ispwproject.adoptme.engineering.exception.federica.NoSheltersWithThatNameException;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterInfoView;

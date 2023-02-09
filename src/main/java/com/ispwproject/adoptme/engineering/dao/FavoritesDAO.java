@@ -4,8 +4,8 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.CRUDQueries;
 
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
-import com.ispwproject.adoptme.engineering.exception.federica.PetIsNoFavoriteException;
-import com.ispwproject.adoptme.engineering.exception.francesca.ConnectionDbException;
+import com.ispwproject.adoptme.engineering.exception.PetIsNoFavoriteException;
+import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 
 import java.sql.*;
 

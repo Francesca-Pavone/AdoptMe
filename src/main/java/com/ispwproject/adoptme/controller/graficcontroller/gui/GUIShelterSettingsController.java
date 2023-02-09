@@ -2,7 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotDevelopedException;
+import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;

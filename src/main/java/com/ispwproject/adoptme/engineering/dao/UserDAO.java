@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.model.UserModel;
 
 public interface UserDAO {

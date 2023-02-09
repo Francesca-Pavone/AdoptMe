@@ -1,6 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
-import com.ispwproject.adoptme.engineering.exception.federica.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundQuestionnaireException;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.model.PetModel;

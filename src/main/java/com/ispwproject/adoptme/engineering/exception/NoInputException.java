@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.francesca;
+package com.ispwproject.adoptme.engineering.exception;
 
 public class NoInputException extends Exception {
     public NoInputException(String missingElements) {

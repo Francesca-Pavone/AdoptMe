@@ -2,7 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.ManageRequestController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.francesca.*;
+import com.ispwproject.adoptme.engineering.exception.*;
 import com.ispwproject.adoptme.engineering.utils.DateTimeSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
@@ -35,7 +35,7 @@ public class GUIModifyRequestController {
     public void modify(ActionEvent event) {
         try {
             String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            if (requestBean.getDate().equals(date) || requestBean.getTime().equals(timeField.getText()))
+            if (requestBean.getDate().equals(date) && requestBean.getTime().equals(timeField.getText()))
                 throw new DuplicateRequestException();
             requestBean.setDate(date);
             requestBean.setTime(timeField.getText());

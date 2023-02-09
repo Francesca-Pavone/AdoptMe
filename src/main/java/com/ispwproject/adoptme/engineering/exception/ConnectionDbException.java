@@ -1,4 +1,4 @@
-package com.ispwproject.adoptme.engineering.exception.francesca;
+package com.ispwproject.adoptme.engineering.exception;
 
 
 public class ConnectionDbException extends Exception {

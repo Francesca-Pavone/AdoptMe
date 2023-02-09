@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;

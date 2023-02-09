@@ -1,7 +1,7 @@
 package junit;
 
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
-import com.ispwproject.adoptme.engineering.exception.francesca.EmailFormatException;
+import com.ispwproject.adoptme.engineering.exception.EmailFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

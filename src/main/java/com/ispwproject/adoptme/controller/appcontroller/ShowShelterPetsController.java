@@ -2,8 +2,8 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
-import com.ispwproject.adoptme.engineering.exception.federica.NoSheltersWithThatNameException;
-import com.ispwproject.adoptme.engineering.exception.francesca.NotFoundException;
+import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
+import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.model.ShelterModel;
 import com.ispwproject.adoptme.engineering.dao.PetDAO;
