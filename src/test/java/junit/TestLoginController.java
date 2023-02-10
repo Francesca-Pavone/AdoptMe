@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestLoginController {
+class TestLoginController {
     /**
      * FEDERICA CANTELMI
      * Il seguente test va a verificare se viene settato il tipo di account corretto.
