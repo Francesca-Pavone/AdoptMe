@@ -101,6 +101,10 @@ public class QuestionnaireResultController {
             questionnaireQuery = new FirstExperienceDecorator(questionnaireQuery);
             questionnaireQuery = new AndDecorator(questionnaireQuery);
         }
+        if(!questionnaireResultBean.getAge().equals("")) {
+            questionnaireQuery = new AgeDecorator(questionnaireQuery, questionnaireResultBean.getAge());
+            questionnaireQuery = new AndDecorator(questionnaireQuery);
+        }
         questionnaireQuery = new HoursAloneDecorator(questionnaireQuery, questionnaireResultBean.getHoursAlone());
         if(questionnaireResultBean.isSpecificArea())
             questionnaireQuery = new CityDecorator(new AndDecorator(questionnaireQuery), questionnaireResultBean.getCity());
