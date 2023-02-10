@@ -44,7 +44,7 @@ public class CLIUserFavoritesController implements Observer {
                 case 1 -> "Female";
                 default -> "Male";
             });
-            this.cliUserFavoritesView.printPet(petBean.getName(), gender, petBean.getAge(), i);
+            this.cliUserFavoritesView.printPet(petBean.getName(), gender, i);
             i++;
         }
         this.cliUserFavoritesView.printCommands();

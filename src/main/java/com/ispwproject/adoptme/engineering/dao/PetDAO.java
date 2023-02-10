@@ -132,7 +132,6 @@ public class PetDAO {
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
-                pet.setAge(petAge);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);

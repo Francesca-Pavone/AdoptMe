@@ -11,7 +11,6 @@ public abstract class PetModel {
     protected int yearOfBirth;
     protected int monthOfBirth;
     protected int dayOfBirth;
-    protected String age;
     protected int gender;
     protected int coatLenght;
 
@@ -95,14 +94,6 @@ public abstract class PetModel {
     public int getDayOfBirth() { return dayOfBirth; }
 
     public void setDayOfBirth(int dayOfBirth) { this.dayOfBirth = dayOfBirth; }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
 
     public int getGender() {
         return gender;

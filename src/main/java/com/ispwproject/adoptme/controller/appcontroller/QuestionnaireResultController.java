@@ -32,7 +32,6 @@ public class QuestionnaireResultController {
             petBean.setPetImage(petModel.getPetImage());
             petBean.setName(petModel.getName());
             petBean.setType(petModel.getType());
-            petBean.setAge(petModel.getAge());
             petBean.setGender(petModel.getGender());
 
             petList.add(petBean);

@@ -33,7 +33,7 @@ public class ShowUserFavoritesController {
         for(Map.Entry<PetModel, Integer> entry: hashMap.entrySet()) {
             PetModel petModel = entry.getKey();
             shelterId = hashMap.get(petModel);
-            PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+            PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
             petBean.setFav(true);
             petBeanList.add(petBean);
         }

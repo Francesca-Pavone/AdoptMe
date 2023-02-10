@@ -24,7 +24,7 @@ public class CLIQuestionnaireResultController {
                     case 1 -> "Female";
                     default -> "Male";
                 });
-                this.cliQuestionnaireResultView.printPet((petBean).getName(), gender, (petBean).getAge(), i);
+                this.cliQuestionnaireResultView.printPet((petBean).getName(), gender, i);
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();

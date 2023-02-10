@@ -32,14 +32,14 @@ public class UserFavoritesPetsList extends Subject {
     public void addPet(PetModel petModel, int shelterId){
         if(this.hashMap!= null)
             this.hashMap.put(petModel, shelterId);
-        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
         this.notifyObservers(petBean);
     }
 
     public void removePet(PetModel petModel, int shelterId){
         if(this.hashMap!= null)
             this.hashMap.remove(petModel, shelterId);
-        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
         this.notifyObservers(petBean);
     }
 

@@ -12,10 +12,11 @@ public class CLIUserFavoritesView {
         this.cliUserFavoritesControllerCurrent = cliUserFavoritesController;
     }
 
-    public void printPet(String name, String gender, String age, int i ){
+    public void printPet(String name, String gender, int i ){
         PrintSupport.printMessage("    " + i + ") Name: " + name + "     ");
         PrintSupport.printMessage("\n       Gender: " + gender + "        ");
-        PrintSupport.printMessage("\n       Age: " + age + "      ");
+        //todo metti giorno mese anno
+        // PrintSupport.printMessage("\n       Age: " + age + "      ");
         PrintSupport.printSeparatorLine();
     }
 

@@ -75,7 +75,7 @@ public class CLIShelterInfoController implements CLIGraficController, Observer {
                     case 1 -> "Female";
                     default -> "Male";
                 });
-                this.view.printPet((petBean).getName(), gender, (petBean).getAge(), i);
+                this.view.printPet((petBean).getName(), gender, i);
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();
