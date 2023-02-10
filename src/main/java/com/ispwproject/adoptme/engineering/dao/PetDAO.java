@@ -117,7 +117,9 @@ public class PetDAO {
 
                 File petImage = getPetImage(petName, blob);
 
-                String petAge = resultSet.getString("age");
+                int dayOfBirth = resultSet.getInt("dayOfBirth");
+                int monthOfBirth = resultSet.getInt("monthOfBirth");
+                int yearOfBirth = resultSet.getInt("yearOfBirth");
                 int petGender = resultSet.getInt(GENDER);
                 int petType = resultSet.getInt("type");
                 int shelterId = resultSet.getInt("shelter");
@@ -132,6 +134,9 @@ public class PetDAO {
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
+                pet.setYearOfBirth(yearOfBirth);
+                pet.setMonthOfBirth(monthOfBirth);
+                pet.setDayOfBirth(dayOfBirth);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
