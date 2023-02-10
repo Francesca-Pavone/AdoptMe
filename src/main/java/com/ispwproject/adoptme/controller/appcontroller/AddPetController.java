@@ -68,7 +68,7 @@ public class AddPetController {
             throw new PetDateOfBirthException("you have inserted a future year");
         else if (LocalDate.now().getYear() == petBean.getYearOfBirth() && LocalDate.now().getMonthValue() < petBean.getMonthOfBirth())
             throw new PetDateOfBirthException("you have insert a future month");
-        else if (LocalDate.now().isBefore(LocalDate.of(petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth()))) {
+        else if (petBean.getDayOfBirth() != 0 && LocalDate.now().isBefore(LocalDate.of(petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth()))) {
             throw new PetDateOfBirthException("You have inserted a future date");
         }
         petModel.setYearOfBirth(petBean.getYearOfBirth());
