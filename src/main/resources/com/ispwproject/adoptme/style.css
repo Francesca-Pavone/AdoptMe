@@ -88,10 +88,6 @@
     -fx-background-radius: 5 0 0 5;
 }
 
-.other-screen:hover{
-    -fx-background-color: #417E70;
-    -fx-background-radius: 10 0 0 10;
-}
 
 .open-screen-bar{
     -fx-background-color: #c89c32;

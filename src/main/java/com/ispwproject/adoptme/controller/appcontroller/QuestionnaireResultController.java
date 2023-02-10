@@ -33,7 +33,9 @@ public class QuestionnaireResultController {
             petBean.setName(petModel.getName());
             petBean.setType(petModel.getType());
             petBean.setGender(petModel.getGender());
-
+            petBean.setYearOfBirth(petModel.getYearOfBirth());
+            petBean.setMonthOfBirth(petModel.getMonthOfBirth());
+            petBean.setDayOfBirth(petModel.getDayOfBirth());
             petList.add(petBean);
         }
         return petList;

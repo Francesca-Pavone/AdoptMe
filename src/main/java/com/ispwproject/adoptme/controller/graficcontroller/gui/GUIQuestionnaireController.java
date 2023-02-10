@@ -606,6 +606,9 @@ public class GUIQuestionnaireController {
                     default -> "";
                 });
             }
+            else {
+                questionnaireResultBeanBuilder.age("");
+            }
             if(btnHaveAPet.isSelected()) {
                 questionnaireResultBeanBuilder.maleCat(btnMaleCat.isSelected())
                         .femaleCat(btnFemaleCat.isSelected())
