@@ -15,11 +15,10 @@ public class CLIQuestionnaireResultView {
         PrintSupport.printMessage("\n------------------------------------- QUESTIONNAIRE RESULT ------------------------------------");
     }
 
-    public void printPet(String name, String gender, int i) {
+    public void printPet(String name, String gender, String age, int i) {
         PrintSupport.printMessage("    " + i + ") Name: " + name + "     ");
         PrintSupport.printMessage("\n       Gender: " + gender + "        ");
-        //todo metti giorno mese e anno
-        // PrintSupport.printMessage("\n       Age: " + age + "      ");
+        PrintSupport.printMessage("\n       Age: " + age + "      ");
         PrintSupport.printSeparatorLine();
     }
 

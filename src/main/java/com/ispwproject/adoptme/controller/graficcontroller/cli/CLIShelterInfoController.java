@@ -10,6 +10,7 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,12 +71,24 @@ public class CLIShelterInfoController implements CLIGraficController, Observer {
         int i = 1;
         for(PetBean petBean: this.petBeanList) {
             String gender;
+            String age;
+            int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
+
+            if (yearDiff <= 1)
+                age = "Puppy";
+            else if (yearDiff <= 3)
+                age = "Young";
+            else if (yearDiff <= 10)
+                age = "Adult";
+            else
+                age = "Senior";
+
             try {
                 gender = (switch ((petBean).getGender()) {
                     case 1 -> "Female";
                     default -> "Male";
                 });
-                this.view.printPet((petBean).getName(), gender, i);
+                this.view.printPet((petBean).getName(), gender, age, i);
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();

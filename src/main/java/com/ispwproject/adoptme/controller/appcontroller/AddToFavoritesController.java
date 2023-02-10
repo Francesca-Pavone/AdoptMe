@@ -93,5 +93,4 @@ public class AddToFavoritesController {
             e.printStackTrace();
         }
     }
-
 }
