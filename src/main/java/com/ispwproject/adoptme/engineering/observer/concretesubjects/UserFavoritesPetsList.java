@@ -10,7 +10,7 @@ import java.util.*;
 
 public class UserFavoritesPetsList extends Subject {
 
-    private final UserModel user;
+    private final UserModel user; // serve per sviluppare la funzionalità di poter visualizzare le liste dei preferiti da parte di altri utenti/shelter
     private Map<PetModel, Integer> hashMap;
 
     public UserFavoritesPetsList(Observer observer, UserModel user, Map<PetModel, Integer> hashmap) {
