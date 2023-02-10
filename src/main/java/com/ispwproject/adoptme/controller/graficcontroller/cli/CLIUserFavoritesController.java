@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIUserFavoritesView;
 
+import java.time.Year;
 import java.util.List;
 
 
@@ -39,12 +40,24 @@ public class CLIUserFavoritesController implements Observer {
     public void getPet(){
         int i = 1;
         String gender;
+        String age;
+
         for (PetBean petBean: petBeanList) {
+            int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
+
+            if (yearDiff <= 1)
+                age = "Puppy";
+            else if (yearDiff <= 3)
+                age = "Young";
+            else if (yearDiff <= 10)
+                age = "Adult";
+            else
+                age = "Senior";
             gender = (switch (petBean.getGender()) {
                 case 1 -> "Female";
                 default -> "Male";
             });
-            this.cliUserFavoritesView.printPet(petBean.getName(), gender, petBean.getAge(), i);
+            this.cliUserFavoritesView.printPet(petBean.getName(), gender, age, i);
             i++;
         }
         this.cliUserFavoritesView.printCommands();

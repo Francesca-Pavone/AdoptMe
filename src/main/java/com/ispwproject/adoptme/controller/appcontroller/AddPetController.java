@@ -28,7 +28,7 @@ public class AddPetController {
         if (petBean.getType() == 0) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize());
+            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.getPetInformationBean().isDogEducation(), petBean.getPetInformationBean().getSize());
             setCommonInfo(dogModel);
 
             try {
@@ -42,7 +42,7 @@ public class AddPetController {
         } else if (petBean.getType() == 1) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility);
+            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.getPetInformationBean().isTestFiv(), petBean.getPetInformationBean().isTestFelv(), petCompatibility);
             setCommonInfo(catModel);
 
             try {
@@ -57,9 +57,9 @@ public class AddPetController {
     }
 
     private PetCompatibility setCompatibility() {
-        PetCompatibility petCompatibility = new PetCompatibility(petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isFirstExperience());
-        petCompatibility.setSleepOutside(petBean.isSleepOutside());
-        petCompatibility.setHoursAlone(petBean.getHoursAlone());
+        PetCompatibility petCompatibility = new PetCompatibility(petBean.getPetInformationBean().isMaleDog(), petBean.getPetInformationBean().isFemaleDog(), petBean.getPetInformationBean().isMaleCat(), petBean.getPetInformationBean().isFemaleCat(), petBean.getPetInformationBean().isChildren(), petBean.getPetInformationBean().isElders(), petBean.getPetInformationBean().isFirstExperience());
+        petCompatibility.setSleepOutside(petBean.getPetInformationBean().isSleepOutside());
+        petCompatibility.setHoursAlone(petBean.getPetInformationBean().getHoursAlone());
         return petCompatibility;
     }
 
@@ -75,13 +75,13 @@ public class AddPetController {
         petModel.setMonthOfBirth(petBean.getMonthOfBirth());
         petModel.setDayOfBirth(petBean.getDayOfBirth());
         petModel.setGender(petBean.getGender());
-        petModel.setCoatLenght(petBean.getCoatLenght());
-        petModel.setVaccinated(petBean.isVaccinated());
-        petModel.setMicrochipped(petBean.isMicrochipped());
-        petModel.setDewormed(petBean.isDewormed());
-        petModel.setSterilized(petBean.isSterilized());
-        petModel.setDisability(petBean.isDisability());
-        petModel.setDisabilityType(petBean.getDisabilityType());
+        petModel.setCoatLenght(petBean.getPetInformationBean().getCoatLenght());
+        petModel.setVaccinated(petBean.getPetInformationBean().isVaccinated());
+        petModel.setMicrochipped(petBean.getPetInformationBean().isMicrochipped());
+        petModel.setDewormed(petBean.getPetInformationBean().isDewormed());
+        petModel.setSterilized(petBean.getPetInformationBean().isSterilized());
+        petModel.setDisability(petBean.getPetInformationBean().isDisability());
+        petModel.setDisabilityType(petBean.getPetInformationBean().getDisabilityType());
     }
 
 }

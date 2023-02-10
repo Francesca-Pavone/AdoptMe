@@ -91,7 +91,7 @@ public class PetDAO {
         return petList;
     }
 
-    public static HashMap<PetModel, Integer> retrievePetByQuestionnaire(String query) throws NoPetsFoundQuestionnaireException {
+    public static Map<PetModel, Integer> retrievePetByQuestionnaire(String query) throws NoPetsFoundQuestionnaireException {
         Statement stmt;
         HashMap<PetModel, Integer> hashMap = new HashMap<>();
         PetModel pet;
@@ -132,7 +132,6 @@ public class PetDAO {
                 pet.setName(petName);
                 pet.setPetImage(petImage);
                 pet.setGender(petGender);
-                pet.setAge(petAge);
 
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);

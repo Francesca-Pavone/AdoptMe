@@ -10,7 +10,7 @@ import java.util.*;
 
 public class UserFavoritesPetsList extends Subject {
 
-    private final UserModel user;
+    private final UserModel user; // serve per sviluppare la funzionalità di poter visualizzare le liste dei preferiti da parte di altri utenti/shelter
     private Map<PetModel, Integer> hashMap;
 
     public UserFavoritesPetsList(Observer observer, UserModel user, Map<PetModel, Integer> hashmap) {
@@ -32,14 +32,14 @@ public class UserFavoritesPetsList extends Subject {
     public void addPet(PetModel petModel, int shelterId){
         if(this.hashMap!= null)
             this.hashMap.put(petModel, shelterId);
-        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
         this.notifyObservers(petBean);
     }
 
     public void removePet(PetModel petModel, int shelterId){
         if(this.hashMap!= null)
             this.hashMap.remove(petModel, shelterId);
-        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getAge(), petModel.getGender());
+        PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
         this.notifyObservers(petBean);
     }
 

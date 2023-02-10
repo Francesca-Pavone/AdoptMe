@@ -7,6 +7,6 @@ public class FirstExperienceDecorator extends Decorator{
 
     @Override
     public String getQuery() {
-        return super.getQuery() + " firstExperience = '1'";
+        return super.getQuery() + " firstExperience = 1";
     }
 }

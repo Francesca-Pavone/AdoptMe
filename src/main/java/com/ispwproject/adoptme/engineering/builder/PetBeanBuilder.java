@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.engineering.builder;
 
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 
 import java.io.File;
 
@@ -188,30 +189,32 @@ public final class PetBeanBuilder {
     }
 
     public PetBean build() {
-        PetBean petBean =  new PetBean(petId, shelterId, petImage, name, type, null, gender);
+        PetBean petBean =  new PetBean(petId, shelterId, petImage, name, type, gender);
+        PetInformationBean petInformationBean = new PetInformationBean();
         petBean.setYearOfBirth(yearOfBirth);
         petBean.setMonthOfBirth(monthOfBirth);
         petBean.setDayOfBirth(dayOfBirth);
-        petBean.setCoatLenght(coatLenght);
-        petBean.setVaccinated(vaccinated);
-        petBean.setMicrochipped(microchipped);
-        petBean.setDewormed(dewormed);
-        petBean.setSterilized(sterilized);
-        petBean.setDisability(disability);
-        petBean.setDisabilityType(disabilityType);
-        petBean.setMaleDog(maleDog);
-        petBean.setFemaleDog(femaleDog);
-        petBean.setMaleCat(maleCat);
-        petBean.setFemaleCat(femaleCat);
-        petBean.setChildren(children);
-        petBean.setElders(elders);
-        petBean.setSleepOutside(sleepOutside);
-        petBean.setFirstExperience(firstExperience);
-        petBean.setHoursAlone(hoursAlone);
-        petBean.setDogEducation(dogEducation);
-        petBean.setSize(size);
-        petBean.setTestFiv(testFiv);
-        petBean.setTestFelv(testFelv);
+        petInformationBean.setCoatLenght(coatLenght);
+        petInformationBean.setVaccinated(vaccinated);
+        petInformationBean.setMicrochipped(microchipped);
+        petInformationBean.setDewormed(dewormed);
+        petInformationBean.setSterilized(sterilized);
+        petInformationBean.setDisability(disability);
+        petInformationBean.setDisabilityType(disabilityType);
+        petInformationBean.setMaleDog(maleDog);
+        petInformationBean.setFemaleDog(femaleDog);
+        petInformationBean.setMaleCat(maleCat);
+        petInformationBean.setFemaleCat(femaleCat);
+        petInformationBean.setChildren(children);
+        petInformationBean.setElders(elders);
+        petInformationBean.setSleepOutside(sleepOutside);
+        petInformationBean.setFirstExperience(firstExperience);
+        petInformationBean.setHoursAlone(hoursAlone);
+        petInformationBean.setDogEducation(dogEducation);
+        petInformationBean.setSize(size);
+        petInformationBean.setTestFiv(testFiv);
+        petInformationBean.setTestFelv(testFelv);
+        petBean.setPetInformationBean(petInformationBean);
 
         return petBean;
     }
