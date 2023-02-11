@@ -37,59 +37,30 @@ public class PetDAO {
         try {
             stmt = ConnectionDB.getConnection();
 
-            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectPetByShelterId(stmt, shelterModel.getId());
 
-            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
                 throw new NotFoundException("pets for this shelter");
             }
 
-            // Riposiziono il cursore sul primo record del result set
             resultSet.first();
             do {
-                // Leggo le colonne "by name"
-                int petId = resultSet.getInt("id");
-                String petName = resultSet.getString("name");
 
-                Blob blob = resultSet.getBlob(IMG_SRC);
-                File petImage = getPetImage(petName, blob);
-
-                int dayOfBirth = resultSet.getInt("dayOfBirth");
-                int monthOfBirth = resultSet.getInt("monthOfBirth");
-                int yearOfBirth = resultSet.getInt("yearOfBirth");
-                int petGender = resultSet.getInt(GENDER);
-                int petType = resultSet.getInt("type");
-
-                if (petType == 0)
-                    pet = new DogModel();
-                else
-                    pet = new CatModel();
-
-                pet.setPetId(petId);
-                pet.setType(petType);
-                pet.setName(petName);
-                pet.setPetImage(petImage);
-                pet.setGender(petGender);
-                pet.setYearOfBirth(yearOfBirth);
-                pet.setMonthOfBirth(monthOfBirth);
-                pet.setDayOfBirth(dayOfBirth);
+                pet = getPetModel(resultSet);
 
                 pet.setPetCompatibility(new PetCompatibility());
 
                 petList.add(pet);
             }
             while (resultSet.next()) ;
-
-            // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-
         }
         catch (ConnectionDbException e){
             e.printStackTrace();
         }
         return petList;
     }
+
 
     public static Map<PetModel, Integer> retrievePetByQuestionnaire(String query) throws NoPetsFoundQuestionnaireException {
         Statement stmt;
@@ -98,57 +69,26 @@ public class PetDAO {
         try {
             stmt = ConnectionDB.getConnection();
 
-            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectPetsFromQuestionnaire(stmt, query);
 
-            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
                 throw new NoPetsFoundQuestionnaireException();
             }
 
-            // Riposiziono il cursore sul primo record del result set
             resultSet.first();
             do {
-                // Leggo le colonne "by name"
-                int petId = resultSet.getInt("id");
-                String petName = resultSet.getString("name");
-
-                Blob blob = resultSet.getBlob(IMG_SRC);
-
-                File petImage = getPetImage(petName, blob);
-
-                int dayOfBirth = resultSet.getInt("dayOfBirth");
-                int monthOfBirth = resultSet.getInt("monthOfBirth");
-                int yearOfBirth = resultSet.getInt("yearOfBirth");
-                int petGender = resultSet.getInt(GENDER);
-                int petType = resultSet.getInt("type");
                 int shelterId = resultSet.getInt("shelter");
 
-                if (petType == 0)
-                    pet = new DogModel();
-                else
-                    pet = new CatModel();
+                pet = getPetModel(resultSet);
 
-                pet.setPetId(petId);
-                pet.setType(petType);
-                pet.setName(petName);
-                pet.setPetImage(petImage);
-                pet.setGender(petGender);
-                pet.setYearOfBirth(yearOfBirth);
-                pet.setMonthOfBirth(monthOfBirth);
-                pet.setDayOfBirth(dayOfBirth);
-
+                //todo togliere
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
                 hashMap.put(pet, shelterId);
-
             }
             while (resultSet.next()) ;
-
-            // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-
         }
         catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
@@ -162,29 +102,16 @@ public class PetDAO {
         PetModel pet = null;
         try {
             stmt = ConnectionDB.getConnection();
-
-            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectPetById(stmt, petId, shelterId);
-
-            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
                 throw new NotFoundException("No pets found for the shelter with id: "+shelterId);
             }
-
-            // Riposiziono il cursore sul primo record del result set
             resultSet.first();
             do {
-                // Leggo le colonne "by name"
-
                 String petName = resultSet.getString("name");
-
                 Blob blob = resultSet.getBlob(IMG_SRC);
-
                 File petImage = getPetImage(petName, blob);
-
                 int petType = resultSet.getInt("type");
-
-
                 if (petType == 0)
                     pet = new DogModel();
                 else
@@ -194,20 +121,17 @@ public class PetDAO {
                 pet.setName(petName);
                 pet.setPetImage(petImage);
 
+                //todo togliere
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
             }
             while (resultSet.next()) ;
-
-            // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-
         }
         catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
-
         return pet;
     }
 
@@ -218,41 +142,18 @@ public class PetDAO {
         PetModel pet;
         try {
             stmt = ConnectionDB.getConnection();
-
-            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectPetFromFavorites(stmt, userModel.getId());
-
-            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
                 throw new NotFoundException("No favorites pets found for the user with id: "+userModel.getId());
             }
-
-            // Riposiziono il cursore sul primo record del result set
             resultSet.first();
             do {
-                // Leggo le colonne "by name"
-                int petId = resultSet.getInt("id");
-                String petName = resultSet.getString("name");
-
-                Blob blob = resultSet.getBlob(IMG_SRC);
-
-                File petImage = getPetImage(petName, blob);
-
-                int petGender = resultSet.getInt(GENDER);
-                int petType = resultSet.getInt("type");
                 int petShelter = resultSet.getInt("shelter");
 
-                if (petType == 0)
-                    pet = new DogModel();
-                else
-                    pet = new CatModel();
 
-                pet.setPetId(petId);
-                pet.setType(petType);
-                pet.setName(petName);
-                pet.setPetImage(petImage);
-                pet.setGender(petGender);
+                pet = getPetModel(resultSet);
 
+                //todo togliere
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
@@ -260,7 +161,6 @@ public class PetDAO {
             }
             while (resultSet.next()) ;
 
-            // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
 
         }
@@ -270,6 +170,34 @@ public class PetDAO {
         return userFavoritesPetsList;
     }
 
+    private static PetModel getPetModel(ResultSet resultSet) throws SQLException {
+        int petId = resultSet.getInt("id");
+        String petName = resultSet.getString("name");
+        Blob blob = resultSet.getBlob(IMG_SRC);
+        File petImage = getPetImage(petName, blob);
+
+        int dayOfBirth = resultSet.getInt("dayOfBirth");
+        int monthOfBirth = resultSet.getInt("monthOfBirth");
+        int yearOfBirth = resultSet.getInt("yearOfBirth");
+        int petGender = resultSet.getInt(GENDER);
+        int petType = resultSet.getInt("type");
+
+        PetModel pet;
+        if (petType == 0)
+            pet = new DogModel();
+        else
+            pet = new CatModel();
+
+        pet.setPetId(petId);
+        pet.setType(petType);
+        pet.setName(petName);
+        pet.setPetImage(petImage);
+        pet.setGender(petGender);
+        pet.setYearOfBirth(yearOfBirth);
+        pet.setMonthOfBirth(monthOfBirth);
+        pet.setDayOfBirth(dayOfBirth);
+        return pet;
+    }
     private static File getPetImage(String petName, Blob blob) {
         File petImage;
         try {
