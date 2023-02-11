@@ -32,9 +32,9 @@ class TestAddPetController {
             petBean.setDayOfBirth(16);
             petBean.setGender(0);
             petBean.setType(0);
-            petBean.setPetInformationBean(new PetInformationBean());
+            PetInformationBean petInformationBean = new PetInformationBean();
 
-            AddPetController addPetController = new AddPetController(petBean);
+            AddPetController addPetController = new AddPetController(petBean, petInformationBean);
             int petId = addPetController.addNewPet(null);
 
             // il test fallisce perché l'inserimento va a buon fine

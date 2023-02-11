@@ -1,11 +1,12 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.builder.PetBeanBuilder;
+import com.ispwproject.adoptme.engineering.builder.PetInformationBeanBuilder;
 import com.ispwproject.adoptme.engineering.enums.CoatLenght;
 import com.ispwproject.adoptme.engineering.enums.Size;
 import com.ispwproject.adoptme.engineering.observer.Observer;
@@ -160,7 +161,6 @@ public class GUIAddPetController {
         int year;
         int month;
         int day;
-        PetBean petBean;
 
         // retrive data of birth information
         if (datePicker.getValue() != null) {
@@ -176,21 +176,21 @@ public class GUIAddPetController {
             day = 0;
         }
 
-        PetBeanBuilder petBeanBuilder = PetBeanBuilder.newPetBean()
+        PetBean petBean = new PetBean();
+        petBean.setGender((switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
+            case "Female" -> 1;
+            default -> 0;   //case "Male"
+        }));
+        petBean.setShelterId(shelterBean.getShelterId());
+        petBean.setPetImage(file);
+        petBean.setDayOfBirth(day);
+        petBean.setMonthOfBirth(month);
+        petBean.setYearOfBirth(year);
+        petBean.setName(petNameTxtF.getText());
+        petBean.setType(petType);
 
-                .shelterId(shelterBean.getShelterId())
-                .petImage(file)
-                .name(petNameTxtF.getText())
-                .type(petType)
-                .yearOfBirth(year)
-                .monthOfBirth(month)
-                .dayOfBirth(day)
-
-                .gender(switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
-                    case "Female" -> 1;
-                    default -> 0;   //case "Male"
-                })
-
+        PetInformationBean petInformationBean;
+        PetInformationBeanBuilder petInformationBeanBuilder = PetInformationBeanBuilder.newPetBean()
                 .coatLenght(switch (boxCoatLenght.getValue()) {
                     case "Medium" -> 1;
                     case "Long" -> 2;
@@ -241,7 +241,7 @@ public class GUIAddPetController {
 
         if (petType == 0) { // DOG
             
-            petBean = petBeanBuilder
+            petInformationBean = petInformationBeanBuilder
 
                     .size(switch (boxSize.getValue()) {
                         case "Medium" -> 1;
@@ -259,7 +259,7 @@ public class GUIAddPetController {
         }
         else // CAT
         {
-            petBean = petBeanBuilder
+            petInformationBean = petInformationBeanBuilder
 
                     .testFiv(switch (((RadioButton) testFiv.getSelectedToggle()).getText()) {
                         case "Positive" -> true;
@@ -274,7 +274,7 @@ public class GUIAddPetController {
                     .build();
         }
 
-        AddPetController addPetController = new AddPetController(petBean);
+        AddPetController addPetController = new AddPetController(petBean, petInformationBean);
         try {
             addPetController.addNewPet(observer);
             ((Node)event.getSource()).getScene().getWindow().hide();

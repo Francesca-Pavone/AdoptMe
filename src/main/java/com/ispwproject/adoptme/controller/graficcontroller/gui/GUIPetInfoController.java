@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.AddToFavoritesController;
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
@@ -114,6 +115,7 @@ public class GUIPetInfoController implements Observer {
     private boolean fav = false;
 
     private PetBean petBean;
+    private PetInformationBean petInformationBean = new PetInformationBean();
 
     private Parent previousPage;
     private Parent currentPage;
@@ -137,7 +139,7 @@ public class GUIPetInfoController implements Observer {
 
         PetInfoController petInfoControllerA = new PetInfoController();
 
-        ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean);
+        ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean, petInformationBean);
         this.petBean = petBean;
         fav = this.petBean.isFav();
 
@@ -186,7 +188,7 @@ public class GUIPetInfoController implements Observer {
                 }
         );
         coatLenght.setText(
-                switch (petBean.getPetInformationBean().getCoatLenght()) {
+                switch (petInformationBean.getCoatLenght()) {
                     case 1 -> "Medium";
                     case 2 -> "Long";
                     default -> "Short";     // case 0
@@ -199,36 +201,36 @@ public class GUIPetInfoController implements Observer {
         // check if it isn't a cat
         verifyNoCat(petBean);
 
-        setGeneralInfo(petBean);
+        setGeneralInfo();
 
-        setCompatibility(petBean);
+        setCompatibility();
     }
 
-    private void setGeneralInfo(PetBean petBean) {
+    private void setGeneralInfo() {
         vaccinated.setText("Vaccinations not completed");
-        if (petBean.getPetInformationBean().isVaccinated())
+        if (petInformationBean.isVaccinated())
             vaccinated.setText("Vaccinations complete");
 
         microchipped.setText("Not microchipped");
-        if (petBean.getPetInformationBean().isMicrochipped())
+        if (petInformationBean.isMicrochipped())
             microchipped.setText("Microchipped");
 
         dewormed.setText("Not dewormed");
-        if (petBean.getPetInformationBean().isDewormed())
+        if (petInformationBean.isDewormed())
             dewormed.setText("Dewormed");
 
         sterilized.setText("Not sterilized");
-        if (petBean.getPetInformationBean().isSterilized())
+        if (petInformationBean.isSterilized())
             sterilized.setText("Sterilized");
 
 
-        if (!petBean.getPetInformationBean().isDisability())
+        if (!petInformationBean.isDisability())
             petInfoVBox.getChildren().remove(disabilityBox);
         else {
             disability.setText("Disability");
             disabilityType.setText("Not specified");
-            if (!petBean.getPetInformationBean().getDisabilityType().equals(""))
-                disabilityType.setText(petBean.getPetInformationBean().getDisabilityType());
+            if (!petInformationBean.getDisabilityType().equals(""))
+                disabilityType.setText(petInformationBean.getDisabilityType());
         }
     }
 
@@ -238,7 +240,7 @@ public class GUIPetInfoController implements Observer {
         }
         else {
             size.setText(
-                    switch (petBean.getPetInformationBean().getSize()) {
+                    switch (petInformationBean.getSize()) {
                         case 1 -> "Medium";
                         case 2 -> "Large";
                         case 3 -> "ExtraLarge";
@@ -246,7 +248,7 @@ public class GUIPetInfoController implements Observer {
                     }
             );
 
-            if (petBean.getPetInformationBean().isDogEducation())
+            if (petInformationBean.isDogEducation())
                 dogEducation.setText("Program of dog education: Needed");
             else
                 dogEducation.setText("Program of dog education: Not needed");
@@ -259,11 +261,11 @@ public class GUIPetInfoController implements Observer {
         }
         else {
             testFiv.setText("Test Fiv: Negative");
-            if (petBean.getPetInformationBean().isTestFiv())
+            if (petInformationBean.isTestFiv())
                 testFiv.setText("Test Fiv: Positive");
 
             testFelv.setText("Test Felv: Negative");
-            if (petBean.getPetInformationBean().isTestFelv())
+            if (petInformationBean.isTestFelv())
                 testFelv.setText("Test Felv: Positive");
         }
     }
@@ -283,34 +285,34 @@ public class GUIPetInfoController implements Observer {
         yearOfBirth.setText(String.valueOf(petBean.getYearOfBirth()));
     }
 
-    private void setCompatibility(PetBean petBean) {
-        if (petBean.getPetInformationBean().isMaleDog()) {
+    private void setCompatibility() {
+        if (petInformationBean.isMaleDog()) {
             setCompatibilityLabel("Male dogs");
         }
-        if (petBean.getPetInformationBean().isFemaleDog()) {
+        if (petInformationBean.isFemaleDog()) {
             setCompatibilityLabel("Female dogs");
         }
-        if (petBean.getPetInformationBean().isMaleCat()) {
+        if (petInformationBean.isMaleCat()) {
             setCompatibilityLabel("Male cats");
         }
-        if (petBean.getPetInformationBean().isFemaleCat()) {
+        if (petInformationBean.isFemaleCat()) {
             setCompatibilityLabel("Female cats");
         }
-        if (petBean.getPetInformationBean().isChildren()) {
+        if (petInformationBean.isChildren()) {
             setCompatibilityLabel("Children");
         }
-        if (petBean.getPetInformationBean().isElders()) {
+        if (petInformationBean.isElders()) {
             setCompatibilityLabel("Elders");
         }
-        if (petBean.getPetInformationBean().isSleepOutside()) {
+        if (petInformationBean.isSleepOutside()) {
             setCompatibilityLabel("Sleeping outside");
         }
-        if (petBean.getPetInformationBean().isFirstExperience()) {
+        if (petInformationBean.isFirstExperience()) {
             setCompatibilityLabel("First experience");
         }
 
         setCompatibilityLabel(
-                switch (petBean.getPetInformationBean().getHoursAlone()) {
+                switch (petInformationBean.getHoursAlone()) {
                     case 0 -> "Stay from 1 to 3 hours alone";
                     case 1 -> "Stay from 4 to 6 hours alone";
                     default -> "Stay more than 6 hours alone"; // case 2
@@ -339,12 +341,13 @@ public class GUIPetInfoController implements Observer {
                 throw new NoAccountException();
             else {
                 UserBean userBean = Session.getCurrentSession().getUserBean();
-                AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+                AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean, this.petInformationBean);
                 if (fav) {
                     addToFavoritesController.removePet(userBean, this, this.panePetItem);
                     addToFavoritesController.removePet(userBean, favObserver, this.panePetItem);
                 } else {
                     addToFavoritesController.addPet(userBean, this, this.panePetItem);
+                    addToFavoritesController.addPet(userBean, favObserver, this.panePetItem);
                 }
             }
         }catch (NoAccountException e){
