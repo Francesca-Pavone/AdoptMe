@@ -8,6 +8,7 @@
     -fx-background-color: #417E70;
 }
 
+/*
 .button1:pressed {
     -fx-background-color: #C89C32;
 }
@@ -15,6 +16,8 @@
 .button1:selected {
     -fx-background-color: #C89C32;
 }
+
+ */
 
 .button2 {
     -fx-background-color: #CFCFCF;
@@ -25,6 +28,7 @@
     -fx-background-color: #9C9C9C;
 }
 
+/*
 .button2:pressed {
     -fx-background-color: #7797B3;
 }
@@ -37,6 +41,8 @@
 	-fx-scale-x: 1.2;
 	-fx-scale-y: 1.2;
 }
+
+ */
 
 .button4 {
 	-fx-background-color: white;
@@ -55,6 +61,7 @@
 	-fx-border-width: 7;
 }
 
+/*
 .button4:pressed {
 	-fx-background-color: #C89C32;
 	-fx-border-color: #C89C32;
@@ -67,26 +74,13 @@
 	-fx-text-fill: white;
 }
 
+ */
+
 
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
 
-.open-screen{
-    -fx-background-color: #295147;
-    -fx-background-radius: 10 0 0 10;
-}
-
-.other-screen{
-    -fx-background-color: rgba(0,0,0,0);
-}
-.sidebar-btn{
-    -fx-background-color: rgba(0,0,0,0);
-}
-.sidebar-btn:focused{
-    -fx-background-color: #295147;
-    -fx-background-radius: 5 0 0 5;
-}
 
 
 .open-screen-bar{
@@ -124,9 +118,12 @@
     -fx-border-color: #C89C32;
 }
 
+/*
 .radio-button1:selected .radio {
     -fx-border-color: #C89C32;
 }
+
+ */
 
 .radio-button1:hover {
 	-fx-border-color: #C89C32;
@@ -134,6 +131,7 @@
 	-fx-border-width: 3;
 	-fx-text-fill: #C89C32;
 }
+/*
 
 .radio-button1:selected {
     -fx-background-color: #C89C32;
@@ -147,6 +145,8 @@
 .radio-button1:selected .dot{
     -fx-background-color: #C89C32;
 }
+
+ */
 
 
 .request-box{
@@ -175,13 +175,16 @@
 .check-box .mark {
     -fx-shape: "M1.73,12.91 8.1,19.28 22.79,4.59 22.79,1.59 8.1,16.28 1.73,9.91";
 }
-.check-box:focused .mark {
+/*
+.check-box:selected .mark {
     -fx-background-color: white;
 }
-.check-box:focused .box {
+.check-box:selected .box {
     -fx-background-color: #34665A;
     -fx-background-radius: 5;
 }
+
+ */
 
 .button-modify {
     -fx-background-color: #c89c32;
@@ -201,32 +204,5 @@
     -fx-background-color: #7A443D;
 }
 
-.photo-loaded {
-    -fx-background-color: green;
-    -fx-background-radius: 100;
-}
-
-.list-view {
-    -fx-background-color: rgba(0,0,0,0);
-    -fx-border-color: rgba(0,0,0,0);
-}
-
-.switchInterface {
-	-fx-background-color: #CCC9C3;
-
-}
-
-.switchInterface:selected {
-	-fx-background-color: #A6A29A;
-}
 
 
-.radio-button2 .radio {
-    -fx-border-width: 2px;
-    -fx-border-color: #ffffff;
-    -fx-background-color: #34665A;
-    -fx-border-radius: 15px;
-}
-.radio-button2:selected .dot {
-	-fx-background-color: #ffffff;
-}
