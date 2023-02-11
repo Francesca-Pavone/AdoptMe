@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.DogModel;
@@ -90,7 +89,7 @@ public class DogDAO {
 
     public static int saveDog(DogModel dogModel) throws SQLException {
         Statement stmt;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         int dogId = 1;
         int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
@@ -116,10 +115,12 @@ public class DogDAO {
             preparedStatement.setString(3, dogModel.getName());
 
             if (dogModel.getPetImage() == null) {
-                throw new ImageNotFoundException();
+                preparedStatement.setNull(4, Types.BLOB);
+            }else
+            {
+                InputStream inputStream = new FileInputStream(dogModel.getPetImage());
+                preparedStatement.setBlob(4, inputStream);
             }
-            InputStream inputStream = new FileInputStream(dogModel.getPetImage());
-            preparedStatement.setBlob(4, inputStream);
             preparedStatement.setInt(5, dogModel.getGender());
             preparedStatement.setInt(6, dogModel.getDayOfBirth());
             preparedStatement.setInt(7, dogModel.getMonthOfBirth());
@@ -150,10 +151,8 @@ public class DogDAO {
             preparedStatement1.executeUpdate();
 
         }
-        catch (ImageNotFoundException | FileNotFoundException e){
-            preparedStatement.setNull(4, Types.BLOB);
-        }
-        catch (SQLException | ConnectionDbException e) {
+
+        catch (SQLException | ConnectionDbException | FileNotFoundException e) {
             e.printStackTrace();
         }
         return dogId;

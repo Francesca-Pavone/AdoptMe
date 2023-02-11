@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.controller.appcontroller.AddToFavoritesController
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.dao.FavoritesDAO;
 import com.ispwproject.adoptme.engineering.session.Session;
@@ -31,6 +32,7 @@ class TestAddToFavoritesController {
         PetBean petBean = new PetBean();
         petBean.setPetId(1);
         petBean.setShelterId(1);
+        petBean.setPetInformationBean(new PetInformationBean());
 
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean);
         try {

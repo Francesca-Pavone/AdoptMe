@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.dao.CatDAO;
@@ -8,6 +9,7 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class AddPetController {
 
@@ -17,7 +19,7 @@ public class AddPetController {
         this.petBean = petBean;
     }
 
-    public int addNewPet(Observer observer) {
+    public int addNewPet(Observer observer) throws PetDateOfBirthException {
         int petId = -1;
 
         ShelterModel shelter = new ShelterModel(petBean.getShelterId());
@@ -61,7 +63,14 @@ public class AddPetController {
         return petCompatibility;
     }
 
-    private void setCommonInfo(PetModel petModel) {
+    private void setCommonInfo(PetModel petModel) throws PetDateOfBirthException {
+        if (LocalDate.now().getYear() < petBean.getYearOfBirth())
+            throw new PetDateOfBirthException("you have inserted a future year");
+        else if (LocalDate.now().getYear() == petBean.getYearOfBirth() && LocalDate.now().getMonthValue() < petBean.getMonthOfBirth())
+            throw new PetDateOfBirthException("you have insert a future month");
+        else if (petBean.getDayOfBirth() != 0 && LocalDate.now().isBefore(LocalDate.of(petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth()))) {
+            throw new PetDateOfBirthException("You have inserted a future date");
+        }
         petModel.setYearOfBirth(petBean.getYearOfBirth());
         petModel.setMonthOfBirth(petBean.getMonthOfBirth());
         petModel.setDayOfBirth(petBean.getDayOfBirth());

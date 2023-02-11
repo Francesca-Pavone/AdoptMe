@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +32,7 @@ class TestAddPetController {
             petBean.setDayOfBirth(16);
             petBean.setGender(0);
             petBean.setType(0);
+            petBean.setPetInformationBean(new PetInformationBean());
 
             AddPetController addPetController = new AddPetController(petBean);
             int petId = addPetController.addNewPet(null);

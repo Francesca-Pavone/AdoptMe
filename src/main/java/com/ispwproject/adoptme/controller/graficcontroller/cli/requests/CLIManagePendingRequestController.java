@@ -74,11 +74,11 @@ public class CLIManagePendingRequestController implements CLIGraficController {
                 this.requestBean.register(this.previousPage);
                 manageRequestController.updateRequest(requestBean, requestBean);
             }
+            else start();
         }
         catch (PastDateException | NotFoundException | DuplicateRequestException e){
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
-        this.previousPage.showAppointments(this.requestBean.getUserName());
     }
 
     private void setNewTime() {
@@ -115,6 +115,6 @@ public class CLIManagePendingRequestController implements CLIGraficController {
                 ShowExceptionSupport.showExceptionCLI(e.getMessage());
             }
         }
-        this.previousPage.showAppointments(this.requestBean.getUserName());
+        else start();
     }
 }

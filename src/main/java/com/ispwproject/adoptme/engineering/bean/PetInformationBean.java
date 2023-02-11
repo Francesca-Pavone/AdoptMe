@@ -30,7 +30,6 @@ public class PetInformationBean {
     protected boolean testFiv;
     protected boolean testFelv;
 
-    public PetInformationBean() {}
 
     public int getCoatLenght() {
         return coatLenght;

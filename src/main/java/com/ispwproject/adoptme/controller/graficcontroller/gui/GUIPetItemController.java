@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,8 +70,16 @@ public class GUIPetItemController {
 
         petAge.setText(age);
 
-        InputStream inputStream = new FileInputStream(petBean.getPetImage());
-        Image image = new Image(inputStream);
+        Image image;
+        try {
+            if (petBean.getPetImage() == null)
+                throw new ImageNotFoundException();
+            InputStream inputStream = new FileInputStream(petBean.getPetImage());
+            image = new Image(inputStream);
+        }catch (ImageNotFoundException e){
+            image = new Image(Main.class.getResource("image/default_photo.png").openStream());
+        }
+
         petImage.setImage(image);
 
     }

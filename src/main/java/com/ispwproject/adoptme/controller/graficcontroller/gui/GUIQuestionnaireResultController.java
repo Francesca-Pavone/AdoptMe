@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +26,7 @@ public class GUIQuestionnaireResultController {
     public void exitQuestionnaire(ActionEvent event) throws IOException {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.UNDECORATED);
         dialog.setResizable(false);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ExitQuestionnaire.fxml"));
         Scene scene1 = new Scene(fxmlLoader.load());

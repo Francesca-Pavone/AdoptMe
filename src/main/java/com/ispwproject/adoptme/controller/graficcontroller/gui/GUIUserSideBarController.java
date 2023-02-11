@@ -7,9 +7,9 @@ import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -18,14 +18,6 @@ public class GUIUserSideBarController {
     @FXML
     private Pane appointmentsSelect;
     @FXML
-    private ToggleButton btnApp;
-    @FXML
-    private ToggleButton btnFav;
-    @FXML
-    private ToggleButton btnHomepage;
-    @FXML
-    private ToggleButton btnSettings;
-    @FXML
     private Pane favoritesSelect;
     @FXML
     private HBox hBox;
@@ -33,6 +25,17 @@ public class GUIUserSideBarController {
     private Pane homepageSelect;
     @FXML
     private Pane settingsSelect;
+    @FXML
+    private HBox home;
+    @FXML
+    private HBox fav;
+    @FXML
+    private HBox app;
+    @FXML
+    private HBox sett;
+
+    private final Background background1 = new Background(new BackgroundFill(Color.rgb(41, 81, 71), CornerRadii.EMPTY, Insets.EMPTY));
+    private final Background background2 = new Background(new BackgroundFill(Color.rgb(52, 102, 90), CornerRadii.EMPTY, Insets.EMPTY));
 
     public void goToHomePage() throws IOException {
         FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("UserHomepage.fxml"));
@@ -43,10 +46,13 @@ public class GUIUserSideBarController {
         GUIUserHomepageController guiUserHomepageController = fxmlLoader.getController();
         guiUserHomepageController.setCurrentPage(screen);
         homepageSelect.setVisible(true);
+        home.setBackground(background1);
         favoritesSelect.setVisible(false);
+        fav.setBackground(background2);
         appointmentsSelect.setVisible(false);
+        app.setBackground(background2);
         settingsSelect.setVisible(false);
-        btnHomepage.setSelected(true);
+        sett.setBackground(background2);
     }
 
 
@@ -54,10 +60,13 @@ public class GUIUserSideBarController {
         GUIUserFavoritesController guiUserFavoritesController = null;
         try {
             homepageSelect.setVisible(false);
+            home.setBackground(background2);
             favoritesSelect.setVisible(true);
+            fav.setBackground(background1);
             appointmentsSelect.setVisible(false);
+            app.setBackground(background2);
             settingsSelect.setVisible(false);
-            btnFav.setSelected(true);
+            sett.setBackground(background2);
             if(Session.getCurrentSession().getUserBean() == null)
                 throw new NoAccountException();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserFavoritesPage.fxml"));
@@ -77,10 +86,13 @@ public class GUIUserSideBarController {
     public void goToAppointments() throws IOException {
         try {
             homepageSelect.setVisible(false);
+            home.setBackground(background2);
             favoritesSelect.setVisible(false);
+            fav.setBackground(background2);
             appointmentsSelect.setVisible(true);
+            app.setBackground(background1);
             settingsSelect.setVisible(false);
-            btnApp.setSelected(true);
+            sett.setBackground(background2);
             if(Session.getCurrentSession().getUserBean() == null)
                 throw new NoAccountException();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserAppointments.fxml"));
@@ -96,10 +108,13 @@ public class GUIUserSideBarController {
     public void goToSettings() throws IOException {
         try {
             homepageSelect.setVisible(false);
+            home.setBackground(background2);
             favoritesSelect.setVisible(false);
+            fav.setBackground(background2);
             appointmentsSelect.setVisible(false);
+            app.setBackground(background2);
             settingsSelect.setVisible(true);
-            btnSettings.setSelected(true);
+            sett.setBackground(background1);
             if(Session.getCurrentSession().getUserBean() == null)
                 throw new NoAccountException();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("UserSettingsPage.fxml"));

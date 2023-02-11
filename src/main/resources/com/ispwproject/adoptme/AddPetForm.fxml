@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="570.0" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIAddPetController">
+<VBox alignment="CENTER" prefHeight="570.0" prefWidth="790.0" style="-fx-background-color: #ffffff; -fx-border-width: 5; -fx-border-color: #000000;" styleClass="transparent" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUIAddPetController">
    <children>
       <HBox alignment="CENTER_RIGHT">
          <children>
@@ -552,11 +552,6 @@
                                           <Font name="Arial" size="16.0" />
                                        </font>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbApartNoGarden" mnemonicParsing="false" text="apartment without garden">
-                                       <font>
-                                          <Font name="Arial" size="16.0" />
-                                       </font>
-                                    </CheckBox>
                                     <CheckBox fx:id="cbSleepOut" mnemonicParsing="false" text="sleeping outside">
                                        <font>
                                           <Font name="Arial" size="16.0" />
@@ -577,11 +572,6 @@
                                        </font>
                                     </CheckBox>
                                     <CheckBox fx:id="cbElders" mnemonicParsing="false" text="elders">
-                                       <font>
-                                          <Font name="Arial" size="16.0" />
-                                       </font>
-                                    </CheckBox>
-                                    <CheckBox fx:id="cbApartNoTerrace" mnemonicParsing="false" text="apartment without terrace">
                                        <font>
                                           <Font name="Arial" size="16.0" />
                                        </font>
