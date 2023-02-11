@@ -192,9 +192,9 @@ public class GUIAddPetController {
         PetInformationBean petInformationBean;
         PetInformationBeanBuilder petInformationBeanBuilder = PetInformationBeanBuilder.newPetBean()
                 .coatLenght(switch (boxCoatLenght.getValue()) {
-                    case "Medium" -> 1;
-                    case "Long" -> 2;
-                    default -> 0;   //case "Short"
+                    case "MEDIUM" -> 1;
+                    case "LONG" -> 2;
+                    default -> 0; // case SMALL
                 })
 
                 .vaccinated(switch (((RadioButton) vaccinated.getSelectedToggle()).getText()) {
@@ -233,9 +233,10 @@ public class GUIAddPetController {
                 .firstExperience(cbFirstExp.isSelected())
                 
                 .hoursAlone(switch (((RadioButton) hoursAlone.getSelectedToggle()).getText()) {
+                    case "1-3" -> 0;
                     case "4-6" -> 1;
                     case "more than 6" -> 2;
-                    default -> 0;   //case "1-3"
+                    default -> -1;
                 });
 
 
@@ -244,10 +245,10 @@ public class GUIAddPetController {
             petInformationBean = petInformationBeanBuilder
 
                     .size(switch (boxSize.getValue()) {
-                        case "Medium" -> 1;
-                        case "Large" -> 2;
-                        case "ExtraLarge" -> 3;
-                        default -> 0;   //case "Small"
+                        case "MEDIUM" -> 1;
+                        case "LARGE" -> 2;
+                        case "EXTRALARGE" -> 3;
+                        default -> 0; // case SMALL
                     })
 
                     .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {

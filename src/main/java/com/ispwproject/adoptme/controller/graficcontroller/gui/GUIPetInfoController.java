@@ -115,7 +115,7 @@ public class GUIPetInfoController implements Observer {
     private boolean fav = false;
 
     private PetBean petBean;
-    private PetInformationBean petInformationBean = new PetInformationBean();
+    private final PetInformationBean petInformationBean = new PetInformationBean();
 
     private Parent previousPage;
     private Parent currentPage;
@@ -138,8 +138,8 @@ public class GUIPetInfoController implements Observer {
     public void setPetInfo(PetBean petBean) throws Exception {
 
         PetInfoController petInfoControllerA = new PetInfoController();
-
-        ShelterBean shelterBean = petInfoControllerA.getPetInfo(petBean, petInformationBean);
+        ShelterBean shelterBean = new ShelterBean();
+        petInfoControllerA.getPetInfo(petBean, petInformationBean, shelterBean);
         this.petBean = petBean;
         fav = this.petBean.isFav();
 
@@ -189,9 +189,10 @@ public class GUIPetInfoController implements Observer {
         );
         coatLenght.setText(
                 switch (petInformationBean.getCoatLenght()) {
+                    case 0 -> "Short";
                     case 1 -> "Medium";
                     case 2 -> "Long";
-                    default -> "Short";     // case 0
+                    default -> "";    
                 }
         );
 
@@ -241,10 +242,11 @@ public class GUIPetInfoController implements Observer {
         else {
             size.setText(
                     switch (petInformationBean.getSize()) {
+                        case 0 -> "Small";   
                         case 1 -> "Medium";
                         case 2 -> "Large";
                         case 3 -> "ExtraLarge";
-                        default -> "Small";   //case 0
+                        default -> "";
                     }
             );
 

@@ -45,11 +45,7 @@ public class PetDAO {
 
             resultSet.first();
             do {
-
                 pet = getPetModel(resultSet);
-
-                pet.setPetCompatibility(new PetCompatibility());
-
                 petList.add(pet);
             }
             while (resultSet.next()) ;
@@ -78,13 +74,7 @@ public class PetDAO {
             resultSet.first();
             do {
                 int shelterId = resultSet.getInt("shelter");
-
                 pet = getPetModel(resultSet);
-
-                //todo togliere
-                PetCompatibility petCompatibility = new PetCompatibility();
-                pet.setPetCompatibility(petCompatibility);
-
                 hashMap.put(pet, shelterId);
             }
             while (resultSet.next()) ;
@@ -121,7 +111,6 @@ public class PetDAO {
                 pet.setName(petName);
                 pet.setPetImage(petImage);
 
-                //todo togliere
                 PetCompatibility petCompatibility = new PetCompatibility();
                 pet.setPetCompatibility(petCompatibility);
 
@@ -149,14 +138,7 @@ public class PetDAO {
             resultSet.first();
             do {
                 int petShelter = resultSet.getInt("shelter");
-
-
                 pet = getPetModel(resultSet);
-
-                //todo togliere
-                PetCompatibility petCompatibility = new PetCompatibility();
-                pet.setPetCompatibility(petCompatibility);
-
                 userFavoritesPetsList.addPet(pet, petShelter);
             }
             while (resultSet.next()) ;
@@ -196,6 +178,7 @@ public class PetDAO {
         pet.setYearOfBirth(yearOfBirth);
         pet.setMonthOfBirth(monthOfBirth);
         pet.setDayOfBirth(dayOfBirth);
+        pet.setPetCompatibility(new PetCompatibility());
         return pet;
     }
     private static File getPetImage(String petName, Blob blob) {

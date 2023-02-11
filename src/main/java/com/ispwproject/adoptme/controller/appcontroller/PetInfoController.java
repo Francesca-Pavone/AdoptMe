@@ -10,8 +10,7 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 public class PetInfoController {
 
-    public ShelterBean getPetInfo(PetBean petBean, PetInformationBean petInformationBean){
-        ShelterBean shelterBean = null;
+    public void getPetInfo(PetBean petBean, PetInformationBean petInformationBean, ShelterBean shelterBean){
         try {
             ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
@@ -37,12 +36,17 @@ public class PetInfoController {
                 petInformationBean.setTestFelv(catModel.isTestFelv());
                 petBean.setFav(this.checkFavorite(petBean));
             }
-            shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
+            shelterBean.setShelterId(shelterModel.getId());
+            shelterBean.setName(shelterModel.getShelterName());
+            shelterBean.setPhoneNumber(shelterModel.getPhoneNumber());
+            shelterBean.setAddress(shelterModel.getAddress());
+            shelterBean.setCity(shelterModel.getCity());
+            shelterBean.setWebSite(shelterModel.getWebSite());
+            shelterBean.setEmail(shelterModel.getEmail());
             shelterBean.setShelterImg(shelterModel.getImage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return shelterBean;
     }
 
     public boolean checkFavorite(PetBean petBean) {

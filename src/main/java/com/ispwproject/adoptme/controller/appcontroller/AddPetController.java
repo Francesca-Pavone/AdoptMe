@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.controller.appcontroller;
 
 import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
+import com.ispwproject.adoptme.engineering.utils.SetPetInfoSupport;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.dao.CatDAO;
@@ -74,17 +75,9 @@ public class AddPetController {
         else if (petBean.getDayOfBirth() != 0 && LocalDate.now().isBefore(LocalDate.of(petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth()))) {
             throw new PetDateOfBirthException("You have inserted a future date");
         }
-        petModel.setYearOfBirth(petBean.getYearOfBirth());
-        petModel.setMonthOfBirth(petBean.getMonthOfBirth());
-        petModel.setDayOfBirth(petBean.getDayOfBirth());
-        petModel.setGender(petBean.getGender());
-        petModel.setCoatLenght(petInformationBean.getCoatLenght());
-        petModel.setVaccinated(petInformationBean.isVaccinated());
-        petModel.setMicrochipped(petInformationBean.isMicrochipped());
-        petModel.setDewormed(petInformationBean.isDewormed());
-        petModel.setSterilized(petInformationBean.isSterilized());
-        petModel.setDisability(petInformationBean.isDisability());
-        petModel.setDisabilityType(petInformationBean.getDisabilityType());
+        SetPetInfoSupport.setPetModel(petModel, petBean, petInformationBean);
     }
+
+
 
 }

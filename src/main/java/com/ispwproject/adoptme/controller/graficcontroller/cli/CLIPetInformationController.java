@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
@@ -44,7 +45,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     @Override
     public void start(){
         PetInfoController petInfoControllerA = new PetInfoController();
-        petInfoControllerA.getPetInfo(petBean, this.petInformationBean);
+        petInfoControllerA.getPetInfo(petBean, this.petInformationBean, new ShelterBean());
 
         String dateOfBirth;
 

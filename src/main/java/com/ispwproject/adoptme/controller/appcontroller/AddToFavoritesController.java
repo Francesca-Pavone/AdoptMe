@@ -7,6 +7,7 @@ import com.ispwproject.adoptme.engineering.dao.FavoritesDAO;
 import com.ispwproject.adoptme.engineering.dao.ShelterDAO;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.UserFavoritesPetsList;
+import com.ispwproject.adoptme.engineering.utils.SetPetInfoSupport;
 import com.ispwproject.adoptme.model.*;
 
 public class AddToFavoritesController {
@@ -55,17 +56,7 @@ public class AddToFavoritesController {
     }
 
     private void setCommonInfo(PetModel petModel) {
-        petModel.setYearOfBirth(petBean.getYearOfBirth());
-        petModel.setMonthOfBirth(petBean.getMonthOfBirth());
-        petModel.setDayOfBirth(petBean.getDayOfBirth());
-        petModel.setGender(petBean.getGender());
-        petModel.setCoatLenght(petInformationBean.getCoatLenght());
-        petModel.setVaccinated(petInformationBean.isVaccinated());
-        petModel.setMicrochipped(petInformationBean.isMicrochipped());
-        petModel.setDewormed(petInformationBean.isDewormed());
-        petModel.setSterilized(petInformationBean.isSterilized());
-        petModel.setDisability(petInformationBean.isDisability());
-        petModel.setDisabilityType(petInformationBean.getDisabilityType());
+        SetPetInfoSupport.setPetModel(petModel, petBean, petInformationBean);
     }
 
     public void removePet(UserBean userBean, Observer observer, Object object){
