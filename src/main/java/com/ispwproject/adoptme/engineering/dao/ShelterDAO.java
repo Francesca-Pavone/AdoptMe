@@ -57,14 +57,6 @@ public class ShelterDAO {
             }while(resultSet.next());
             resultSet.close();
         }
-        /* TODO vedere se funziona
-            catch (ImageNotFoundException e) {
-            shelterImage = new File(Main.class.getResource(DEFAULT_PHOTO).getPath());
-            shelterModel.setImage(shelterImage);
-            sheltersList.add(shelterModel);
-        }
-
-         */
         catch (SQLException | MalformedURLException | ConnectionDbException e) {
             e.printStackTrace();
         }
