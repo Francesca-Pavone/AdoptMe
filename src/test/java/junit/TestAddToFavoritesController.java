@@ -32,9 +32,9 @@ class TestAddToFavoritesController {
         PetBean petBean = new PetBean();
         petBean.setPetId(1);
         petBean.setShelterId(1);
-        petBean.setPetInformationBean(new PetInformationBean());
+        PetInformationBean petInformationBean = new PetInformationBean();
 
-        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean);
+        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean, petInformationBean);
         try {
             addToFavoritesController.removePet(userBean, null, null);
         } catch (Exception ignored) {}

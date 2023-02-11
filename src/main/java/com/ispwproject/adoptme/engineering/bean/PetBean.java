@@ -16,8 +16,6 @@ public class PetBean {
     protected int dayOfBirth;
     protected int gender;
 
-    protected PetInformationBean petInformationBean;
-
     public PetBean() {
 
     }
@@ -101,14 +99,6 @@ public class PetBean {
 
     public void setGender(int gender) {
         this.gender = gender;
-    }
-
-    public PetInformationBean getPetInformationBean() {
-        return petInformationBean;
-    }
-
-    public void setPetInformationBean(PetInformationBean petInformationBean) {
-        this.petInformationBean = petInformationBean;
     }
 
     public boolean isFav() {

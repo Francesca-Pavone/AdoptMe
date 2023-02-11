@@ -1,5 +1,6 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
@@ -14,9 +15,11 @@ import java.time.LocalDate;
 public class AddPetController {
 
     private final PetBean petBean;
+    private final PetInformationBean petInformationBean;
 
-    public AddPetController(PetBean petBean) {
+    public AddPetController(PetBean petBean, PetInformationBean petInformationBean) {
         this.petBean = petBean;
+        this.petInformationBean = petInformationBean;
     }
 
     public int addNewPet(Observer observer) throws PetDateOfBirthException {
@@ -28,7 +31,7 @@ public class AddPetController {
         if (petBean.getType() == 0) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.getPetInformationBean().isDogEducation(), petBean.getPetInformationBean().getSize());
+            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
             setCommonInfo(dogModel);
 
             try {
@@ -42,7 +45,7 @@ public class AddPetController {
         } else if (petBean.getType() == 1) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.getPetInformationBean().isTestFiv(), petBean.getPetInformationBean().isTestFelv(), petCompatibility);
+            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
             setCommonInfo(catModel);
 
             try {
@@ -57,9 +60,9 @@ public class AddPetController {
     }
 
     private PetCompatibility setCompatibility() {
-        PetCompatibility petCompatibility = new PetCompatibility(petBean.getPetInformationBean().isMaleDog(), petBean.getPetInformationBean().isFemaleDog(), petBean.getPetInformationBean().isMaleCat(), petBean.getPetInformationBean().isFemaleCat(), petBean.getPetInformationBean().isChildren(), petBean.getPetInformationBean().isElders(), petBean.getPetInformationBean().isFirstExperience());
-        petCompatibility.setSleepOutside(petBean.getPetInformationBean().isSleepOutside());
-        petCompatibility.setHoursAlone(petBean.getPetInformationBean().getHoursAlone());
+        PetCompatibility petCompatibility = new PetCompatibility(petInformationBean.isMaleDog(), petInformationBean.isFemaleDog(), petInformationBean.isMaleCat(), petInformationBean.isFemaleCat(), petInformationBean.isChildren(), petInformationBean.isElders(), petInformationBean.isFirstExperience());
+        petCompatibility.setSleepOutside(petInformationBean.isSleepOutside());
+        petCompatibility.setHoursAlone(petInformationBean.getHoursAlone());
         return petCompatibility;
     }
 
@@ -75,13 +78,13 @@ public class AddPetController {
         petModel.setMonthOfBirth(petBean.getMonthOfBirth());
         petModel.setDayOfBirth(petBean.getDayOfBirth());
         petModel.setGender(petBean.getGender());
-        petModel.setCoatLenght(petBean.getPetInformationBean().getCoatLenght());
-        petModel.setVaccinated(petBean.getPetInformationBean().isVaccinated());
-        petModel.setMicrochipped(petBean.getPetInformationBean().isMicrochipped());
-        petModel.setDewormed(petBean.getPetInformationBean().isDewormed());
-        petModel.setSterilized(petBean.getPetInformationBean().isSterilized());
-        petModel.setDisability(petBean.getPetInformationBean().isDisability());
-        petModel.setDisabilityType(petBean.getPetInformationBean().getDisabilityType());
+        petModel.setCoatLenght(petInformationBean.getCoatLenght());
+        petModel.setVaccinated(petInformationBean.isVaccinated());
+        petModel.setMicrochipped(petInformationBean.isMicrochipped());
+        petModel.setDewormed(petInformationBean.isDewormed());
+        petModel.setSterilized(petInformationBean.isSterilized());
+        petModel.setDisability(petInformationBean.isDisability());
+        petModel.setDisabilityType(petInformationBean.getDisabilityType());
     }
 
 }

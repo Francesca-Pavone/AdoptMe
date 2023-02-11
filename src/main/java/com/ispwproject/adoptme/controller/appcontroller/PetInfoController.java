@@ -10,12 +10,11 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 public class PetInfoController {
 
-    public ShelterBean getPetInfo(PetBean petBean){
+    public ShelterBean getPetInfo(PetBean petBean, PetInformationBean petInformationBean){
         ShelterBean shelterBean = null;
         try {
             ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
-            PetInformationBean petInformationBean = new PetInformationBean();
             if (petBean.getType() == 0) {
                 DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());
 
@@ -25,7 +24,6 @@ public class PetInfoController {
                 setCompatibility(petInformationBean, dogModel.getPetCompatibility());
                 petInformationBean.setDogEducation(dogModel.isProgramEducation());
                 petInformationBean.setSize(dogModel.getSize());
-                petBean.setPetInformationBean(petInformationBean);
                 petBean.setFav(this.checkFavorite(petBean));
 
             }
@@ -37,7 +35,6 @@ public class PetInfoController {
                 setCompatibility(petInformationBean, catModel.getPetCompatibility());
                 petInformationBean.setTestFiv(catModel.isTestFiv());
                 petInformationBean.setTestFelv(catModel.isTestFelv());
-                petBean.setPetInformationBean(petInformationBean);
                 petBean.setFav(this.checkFavorite(petBean));
             }
             shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
