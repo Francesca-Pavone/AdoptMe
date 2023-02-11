@@ -83,8 +83,7 @@ public class AddToFavoritesController {
                 userFavoritesPetsList.removePet(catModel, shelter.getId());
                 userFavoritesPetsList.notifyObservers(catModel,object);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 }
