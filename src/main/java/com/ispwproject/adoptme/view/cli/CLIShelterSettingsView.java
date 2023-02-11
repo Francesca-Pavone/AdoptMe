@@ -24,14 +24,14 @@ public class CLIShelterSettingsView {
         PrintSupport.printMessage("\tName: " + shelterBean.getName() + "\n\tPhone Number: " + shelterBean.getPhoneNumber() + "\n\tAddress: " + shelterBean.getAddress() + "\n\tWeb Site: " + shelterBean.getWebSite() +"\n\tEmail: " + shelterBean.getEmail());
 
         PrintSupport.printMessage("------------------------------------------- commands ------------------------------------------");
-        PrintSupport.printMessage(" 1) Modify name.\n 2) Modify Phone Number.\n 3) Modify Address.\n 4) Modify Web Site.\n 5) Modify Email.\n 6) Modify Password.\n 5) Logout.");
+        PrintSupport.printMessage(" 1) Modify name.\n 2) Modify Phone Number.\n 3) Modify Address.\n 4) Modify Web Site.\n 5) Modify Email.\n 6) Modify Password.\n 7) Logout.");
         Scanner scanner = new Scanner(System.in);
         String inputLine = scanner.nextLine();
         try {
             this.controller.executeCommand(inputLine);
         }
         catch (CommandNotFoundException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage() + "1 | 2 | 3 | 4 | 5 | 6 | 7\n\tPress ENTER to continue");
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
         } catch (NotDevelopedException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             run();

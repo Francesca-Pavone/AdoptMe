@@ -18,8 +18,6 @@ public class CLIQuestionnaireView {
     private String dogSize = "";
     private String alreadyHavePet = "";
     private List<String> petAlreadyHaveList = new ArrayList<>();
-    private String garden = "";
-    private String terrace = "";
     private String sleepOutside = "";
     private String hoursAlone = "";
     private String firstPet = "";
@@ -37,7 +35,7 @@ public class CLIQuestionnaireView {
 
     public void run() {
         PrintSupport.printMessage("---------------------------------------- QUESTIONNAIRE ----------------------------------------");
-        while(question < 17) {
+        while(question < 15) {
             switch (question) {
                 case 1:
                     setType();
@@ -73,50 +71,42 @@ public class CLIQuestionnaireView {
                     }
                     break;
                 case 7:
-                    setGarden();
-                    question++;
-                    break;
-                case 8:
-                    setTerrace();
-                    question++;
-                    break;
-                case 9:
                     setSleepOutside();
                     question++;
                     break;
-                case 10:
+                case 8:
                     setHoursAlone();
                     question++;
                     break;
-                case 11:
+                case 9:
                     setFirstPet();
                     question++;
                     break;
-                case 12:
+                case 10:
                     setSterilize();
                     question++;
                     break;
-                case 13:
+                case 11:
                     setDogEducation();
                     question++;
                     break;
-                case 14:
+                case 12:
                     setDisabled();
                     question++;
                     break;
-                case 15:
+                case 13:
                     setSpecificArea();
                     question++;
                     break;
-                case 16:
+                case 14:
                     setCity();
                     question++;
                     break;
                 default:
             }
         }
-        this.cliQuestionnaireControllerCurrent.setPetAlreadyHave( alreadyHavePet, petAlreadyHaveList);
-        this.cliQuestionnaireControllerCurrent.setCompatibility(garden, terrace, sleepOutside, hoursAlone, firstPet, specificArea, city);
+        this.cliQuestionnaireControllerCurrent.setPetAlreadyHave(petAlreadyHaveList);
+        this.cliQuestionnaireControllerCurrent.setCompatibility(sleepOutside, hoursAlone, firstPet, specificArea, city);
         this.cliQuestionnaireControllerCurrent.getResult(petType, petGender, petAge, dogSize, sterilize, dogEducation, disabled);
     }
 
@@ -191,31 +181,11 @@ public class CLIQuestionnaireView {
     }
 
     private void setSleepOutside() {
-        if (terrace.equals("a") || garden.equals("a")) {
-            PrintSupport.printMessage("\n\nWill the pet be sleeping outside?\n a) Yes    b) No");
+        PrintSupport.printMessage("\n\nIf you have a garden or a terrace, will the pet be sleeping outside?\n a) Yes    b) No");
+        sleepOutside = scanner.nextLine();
+        while (!(sleepOutside.equals("a")) && !(sleepOutside.equals("b")) && !(sleepOutside.equals("back"))) {
+            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
             sleepOutside = scanner.nextLine();
-            while (!(sleepOutside.equals("a")) && !(sleepOutside.equals("b")) && !(sleepOutside.equals("back"))) {
-                PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
-                sleepOutside = scanner.nextLine();
-            }
-        }
-    }
-
-    private void setTerrace() {
-        PrintSupport.printMessage("\n\nDo you live in an apartment with a terrace?\n a) Yes    b) No");
-        terrace = scanner.nextLine();
-        while (!(terrace.equals("a")) && !(terrace.equals("b")) && !(terrace.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
-            terrace = scanner.nextLine();
-        }
-    }
-
-    private void setGarden() {
-        PrintSupport.printMessage("\n\nDo you live in an apartment with a garden?\n a) Yes    b) No");
-        garden = scanner.nextLine();
-        while (!(garden.equals("a")) && !(garden.equals("b")) && !(garden.equals("back"))) {
-            PrintSupport.printError(INVALID_INPUT + DOUBLE_CHOICE);
-            garden = scanner.nextLine();
         }
     }
 

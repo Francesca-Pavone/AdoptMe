@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.engineering.dao;
 
 import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
-import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.model.DogModel;
@@ -53,8 +52,6 @@ public class DogDAO {
                 boolean femaleCat = resultSet.getBoolean("femaleCat");
                 boolean children = resultSet.getBoolean("children");
                 boolean elders = resultSet.getBoolean("elders");
-                boolean apartmentNoGarden = resultSet.getBoolean("apartmentNoGarden");
-                boolean apartmentNoTerrace = resultSet.getBoolean("apartmentNoTerrace");
                 boolean sleepOutside = resultSet.getBoolean("sleepOutside");
                 boolean firstExperience = resultSet.getBoolean("firstExperience");
                 int hoursAlone = resultSet.getInt("hoursAlone");
@@ -62,8 +59,6 @@ public class DogDAO {
                 int size = resultSet.getInt("size");
 
                 PetCompatibility petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, firstExperience);
-                petCompatibility.setApartmentNoGarden(apartmentNoGarden);
-                petCompatibility.setApartmentNoTerrace(apartmentNoTerrace);
                 petCompatibility.setSleepOutside(sleepOutside);
                 petCompatibility.setHoursAlone(hoursAlone);
 
@@ -94,7 +89,7 @@ public class DogDAO {
 
     public static int saveDog(DogModel dogModel) throws SQLException {
         Statement stmt;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         int dogId = 1;
         int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
 
@@ -120,10 +115,12 @@ public class DogDAO {
             preparedStatement.setString(3, dogModel.getName());
 
             if (dogModel.getPetImage() == null) {
-                throw new ImageNotFoundException();
+                preparedStatement.setNull(4, Types.BLOB);
+            }else
+            {
+                InputStream inputStream = new FileInputStream(dogModel.getPetImage());
+                preparedStatement.setBlob(4, inputStream);
             }
-            InputStream inputStream = new FileInputStream(dogModel.getPetImage());
-            preparedStatement.setBlob(4, inputStream);
             preparedStatement.setInt(5, dogModel.getGender());
             preparedStatement.setInt(6, dogModel.getDayOfBirth());
             preparedStatement.setInt(7, dogModel.getMonthOfBirth());
@@ -148,18 +145,14 @@ public class DogDAO {
             preparedStatement1.setBoolean(6, dogModel.getPetCompatibility().isFemaleCat());
             preparedStatement1.setBoolean(7, dogModel.getPetCompatibility().isChildren());
             preparedStatement1.setBoolean(8, dogModel.getPetCompatibility().isElders());
-            preparedStatement1.setBoolean(9, dogModel.getPetCompatibility().isApartmentNoGarden());
-            preparedStatement1.setBoolean(10, dogModel.getPetCompatibility().isApartmentNoTerrace());
-            preparedStatement1.setBoolean(11, dogModel.getPetCompatibility().isSleepOutside());
-            preparedStatement1.setBoolean(12, dogModel.getPetCompatibility().isFirstExperience());
-            preparedStatement1.setInt(13, dogModel.getPetCompatibility().getHoursAlone());
+            preparedStatement1.setBoolean(9, dogModel.getPetCompatibility().isSleepOutside());
+            preparedStatement1.setBoolean(10, dogModel.getPetCompatibility().isFirstExperience());
+            preparedStatement1.setInt(11, dogModel.getPetCompatibility().getHoursAlone());
             preparedStatement1.executeUpdate();
 
         }
-        catch (ImageNotFoundException | FileNotFoundException e){
-            preparedStatement.setNull(4, Types.BLOB);
-        }
-        catch (SQLException | ConnectionDbException e) {
+
+        catch (SQLException | ConnectionDbException | FileNotFoundException e) {
             e.printStackTrace();
         }
         return dogId;

@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.view.cli.requests;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 
 import java.util.Scanner;
 
@@ -32,16 +32,8 @@ public class CLIAppointmentsPageView {
             controller.executeCommand(input);
         }
         catch (NotFoundException e) {
-            PrintSupport.printError(e.getMessage() + "\n\tPress ENTER to continue");
-            ScannerSupport.waitEnter();
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
             showCommands();
         }
-    }
-
-    public void showConfirmedApp(int id, String date, String time) {
-        PrintSupport.printSeparatorLine();
-        PrintSupport.printMessage("The appointment with ID '" + id +"' is already confirmed (on " + date + " at " + time +")\n\tGood luck!");
-        PrintSupport.printMessage("\nPress ENTER to continue");
-        ScannerSupport.waitEnter();
     }
 }

@@ -38,7 +38,7 @@ public class CLILoginController implements CLIGraficController{
                 throw new NotDevelopedException();
             }
             default ->
-                throw new CommandNotFoundException();
+                throw new CommandNotFoundException("1 | 2 | 3 | 4 | 5");
         }
     }
 

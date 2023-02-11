@@ -34,10 +34,10 @@ public class CLINeedAccountController implements CLIGraficController{
                     CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
                     cliUserHomepageController.start();
                 }
-                default -> throw new CommandNotFoundException();
+                default -> throw new CommandNotFoundException("1 | 2");
             }
         } catch (CommandNotFoundException e) {
-            ShowExceptionSupport.showExceptionCLI("e.getMessage() + \"1 | 2");
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
             start();
         }
     }

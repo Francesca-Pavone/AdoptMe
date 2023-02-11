@@ -26,7 +26,7 @@ public class CLIShelterHomepageView {
             this.controller.executeCommand(inputLine);
         }
         catch (CommandNotFoundException e) {
-            PrintSupport.printError(e.getMessage() + "1 | 2 | 3\n\tPress ENTER to continue");
+            PrintSupport.printError(e.getMessage());
             ScannerSupport.waitEnter();
             run();
         }

@@ -42,9 +42,6 @@ public class CLIAppointmentsPageController implements CLIGraficController, Obser
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
         showAppointments(ownerName);
-
-        this.view.showCommands();
-
     }
 
     public void showAppointments(String owner){
@@ -80,14 +77,13 @@ public class CLIAppointmentsPageController implements CLIGraficController, Obser
 
     }
     public void executeCommand(String input) throws NotFoundException {
-        Session session = Session.getCurrentSession();
         if (input.equals("0"))
-            goToHomepage(session);
+            goToHomepage();
         else
-            goToRequest(input, session);
+            goToRequest(input);
     }
 
-    private void goToRequest(String input, Session session) throws NotFoundException {
+    private void goToRequest(String input) throws NotFoundException {
         // verifico se all'interno della lista di RequestBean trovo un RequestBean con id uguale al valore inserito dall'utente
         RequestBean requestBean = null;
         for (RequestBean bean : requestList) {
@@ -97,43 +93,22 @@ public class CLIAppointmentsPageController implements CLIGraficController, Obser
         if (requestBean == null)
             throw new NotFoundException("The request with id '" + input + "' does not exist");
 
+        CLIManageRequestController cliManageRequestController = new CLIManageRequestController(requestBean);
+        cliManageRequestController.setPreviousPage(this);
+        cliManageRequestController.start();
 
-        boolean sent = (session.getUserBean() != null && requestBean.getStatus() == 0) || (session.getShelterBean() != null && requestBean.getStatus() == 1);
-        boolean pending = (session.getShelterBean() != null && requestBean.getStatus() == 0) || (session.getUserBean() != null && requestBean.getStatus() == 1);
-        boolean rejected = requestBean.getStatus() == 3;
-
-        if (sent){
-            CLIManageSendRequestController cliManageSendRequestController = new CLIManageSendRequestController(requestBean);
-            cliManageSendRequestController.setPreviousPage(this);
-            cliManageSendRequestController.start();
-        }
-        else if (pending) {
-            CLIManagePendingRequestController cliManagePendingRequestController = new CLIManagePendingRequestController(requestBean);
-            cliManagePendingRequestController.setPreviousPage(this);
-            cliManagePendingRequestController.start();
-        }
-        else if (rejected) {
-            CLIManageRejectedRequestController cliManageRejectedRequestController = new CLIManageRejectedRequestController(requestBean);
-            cliManageRejectedRequestController.setPreviousPage(this);
-            cliManageRejectedRequestController.start();
-
-        }
-        else {
-            this.view.showConfirmedApp(
-                    requestBean.getId(),
-                    requestBean.getDate(),
-                    requestBean.getTime());
-            start();
-        }
-
+        if (Session.getCurrentSession().getUserBean() != null)
+            this.showAppointments(Session.getCurrentSession().getUserBean().getName());
+        else
+            this.showAppointments(Session.getCurrentSession().getShelterBean().getName());
     }
 
-    private static void goToHomepage(Session session) {
-        if (session.getUserBean() != null) {
+    private static void goToHomepage() {
+        if (Session.getCurrentSession().getUserBean() != null) {
             CLIUserHomepageController cliUserHomepageController = new CLIUserHomepageController();
             cliUserHomepageController.start();
         }
-        if (session.getShelterBean() != null) {
+        if (Session.getCurrentSession().getShelterBean() != null) {
             CLIShelterHomepageController cliShelterHomepageController= new CLIShelterHomepageController();
             cliShelterHomepageController.start();
         }

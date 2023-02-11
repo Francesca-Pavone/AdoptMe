@@ -7,8 +7,6 @@ public class PetCompatibility {
     private boolean femaleCat;
     private boolean children;
     private boolean elders;
-    private boolean apartmentNoGarden;
-    private boolean apartmentNoTerrace;
     private boolean sleepOutside;
     private boolean firstExperience;
     private int hoursAlone;
@@ -72,22 +70,6 @@ public class PetCompatibility {
 
     public void setElders(boolean elders) {
         this.elders = elders;
-    }
-
-    public boolean isApartmentNoGarden() {
-        return apartmentNoGarden;
-    }
-
-    public void setApartmentNoGarden(boolean apartmentNoGarden) {
-        this.apartmentNoGarden = apartmentNoGarden;
-    }
-
-    public boolean isApartmentNoTerrace() {
-        return apartmentNoTerrace;
-    }
-
-    public void setApartmentNoTerrace(boolean apartmentNoTerrace) {
-        this.apartmentNoTerrace = apartmentNoTerrace;
     }
 
     public boolean isSleepOutside() {

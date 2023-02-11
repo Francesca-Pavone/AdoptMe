@@ -4,6 +4,8 @@ import com.ispwproject.adoptme.controller.appcontroller.AddToFavoritesController
 import com.ispwproject.adoptme.controller.appcontroller.PetInfoController;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLISendRequestController;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
+import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
@@ -11,13 +13,13 @@ import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 
 public class CLIPetInformationController implements CLIGraficController, Observer {
 
     private final PetBean petBean;
+    private PetInformationBean petInformationBean;
     private boolean fav = false;
 
     private Observer favObserver;
@@ -31,6 +33,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     public CLIPetInformationController(PetBean petBean) {
         this.petBean = petBean;
+        this.petInformationBean = new PetInformationBean();
         this.view = new CLIPetInformationView(this);
     }
 
@@ -41,7 +44,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     @Override
     public void start(){
         PetInfoController petInfoControllerA = new PetInfoController();
-        petInfoControllerA.getPetInfo(petBean);
+        petInformationBean = petInfoControllerA.getPetInfo(petBean, new ShelterBean());
 
         String dateOfBirth;
 
@@ -69,7 +72,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                 }
         );
         String coatLenght = String.valueOf(
-                switch (petBean.getCoatLenght()) {
+                switch (petInformationBean.getCoatLenght()) {
                     case 1 -> "Medium";
                     case 2 -> "Long";
                     default -> "Short";     // case 0
@@ -82,7 +85,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         // check if it's a dog
         if (petBean.getType() == 0) {
             dogSize = String.valueOf(
-                    switch (petBean.getSize()) {
+                    switch (petInformationBean.getSize()) {
                         case 1 -> "Medium";
                         case 2 -> "Large";
                         case 3 -> "ExtraLarge";
@@ -90,20 +93,20 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                     }
             );
             dogEducation = "\t\tProgram of dog education: Not needed\n";
-            if (petBean.isDogEducation())
+            if (petInformationBean.isDogEducation())
                 dogEducation = "\t\tProgram of dog education: Needed\n";
         } else {
             testFiv = "\t\tTest Fiv: Negative\n";
-            if (petBean.isTestFiv())
+            if (petInformationBean.isTestFiv())
                 testFiv = "\t\tTest Fiv: Positive\n";
 
             testFelv = "\t\tTest Felv: Negative\n";
-            if (petBean.isTestFelv())
+            if (petInformationBean.isTestFelv())
                 testFelv = "\t\tTest Felv: Positive\n";
         }
         String generalInfo = getCommonGeneralInfo() + testFiv + testFelv + dogEducation;
 
-        String compatibility = getCompatibility(petBean);
+        String compatibility = getCompatibility();
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
         cliPetInformationView.showTitle(petBean.getName());
@@ -135,15 +138,10 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                         cliUserHomepageController.start();
                     }
                 }
-                default -> throw new CommandNotFoundException();
+                default -> throw new CommandNotFoundException("1 | 2 | 3");
             }
-        } catch (CommandNotFoundException e) {
-            PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
-            ScannerSupport.waitEnter();
-            this.view.showCommand(petBean.isFav());
-        } catch(NoAccountException e) {
-            PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
-            ScannerSupport.waitEnter();
+        } catch (CommandNotFoundException | NoAccountException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
             this.view.showCommand(petBean.isFav());
         } catch (FavoriteListEmptyException e) {
             e.printStackTrace();
@@ -152,7 +150,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     private void addToFavorite(){
         UserBean userBean = Session.getCurrentSession().getUserBean();
-        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean);
+        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(this.petBean, this.petInformationBean);
         PetInfoController petInfoController = new PetInfoController();
         fav = petInfoController.checkFavorite(petBean);
         if (fav) {
@@ -181,66 +179,60 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     private String getCommonGeneralInfo() {
         String vaccinated = "\t\tVaccinations not completed\n";
-        if (petBean.isVaccinated())
+        if (petInformationBean.isVaccinated())
             vaccinated = "\t\tVaccinations completed\n";
 
         String microchipped = "\t\tNot microchipped\n";
-        if (petBean.isMicrochipped())
+        if (petInformationBean.isMicrochipped())
             microchipped = "\t\tMicrochipped\n";
 
         String dewormed = "\t\tNot dewormed\n";
-        if (petBean.isDewormed())
+        if (petInformationBean.isDewormed())
             dewormed = "\t\tDewormed\n";
 
         String sterilized = "\t\tNot sterilized\n";
-        if (petBean.isSterilized())
+        if (petInformationBean.isSterilized())
             sterilized = "\t\tSterilized\n";
 
         String disability = "";
         String disabilityType = "";
-        if (petBean.isDisability()) {
+        if (petInformationBean.isDisability()) {
             disability = "\t\tDisability";
             disabilityType = "(Not specified)\n";
-            if (!petBean.getDisabilityType().equals(""))
-                disabilityType= "(" + petBean.getDisabilityType() + ")\n";
+            if (!petInformationBean.getDisabilityType().equals(""))
+                disabilityType= "(" + petInformationBean.getDisabilityType() + ")\n";
         }
         return vaccinated + microchipped + dewormed + sterilized + disability + disabilityType;
     }
 
-    private String getCompatibility(PetBean petBean) {
+    private String getCompatibility() {
         String compatibility = "";
-        if (petBean.isMaleDog()) {
+        if (petInformationBean.isMaleDog()) {
             compatibility = compatibility.concat( "\t\tMale dogs\n");
         }
-        if (petBean.isFemaleDog()) {
+        if (petInformationBean.isFemaleDog()) {
             compatibility = compatibility.concat("\t\tFemale dogs\n");
         }
-        if (petBean.isMaleCat()) {
+        if (petInformationBean.isMaleCat()) {
             compatibility = compatibility.concat("\t\tMale cats\n");
         }
-        if (petBean.isFemaleCat()) {
+        if (petInformationBean.isFemaleCat()) {
             compatibility = compatibility.concat("\t\tFemale cats\n");
         }
-        if (petBean.isChildren()) {
+        if (petInformationBean.isChildren()) {
             compatibility = compatibility.concat("\t\tChildren\n");
         }
-        if (petBean.isElders()) {
+        if (petInformationBean.isElders()) {
             compatibility = compatibility.concat("\t\tElders\n");
         }
-        if (petBean.isNoGarden()) {
-            compatibility = compatibility.concat("\t\tApartments without garden\n");
-        }
-        if (petBean.isNoTerrace()) {
-            compatibility = compatibility.concat("\t\tApartments without terrace\n");
-        }
-        if (petBean.isSleepOutside()) {
+        if (petInformationBean.isSleepOutside()) {
             compatibility = compatibility.concat("\t\tSleeping outside\n");
         }
-        if (petBean.isFirstExperience()) {
+        if (petInformationBean.isFirstExperience()) {
             compatibility = compatibility.concat("\t\tFirst experience\n");
         }
 
-        compatibility = compatibility.concat(switch (petBean.getHoursAlone()) {
+        compatibility = compatibility.concat(switch (petInformationBean.getHoursAlone()) {
                     case 0 -> "\t\tStay from 1 to 3 hours alone";
                     case 1 -> "\t\tStay from 4 to 6 hours alone";
                     default -> "\t\tStay more than 6 hours alone"; // case 2

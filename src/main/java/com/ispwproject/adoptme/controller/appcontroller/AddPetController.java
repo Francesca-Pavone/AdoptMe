@@ -1,5 +1,8 @@
 package com.ispwproject.adoptme.controller.appcontroller;
 
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
+import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
+import com.ispwproject.adoptme.engineering.utils.SetPetInfoSupport;
 import com.ispwproject.adoptme.model.*;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.dao.CatDAO;
@@ -8,16 +11,19 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.observer.concretesubjects.ShelterPetsList;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class AddPetController {
 
     private final PetBean petBean;
+    private final PetInformationBean petInformationBean;
 
-    public AddPetController(PetBean petBean) {
+    public AddPetController(PetBean petBean, PetInformationBean petInformationBean) {
         this.petBean = petBean;
+        this.petInformationBean = petInformationBean;
     }
 
-    public int addNewPet(Observer observer) {
+    public int addNewPet(Observer observer) throws PetDateOfBirthException {
         int petId = -1;
 
         ShelterModel shelter = new ShelterModel(petBean.getShelterId());
@@ -26,7 +32,7 @@ public class AddPetController {
         if (petBean.getType() == 0) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petBean.isDogEducation(), petBean.getSize());
+            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
             setCommonInfo(dogModel);
 
             try {
@@ -40,7 +46,7 @@ public class AddPetController {
         } else if (petBean.getType() == 1) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petBean.isTestFiv(), petBean.isTestFelv(), petCompatibility);
+            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
             setCommonInfo(catModel);
 
             try {
@@ -55,26 +61,23 @@ public class AddPetController {
     }
 
     private PetCompatibility setCompatibility() {
-        PetCompatibility petCompatibility = new PetCompatibility(petBean.isMaleDog(), petBean.isFemaleDog(), petBean.isMaleCat(), petBean.isFemaleCat(), petBean.isChildren(), petBean.isElders(), petBean.isFirstExperience());
-        petCompatibility.setApartmentNoGarden(petBean.isNoGarden());
-        petCompatibility.setApartmentNoTerrace(petBean.isNoTerrace());
-        petCompatibility.setSleepOutside(petBean.isSleepOutside());
-        petCompatibility.setHoursAlone(petBean.getHoursAlone());
+        PetCompatibility petCompatibility = new PetCompatibility(petInformationBean.isMaleDog(), petInformationBean.isFemaleDog(), petInformationBean.isMaleCat(), petInformationBean.isFemaleCat(), petInformationBean.isChildren(), petInformationBean.isElders(), petInformationBean.isFirstExperience());
+        petCompatibility.setSleepOutside(petInformationBean.isSleepOutside());
+        petCompatibility.setHoursAlone(petInformationBean.getHoursAlone());
         return petCompatibility;
     }
 
-    private void setCommonInfo(PetModel petModel) {
-        petModel.setYearOfBirth(petBean.getYearOfBirth());
-        petModel.setMonthOfBirth(petBean.getMonthOfBirth());
-        petModel.setDayOfBirth(petBean.getDayOfBirth());
-        petModel.setGender(petBean.getGender());
-        petModel.setCoatLenght(petBean.getCoatLenght());
-        petModel.setVaccinated(petBean.isVaccinated());
-        petModel.setMicrochipped(petBean.isMicrochipped());
-        petModel.setDewormed(petBean.isDewormed());
-        petModel.setSterilized(petBean.isSterilized());
-        petModel.setDisability(petBean.isDisability());
-        petModel.setDisabilityType(petBean.getDisabilityType());
+    private void setCommonInfo(PetModel petModel) throws PetDateOfBirthException {
+        if (LocalDate.now().getYear() < petBean.getYearOfBirth())
+            throw new PetDateOfBirthException("you have inserted a future year");
+        else if (LocalDate.now().getYear() == petBean.getYearOfBirth() && LocalDate.now().getMonthValue() < petBean.getMonthOfBirth())
+            throw new PetDateOfBirthException("you have insert a future month");
+        else if (petBean.getDayOfBirth() != 0 && LocalDate.now().isBefore(LocalDate.of(petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth()))) {
+            throw new PetDateOfBirthException("You have inserted a future date");
+        }
+        SetPetInfoSupport.setPetModel(petModel, petBean, petInformationBean);
     }
+
+
 
 }

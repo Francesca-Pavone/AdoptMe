@@ -67,6 +67,8 @@ public class GUIUserFavoritesController implements Observer {
     public void update2(Object object1, Object object2) {
         if(grid.getChildren().contains((Pane)object2))
             grid.getChildren().remove((Pane)object2);
+        else
+            grid.getChildren().add((Pane)object2);
     }
 
     public void listIsEmpty() {

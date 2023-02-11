@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.controller.appcontroller.AddToFavoritesController
 import com.ispwproject.adoptme.controller.appcontroller.LoginController;
 import com.ispwproject.adoptme.engineering.bean.LoginBean;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.dao.FavoritesDAO;
 import com.ispwproject.adoptme.engineering.session.Session;
@@ -31,12 +32,10 @@ class TestAddToFavoritesController {
         PetBean petBean = new PetBean();
         petBean.setPetId(1);
         petBean.setShelterId(1);
+        PetInformationBean petInformationBean = new PetInformationBean();
 
-        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean);
-        try {
-            addToFavoritesController.removePet(userBean, null, null);
-        } catch (Exception ignored) {}
-
+        AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean, petInformationBean);
+        addToFavoritesController.removePet(userBean, null, null);
         addToFavoritesController.addPet(userBean, null, null);
 
         if(FavoritesDAO.checkFav(petBean.getPetId(), userBean.getUserId(), petBean.getShelterId()))

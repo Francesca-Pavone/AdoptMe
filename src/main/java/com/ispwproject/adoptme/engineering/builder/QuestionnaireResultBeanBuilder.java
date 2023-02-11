@@ -11,9 +11,7 @@ public final class QuestionnaireResultBeanBuilder {
     private boolean femaleCat;
     private boolean maleDog;
     private boolean femaleDog;
-    private int haveAGarden;
     private int sleepOutside;
-    private int haveATerrace;
     private int hoursAlone;
     private int firstPet;
     private boolean sterilizePet;
@@ -69,18 +67,8 @@ public final class QuestionnaireResultBeanBuilder {
         return this;
     }
 
-    public QuestionnaireResultBeanBuilder haveAGarden(int haveAGarden) {
-        this.haveAGarden = haveAGarden;
-        return this;
-    }
-
     public QuestionnaireResultBeanBuilder sleepOutside(int gardenSleepOutside) {
         this.sleepOutside = gardenSleepOutside;
-        return this;
-    }
-
-    public QuestionnaireResultBeanBuilder haveATerrace(int haveATerrace) {
-        this.haveATerrace = haveATerrace;
         return this;
     }
 
@@ -129,9 +117,7 @@ public final class QuestionnaireResultBeanBuilder {
         questionnaireResultBean.setFemaleCat(femaleCat);
         questionnaireResultBean.setMaleDog(maleDog);
         questionnaireResultBean.setFemaleDog(femaleDog);
-        questionnaireResultBean.setHaveAGarden(haveAGarden);
         questionnaireResultBean.setSleepOutside(sleepOutside);
-        questionnaireResultBean.setHaveATerrace(haveATerrace);
         questionnaireResultBean.setHoursAlone(hoursAlone);
         questionnaireResultBean.setFirstPet(firstPet);
         questionnaireResultBean.setSterilizePet(sterilizePet);

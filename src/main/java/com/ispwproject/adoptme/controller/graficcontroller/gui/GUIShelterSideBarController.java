@@ -3,9 +3,9 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 import com.ispwproject.adoptme.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 
@@ -19,11 +19,13 @@ public class GUIShelterSideBarController {
     @FXML
     private HBox hBox;
     @FXML
-    private ToggleButton btnAppointments;
+    private HBox home;
     @FXML
-    private ToggleButton btnHomePage;
+    private HBox app;
     @FXML
-    private ToggleButton btnSettings;
+    private HBox sett;
+    private final Background background1 = new Background(new BackgroundFill(Color.rgb(41, 81, 71), CornerRadii.EMPTY, Insets.EMPTY));
+    private final Background background2 = new Background(new BackgroundFill(Color.rgb(52, 102, 90), CornerRadii.EMPTY, Insets.EMPTY));
 
     public void goToHomePage() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
@@ -34,9 +36,11 @@ public class GUIShelterSideBarController {
         GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
         guiShelterHomepageController.setCurrentPage(screen);
         homepageSelect.setVisible(true);
+        home.setBackground(background1);
         appointmentsSelect.setVisible(false);
+        app.setBackground(background2);
         settingsSelect.setVisible(false);
-        btnHomePage.setSelected(true);
+        sett.setBackground(background2);
     }
 
     public void goToAppointments() throws IOException {
@@ -45,9 +49,11 @@ public class GUIShelterSideBarController {
         hBox.getChildren().remove(1);
         hBox.getChildren().add(screen);
         homepageSelect.setVisible(false);
+        home.setBackground(background2);
         appointmentsSelect.setVisible(true);
+        app.setBackground(background1);
         settingsSelect.setVisible(false);
-        btnAppointments.setSelected(true);
+        sett.setBackground(background2);
     }
 
     public void goToSettings() throws IOException {
@@ -56,8 +62,10 @@ public class GUIShelterSideBarController {
         hBox.getChildren().remove(1);
         hBox.getChildren().add(screen);
         homepageSelect.setVisible(false);
+        home.setBackground(background2);
         appointmentsSelect.setVisible(false);
+        app.setBackground(background2);
         settingsSelect.setVisible(true);
-        btnSettings.setSelected(true);
+        sett.setBackground(background1);
     }
 }

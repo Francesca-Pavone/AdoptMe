@@ -1,14 +1,17 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.controller.appcontroller.AddPetController;
+import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
+import com.ispwproject.adoptme.engineering.exception.PetDateOfBirthException;
 import com.ispwproject.adoptme.engineering.utils.ImageConverterSupport;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
-import com.ispwproject.adoptme.engineering.builder.PetBeanBuilder;
+import com.ispwproject.adoptme.engineering.builder.PetInformationBeanBuilder;
 import com.ispwproject.adoptme.engineering.enums.CoatLenght;
 import com.ispwproject.adoptme.engineering.enums.Size;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -104,10 +107,6 @@ public class GUIAddPetController {
     @FXML
     private CheckBox cbMaleDog;
     @FXML
-    private CheckBox cbApartNoGarden;
-    @FXML
-    private CheckBox cbApartNoTerrace;
-    @FXML
     private CheckBox cbChildren;
     @FXML
     private CheckBox cbElders;
@@ -118,7 +117,7 @@ public class GUIAddPetController {
     @FXML
     private ToggleGroup hoursAlone;
 
-    private File file;
+    private File file = null;
     private int petType; // 0 -> DOG  |  1 -> CAT
     private Observer observer;
 
@@ -157,12 +156,11 @@ public class GUIAddPetController {
         txtDisabilityType.setVisible(false);
     }
 
-    public void confirmAddPet(ActionEvent event) throws Exception {
+    public void confirmAddPet(ActionEvent event) {
         ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
         int year;
         int month;
         int day;
-        PetBean petBean;
 
         // retrive data of birth information
         if (datePicker.getValue() != null) {
@@ -178,25 +176,25 @@ public class GUIAddPetController {
             day = 0;
         }
 
-        PetBeanBuilder petBeanBuilder = PetBeanBuilder.newPetBean()
+        PetBean petBean = new PetBean();
+        petBean.setGender((switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
+            case "Female" -> 1;
+            default -> 0;   //case "Male"
+        }));
+        petBean.setShelterId(shelterBean.getShelterId());
+        petBean.setPetImage(file);
+        petBean.setDayOfBirth(day);
+        petBean.setMonthOfBirth(month);
+        petBean.setYearOfBirth(year);
+        petBean.setName(petNameTxtF.getText());
+        petBean.setType(petType);
 
-                .shelterId(shelterBean.getShelterId())
-                .petImage(file)
-                .name(petNameTxtF.getText())
-                .type(petType)
-                .yearOfBirth(year)
-                .monthOfBirth(month)
-                .dayOfBirth(day)
-
-                .gender(switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
-                    case "Female" -> 1;
-                    default -> 0;   //case "Male"
-                })
-
+        PetInformationBean petInformationBean;
+        PetInformationBeanBuilder petInformationBeanBuilder = PetInformationBeanBuilder.newPetBean()
                 .coatLenght(switch (boxCoatLenght.getValue()) {
-                    case "Medium" -> 1;
-                    case "Long" -> 2;
-                    default -> 0;   //case "Short"
+                    case "MEDIUM" -> 1;
+                    case "LONG" -> 2;
+                    default -> 0; // case SMALL
                 })
 
                 .vaccinated(switch (((RadioButton) vaccinated.getSelectedToggle()).getText()) {
@@ -231,27 +229,26 @@ public class GUIAddPetController {
                 .femaleCat(cbFemaleCat.isSelected())
                 .children(cbChildren.isSelected())
                 .elders(cbElders.isSelected())
-                .apartmentNoGarden(cbApartNoGarden.isSelected())
-                .apartmentNoTerrace(cbApartNoTerrace.isSelected())
                 .sleepOutside(cbSleepOut.isSelected())
                 .firstExperience(cbFirstExp.isSelected())
                 
                 .hoursAlone(switch (((RadioButton) hoursAlone.getSelectedToggle()).getText()) {
+                    case "1-3" -> 0;
                     case "4-6" -> 1;
                     case "more than 6" -> 2;
-                    default -> 0;   //case "1-3"
+                    default -> -1;
                 });
 
 
         if (petType == 0) { // DOG
             
-            petBean = petBeanBuilder
+            petInformationBean = petInformationBeanBuilder
 
                     .size(switch (boxSize.getValue()) {
-                        case "Medium" -> 1;
-                        case "Large" -> 2;
-                        case "ExtraLarge" -> 3;
-                        default -> 0;   //case "Small"
+                        case "MEDIUM" -> 1;
+                        case "LARGE" -> 2;
+                        case "EXTRALARGE" -> 3;
+                        default -> 0; // case SMALL
                     })
 
                     .dogEducation(switch (((RadioButton) dogEducation.getSelectedToggle()).getText()) {
@@ -263,7 +260,7 @@ public class GUIAddPetController {
         }
         else // CAT
         {
-            petBean = petBeanBuilder
+            petInformationBean = petInformationBeanBuilder
 
                     .testFiv(switch (((RadioButton) testFiv.getSelectedToggle()).getText()) {
                         case "Positive" -> true;
@@ -278,9 +275,14 @@ public class GUIAddPetController {
                     .build();
         }
 
-        AddPetController addPetController = new AddPetController(petBean);
-        addPetController.addNewPet(observer);
-        ((Node)event.getSource()).getScene().getWindow().hide();
+        AddPetController addPetController = new AddPetController(petBean, petInformationBean);
+        try {
+            addPetController.addNewPet(observer);
+            ((Node)event.getSource()).getScene().getWindow().hide();
+
+        } catch (PetDateOfBirthException e) {
+            ShowExceptionSupport.showExceptionGUI(e.getMessage());
+        }
     }
 
     public void loadImage(ActionEvent event) throws IOException {

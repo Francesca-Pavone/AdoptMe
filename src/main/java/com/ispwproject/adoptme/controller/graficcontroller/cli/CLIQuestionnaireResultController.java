@@ -2,6 +2,8 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.view.cli.CLIQuestionnaireResultView;
+
+import java.time.Year;
 import java.util.List;
 
 public class CLIQuestionnaireResultController {
@@ -19,12 +21,23 @@ public class CLIQuestionnaireResultController {
         this.petBeanList = petList;
         for(PetBean petBean: petList) {
             String gender;
+            String age;
+            int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
+
+            if (yearDiff <= 1)
+                age = "Puppy";
+            else if (yearDiff <= 3)
+                age = "Young";
+            else if (yearDiff <= 10)
+                age = "Adult";
+            else
+                age = "Senior";
             try {
                 gender = (switch ((petBean).getGender()) {
                     case 1 -> "Female";
                     default -> "Male";
                 });
-                this.cliQuestionnaireResultView.printPet((petBean).getName(), gender, (petBean).getAge(), i);
+                this.cliQuestionnaireResultView.printPet((petBean).getName(), gender, age, i);
                 i++;
             } catch (Exception e) {
                 e.printStackTrace();

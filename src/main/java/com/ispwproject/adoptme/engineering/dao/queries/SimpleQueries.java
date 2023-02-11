@@ -75,7 +75,7 @@ public class SimpleQueries {
     }
 
     public static ResultSet selectPetById(Statement stmt, int petId, int shelterId) throws SQLException {
-        String sql = "SELECT name, imgSrc, 0 as type, age FROM Dogs WHERE shelter = '" + shelterId + "' and dogId = '" + petId + "'UNION SELECT name, imgSrc, 1 as type, age FROM Cats WHERE shelter = '" + shelterId + "' and catId = '" + petId + "';";
+        String sql = "SELECT name, imgSrc, 0 as type FROM Dogs WHERE shelter = '" + shelterId + "' and dogId = '" + petId + "'UNION SELECT name, imgSrc, 1 as type FROM Cats WHERE shelter = '" + shelterId + "' and catId = '" + petId + "';";
         return stmt.executeQuery(sql);
     }
     public static ResultSet selectDogById(Statement stmt, int dogId, int shelterId) throws SQLException {
@@ -109,12 +109,11 @@ public class SimpleQueries {
     }
 
     public static ResultSet selectPetsFromQuestionnaire(Statement stmt, String query) throws SQLException {
-        String sql = query;
-        return stmt.executeQuery(sql);
+        return stmt.executeQuery(query);
     }
 
     public static ResultSet selectPetFromFavorites(Statement stmt, int userId) throws SQLException {
-        String sql = "SELECT dogId AS id, name, imgSrc, gender, age, shelter, 0 as type FROM Dogs WHERE (dogId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "') UNION SELECT catId AS id, name, imgSrc, gender, age, shelter, 1 as type FROM Cats WHERE (catId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "')";
+        String sql = "SELECT dogId AS id, name, imgSrc, gender, shelter, dayOfBirth, monthOfBirth, yearOfBirth, 0 as type FROM Dogs WHERE (dogId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "') UNION SELECT catId AS id, name, imgSrc, gender, shelter, dayOfBirth, monthOfBirth, yearOfBirth, 1 as type FROM Cats WHERE (catId, shelter) in (SELECT petId, shelterId FROM Favorites WHERE userId = '" + userId + "')";
         return stmt.executeQuery(sql);
     }
 

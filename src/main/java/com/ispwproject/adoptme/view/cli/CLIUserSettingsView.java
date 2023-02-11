@@ -30,7 +30,7 @@ public class CLIUserSettingsView {
             this.controller.executeCommand(inputLine);
         }
         catch (CommandNotFoundException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage() + "1 | 2 | 3 | 4 | 5\n\tPress ENTER to continue");
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
         catch (NotDevelopedException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
