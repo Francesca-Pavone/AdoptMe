@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
+import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.FavoriteListEmptyException;
 import com.ispwproject.adoptme.engineering.exception.NoCityFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
@@ -30,7 +31,7 @@ public class CLIUserHomepageController {
         this.cliUserHomepageView = new CLIUserHomepageView(this);
         this.cliUserHomepageView.run();
     }
-    public void executeCommand(String input) {
+    public void executeCommand(String input) throws CommandNotFoundException {
         if(Session.getCurrentSession().getUserBean() == null) {
             switch (input) {
                 case QUESTIONNAIRE -> {
@@ -41,14 +42,8 @@ public class CLIUserHomepageController {
 
                 // vai a search shelter
                 case SEARCH_SHELTER -> this.cliUserHomepageView.searchShelter();
-                default ->  {
-                    PrintSupport.printError(MSG_ERROR);
-                    if (Session.getCurrentSession().getUserBean() != null)
-                        PrintSupport.printError(" 4 | 5 | 6");
-                    PrintSupport.printError("\n\tPress ENTER to continue");
-                    ScannerSupport.waitEnter();
-                    this.start();
-                }
+                default -> throw new CommandNotFoundException("1 | 2 | 3");
+
             }
         }
 

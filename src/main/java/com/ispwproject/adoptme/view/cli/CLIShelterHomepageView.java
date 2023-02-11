@@ -3,7 +3,7 @@ package com.ispwproject.adoptme.view.cli;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterHomepageController;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 
 import java.util.Scanner;
 
@@ -26,8 +26,7 @@ public class CLIShelterHomepageView {
             this.controller.executeCommand(inputLine);
         }
         catch (CommandNotFoundException e) {
-            PrintSupport.printError(e.getMessage());
-            ScannerSupport.waitEnter();
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
             run();
         }
 

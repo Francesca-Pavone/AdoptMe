@@ -2,14 +2,16 @@ package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserHomepageController;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
+import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class CLIUserHomepageView {
-    private CLIUserHomepageController cliUserHomepageControllerCurrent;
+    private final CLIUserHomepageController cliUserHomepageControllerCurrent;
 
     public CLIUserHomepageView(CLIUserHomepageController cliUserHomepageController) {
         this.cliUserHomepageControllerCurrent = cliUserHomepageController;
@@ -28,8 +30,9 @@ public class CLIUserHomepageView {
         try {
             this.cliUserHomepageControllerCurrent.executeCommand(inputLine);
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (CommandNotFoundException e){
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            run();
         }
     }
 
