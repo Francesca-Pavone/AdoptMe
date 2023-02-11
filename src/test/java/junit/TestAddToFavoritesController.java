@@ -35,10 +35,7 @@ class TestAddToFavoritesController {
         PetInformationBean petInformationBean = new PetInformationBean();
 
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean, petInformationBean);
-        try {
-            addToFavoritesController.removePet(userBean, null, null);
-        } catch (Exception ignored) {}
-
+        addToFavoritesController.removePet(userBean, null, null);
         addToFavoritesController.addPet(userBean, null, null);
 
         if(FavoritesDAO.checkFav(petBean.getPetId(), userBean.getUserId(), petBean.getShelterId()))
