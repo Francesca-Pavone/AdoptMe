@@ -1,9 +1,6 @@
 package com.ispwproject.adoptme.engineering.builder;
 
-import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
-
-import java.io.File;
 
 public final class PetInformationBeanBuilder {
     private int petId;

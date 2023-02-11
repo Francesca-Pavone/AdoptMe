@@ -25,7 +25,9 @@ public class AddToFavoritesController {
             UserModel userModel = new UserModel(userBean.getUserId(), userBean.getProfileImg(), userBean.getName(), userBean.getSurname());
             UserFavoritesPetsList userFavoritesPetsList = new UserFavoritesPetsList(observer, userModel);
 
-            try {FavoritesDAO.addFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());} catch (Exception e) {}
+            try {FavoritesDAO.addFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());} catch (Exception ignored) {
+                //exception ignored
+            }
             ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
             if (petBean.getType() == 0) {
@@ -84,6 +86,7 @@ public class AddToFavoritesController {
                 userFavoritesPetsList.notifyObservers(catModel,object);
             }
         } catch (Exception ignored) {
+            //exception ignored
         }
     }
 }
