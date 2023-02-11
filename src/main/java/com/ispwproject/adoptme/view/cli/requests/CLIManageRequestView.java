@@ -40,7 +40,9 @@ public class CLIManageRequestView {
                 return;
             }
             case 3 -> PrintSupport.printMessage("\n---------------  action you can do  ---------------\n1) Delete appointment request\n2) Go back\n\nInsert the number:");
-
+            default -> {
+                return;
+            }
         }
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();

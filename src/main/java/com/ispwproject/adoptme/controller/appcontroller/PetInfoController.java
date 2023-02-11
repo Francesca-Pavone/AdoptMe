@@ -9,8 +9,10 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 
 
 public class PetInfoController {
+    private PetInformationBean petInformationBean;
 
-    public void getPetInfo(PetBean petBean, PetInformationBean petInformationBean, ShelterBean shelterBean){
+
+    public PetInformationBean getPetInfo(PetBean petBean, ShelterBean shelterBean){
         try {
             ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
@@ -19,8 +21,8 @@ public class PetInfoController {
 
                 //vado a settare nel bean le nuove info del pet che mi servono
                 setGeneralInfo(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth());
-                setMedicalInfo(petInformationBean, dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getCoatLenght());
-                setCompatibility(petInformationBean, dogModel.getPetCompatibility());
+                setMedicalInfo(dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getCoatLenght());
+                setCompatibility(dogModel.getPetCompatibility());
                 petInformationBean.setDogEducation(dogModel.isProgramEducation());
                 petInformationBean.setSize(dogModel.getSize());
                 petBean.setFav(this.checkFavorite(petBean));
@@ -30,8 +32,8 @@ public class PetInfoController {
                 CatModel catModel = CatDAO.retrieveCatById(petBean.getPetId(), petBean.getShelterId());
 
                 setGeneralInfo(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth());
-                setMedicalInfo(petInformationBean, catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getCoatLenght());
-                setCompatibility(petInformationBean, catModel.getPetCompatibility());
+                setMedicalInfo(catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getCoatLenght());
+                setCompatibility(catModel.getPetCompatibility());
                 petInformationBean.setTestFiv(catModel.isTestFiv());
                 petInformationBean.setTestFelv(catModel.isTestFelv());
                 petBean.setFav(this.checkFavorite(petBean));
@@ -47,6 +49,7 @@ public class PetInfoController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return petInformationBean;
     }
 
     public boolean checkFavorite(PetBean petBean) {
@@ -62,7 +65,8 @@ public class PetInfoController {
         petBean.setDayOfBirth(dayOfBirth);
     }
 
-    private void setMedicalInfo(PetInformationBean petInformationBean, boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, int coatLenght){
+    private void setMedicalInfo(boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, int coatLenght){
+        this.petInformationBean = new PetInformationBean();
         petInformationBean.setCoatLenght(coatLenght);
         petInformationBean.setVaccinated(vaccinated);
         petInformationBean.setMicrochipped(microchipped);
@@ -72,7 +76,7 @@ public class PetInfoController {
         petInformationBean.setDisabilityType(disabilityType);
     }
 
-    private void setCompatibility(PetInformationBean petInformationBean, PetCompatibility petCompatibility) {
+    private void setCompatibility(PetCompatibility petCompatibility) {
         petInformationBean.setMaleDog(petCompatibility.isMaleDog());
         petInformationBean.setFemaleDog(petCompatibility.isFemaleDog());
         petInformationBean.setMaleCat(petCompatibility.isMaleCat());

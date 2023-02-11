@@ -5,6 +5,10 @@ import com.ispwproject.adoptme.engineering.bean.PetInformationBean;
 import com.ispwproject.adoptme.model.PetModel;
 
 public class SetPetInfoSupport {
+    private SetPetInfoSupport() {
+        //private constructor
+    }
+
     public static void setPetModel(PetModel petModel, PetBean petBean, PetInformationBean petInformationBean) {
         petModel.setYearOfBirth(petBean.getYearOfBirth());
         petModel.setMonthOfBirth(petBean.getMonthOfBirth());

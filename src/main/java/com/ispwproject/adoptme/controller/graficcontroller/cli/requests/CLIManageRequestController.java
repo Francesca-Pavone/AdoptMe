@@ -146,6 +146,7 @@ public class CLIManageRequestController implements CLIGraficController {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             start();
         } catch (DateFormatException | TimeFormatException ignored) {
+            //ignore
         }
     }
 

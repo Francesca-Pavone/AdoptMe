@@ -44,7 +44,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     @Override
     public void start(){
         PetInfoController petInfoControllerA = new PetInfoController();
-        petInfoControllerA.getPetInfo(petBean, this.petInformationBean, new ShelterBean());
+        petInformationBean = petInfoControllerA.getPetInfo(petBean, new ShelterBean());
 
         String dateOfBirth;
 

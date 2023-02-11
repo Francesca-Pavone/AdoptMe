@@ -115,7 +115,7 @@ public class GUIPetInfoController implements Observer {
     private boolean fav = false;
 
     private PetBean petBean;
-    private final PetInformationBean petInformationBean = new PetInformationBean();
+    private PetInformationBean petInformationBean;
 
     private Parent previousPage;
     private Parent currentPage;
@@ -139,7 +139,7 @@ public class GUIPetInfoController implements Observer {
 
         PetInfoController petInfoControllerA = new PetInfoController();
         ShelterBean shelterBean = new ShelterBean();
-        petInfoControllerA.getPetInfo(petBean, petInformationBean, shelterBean);
+        petInformationBean = petInfoControllerA.getPetInfo(petBean, shelterBean);
         this.petBean = petBean;
         fav = this.petBean.isFav();
 
