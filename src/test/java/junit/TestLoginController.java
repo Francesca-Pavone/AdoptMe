@@ -18,9 +18,9 @@ class TestLoginController {
         LoginController loginController = new LoginController();
         loginController.checkLogin(loginBean);
 
-        int accountType2 = 0;
-        int accountType1 = loginBean.getAccountType();
+        int accountExpected = 1;
+        int accountActual = loginBean.getAccountType();
 
-        assertEquals(accountType1, accountType2, 0); //test ha successo
+        assertEquals(accountExpected, accountActual); //test ha successo
     }
 }
