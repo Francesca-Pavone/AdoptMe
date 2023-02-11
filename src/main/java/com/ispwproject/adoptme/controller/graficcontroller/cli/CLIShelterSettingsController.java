@@ -34,7 +34,7 @@ public class CLIShelterSettingsController implements CLIGraficController{
                 CLILoginController cliLoginController = new CLILoginController();
                 cliLoginController.start();
             }
-            default -> throw new CommandNotFoundException();
+            default -> throw new CommandNotFoundException("1 | 2 | 3 | 4 | 5 | 6 | 7");
         }
     }
 }

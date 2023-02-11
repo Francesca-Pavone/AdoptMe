@@ -23,11 +23,7 @@ public class CLILoginView {
         String inputLine = scanner.nextLine();
         try {
             this.cliLoginControllerCurrent.executeCommand(inputLine);
-        } catch (CommandNotFoundException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage() + "1 | 2 | 3 | 4 | 5");
-            run();
-        }
-        catch (NotDevelopedException e) {
+        } catch (CommandNotFoundException | NotDevelopedException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             run();
         }

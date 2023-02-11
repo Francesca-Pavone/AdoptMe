@@ -13,7 +13,6 @@ import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIPetInformationView;
 
@@ -107,7 +106,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         }
         String generalInfo = getCommonGeneralInfo() + testFiv + testFelv + dogEducation;
 
-        String compatibility = getCompatibility(petBean);
+        String compatibility = getCompatibility();
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
         cliPetInformationView.showTitle(petBean.getName());
@@ -139,15 +138,10 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                         cliUserHomepageController.start();
                     }
                 }
-                default -> throw new CommandNotFoundException();
+                default -> throw new CommandNotFoundException("1 | 2 | 3");
             }
-        } catch (CommandNotFoundException e) {
-            PrintSupport.printError(e.getMessage() + "1 | 2 | 3\nPress ENTER to continue");
-            ScannerSupport.waitEnter();
-            this.view.showCommand(petBean.isFav());
-        } catch(NoAccountException e) {
-            PrintSupport.printError(e.getMessage() + "\n\t Press ENTER to continue");
-            ScannerSupport.waitEnter();
+        } catch (CommandNotFoundException | NoAccountException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
             this.view.showCommand(petBean.isFav());
         } catch (FavoriteListEmptyException e) {
             e.printStackTrace();
@@ -211,7 +205,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         return vaccinated + microchipped + dewormed + sterilized + disability + disabilityType;
     }
 
-    private String getCompatibility(PetBean petBean) {
+    private String getCompatibility() {
         String compatibility = "";
         if (petInformationBean.isMaleDog()) {
             compatibility = compatibility.concat( "\t\tMale dogs\n");

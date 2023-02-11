@@ -23,7 +23,7 @@ public class CLIShelterHomepageController implements CLIGraficController{
 
     public void executeCommand(String input) throws CommandNotFoundException {
         switch (input){
-            case ADD_PET, VIEW_PETS, SETTINGS -> {
+            case ADD_PET, VIEW_PETS -> {
                 PrintSupport.printMessage("Functionality realized just with the first interface\n\n");
                 view.run();
             }
@@ -31,8 +31,13 @@ public class CLIShelterHomepageController implements CLIGraficController{
                 CLIAppointmentsPageController cliAppointmentsPageController = new CLIAppointmentsPageController();
                 cliAppointmentsPageController.start();
             }
-            default -> throw new CommandNotFoundException();
+            case SETTINGS -> {
+                CLIShelterSettingsController cliShelterSettingsController = new CLIShelterSettingsController();
+                cliShelterSettingsController.start();
+            }
+            default -> throw new CommandNotFoundException("1 | 2 | 3");
         }
+
     }
 
 }
