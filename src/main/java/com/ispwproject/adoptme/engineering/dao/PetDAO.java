@@ -191,7 +191,6 @@ public class PetDAO {
                     pet = new CatModel();
 
                 pet.setPetId(petId);
-                pet.setType(petType);
                 pet.setName(petName);
                 pet.setPetImage(petImage);
 
