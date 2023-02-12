@@ -147,7 +147,6 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         } catch (FavoriteListEmptyException e) {
             e.printStackTrace();
         } catch (NoAccountException e) {
-            PrintSupport.printMessage("a");
             CLINeedAccountController cliNeedAccountController = new CLINeedAccountController();
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             cliNeedAccountController.start();
