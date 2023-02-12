@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
+import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
@@ -27,7 +28,7 @@ public class CLIPetInformationView {
         PrintSupport.printMessage("\tCompatibility:\n" + compatibility);
     }
 
-    public void showCommand(boolean petIsFav){
+    public void showCommand(boolean petIsFav) {
         PrintSupport.printSeparatorLine();
         if (Session.getCurrentSession().getShelterBean() == null){
             PrintSupport.printMessage("1) Request to meet this pet");

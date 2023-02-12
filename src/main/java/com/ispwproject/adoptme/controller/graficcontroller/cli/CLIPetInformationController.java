@@ -115,12 +115,13 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     }
 
 
-    public void executeCommand(String inputLine){
+    public void executeCommand(String inputLine) {
         try {
             switch (inputLine) {
                 case REQUEST -> {
-                    if (Session.getCurrentSession().getUserBean() == null)
+                    if (Session.getCurrentSession().getUserBean() == null) {
                         throw new NoAccountException();
+                    }
                     this.executeRequest(); }
                 case FAVORITE -> {
                     if (Session.getCurrentSession().getUserBean() == null)
@@ -140,11 +141,16 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                 }
                 default -> throw new CommandNotFoundException("1 | 2 | 3");
             }
-        } catch (CommandNotFoundException | NoAccountException e) {
+        } catch (CommandNotFoundException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
             this.view.showCommand(petBean.isPetBeanFav());
         } catch (FavoriteListEmptyException e) {
             e.printStackTrace();
+        } catch (NoAccountException e) {
+            PrintSupport.printMessage("a");
+            CLINeedAccountController cliNeedAccountController = new CLINeedAccountController();
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+            cliNeedAccountController.start();
         }
     }
 
@@ -163,18 +169,8 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     }
 
     private void executeRequest() {
-        try {
-            if (Session.getCurrentSession().getUserBean() == null)
-                throw new NoAccountException();
-            else {
-                CLISendRequestController cliSendRequestController = new CLISendRequestController(petBean);
-                cliSendRequestController.start();
-            }
-        } catch (NoAccountException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage());
-            CLINeedAccountController cliNeedAccountController = new CLINeedAccountController();
-            cliNeedAccountController.start();
-        }
+        CLISendRequestController cliSendRequestController = new CLISendRequestController(petBean);
+        cliSendRequestController.start();
     }
 
     private String getCommonGeneralInfo() {
