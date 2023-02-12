@@ -14,7 +14,7 @@ public class SetPetInfoSupport {
         petModel.setMonthOfBirth(petBean.getMonthOfBirth());
         petModel.setDayOfBirth(petBean.getDayOfBirth());
         petModel.setGender(petBean.getGender());
-        petModel.setCoatLenght(petInformationBean.getCoatLenght());
+        petModel.setCoatLength(petInformationBean.getCoatLength());
         petModel.setVaccinated(petInformationBean.isVaccinated());
         petModel.setMicrochipped(petInformationBean.isMicrochipped());
         petModel.setDewormed(petInformationBean.isDewormed());

@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.requests.CLIAppointmentsPageController;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterHomepageView;
 
 public class CLIShelterHomepageController implements CLIGraficController{
@@ -22,22 +21,23 @@ public class CLIShelterHomepageController implements CLIGraficController{
     }
 
     public void executeCommand(String input) throws CommandNotFoundException {
+        CLIGraficController controller = null;
         switch (input){
-            case ADD_PET, VIEW_PETS -> {
-                PrintSupport.printMessage("Functionality realized just with the first interface\n\n");
-                view.run();
+            case ADD_PET -> {
+                controller = new CLIAddPetController();
+            }
+            case VIEW_PETS -> {
+                controller = new CLIShowPetsController();
             }
             case APPOINTMENTS -> {
-                CLIAppointmentsPageController cliAppointmentsPageController = new CLIAppointmentsPageController();
-                cliAppointmentsPageController.start();
+                controller = new CLIAppointmentsPageController();
             }
             case SETTINGS -> {
-                CLIShelterSettingsController cliShelterSettingsController = new CLIShelterSettingsController();
-                cliShelterSettingsController.start();
+                controller = new CLIShelterSettingsController();
             }
-            default -> throw new CommandNotFoundException("1 | 2 | 3");
+            default -> throw new CommandNotFoundException("1 | 2 | 3 | 4");
         }
-
+        controller.start();
     }
 
 }

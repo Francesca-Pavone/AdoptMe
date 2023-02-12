@@ -56,7 +56,7 @@ public class GUIAddPetController {
     @FXML
     private ComboBox<String> boxSize;
     @FXML
-    private ComboBox<String> boxCoatLenght;
+    private ComboBox<String> boxCoatLength;
     @FXML
     private ToggleGroup genderTogG;
     @FXML
@@ -138,7 +138,7 @@ public class GUIAddPetController {
 
         boxSize.getItems().addAll(Size.SMALL.toString(), Size.MEDIUM.toString(), Size.LARGE.toString(), Size.EXTRALARGE.toString());
 
-        boxCoatLenght.getItems().addAll(CoatLenght.SHORT.toString(), CoatLenght.MEDIUM.toString(), CoatLenght.LONG.toString());
+        boxCoatLength.getItems().addAll(CoatLenght.SHORT.toString(), CoatLenght.MEDIUM.toString(), CoatLenght.LONG.toString());
 
         yearMonthHBox.getChildren().removeAll(yearVBox, monthVBox);
         sizeVBox.getChildren().removeAll(txtSize, boxSize);
@@ -191,10 +191,10 @@ public class GUIAddPetController {
 
         PetInformationBean petInformationBean;
         PetInformationBeanBuilder petInformationBeanBuilder = PetInformationBeanBuilder.newPetBean()
-                .coatLenght(switch (boxCoatLenght.getValue()) {
+                .coatLength(switch (boxCoatLength.getValue()) {
                     case "MEDIUM" -> 1;
                     case "LONG" -> 2;
-                    default -> 0; // case SMALL
+                    default -> 0; // case SHORT
                 })
 
                 .vaccinated(switch (((RadioButton) vaccinated.getSelectedToggle()).getText()) {

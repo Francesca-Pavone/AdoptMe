@@ -37,7 +37,7 @@ public final class PetInformationBeanBuilder {
         return this;
     }
 
-    public PetInformationBeanBuilder coatLenght(int coatLenght) {
+    public PetInformationBeanBuilder coatLength(int coatLenght) {
         this.coatLenght = coatLenght;
         return this;
     }
@@ -139,7 +139,7 @@ public final class PetInformationBeanBuilder {
 
     public PetInformationBean build() {
         PetInformationBean petInformationBean =  new PetInformationBean();
-        petInformationBean.setCoatLenght(coatLenght);
+        petInformationBean.setCoatLength(coatLenght);
         petInformationBean.setVaccinated(vaccinated);
         petInformationBean.setMicrochipped(microchipped);
         petInformationBean.setDewormed(dewormed);

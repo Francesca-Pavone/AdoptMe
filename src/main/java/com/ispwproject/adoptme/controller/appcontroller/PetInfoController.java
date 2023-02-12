@@ -21,7 +21,7 @@ public class PetInfoController {
 
                 //vado a settare nel bean le nuove info del pet che mi servono
                 setGeneralInfo(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth());
-                setMedicalInfo(dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getCoatLenght());
+                setMedicalInfo(dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getCoatLength());
                 setCompatibility(dogModel.getPetCompatibility());
                 petInformationBean.setDogEducation(dogModel.isProgramEducation());
                 petInformationBean.setSize(dogModel.getSize());
@@ -32,7 +32,7 @@ public class PetInfoController {
                 CatModel catModel = CatDAO.retrieveCatById(petBean.getPetId(), petBean.getShelterId());
 
                 setGeneralInfo(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth());
-                setMedicalInfo(catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getCoatLenght());
+                setMedicalInfo(catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getCoatLength());
                 setCompatibility(catModel.getPetCompatibility());
                 petInformationBean.setTestFiv(catModel.isTestFiv());
                 petInformationBean.setTestFelv(catModel.isTestFelv());
@@ -67,7 +67,7 @@ public class PetInfoController {
 
     private void setMedicalInfo(boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, int coatLenght){
         this.petInformationBean = new PetInformationBean();
-        petInformationBean.setCoatLenght(coatLenght);
+        petInformationBean.setCoatLength(coatLenght);
         petInformationBean.setVaccinated(vaccinated);
         petInformationBean.setMicrochipped(microchipped);
         petInformationBean.setDewormed(dewormed);

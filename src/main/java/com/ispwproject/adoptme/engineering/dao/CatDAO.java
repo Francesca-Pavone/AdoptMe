@@ -134,7 +134,7 @@ public class CatDAO {
             preparedStatement.setInt(6, catModel.getDayOfBirth());
             preparedStatement.setInt(7, catModel.getMonthOfBirth());
             preparedStatement.setInt(8, catModel.getYearOfBirth());
-            preparedStatement.setInt(9, catModel.getCoatLenght());
+            preparedStatement.setInt(9, catModel.getCoatLength());
             preparedStatement.setBoolean(10, catModel.isVaccinated());
             preparedStatement.setBoolean(11, catModel.isMicrochipped());
             preparedStatement.setBoolean(12, catModel.isDewormed());
