@@ -3,15 +3,13 @@ package com.ispwproject.adoptme.engineering.dao;
 import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
-import com.ispwproject.adoptme.engineering.utils.RetrievePetCompatibilitySupport;
+import com.ispwproject.adoptme.engineering.utils.DogCatDAOSupport;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.*;
 
 public class DogDAO {
@@ -24,16 +22,10 @@ public class DogDAO {
 
         try {
             stmt = ConnectionDB.getConnection();
-
-            // Prendo il result set della query, lo faccio usando la classe SimpleQueries in modo tale da creare indipendenza tra il db e il modo in cui vengono formulate le query
             ResultSet resultSet = SimpleQueries.selectDogById(stmt, dogId, shelterId);
-
-            // Verifico se il result set è vuoto e nel caso lancio un’eccezione
             if (!resultSet.first()){
                 throw new NotFoundException("Dog with the id " + dogId + " NOT found for the shelter with id: "+shelterId);
             }
-
-            // Riposiziono il cursore sul primo record del result set
             resultSet.first();
             do{
                 int yearOfBirth = resultSet.getInt("yearOfBirth");
@@ -50,7 +42,7 @@ public class DogDAO {
                 boolean programEducation = resultSet.getBoolean("education");
                 int size = resultSet.getInt("size");
 
-                PetCompatibility petCompatibility = RetrievePetCompatibilitySupport.retrievePetCompatibility(resultSet);
+                PetCompatibility petCompatibility = DogCatDAOSupport.retrievePetCompatibility(resultSet);
 
                 dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
                 dog.setVaccinated(vaccinated);
@@ -63,15 +55,11 @@ public class DogDAO {
                 dog.setSize(size);
 
             }while(resultSet.next());
-
-            // STEP 5.1: Clean-up dell'ambiente
             resultSet.close();
-
         }
         catch (SQLException | NotFoundException | ConnectionDbException e) {
             e.printStackTrace();
         }
-
         return dog;
     }
 
@@ -85,37 +73,16 @@ public class DogDAO {
 
         try {
             stmt = ConnectionDB.getConnection();
-
-            // In pratica i risultati delle query possono essere visti come un Array Associativo o un Map
             ResultSet rs = SimpleQueries.selectLastPetIdByShelterId(stmt, shelterId);
             while (rs.next()) {
-                // lettura delle colonne "by name"
                 dogId = rs.getInt("petId");
             }
-
             rs.close();
             stmt.close();
 
-            // STEP 4.2: creazione ed esecuzione della query
-
             //utilizzo i prepared statement per poter passare alla query il tipo di dato blob usato per le immagini
             preparedStatement = ConnectionDB.insertDog();
-            preparedStatement.setInt(1, dogId);
-            preparedStatement.setInt(2, shelterId);
-            preparedStatement.setString(3, dogModel.getName());
-
-            if (dogModel.getPetImage() == null) {
-                preparedStatement.setNull(4, Types.BLOB);
-            }else
-            {
-                InputStream inputStream = new FileInputStream(dogModel.getPetImage());
-                preparedStatement.setBlob(4, inputStream);
-            }
-            preparedStatement.setInt(5, dogModel.getGender());
-            preparedStatement.setInt(6, dogModel.getDayOfBirth());
-            preparedStatement.setInt(7, dogModel.getMonthOfBirth());
-            preparedStatement.setInt(8, dogModel.getYearOfBirth());
-            preparedStatement.setInt(9, dogModel.getCoatLength());
+            DogCatDAOSupport.setMainPetInfo(preparedStatement, dogId, shelterId, dogModel.getName(), dogModel.getPetImage(), dogModel.getGender(), dogModel.getDayOfBirth(), dogModel.getMonthOfBirth(), dogModel.getYearOfBirth(), dogModel.getCoatLength());
             preparedStatement.setInt(10, dogModel.getSize());
             preparedStatement.setBoolean(11, dogModel.isVaccinated());
             preparedStatement.setBoolean(12, dogModel.isMicrochipped());
@@ -125,21 +92,7 @@ public class DogDAO {
             preparedStatement.setString(16, dogModel.getDisabilityType());
             preparedStatement.setBoolean(17, dogModel.isProgramEducation());
             preparedStatement.executeUpdate();
-
-            PreparedStatement preparedStatement1 = ConnectionDB.insertPetCompatibility();
-            preparedStatement1.setInt(1, dogId);
-            preparedStatement1.setInt(2, shelterId);
-            preparedStatement1.setBoolean(3, dogModel.getPetCompatibility().isMaleDog());
-            preparedStatement1.setBoolean(4, dogModel.getPetCompatibility().isFemaleDog());
-            preparedStatement1.setBoolean(5, dogModel.getPetCompatibility().isMaleCat());
-            preparedStatement1.setBoolean(6, dogModel.getPetCompatibility().isFemaleCat());
-            preparedStatement1.setBoolean(7, dogModel.getPetCompatibility().isChildren());
-            preparedStatement1.setBoolean(8, dogModel.getPetCompatibility().isElders());
-            preparedStatement1.setBoolean(9, dogModel.getPetCompatibility().isSleepOutside());
-            preparedStatement1.setBoolean(10, dogModel.getPetCompatibility().isFirstExperience());
-            preparedStatement1.setInt(11, dogModel.getPetCompatibility().getHoursAlone());
-            preparedStatement1.executeUpdate();
-
+            DogCatDAOSupport.executePSCompatibility(shelterId, dogId, dogModel.getPetCompatibility());
         }
 
         catch (SQLException | ConnectionDbException | FileNotFoundException e) {
@@ -147,5 +100,6 @@ public class DogDAO {
         }
         return dogId;
     }
+
 
 }
