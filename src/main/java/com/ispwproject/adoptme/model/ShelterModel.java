@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.model;
 
 
 import java.io.File;
-import java.net.URL;
 
 public class ShelterModel extends GenericUserModel {
 

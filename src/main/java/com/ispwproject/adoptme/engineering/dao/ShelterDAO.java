@@ -13,7 +13,6 @@ import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +56,7 @@ public class ShelterDAO {
             }while(resultSet.next());
             resultSet.close();
         }
-        catch (SQLException | MalformedURLException | ConnectionDbException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
 
@@ -110,7 +109,7 @@ public class ShelterDAO {
             }while(resultSet.next());
             resultSet.close();
         }
-        catch (SQLException | MalformedURLException | ConnectionDbException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return shelterModel;
@@ -136,13 +135,13 @@ public class ShelterDAO {
             }while(resultSet.next());
             resultSet.close();
         }
-        catch (SQLException | MalformedURLException | ConnectionDbException e) {
+        catch (SQLException | ConnectionDbException e) {
             e.printStackTrace();
         }
         return shelterModel;
     }
 
-    private static ShelterModel setShelterInfo(int shelterId, String email, ResultSet resultSet) throws SQLException, MalformedURLException {
+    private static ShelterModel setShelterInfo(int shelterId, String email, ResultSet resultSet) throws SQLException {
         File shelterImage;
         ShelterModel shelterModel = null;
         try {
