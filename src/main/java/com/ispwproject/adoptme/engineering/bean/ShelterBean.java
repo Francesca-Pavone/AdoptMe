@@ -2,7 +2,6 @@ package com.ispwproject.adoptme.engineering.bean;
 
 
 import java.io.File;
-import java.net.URL;
 
 public class ShelterBean {
     private int shelterId;

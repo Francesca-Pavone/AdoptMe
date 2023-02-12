@@ -4,8 +4,6 @@ import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIShelterInfoCon
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
-import java.net.URL;
-
 public class CLIShelterInfoView {
     
     private final CLIShelterInfoController cliShelterInfoControllerCurrent;
