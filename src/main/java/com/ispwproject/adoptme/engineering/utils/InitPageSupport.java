@@ -41,14 +41,20 @@ public class InitPageSupport {
         return pane;
     }
 
-    public static void initPetItem(Object object, GridPane grid, Parent currentPage, int column, int row) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
-        Pane pane = fxmlLoader.load();
+    public static int initPetItem(Object object, GridPane grid, Parent currentPage, int column, int row) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
+            Pane pane = fxmlLoader.load();
 
-        GUIPetItemController petItemControllerG = fxmlLoader.getController();
-        petItemControllerG.setPageContainer(currentPage);
-        petItemControllerG.setPetData((PetBean) object);
-        grid.add(pane, column, row);
+            GUIPetItemController petItemControllerG = fxmlLoader.getController();
+            petItemControllerG.setPageContainer(currentPage);
+            petItemControllerG.setPetData((PetBean) object);
+            grid.add(pane, column++, row);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return column;
     }
 }

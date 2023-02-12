@@ -110,16 +110,12 @@ public class GUIShelterInformationController implements Observer {
 
     @Override
     public void update(Object object) {
-        try {
-            if (column == 4) {
-                column = 0;
-                row++;
-            }
-            InitPageSupport.initPetItem(object, grid, currentPage, column, row);
-            column++;
-        } catch(IOException e) {
-            e.printStackTrace();
+        if (column == 4) {
+            column = 0;
+            row++;
         }
+        column = InitPageSupport.initPetItem(object, grid, currentPage, column, row);
+
     }
 
     @Override
