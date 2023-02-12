@@ -1,7 +1,6 @@
 package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
-import com.ispwproject.adoptme.engineering.exception.NoAccountException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
