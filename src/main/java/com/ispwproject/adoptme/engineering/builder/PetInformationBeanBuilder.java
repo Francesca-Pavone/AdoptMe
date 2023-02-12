@@ -139,26 +139,26 @@ public final class PetInformationBeanBuilder {
 
     public PetInformationBean build() {
         PetInformationBean petInformationBean =  new PetInformationBean();
-        petInformationBean.setCoatLength(coatLenght);
-        petInformationBean.setVaccinated(vaccinated);
-        petInformationBean.setMicrochipped(microchipped);
-        petInformationBean.setDewormed(dewormed);
-        petInformationBean.setSterilized(sterilized);
-        petInformationBean.setDisability(disability);
-        petInformationBean.setDisabilityType(disabilityType);
-        petInformationBean.setMaleDog(maleDog);
-        petInformationBean.setFemaleDog(femaleDog);
-        petInformationBean.setMaleCat(maleCat);
-        petInformationBean.setFemaleCat(femaleCat);
-        petInformationBean.setChildren(children);
-        petInformationBean.setElders(elders);
-        petInformationBean.setSleepOutside(sleepOutside);
-        petInformationBean.setFirstExperience(firstExperience);
-        petInformationBean.setHoursAlone(hoursAlone);
-        petInformationBean.setDogEducation(dogEducation);
-        petInformationBean.setSize(size);
-        petInformationBean.setTestFiv(testFiv);
-        petInformationBean.setTestFelv(testFelv);
+        petInformationBean.setCoatLengthBean(coatLenght);
+        petInformationBean.setVaccinatedBean(vaccinated);
+        petInformationBean.setMicrochippedBean(microchipped);
+        petInformationBean.setDewormedBean(dewormed);
+        petInformationBean.setSterilizedBean(sterilized);
+        petInformationBean.setDisabilityBean(disability);
+        petInformationBean.setDisabilityTypeBean(disabilityType);
+        petInformationBean.setMaleDogBean(maleDog);
+        petInformationBean.setFemaleDogBean(femaleDog);
+        petInformationBean.setMaleCatBean(maleCat);
+        petInformationBean.setFemaleCatBean(femaleCat);
+        petInformationBean.setChildrenBean(children);
+        petInformationBean.setEldersBean(elders);
+        petInformationBean.setSleepOutsideBean(sleepOutside);
+        petInformationBean.setFirstExperienceBean(firstExperience);
+        petInformationBean.setHoursAloneBean(hoursAlone);
+        petInformationBean.setDogEducationBean(dogEducation);
+        petInformationBean.setSizeBean(size);
+        petInformationBean.setTestFivBean(testFiv);
+        petInformationBean.setTestFelvBean(testFelv);
 
         return petInformationBean;
     }

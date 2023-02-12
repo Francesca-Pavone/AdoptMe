@@ -72,7 +72,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                 }
         );
         String coatLenght = String.valueOf(
-                switch (petInformationBean.getCoatLength()) {
+                switch (petInformationBean.getCoatLengthBean()) {
                     case 1 -> "Medium";
                     case 2 -> "Long";
                     default -> "Short";     // case 0
@@ -85,7 +85,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         // check if it's a dog
         if (petBean.getPetBeanType() == 0) {
             dogSize = String.valueOf(
-                    switch (petInformationBean.getSize()) {
+                    switch (petInformationBean.getSizeBean()) {
                         case 1 -> "Medium";
                         case 2 -> "Large";
                         case 3 -> "ExtraLarge";
@@ -93,15 +93,15 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                     }
             );
             dogEducation = "\t\tProgram of dog education: Not needed\n";
-            if (petInformationBean.isDogEducation())
+            if (petInformationBean.isDogEducationBean())
                 dogEducation = "\t\tProgram of dog education: Needed\n";
         } else {
             testFiv = "\t\tTest Fiv: Negative\n";
-            if (petInformationBean.isTestFiv())
+            if (petInformationBean.isTestFivBean())
                 testFiv = "\t\tTest Fiv: Positive\n";
 
             testFelv = "\t\tTest Felv: Negative\n";
-            if (petInformationBean.isTestFelv())
+            if (petInformationBean.isTestFelvBean())
                 testFelv = "\t\tTest Felv: Positive\n";
         }
         String generalInfo = getCommonGeneralInfo() + testFiv + testFelv + dogEducation;
@@ -179,60 +179,60 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
     private String getCommonGeneralInfo() {
         String vaccinated = "\t\tVaccinations not completed\n";
-        if (petInformationBean.isVaccinated())
+        if (petInformationBean.isVaccinatedBean())
             vaccinated = "\t\tVaccinations completed\n";
 
         String microchipped = "\t\tNot microchipped\n";
-        if (petInformationBean.isMicrochipped())
+        if (petInformationBean.isMicrochippedBean())
             microchipped = "\t\tMicrochipped\n";
 
         String dewormed = "\t\tNot dewormed\n";
-        if (petInformationBean.isDewormed())
+        if (petInformationBean.isDewormedBean())
             dewormed = "\t\tDewormed\n";
 
         String sterilized = "\t\tNot sterilized\n";
-        if (petInformationBean.isSterilized())
+        if (petInformationBean.isSterilizedBean())
             sterilized = "\t\tSterilized\n";
 
         String disability = "";
         String disabilityType = "";
-        if (petInformationBean.isDisability()) {
+        if (petInformationBean.isDisabilityBean()) {
             disability = "\t\tDisability";
             disabilityType = "(Not specified)\n";
-            if (!petInformationBean.getDisabilityType().equals(""))
-                disabilityType= "(" + petInformationBean.getDisabilityType() + ")\n";
+            if (!petInformationBean.getDisabilityTypeBean().equals(""))
+                disabilityType= "(" + petInformationBean.getDisabilityTypeBean() + ")\n";
         }
         return vaccinated + microchipped + dewormed + sterilized + disability + disabilityType;
     }
 
     private String getCompatibility() {
         String compatibility = "";
-        if (petInformationBean.isMaleDog()) {
+        if (petInformationBean.isMaleDogBean()) {
             compatibility = compatibility.concat( "\t\tMale dogs\n");
         }
-        if (petInformationBean.isFemaleDog()) {
+        if (petInformationBean.isFemaleDogBean()) {
             compatibility = compatibility.concat("\t\tFemale dogs\n");
         }
-        if (petInformationBean.isMaleCat()) {
+        if (petInformationBean.isMaleCatBean()) {
             compatibility = compatibility.concat("\t\tMale cats\n");
         }
-        if (petInformationBean.isFemaleCat()) {
+        if (petInformationBean.isFemaleCatBean()) {
             compatibility = compatibility.concat("\t\tFemale cats\n");
         }
-        if (petInformationBean.isChildren()) {
+        if (petInformationBean.isChildrenBean()) {
             compatibility = compatibility.concat("\t\tChildren\n");
         }
-        if (petInformationBean.isElders()) {
+        if (petInformationBean.isEldersBean()) {
             compatibility = compatibility.concat("\t\tElders\n");
         }
-        if (petInformationBean.isSleepOutside()) {
+        if (petInformationBean.isSleepOutsideBean()) {
             compatibility = compatibility.concat("\t\tSleeping outside\n");
         }
-        if (petInformationBean.isFirstExperience()) {
+        if (petInformationBean.isFirstExperienceBean()) {
             compatibility = compatibility.concat("\t\tFirst experience\n");
         }
 
-        compatibility = compatibility.concat(switch (petInformationBean.getHoursAlone()) {
+        compatibility = compatibility.concat(switch (petInformationBean.getHoursAloneBean()) {
                     case 0 -> "\t\tStay from 1 to 3 hours alone";
                     case 1 -> "\t\tStay from 4 to 6 hours alone";
                     default -> "\t\tStay more than 6 hours alone"; // case 2

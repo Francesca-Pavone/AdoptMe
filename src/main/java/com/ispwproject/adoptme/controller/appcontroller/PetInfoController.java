@@ -23,8 +23,8 @@ public class PetInfoController {
                 setGeneralInfo(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth());
                 setMedicalInfo(dogModel.isVaccinated(), dogModel.isMicrochipped(), dogModel.isDewormed(), dogModel.isSterilized(), dogModel.isDisability(), dogModel.getDisabilityType(), dogModel.getCoatLength());
                 setCompatibility(dogModel.getPetCompatibility());
-                petInformationBean.setDogEducation(dogModel.isProgramEducation());
-                petInformationBean.setSize(dogModel.getSize());
+                petInformationBean.setDogEducationBean(dogModel.isProgramEducation());
+                petInformationBean.setSizeBean(dogModel.getSize());
                 petBean.setPetBeanFav(this.checkFavorite(petBean));
 
             }
@@ -34,8 +34,8 @@ public class PetInfoController {
                 setGeneralInfo(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth());
                 setMedicalInfo(catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getCoatLength());
                 setCompatibility(catModel.getPetCompatibility());
-                petInformationBean.setTestFiv(catModel.isTestFiv());
-                petInformationBean.setTestFelv(catModel.isTestFelv());
+                petInformationBean.setTestFivBean(catModel.isTestFiv());
+                petInformationBean.setTestFelvBean(catModel.isTestFelv());
                 petBean.setPetBeanFav(this.checkFavorite(petBean));
             }
             shelterBean.setShelterBeanId(shelterModel.getId());
@@ -67,25 +67,25 @@ public class PetInfoController {
 
     private void setMedicalInfo(boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, int coatLenght){
         this.petInformationBean = new PetInformationBean();
-        petInformationBean.setCoatLength(coatLenght);
-        petInformationBean.setVaccinated(vaccinated);
-        petInformationBean.setMicrochipped(microchipped);
-        petInformationBean.setDewormed(dewormed);
-        petInformationBean.setSterilized(sterilized);
-        petInformationBean.setDisability(disability);
-        petInformationBean.setDisabilityType(disabilityType);
+        petInformationBean.setCoatLengthBean(coatLenght);
+        petInformationBean.setVaccinatedBean(vaccinated);
+        petInformationBean.setMicrochippedBean(microchipped);
+        petInformationBean.setDewormedBean(dewormed);
+        petInformationBean.setSterilizedBean(sterilized);
+        petInformationBean.setDisabilityBean(disability);
+        petInformationBean.setDisabilityTypeBean(disabilityType);
     }
 
     private void setCompatibility(PetCompatibility petCompatibility) {
-        petInformationBean.setMaleDog(petCompatibility.isMaleDog());
-        petInformationBean.setFemaleDog(petCompatibility.isFemaleDog());
-        petInformationBean.setMaleCat(petCompatibility.isMaleCat());
-        petInformationBean.setFemaleCat(petCompatibility.isFemaleCat());
-        petInformationBean.setChildren(petCompatibility.isChildren());
-        petInformationBean.setElders(petCompatibility.isElders());
-        petInformationBean.setSleepOutside(petCompatibility.isSleepOutside());
-        petInformationBean.setFirstExperience(petCompatibility.isFirstExperience());
-        petInformationBean.setHoursAlone(petCompatibility.getHoursAlone());
+        petInformationBean.setMaleDogBean(petCompatibility.isMaleDog());
+        petInformationBean.setFemaleDogBean(petCompatibility.isFemaleDog());
+        petInformationBean.setMaleCatBean(petCompatibility.isMaleCat());
+        petInformationBean.setFemaleCatBean(petCompatibility.isFemaleCat());
+        petInformationBean.setChildrenBean(petCompatibility.isChildren());
+        petInformationBean.setEldersBean(petCompatibility.isElders());
+        petInformationBean.setSleepOutsideBean(petCompatibility.isSleepOutside());
+        petInformationBean.setFirstExperienceBean(petCompatibility.isFirstExperience());
+        petInformationBean.setHoursAloneBean(petCompatibility.getHoursAlone());
     }
 
 }

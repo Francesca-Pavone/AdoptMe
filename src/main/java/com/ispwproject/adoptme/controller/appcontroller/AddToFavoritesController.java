@@ -31,13 +31,13 @@ public class AddToFavoritesController {
             PetModel pet = null;
             if (petBean.getPetBeanType() == 0) {
                 PetCompatibility petCompatibility = setCompatibility();
-                DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
+                DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducationBean(), petInformationBean.getSizeBean());
                 dogModel.setPetId(petBean.getPetBeanId());
                 setCommonInfo(dogModel);
                 pet = dogModel;
             } else if (petBean.getPetBeanType() == 1) {
                 PetCompatibility petCompatibility = setCompatibility();
-                CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
+                CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFivBean(), petInformationBean.isTestFelvBean(), petCompatibility);
                 catModel.setPetId(petBean.getPetBeanId());
                 setCommonInfo(catModel);
                 pet = catModel;
@@ -50,9 +50,9 @@ public class AddToFavoritesController {
     }
 
     private PetCompatibility setCompatibility() {
-        PetCompatibility petCompatibility = new PetCompatibility(petInformationBean.isMaleDog(), petInformationBean.isFemaleDog(), petInformationBean.isMaleCat(), petInformationBean.isFemaleCat(), petInformationBean.isChildren(), petInformationBean.isElders(), petInformationBean.isFirstExperience());
-        petCompatibility.setSleepOutside(petInformationBean.isSleepOutside());
-        petCompatibility.setHoursAlone(petInformationBean.getHoursAlone());
+        PetCompatibility petCompatibility = new PetCompatibility(petInformationBean.isMaleDogBean(), petInformationBean.isFemaleDogBean(), petInformationBean.isMaleCatBean(), petInformationBean.isFemaleCatBean(), petInformationBean.isChildrenBean(), petInformationBean.isEldersBean(), petInformationBean.isFirstExperienceBean());
+        petCompatibility.setSleepOutside(petInformationBean.isSleepOutsideBean());
+        petCompatibility.setHoursAlone(petInformationBean.getHoursAloneBean());
         return petCompatibility;
     }
 
@@ -71,14 +71,14 @@ public class AddToFavoritesController {
 
             if (petBean.getPetBeanType() == 0) {
                 PetCompatibility petCompatibility = setCompatibility();
-                DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
+                DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducationBean(), petInformationBean.getSizeBean());
                 dogModel.setPetId(petBean.getPetBeanId());
                 setCommonInfo(dogModel);
                 userFavoritesPetsList.removePet(dogModel, shelter.getId());
                 userFavoritesPetsList.notifyObservers(dogModel,object);
             } else if (petBean.getPetBeanType() == 1) {
                 PetCompatibility petCompatibility = setCompatibility();
-                CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
+                CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFivBean(), petInformationBean.isTestFelvBean(), petCompatibility);
                 catModel.setPetId(petBean.getPetBeanId());
                 setCommonInfo(catModel);
                 userFavoritesPetsList.removePet(catModel, shelter.getId());
