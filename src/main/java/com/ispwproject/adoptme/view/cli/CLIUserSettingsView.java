@@ -2,14 +2,8 @@ package com.ispwproject.adoptme.view.cli;
 
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIUserSettingsController;
 import com.ispwproject.adoptme.engineering.bean.UserBean;
-import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
-import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.CLIPrintSettingsSupport;
-import com.ispwproject.adoptme.engineering.utils.PrintSupport;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
-
-import java.util.Scanner;
 
 public class CLIUserSettingsView {
     private final CLIUserSettingsController controller;
