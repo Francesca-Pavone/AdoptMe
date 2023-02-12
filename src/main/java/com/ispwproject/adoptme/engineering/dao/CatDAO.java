@@ -81,7 +81,8 @@ public class CatDAO {
             stmt.close();
 
             preparedStatement = ConnectionDB.insertCat();
-            DogCatDAOSupport.setMainPetInfo(preparedStatement, catId, shelterId, catModel.getName(), catModel.getPetImage(), catModel.getGender(), catModel.getDayOfBirth(), catModel.getMonthOfBirth(), catModel.getYearOfBirth(), catModel.getCoatLength());
+            DogCatDAOSupport.setMainPetInfo(preparedStatement, catId, shelterId, catModel.getName(), catModel.getPetImage(), catModel.getGender(), catModel.getCoatLength());
+            DogCatDAOSupport.setPetDate(preparedStatement, catModel.getDayOfBirth(), catModel.getMonthOfBirth(), catModel.getYearOfBirth());
             preparedStatement.setBoolean(10, catModel.isVaccinated());
             preparedStatement.setBoolean(11, catModel.isMicrochipped());
             preparedStatement.setBoolean(12, catModel.isDewormed());

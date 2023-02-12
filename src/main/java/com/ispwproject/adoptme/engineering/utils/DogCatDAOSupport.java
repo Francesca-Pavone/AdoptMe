@@ -53,7 +53,7 @@ public class DogCatDAOSupport {
     }
 
 
-    public static void setMainPetInfo(PreparedStatement preparedStatement, int petId, int shelterId, String name, File petImage, int gender, int dayOfBirth, int monthOfBirth, int yearOfBirth, int coatLength) throws SQLException, FileNotFoundException {
+    public static void setMainPetInfo(PreparedStatement preparedStatement, int petId, int shelterId, String name, File petImage, int gender, int coatLength) throws SQLException, FileNotFoundException {
         preparedStatement.setInt(1, petId);
         preparedStatement.setInt(2, shelterId);
         preparedStatement.setString(3, name);
@@ -66,9 +66,12 @@ public class DogCatDAOSupport {
             preparedStatement.setBlob(4, inputStream);
         }
         preparedStatement.setInt(5, gender);
+        preparedStatement.setInt(9, coatLength);
+    }
+
+    public static void setPetDate(PreparedStatement preparedStatement, int dayOfBirth, int monthOfBirth, int yearOfBirth) throws SQLException {
         preparedStatement.setInt(6, dayOfBirth);
         preparedStatement.setInt(7, monthOfBirth);
         preparedStatement.setInt(8, yearOfBirth);
-        preparedStatement.setInt(9, coatLength);
     }
 }

@@ -82,7 +82,8 @@ public class DogDAO {
 
             //utilizzo i prepared statement per poter passare alla query il tipo di dato blob usato per le immagini
             preparedStatement = ConnectionDB.insertDog();
-            DogCatDAOSupport.setMainPetInfo(preparedStatement, dogId, shelterId, dogModel.getName(), dogModel.getPetImage(), dogModel.getGender(), dogModel.getDayOfBirth(), dogModel.getMonthOfBirth(), dogModel.getYearOfBirth(), dogModel.getCoatLength());
+            DogCatDAOSupport.setMainPetInfo(preparedStatement, dogId, shelterId, dogModel.getName(), dogModel.getPetImage(), dogModel.getGender(), dogModel.getCoatLength());
+            DogCatDAOSupport.setPetDate(preparedStatement, dogModel.getDayOfBirth(), dogModel.getMonthOfBirth(), dogModel.getYearOfBirth());
             preparedStatement.setInt(10, dogModel.getSize());
             preparedStatement.setBoolean(11, dogModel.isVaccinated());
             preparedStatement.setBoolean(12, dogModel.isMicrochipped());
