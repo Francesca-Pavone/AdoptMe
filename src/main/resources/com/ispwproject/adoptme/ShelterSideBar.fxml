@@ -43,7 +43,7 @@
                <VBox alignment="CENTER" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="180.0">
                   <ToggleButton fx:id="btnHomePage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="300.0" selected="true" styleClass="transparent">
                      <graphic>
-                        <HBox fx:id="home" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                        <HBox fx:id="shelterHomepage" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -74,7 +74,7 @@
                   </ToggleButton>
                   <ToggleButton fx:id="btnAppointments" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="transparent" toggleGroup="$shelterTogG">
                      <graphic>
-                        <HBox fx:id="app" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                        <HBox fx:id="shelterAppointments" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -99,7 +99,7 @@
                   </ToggleButton>
                   <ToggleButton fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="transparent" toggleGroup="$shelterTogG">
                      <graphic>
-                        <HBox fx:id="sett" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                        <HBox fx:id="shelterSettings" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>

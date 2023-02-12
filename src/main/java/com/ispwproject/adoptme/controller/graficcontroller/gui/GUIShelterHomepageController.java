@@ -5,7 +5,7 @@ import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsControlle
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.utils.InitPageSupport;
+import com.ispwproject.adoptme.engineering.utils.InitializeSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +61,7 @@ public class GUIShelterHomepageController  implements Observer {
             column = 0;
             row++;
         }
-        column = InitPageSupport.initPetItem(object, grid, currentPage, column, row);
+        column = InitializeSupport.initPetItem(object, grid, currentPage, column, row);
         petsNumber.setText(String.valueOf(((PetBean)object).getPetId()));
     }
 

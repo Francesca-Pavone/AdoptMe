@@ -6,7 +6,7 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.utils.InitPageSupport;
+import com.ispwproject.adoptme.engineering.utils.InitializeSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -114,7 +114,7 @@ public class GUIShelterInformationController implements Observer {
             column = 0;
             row++;
         }
-        column = InitPageSupport.initPetItem(object, grid, currentPage, column, row);
+        column = InitializeSupport.initPetItem(object, grid, currentPage, column, row);
 
     }
 

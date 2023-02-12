@@ -51,7 +51,7 @@
                      <children>
                         <ToggleButton fx:id="btnHomepage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToHomePage" prefHeight="70.0" prefWidth="300.0" selected="true" styleClass="transparent">
                            <graphic>
-                              <HBox fx:id="home" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                              <HBox fx:id="userHomepage" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                                  <children>
                                     <Pane fx:id="homepageSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar">
                                        <HBox.margin>
@@ -85,7 +85,7 @@
                            </toggleGroup></ToggleButton>
                         <ToggleButton fx:id="btnFav" layoutX="10.0" layoutY="290.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToFavorites" prefHeight="70.0" prefWidth="300.0" styleClass="transparent" toggleGroup="$userTogG">
                            <graphic>
-                              <HBox fx:id="fav" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                              <HBox fx:id="userFavorites" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                                  <children>
                                     <Pane fx:id="favoritesSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                                        <HBox.margin>
@@ -117,7 +117,7 @@
                         </ToggleButton>
                         <ToggleButton fx:id="btnApp" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToAppointments" prefHeight="70.0" prefWidth="300.0" styleClass="transparent" stylesheets="@style.css" toggleGroup="$userTogG">
                            <graphic>
-                              <HBox fx:id="app" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                              <HBox fx:id="userAppointments" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                                  <children>
                                     <Pane fx:id="appointmentsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                                        <HBox.margin>
@@ -146,7 +146,7 @@
                         </ToggleButton>
                         <ToggleButton fx:id="btnSettings" layoutX="10.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="70.0" prefWidth="300.0" styleClass="transparent" stylesheets="@style.css" toggleGroup="$userTogG">
                            <graphic>
-                              <HBox fx:id="sett" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                              <HBox fx:id="userSettings" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
                                  <children>
                                     <Pane fx:id="settingsSelect" prefHeight="70.0" prefWidth="8.0" styleClass="open-screen-bar" stylesheets="@style.css" visible="false">
                                        <HBox.margin>

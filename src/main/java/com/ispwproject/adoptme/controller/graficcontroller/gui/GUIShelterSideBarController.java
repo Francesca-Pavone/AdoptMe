@@ -1,6 +1,7 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
+import com.ispwproject.adoptme.engineering.utils.InitializeSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -19,28 +20,26 @@ public class GUIShelterSideBarController {
     @FXML
     private HBox hBox;
     @FXML
-    private HBox home;
+    private HBox shelterHomepage;
     @FXML
-    private HBox app;
+    private HBox shelterAppointments;
     @FXML
-    private HBox sett;
-    private final Background background1 = new Background(new BackgroundFill(Color.rgb(41, 81, 71), CornerRadii.EMPTY, Insets.EMPTY));
-    private final Background background2 = new Background(new BackgroundFill(Color.rgb(52, 102, 90), CornerRadii.EMPTY, Insets.EMPTY));
+    private HBox shelterSettings;
+    private final Background shelterSideBarSelected = new Background(new BackgroundFill(Color.rgb(41, 81, 71), CornerRadii.EMPTY, Insets.EMPTY));
+    private final Background shelterSideBar = new Background(new BackgroundFill(Color.rgb(52, 102, 90), CornerRadii.EMPTY, Insets.EMPTY));
 
     public void goToHomePage() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ShelterHomepage.fxml"));
+        FXMLLoader fxmlLoader = InitializeSupport.initHomepage(hBox, "ShelterHomepage.fxml");
         Pane screen = fxmlLoader.load();
-        if (hBox.getChildren().size() == 2)
-            hBox.getChildren().remove(1);
         hBox.getChildren().add(screen);
         GUIShelterHomepageController guiShelterHomepageController = fxmlLoader.getController();
         guiShelterHomepageController.setCurrentPage(screen);
         homepageSelect.setVisible(true);
-        home.setBackground(background1);
+        shelterHomepage.setBackground(shelterSideBarSelected);
         appointmentsSelect.setVisible(false);
-        app.setBackground(background2);
+        shelterAppointments.setBackground(shelterSideBar);
         settingsSelect.setVisible(false);
-        sett.setBackground(background2);
+        shelterSettings.setBackground(shelterSideBar);
     }
 
     public void goToAppointments() throws IOException {
@@ -49,11 +48,11 @@ public class GUIShelterSideBarController {
         hBox.getChildren().remove(1);
         hBox.getChildren().add(screen);
         homepageSelect.setVisible(false);
-        home.setBackground(background2);
+        shelterHomepage.setBackground(shelterSideBar);
         appointmentsSelect.setVisible(true);
-        app.setBackground(background1);
+        shelterAppointments.setBackground(shelterSideBarSelected);
         settingsSelect.setVisible(false);
-        sett.setBackground(background2);
+        shelterSettings.setBackground(shelterSideBar);
     }
 
     public void goToSettings() throws IOException {
@@ -62,10 +61,10 @@ public class GUIShelterSideBarController {
         hBox.getChildren().remove(1);
         hBox.getChildren().add(screen);
         homepageSelect.setVisible(false);
-        home.setBackground(background2);
+        shelterHomepage.setBackground(shelterSideBar);
         appointmentsSelect.setVisible(false);
-        app.setBackground(background2);
+        shelterAppointments.setBackground(shelterSideBar);
         settingsSelect.setVisible(true);
-        sett.setBackground(background1);
+        shelterSettings.setBackground(shelterSideBarSelected);
     }
 }

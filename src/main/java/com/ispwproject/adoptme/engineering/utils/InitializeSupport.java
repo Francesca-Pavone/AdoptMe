@@ -13,12 +13,13 @@ import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class InitPageSupport {
-    private InitPageSupport() {
+public class InitializeSupport {
+    private InitializeSupport() {
         //private constructor
     }
 
@@ -56,5 +57,12 @@ public class InitPageSupport {
             e.printStackTrace();
         }
         return column;
+    }
+
+    public static FXMLLoader initHomepage(HBox hBox, String fxml) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
+        if (hBox.getChildren().size() == 2)
+            hBox.getChildren().remove(1);
+        return fxmlLoader;
     }
 }

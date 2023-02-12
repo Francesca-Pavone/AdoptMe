@@ -2,7 +2,7 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.utils.InitPageSupport;
+import com.ispwproject.adoptme.engineering.utils.InitializeSupport;
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -19,13 +19,13 @@ public class GUIShelterAppointmentsController implements Observer {
     private HBox confirmedReqList;
 
     public void initialize() {
-        InitPageSupport.initAppointmentsPage(this);
+        InitializeSupport.initAppointmentsPage(this);
     }
 
     @Override
     public void update(Object object) {
             try {
-                Pane pane = InitPageSupport.initRequestItem(object);
+                Pane pane = InitializeSupport.initRequestItem(object);
                 switch (((RequestBean) object).getStatus()) {
                     case 0 -> pendingReqList.getChildren().add(pane);
                     case 1 -> sentReqList.getChildren().add(pane);
