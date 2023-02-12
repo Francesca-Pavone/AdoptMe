@@ -4,6 +4,8 @@ import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsControlle
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ComputeAgeSupport;
+import com.ispwproject.adoptme.engineering.utils.ComputeGenderSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIShowPetsView;
 
@@ -39,29 +41,9 @@ public class CLIShowPetsController implements CLIGraficController, Observer {
     public void showPets() {
         int i = 1;
         for(PetBean petBean: this.petBeanList) {
-            String gender;
-            String age;
-            int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
-
-            if (yearDiff <= 1)
-                age = "Puppy";
-            else if (yearDiff <= 3)
-                age = "Young";
-            else if (yearDiff <= 10)
-                age = "Adult";
-            else
-                age = "Senior";
-
-            try {
-                gender = (switch ((petBean).getGender()) {
-                    case 1 -> "Female";
-                    default -> "Male";
-                });
-                this.view.showPetInfo((petBean).getName(), gender, age, i);
-                i++;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            String gender = ComputeGenderSupport.computeGender(petBean);
+            String age = ComputeAgeSupport.computeAge(petBean);
+            this.view.showPetInfo((petBean).getName(), gender, age, i);
         }
         this.view.showCommands();
     }
