@@ -7,10 +7,9 @@ public class ComputeGenderSupport {
         //ignore
     }
     public static String computeGender(PetBean petBean) {
-        String gender = (switch (petBean.getGender()) {
+        return switch (petBean.getGender()) {
             case 1 -> "Female";
             default -> "Male";
-        });
-        return gender;
+        };
     }
 }
