@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="requestVBox" alignment="TOP_CENTER" maxHeight="-Infinity" spacing="12.0" styleClass="request-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUISendRequestController">
+<VBox fx:id="requestVBox" alignment="TOP_CENTER" maxHeight="-Infinity" spacing="12.0" styleClass="request-box" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispwproject.adoptme.controller.graficcontroller.gui.GUISendRequestController">
    <children>
       <HBox alignment="CENTER">
          <children>

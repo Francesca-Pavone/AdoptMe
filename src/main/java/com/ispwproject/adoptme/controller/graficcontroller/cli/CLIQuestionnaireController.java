@@ -3,6 +3,8 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 import com.ispwproject.adoptme.controller.appcontroller.QuestionnaireResultController;
 import com.ispwproject.adoptme.engineering.bean.QuestionnaireResultBean;
 import com.ispwproject.adoptme.engineering.builder.QuestionnaireResultBeanBuilder;
+import com.ispwproject.adoptme.engineering.exception.NoPetsFoundQuestionnaireException;
+import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIQuestionnaireView;
 
 import java.util.List;
@@ -70,7 +72,9 @@ public class CLIQuestionnaireController {
         QuestionnaireResultBean questionnaireResultBean = this.questionnaireResultBeanBuilder.build();
         QuestionnaireResultController questionnaireResultController = new QuestionnaireResultController();
         CLIQuestionnaireResultController cliQuestionnaireResultController = new CLIQuestionnaireResultController();
-        cliQuestionnaireResultController.setData(questionnaireResultController.searchPets(questionnaireResultBean));
+        try {cliQuestionnaireResultController.setData(questionnaireResultController.searchPets(questionnaireResultBean));} catch (NoPetsFoundQuestionnaireException e) {
+            ShowExceptionSupport.showExceptionCLI(e.getMessage());
+        }
 
 
         //inizializza pagina result e passagli i risultati di questionnaireResultController.searchPets(questionnaireResultBean)

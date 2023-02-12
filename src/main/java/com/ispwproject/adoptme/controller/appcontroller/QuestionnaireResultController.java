@@ -14,16 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public class QuestionnaireResultController {
-    public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) {
+    public List<PetBean> searchPets(QuestionnaireResultBean questionnaireResultBean) throws NoPetsFoundQuestionnaireException {
         this.generateQuery(questionnaireResultBean);
 
         List<PetBean> petList = new ArrayList<>();
         Map<PetModel, Integer> hashMap = new HashMap<>();
-        try { hashMap = PetDAO.retrievePetByQuestionnaire(generateQuery(questionnaireResultBean)); }
-        catch (
-                NoPetsFoundQuestionnaireException e) {
-            ShowExceptionSupport.showExceptionGUI(e.getMessage());
-        }
+        hashMap = PetDAO.retrievePetByQuestionnaire(generateQuery(questionnaireResultBean));
         for (Map.Entry<PetModel, Integer> entry : hashMap.entrySet()) {
             PetModel petModel = entry.getKey();
             PetBean petBean = new PetBean();
