@@ -7,10 +7,10 @@ import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.LoadPetInfoSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -112,14 +112,7 @@ public class GUIShelterInformationController implements Observer {
     @Override
     public void update(Object object) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
-            Pane pane = fxmlLoader.load();
-
-            GUIPetItemController petItemControllerG = fxmlLoader.getController();
-            petItemControllerG.setPageContainer(currentPage);
-            petItemControllerG.setPetData((PetBean) object);
-
+            Pane pane = LoadPetInfoSupport.loadPage(object, currentPage);
             if (column == 4) {
                 column = 0;
                 row++;
