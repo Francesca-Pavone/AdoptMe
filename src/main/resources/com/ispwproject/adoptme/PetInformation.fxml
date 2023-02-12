@@ -48,9 +48,6 @@
             </VBox.margin>
             <children>
                <ImageView fx:id="petImg" blendMode="SCREEN" cache="true" fitHeight="130.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@image/cane4.png" />
-                  </image>
                </ImageView>
             </children>
          </Pane>
