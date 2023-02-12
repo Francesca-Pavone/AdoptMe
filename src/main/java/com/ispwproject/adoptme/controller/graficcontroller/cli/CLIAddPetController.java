@@ -58,15 +58,19 @@ public class CLIAddPetController implements CLIGraficController {
 
     }
 
-    public void setCompatibility(String maleDog, String femaleDog, String maleCat, String femaleCat, String children, String elders, String sleepOutside, String firstExperience, int hoursAlone){
+    public void setCompatibilityWithPets(String maleDog, String femaleDog, String maleCat, String femaleCat){
         petInformationBeanBuilder
                 .maleDog(maleDog.equals("1"))
                 .femaleDog(femaleDog.equals("1"))
                 .maleCat(maleCat.equals("1"))
-                .femaleCat(femaleCat.equals("1"))
+                .femaleCat(femaleCat.equals("1"));
+    }
+    public void setOtherCompatibility(String children, String elders, String sleepOutside, String firstExperience, int hoursAlone){
+        petInformationBeanBuilder
                 .children(children.equals("1"))
                 .elders(elders.equals("1"))
                 .sleepOutside(sleepOutside.equals("1"))
+                .firstExperience(firstExperience.equals("1"))
                 .hoursAlone(hoursAlone);
     }
 
