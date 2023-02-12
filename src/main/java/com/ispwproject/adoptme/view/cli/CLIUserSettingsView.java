@@ -5,6 +5,7 @@ import com.ispwproject.adoptme.engineering.bean.UserBean;
 import com.ispwproject.adoptme.engineering.exception.CommandNotFoundException;
 import com.ispwproject.adoptme.engineering.exception.NotDevelopedException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.CLIPrintSettingsSupport;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 
@@ -19,22 +20,6 @@ public class CLIUserSettingsView {
     public void run() {
         UserBean user = Session.getCurrentSession().getUserBean();
 
-        PrintSupport.printMessage("------------------------------------------- SETTINGS ------------------------------------------");
-        PrintSupport.printMessage("\tName: " + user.getName() + "\n\tSurname: " + user.getSurname() + "\n\tEmail: " + user.getEmail());
-
-        PrintSupport.printMessage("------------------------------------------- commands ------------------------------------------");
-        PrintSupport.printMessage(" 1) Modify name.\n 2) Modify surname.\n 3) Modify email.\n 4) Modify password.\n 5) Logout.");
-        Scanner scanner = new Scanner(System.in);
-        String inputLine = scanner.nextLine();
-        try {
-            this.controller.executeCommand(inputLine);
-        }
-        catch (CommandNotFoundException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage());
-        }
-        catch (NotDevelopedException e) {
-            ShowExceptionSupport.showExceptionCLI(e.getMessage());
-            run();
-        }
+        CLIPrintSettingsSupport.printSettings("\tName: " + user.getName() + "\n\tSurname: " + user.getSurname() + "\n\tEmail: " + user.getEmail(), " 1) Modify name.\n 2) Modify surname.\n 3) Modify email.\n 4) Modify password.\n 5) Logout.", controller, this );
     }
 }
