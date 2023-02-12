@@ -31,164 +31,164 @@ public class PetInformationBean {
     protected boolean testFelv;
 
 
-    public int getCoatLength() {
+    public int getCoatLengthBean() {
         return coatLength;
     }
 
-    public void setCoatLength(int coatLength) {
+    public void setCoatLengthBean(int coatLength) {
         this.coatLength = coatLength;
     }
 
 
-    public boolean isVaccinated() {
+    public boolean isVaccinatedBean() {
         return vaccinated;
     }
 
-    public void setVaccinated(boolean vaccinated) {
+    public void setVaccinatedBean(boolean vaccinated) {
         this.vaccinated = vaccinated;
     }
 
-    public boolean isMicrochipped() {
+    public boolean isMicrochippedBean() {
         return microchipped;
     }
 
-    public void setMicrochipped(boolean microchipped) {
+    public void setMicrochippedBean(boolean microchipped) {
         this.microchipped = microchipped;
     }
 
-    public boolean isDewormed() {
+    public boolean isDewormedBean() {
         return dewormed;
     }
 
-    public void setDewormed(boolean dewormed) {
+    public void setDewormedBean(boolean dewormed) {
         this.dewormed = dewormed;
     }
 
-    public boolean isSterilized() {
+    public boolean isSterilizedBean() {
         return sterilized;
     }
 
-    public void setSterilized(boolean sterilized) {
+    public void setSterilizedBean(boolean sterilized) {
         this.sterilized = sterilized;
     }
 
-    public boolean isDisability() {
+    public boolean isDisabilityBean() {
         return disability;
     }
 
-    public void setDisability(boolean disability) {
+    public void setDisabilityBean(boolean disability) {
         this.disability = disability;
     }
 
-    public String getDisabilityType() {
+    public String getDisabilityTypeBean() {
         return disabilityType;
     }
 
-    public void setDisabilityType(String disabilityType) {
+    public void setDisabilityTypeBean(String disabilityType) {
         this.disabilityType = disabilityType;
     }
 
-    public boolean isMaleDog() {
+    public boolean isMaleDogBean() {
         return maleDog;
     }
 
-    public void setMaleDog(boolean maleDog) {
+    public void setMaleDogBean(boolean maleDog) {
         this.maleDog = maleDog;
     }
 
-    public boolean isFemaleDog() {
+    public boolean isFemaleDogBean() {
         return femaleDog;
     }
 
-    public void setFemaleDog(boolean femaleDog) {
+    public void setFemaleDogBean(boolean femaleDog) {
         this.femaleDog = femaleDog;
     }
 
-    public boolean isMaleCat() {
+    public boolean isMaleCatBean() {
         return maleCat;
     }
 
-    public void setMaleCat(boolean maleCat) {
+    public void setMaleCatBean(boolean maleCat) {
         this.maleCat = maleCat;
     }
 
-    public boolean isFemaleCat() {
+    public boolean isFemaleCatBean() {
         return femaleCat;
     }
 
-    public void setFemaleCat(boolean femaleCat) {
+    public void setFemaleCatBean(boolean femaleCat) {
         this.femaleCat = femaleCat;
     }
 
-    public boolean isChildren() {
+    public boolean isChildrenBean() {
         return children;
     }
 
-    public void setChildren(boolean children) {
+    public void setChildrenBean(boolean children) {
         this.children = children;
     }
 
-    public boolean isElders() {
+    public boolean isEldersBean() {
         return elders;
     }
 
-    public void setElders(boolean elders) {
+    public void setEldersBean(boolean elders) {
         this.elders = elders;
     }
 
-    public boolean isSleepOutside() {
+    public boolean isSleepOutsideBean() {
         return sleepOutside;
     }
 
-    public void setSleepOutside(boolean sleepOutside) {
+    public void setSleepOutsideBean(boolean sleepOutside) {
         this.sleepOutside = sleepOutside;
     }
 
-    public boolean isFirstExperience() {
+    public boolean isFirstExperienceBean() {
         return firstExperience;
     }
 
-    public void setFirstExperience(boolean firstExperience) {
+    public void setFirstExperienceBean(boolean firstExperience) {
         this.firstExperience = firstExperience;
     }
 
-    public int getHoursAlone() {
+    public int getHoursAloneBean() {
         return hoursAlone;
     }
 
-    public void setHoursAlone(int hoursAlone) {
+    public void setHoursAloneBean(int hoursAlone) {
         this.hoursAlone = hoursAlone;
     }
 
-    public boolean isDogEducation() {
+    public boolean isDogEducationBean() {
         return dogEducation;
     }
 
-    public void setDogEducation(boolean dogEducation) {
+    public void setDogEducationBean(boolean dogEducation) {
         this.dogEducation = dogEducation;
     }
 
-    public int getSize() {
+    public int getSizeBean() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSizeBean(int size) {
         this.size = size;
     }
 
-    public boolean isTestFiv() {
+    public boolean isTestFivBean() {
         return testFiv;
     }
 
-    public void setTestFiv(boolean testFiv) {
+    public void setTestFivBean(boolean testFiv) {
         this.testFiv = testFiv;
     }
 
-    public boolean isTestFelv() {
+    public boolean isTestFelvBean() {
         return testFelv;
     }
 
-    public void setTestFelv(boolean testFelv) {
+    public void setTestFelvBean(boolean testFelv) {
         this.testFelv = testFelv;
     }
 }

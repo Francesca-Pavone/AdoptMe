@@ -188,7 +188,7 @@ public class GUIPetInfoController implements Observer {
                 }
         );
         coatLenght.setText(
-                switch (petInformationBean.getCoatLength()) {
+                switch (petInformationBean.getCoatLengthBean()) {
                     case 0 -> "Short";
                     case 1 -> "Medium";
                     case 2 -> "Long";
@@ -209,29 +209,29 @@ public class GUIPetInfoController implements Observer {
 
     private void setGeneralInfo() {
         vaccinated.setText("Vaccinations not completed");
-        if (petInformationBean.isVaccinated())
+        if (petInformationBean.isVaccinatedBean())
             vaccinated.setText("Vaccinations complete");
 
         microchipped.setText("Not microchipped");
-        if (petInformationBean.isMicrochipped())
+        if (petInformationBean.isMicrochippedBean())
             microchipped.setText("Microchipped");
 
         dewormed.setText("Not dewormed");
-        if (petInformationBean.isDewormed())
+        if (petInformationBean.isDewormedBean())
             dewormed.setText("Dewormed");
 
         sterilized.setText("Not sterilized");
-        if (petInformationBean.isSterilized())
+        if (petInformationBean.isSterilizedBean())
             sterilized.setText("Sterilized");
 
 
-        if (!petInformationBean.isDisability())
+        if (!petInformationBean.isDisabilityBean())
             petInfoVBox.getChildren().remove(disabilityBox);
         else {
             disability.setText("Disability");
             disabilityType.setText("Not specified");
-            if (!petInformationBean.getDisabilityType().equals(""))
-                disabilityType.setText(petInformationBean.getDisabilityType());
+            if (!petInformationBean.getDisabilityTypeBean().equals(""))
+                disabilityType.setText(petInformationBean.getDisabilityTypeBean());
         }
     }
 
@@ -241,7 +241,7 @@ public class GUIPetInfoController implements Observer {
         }
         else {
             size.setText(
-                    switch (petInformationBean.getSize()) {
+                    switch (petInformationBean.getSizeBean()) {
                         case 0 -> "Small";   
                         case 1 -> "Medium";
                         case 2 -> "Large";
@@ -250,7 +250,7 @@ public class GUIPetInfoController implements Observer {
                     }
             );
 
-            if (petInformationBean.isDogEducation())
+            if (petInformationBean.isDogEducationBean())
                 dogEducation.setText("Program of dog education: Needed");
             else
                 dogEducation.setText("Program of dog education: Not needed");
@@ -263,11 +263,11 @@ public class GUIPetInfoController implements Observer {
         }
         else {
             testFiv.setText("Test Fiv: Negative");
-            if (petInformationBean.isTestFiv())
+            if (petInformationBean.isTestFivBean())
                 testFiv.setText("Test Fiv: Positive");
 
             testFelv.setText("Test Felv: Negative");
-            if (petInformationBean.isTestFelv())
+            if (petInformationBean.isTestFelvBean())
                 testFelv.setText("Test Felv: Positive");
         }
     }
@@ -288,33 +288,33 @@ public class GUIPetInfoController implements Observer {
     }
 
     private void setCompatibility() {
-        if (petInformationBean.isMaleDog()) {
+        if (petInformationBean.isMaleDogBean()) {
             setCompatibilityLabel("Male dogs");
         }
-        if (petInformationBean.isFemaleDog()) {
+        if (petInformationBean.isFemaleDogBean()) {
             setCompatibilityLabel("Female dogs");
         }
-        if (petInformationBean.isMaleCat()) {
+        if (petInformationBean.isMaleCatBean()) {
             setCompatibilityLabel("Male cats");
         }
-        if (petInformationBean.isFemaleCat()) {
+        if (petInformationBean.isFemaleCatBean()) {
             setCompatibilityLabel("Female cats");
         }
-        if (petInformationBean.isChildren()) {
+        if (petInformationBean.isChildrenBean()) {
             setCompatibilityLabel("Children");
         }
-        if (petInformationBean.isElders()) {
+        if (petInformationBean.isEldersBean()) {
             setCompatibilityLabel("Elders");
         }
-        if (petInformationBean.isSleepOutside()) {
+        if (petInformationBean.isSleepOutsideBean()) {
             setCompatibilityLabel("Sleeping outside");
         }
-        if (petInformationBean.isFirstExperience()) {
+        if (petInformationBean.isFirstExperienceBean()) {
             setCompatibilityLabel("First experience");
         }
 
         setCompatibilityLabel(
-                switch (petInformationBean.getHoursAlone()) {
+                switch (petInformationBean.getHoursAloneBean()) {
                     case 0 -> "Stay from 1 to 3 hours alone";
                     case 1 -> "Stay from 4 to 6 hours alone";
                     default -> "Stay more than 6 hours alone"; // case 2

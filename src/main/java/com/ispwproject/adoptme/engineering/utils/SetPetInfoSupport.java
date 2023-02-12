@@ -14,12 +14,12 @@ public class SetPetInfoSupport {
         petModel.setMonthOfBirth(petBean.getPetBeanBirthMonth());
         petModel.setDayOfBirth(petBean.getPetBeanBirthDay());
         petModel.setGender(petBean.getPetBeanGender());
-        petModel.setCoatLength(petInformationBean.getCoatLength());
-        petModel.setVaccinated(petInformationBean.isVaccinated());
-        petModel.setMicrochipped(petInformationBean.isMicrochipped());
-        petModel.setDewormed(petInformationBean.isDewormed());
-        petModel.setSterilized(petInformationBean.isSterilized());
-        petModel.setDisability(petInformationBean.isDisability());
-        petModel.setDisabilityType(petInformationBean.getDisabilityType());
+        petModel.setCoatLength(petInformationBean.getCoatLengthBean());
+        petModel.setVaccinated(petInformationBean.isVaccinatedBean());
+        petModel.setMicrochipped(petInformationBean.isMicrochippedBean());
+        petModel.setDewormed(petInformationBean.isDewormedBean());
+        petModel.setSterilized(petInformationBean.isSterilizedBean());
+        petModel.setDisability(petInformationBean.isDisabilityBean());
+        petModel.setDisabilityType(petInformationBean.getDisabilityTypeBean());
     }
 }

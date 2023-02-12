@@ -32,7 +32,7 @@ public class AddPetController {
         if (petBean.getPetBeanType() == 0) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
+            DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducationBean(), petInformationBean.getSizeBean());
             setCommonInfo(dogModel);
 
             try {
@@ -46,7 +46,7 @@ public class AddPetController {
         } else if (petBean.getPetBeanType() == 1) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
+            CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFivBean(), petInformationBean.isTestFelvBean(), petCompatibility);
             setCommonInfo(catModel);
 
             try {
@@ -61,9 +61,9 @@ public class AddPetController {
     }
 
     private PetCompatibility setCompatibility() {
-        PetCompatibility petCompatibility = new PetCompatibility(petInformationBean.isMaleDog(), petInformationBean.isFemaleDog(), petInformationBean.isMaleCat(), petInformationBean.isFemaleCat(), petInformationBean.isChildren(), petInformationBean.isElders(), petInformationBean.isFirstExperience());
-        petCompatibility.setSleepOutside(petInformationBean.isSleepOutside());
-        petCompatibility.setHoursAlone(petInformationBean.getHoursAlone());
+        PetCompatibility petCompatibility = new PetCompatibility(petInformationBean.isMaleDogBean(), petInformationBean.isFemaleDogBean(), petInformationBean.isMaleCatBean(), petInformationBean.isFemaleCatBean(), petInformationBean.isChildrenBean(), petInformationBean.isEldersBean(), petInformationBean.isFirstExperienceBean());
+        petCompatibility.setSleepOutside(petInformationBean.isSleepOutsideBean());
+        petCompatibility.setHoursAlone(petInformationBean.getHoursAloneBean());
         return petCompatibility;
     }
 
