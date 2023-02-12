@@ -24,6 +24,9 @@ public class CLIUserHomepageView {
 
         if(Session.getCurrentSession().getUserBean() != null)
             PrintSupport.printMessage(" 4) Go to favorites.\n 5) Go to appointments.\n 6) Go to settings.");
+        else {
+            PrintSupport.printMessage(" 4) Go to login.");
+        }
 
         Scanner scanner = new Scanner(System.in);
         String inputLine = scanner.nextLine();

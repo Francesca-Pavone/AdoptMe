@@ -21,11 +21,12 @@ public class CLIUserHomepageController {
     private static final String SEARCH_CITY = "1";
     private static final String SEARCH_SHELTER = "2";
     private static final String QUESTIONNAIRE = "3";
+    private static final String LOGIN = "4";
     private static final String FAVORITES = "4";
     private static final String APPOINTMENTS = "5";
     private static final String SETTINGS = "6";
 
-    private static final String MSG_ERROR = "Input not valid. Try with: 1 | 2 | 3";
+    private static final String MSG_ERROR = "Input not valid. Try with: 1 | 2 | 3 | 4 | 5 | 6";
 
     public void start() {
         this.cliUserHomepageView = new CLIUserHomepageView(this);
@@ -42,7 +43,11 @@ public class CLIUserHomepageController {
 
                 // vai a search shelter
                 case SEARCH_SHELTER -> this.cliUserHomepageView.searchShelter();
-                default -> throw new CommandNotFoundException("1 | 2 | 3");
+                case LOGIN -> {
+                    CLILoginController cliLoginController = new CLILoginController();
+                    cliLoginController.start();
+                }
+                default -> throw new CommandNotFoundException("1 | 2 | 3 | 4");
 
             }
         }
