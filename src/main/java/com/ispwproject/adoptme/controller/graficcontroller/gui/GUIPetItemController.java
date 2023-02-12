@@ -4,6 +4,7 @@ import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.exception.ImageNotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
+import com.ispwproject.adoptme.engineering.utils.ComputeAgeSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,17 +57,7 @@ public class GUIPetItemController {
                     default -> "Female";
                 });
 
-        String age;
-        int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
-
-        if (yearDiff <= 1)
-            age = "Puppy";
-        else if (yearDiff <= 3)
-            age = "Young";
-        else if (yearDiff <= 10)
-            age = "Adult";
-        else
-            age = "Senior";
+        String age = ComputeAgeSupport.computeAge(petBean);
 
         petAge.setText(age);
 
