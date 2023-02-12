@@ -181,7 +181,7 @@ public class GUIAddPetController {
             case "Female" -> 1;
             default -> 0;   //case "Male"
         }));
-        petBean.setPetBeanShelter(shelterBean.getShelterId());
+        petBean.setPetBeanShelter(shelterBean.getShelterBeanId());
         petBean.setPetBeanImage(file);
         petBean.setPetBeanBirthDay(day);
         petBean.setPetBeanBirthMonth(month);

@@ -16,7 +16,7 @@ public class UserResearchController {
         List<ShelterBean> listShelterBean = new ArrayList<>();
         for (ShelterModel shelterModel : ShelterDAO.retrieveShelterByCity(userResearchBean.getCityShelter())) {
             ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
-            shelterBean.setShelterImg(shelterModel.getImage());
+            shelterBean.setShelterBeanImg(shelterModel.getImage());
             listShelterBean.add(shelterBean);
         }
         return listShelterBean;

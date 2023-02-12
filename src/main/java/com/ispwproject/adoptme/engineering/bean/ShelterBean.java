@@ -28,67 +28,67 @@ public class ShelterBean {
 
 
 
-    public String getName() {
+    public String getShelterBeanName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setShelterBeanName(String name) {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
+    public String getBeanPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setBeanPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
+    public String getBeanEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setBeanEmail(String email) {
         this.email = email;
     }
 
-    public File getShelterImg() {
+    public File getShelterBeanImg() {
         return shelterImg;
     }
 
-    public void setShelterImg(File shelterImg) {
+    public void setShelterBeanImg(File shelterImg) {
         this.shelterImg = shelterImg;
     }
 
-    public String getAddress() {
+    public String getBeanAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setBeanAddress(String address) {
         this.address = address;
     }
 
-    public String getCity() {
+    public String getBeanCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setBeanCity(String city) {
         this.city = city;
     }
 
-    public URL getWebSite() {
+    public URL getBeanWebSite() {
         return webSite;
     }
 
-    public void setWebSite(URL webSite) {
+    public void setBeanWebSite(URL webSite) {
         this.webSite = webSite;
     }
 
-    public int getShelterId() {
+    public int getShelterBeanId() {
         return shelterId;
     }
 
-    public void setShelterId(int shelterId) {
+    public void setShelterBeanId(int shelterId) {
         this.shelterId = shelterId;
     }
 

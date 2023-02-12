@@ -43,7 +43,7 @@ public class CLIAddPetController implements CLIGraficController {
         }
         petBean.setPetBeanGender(gender);
         petBean.setPetBeanType(type);
-        petBean.setPetBeanShelter(Session.getCurrentSession().getShelterBean().getShelterId());
+        petBean.setPetBeanShelter(Session.getCurrentSession().getShelterBean().getShelterBeanId());
     }
 
     public void setGeneralInfo(int coatLength, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType){

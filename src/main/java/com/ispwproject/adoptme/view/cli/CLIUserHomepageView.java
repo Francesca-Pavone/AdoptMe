@@ -40,7 +40,7 @@ public class CLIUserHomepageView {
         int i = 1;
         PrintSupport.printMessage("\n------------------------------------------ Shelters ------------------------------------------");
         for(ShelterBean shelter: shelterList) {
-            PrintSupport.printMessage(i + ") " + shelter.getName() );
+            PrintSupport.printMessage(i + ") " + shelter.getShelterBeanName() );
             i++;
         }
         PrintSupport.printSeparatorLine();

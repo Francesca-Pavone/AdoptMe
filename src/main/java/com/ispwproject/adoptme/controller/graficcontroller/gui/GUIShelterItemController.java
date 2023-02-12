@@ -40,16 +40,16 @@ public class GUIShelterItemController {
     }
 
     public void setData() throws IOException {
-        shelterName.setText(shelterBean.getName());
+        shelterName.setText(shelterBean.getShelterBeanName());
         Image image;
-        if (shelterBean.getShelterImg() != null) {
-            InputStream inputStream = new FileInputStream(shelterBean.getShelterImg());
+        if (shelterBean.getShelterBeanImg() != null) {
+            InputStream inputStream = new FileInputStream(shelterBean.getShelterBeanImg());
             image = new Image(inputStream);
         } else {
             image = new Image(Main.class.getResource("image/photo.png").openStream());
         }
         shelterImage.setImage(image);
-        btnShelter.setId(shelterBean.getName());
+        btnShelter.setId(shelterBean.getShelterBeanName());
     }
 
     public void selectShelter(ActionEvent event) throws Exception {

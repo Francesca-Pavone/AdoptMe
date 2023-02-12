@@ -33,7 +33,7 @@ public class CLIAppointmentsPageController implements CLIGraficController, Obser
         if (session.getUserBean() != null)
             ownerName = session.getUserBean().getName();
         else if (session.getShelterBean() != null )
-            ownerName = session.getShelterBean().getName();
+            ownerName = session.getShelterBean().getShelterBeanName();
 
         ShowRequestsController showRequestsController = new ShowRequestsController();
         try {
@@ -100,7 +100,7 @@ public class CLIAppointmentsPageController implements CLIGraficController, Obser
         if (Session.getCurrentSession().getUserBean() != null)
             this.showAppointments(Session.getCurrentSession().getUserBean().getName());
         else
-            this.showAppointments(Session.getCurrentSession().getShelterBean().getName());
+            this.showAppointments(Session.getCurrentSession().getShelterBean().getShelterBeanName());
     }
 
     private static void goToHomepage() {

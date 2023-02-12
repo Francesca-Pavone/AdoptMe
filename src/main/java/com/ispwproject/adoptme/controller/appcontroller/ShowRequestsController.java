@@ -23,8 +23,8 @@ public class ShowRequestsController {
     public ShowRequestsController() {
         if (Session.getCurrentSession().getShelterBean() != null){
             ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
-            this.genericUserModel = new ShelterModel(shelterBean.getShelterImg(), shelterBean.getName(), shelterBean.getEmail(), shelterBean.getPhoneNumber(), shelterBean.getAddress(), shelterBean.getCity(), shelterBean.getWebSite());
-            this.genericUserModel.setId(shelterBean.getShelterId());
+            this.genericUserModel = new ShelterModel(shelterBean.getShelterBeanImg(), shelterBean.getShelterBeanName(), shelterBean.getBeanEmail(), shelterBean.getBeanPhoneNumber(), shelterBean.getBeanAddress(), shelterBean.getBeanCity(), shelterBean.getBeanWebSite());
+            this.genericUserModel.setId(shelterBean.getShelterBeanId());
         }
         else if (Session.getCurrentSession().getUserBean() != null) {
             UserBean userBean = Session.getCurrentSession().getUserBean();

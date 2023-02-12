@@ -64,18 +64,18 @@ public class GUIShelterInformationController implements Observer {
     }
 
     public void setData(ShelterBean shelterBean) throws IOException, NotFoundException {
-        shelterName.setText(shelterBean.getName());
+        shelterName.setText(shelterBean.getShelterBeanName());
         Image image;
-        if (shelterBean.getShelterImg() != null) {
-            InputStream inputStream = new FileInputStream(shelterBean.getShelterImg());
+        if (shelterBean.getShelterBeanImg() != null) {
+            InputStream inputStream = new FileInputStream(shelterBean.getShelterBeanImg());
             image = new Image(inputStream);
         } else {
             image = new Image(Main.class.getResource("image/photo.png").openStream());
         }
-        labelEmail.setText(shelterBean.getEmail());
-        labelPhoneNumber.setText(shelterBean.getPhoneNumber());
-        labelWebSite.setText(shelterBean.getWebSite().toString());
-        labelAddress.setText(shelterBean.getAddress() + ", " + shelterBean.getCity());
+        labelEmail.setText(shelterBean.getBeanEmail());
+        labelPhoneNumber.setText(shelterBean.getBeanPhoneNumber());
+        labelWebSite.setText(shelterBean.getBeanWebSite().toString());
+        labelAddress.setText(shelterBean.getBeanAddress() + ", " + shelterBean.getBeanCity());
         shelterImage.setImage(image);
 
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(shelterBean);

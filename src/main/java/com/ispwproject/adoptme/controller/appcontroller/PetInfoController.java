@@ -38,14 +38,14 @@ public class PetInfoController {
                 petInformationBean.setTestFelv(catModel.isTestFelv());
                 petBean.setPetBeanFav(this.checkFavorite(petBean));
             }
-            shelterBean.setShelterId(shelterModel.getId());
-            shelterBean.setName(shelterModel.getShelterName());
-            shelterBean.setPhoneNumber(shelterModel.getPhoneNumber());
-            shelterBean.setAddress(shelterModel.getAddress());
-            shelterBean.setCity(shelterModel.getCity());
-            shelterBean.setWebSite(shelterModel.getWebSite());
-            shelterBean.setEmail(shelterModel.getEmail());
-            shelterBean.setShelterImg(shelterModel.getImage());
+            shelterBean.setShelterBeanId(shelterModel.getId());
+            shelterBean.setShelterBeanName(shelterModel.getShelterName());
+            shelterBean.setBeanPhoneNumber(shelterModel.getPhoneNumber());
+            shelterBean.setBeanAddress(shelterModel.getAddress());
+            shelterBean.setBeanCity(shelterModel.getCity());
+            shelterBean.setBeanWebSite(shelterModel.getWebSite());
+            shelterBean.setBeanEmail(shelterModel.getEmail());
+            shelterBean.setShelterBeanImg(shelterModel.getImage());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -65,20 +65,20 @@ public class GUIShelterSettingsController {
     public void initialize() throws IOException {
         Image image;
         ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
-        if (shelterBean.getShelterImg() != null) {
-            InputStream inputStream = new FileInputStream(shelterBean.getShelterImg());
+        if (shelterBean.getShelterBeanImg() != null) {
+            InputStream inputStream = new FileInputStream(shelterBean.getShelterBeanImg());
             image = new Image(inputStream);
         } else {
             image = new Image(Main.class.getResource("image/photo.png").openStream());
         }
         userImg.setImage(image);
-        nameTitle.setText(shelterBean.getName());
-        emailTitle.setText(shelterBean.getEmail());
+        nameTitle.setText(shelterBean.getShelterBeanName());
+        emailTitle.setText(shelterBean.getBeanEmail());
 
-        name.setPromptText(shelterBean.getName());
-        number.setPromptText(shelterBean.getPhoneNumber());
-        address.setPromptText(shelterBean.getAddress());
-        site.setPromptText(shelterBean.getWebSite().toString());
-        email.setPromptText(shelterBean.getEmail());
+        name.setPromptText(shelterBean.getShelterBeanName());
+        number.setPromptText(shelterBean.getBeanPhoneNumber());
+        address.setPromptText(shelterBean.getBeanAddress());
+        site.setPromptText(shelterBean.getBeanWebSite().toString());
+        email.setPromptText(shelterBean.getBeanEmail());
     }
 }

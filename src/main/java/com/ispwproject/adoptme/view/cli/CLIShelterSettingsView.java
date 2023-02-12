@@ -15,6 +15,6 @@ public class CLIShelterSettingsView {
     public void run() {
         ShelterBean shelterBean = Session.getCurrentSession().getShelterBean();
 
-        CLIPrintSettingsSupport.printSettings("\tName: " + shelterBean.getName() + "\n\tPhone Number: " + shelterBean.getPhoneNumber() + "\n\tAddress: " + shelterBean.getAddress() + "\n\tWeb Site: " + shelterBean.getWebSite() +"\n\tEmail: " + shelterBean.getEmail(), " 1) Modify name.\n 2) Modify Phone Number.\n 3) Modify Address.\n 4) Modify Web Site.\n 5) Modify Email.\n 6) Modify Password.\n 7) Logout.", controller, this);
+        CLIPrintSettingsSupport.printSettings("\tName: " + shelterBean.getShelterBeanName() + "\n\tPhone Number: " + shelterBean.getBeanPhoneNumber() + "\n\tAddress: " + shelterBean.getBeanAddress() + "\n\tWeb Site: " + shelterBean.getBeanWebSite() +"\n\tEmail: " + shelterBean.getBeanEmail(), " 1) Modify name.\n 2) Modify Phone Number.\n 3) Modify Address.\n 4) Modify Web Site.\n 5) Modify Email.\n 6) Modify Password.\n 7) Logout.", controller, this);
     }
 }

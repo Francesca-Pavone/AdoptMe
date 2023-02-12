@@ -36,7 +36,7 @@ public class LoginController {
         ShelterModel shelterModel = ShelterDAO.retrieveShelterByEmail(loginBean.getEmail());
 
         ShelterBean shelterBean = new ShelterBean(shelterModel.getId(), shelterModel.getShelterName(), shelterModel.getPhoneNumber(), shelterModel.getAddress(), shelterModel.getCity(), shelterModel.getWebSite(), shelterModel.getEmail());
-        shelterBean.setShelterImg(shelterModel.getImage());
+        shelterBean.setShelterBeanImg(shelterModel.getImage());
         Session.setSessionInstance(shelterBean);
 
     }

@@ -41,7 +41,7 @@ public class CLIShelterInfoController implements CLIGraficController, Observer {
     public void start() {
 
         try {
-            this.view.run(this.shelterBean.getName(), this.shelterBean.getEmail(), this.shelterBean.getPhoneNumber(), this.shelterBean.getWebSite(), this.shelterBean.getAddress(), this.shelterBean.getCity());
+            this.view.run(this.shelterBean.getShelterBeanName(), this.shelterBean.getBeanEmail(), this.shelterBean.getBeanPhoneNumber(), this.shelterBean.getBeanWebSite(), this.shelterBean.getBeanAddress(), this.shelterBean.getBeanCity());
         }
         catch (NotFoundException e){
             ShowExceptionSupport.showExceptionCLI(e.getMessage());

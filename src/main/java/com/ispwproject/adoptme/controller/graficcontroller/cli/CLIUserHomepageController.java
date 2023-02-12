@@ -83,7 +83,7 @@ public class CLIUserHomepageController {
     public void showShelter(ShelterBean shelterBean) {
         CLIShelterInfoController cliShelterInfoController = new CLIShelterInfoController();
         cliShelterInfoController.setPreviousPage(this);
-        cliShelterInfoController.setShelter(shelterBean.getName());
+        cliShelterInfoController.setShelter(shelterBean.getShelterBeanName());
     }
 
     public void searchCity(String city) {

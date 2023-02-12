@@ -54,7 +54,7 @@ public class CatDAO {
     public static int saveCat(CatModel catModel) throws SQLException {
         Statement stmt;
         PreparedStatement preparedStatement;
-        int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
+        int shelterId = Session.getCurrentSession().getShelterBean().getShelterBeanId();
         int catId = 1;
 
         try {

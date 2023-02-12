@@ -55,7 +55,7 @@ public class DogDAO {
         Statement stmt;
         PreparedStatement preparedStatement;
         int dogId = 1;
-        int shelterId = Session.getCurrentSession().getShelterBean().getShelterId();
+        int shelterId = Session.getCurrentSession().getShelterBean().getShelterBeanId();
 
         try {
             stmt = ConnectionDB.getConnection();
