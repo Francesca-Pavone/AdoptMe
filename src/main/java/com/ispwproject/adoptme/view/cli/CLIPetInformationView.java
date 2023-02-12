@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.view.cli;
 import com.ispwproject.adoptme.controller.graficcontroller.cli.CLIPetInformationController;
 import com.ispwproject.adoptme.engineering.session.Session;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
+import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 
 import java.util.Scanner;
 
@@ -39,6 +40,10 @@ public class CLIPetInformationView {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             this.controller.executeCommand(input);
+        }
+        else {
+            PrintSupport.printMessage("\nPress ENTER to continue");
+            ScannerSupport.waitEnter();
         }
     }
 }

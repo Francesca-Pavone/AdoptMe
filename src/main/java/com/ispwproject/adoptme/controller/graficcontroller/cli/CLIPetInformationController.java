@@ -72,7 +72,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
                 }
         );
         String coatLenght = String.valueOf(
-                switch (petInformationBean.getCoatLenght()) {
+                switch (petInformationBean.getCoatLength()) {
                     case 1 -> "Medium";
                     case 2 -> "Long";
                     default -> "Short";     // case 0

@@ -12,7 +12,7 @@ public abstract class PetModel {
     protected int monthOfBirth;
     protected int dayOfBirth;
     protected int gender;
-    protected int coatLenght;
+    protected int coatLength;
 
     protected boolean vaccinated;
     protected boolean microchipped;
@@ -26,11 +26,11 @@ public abstract class PetModel {
     protected PetModel() {
     }
 
-    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLenght, PetCompatibility petCompatibility) {
+    protected PetModel(int yearOfBirth, int monthOfBirth, int dayOfBirth, int coatLength, PetCompatibility petCompatibility) {
         this.yearOfBirth = yearOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.dayOfBirth = dayOfBirth;
-        this.coatLenght = coatLenght;
+        this.coatLength = coatLength;
         this.petCompatibility = petCompatibility;
     }
 
@@ -103,12 +103,12 @@ public abstract class PetModel {
         this.gender = gender;
     }
 
-    public int getCoatLenght() {
-        return coatLenght;
+    public int getCoatLength() {
+        return coatLength;
     }
 
-    public void setCoatLenght(int coatLenght) {
-        this.coatLenght = coatLenght;
+    public void setCoatLength(int coatLength) {
+        this.coatLength = coatLength;
     }
 
     public boolean isVaccinated() {

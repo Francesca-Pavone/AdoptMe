@@ -125,7 +125,7 @@ public class DogDAO {
             preparedStatement.setInt(6, dogModel.getDayOfBirth());
             preparedStatement.setInt(7, dogModel.getMonthOfBirth());
             preparedStatement.setInt(8, dogModel.getYearOfBirth());
-            preparedStatement.setInt(9, dogModel.getCoatLenght());
+            preparedStatement.setInt(9, dogModel.getCoatLength());
             preparedStatement.setInt(10, dogModel.getSize());
             preparedStatement.setBoolean(11, dogModel.isVaccinated());
             preparedStatement.setBoolean(12, dogModel.isMicrochipped());

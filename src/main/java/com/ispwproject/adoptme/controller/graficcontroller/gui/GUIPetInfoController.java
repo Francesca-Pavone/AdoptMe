@@ -188,7 +188,7 @@ public class GUIPetInfoController implements Observer {
                 }
         );
         coatLenght.setText(
-                switch (petInformationBean.getCoatLenght()) {
+                switch (petInformationBean.getCoatLength()) {
                     case 0 -> "Short";
                     case 1 -> "Medium";
                     case 2 -> "Long";

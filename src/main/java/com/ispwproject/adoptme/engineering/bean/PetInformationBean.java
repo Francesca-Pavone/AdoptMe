@@ -1,7 +1,7 @@
 package com.ispwproject.adoptme.engineering.bean;
 
 public class PetInformationBean {
-    protected int coatLenght;
+    protected int coatLength;
 
     protected boolean vaccinated;
     protected boolean microchipped;
@@ -31,12 +31,12 @@ public class PetInformationBean {
     protected boolean testFelv;
 
 
-    public int getCoatLenght() {
-        return coatLenght;
+    public int getCoatLength() {
+        return coatLength;
     }
 
-    public void setCoatLenght(int coatLenght) {
-        this.coatLenght = coatLenght;
+    public void setCoatLength(int coatLength) {
+        this.coatLength = coatLength;
     }
 
 
