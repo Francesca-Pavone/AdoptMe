@@ -9,7 +9,6 @@ import com.ispwproject.adoptme.engineering.dao.RequestDAO;
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.DuplicateRequestException;
 import com.ispwproject.adoptme.engineering.exception.PastDateException;
-import com.ispwproject.adoptme.model.ShelterModel;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +23,7 @@ class TestManageRequestController {
     @Test
     void testSendRequest() throws PastDateException, DuplicateRequestException, DateFormatException {
         try {
-            int requestBefore = RequestDAO.retrieveReqByShelter(new ShelterModel(1)).size();
+            int requestBefore = RequestDAO.retrieveReqByOwnerId(1, 1).size();
 
             LoginBean loginBean = new LoginBean("francesca@gmail.com", "123");
             LoginController loginController = new LoginController();
@@ -35,12 +34,12 @@ class TestManageRequestController {
             petBean.setPetId(1);
             petBean.setShelterId(1);
 
-            RequestBean requestBean = new RequestBean("16-03-2023", "16:00");
+            RequestBean requestBean = new RequestBean("17-03-2023", "16:00");
 
             ManageRequestController manageRequestController = new ManageRequestController();
             manageRequestController.sendRequest(petBean, requestBean);
 
-            int requestAfter = RequestDAO.retrieveReqByShelter(new ShelterModel(1)).size();
+            int requestAfter = RequestDAO.retrieveReqByOwnerId(1, 1).size();
 
             assertEquals(requestBefore + 1, requestAfter, 0);  // supera il test
         }
