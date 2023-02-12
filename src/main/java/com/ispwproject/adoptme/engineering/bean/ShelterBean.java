@@ -10,13 +10,13 @@ public class ShelterBean {
     private String phoneNumber;
     private String address;
     private String city;
-    private URL webSite;
+    private String webSite;
     private String email;
     private File shelterImg;
 
     public ShelterBean() {}
 
-    public ShelterBean(int shelterId, String name, String phoneNumber, String address, String city, URL webSite, String email) {
+    public ShelterBean(int shelterId, String name, String phoneNumber, String address, String city, String webSite, String email) {
         this.shelterId = shelterId;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -76,11 +76,11 @@ public class ShelterBean {
         this.city = city;
     }
 
-    public URL getBeanWebSite() {
+    public String getBeanWebSite() {
         return webSite;
     }
 
-    public void setBeanWebSite(URL webSite) {
+    public void setBeanWebSite(String webSite) {
         this.webSite = webSite;
     }
 

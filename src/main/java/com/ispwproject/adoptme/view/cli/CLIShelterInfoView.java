@@ -14,7 +14,7 @@ public class CLIShelterInfoView {
         this.cliShelterInfoControllerCurrent = cliShelterInfoController;
     }
 
-    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, URL shelterWebSite, String shelterAddress, String shelterCity) throws NotFoundException {
+    public void run(String shelterName, String shelterEmail, String shelterPhoneNumber, String shelterWebSite, String shelterAddress, String shelterCity) throws NotFoundException {
         PrintSupport.printMessage("\n\n-------------------------------------- " + shelterName.toUpperCase() + " --------------------------------------");
         PrintSupport.printMessage("------------------------------------- Shelter Information -------------------------------------\n  Email: " + shelterEmail + "\n  Phone number: " + shelterPhoneNumber + "\n  Web site: " + shelterWebSite + "\n  Address: " + shelterAddress + ", " + shelterCity);
         PrintSupport.printMessage("--------------------------------------- Shelter's pets ---------------------------------------");

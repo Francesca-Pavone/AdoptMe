@@ -74,7 +74,7 @@ public class GUIShelterInformationController implements Observer {
         }
         labelEmail.setText(shelterBean.getBeanEmail());
         labelPhoneNumber.setText(shelterBean.getBeanPhoneNumber());
-        labelWebSite.setText(shelterBean.getBeanWebSite().toString());
+        labelWebSite.setText(shelterBean.getBeanWebSite());
         labelAddress.setText(shelterBean.getBeanAddress() + ", " + shelterBean.getBeanCity());
         shelterImage.setImage(image);
 

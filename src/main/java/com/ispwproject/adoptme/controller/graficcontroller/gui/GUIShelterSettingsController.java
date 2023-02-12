@@ -78,7 +78,7 @@ public class GUIShelterSettingsController {
         name.setPromptText(shelterBean.getShelterBeanName());
         number.setPromptText(shelterBean.getBeanPhoneNumber());
         address.setPromptText(shelterBean.getBeanAddress());
-        site.setPromptText(shelterBean.getBeanWebSite().toString());
+        site.setPromptText(shelterBean.getBeanWebSite());
         email.setPromptText(shelterBean.getBeanEmail());
     }
 }

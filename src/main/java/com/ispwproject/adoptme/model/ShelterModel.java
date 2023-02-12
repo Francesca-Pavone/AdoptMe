@@ -10,9 +10,9 @@ public class ShelterModel extends GenericUserModel {
     private String phoneNumber;
     private String address;
     private String city;
-    private URL webSite;
+    private String webSite;
 
-    public ShelterModel(File profileImg, String shelterName, String phoneNumber, String address, String city, URL webSite) {
+    public ShelterModel(File profileImg, String shelterName, String phoneNumber, String address, String city, String webSite) {
         super(profileImg, 1);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
@@ -20,7 +20,7 @@ public class ShelterModel extends GenericUserModel {
         setCity(city);
         setWebSite(webSite);
     }
-    public ShelterModel(File profileImg, String shelterName, String email, String phoneNumber, String address, String city, URL webSite) {
+    public ShelterModel(File profileImg, String shelterName, String email, String phoneNumber, String address, String city, String webSite) {
         super(profileImg, 1, email);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
@@ -29,7 +29,7 @@ public class ShelterModel extends GenericUserModel {
         setWebSite(webSite);
     }
 
-    public ShelterModel(int id, String shelterName, String email, String phoneNumber, String address, String city, URL webSite) {
+    public ShelterModel(int id, String shelterName, String email, String phoneNumber, String address, String city, String webSite) {
         super(1, email);
         setId(id);
         setShelterName(shelterName);
@@ -39,7 +39,7 @@ public class ShelterModel extends GenericUserModel {
         setWebSite(webSite);
     }
 
-    public ShelterModel(String shelterName, String phoneNumber, String address, String city, File profileImg, URL webSite) {
+    public ShelterModel(String shelterName, String phoneNumber, String address, String city, File profileImg, String webSite) {
         super(profileImg);
         setShelterName(shelterName);
         setPhoneNumber(phoneNumber);
@@ -89,11 +89,11 @@ public class ShelterModel extends GenericUserModel {
         this.city = city;
     }
 
-    public URL getWebSite() {
+    public String getWebSite() {
         return webSite;
     }
 
-    public void setWebSite(URL webSite) {
+    public void setWebSite(String webSite) {
         this.webSite = webSite;
     }
 

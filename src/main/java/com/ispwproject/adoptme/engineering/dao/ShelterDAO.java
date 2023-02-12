@@ -151,8 +151,7 @@ public class ShelterDAO {
             String address = resultSet.getString(ADDRESS);
             String city = resultSet.getString(CITY);
             String webSite = resultSet.getString(WEB_SITE);
-            URL webSiteURL = new URL(webSite);
-            shelterModel = new ShelterModel(shelterId, shelterName, email, phoneNumber, address, city, webSiteURL);
+            shelterModel = new ShelterModel(shelterId, shelterName, email, phoneNumber, address, city, webSite);
             Blob blob = resultSet.getBlob(PROFILE_IMG);
             if (blob != null) {
                 shelterImage = ImageConverterSupport.fromBlobToFile(blob, SHELTER + shelterId);
