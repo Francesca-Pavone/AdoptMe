@@ -3,8 +3,6 @@ package com.ispwproject.adoptme.controller.graficcontroller.cli;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
-import com.ispwproject.adoptme.engineering.utils.ComputeAgeSupport;
-import com.ispwproject.adoptme.engineering.utils.ComputeGenderSupport;
 import com.ispwproject.adoptme.engineering.utils.ScannerSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIShelterInfoView;
@@ -55,8 +53,10 @@ public class CLIShelterInfoController implements CLIGraficController, Observer {
     public void getPet() throws NotFoundException {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController(this.shelterBean);
         showShelterPetsController.getPetList(this);
-        this.printPet();
-
+        CLIShowPetsController cliShowPetsController = new CLIShowPetsController();
+        cliShowPetsController.setPetList(this.petBeanList);
+        cliShowPetsController.setPreviousPage(this);
+        cliShowPetsController.showPets();
     }
 
     public void goBack(){
@@ -66,17 +66,6 @@ public class CLIShelterInfoController implements CLIGraficController, Observer {
     @Override
     public void update(Object object) {
         this.petBeanList.add((PetBean) object);
-    }
-
-    private void printPet() {
-        int i = 1;
-        for(PetBean petBean: this.petBeanList) {
-            String gender = ComputeGenderSupport.computeGender(petBean);
-            String age = ComputeAgeSupport.computeAge(petBean);
-            this.view.printPet((petBean).getName(), gender, age, i);
-
-        }
-        this.view.printCommands();
     }
 
     @Override

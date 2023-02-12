@@ -15,7 +15,16 @@ import java.util.List;
 public class CLIShowPetsController implements CLIGraficController, Observer {
 
     private final CLIShowPetsView view;
-    private final List<PetBean> petBeanList = new ArrayList<>();
+    private List<PetBean> petBeanList = new ArrayList<>();
+    private Object previousPage = null;
+
+    public void setPreviousPage(Object object) {
+        this.previousPage = object;
+    }
+
+    public void setPetList(List<PetBean> petList) {
+            this.petBeanList = petList;
+    }
 
     public CLIShowPetsController() {
         this.view = new CLIShowPetsView(this);
@@ -26,7 +35,7 @@ public class CLIShowPetsController implements CLIGraficController, Observer {
         ShowShelterPetsController showShelterPetsController = new ShowShelterPetsController();
         try {
             showShelterPetsController.getPetList(this);
-        }catch (NotFoundException e){
+        } catch (NotFoundException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
         }
         showPets();
@@ -43,6 +52,7 @@ public class CLIShowPetsController implements CLIGraficController, Observer {
             String gender = ComputeGenderSupport.computeGender(petBean);
             String age = ComputeAgeSupport.computeAge(petBean);
             this.view.showPetInfo((petBean).getName(), gender, age, i);
+            i++;
         }
         this.view.showCommands();
     }
@@ -50,11 +60,12 @@ public class CLIShowPetsController implements CLIGraficController, Observer {
 
 
     public void executeCommand(int i) {
-        if (i == 0) {
+        if(previousPage instanceof CLIShelterInfoController)
+            ((CLIShelterInfoController)previousPage).executeCommand(i);
+        else if (i == 0)
             goToHomepage();
-        }
         else {
-            PetBean petBean = this.petBeanList.get(i-1);
+            PetBean petBean = this.petBeanList.get(i - 1);
             this.petBeanList.clear();
             CLIPetInformationController cliPetInformationController = new CLIPetInformationController(petBean);
             cliPetInformationController.setIndex(i);
