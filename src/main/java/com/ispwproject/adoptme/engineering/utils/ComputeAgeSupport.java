@@ -5,17 +5,18 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import java.time.Year;
 
 public class ComputeAgeSupport {
+    private ComputeAgeSupport() {
+        //ignore
+    }
     public static String computeAge(PetBean petBean) {
-        String age;
         int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
         if (yearDiff <= 1)
-            age = "Puppy";
+            return "Puppy";
         else if (yearDiff <= 3)
-            age = "Young";
+            return "Young";
         else if (yearDiff <= 10)
-            age = "Adult";
+            return "Adult";
         else
-            age = "Senior";
-        return age;
+            return "Senior";
     }
 }

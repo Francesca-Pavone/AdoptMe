@@ -11,6 +11,9 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 public class LoadPetInfoSupport {
+    private LoadPetInfoSupport() {
+        //ignore
+    }
     public static Pane loadPage(Object object, Parent currentPage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));

@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.utils.PrintSupport;
 
 import java.net.URL;
-import java.util.Scanner;
 
 public class CLIShelterInfoView {
     

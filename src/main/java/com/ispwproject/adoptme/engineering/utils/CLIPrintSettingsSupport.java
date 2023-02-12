@@ -10,6 +10,9 @@ import com.ispwproject.adoptme.view.cli.CLIUserSettingsView;
 import java.util.Scanner;
 
 public class CLIPrintSettingsSupport {
+    private CLIPrintSettingsSupport() {
+        //ignore
+    }
     public static void printSettings(String information, String commands, Object controller, Object view) {
         PrintSupport.printMessage("------------------------------------------- SETTINGS ------------------------------------------");
         PrintSupport.printMessage(information);
