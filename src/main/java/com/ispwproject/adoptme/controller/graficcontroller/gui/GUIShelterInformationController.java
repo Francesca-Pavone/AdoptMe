@@ -2,12 +2,11 @@ package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowShelterPetsController;
-import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.exception.NoSheltersWithThatNameException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.utils.LoadPetInfoSupport;
+import com.ispwproject.adoptme.engineering.utils.InitPageSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -112,12 +111,12 @@ public class GUIShelterInformationController implements Observer {
     @Override
     public void update(Object object) {
         try {
-            Pane pane = LoadPetInfoSupport.loadPage(object, currentPage);
             if (column == 4) {
                 column = 0;
                 row++;
             }
-            grid.add(pane, column++, row);
+            InitPageSupport.initPetItem(object, grid, currentPage, column, row);
+            column++;
         } catch(IOException e) {
             e.printStackTrace();
         }

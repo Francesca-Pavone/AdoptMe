@@ -2,13 +2,17 @@ package com.ispwproject.adoptme.engineering.utils;
 
 import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
+import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIPetItemController;
 import com.ispwproject.adoptme.controller.graficcontroller.gui.GUIRequestItemController;
+import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.exception.DateFormatException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -35,5 +39,16 @@ public class InitPageSupport {
         requestItemController.setPane(pane);
         requestItemController.setRequestData((RequestBean) object);
         return pane;
+    }
+
+    public static void initPetItem(Object object, GridPane grid, Parent currentPage, int column, int row) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(Main.class.getResource("PetItem.fxml"));
+        Pane pane = fxmlLoader.load();
+
+        GUIPetItemController petItemControllerG = fxmlLoader.getController();
+        petItemControllerG.setPageContainer(currentPage);
+        petItemControllerG.setPetData((PetBean) object);
+        grid.add(pane, column, row);
     }
 }
