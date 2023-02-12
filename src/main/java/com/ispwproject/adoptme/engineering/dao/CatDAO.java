@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.engineering.dao;
 import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.RetrievePetCompatibilitySupport;
 import com.ispwproject.adoptme.model.CatModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
@@ -47,29 +48,10 @@ public class CatDAO {
                 boolean sterilized = resultSet.getBoolean("sterilized");
                 boolean disability = resultSet.getBoolean("disability");
                 String disabilityType = resultSet.getString("disabilityType");
-                boolean maleDog = resultSet.getBoolean("maleDog");
-                boolean femaleDog = resultSet.getBoolean("femaleDog");
-                boolean maleCat = resultSet.getBoolean("maleCat");
-                boolean femaleCat = resultSet.getBoolean("femaleCat");
-                boolean children = resultSet.getBoolean("children");
-                boolean elders = resultSet.getBoolean("elders");
-                boolean sleepOutside = resultSet.getBoolean("sleepOutside");
-                boolean firstExperience = resultSet.getBoolean("firstExperience");
-                int hoursAlone = resultSet.getInt("hoursAlone");
                 boolean testFiv = resultSet.getBoolean("testFiv");
                 boolean testFelv = resultSet.getBoolean("testFelv");
 
-
-                PetCompatibility petCompatibility = new PetCompatibility();
-                petCompatibility.setMaleDog(maleDog);
-                petCompatibility.setFemaleDog(femaleDog);
-                petCompatibility.setMaleCat(maleCat);
-                petCompatibility.setFemaleCat(femaleCat);
-                petCompatibility.setChildren(children);
-                petCompatibility.setElders(elders);
-                petCompatibility.setSleepOutside(sleepOutside);
-                petCompatibility.setFirstExperience(firstExperience);
-                petCompatibility.setHoursAlone(hoursAlone);
+                PetCompatibility petCompatibility = RetrievePetCompatibilitySupport.retrievePetCompatibility(resultSet);
 
                 cat = new CatModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
                 cat.setVaccinated(vaccinated);
