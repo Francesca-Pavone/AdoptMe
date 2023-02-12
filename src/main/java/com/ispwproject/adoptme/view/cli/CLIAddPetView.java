@@ -85,6 +85,8 @@ public class CLIAddPetView {
         String maleCat = scanner.nextLine();
         PrintSupport.printMessage("\nFemale cat:");
         String femaleCat = scanner.nextLine();
+        this.controller.setCompatibilityWithPets(maleDog, femaleDog, maleCat, femaleCat);
+
         PrintSupport.printMessage("\nChildren:");
         String children = scanner.nextLine();
         PrintSupport.printMessage("\nElders:");
@@ -96,7 +98,7 @@ public class CLIAddPetView {
         PrintSupport.printMessage("\nHours alone: ( 0 -> from 1 to 3 hours  |  1 -> from 4 to 6 hours  |  2 -> more than 6 hours)");
         int hoursAlone = scanner.nextInt();
         scanner.nextLine();
-        this.controller.setCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, sleepOutside, firstExperience, hoursAlone);
+        this.controller.setOtherCompatibility(children, elders, sleepOutside, firstExperience, hoursAlone);
 
         if (type == 0)
             this.controller.setDogInfo(size, education);
