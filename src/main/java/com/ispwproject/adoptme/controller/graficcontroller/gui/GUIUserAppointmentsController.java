@@ -1,13 +1,9 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
 import com.ispwproject.adoptme.Main;
-import com.ispwproject.adoptme.controller.appcontroller.ShowRequestsController;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
-import com.ispwproject.adoptme.engineering.exception.DateFormatException;
-import com.ispwproject.adoptme.engineering.exception.NotFoundException;
-import com.ispwproject.adoptme.engineering.exception.TimeFormatException;
 import com.ispwproject.adoptme.engineering.observer.Observer;
-import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
+import com.ispwproject.adoptme.engineering.utils.InitPageSupport;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
@@ -26,12 +22,7 @@ public class GUIUserAppointmentsController implements Observer {
     private HBox confirmedReqList;
 
     public void initialize() {
-        ShowRequestsController showRequestsController = new ShowRequestsController();
-        try {
-            showRequestsController.getRequestList(this);
-        } catch (NotFoundException | DateFormatException | TimeFormatException e) {
-            ShowExceptionSupport.showExceptionGUI(e.getMessage());
-        }
+        InitPageSupport.initAppointmentsPage(this);
     }
 
     @Override
