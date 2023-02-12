@@ -141,7 +141,7 @@ public class GUIPetInfoController implements Observer {
         ShelterBean shelterBean = new ShelterBean();
         petInformationBean = petInfoControllerA.getPetInfo(petBean, shelterBean);
         this.petBean = petBean;
-        fav = this.petBean.isFav();
+        fav = this.petBean.isPetBeanFav();
 
         if (Session.getCurrentSession().getShelterBean() == null) { // non sono uno Shelter
 
@@ -160,29 +160,29 @@ public class GUIPetInfoController implements Observer {
         }
         Image image;
         try {
-            if (petBean.getPetImage() == null)
+            if (petBean.getPetBeanImage() == null)
                 throw new ImageNotFoundException();
-            InputStream inputStream = new FileInputStream(petBean.getPetImage());
+            InputStream inputStream = new FileInputStream(petBean.getPetBeanImage());
             image = new Image(inputStream);
         }catch (ImageNotFoundException e){
             image = new Image(Main.class.getResource("image/default_photo.png").openStream());
         }
         petImg.setImage(image);
 
-        name.setText(petBean.getName());
-        nameTitle.setText(petBean.getName());
+        name.setText(petBean.getPetBeanName());
+        nameTitle.setText(petBean.getPetBeanName());
 
 
         setDateOfBirth(petBean);
 
         type.setText(
-                switch (petBean.getType()) {
+                switch (petBean.getPetBeanType()) {
                     case 1 -> "Cat";
                     default -> "Dog";
                 }
         );
         gender.setText(
-                switch (petBean.getGender()) {
+                switch (petBean.getPetBeanGender()) {
                     case 1 -> "Female";
                     default -> "Male";
                 }
@@ -236,7 +236,7 @@ public class GUIPetInfoController implements Observer {
     }
 
     private void verifyNoDog(PetBean petBean) {
-        if (petBean.getType() != 0) {
+        if (petBean.getPetBeanType() != 0) {
             petInfoVBox.getChildren().removeAll(sizeBox, dogEducation);
         }
         else {
@@ -258,7 +258,7 @@ public class GUIPetInfoController implements Observer {
     }
 
     private void verifyNoCat(PetBean petBean) {
-        if (petBean.getType() != 1){
+        if (petBean.getPetBeanType() != 1){
             petInfoVBox.getChildren().removeAll(testFiv, testFelv);
         }
         else {
@@ -273,18 +273,18 @@ public class GUIPetInfoController implements Observer {
     }
 
     private void setDateOfBirth(PetBean petBean) {
-        if (petBean.getDayOfBirth() == 0)  // day of birth not known
+        if (petBean.getPetBeanBirthDay() == 0)  // day of birth not known
             dateBox.getChildren().removeAll(dayOfBirth, slash1);
         else
-            dayOfBirth.setText(String.valueOf(petBean.getDayOfBirth()));
+            dayOfBirth.setText(String.valueOf(petBean.getPetBeanBirthDay()));
 
-        if (petBean.getMonthOfBirth() == 0)  // month of birth not known
+        if (petBean.getPetBeanBirthMonth() == 0)  // month of birth not known
             dateBox.getChildren().removeAll(monthOfBirth, slash2);
         else
-            monthOfBirth.setText(String.valueOf(petBean.getMonthOfBirth()));
+            monthOfBirth.setText(String.valueOf(petBean.getPetBeanBirthMonth()));
 
         // year of birth is mandatory information on pet registration
-        yearOfBirth.setText(String.valueOf(petBean.getYearOfBirth()));
+        yearOfBirth.setText(String.valueOf(petBean.getPetBeanBirthYear()));
     }
 
     private void setCompatibility() {

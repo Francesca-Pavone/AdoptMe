@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Year;
 
 public class GUIPetItemController {
 
@@ -50,9 +49,9 @@ public class GUIPetItemController {
 
     public void setPetData(PetBean pet) throws IOException {
         this.petBean = pet;
-        petName.setText(petBean.getName());
+        petName.setText(petBean.getPetBeanName());
         petGender.setText(
-                switch (petBean.getGender()) {
+                switch (petBean.getPetBeanGender()) {
                     case 0 -> "Male";
                     default -> "Female";
                 });
@@ -63,9 +62,9 @@ public class GUIPetItemController {
 
         Image image;
         try {
-            if (petBean.getPetImage() == null)
+            if (petBean.getPetBeanImage() == null)
                 throw new ImageNotFoundException();
-            InputStream inputStream = new FileInputStream(petBean.getPetImage());
+            InputStream inputStream = new FileInputStream(petBean.getPetBeanImage());
             image = new Image(inputStream);
         }catch (ImageNotFoundException e){
             image = new Image(Main.class.getResource("image/default_photo.png").openStream());

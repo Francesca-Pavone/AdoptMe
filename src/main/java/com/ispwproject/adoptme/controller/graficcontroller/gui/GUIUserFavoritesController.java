@@ -40,7 +40,7 @@ public class GUIUserFavoritesController implements Observer {
 
     @Override
     public void update(Object object) {
-        if(((PetBean) object).isFav()) {
+        if(((PetBean) object).isPetBeanFav()) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PetItem.fxml"));
                 Pane pane = fxmlLoader.load();

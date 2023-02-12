@@ -27,15 +27,15 @@ public class QuestionnaireResultController {
         for (Map.Entry<PetModel, Integer> entry : hashMap.entrySet()) {
             PetModel petModel = entry.getKey();
             PetBean petBean = new PetBean();
-            petBean.setPetId(petModel.getPetId());
-            petBean.setShelterId(hashMap.get(petModel));
-            petBean.setPetImage(petModel.getPetImage());
-            petBean.setName(petModel.getName());
-            petBean.setType(petModel.getType());
-            petBean.setGender(petModel.getGender());
-            petBean.setYearOfBirth(petModel.getYearOfBirth());
-            petBean.setMonthOfBirth(petModel.getMonthOfBirth());
-            petBean.setDayOfBirth(petModel.getDayOfBirth());
+            petBean.setPetBeanId(petModel.getPetId());
+            petBean.setPetBeanShelter(hashMap.get(petModel));
+            petBean.setPetBeanImage(petModel.getPetImage());
+            petBean.setPetBeanName(petModel.getName());
+            petBean.setPetBeanType(petModel.getType());
+            petBean.setPetBeanGender(petModel.getGender());
+            petBean.setPetBeanBirthYear(petModel.getYearOfBirth());
+            petBean.setPetBeanBirthMonth(petModel.getMonthOfBirth());
+            petBean.setPetBeanBirthDay(petModel.getDayOfBirth());
             petList.add(petBean);
         }
         return petList;

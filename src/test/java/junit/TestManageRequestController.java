@@ -31,8 +31,8 @@ class TestManageRequestController {
             loginController.completeUserLogin(loginBean);
 
             PetBean petBean = new PetBean();
-            petBean.setPetId(1);
-            petBean.setShelterId(1);
+            petBean.setPetBeanId(1);
+            petBean.setPetBeanShelter(1);
 
             RequestBean requestBean = new RequestBean("17-03-2023", "16:00");
 

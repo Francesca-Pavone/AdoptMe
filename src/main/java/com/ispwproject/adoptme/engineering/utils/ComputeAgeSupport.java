@@ -9,7 +9,7 @@ public class ComputeAgeSupport {
         //ignore
     }
     public static String computeAge(PetBean petBean) {
-        int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
+        int yearDiff = Year.now().getValue() - petBean.getPetBeanBirthYear();
         if (yearDiff <= 1)
             return "Puppy";
         else if (yearDiff <= 3)

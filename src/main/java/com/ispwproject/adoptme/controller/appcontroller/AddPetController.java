@@ -26,13 +26,13 @@ public class AddPetController {
     public int addNewPet(Observer observer) throws PetDateOfBirthException {
         int petId = -1;
 
-        ShelterModel shelter = new ShelterModel(petBean.getShelterId());
+        ShelterModel shelter = new ShelterModel(petBean.getPetBeanShelter());
         ShelterPetsList shelterPetsList = new ShelterPetsList(observer, shelter);
 
-        if (petBean.getType() == 0) {
+        if (petBean.getPetBeanType() == 0) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
+            DogModel dogModel = new DogModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
             setCommonInfo(dogModel);
 
             try {
@@ -43,10 +43,10 @@ public class AddPetController {
             dogModel.setPetId(petId);
             shelterPetsList.addPet(dogModel);
 
-        } else if (petBean.getType() == 1) {
+        } else if (petBean.getPetBeanType() == 1) {
             PetCompatibility petCompatibility = setCompatibility();
 
-            CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
+            CatModel catModel = new CatModel(petBean.getPetBeanName(), petBean.getPetBeanImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
             setCommonInfo(catModel);
 
             try {
@@ -68,11 +68,11 @@ public class AddPetController {
     }
 
     private void setCommonInfo(PetModel petModel) throws PetDateOfBirthException {
-        if (LocalDate.now().getYear() < petBean.getYearOfBirth())
+        if (LocalDate.now().getYear() < petBean.getPetBeanBirthYear())
             throw new PetDateOfBirthException("you have inserted a future year");
-        else if (LocalDate.now().getYear() == petBean.getYearOfBirth() && LocalDate.now().getMonthValue() < petBean.getMonthOfBirth())
+        else if (LocalDate.now().getYear() == petBean.getPetBeanBirthYear() && LocalDate.now().getMonthValue() < petBean.getPetBeanBirthMonth())
             throw new PetDateOfBirthException("you have insert a future month");
-        else if (petBean.getDayOfBirth() != 0 && LocalDate.now().isBefore(LocalDate.of(petBean.getYearOfBirth(), petBean.getMonthOfBirth(), petBean.getDayOfBirth()))) {
+        else if (petBean.getPetBeanBirthDay() != 0 && LocalDate.now().isBefore(LocalDate.of(petBean.getPetBeanBirthYear(), petBean.getPetBeanBirthMonth(), petBean.getPetBeanBirthDay()))) {
             throw new PetDateOfBirthException("You have inserted a future date");
         }
         SetPetInfoSupport.setPetModel(petModel, petBean, petInformationBean);

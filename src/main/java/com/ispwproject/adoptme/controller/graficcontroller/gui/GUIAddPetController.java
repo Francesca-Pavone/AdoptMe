@@ -177,17 +177,17 @@ public class GUIAddPetController {
         }
 
         PetBean petBean = new PetBean();
-        petBean.setGender((switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
+        petBean.setPetBeanGender((switch (((RadioButton) genderTogG.getSelectedToggle()).getText()) {
             case "Female" -> 1;
             default -> 0;   //case "Male"
         }));
-        petBean.setShelterId(shelterBean.getShelterId());
-        petBean.setPetImage(file);
-        petBean.setDayOfBirth(day);
-        petBean.setMonthOfBirth(month);
-        petBean.setYearOfBirth(year);
-        petBean.setName(petNameTxtF.getText());
-        petBean.setType(petType);
+        petBean.setPetBeanShelter(shelterBean.getShelterId());
+        petBean.setPetBeanImage(file);
+        petBean.setPetBeanBirthDay(day);
+        petBean.setPetBeanBirthMonth(month);
+        petBean.setPetBeanBirthYear(year);
+        petBean.setPetBeanName(petNameTxtF.getText());
+        petBean.setPetBeanType(petType);
 
         PetInformationBean petInformationBean;
         PetInformationBeanBuilder petInformationBeanBuilder = PetInformationBeanBuilder.newPetBean()

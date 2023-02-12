@@ -23,7 +23,7 @@ public class CLIQuestionnaireResultController {
         for(PetBean petBean: petList) {
             String gender = ComputeGenderSupport.computeGender(petBean);
             String age = ComputeAgeSupport.computeAge(petBean);
-            this.cliQuestionnaireResultView.printPet((petBean).getName(), gender, age, i);
+            this.cliQuestionnaireResultView.printPet((petBean).getPetBeanName(), gender, age, i);
             i++;
         }
         this.cliQuestionnaireResultView.printCommands();

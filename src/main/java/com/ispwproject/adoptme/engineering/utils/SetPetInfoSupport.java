@@ -10,10 +10,10 @@ public class SetPetInfoSupport {
     }
 
     public static void setPetModel(PetModel petModel, PetBean petBean, PetInformationBean petInformationBean) {
-        petModel.setYearOfBirth(petBean.getYearOfBirth());
-        petModel.setMonthOfBirth(petBean.getMonthOfBirth());
-        petModel.setDayOfBirth(petBean.getDayOfBirth());
-        petModel.setGender(petBean.getGender());
+        petModel.setYearOfBirth(petBean.getPetBeanBirthYear());
+        petModel.setMonthOfBirth(petBean.getPetBeanBirthMonth());
+        petModel.setDayOfBirth(petBean.getPetBeanBirthDay());
+        petModel.setGender(petBean.getPetBeanGender());
         petModel.setCoatLength(petInformationBean.getCoatLength());
         petModel.setVaccinated(petInformationBean.isVaccinated());
         petModel.setMicrochipped(petInformationBean.isMicrochipped());

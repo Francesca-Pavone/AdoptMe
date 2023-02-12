@@ -21,91 +21,91 @@ public class PetBean {
     }
 
     public PetBean(int petId, int shelterId, File petImage, String name, int type, int gender) {
-        setPetId(petId);
-        setShelterId(shelterId);
-        setPetImage(petImage);
-        setName(name);
-        setType(type);
-        setGender(gender);
+        setPetBeanId(petId);
+        setPetBeanShelter(shelterId);
+        setPetBeanImage(petImage);
+        setPetBeanName(name);
+        setPetBeanType(type);
+        setPetBeanGender(gender);
     }
 
-    public int getPetId() {
+    public int getPetBeanId() {
         return petId;
     }
 
-    public void setPetId(int petId) {
+    public void setPetBeanId(int petId) {
         this.petId = petId;
     }
 
-    public int getShelterId() {
+    public int getPetBeanShelter() {
         return shelterId;
     }
 
-    public void setShelterId(int shelterId) {
+    public void setPetBeanShelter(int shelterId) {
         this.shelterId = shelterId;
     }
 
-    public File getPetImage() {
+    public File getPetBeanImage() {
         return petImage;
     }
 
-    public void setPetImage(File petImage) {
+    public void setPetBeanImage(File petImage) {
         this.petImage = petImage;
     }
 
-    public String getName() {
+    public String getPetBeanName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setPetBeanName(String name) {
         this.name = name;
     }
 
-    public int getType() {
+    public int getPetBeanType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setPetBeanType(int type) {
         this.type = type;
     }
 
-    public int getYearOfBirth() {
+    public int getPetBeanBirthYear() {
         return yearOfBirth;
     }
 
-    public void setYearOfBirth(int yearOfBirth) {
+    public void setPetBeanBirthYear(int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
     }
 
-    public int getMonthOfBirth() {
+    public int getPetBeanBirthMonth() {
         return monthOfBirth;
     }
 
-    public void setMonthOfBirth(int monthOfBirth) {
+    public void setPetBeanBirthMonth(int monthOfBirth) {
         this.monthOfBirth = monthOfBirth;
     }
 
-    public int getDayOfBirth() {
+    public int getPetBeanBirthDay() {
         return dayOfBirth;
     }
 
-    public void setDayOfBirth(int dayOfBirth) {
+    public void setPetBeanBirthDay(int dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
 
-    public int getGender() {
+    public int getPetBeanGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setPetBeanGender(int gender) {
         this.gender = gender;
     }
 
-    public boolean isFav() {
+    public boolean isPetBeanFav() {
         return fav;
     }
 
-    public void setFav(boolean getFav) {
+    public void setPetBeanFav(boolean getFav) {
         this.fav = getFav;
     }
 }

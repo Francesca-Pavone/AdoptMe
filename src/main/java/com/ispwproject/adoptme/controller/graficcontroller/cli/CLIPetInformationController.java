@@ -48,25 +48,25 @@ public class CLIPetInformationController implements CLIGraficController, Observe
 
         String dateOfBirth;
 
-        if (petBean.getMonthOfBirth() != 0) {  // month of birth not known
-            if (petBean.getDayOfBirth() != 0)  // day of birth not known
-                dateOfBirth = "\tDate of birth: " + petBean.getDayOfBirth() + " / " + petBean.getMonthOfBirth() + " / " + petBean.getYearOfBirth();
+        if (petBean.getPetBeanBirthMonth() != 0) {  // month of birth not known
+            if (petBean.getPetBeanBirthDay() != 0)  // day of birth not known
+                dateOfBirth = "\tDate of birth: " + petBean.getPetBeanBirthDay() + " / " + petBean.getPetBeanBirthMonth() + " / " + petBean.getPetBeanBirthYear();
             else
-                dateOfBirth = "\tDate of birth: " + petBean.getMonthOfBirth() + " / " + petBean.getYearOfBirth();
+                dateOfBirth = "\tDate of birth: " + petBean.getPetBeanBirthMonth() + " / " + petBean.getPetBeanBirthYear();
         }
         else {
             // year of birth is mandatory information on pet registration
-            dateOfBirth = "\tYear of birth: " + petBean.getYearOfBirth();
+            dateOfBirth = "\tYear of birth: " + petBean.getPetBeanBirthYear();
         }
 
 
         String type = String.valueOf(
-                switch (petBean.getType()) {
+                switch (petBean.getPetBeanType()) {
                     case 1 -> "Cat";
                     default -> "Dog";
                 });
         String gender = String.valueOf(
-                switch (petBean.getGender()) {
+                switch (petBean.getPetBeanGender()) {
                     case 1 -> "Female";
                     default -> "Male";
                 }
@@ -83,7 +83,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         String testFiv = "";
         String testFelv = "";
         // check if it's a dog
-        if (petBean.getType() == 0) {
+        if (petBean.getPetBeanType() == 0) {
             dogSize = String.valueOf(
                     switch (petInformationBean.getSize()) {
                         case 1 -> "Medium";
@@ -109,9 +109,9 @@ public class CLIPetInformationController implements CLIGraficController, Observe
         String compatibility = getCompatibility();
 
         CLIPetInformationView cliPetInformationView = new CLIPetInformationView(this);
-        cliPetInformationView.showTitle(petBean.getName());
+        cliPetInformationView.showTitle(petBean.getPetBeanName());
         cliPetInformationView.showData(dateOfBirth, type, gender, coatLenght, dogSize, generalInfo, compatibility);
-        cliPetInformationView.showCommand(petBean.isFav());
+        cliPetInformationView.showCommand(petBean.isPetBeanFav());
     }
 
 
@@ -142,7 +142,7 @@ public class CLIPetInformationController implements CLIGraficController, Observe
             }
         } catch (CommandNotFoundException | NoAccountException e) {
             ShowExceptionSupport.showExceptionCLI(e.getMessage());
-            this.view.showCommand(petBean.isFav());
+            this.view.showCommand(petBean.isPetBeanFav());
         } catch (FavoriteListEmptyException e) {
             e.printStackTrace();
         }
@@ -245,9 +245,9 @@ public class CLIPetInformationController implements CLIGraficController, Observe
     @Override
     public void update(Object object){
         if(!fav)
-            PrintSupport.printMessage(petBean.getName() + " has been added to your favorite pets!");
+            PrintSupport.printMessage(petBean.getPetBeanName() + " has been added to your favorite pets!");
         else
-            PrintSupport.printMessage(petBean.getName() + " has been removed from your favorite pets");
+            PrintSupport.printMessage(petBean.getPetBeanName() + " has been removed from your favorite pets");
     }
 
     @Override

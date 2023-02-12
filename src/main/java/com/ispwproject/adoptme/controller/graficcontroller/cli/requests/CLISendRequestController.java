@@ -30,7 +30,7 @@ public class CLISendRequestController implements CLIGraficController, Observer {
     @Override
     public void start() {
         UserBean user = Session.getCurrentSession().getUserBean();
-        this.requestBean = new RequestBean(petBean.getName(), petBean.getPetId(), petBean.getShelterId(), user.getName(), user.getUserId());
+        this.requestBean = new RequestBean(petBean.getPetBeanName(), petBean.getPetBeanId(), petBean.getPetBeanShelter(), user.getName(), user.getUserId());
         this.view.showSendRequestForm(requestBean.getUserName(), requestBean.getPetName(), this);
     }
 

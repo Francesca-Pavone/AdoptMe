@@ -26,24 +26,24 @@ public class CLIAddPetController implements CLIGraficController {
     }
 
     public void setMainInfo(String name, String date, String year, String month, int type, int gender){
-        petBean.setName(name);
+        petBean.setPetBeanName(name);
         if (date.equals("")){
-            petBean.setYearOfBirth(Integer.parseInt(year));
+            petBean.setPetBeanBirthYear(Integer.parseInt(year));
             if (!month.equals(""))
-                petBean.setMonthOfBirth(Integer.parseInt(month));
+                petBean.setPetBeanBirthMonth(Integer.parseInt(month));
             else
-                petBean.setMonthOfBirth(0);
-            petBean.setDayOfBirth(0);
+                petBean.setPetBeanBirthMonth(0);
+            petBean.setPetBeanBirthDay(0);
         }
         else {
             String[] dateValues = date.split("-");
-            petBean.setDayOfBirth(Integer.parseInt(dateValues[0]));
-            petBean.setMonthOfBirth(Integer.parseInt(dateValues[1]));
-            petBean.setYearOfBirth(Integer.parseInt(dateValues[2]));
+            petBean.setPetBeanBirthDay(Integer.parseInt(dateValues[0]));
+            petBean.setPetBeanBirthMonth(Integer.parseInt(dateValues[1]));
+            petBean.setPetBeanBirthYear(Integer.parseInt(dateValues[2]));
         }
-        petBean.setGender(gender);
-        petBean.setType(type);
-        petBean.setShelterId(Session.getCurrentSession().getShelterBean().getShelterId());
+        petBean.setPetBeanGender(gender);
+        petBean.setPetBeanType(type);
+        petBean.setPetBeanShelter(Session.getCurrentSession().getShelterBean().getShelterId());
     }
 
     public void setGeneralInfo(int coatLength, String vaccinated, String microchipped, String dewormed, String sterilized, String disability, String disabilityType){

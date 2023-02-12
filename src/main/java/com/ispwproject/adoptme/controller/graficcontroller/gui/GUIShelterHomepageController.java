@@ -62,7 +62,7 @@ public class GUIShelterHomepageController  implements Observer {
             row++;
         }
         column = InitializeSupport.initPetItem(object, grid, currentPage, column, row);
-        petsNumber.setText(String.valueOf(((PetBean)object).getPetId()));
+        petsNumber.setText(String.valueOf(((PetBean)object).getPetBeanId()));
     }
 
     @Override

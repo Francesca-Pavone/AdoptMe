@@ -14,10 +14,10 @@ public class PetInfoController {
 
     public PetInformationBean getPetInfo(PetBean petBean, ShelterBean shelterBean){
         try {
-            ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+            ShelterModel shelterModel = ShelterDAO.retrieveShelterById(petBean.getPetBeanShelter());
 
-            if (petBean.getType() == 0) {
-                DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetId(), petBean.getShelterId());
+            if (petBean.getPetBeanType() == 0) {
+                DogModel dogModel = DogDAO.retrieveDogById(petBean.getPetBeanId(), petBean.getPetBeanShelter());
 
                 //vado a settare nel bean le nuove info del pet che mi servono
                 setGeneralInfo(petBean, dogModel.getYearOfBirth(), dogModel.getMonthOfBirth(), dogModel.getDayOfBirth());
@@ -25,18 +25,18 @@ public class PetInfoController {
                 setCompatibility(dogModel.getPetCompatibility());
                 petInformationBean.setDogEducation(dogModel.isProgramEducation());
                 petInformationBean.setSize(dogModel.getSize());
-                petBean.setFav(this.checkFavorite(petBean));
+                petBean.setPetBeanFav(this.checkFavorite(petBean));
 
             }
             else {
-                CatModel catModel = CatDAO.retrieveCatById(petBean.getPetId(), petBean.getShelterId());
+                CatModel catModel = CatDAO.retrieveCatById(petBean.getPetBeanId(), petBean.getPetBeanShelter());
 
                 setGeneralInfo(petBean, catModel.getYearOfBirth(), catModel.getMonthOfBirth(), catModel.getDayOfBirth());
                 setMedicalInfo(catModel.isVaccinated(), catModel.isMicrochipped(), catModel.isDewormed(), catModel.isSterilized(), catModel.isDisability(), catModel.getDisabilityType(), catModel.getCoatLength());
                 setCompatibility(catModel.getPetCompatibility());
                 petInformationBean.setTestFiv(catModel.isTestFiv());
                 petInformationBean.setTestFelv(catModel.isTestFelv());
-                petBean.setFav(this.checkFavorite(petBean));
+                petBean.setPetBeanFav(this.checkFavorite(petBean));
             }
             shelterBean.setShelterId(shelterModel.getId());
             shelterBean.setName(shelterModel.getShelterName());
@@ -55,14 +55,14 @@ public class PetInfoController {
     public boolean checkFavorite(PetBean petBean) {
         boolean fav = false;
         if(Session.getCurrentSession().getUserBean() != null)
-            fav = FavoritesDAO.checkFav(petBean.getPetId(), petBean.getShelterId(), Session.getCurrentSession().getUserBean().getUserId());
+            fav = FavoritesDAO.checkFav(petBean.getPetBeanId(), petBean.getPetBeanShelter(), Session.getCurrentSession().getUserBean().getUserId());
         return fav;
     }
 
     private void setGeneralInfo(PetBean petBean, int yearOfBirth, int monthOfBirth, int dayOfBirth) {
-        petBean.setYearOfBirth(yearOfBirth);
-        petBean.setMonthOfBirth(monthOfBirth);
-        petBean.setDayOfBirth(dayOfBirth);
+        petBean.setPetBeanBirthYear(yearOfBirth);
+        petBean.setPetBeanBirthMonth(monthOfBirth);
+        petBean.setPetBeanBirthDay(dayOfBirth);
     }
 
     private void setMedicalInfo(boolean vaccinated, boolean microchipped, boolean dewormed, boolean sterilized, boolean disability, String disabilityType, int coatLenght){

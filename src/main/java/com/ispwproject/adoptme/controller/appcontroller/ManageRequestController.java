@@ -20,7 +20,7 @@ public class ManageRequestController {
         PetModel petModel;
         ShelterModel shelterModel;
         try {
-            shelterModel = ShelterDAO.retrieveShelterById(petBean.getShelterId());
+            shelterModel = ShelterDAO.retrieveShelterById(petBean.getPetBeanShelter());
         }catch (NotFoundException e) {
             throw new NotFoundException("during sending request process");
         }
@@ -30,15 +30,15 @@ public class ManageRequestController {
 
         RequestModel requestModel = new RequestModel();
 
-        if (petBean.getType() == 0){
+        if (petBean.getPetBeanType() == 0){
             //DOG
             petModel = new DogModel();
         }else {
             //CAT
             petModel = new CatModel();
         }
-        petModel.setPetId(petBean.getPetId());
-        petModel.setName(petBean.getName());
+        petModel.setPetId(petBean.getPetBeanId());
+        petModel.setName(petBean.getPetBeanName());
 
         requestModel.setPet(petModel);
         requestModel.setShelter(shelterModel);

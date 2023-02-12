@@ -29,9 +29,9 @@ public class ShelterPetsList extends Subject {
     public void addPet(PetModel petModel){
         this.petList.add(petModel);
         PetBean petBean = new PetBean(petModel.getPetId(), shelter.getId(), petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
-        petBean.setDayOfBirth(petModel.getDayOfBirth());
-        petBean.setMonthOfBirth(petModel.getMonthOfBirth());
-        petBean.setYearOfBirth(petModel.getYearOfBirth());
+        petBean.setPetBeanBirthDay(petModel.getDayOfBirth());
+        petBean.setPetBeanBirthMonth(petModel.getMonthOfBirth());
+        petBean.setPetBeanBirthYear(petModel.getYearOfBirth());
 
         this.notifyObservers(petBean);
     }

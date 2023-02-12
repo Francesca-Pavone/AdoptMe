@@ -26,12 +26,12 @@ class TestAddPetController {
             loginController.completeShelterLogin(loginBean);
 
             PetBean petBean = new PetBean();
-            petBean.setName("Romi");
-            petBean.setYearOfBirth(2019);
-            petBean.setMonthOfBirth(1);
-            petBean.setDayOfBirth(16);
-            petBean.setGender(0);
-            petBean.setType(0);
+            petBean.setPetBeanName("Romi");
+            petBean.setPetBeanBirthYear(2019);
+            petBean.setPetBeanBirthMonth(1);
+            petBean.setPetBeanBirthDay(16);
+            petBean.setPetBeanGender(0);
+            petBean.setPetBeanType(0);
             PetInformationBean petInformationBean = new PetInformationBean();
 
             AddPetController addPetController = new AddPetController(petBean, petInformationBean);

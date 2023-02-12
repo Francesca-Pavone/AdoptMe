@@ -30,15 +30,15 @@ class TestAddToFavoritesController {
         int ret = 0;
 
         PetBean petBean = new PetBean();
-        petBean.setPetId(2);
-        petBean.setShelterId(1);
+        petBean.setPetBeanId(2);
+        petBean.setPetBeanShelter(1);
         PetInformationBean petInformationBean = new PetInformationBean();
 
         AddToFavoritesController addToFavoritesController = new AddToFavoritesController(petBean, petInformationBean);
         addToFavoritesController.removePet(userBean, null, null);
         addToFavoritesController.addPet(userBean, null, null);
 
-        if(FavoritesDAO.checkFav(petBean.getPetId(), petBean.getShelterId(), userBean.getUserId()))
+        if(FavoritesDAO.checkFav(petBean.getPetBeanId(), petBean.getPetBeanShelter(), userBean.getUserId()))
             ret = 1;
 
         assertEquals(1, ret, 0); //il test ha successo perchè, se il pet era già tra i preferiti

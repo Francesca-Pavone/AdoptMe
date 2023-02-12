@@ -43,7 +43,7 @@ public class CLIUserFavoritesController implements Observer {
         String age;
 
         for (PetBean petBean: petBeanList) {
-            int yearDiff = Year.now().getValue() - petBean.getYearOfBirth();
+            int yearDiff = Year.now().getValue() - petBean.getPetBeanBirthYear();
 
             if (yearDiff <= 1)
                 age = "Puppy";
@@ -53,11 +53,11 @@ public class CLIUserFavoritesController implements Observer {
                 age = "Adult";
             else
                 age = "Senior";
-            gender = (switch (petBean.getGender()) {
+            gender = (switch (petBean.getPetBeanGender()) {
                 case 1 -> "Female";
                 default -> "Male";
             });
-            this.cliUserFavoritesView.printPet(petBean.getName(), gender, age, i);
+            this.cliUserFavoritesView.printPet(petBean.getPetBeanName(), gender, age, i);
             i++;
         }
         this.cliUserFavoritesView.printCommands();

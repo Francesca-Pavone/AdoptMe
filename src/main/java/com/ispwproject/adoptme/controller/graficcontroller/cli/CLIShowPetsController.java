@@ -51,7 +51,7 @@ public class CLIShowPetsController implements CLIGraficController, Observer {
         for(PetBean petBean: this.petBeanList) {
             String gender = ComputeGenderSupport.computeGender(petBean);
             String age = ComputeAgeSupport.computeAge(petBean);
-            this.view.showPetInfo((petBean).getName(), gender, age, i);
+            this.view.showPetInfo((petBean).getPetBeanName(), gender, age, i);
             i++;
         }
         this.view.showCommands();

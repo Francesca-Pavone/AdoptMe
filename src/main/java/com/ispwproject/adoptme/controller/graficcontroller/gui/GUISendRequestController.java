@@ -49,7 +49,7 @@ public class GUISendRequestController implements Observer {
     public void setData(PetBean pet, ShelterBean shelterBean) {
         this.shelterBean = shelterBean;
         this.petBean = pet;
-        nameReq.setText(petBean.getName());
+        nameReq.setText(petBean.getPetBeanName());
         shelterBtn.setText(shelterBean.getName());
         if (Session.getCurrentSession().getUserBean() == null) { // accesso effettuato senza autenticazione
             datePicker.setDisable(true);

@@ -34,10 +34,10 @@ public class ShowUserFavoritesController {
             PetModel petModel = entry.getKey();
             shelterId = hashMap.get(petModel);
             PetBean petBean = new PetBean(petModel.getPetId(), shelterId, petModel.getPetImage(), petModel.getName(), petModel.getType(), petModel.getGender());
-            petBean.setFav(true);
-            petBean.setYearOfBirth(petModel.getYearOfBirth());
-            petBean.setMonthOfBirth(petModel.getMonthOfBirth());
-            petBean.setDayOfBirth(petModel.getDayOfBirth());
+            petBean.setPetBeanFav(true);
+            petBean.setPetBeanBirthYear(petModel.getYearOfBirth());
+            petBean.setPetBeanBirthMonth(petModel.getMonthOfBirth());
+            petBean.setPetBeanBirthDay(petModel.getDayOfBirth());
             petBeanList.add(petBean);
         }
 
