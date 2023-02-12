@@ -60,22 +60,16 @@ public class ManageRequestController {
     }
 
     public void deleteRequest(RequestBean request, Object object) throws NotFoundException {
-        UserDAO userDAO;
-        if (LocalTime.now().getMinute()%2 == 0) {
-            userDAO = new UserDAOJDBC();
-        } else {
-            userDAO = new UserDAOCSV();
-        }
+        UserDAO userDAO = getUserDAO();
+        UserModel userModel = userDAO.retrieveUserById(request.getUserId());
 
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(request.getShelterId());
-        UserModel userModel = userDAO.retrieveUserById(request.getUserId());
 
         request.setStatus(3);
         request.notifyObservers(request, object);
 
-        RequestModel requestModel = new RequestModel(request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
-        requestModel.setShelter(shelterModel);
+        RequestModel requestModel = new RequestModel(request.getId(), petModel, shelterModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
 
         if (Session.getCurrentSession().getUserBean() != null)
             RequestDAO.deleteRequest(requestModel.getId());
@@ -85,42 +79,31 @@ public class ManageRequestController {
     }
 
     public void acceptRequest(RequestBean request, Object object) throws NotFoundException {
-        UserDAO userDAO;
-        if (LocalTime.now().getMinute()%2 == 0) {
-            userDAO = new UserDAOJDBC();
-        } else {
-            userDAO = new UserDAOCSV();
-        }
+        UserDAO userDAO = getUserDAO();
+        UserModel userModel = userDAO.retrieveUserById(request.getUserId());
 
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(request.getShelterId());
-        UserModel userModel = userDAO.retrieveUserById(request.getUserId());
 
         request.setStatus(2);
         request.notifyObservers(request, object);
 
-        RequestModel requestModel = new RequestModel(request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
-        requestModel.setShelter(shelterModel);
+        RequestModel requestModel = new RequestModel(request.getId(), petModel, shelterModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
 
         RequestDAO.updateRequestStatus(requestModel);
     }
 
     public void updateRequest(RequestBean request, Object object) throws NotFoundException, PastDateException {
-        UserDAO userDAO;
-        if (LocalTime.now().getMinute()%2 == 0) {
-            userDAO = new UserDAOJDBC();
-        } else {
-            userDAO = new UserDAOCSV();
-        }
 
         LocalDate date = DateTimeSupport.fromStringToLocalDate(request.getDate());
         if (date.isBefore(LocalDate.now())){
             throw new PastDateException(request.getDate());
         }
+        UserDAO userDAO = getUserDAO();
+        UserModel userModel = userDAO.retrieveUserById(request.getUserId());
 
         PetModel petModel = PetDAO.retrievePetById(request.getPetId(), request.getShelterId());
         ShelterModel shelterModel = ShelterDAO.retrieveShelterById(request.getShelterId());
-        UserModel userModel = userDAO.retrieveUserById(request.getUserId());
 
         if (Session.getCurrentSession().getShelterBean() != null) {
             request.setStatus(1);
@@ -130,9 +113,18 @@ public class ManageRequestController {
         }
         request.notifyObservers(request, object);
 
-        RequestModel requestModel = new RequestModel(request.getId(), petModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
-        requestModel.setShelter(shelterModel);
+        RequestModel requestModel = new RequestModel(request.getId(), petModel, shelterModel, userModel, DateTimeSupport.fromStringToLocalDate(request.getDate()), DateTimeSupport.fromStringToLocalTime(request.getTime()), request.getStatus());
 
         RequestDAO.modifyRequest(requestModel);
+    }
+
+    private static UserDAO getUserDAO() {
+        UserDAO userDAO;
+        if (LocalTime.now().getMinute()%2 == 0) {
+            userDAO = new UserDAOJDBC();
+        } else {
+            userDAO = new UserDAOCSV();
+        }
+        return userDAO;
     }
 }
