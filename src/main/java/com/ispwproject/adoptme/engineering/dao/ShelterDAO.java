@@ -12,7 +12,6 @@ import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.engineering.dao.queries.SimpleQueries;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
