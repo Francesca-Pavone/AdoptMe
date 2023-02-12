@@ -1,11 +1,9 @@
 package com.ispwproject.adoptme.controller.graficcontroller.gui;
 
-import com.ispwproject.adoptme.Main;
 import com.ispwproject.adoptme.engineering.bean.RequestBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 import com.ispwproject.adoptme.engineering.utils.InitPageSupport;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
@@ -28,13 +26,7 @@ public class GUIUserAppointmentsController implements Observer {
     @Override
     public void update(Object object) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("RequestItem.fxml"));
-            Pane pane = fxmlLoader.load();
-
-            GUIRequestItemController requestItemController = fxmlLoader.getController();
-            requestItemController.setPane(pane);
-            requestItemController.setRequestData((RequestBean) object);
-
+            Pane pane = InitPageSupport.initRequestItem(object);
             switch (((RequestBean) object).getStatus()) {
                 case 0 -> sentReqList.getChildren().add(pane);
                 case 1 -> pendingReqList.getChildren().add(pane);
