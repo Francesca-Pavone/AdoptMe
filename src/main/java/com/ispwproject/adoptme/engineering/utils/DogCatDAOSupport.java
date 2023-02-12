@@ -2,6 +2,7 @@ package com.ispwproject.adoptme.engineering.utils;
 
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
 import com.ispwproject.adoptme.model.PetCompatibility;
+import com.ispwproject.adoptme.model.PetModel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,7 +36,7 @@ public class DogCatDAOSupport {
         return petCompatibility;
     }
 
-    public static void executePSCompatibility(int shelterId, int catId, PetCompatibility petCompatibility) throws SQLException {
+    public static void preparePetCompatibility(int shelterId, int catId, PetCompatibility petCompatibility) throws SQLException {
 
         PreparedStatement preparedStatement1 = ConnectionDB.insertPetCompatibility();
         preparedStatement1.setInt(1, catId);
@@ -53,7 +54,7 @@ public class DogCatDAOSupport {
     }
 
 
-    public static void setMainPetInfo(PreparedStatement preparedStatement, int petId, int shelterId, String name, File petImage, int gender, int coatLength) throws SQLException, FileNotFoundException {
+    public static void preparePetInfo(PreparedStatement preparedStatement, int petId, int shelterId, String name, File petImage, int gender, int coatLength) throws SQLException, FileNotFoundException {
         preparedStatement.setInt(1, petId);
         preparedStatement.setInt(2, shelterId);
         preparedStatement.setString(3, name);
@@ -69,9 +70,18 @@ public class DogCatDAOSupport {
         preparedStatement.setInt(9, coatLength);
     }
 
-    public static void setPetDate(PreparedStatement preparedStatement, int dayOfBirth, int monthOfBirth, int yearOfBirth) throws SQLException {
+    public static void preparePetDate(PreparedStatement preparedStatement, int dayOfBirth, int monthOfBirth, int yearOfBirth) throws SQLException {
         preparedStatement.setInt(6, dayOfBirth);
         preparedStatement.setInt(7, monthOfBirth);
         preparedStatement.setInt(8, yearOfBirth);
+    }
+
+    public static void setPetMedicalInfo(ResultSet resultSet, PetModel petModel) throws SQLException {
+        petModel.setVaccinated(resultSet.getBoolean("vaccinated"));
+        petModel.setMicrochipped(resultSet.getBoolean("microchipped"));
+        petModel.setDewormed(resultSet.getBoolean("dewormed"));
+        petModel.setSterilized(resultSet.getBoolean("sterilized"));
+        petModel.setDisability(resultSet.getBoolean("disability"));
+        petModel.setDisabilityType(resultSet.getString("disabilityType"));
     }
 }

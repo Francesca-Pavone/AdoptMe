@@ -29,31 +29,17 @@ public class CatDAO {
             }
             resultSet.first();
             do{
-                int yearOfBirth = resultSet.getInt("yearOfBirth");
-                int monthOfBirth = resultSet.getInt("monthOfBirth");
-                int dayOfBirth = resultSet.getInt("dayOfBirth");
-
-                int coatLenght= resultSet.getInt("coatLenght");
-                boolean vaccinated = resultSet.getBoolean("vaccinated");
-                boolean microchipped = resultSet.getBoolean("microchipped");
-                boolean dewormed = resultSet.getBoolean("dewormed");
-                boolean sterilized = resultSet.getBoolean("sterilized");
-                boolean disability = resultSet.getBoolean("disability");
-                String disabilityType = resultSet.getString("disabilityType");
-                boolean testFiv = resultSet.getBoolean("testFiv");
-                boolean testFelv = resultSet.getBoolean("testFelv");
-
                 PetCompatibility petCompatibility = DogCatDAOSupport.retrievePetCompatibility(resultSet);
 
-                cat = new CatModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
-                cat.setVaccinated(vaccinated);
-                cat.setMicrochipped(microchipped);
-                cat.setDewormed(dewormed);
-                cat.setSterilized(sterilized);
-                cat.setDisability(disability);
-                cat.setDisabilityType(disabilityType);
-                cat.setTestFiv(testFiv);
-                cat.setTestFelv(testFelv);
+                cat = new CatModel(
+                        resultSet.getInt("yearOfBirth"),
+                        resultSet.getInt("monthOfBirth"),
+                        resultSet.getInt("dayOfBirth"),
+                        resultSet.getInt("coatLenght"),
+                        petCompatibility);
+                DogCatDAOSupport.setPetMedicalInfo(resultSet, cat);
+                cat.setTestFiv(resultSet.getBoolean("testFiv"));
+                cat.setTestFelv(resultSet.getBoolean("testFelv"));
             }
             while(resultSet.next());
             resultSet.close();
@@ -81,8 +67,8 @@ public class CatDAO {
             stmt.close();
 
             preparedStatement = ConnectionDB.insertCat();
-            DogCatDAOSupport.setMainPetInfo(preparedStatement, catId, shelterId, catModel.getName(), catModel.getPetImage(), catModel.getGender(), catModel.getCoatLength());
-            DogCatDAOSupport.setPetDate(preparedStatement, catModel.getDayOfBirth(), catModel.getMonthOfBirth(), catModel.getYearOfBirth());
+            DogCatDAOSupport.preparePetInfo(preparedStatement, catId, shelterId, catModel.getName(), catModel.getPetImage(), catModel.getGender(), catModel.getCoatLength());
+            DogCatDAOSupport.preparePetDate(preparedStatement, catModel.getDayOfBirth(), catModel.getMonthOfBirth(), catModel.getYearOfBirth());
             preparedStatement.setBoolean(10, catModel.isVaccinated());
             preparedStatement.setBoolean(11, catModel.isMicrochipped());
             preparedStatement.setBoolean(12, catModel.isDewormed());
@@ -92,7 +78,7 @@ public class CatDAO {
             preparedStatement.setBoolean(16, catModel.isDisability());
             preparedStatement.setString(17, catModel.getDisabilityType());
             preparedStatement.executeUpdate();
-            DogCatDAOSupport.executePSCompatibility(shelterId, catId, catModel.getPetCompatibility());
+            DogCatDAOSupport.preparePetCompatibility(shelterId, catId, catModel.getPetCompatibility());
 
         }
 

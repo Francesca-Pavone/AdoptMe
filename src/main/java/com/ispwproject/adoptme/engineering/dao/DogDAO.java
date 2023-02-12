@@ -28,31 +28,17 @@ public class DogDAO {
             }
             resultSet.first();
             do{
-                int yearOfBirth = resultSet.getInt("yearOfBirth");
-                int monthOfBirth = resultSet.getInt("monthOfBirth");
-                int dayOfBirth = resultSet.getInt("dayOfBirth");
-
-                int coatLenght= resultSet.getInt("coatLenght");
-                boolean vaccinated = resultSet.getBoolean("vaccinated");
-                boolean microchipped = resultSet.getBoolean("microchipped");
-                boolean dewormed = resultSet.getBoolean("dewormed");
-                boolean sterilized = resultSet.getBoolean("sterilized");
-                boolean disability = resultSet.getBoolean("disability");
-                String disabilityType = resultSet.getString("disabilityType");
-                boolean programEducation = resultSet.getBoolean("education");
-                int size = resultSet.getInt("size");
-
                 PetCompatibility petCompatibility = DogCatDAOSupport.retrievePetCompatibility(resultSet);
 
-                dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
-                dog.setVaccinated(vaccinated);
-                dog.setMicrochipped(microchipped);
-                dog.setDewormed(dewormed);
-                dog.setSterilized(sterilized);
-                dog.setDisability(disability);
-                dog.setDisabilityType(disabilityType);
-                dog.setProgramEducation(programEducation);
-                dog.setSize(size);
+                dog = new DogModel(
+                        resultSet.getInt("yearOfBirth"),
+                        resultSet.getInt("monthOfBirth"),
+                        resultSet.getInt("dayOfBirth"),
+                        resultSet.getInt("coatLenght"),
+                        petCompatibility);
+                DogCatDAOSupport.setPetMedicalInfo(resultSet, dog);
+                dog.setProgramEducation(resultSet.getBoolean("education"));
+                dog.setSize(resultSet.getInt("size"));
 
             }while(resultSet.next());
             resultSet.close();
@@ -82,8 +68,8 @@ public class DogDAO {
 
             //utilizzo i prepared statement per poter passare alla query il tipo di dato blob usato per le immagini
             preparedStatement = ConnectionDB.insertDog();
-            DogCatDAOSupport.setMainPetInfo(preparedStatement, dogId, shelterId, dogModel.getName(), dogModel.getPetImage(), dogModel.getGender(), dogModel.getCoatLength());
-            DogCatDAOSupport.setPetDate(preparedStatement, dogModel.getDayOfBirth(), dogModel.getMonthOfBirth(), dogModel.getYearOfBirth());
+            DogCatDAOSupport.preparePetInfo(preparedStatement, dogId, shelterId, dogModel.getName(), dogModel.getPetImage(), dogModel.getGender(), dogModel.getCoatLength());
+            DogCatDAOSupport.preparePetDate(preparedStatement, dogModel.getDayOfBirth(), dogModel.getMonthOfBirth(), dogModel.getYearOfBirth());
             preparedStatement.setInt(10, dogModel.getSize());
             preparedStatement.setBoolean(11, dogModel.isVaccinated());
             preparedStatement.setBoolean(12, dogModel.isMicrochipped());
@@ -93,7 +79,7 @@ public class DogDAO {
             preparedStatement.setString(16, dogModel.getDisabilityType());
             preparedStatement.setBoolean(17, dogModel.isProgramEducation());
             preparedStatement.executeUpdate();
-            DogCatDAOSupport.executePSCompatibility(shelterId, dogId, dogModel.getPetCompatibility());
+            DogCatDAOSupport.preparePetCompatibility(shelterId, dogId, dogModel.getPetCompatibility());
         }
 
         catch (SQLException | ConnectionDbException | FileNotFoundException e) {
