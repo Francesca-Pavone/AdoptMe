@@ -13,14 +13,6 @@ public class RequestModel {
     private LocalTime time;
     private int status; // 0 -> send  |  1 -> pending  |  2 -> accepted  | 3 -> rejected
 
-    public RequestModel(int id, PetModel pet, UserModel user, LocalDate date, LocalTime time, int status) {
-        this.id = id;
-        this.pet = pet;
-        this.user = user;
-        this.date = date;
-        this.time = time;
-        this.status = status;
-    }
 
     public RequestModel(int id, PetModel pet, ShelterModel shelter, UserModel user, LocalDate date, LocalTime time, int status) {
         this.id = id;
