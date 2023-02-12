@@ -13,6 +13,11 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 public class DogCatDAOSupport {
+
+    private DogCatDAOSupport() {
+        //private constructor
+    }
+
     public static PetCompatibility retrievePetCompatibility(ResultSet resultSet) throws SQLException {
         boolean maleDog = resultSet.getBoolean("maleDog");
         boolean femaleDog = resultSet.getBoolean("femaleDog");
