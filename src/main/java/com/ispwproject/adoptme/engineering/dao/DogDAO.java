@@ -3,6 +3,7 @@ package com.ispwproject.adoptme.engineering.dao;
 import com.ispwproject.adoptme.engineering.exception.ConnectionDbException;
 import com.ispwproject.adoptme.engineering.exception.NotFoundException;
 import com.ispwproject.adoptme.engineering.session.Session;
+import com.ispwproject.adoptme.engineering.utils.RetrievePetCompatibilitySupport;
 import com.ispwproject.adoptme.model.DogModel;
 import com.ispwproject.adoptme.model.PetCompatibility;
 import com.ispwproject.adoptme.engineering.connection.ConnectionDB;
@@ -46,21 +47,10 @@ public class DogDAO {
                 boolean sterilized = resultSet.getBoolean("sterilized");
                 boolean disability = resultSet.getBoolean("disability");
                 String disabilityType = resultSet.getString("disabilityType");
-                boolean maleDog = resultSet.getBoolean("maleDog");
-                boolean femaleDog = resultSet.getBoolean("femaleDog");
-                boolean maleCat = resultSet.getBoolean("maleCat");
-                boolean femaleCat = resultSet.getBoolean("femaleCat");
-                boolean children = resultSet.getBoolean("children");
-                boolean elders = resultSet.getBoolean("elders");
-                boolean sleepOutside = resultSet.getBoolean("sleepOutside");
-                boolean firstExperience = resultSet.getBoolean("firstExperience");
-                int hoursAlone = resultSet.getInt("hoursAlone");
                 boolean programEducation = resultSet.getBoolean("education");
                 int size = resultSet.getInt("size");
 
-                PetCompatibility petCompatibility = new PetCompatibility(maleDog, femaleDog, maleCat, femaleCat, children, elders, firstExperience);
-                petCompatibility.setSleepOutside(sleepOutside);
-                petCompatibility.setHoursAlone(hoursAlone);
+                PetCompatibility petCompatibility = RetrievePetCompatibilitySupport.retrievePetCompatibility(resultSet);
 
                 dog = new DogModel(yearOfBirth, monthOfBirth, dayOfBirth, coatLenght, petCompatibility);
                 dog.setVaccinated(vaccinated);
