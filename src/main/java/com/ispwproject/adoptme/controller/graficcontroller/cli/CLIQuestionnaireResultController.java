@@ -5,7 +5,6 @@ import com.ispwproject.adoptme.engineering.utils.ComputeAgeSupport;
 import com.ispwproject.adoptme.engineering.utils.ComputeGenderSupport;
 import com.ispwproject.adoptme.view.cli.CLIQuestionnaireResultView;
 
-import java.time.Year;
 import java.util.List;
 
 public class CLIQuestionnaireResultController {

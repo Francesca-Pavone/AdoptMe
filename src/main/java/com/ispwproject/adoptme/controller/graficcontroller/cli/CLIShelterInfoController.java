@@ -12,7 +12,6 @@ import com.ispwproject.adoptme.engineering.bean.PetBean;
 import com.ispwproject.adoptme.engineering.bean.ShelterBean;
 import com.ispwproject.adoptme.engineering.observer.Observer;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 

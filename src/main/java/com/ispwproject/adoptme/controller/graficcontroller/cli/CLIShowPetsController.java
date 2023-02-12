@@ -9,7 +9,6 @@ import com.ispwproject.adoptme.engineering.utils.ComputeGenderSupport;
 import com.ispwproject.adoptme.engineering.utils.ShowExceptionSupport;
 import com.ispwproject.adoptme.view.cli.CLIShowPetsView;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
