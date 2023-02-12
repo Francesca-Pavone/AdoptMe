@@ -28,21 +28,22 @@ public class AddToFavoritesController {
             FavoritesDAO.addFavorite(userModel.getId(), petBean.getPetId(), petBean.getShelterId());
             ShelterModel shelter = ShelterDAO.retrieveShelterById(petBean.getShelterId());
 
+            PetModel pet = null;
             if (petBean.getType() == 0) {
                 PetCompatibility petCompatibility = setCompatibility();
                 DogModel dogModel = new DogModel(petBean.getName(), petBean.getPetImage(), petCompatibility, petInformationBean.isDogEducation(), petInformationBean.getSize());
                 dogModel.setPetId(petBean.getPetId());
                 setCommonInfo(dogModel);
-                userFavoritesPetsList.addPet(dogModel, shelter.getId());
-                userFavoritesPetsList.notifyObservers(dogModel, object);
+                pet = dogModel;
             } else if (petBean.getType() == 1) {
                 PetCompatibility petCompatibility = setCompatibility();
                 CatModel catModel = new CatModel(petBean.getName(), petBean.getPetImage(), petInformationBean.isTestFiv(), petInformationBean.isTestFelv(), petCompatibility);
                 catModel.setPetId(petBean.getPetId());
                 setCommonInfo(catModel);
-                userFavoritesPetsList.addPet(catModel, shelter.getId());
-                userFavoritesPetsList.notifyObservers(catModel, object);
+                pet = catModel;
             }
+            userFavoritesPetsList.addPet(pet, shelter.getId());
+            userFavoritesPetsList.notifyObservers(pet, object);
         } catch (Exception e) {
             e.printStackTrace();
         }

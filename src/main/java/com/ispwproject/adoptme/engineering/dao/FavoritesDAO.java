@@ -20,8 +20,10 @@ public class FavoritesDAO {
             stmt = ConnectionDB.getConnection();
             CRUDQueries.insertFavorite(stmt, userId, petId, shelterId);
 
-        } catch (SQLException | ConnectionDbException e) {
+        } catch ( ConnectionDbException e) {
             e.printStackTrace();
+        } catch (SQLException ignore) {
+        //exception ignored
         }
     }
 
