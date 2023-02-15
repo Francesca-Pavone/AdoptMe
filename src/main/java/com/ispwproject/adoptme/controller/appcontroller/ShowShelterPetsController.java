@@ -17,6 +17,7 @@ public class ShowShelterPetsController {
     private ShelterModel shelterModel;
 
     public ShowShelterPetsController(ShelterBean shelterBean) {
+        int a;
         this.shelterModel = new ShelterModel(shelterBean.getShelterBeanId());
     }
     public ShowShelterPetsController(){}
